@@ -514,7 +514,8 @@ class PLYReader:
             if not parts:
                 continue
             if parts[0] == "element":
-                in_face = len(parts) >= 3 and parts[1] == "face"
+                min_parts = 3
+                in_face = len(parts) >= min_parts and parts[1] == "face"
                 if in_face:
                     return int(parts[2])
         return 0
@@ -550,8 +551,7 @@ class PLYReader:
             count = int(parts[0])
             if len(parts) >= count + 1:
                 polys.append(count)
-                for j in range(1, count + 1):
-                    polys.append(int(parts[j]))
+                polys.extend(int(parts[j]) for j in range(1, count + 1))
         if not polys:
             return np.empty((0,), dtype=np.int64)
         return np.array(polys, dtype=np.int64)
