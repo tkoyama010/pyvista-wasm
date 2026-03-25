@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^src/pyvista_wasm/rendering\\.py$",
+        "^src/pyvista_wasm/templates/streamlit\\.html$"
+      ],
+      "matchStrings": [
+        "https://unpkg\\.com/@kitware/vtk-wasm@(?<currentValue>[^/]+)/"
+      ],
+      "depNameTemplate": "@kitware/vtk-wasm",
+      "datasourceTemplate": "npm"
+    }
+  ]
+}
