@@ -1,0 +1,105 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-toml
+      - id: check-merge-conflict
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-no-log-warn
+      - id: python-use-type-annotations
+      - id: text-unicode-replacement-char
+
+  - repo: https://github.com/hukkin/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
+        additional_dependencies: ['mdformat-toc==0.5.0']
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "v2.20.0"
+    hooks:
+      - id: pyproject-fmt
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.7
+    hooks:
+      # Run the linter
+      - id: ruff-check
+        args: [--fix, --show-fixes]
+      # Run the formatter
+      - id: ruff-format
+
+  - repo: https://github.com/djlint/djLint
+    rev: v1.36.4
+    hooks:
+      - id: djlint-reformat-jinja
+        files: src/pyvista_wasm/templates/.*\.html$
+        args: ["--format-js", "--indent-js", "2"]
+      - id: djlint-jinja
+        files: src/pyvista_wasm/templates/.*\.html$
+
+  - repo: local
+    hooks:
+      - id: xo
+        name: xo
+        entry: npx xo
+        language: node
+        types_or: [javascript, ts]
+        pass_filenames: false
+
+  - repo: https://github.com/scientific-python/cookie
+    rev: 2026.03.02
+    hooks:
+      - id: sp-repo-review
+        additional_dependencies: ["repo-review[cli]"]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.19.1
+    hooks:
+      - id: mypy
+        files: ^src/.*\.py$
+        # SPEC 0: Use minimum supported numpy version
+        additional_dependencies: [numpy>=2.0]
+
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: 1.20.0
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==24.10.0]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.2
+    hooks:
+      - id: codespell
+
+  - repo: https://github.com/tkoyama010/standard-readme-pre-commit
+    rev: 810adb53324d6891fc270081b58e21db67fdafcb
+    hooks:
+      - id: standard-readme
+
+  - repo: https://github.com/woodruffw/zizmor-pre-commit
+    rev: v1.23.1
+    hooks:
+      - id: zizmor
+
+ci:
+  autofix_commit_msg: |
+    chore: auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: 'chore: pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: [xo]
+  submodules: false

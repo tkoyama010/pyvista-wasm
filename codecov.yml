@@ -1,0 +1,46 @@
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        target: auto
+        threshold: 1%
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+
+# SPEC 0: Only test Python versions within 36-month support window
+# SPEC 1: Use lazy loading for submodules and functions
+flags:
+  py3.12-ubuntu-latest:
+    paths:
+      - src/
+  py3.12-windows-latest:
+    paths:
+      - src/
+  py3.12-macos-latest:
+    paths:
+      - src/
+  py3.13-ubuntu-latest:
+    paths:
+      - src/
+  py3.13-windows-latest:
+    paths:
+      - src/
+  py3.13-macos-latest:
+    paths:
+      - src/
+  py3.14-ubuntu-latest:
+    paths:
+      - src/
+  py3.14-windows-latest:
+    paths:
+      - src/
+  py3.14-macos-latest:
+    paths:
+      - src/
