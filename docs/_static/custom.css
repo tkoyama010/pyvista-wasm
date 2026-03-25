@@ -1,0 +1,7 @@
+.jupyterlite_sphinx_raw_iframe {
+    width: 100%;
+}
+
+.jupyterlite_sphinx_iframe_container iframe {
+    height: 1000px !important;
+}
