@@ -78,11 +78,16 @@ class _PolyDataMesh(PolyData):
 
 
 class _PLYMesh(PolyData):
-    """Mesh loaded from a PLY file, rendered using extracted geometry."""
+    """Mesh loaded from a PLY file, rendered via VTK.wasm PLY reader."""
 
-    def __init__(self, points: np.ndarray, polys: np.ndarray) -> None:
-        """Initialize with points and face connectivity."""
-        super().__init__(points, faces=polys if len(polys) > 0 else None)
+    def __init__(self, points: np.ndarray, ply_base64: str) -> None:
+        """Initialize with points and base64-encoded PLY file content."""
+        super().__init__(points)
+        self._ply_base64 = ply_base64
+
+    def to_scene_data(self) -> dict[str, object]:
+        """Return scene data using VTK.wasm PLY reader."""
+        return {"type": "plyReader", "data": self._ply_base64}
 
 
 class _STLMesh(PolyData):
@@ -262,14 +267,14 @@ class PLYReader:
     def read(self) -> _PLYMesh:
         """Read the PLY file and return a Mesh.
 
-        Vertex coordinates and face connectivity are extracted on the Python
-        side so that the mesh can be rendered via the standard geometry
-        pipeline without requiring a VTK.wasm file reader.
+        The full file content is base64-encoded and stored so that VTK.wasm
+        can parse it at render time.  Vertex coordinates are extracted on
+        the Python side for bounding-sphere and camera-framing calculations.
 
         Returns
         -------
         Mesh
-            A mesh with extracted points and face connectivity.
+            A mesh backed by the PLY file content.
 
         Raises
         ------
@@ -299,20 +304,23 @@ class PLYReader:
             raise ValueError(msg)
 
         fmt = self._parse_format(lines[1 : header_end + 1])
-        header_lines = lines[1 : header_end + 1]
 
         if fmt == "ascii":
             points = self._extract_points(lines, header_end)
-            polys = self._extract_polys(lines, header_end, len(points))
         elif fmt in ("binary_little_endian", "binary_big_endian"):
-            points = self._extract_points_binary(raw, header_lines, header_byte_offset, fmt)
-            polys = self._extract_polys_binary(raw, header_lines, header_byte_offset, fmt)
+            points = self._extract_points_binary(
+                raw,
+                lines[1 : header_end + 1],
+                header_byte_offset,
+                fmt,
+            )
         else:
             msg = f"Unsupported PLY format: {fmt}"
             raise ValueError(msg)
 
+        ply_base64 = base64.b64encode(raw).decode("ascii")
         logger.info("Read %d points from %s", len(points), self._path)
-        return _PLYMesh(points=points, polys=polys)
+        return _PLYMesh(points=points, ply_base64=ply_base64)
 
     @staticmethod
     def _parse_format(header_lines: list[str]) -> str:
@@ -492,137 +500,6 @@ class PLYReader:
         if not points:
             return np.empty((0, 3))
         return np.array(points)
-
-    @staticmethod
-    def _parse_face_count(header_lines: list[str]) -> int:
-        """Extract the face element count from PLY header lines.
-
-        Parameters
-        ----------
-        header_lines : list[str]
-            Header lines between 'ply' and 'end_header'.
-
-        Returns
-        -------
-        int
-            Number of faces declared in the header, or 0 if not found.
-
-        """
-        in_face = False
-        for line in header_lines:
-            parts = line.strip().split()
-            if not parts:
-                continue
-            if parts[0] == "element":
-                min_parts = 3
-                in_face = len(parts) >= min_parts and parts[1] == "face"
-                if in_face:
-                    return int(parts[2])
-        return 0
-
-    @staticmethod
-    def _extract_polys(lines: list[str], header_end: int, n_vertices: int) -> np.ndarray:
-        """Extract face connectivity from PLY ASCII data.
-
-        Parameters
-        ----------
-        lines : list[str]
-            All lines of the PLY file.
-        header_end : int
-            Index of the 'end_header' line.
-        n_vertices : int
-            Number of vertex lines to skip before face data begins.
-
-        Returns
-        -------
-        np.ndarray
-            Flat integer array in VTK cell format: ``[n, i0, i1, ..., n, i0, ...]``.
-
-        """
-        face_start = header_end + 1 + n_vertices
-        polys: list[int] = []
-        for line in lines[face_start:]:
-            stripped = line.strip()
-            if not stripped:
-                continue
-            parts = stripped.split()
-            if not parts:
-                continue
-            count = int(parts[0])
-            if len(parts) >= count + 1:
-                polys.append(count)
-                polys.extend(int(parts[j]) for j in range(1, count + 1))
-        if not polys:
-            return np.empty((0,), dtype=np.int64)
-        return np.array(polys, dtype=np.int64)
-
-    @staticmethod
-    def _extract_polys_binary(
-        raw: bytes,
-        header_lines: list[str],
-        data_offset: int,
-        fmt: str,
-    ) -> np.ndarray:
-        """Extract face connectivity from binary PLY data.
-
-        Assumes face list properties use a 1-byte count (``uchar``/``uint8``)
-        followed by 4-byte signed integer indices (``int``/``int32``), which is
-        the standard format produced by VTK and most 3D tools.
-
-        Parameters
-        ----------
-        raw : bytes
-            Raw binary content of the PLY file.
-        header_lines : list[str]
-            Header lines between 'ply' and 'end_header'.
-        data_offset : int
-            Byte offset where vertex data starts (after 'end_header').
-        fmt : str
-            Format string ('binary_little_endian' or 'binary_big_endian').
-
-        Returns
-        -------
-        np.ndarray
-            Flat integer array in VTK cell format: ``[n, i0, i1, ..., n, i0, ...]``.
-
-        """
-        endian = "<" if fmt == "binary_little_endian" else ">"
-
-        n_vertices, vertex_properties = PLYReader._parse_vertex_info(header_lines)
-        n_faces = PLYReader._parse_face_count(header_lines)
-
-        type_sizes = {
-            "char": 1,
-            "uchar": 1,
-            "short": 2,
-            "ushort": 2,
-            "int": 4,
-            "uint": 4,
-            "float": 4,
-            "double": 8,
-        }
-        bytes_per_vertex = sum(type_sizes.get(pt, 0) for pt in vertex_properties)
-        offset = data_offset + n_vertices * bytes_per_vertex
-
-        polys: list[int] = []
-        for _ in range(n_faces):
-            if offset >= len(raw):
-                break
-            # Read 1-byte face vertex count
-            count = raw[offset]
-            offset += 1
-            polys.append(count)
-            # Read 'count' 4-byte signed integer vertex indices
-            for _ in range(count):
-                if offset + 4 > len(raw):
-                    break
-                (idx,) = struct.unpack_from(endian + "i", raw, offset)
-                polys.append(idx)
-                offset += 4
-
-        if not polys:
-            return np.empty((0,), dtype=np.int64)
-        return np.array(polys, dtype=np.int64)
 
 
 class OBJReader:

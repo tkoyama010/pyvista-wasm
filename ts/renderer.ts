@@ -26,9 +26,10 @@ function at(array: Float32Array | Uint32Array, index: number): number {
 }
 
 /** Wraps either a VTK algorithm (filter/source) or raw PolyData. */
-type SourceResult =
-  | { output: VtkAlgorithm; isFilter: true }
-  | { output: VtkPolyData; isFilter: false };
+type SourceResult = {
+  output: VtkAlgorithm | VtkPolyData;
+  isFilter: boolean;
+};
 
 /**
  * Resolve a {@link SourceResult} to its underlying PolyData.
@@ -37,11 +38,11 @@ type SourceResult =
  */
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
-    await sourceResult.output.update();
-    return sourceResult.output.getOutputData();
+    (sourceResult.output as VtkAlgorithm).update();
+    return (sourceResult.output as VtkAlgorithm).getOutputData();
   }
 
-  return sourceResult.output;
+  return sourceResult.output as VtkPolyData;
 }
 
 /**
@@ -50,9 +51,11 @@ async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
  * @param sourceResult
  */
 async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): Promise<void> {
-  await (sourceResult.isFilter
-    ? filter.setInputConnection(await sourceResult.output.getOutputPort())
-    : filter.setInputData(sourceResult.output));
+  if (sourceResult.isFilter) {
+    filter.setInputConnection(await (sourceResult.output as VtkAlgorithm).getOutputPort());
+  } else {
+    filter.setInputData(sourceResult.output as VtkPolyData);
+  }
 }
 
 /**
@@ -60,11 +63,10 @@ async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): P
  * @param vtk
  */
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
-  const rawSceneJson = document.querySelector("#scene-data")?.textContent ?? "{}";
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
   const sceneData: SceneData =
-    typeof __pvwasmSceneData === "undefined" ? parsedSceneData : __pvwasmSceneData;
+    typeof __pvwasmSceneData === "undefined"
+      ? (JSON.parse(document.querySelector("#scene-data")?.textContent ?? "{}") as SceneData)
+      : __pvwasmSceneData;
   const container: HTMLElement =
     typeof __pvwasmContainer === "undefined"
       ? (document.querySelector<HTMLElement>(`#${CSS.escape(sceneData.containerId)}`) ??
@@ -115,6 +117,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
     await setupCamera(renderer, sceneData.camera);
   }
 
+  // CanvasSelector must match the canvas for Emscripten event callbacks
   const interactor = vtk.vtkRenderWindowInteractor({
     canvasSelector,
     renderWindow,
@@ -125,9 +128,12 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   await interactor.start();
 }
 
+// Bootstrap: wait for VTK.wasm namespace then build the scene
 if (typeof vtkReady !== "undefined") {
+  // Annotation-based loading: vtkReady is set by the UMD script
   void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
+  // Manual loading: create namespace ourselves
   void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
@@ -219,8 +225,7 @@ function createSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult | 
     }
 
     case "points": {
-      console.error("points source must be awaited; use createPointsSource directly");
-      return undefined;
+      return createPointsSource(vtk, cfg);
     }
 
     default: {
@@ -307,9 +312,10 @@ function createDiskSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
         circumferentialResolution: cfg.resolution,
       })
     : undefined;
-  return source
-    ? { output: source, isFilter: true }
-    : { output: vtk.vtkPolyData(), isFilter: false };
+  return {
+    output: source ?? vtk.vtkPolyData(),
+    isFilter: true,
+  };
 }
 
 /**
@@ -381,33 +387,14 @@ function createPlaneSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResu
  */
 async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
-  await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
+  const pointsArray = Float32Array.from(cfg.points ?? []);
   const vtkPts = vtk.vtkPoints();
-  await vtkPts.setData(pointsFloatArray);
-  await polydata.setPoints(vtkPts);
-  if (cfg.polys && cfg.polys.length > 0) {
-    const legacyPolys = cfg.polys;
-    const offsetsList: number[] = [0];
-    const connectivityList: number[] = [];
-    let i = 0;
-    while (i < legacyPolys.length) {
-      const count = legacyPolys[i] ?? 0;
-      for (let j = 1; j <= count; j++) {
-        connectivityList.push(legacyPolys[i + j] ?? 0);
-      }
-
-      offsetsList.push(connectivityList.length);
-      i += count + 1;
-    }
-
-    const offsetsArray = vtk.vtkIntArray({ numberOfComponents: 1 });
-    await offsetsArray.setArray(Int32Array.from(offsetsList));
-    const connectivityArray = vtk.vtkIntArray({ numberOfComponents: 1 });
-    await connectivityArray.setArray(Int32Array.from(connectivityList));
-    const cellArray = vtk.vtkCellArray();
-    await cellArray.setData(offsetsArray, connectivityArray);
-    await polydata.setPolys(cellArray);
+  vtkPts.setData(pointsArray, 3);
+  polydata.setPoints(vtkPts);
+  if (cfg.polys) {
+    const polysArray = Uint32Array.from(cfg.polys);
+    const polysObject = await polydata.getPolys();
+    polysObject.setData(polysArray);
   }
 
   return { output: polydata, isFilter: false };
@@ -419,13 +406,12 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
  * @param cfg
  * @returns A {@link SourceResult} wrapping the point cloud PolyData.
  */
-async function createPointsSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
+function createPointsSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
-  await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
+  const pointsArray = Float32Array.from(cfg.points ?? []);
   const vtkPts = vtk.vtkPoints();
-  await vtkPts.setData(pointsFloatArray);
-  await polydata.setPoints(vtkPts);
+  vtkPts.setData(pointsArray, 3);
+  polydata.setPoints(vtkPts);
   return { output: polydata, isFilter: false };
 }
 
@@ -448,9 +434,9 @@ async function injectPointData(
   for (const array of pointDataArrays) {
     const dataArray = vtk.vtkFloatArray({
       numberOfComponents: array.numberOfComponents,
+      values: Float32Array.from(array.values),
       name: array.name,
     });
-    await dataArray.setArray(Float32Array.from(array.values)); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     pd.addArray(dataArray);
   }
 }
@@ -472,9 +458,9 @@ async function injectTcoords(
 
   const tcArray = vtk.vtkFloatArray({
     numberOfComponents: 2,
+    values: Float32Array.from(tCoords),
     name: "TextureCoordinates",
   });
-  await tcArray.setArray(Float32Array.from(tCoords));
   const pointData = await polydata.getPointData();
   pointData.setTcoords(tcArray);
 }
@@ -499,7 +485,6 @@ async function setupNormals(
   normals.setComputePointNormals?.(normalsConfig.computePointNormals ? 1 : 0);
   normals.setComputeCellNormals?.(normalsConfig.computeCellNormals ? 1 : 0);
   await connectInput(normals, sourceResult);
-  await normals.update();
   return { output: normals, isFilter: true };
 }
 
@@ -538,9 +523,7 @@ async function setupActor(
   const sourceResult: SourceResult | undefined =
     cfg.source.type === "mesh"
       ? await createMeshSource(vtk, cfg.source)
-      : cfg.source.type === "points"
-        ? await createPointsSource(vtk, cfg.source)
-        : createSource(vtk, cfg.source);
+      : createSource(vtk, cfg.source);
 
   if (!sourceResult?.output) {
     return;
@@ -560,9 +543,11 @@ async function setupActor(
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
   const mapper = vtk.vtkPolyDataMapper();
-  await (mapperInput.isFilter
-    ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
-    : mapper.setInputData(mapperInput.output));
+  if (mapperInput.isFilter) {
+    mapper.setInputConnection(await (mapperInput.output as VtkAlgorithm).getOutputPort());
+  } else {
+    mapper.setInputData(mapperInput.output as VtkPolyData);
+  }
 
   const actor = vtk.vtkActor({ mapper });
   const prop = await actor.getProperty();
@@ -766,9 +751,9 @@ async function applyShrinkFilter(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
-  await outPointsObject.setData(new Float32Array(resultPoints), 3);
+  outPointsObject.setData(new Float32Array(resultPoints), 3);
   const outPolysObject = await outputPd.getPolys();
-  await outPolysObject.setData(new Uint32Array(resultPolys));
+  outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -869,9 +854,9 @@ async function applyClipManual(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
-  await outPointsObject.setData(new Float32Array(resultPoints), 3);
+  outPointsObject.setData(new Float32Array(resultPoints), 3);
   const outPolysObject = await outputPd.getPolys();
-  await outPolysObject.setData(new Uint32Array(resultPolys));
+  outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -1003,9 +988,9 @@ async function applyContourManual(
   const outputPd = vtk.vtkPolyData();
   if (outPoints.length > 0) {
     const outPointsObject = await outputPd.getPoints();
-    await outPointsObject.setData(new Float32Array(outPoints), 3);
+    outPointsObject.setData(new Float32Array(outPoints), 3);
     const outLinesObject = await outputPd.getLines();
-    await outLinesObject.setData(new Uint32Array(outPolys));
+    outLinesObject.setData(new Uint32Array(outPolys));
   }
 
   return { output: outputPd, isFilter: false };
