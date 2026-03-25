@@ -38,7 +38,7 @@ type SourceResult = {
  */
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
-    (sourceResult.output as VtkAlgorithm).update();
+    await (sourceResult.output as VtkAlgorithm).update();
     return (sourceResult.output as VtkAlgorithm).getOutputData();
   }
 
@@ -51,11 +51,9 @@ async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
  * @param sourceResult
  */
 async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): Promise<void> {
-  if (sourceResult.isFilter) {
-    filter.setInputConnection(await (sourceResult.output as VtkAlgorithm).getOutputPort());
-  } else {
-    await (filter.setInputData(sourceResult.output as VtkPolyData) as unknown as Promise<void>);
-  }
+  await (sourceResult.isFilter
+    ? filter.setInputConnection(await (sourceResult.output as VtkAlgorithm).getOutputPort())
+    : filter.setInputData(sourceResult.output as VtkPolyData));
 }
 
 /**
@@ -388,11 +386,11 @@ function createPlaneSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResu
  */
 async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArr = vtk.vtkFloatArray({ numberOfComponents: 3 });
-  await pointsFloatArr.setArray(Float32Array.from(cfg.points ?? []));
+  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
+  await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
   const vtkPts = vtk.vtkPoints();
-  await (vtkPts.setData(pointsFloatArr) as unknown as Promise<void>);
-  await (polydata.setPoints(vtkPts) as unknown as Promise<void>);
+  await vtkPts.setData(pointsFloatArray);
+  await polydata.setPoints(vtkPts);
   if (cfg.polys && cfg.polys.length > 0) {
     // Convert legacy format [n, i0, ..., n, j0, ...] to offsets+connectivity
     const legacyPolys = cfg.polys;
@@ -400,22 +398,22 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
     const connectivityList: number[] = [];
     let i = 0;
     while (i < legacyPolys.length) {
-      const count = legacyPolys[i];
+      const count = legacyPolys[i] ?? 0;
       for (let j = 1; j <= count; j++) {
-        connectivityList.push(legacyPolys[i + j]);
+        connectivityList.push(legacyPolys[i + j] ?? 0);
       }
 
       offsetsList.push(connectivityList.length);
       i += count + 1;
     }
 
-    const offsetsArr = vtk.vtkIntArray({ numberOfComponents: 1 });
-    await offsetsArr.setArray(Int32Array.from(offsetsList));
-    const connectivityArr = vtk.vtkIntArray({ numberOfComponents: 1 });
-    await connectivityArr.setArray(Int32Array.from(connectivityList));
+    const offsetsArray = vtk.vtkIntArray({ numberOfComponents: 1 });
+    await offsetsArray.setArray(Int32Array.from(offsetsList));
+    const connectivityArray = vtk.vtkIntArray({ numberOfComponents: 1 });
+    await connectivityArray.setArray(Int32Array.from(connectivityList));
     const cellArray = vtk.vtkCellArray();
-    await (cellArray.setData(offsetsArr, connectivityArr) as unknown as Promise<void>);
-    await (polydata.setPolys(cellArray) as unknown as Promise<void>);
+    await cellArray.setData(offsetsArray, connectivityArray);
+    await polydata.setPolys(cellArray);
   }
 
   return { output: polydata, isFilter: false };
@@ -429,11 +427,11 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
  */
 async function createPointsSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArr = vtk.vtkFloatArray({ numberOfComponents: 3 });
-  await pointsFloatArr.setArray(Float32Array.from(cfg.points ?? []));
+  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
+  await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
   const vtkPts = vtk.vtkPoints();
-  await (vtkPts.setData(pointsFloatArr) as unknown as Promise<void>);
-  await (polydata.setPoints(vtkPts) as unknown as Promise<void>);
+  await vtkPts.setData(pointsFloatArray);
+  await polydata.setPoints(vtkPts);
   return { output: polydata, isFilter: false };
 }
 
@@ -507,7 +505,7 @@ async function setupNormals(
   normals.setComputePointNormals?.(normalsConfig.computePointNormals ? 1 : 0);
   normals.setComputeCellNormals?.(normalsConfig.computeCellNormals ? 1 : 0);
   await connectInput(normals, sourceResult);
-  await (normals.update() as unknown as Promise<void>);
+  await normals.update();
   return { output: normals, isFilter: true };
 }
 
@@ -568,11 +566,9 @@ async function setupActor(
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
   const mapper = vtk.vtkPolyDataMapper();
-  if (mapperInput.isFilter) {
-    await (mapper.setInputConnection(await (mapperInput.output as VtkAlgorithm).getOutputPort()) as unknown as Promise<void>);
-  } else {
-    await (mapper.setInputData(mapperInput.output as VtkPolyData) as unknown as Promise<void>);
-  }
+  await (mapperInput.isFilter
+    ? mapper.setInputConnection(await (mapperInput.output as VtkAlgorithm).getOutputPort())
+    : mapper.setInputData(mapperInput.output as VtkPolyData));
 
   const actor = vtk.vtkActor({ mapper });
   const prop = await actor.getProperty();
@@ -776,9 +772,9 @@ async function applyShrinkFilter(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
-  outPointsObject.setData(new Float32Array(resultPoints), 3);
+  await outPointsObject.setData(new Float32Array(resultPoints), 3);
   const outPolysObject = await outputPd.getPolys();
-  outPolysObject.setData(new Uint32Array(resultPolys));
+  await outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -879,9 +875,9 @@ async function applyClipManual(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
-  outPointsObject.setData(new Float32Array(resultPoints), 3);
+  await outPointsObject.setData(new Float32Array(resultPoints), 3);
   const outPolysObject = await outputPd.getPolys();
-  outPolysObject.setData(new Uint32Array(resultPolys));
+  await outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -1013,9 +1009,9 @@ async function applyContourManual(
   const outputPd = vtk.vtkPolyData();
   if (outPoints.length > 0) {
     const outPointsObject = await outputPd.getPoints();
-    outPointsObject.setData(new Float32Array(outPoints), 3);
+    await outPointsObject.setData(new Float32Array(outPoints), 3);
     const outLinesObject = await outputPd.getLines();
-    outLinesObject.setData(new Uint32Array(outPolys));
+    await outLinesObject.setData(new Uint32Array(outPolys));
   }
 
   return { output: outputPd, isFilter: false };

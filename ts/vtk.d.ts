@@ -57,8 +57,8 @@ type VtkProperty = {
 
 /** Maps data to graphics primitives for rendering. */
 type VtkMapper = {
-  setInputData(data: VtkPolyData): void;
-  setInputConnection(port: VtkOutputPort): void;
+  setInputData(data: VtkPolyData): Promise<void>;
+  setInputConnection(port: VtkOutputPort): Promise<void>;
   delete(): void;
 };
 
@@ -70,11 +70,11 @@ type VtkOutputPort = {
 /** Polygonal mesh data structure — the core VTK data object. */
 type VtkPolyData = {
   getPoints(): Promise<VtkPoints>;
-  setPoints(points: VtkPoints): void;
+  setPoints(points: VtkPoints): Promise<void>;
   getPolys(): Promise<VtkCellArray>;
-  setPolys(cellArray: VtkCellArray): void;
+  setPolys(cellArray: VtkCellArray): Promise<void>;
   getLines(): Promise<VtkCellArray>;
-  setLines(cellArray: VtkCellArray): void;
+  setLines(cellArray: VtkCellArray): Promise<void>;
   getPointData(): Promise<VtkPointData>;
   getNumberOfPoints(): Promise<number>;
   getNumberOfCells(): Promise<number>;
@@ -83,13 +83,15 @@ type VtkPolyData = {
 
 /** A set of 3D points. */
 type VtkPoints = {
-  setData(data: VtkDataArray): void;
+  setData(data: VtkDataArray): Promise<void>;
+  setData(data: Float32Array, numberOfComponents: number): Promise<void>;
   getData(): Promise<Float32Array>;
 };
 
 /** A VTK cell array (polygons, lines, etc.). */
 type VtkCellArray = {
-  setData(offsets: VtkDataArray, connectivity: VtkDataArray): void;
+  setData(offsets: VtkDataArray, connectivity: VtkDataArray): Promise<void>;
+  setData(data: Uint32Array): Promise<void>;
   getData(): Promise<Uint32Array>;
 };
 
@@ -139,9 +141,9 @@ type VtkLight = {
 type VtkAlgorithm = {
   getOutputPort(): Promise<VtkOutputPort>;
   getOutputData(): Promise<VtkPolyData>;
-  update(): void;
-  setInputConnection(port: VtkOutputPort): void;
-  setInputData(data: VtkPolyData): void;
+  update(): Promise<void>;
+  setInputConnection(port: VtkOutputPort): Promise<void>;
+  setInputData(data: VtkPolyData): Promise<void>;
   setComputePointNormals?(v: number): void;
   setComputeCellNormals?(v: number): void;
   setNormal?(x: number, y: number, z: number): void;
@@ -197,11 +199,9 @@ type VtkWasmNamespace = {
   vtkFloatArray(options?: {
     numberOfComponents?: number;
     name?: string;
+    values?: Float32Array;
   }): VtkDataArray;
-  vtkIntArray(options?: {
-    numberOfComponents?: number;
-    name?: string;
-  }): VtkDataArray;
+  vtkIntArray(options?: { numberOfComponents?: number; name?: string }): VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
   vtkRenderWindowInteractor(options?: {
