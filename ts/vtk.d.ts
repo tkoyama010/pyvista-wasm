@@ -4,11 +4,15 @@
  * Only the APIs actually used by `renderer.ts` are declared here.
  * These correspond to the `vtk` namespace created by `vtkWASM.createNamespace()`
  * from the `@kitware/vtk-wasm` package.
+ *
+ * IMPORTANT: VTK.wasm getter methods return Promises and must be awaited.
+ * Boolean parameters use number (0/1) instead of boolean due to C++ WASM bindings.
  */
 
 /** A VTK.wasm render window that owns the canvas. */
 type VtkRenderWindow = {
   render(): void;
+  addRenderer(renderer: VtkRenderer): void;
   delete(): void;
 };
 
@@ -18,16 +22,16 @@ type VtkRenderer = {
   addActor(actor: VtkActor): void;
   addLight(light: VtkLight): void;
   removeAllLights(): void;
-  setAutomaticLightCreation(value: boolean): void;
+  setAutomaticLightCreation(value: number): void;
   resetCamera(): void;
   resetCameraClippingRange(): void;
-  getActiveCamera(): VtkCamera;
+  getActiveCamera(): Promise<VtkCamera>;
   delete(): void;
 };
 
 /** A renderable entity in the scene that maps data through a mapper. */
 type VtkActor = {
-  getProperty(): VtkProperty;
+  getProperty(): Promise<VtkProperty>;
   delete(): void;
 };
 
@@ -37,7 +41,7 @@ type VtkProperty = {
   setOpacity(opacity: number): void;
   setRepresentation(mode: number): void;
   setRepresentationToPoints(): void;
-  setEdgeVisibility(visible: boolean): void;
+  setEdgeVisibility(visible: number): void;
   setEdgeColor(r: number, g: number, b: number): void;
   setInterpolationToGouraud(): void;
   setInterpolationToFlat(): void;
@@ -65,24 +69,24 @@ type VtkOutputPort = {
 
 /** Polygonal mesh data structure — the core VTK data object. */
 type VtkPolyData = {
-  getPoints(): VtkPoints;
+  getPoints(): Promise<VtkPoints>;
   setPoints(points: VtkPoints): void;
-  getPolys(): VtkCellArray;
-  getLines(): VtkCellArray;
-  getPointData(): VtkPointData;
+  getPolys(): Promise<VtkCellArray>;
+  getLines(): Promise<VtkCellArray>;
+  getPointData(): Promise<VtkPointData>;
   delete(): void;
 };
 
 /** A set of 3D points. */
 type VtkPoints = {
   setData(data: Float32Array, numberOfComponents: number): void;
-  getData(): Float32Array;
+  getData(): Promise<Float32Array>;
 };
 
 /** A VTK cell array (polygons, lines, etc.). */
 type VtkCellArray = {
   setData(data: Uint32Array): void;
-  getData(): Uint32Array;
+  getData(): Promise<Uint32Array>;
 };
 
 /** Manages per-point data arrays (scalars, vectors, texture coordinates). */
@@ -95,7 +99,7 @@ type VtkPointData = {
 
 /** A VTK data array holding typed numeric values. */
 type VtkDataArray = {
-  getData(): Float32Array;
+  getData(): Promise<Float32Array>;
 };
 
 /** A virtual camera controlling the viewpoint. */
@@ -105,7 +109,7 @@ type VtkCamera = {
   setViewUp(x: number, y: number, z: number): void;
   setViewAngle(angle: number): void;
   setClippingRange(near: number, far: number): void;
-  setParallelProjection(value: boolean): void;
+  setParallelProjection(value: number): void;
 };
 
 /** A scene light with position, color, and cone parameters. */
@@ -115,7 +119,7 @@ type VtkLight = {
   setFocalPoint(x: number, y: number, z: number): void;
   setColor(r: number, g: number, b: number): void;
   setIntensity(intensity: number): void;
-  setPositional(value: boolean): void;
+  setPositional(value: number): void;
   setConeAngle(angle: number): void;
   setExponent(value: number): void;
   setAttenuationValues(a: number, b: number, c: number): void;
@@ -127,13 +131,13 @@ type VtkLight = {
 
 /** A VTK algorithm (filter or source) with input/output pipeline. */
 type VtkAlgorithm = {
-  getOutputPort(): VtkOutputPort;
-  getOutputData(): VtkPolyData;
+  getOutputPort(): Promise<VtkOutputPort>;
+  getOutputData(): Promise<VtkPolyData>;
   update(): void;
   setInputConnection(port: VtkOutputPort): void;
   setInputData(data: VtkPolyData): void;
-  setComputePointNormals?(v: boolean): void;
-  setComputeCellNormals?(v: boolean): void;
+  setComputePointNormals?(v: number): void;
+  setComputeCellNormals?(v: number): void;
   setNormal?(x: number, y: number, z: number): void;
   delete(): void;
 };
@@ -159,7 +163,7 @@ type VtkInteractorStyle = {
 
 /** An image-based texture applied to actor surfaces. */
 type VtkTexture = {
-  setInterpolate(value: boolean): void;
+  setInterpolate(value: number): void;
   setImage(img: HTMLImageElement): void;
   delete(): void;
 };

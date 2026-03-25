@@ -976,16 +976,16 @@ def test_plotter_enable_parallel_projection_with_existing_camera() -> None:
 
 
 def test_plotter_parallel_projection_generates_code() -> None:
-    """Test that plotter generates vtk.js code for parallel projection."""
+    """Test that plotter generates scene data for parallel projection."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
     plotter.enable_parallel_projection()
 
-    # Generate HTML
     html = plotter._renderer._generate_html()
-
-    # Verify parallel projection is set in the generated code
-    assert "cam.setParallelProjection(true)" in html
+    scene = extract_scene_data(html)
+    assert scene["camera"]["parallelProjection"] is True
 
 
 def test_plotter_perspective_projection_generates_code() -> None:
