@@ -26,10 +26,9 @@ function at(array: Float32Array | Uint32Array, index: number): number {
 }
 
 /** Wraps either a VTK algorithm (filter/source) or raw PolyData. */
-type SourceResult = {
-  output: VtkAlgorithm | VtkPolyData;
-  isFilter: boolean;
-};
+type SourceResult =
+  | { output: VtkAlgorithm; isFilter: true }
+  | { output: VtkPolyData; isFilter: false };
 
 /**
  * Resolve a {@link SourceResult} to its underlying PolyData.
@@ -38,11 +37,11 @@ type SourceResult = {
  */
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
-    await (sourceResult.output as VtkAlgorithm).update();
-    return (sourceResult.output as VtkAlgorithm).getOutputData();
+    await sourceResult.output.update();
+    return sourceResult.output.getOutputData();
   }
 
-  return sourceResult.output as VtkPolyData;
+  return sourceResult.output;
 }
 
 /**
@@ -52,8 +51,8 @@ async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
  */
 async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): Promise<void> {
   await (sourceResult.isFilter
-    ? filter.setInputConnection(await (sourceResult.output as VtkAlgorithm).getOutputPort())
-    : filter.setInputData(sourceResult.output as VtkPolyData));
+    ? filter.setInputConnection(await sourceResult.output.getOutputPort())
+    : filter.setInputData(sourceResult.output));
 }
 
 /**
@@ -61,10 +60,11 @@ async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): P
  * @param vtk
  */
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
+  const rawSceneJson = document.querySelector("#scene-data")?.textContent ?? "{}";
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
   const sceneData: SceneData =
-    typeof __pvwasmSceneData === "undefined"
-      ? (JSON.parse(document.querySelector("#scene-data")?.textContent ?? "{}") as SceneData)
-      : __pvwasmSceneData;
+    typeof __pvwasmSceneData === "undefined" ? parsedSceneData : __pvwasmSceneData;
   const container: HTMLElement =
     typeof __pvwasmContainer === "undefined"
       ? (document.querySelector<HTMLElement>(`#${CSS.escape(sceneData.containerId)}`) ??
@@ -115,7 +115,6 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
     await setupCamera(renderer, sceneData.camera);
   }
 
-  // CanvasSelector must match the canvas for Emscripten event callbacks
   const interactor = vtk.vtkRenderWindowInteractor({
     canvasSelector,
     renderWindow,
@@ -126,12 +125,9 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   await interactor.start();
 }
 
-// Bootstrap: wait for VTK.wasm namespace then build the scene
 if (typeof vtkReady !== "undefined") {
-  // Annotation-based loading: vtkReady is set by the UMD script
   void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
-  // Manual loading: create namespace ourselves
   void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
@@ -311,10 +307,9 @@ function createDiskSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
         circumferentialResolution: cfg.resolution,
       })
     : undefined;
-  return {
-    output: source ?? vtk.vtkPolyData(),
-    isFilter: true,
-  };
+  return source
+    ? { output: source, isFilter: true }
+    : { output: vtk.vtkPolyData(), isFilter: false };
 }
 
 /**
@@ -392,7 +387,6 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
   await vtkPts.setData(pointsFloatArray);
   await polydata.setPoints(vtkPts);
   if (cfg.polys && cfg.polys.length > 0) {
-    // Convert legacy format [n, i0, ..., n, j0, ...] to offsets+connectivity
     const legacyPolys = cfg.polys;
     const offsetsList: number[] = [0];
     const connectivityList: number[] = [];
@@ -567,8 +561,8 @@ async function setupActor(
 
   const mapper = vtk.vtkPolyDataMapper();
   await (mapperInput.isFilter
-    ? mapper.setInputConnection(await (mapperInput.output as VtkAlgorithm).getOutputPort())
-    : mapper.setInputData(mapperInput.output as VtkPolyData));
+    ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
+    : mapper.setInputData(mapperInput.output));
 
   const actor = vtk.vtkActor({ mapper });
   const prop = await actor.getProperty();
