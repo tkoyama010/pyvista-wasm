@@ -39,7 +39,7 @@ type SourceResult = {
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
     (sourceResult.output as VtkAlgorithm).update();
-    return await (sourceResult.output as VtkAlgorithm).getOutputData();
+    return (sourceResult.output as VtkAlgorithm).getOutputData();
   }
 
   return sourceResult.output as VtkPolyData;
@@ -86,12 +86,14 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   canvas.style.width = "100%";
   canvas.style.height = "100%";
   canvas.tabIndex = -1;
-  canvas.addEventListener("click", () => canvas.focus());
+  canvas.addEventListener("click", () => {
+    canvas.focus();
+  });
   container.append(canvas);
 
   const canvasSelector = `#${CSS.escape(canvasId)}`;
   const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
-  await renderWindow.addRenderer(renderer);
+  renderWindow.addRenderer(renderer);
 
   if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
     renderer.removeAllLights();
@@ -101,7 +103,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   }
 
   for (const [index, actorConfig] of sceneData.actors.entries()) {
-    await setupActor(vtk, actorConfig, index, renderer);
+    await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
   }
 
   if (sceneData.textActors) {
@@ -115,7 +117,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
     await setupCamera(renderer, sceneData.camera);
   }
 
-  // canvasSelector must match the canvas for Emscripten event callbacks
+  // CanvasSelector must match the canvas for Emscripten event callbacks
   const interactor = vtk.vtkRenderWindowInteractor({
     canvasSelector,
     renderWindow,
@@ -127,7 +129,6 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 }
 
 // Bootstrap: wait for VTK.wasm namespace then build the scene
-// eslint-disable-next-line unicorn/prefer-top-level-await -- conditional await not supported at top level
 if (typeof vtkReady !== "undefined") {
   // Annotation-based loading: vtkReady is set by the UMD script
   void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
@@ -392,7 +393,8 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
   polydata.setPoints(vtkPts);
   if (cfg.polys) {
     const polysArray = Uint32Array.from(cfg.polys);
-    (await polydata.getPolys()).setData(polysArray);
+    const polysObject = await polydata.getPolys();
+    polysObject.setData(polysArray);
   }
 
   return { output: polydata, isFilter: false };
@@ -459,7 +461,8 @@ async function injectTcoords(
     values: Float32Array.from(tCoords),
     name: "TextureCoordinates",
   });
-  (await polydata.getPointData()).setTcoords(tcArray);
+  const pointData = await polydata.getPointData();
+  pointData.setTcoords(tcArray);
 }
 
 /**
@@ -517,12 +520,10 @@ async function setupActor(
   _index: number,
   ren: VtkRenderer,
 ): Promise<void> {
-  let sourceResult: SourceResult | undefined;
-  if (cfg.source.type === "mesh") {
-    sourceResult = await createMeshSource(vtk, cfg.source);
-  } else {
-    sourceResult = createSource(vtk, cfg.source);
-  }
+  const sourceResult: SourceResult | undefined =
+    cfg.source.type === "mesh"
+      ? await createMeshSource(vtk, cfg.source)
+      : createSource(vtk, cfg.source);
 
   if (!sourceResult?.output) {
     return;
@@ -664,13 +665,13 @@ async function applyFilters(
   let current = sourceResult;
   for (const f of filters) {
     if (f.type === "shrink" && f.shrinkFactor !== undefined) {
-      current = await applyShrinkFilter(vtk, current, f.shrinkFactor);
+      current = await applyShrinkFilter(vtk, current, f.shrinkFactor); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (f.type === "tube" && f.radius !== undefined && f.numberOfSides !== undefined) {
-      current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides);
+      current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (f.type === "clip" && f.normal && f.origin && f.invert !== undefined) {
-      current = await applyClipManual(vtk, current, f.normal, f.origin, f.invert);
+      current = await applyClipManual(vtk, current, f.normal, f.origin, f.invert); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (f.type === "contour" && f.values && f.scalarName && f.scalarData) {
-      current = await applyContourFilter(vtk, current, f.values, f.scalarName, f.scalarData);
+      current = await applyContourFilter(vtk, current, f.values, f.scalarName, f.scalarData); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     }
   }
 
@@ -690,8 +691,10 @@ async function applyShrinkFilter(
   shrinkFactor: number,
 ): Promise<SourceResult> {
   const inputPd = await getPolyData(sourceResult);
-  const inPoints = await (await inputPd.getPoints()).getData();
-  const polys = await (await inputPd.getPolys()).getData();
+  const pointsObject = await inputPd.getPoints();
+  const inPoints = await pointsObject.getData();
+  const polysObject = await inputPd.getPolys();
+  const polys = await polysObject.getData();
   if (polys.length === 0) {
     return sourceResult;
   }
@@ -737,8 +740,10 @@ async function applyShrinkFilter(
   }
 
   const outputPd = vtk.vtkPolyData();
-  (await outputPd.getPoints()).setData(new Float32Array(resultPoints), 3);
-  (await outputPd.getPolys()).setData(new Uint32Array(resultPolys));
+  const outPointsObject = await outputPd.getPoints();
+  outPointsObject.setData(new Float32Array(resultPoints), 3);
+  const outPolysObject = await outputPd.getPolys();
+  outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -781,8 +786,10 @@ async function applyClipManual(
   invert: boolean,
 ): Promise<SourceResult> {
   const inputPd = await getPolyData(sourceResult);
-  const inPoints = await (await inputPd.getPoints()).getData();
-  const polys = await (await inputPd.getPolys()).getData();
+  const pointsObject = await inputPd.getPoints();
+  const inPoints = await pointsObject.getData();
+  const polysObject = await inputPd.getPolys();
+  const polys = await polysObject.getData();
   if (polys.length === 0) {
     return sourceResult;
   }
@@ -836,8 +843,10 @@ async function applyClipManual(
   }
 
   const outputPd = vtk.vtkPolyData();
-  (await outputPd.getPoints()).setData(new Float32Array(resultPoints), 3);
-  (await outputPd.getPolys()).setData(new Uint32Array(resultPolys));
+  const outPointsObject = await outputPd.getPoints();
+  outPointsObject.setData(new Float32Array(resultPoints), 3);
+  const outPolysObject = await outputPd.getPolys();
+  outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
 }
 
@@ -868,7 +877,7 @@ async function applyContourFilter(
   pd.addArray(scalars);
   pd.setActiveScalars(scalarName);
 
-  return await applyContourManual(vtk, inputPd, values, scalarName);
+  return applyContourManual(vtk, inputPd, values, scalarName);
 }
 
 /**
@@ -913,10 +922,12 @@ async function applyContourManual(
   values: number[],
   scalarName: string,
 ): Promise<SourceResult> {
-  const inPoints = await (await inputPd.getPoints()).getData();
-  const polys = await (await inputPd.getPolys()).getData();
-  const pointDataObj = await inputPd.getPointData();
-  const scalarsArray = pointDataObj.getArrayByName(scalarName);
+  const pointsObject = await inputPd.getPoints();
+  const inPoints = await pointsObject.getData();
+  const polysObject = await inputPd.getPolys();
+  const polys = await polysObject.getData();
+  const pointDataObject = await inputPd.getPointData();
+  const scalarsArray = pointDataObject.getArrayByName(scalarName);
   if (polys.length === 0 || !scalarsArray) {
     return { output: inputPd, isFilter: false };
   }
@@ -966,8 +977,10 @@ async function applyContourManual(
 
   const outputPd = vtk.vtkPolyData();
   if (outPoints.length > 0) {
-    (await outputPd.getPoints()).setData(new Float32Array(outPoints), 3);
-    (await outputPd.getLines()).setData(new Uint32Array(outPolys));
+    const outPointsObject = await outputPd.getPoints();
+    outPointsObject.setData(new Float32Array(outPoints), 3);
+    const outLinesObject = await outputPd.getLines();
+    outLinesObject.setData(new Uint32Array(outPolys));
   }
 
   return { output: outputPd, isFilter: false };
