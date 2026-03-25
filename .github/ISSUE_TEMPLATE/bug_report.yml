@@ -1,0 +1,77 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in pyvista-wasm
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the form below.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Install pyvista-wasm
+        2. Run the following code
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened.
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal Code Example
+      description: A minimal, reproducible code example.
+      render: python
+      placeholder: |
+        import pyvista_wasm as pv
+
+        plotter = pv.Plotter()
+        plotter.add_mesh(pv.Sphere(), color="red")
+        plotter.show()
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Information
+      description: Please provide your environment details.
+      placeholder: |
+        - pyvista-wasm version:
+        - Python version:
+        - OS:
+        - Browser:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Messages / Logs
+      description: Any relevant error messages or logs.
+      render: shell
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the [Code of Conduct](https://github.com/tkoyama010/pyvista-wasm/blob/main/CODE_OF_CONDUCT.md)
+          required: true
