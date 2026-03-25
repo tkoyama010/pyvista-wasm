@@ -146,8 +146,9 @@ def test_ply_reader_scene_data() -> None:
     mesh = PLYReader(TRIANGLE_PLY).read()
     scene = mesh.to_scene_data()
     assert scene is not None
-    assert scene["type"] == "plyReader"
-    assert "data" in scene
+    assert scene["type"] == "mesh"
+    assert "points" in scene
+    assert "polys" in scene
 
 
 @pytest.mark.parametrize(
@@ -507,8 +508,9 @@ def test_download_bunny_scene_data() -> None:
     mesh = examples.download_bunny()
     scene = mesh.to_scene_data()
     assert scene is not None
-    assert scene["type"] == "plyReader"
-    assert "data" in scene
+    assert scene["type"] == "mesh"
+    assert "points" in scene
+    assert "polys" in scene
 
 
 def test_download_lucy_returns_ply_mesh() -> None:
@@ -522,5 +524,6 @@ def test_download_lucy_scene_data() -> None:
     mesh = examples.download_lucy()
     scene = mesh.to_scene_data()
     assert scene is not None
-    assert scene["type"] == "plyReader"
-    assert "data" in scene
+    assert scene["type"] == "mesh"
+    assert "points" in scene
+    assert "polys" in scene

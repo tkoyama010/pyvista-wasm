@@ -2,6 +2,7 @@
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+import pyvista_wasm
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -9,7 +10,7 @@
 project = "pyvista-wasm"
 copyright = "2026, Tetsuo Koyama"  # noqa: A001
 author = "Tetsuo Koyama"
-release = "0.1.0"
+release = pyvista_wasm.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
