@@ -6,6 +6,7 @@
       "release-type": "python",
       "package-name": "pyvista-wasm",
       "version-file": "pyproject.toml",
+      "extra-files": ["tests/test_init.py"],
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
