@@ -69,6 +69,7 @@ dev = [
   { include-group = "test" },
 ]
 test = [
+  "pillow>=9",
   "playwright>=1.40",
   "pytest>=7",
   "pytest-playwright>=0.4",

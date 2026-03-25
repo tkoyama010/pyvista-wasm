@@ -903,18 +903,14 @@ def test_add_axes() -> None:
 
 
 def test_add_axes_generates_code() -> None:
-    """Test that add_axes() generates vtk.js code."""
+    """Test that add_axes() generates scene data with axes enabled."""
     plotter = Plotter()
     plotter.add_mesh(Sphere())
     plotter.add_axes()
 
-    # Generate HTML to check if axes code is included
-    html = plotter._renderer._generate_html()
-
-    # Check that axes-related vtk.js code is in the output
-    assert "vtkAxesActor" in html
-    assert "vtkOrientationMarkerWidget" in html
-    assert "orientationWidget" in html
+    # Check that axes flag is set in scene data
+    scene_data = plotter._renderer._build_scene_data()
+    assert scene_data["axes"] is True
 
 
 def test_add_axes_without_meshes() -> None:

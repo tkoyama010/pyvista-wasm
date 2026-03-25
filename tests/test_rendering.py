@@ -131,7 +131,7 @@ def test_html_generation_mesh_sources(mesh_factory, vtk_source_name, monkeypatch
     # Mock IPython availability
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     mesh = mesh_factory()
     renderer.add_mesh_actor(mesh, color="red")
 
@@ -149,7 +149,7 @@ def test_mesh_parameters_in_html(monkeypatch) -> None:
     # Mock IPython availability
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     sphere = Sphere(radius=2.5, center=(1, 2, 3), theta_resolution=60)
     renderer.add_mesh_actor(sphere, color="blue")
 
@@ -169,7 +169,7 @@ def test_view_vector_in_html(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="red")
     renderer.view_vector((1.0, 2.0, 3.0))
 
@@ -187,7 +187,7 @@ def test_view_vector_default_viewup_in_html(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere())
     renderer.view_vector((0.0, 0.0, 1.0))
 
@@ -203,7 +203,7 @@ def test_view_vector_custom_viewup_in_html(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere())
     renderer.view_vector((1.0, 0.0, 0.0), viewup=(0.0, 0.0, 1.0))
 
@@ -220,7 +220,7 @@ def test_no_view_vector_no_camera_code(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="blue")
 
     html = renderer._repr_html_()
@@ -255,7 +255,7 @@ def test_multiple_meshes_unique_variables(monkeypatch) -> None:
     # Mock IPython availability
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     mesh1 = Sphere()
     mesh2 = Cube()
     renderer.add_mesh_actor(mesh1, color="red", opacity=0.8)
@@ -276,7 +276,7 @@ def test_generate_standalone_html(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="red")
 
     html = renderer._generate_standalone_html()
@@ -294,7 +294,7 @@ def test_generate_render_js(monkeypatch) -> None:
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="red")
 
     js = renderer._generate_render_js()
@@ -309,7 +309,7 @@ def test_generate_render_js(monkeypatch) -> None:
 
 
 def test_render_with_ipython_calls_display(monkeypatch) -> None:
-    """Test that VTKJSRenderer.render() calls display(Javascript(...)) in IPython mode."""
+    """Test that VTKWasmRenderer.render() calls display(Javascript(...)) in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
     displayed = []
@@ -324,7 +324,7 @@ def test_render_with_ipython_calls_display(monkeypatch) -> None:
     monkeypatch.setattr(rendering, "display", mock_display)
     monkeypatch.setattr(rendering, "Javascript", MockJavascript)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="blue")
     renderer.render()
 
@@ -337,17 +337,17 @@ def test_create_container_with_ipython(monkeypatch) -> None:
     """Test that create_container returns None in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     result = renderer.create_container("test-id")
 
     assert result is None
 
 
 def test_clear_with_ipython(monkeypatch) -> None:
-    """Test that VTKJSRenderer.clear() clears actors in IPython mode."""
+    """Test that VTKWasmRenderer.clear() clears actors in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="red")
     renderer.add_mesh_actor(Cube(), color="blue")
 
@@ -374,7 +374,7 @@ def test_points_actor_html_no_spheres(monkeypatch) -> None:
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     points = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
     renderer.add_points_actor(points, color="red", point_size=10.0, render_points_as_spheres=False)
 
@@ -394,7 +394,7 @@ def test_points_actor_html_with_spheres(monkeypatch) -> None:
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     points = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
     renderer.add_points_actor(points, color="blue", point_size=20.0, render_points_as_spheres=True)
 
@@ -460,7 +460,7 @@ def test_base_html_renderer_color_name_to_rgb() -> None:
 def test_smooth_shading_default(monkeypatch) -> None:
     """Test smooth shading is enabled by default."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere())
 
     html = renderer._repr_html_()
@@ -470,7 +470,7 @@ def test_smooth_shading_default(monkeypatch) -> None:
 def test_smooth_shading_enabled(monkeypatch) -> None:
     """Test smooth shading when explicitly enabled."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), smooth_shading=True)
 
     html = renderer._repr_html_()
@@ -482,7 +482,7 @@ def test_smooth_shading_disabled(monkeypatch) -> None:
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), smooth_shading=False)
 
     html = renderer._repr_html_()
@@ -499,7 +499,7 @@ def test_smooth_shading_enabled_with_texmap_recomputes_point_normals(monkeypatch
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), smooth_shading=True)
 
     html = renderer._repr_html_()
@@ -516,7 +516,7 @@ def test_smooth_shading_with_actor_index(monkeypatch) -> None:
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
-    renderer = rendering.VTKJSRenderer()
+    renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), smooth_shading=True)
     renderer.add_mesh_actor(Cube(), smooth_shading=False)
 

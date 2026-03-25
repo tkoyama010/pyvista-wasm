@@ -108,7 +108,9 @@ def test_add_mesh_with_texture(monkeypatch) -> None:
 
 
 def test_generated_html_contains_texture_code(monkeypatch) -> None:
-    """Test that HTML output contains texture loading code when texture is set."""
+    """Test that HTML output contains texture data when texture is set."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
     monkeypatch.setattr(webbrowser, "open", lambda _: None)
 
     plotter = pv.Plotter()
@@ -118,8 +120,9 @@ def test_generated_html_contains_texture_code(monkeypatch) -> None:
 
     html = plotter._renderer._generate_html()
     assert "masonry.bmp" in html
-    assert "addTexture" in html
-    assert "vtkTexture" in html
+    scene = extract_scene_data(html)
+    assert scene["actors"][0]["texture"] is not None
+    assert "masonry.bmp" in scene["actors"][0]["texture"]["url"]
 
 
 def test_generated_html_no_texture_code_without_texture(monkeypatch) -> None:
@@ -150,6 +153,8 @@ def test_texture_with_primitive_sphere(monkeypatch) -> None:
 
 def test_texture_with_custom_polydata_and_tcoords(monkeypatch) -> None:
     """Test texture on custom PolyData with explicit texture coordinates."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
     monkeypatch.setattr(webbrowser, "open", lambda _: None)
 
     points = np.array(
@@ -169,8 +174,9 @@ def test_texture_with_custom_polydata_and_tcoords(monkeypatch) -> None:
     plotter.add_mesh(mapped, texture=texture)
 
     html = plotter._renderer._generate_html()
-    assert "TextureCoordinates" in html
-    assert "addTexture" in html
+    scene = extract_scene_data(html)
+    assert scene["actors"][0]["texture"] is not None
+    assert scene["actors"][0]["source"]["tCoords"] is not None
 
 
 def test_polydata_t_coords_none_by_default() -> None:

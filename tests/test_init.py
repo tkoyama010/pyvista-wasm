@@ -13,9 +13,9 @@ def test_import() -> None:
 @pytest.mark.parametrize(
     ("attr", "expected"),
     [
-        ("__version__", "0.2.dev0"),
+        ("__version__", "0.1.0"),
         ("__author__", "Tetsuo Koyama"),
-        ("__license__", "BSD-3-Clause"),
+        ("__license__", "Apache-2.0"),
     ],
 )
 def test_metadata_attributes(attr, expected) -> None:
