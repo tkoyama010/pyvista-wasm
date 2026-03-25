@@ -7,14 +7,6 @@
     "typecheck": "tsc --noEmit -p ts/tsconfig.json",
     "watch": "esbuild ts/renderer.ts --bundle --format=iife --outfile=src/pyvista_wasm/templates/renderer.js --target=es2017 --watch"
   },
-  "xo": {
-    "prettier": true,
-    "semicolon": true,
-    "space": 2,
-    "rules": {
-      "no-inline-comments": "error"
-    }
-  },
   "devDependencies": {
     "esbuild": "^0.27",
     "eslint-plugin-jsdoc": "^62.8.0",
