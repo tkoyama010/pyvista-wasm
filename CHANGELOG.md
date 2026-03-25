@@ -2,23 +2,20 @@
 
 ## [0.1.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.1.0...pyvista-wasm-v0.1.1) (2026-03-25)
 
-
 ### Bug Fixes
 
-* render mesh PolyData correctly in VTK.wasm ([#25](https://github.com/tkoyama010/pyvista-wasm/issues/25)) ([14a0ca3](https://github.com/tkoyama010/pyvista-wasm/commit/14a0ca391001a7c34d4a8a8c61165e7319da1c5a))
-
+- render mesh PolyData correctly in VTK.wasm ([#25](https://github.com/tkoyama010/pyvista-wasm/issues/25)) ([14a0ca3](https://github.com/tkoyama010/pyvista-wasm/commit/14a0ca391001a7c34d4a8a8c61165e7319da1c5a))
 
 ### Documentation
 
-* add docs folder to satisfy PY004 requirement ([#27](https://github.com/tkoyama010/pyvista-wasm/issues/27)) ([9906767](https://github.com/tkoyama010/pyvista-wasm/commit/99067674fb17fb60b812fb8607ef1bfad26050ef))
-* add PyPI badge to Install section ([#24](https://github.com/tkoyama010/pyvista-wasm/issues/24)) ([8e28c82](https://github.com/tkoyama010/pyvista-wasm/commit/8e28c82226ac902a26782744d7b52d8519792fd6))
-
+- add docs folder to satisfy PY004 requirement ([#27](https://github.com/tkoyama010/pyvista-wasm/issues/27)) ([9906767](https://github.com/tkoyama010/pyvista-wasm/commit/99067674fb17fb60b812fb8607ef1bfad26050ef))
+- add PyPI badge to Install section ([#24](https://github.com/tkoyama010/pyvista-wasm/issues/24)) ([8e28c82](https://github.com/tkoyama010/pyvista-wasm/commit/8e28c82226ac902a26782744d7b52d8519792fd6))
 
 ### Continuous Integration
 
-* add concurrency group to auto-cancel redundant runs (GH102) ([#28](https://github.com/tkoyama010/pyvista-wasm/issues/28)) ([3e82392](https://github.com/tkoyama010/pyvista-wasm/commit/3e82392622e19eca6075a9f515258f1f8000bb59))
-* add Renovate for automated VTK.wasm CDN version updates ([#21](https://github.com/tkoyama010/pyvista-wasm/issues/21)) ([a0cec82](https://github.com/tkoyama010/pyvista-wasm/commit/a0cec8244ad6d62cb48db760fd031d920b44f75f))
-* add workflow to update uv.lock on release-please PRs ([#30](https://github.com/tkoyama010/pyvista-wasm/issues/30)) ([39af99b](https://github.com/tkoyama010/pyvista-wasm/commit/39af99bcf4fefd8f0b5ba76db303b2604f4da61f))
+- add concurrency group to auto-cancel redundant runs (GH102) ([#28](https://github.com/tkoyama010/pyvista-wasm/issues/28)) ([3e82392](https://github.com/tkoyama010/pyvista-wasm/commit/3e82392622e19eca6075a9f515258f1f8000bb59))
+- add Renovate for automated VTK.wasm CDN version updates ([#21](https://github.com/tkoyama010/pyvista-wasm/issues/21)) ([a0cec82](https://github.com/tkoyama010/pyvista-wasm/commit/a0cec8244ad6d62cb48db760fd031d920b44f75f))
+- add workflow to update uv.lock on release-please PRs ([#30](https://github.com/tkoyama010/pyvista-wasm/issues/30)) ([39af99b](https://github.com/tkoyama010/pyvista-wasm/commit/39af99bcf4fefd8f0b5ba76db303b2604f4da61f))
 
 ## 0.1.0 (2026-03-25)
 
