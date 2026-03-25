@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "pyvista-wasm"
-copyright = "2024, Tetsuo Koyama"  # noqa: A001
+copyright = "2026, Tetsuo Koyama"  # noqa: A001
 author = "Tetsuo Koyama"
 release = "0.1.0"
 
