@@ -13,6 +13,8 @@
 
 ## Install
 
+[![PyPI](https://img.shields.io/pypi/v/pyvista-wasm)](https://pypi.org/project/pyvista-wasm/)
+
 ```bash
 pip install pyvista-wasm
 ```
