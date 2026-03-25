@@ -51,6 +51,13 @@ optional-dependencies.dev = [
   "ruff>=0.1",
   "tox>=4",
 ]
+optional-dependencies.docs = [
+  "myst-parser>=4; python_version>='3.12'",
+  "sphinx>=8; python_version>='3.12'",
+  "sphinx-book-theme>=1.1; python_version>='3.12'",
+  "sphinx-design>=0.6; python_version>='3.12'",
+  "sphinx-intl>=2.2; python_version>='3.12'",
+]
 optional-dependencies.streamlit = [
   "streamlit>=1.30",
 ]
