@@ -1,38 +1,69 @@
-# pyvista-wasm
-
-[PyVista](https://github.com/pyvista/pyvista)-like API for [VTK.wasm](https://kitware.github.io/vtk-wasm/) — bring intuitive 3D visualization to the browser using WebAssembly.
-
-## Install
-
-```bash
-pip install pyvista-wasm
+```{include} ../README.md
 ```
 
-For Pyodide/stlite:
+______________________________________________________________________
 
-```python
-import micropip
+::::{grid} 1 1 2 2
+:gutter: 2
 
-await micropip.install("pyvista-wasm")
-```
+:::{grid-item-card} Tutorials
+:link: tutorials/index
+:link-type: doc
+:class-card: sd-rounded-3
 
-## Usage
+Topic driven themed lessons.
+:::
 
-```python
-import pyvista_wasm as pv
+:::{grid-item-card} How-To Guides
+:link: howtos/index
+:link-type: doc
+:class-card: sd-rounded-3
 
-plotter = pv.Plotter()
-plotter.add_mesh(pv.Sphere())
-plotter.show()
-```
+Focused guides for common tasks.
+:::
 
-## API Reference
+:::{grid-item-card} Explanation
+:link: explanation/index
+:link-type: doc
+:class-card: sd-rounded-3
 
-- `Plotter` — main entry point for building and displaying scenes
-- `examples` — sample datasets (sphere, bunny, etc.)
+Deeper understanding awaits.
+:::
+
+:::{grid-item-card} Reference
+:link: api/index
+:link-type: doc
+:class-card: sd-rounded-3
+
+No fuss facts.
+:::
+
+::::
+
+Choose your approach to learning and `pyvista-wasm` knowledge discovery
+([Diátaxis](https://diataxis.fr/)).
+
+______________________________________________________________________
 
 ## Links
 
-- [Source code](https://github.com/tkoyama010/pyvista-wasm)
-- [Issue tracker](https://github.com/tkoyama010/pyvista-wasm/issues)
-- [Changelog](../CHANGELOG.md)
+- [GitHub Repository](https://github.com/tkoyama010/pyvista-wasm)
+- [Issue Tracker](https://github.com/tkoyama010/pyvista-wasm/issues)
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+:caption: Getting Started
+
+Installation <self>
+```
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+:caption: Contents
+
+howtos/index
+explanation/index
+api/index
+```
