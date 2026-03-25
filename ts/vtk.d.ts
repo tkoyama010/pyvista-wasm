@@ -72,20 +72,24 @@ type VtkPolyData = {
   getPoints(): Promise<VtkPoints>;
   setPoints(points: VtkPoints): void;
   getPolys(): Promise<VtkCellArray>;
+  setPolys(cellArray: VtkCellArray): void;
   getLines(): Promise<VtkCellArray>;
+  setLines(cellArray: VtkCellArray): void;
   getPointData(): Promise<VtkPointData>;
+  getNumberOfPoints(): Promise<number>;
+  getNumberOfCells(): Promise<number>;
   delete(): void;
 };
 
 /** A set of 3D points. */
 type VtkPoints = {
-  setData(data: Float32Array, numberOfComponents: number): void;
+  setData(data: VtkDataArray): void;
   getData(): Promise<Float32Array>;
 };
 
 /** A VTK cell array (polygons, lines, etc.). */
 type VtkCellArray = {
-  setData(data: Uint32Array): void;
+  setData(offsets: VtkDataArray, connectivity: VtkDataArray): void;
   getData(): Promise<Uint32Array>;
 };
 
@@ -99,6 +103,8 @@ type VtkPointData = {
 
 /** A VTK data array holding typed numeric values. */
 type VtkDataArray = {
+  /** Transfer typed-array values into the C++ VTK array (bypasses JSON serialization). */
+  setArray(data: Float32Array | Int32Array): Promise<void>;
   getData(): Promise<Float32Array>;
 };
 
@@ -190,7 +196,10 @@ type VtkWasmNamespace = {
   vtkCellArray(): VtkCellArray;
   vtkFloatArray(options?: {
     numberOfComponents?: number;
-    values?: Float32Array;
+    name?: string;
+  }): VtkDataArray;
+  vtkIntArray(options?: {
+    numberOfComponents?: number;
     name?: string;
   }): VtkDataArray;
   vtkLight(): VtkLight;
