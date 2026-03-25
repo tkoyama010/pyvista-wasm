@@ -150,13 +150,14 @@ type VtkPlane = {
 
 /** Handles user interaction events (mouse, keyboard, touch). */
 type VtkInteractor = {
-  setInteractorStyle(style: VtkInteractorStyle): void;
-  setContainer(element: HTMLElement): void;
-  bindEvents(element: HTMLElement): void;
-  initialize(): void;
-  enable(): void;
+  interactorStyle: VtkInteractorStyleManager;
   start(): Promise<void>;
   delete(): void;
+};
+
+/** Manages interactor style selection. */
+type VtkInteractorStyleManager = {
+  setCurrentStyleToTrackballCamera(): Promise<void>;
 };
 
 /** A trackball camera interaction style. */
@@ -194,8 +195,10 @@ type VtkWasmNamespace = {
   }): VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
-  vtkRenderWindowInteractor(options?: { renderWindow?: VtkRenderWindow }): VtkInteractor;
-  vtkInteractorStyleTrackballCamera(): VtkInteractorStyle;
+  vtkRenderWindowInteractor(options?: {
+    canvasSelector?: string;
+    renderWindow?: VtkRenderWindow;
+  }): VtkInteractor;
   vtkSphereSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkConeSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkCubeSource(options?: Record<string, unknown>): VtkAlgorithm;

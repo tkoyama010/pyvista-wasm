@@ -85,19 +85,13 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   canvas.height = bbox.height || 400;
   canvas.style.width = "100%";
   canvas.style.height = "100%";
+  canvas.tabIndex = -1;
+  canvas.addEventListener("click", () => canvas.focus());
   container.append(canvas);
 
-  const renderWindow = vtk.vtkRenderWindow({ canvasSelector: `#${CSS.escape(canvasId)}` });
-  renderWindow.addRenderer(renderer);
-  renderWindow.render();
-
-  const interactor = vtk.vtkRenderWindowInteractor({ renderWindow });
-  const interactorStyle = vtk.vtkInteractorStyleTrackballCamera();
-  interactor.setInteractorStyle(interactorStyle);
-  interactor.setContainer(canvas);
-  interactor.bindEvents(canvas);
-  interactor.initialize();
-  interactor.enable();
+  const canvasSelector = `#${CSS.escape(canvasId)}`;
+  const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
+  await renderWindow.addRenderer(renderer);
 
   if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
     renderer.removeAllLights();
@@ -120,6 +114,13 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   if (sceneData.camera) {
     await setupCamera(renderer, sceneData.camera);
   }
+
+  // canvasSelector must match the canvas for Emscripten event callbacks
+  const interactor = vtk.vtkRenderWindowInteractor({
+    canvasSelector,
+    renderWindow,
+  });
+  await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
 
   renderWindow.render();
   await interactor.start();
