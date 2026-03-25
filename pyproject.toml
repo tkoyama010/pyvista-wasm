@@ -7,7 +7,7 @@ name = "pyvista-wasm"
 version = "0.1.0"
 description = "PyVista-like API for VTK.wasm"
 readme = "README.md"
-license = "BSD-3-Clause"
+license = "Apache-2.0"
 authors = [
   { name = "Tetsuo Koyama", email = "contact@tetsuo-koyama.dev" },
 ]

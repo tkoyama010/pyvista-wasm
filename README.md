@@ -51,4 +51,4 @@ Contributions are welcome! Please open an issue or pull request on [GitHub](http
 
 ## License
 
-[BSD 3-Clause](LICENSE) © Tetsuo Koyama
+[Apache License 2.0](LICENSE) © Tetsuo Koyama
