@@ -151,6 +151,10 @@ type VtkPlane = {
 /** Handles user interaction events (mouse, keyboard, touch). */
 type VtkInteractor = {
   setInteractorStyle(style: VtkInteractorStyle): void;
+  setContainer(element: HTMLElement): void;
+  bindEvents(element: HTMLElement): void;
+  initialize(): void;
+  enable(): void;
   start(): Promise<void>;
   delete(): void;
 };

@@ -94,6 +94,10 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const interactor = vtk.vtkRenderWindowInteractor({ renderWindow });
   const interactorStyle = vtk.vtkInteractorStyleTrackballCamera();
   interactor.setInteractorStyle(interactorStyle);
+  interactor.setContainer(canvas);
+  interactor.bindEvents(canvas);
+  interactor.initialize();
+  interactor.enable();
 
   if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
     renderer.removeAllLights();
