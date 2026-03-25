@@ -1123,7 +1123,8 @@ class BrowserRenderer(_BaseHTMLRenderer):
             "<head>\n"
             "  <meta charset='utf-8'>\n"
             "  <title>pyvista-wasm</title>\n"
-            f"  <script src='{_VTKWASM_UMD}' id='vtk-wasm' data-url='{_VTKWASM_DATA_URL}'></script>\n" + style + "</head>\n"
+            f"  <script src='{_VTKWASM_UMD}' id='vtk-wasm'"
+            f" data-url='{_VTKWASM_DATA_URL}'></script>\n" + style + "</head>\n"
             "<body>\n" + fragment + "</body>\n"
             "</html>\n"
         )

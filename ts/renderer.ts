@@ -117,12 +117,13 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 }
 
 // Bootstrap: wait for VTK.wasm namespace then build the scene
+// eslint-disable-next-line unicorn/prefer-top-level-await -- conditional await not supported at top level
 if (typeof vtkReady !== "undefined") {
   // Annotation-based loading: vtkReady is set by the UMD script
-  void vtkReady.then(buildScene);
+  void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
   // Manual loading: create namespace ourselves
-  void vtkWASM.createNamespace().then(buildScene);
+  void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
 /**
@@ -132,11 +133,7 @@ if (typeof vtkReady !== "undefined") {
  * @param ren
  * @returns Nothing; mutates the renderer in place.
  */
-function setupLights(
-  vtk: VtkWasmNamespace,
-  lightsConfig: LightConfig[],
-  ren: VtkRenderer,
-): void {
+function setupLights(vtk: VtkWasmNamespace, lightsConfig: LightConfig[], ren: VtkRenderer): void {
   if (lightsConfig.length === 0) {
     return;
   }

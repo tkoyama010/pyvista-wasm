@@ -186,9 +186,7 @@ type VtkWasmNamespace = {
   }): VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
-  vtkRenderWindowInteractor(options?: {
-    renderWindow?: VtkRenderWindow;
-  }): VtkInteractor;
+  vtkRenderWindowInteractor(options?: { renderWindow?: VtkRenderWindow }): VtkInteractor;
   vtkInteractorStyleTrackballCamera(): VtkInteractorStyle;
   vtkSphereSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkConeSource(options?: Record<string, unknown>): VtkAlgorithm;
@@ -346,6 +344,7 @@ declare const __pvwasmContainer: HTMLElement | undefined;
  * The vtkWASM global loaded from the UMD script.
  * Provides createNamespace() to initialise the VTK.wasm runtime.
  */
+// eslint-disable-next-line @typescript-eslint/naming-convention -- external API name from @kitware/vtk-wasm
 declare const vtkWASM: {
   createNamespace(
     url?: string,
