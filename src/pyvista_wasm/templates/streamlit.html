@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>pyvista-wasm Streamlit</title>
+        <meta name="description" content="3D visualization powered by pyvista-wasm and VTK.wasm" />
+        <meta name="keywords" content="pyvista,vtk,wasm,3d,visualization" />
+        <div id="streamlit-config"
+             data-height="{{ HEIGHT }}"
+             data-meshes-data="{{ MESHES_DATA | tojson }}"
+             style="display: none"></div>
+        <style>
+      body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+      }
+      #container {
+          width: 100%;
+      }
+        </style>
+        <script
+          src="https://unpkg.com/@kitware/vtk-wasm@1.7.4/vtk-umd.js"
+          id="vtk-wasm"
+          data-url="https://gitlab.kitware.com/api/v4/projects/13/packages/generic/vtk-wasm32-emscripten/9.6.20260228/vtk-9.6.20260228-wasm32-emscripten.tar.gz"
+        ></script>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="module">
+          const config = document.getElementById('streamlit-config').dataset;
+          const containerHeight = parseInt(config.height);
+          const container = document.getElementById('container');
+          container.style.height = containerHeight + 'px';
+
+          // Wait for VTK.wasm to be ready
+          vtkReady.then(async (vtk) => {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.id = 'vtk-canvas';
+            canvas.width = container.clientWidth;
+            canvas.height = containerHeight;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            container.appendChild(canvas);
+
+            // Create renderer and render window
+            const renderer = vtk.vtkRenderer();
+            renderer.setBackground(0.2, 0.3, 0.4);
+
+            const renderWindow = vtk.vtkRenderWindow({ canvasSelector: '#vtk-canvas' });
+
+            // Create interactor
+            const interactor = vtk.vtkRenderWindowInteractor({ renderWindow });
+            const style = vtk.vtkInteractorStyleTrackballCamera();
+            interactor.setInteractorStyle(style);
+
+            // Mesh data from Python
+            const meshesData = JSON.parse(config.meshesData);
+
+            // Add each mesh
+            meshesData.forEach(meshData => {
+              // Create polydata
+              const polydata = vtk.vtkPolyData();
+
+              // Set points
+              const points = new Float32Array(meshData.points.flat());
+              const vtkPts = vtk.vtkPoints();
+              vtkPts.setData(points, 3);
+              polydata.setPoints(vtkPts);
+
+              // Create mapper
+              const mapper = vtk.vtkPolyDataMapper();
+              mapper.setInputData(polydata);
+
+              // Create actor
+              const actor = vtk.vtkActor({ mapper });
+
+              // Set color
+              if (meshData.color) {
+                let rgb;
+                if (typeof meshData.color === 'string') {
+                  rgb = nameToRGB(meshData.color);
+                } else {
+                  rgb = meshData.color;
+                }
+                actor.getProperty().setColor(...rgb);
+              }
+
+              // Set opacity
+              actor.getProperty().setOpacity(meshData.opacity || 1.0);
+
+              // Set point size for visibility
+              actor.getProperty().setPointSize(5);
+
+              renderer.addActor(actor);
+            });
+
+            // Reset camera and render
+            renderer.resetCamera();
+            renderWindow.render();
+            await interactor.start();
+
+            // Color name to RGB conversion
+            function nameToRGB(colorName) {
+              const colors = {
+                'red': [1.0, 0.0, 0.0],
+                'green': [0.0, 1.0, 0.0],
+                'blue': [0.0, 0.0, 1.0],
+                'yellow': [1.0, 1.0, 0.0],
+                'cyan': [0.0, 1.0, 1.0],
+                'magenta': [1.0, 0.0, 1.0],
+                'white': [1.0, 1.0, 1.0],
+                'black': [0.0, 0.0, 0.0],
+              };
+              return colors[colorName.toLowerCase()] || [0.5, 0.5, 0.5];
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+              canvas.width = container.clientWidth;
+              canvas.height = container.clientHeight;
+              renderWindow.render();
+            });
+          });
+        </script>
+    </body>
+</html>
