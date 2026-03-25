@@ -669,9 +669,19 @@ async function applyFilters(
     } else if (f.type === "tube" && f.radius !== undefined && f.numberOfSides !== undefined) {
       current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (f.type === "clip" && f.normal && f.origin && f.invert !== undefined) {
-      current = await applyClipManual(vtk, current, f.normal, f.origin, f.invert); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+      // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
+      current = await applyClipManual(vtk, current, {
+        normal: f.normal,
+        origin: f.origin,
+        invert: f.invert,
+      });
     } else if (f.type === "contour" && f.values && f.scalarName && f.scalarData) {
-      current = await applyContourFilter(vtk, current, f.values, f.scalarName, f.scalarData); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+      // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
+      current = await applyContourFilter(vtk, current, {
+        values: f.values,
+        scalarName: f.scalarName,
+        scalarData: f.scalarData,
+      });
     }
   }
 
@@ -773,18 +783,18 @@ async function applyTubeFilter(
  * Manual clip — discard cells whose centroid is on the wrong side of a plane.
  * @param vtk
  * @param sourceResult
- * @param normal
- * @param origin
- * @param invert
+ * @param options - Clip plane parameters.
+ * @param options.normal - Plane normal direction.
+ * @param options.origin - Plane origin point.
+ * @param options.invert - Whether to invert the clip.
  * @returns A {@link SourceResult} containing only kept cells.
  */
 async function applyClipManual(
   vtk: VtkWasmNamespace,
   sourceResult: SourceResult,
-  normal: [number, number, number],
-  origin: [number, number, number],
-  invert: boolean,
+  options: { normal: [number, number, number]; origin: [number, number, number]; invert: boolean },
 ): Promise<SourceResult> {
+  const { normal, origin, invert } = options;
   const inputPd = await getPolyData(sourceResult);
   const pointsObject = await inputPd.getPoints();
   const inPoints = await pointsObject.getData();
@@ -854,18 +864,18 @@ async function applyClipManual(
  * Inject scalar data into PolyData and extract isocontour lines.
  * @param vtk
  * @param sourceResult
- * @param values
- * @param scalarName
- * @param scalarData
+ * @param options - Contour parameters.
+ * @param options.values - Contour values to extract.
+ * @param options.scalarName - Name of the scalar array.
+ * @param options.scalarData - Scalar data values.
  * @returns A {@link SourceResult} containing the extracted isocontour lines.
  */
 async function applyContourFilter(
   vtk: VtkWasmNamespace,
   sourceResult: SourceResult,
-  values: number[],
-  scalarName: string,
-  scalarData: number[],
+  options: { values: number[]; scalarName: string; scalarData: number[] },
 ): Promise<SourceResult> {
+  const { values, scalarName, scalarData } = options;
   const inputPd = await getPolyData(sourceResult);
 
   const scalars = vtk.vtkFloatArray({

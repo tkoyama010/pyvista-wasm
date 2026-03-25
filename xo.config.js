@@ -30,6 +30,7 @@ export default [
       "jsdoc/require-returns": "error",
       "complexity": ["error", 20],
       "max-depth": ["error", 4],
+      "max-params": ["error", 4],
     },
   },
   {
