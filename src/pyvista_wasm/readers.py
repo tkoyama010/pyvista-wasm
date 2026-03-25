@@ -592,8 +592,14 @@ class PLYReader:
         n_faces = PLYReader._parse_face_count(header_lines)
 
         type_sizes = {
-            "char": 1, "uchar": 1, "short": 2, "ushort": 2,
-            "int": 4, "uint": 4, "float": 4, "double": 8,
+            "char": 1,
+            "uchar": 1,
+            "short": 2,
+            "ushort": 2,
+            "int": 4,
+            "uint": 4,
+            "float": 4,
+            "double": 8,
         }
         bytes_per_vertex = sum(type_sizes.get(pt, 0) for pt in vertex_properties)
         offset = data_offset + n_vertices * bytes_per_vertex
