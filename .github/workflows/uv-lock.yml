@@ -13,6 +13,7 @@ jobs:
   uv-lock:
     if: startsWith(github.head_ref, 'release-please--')
     runs-on: ubuntu-latest
+    environment: release-please
     permissions:
       contents: write
     steps:
@@ -20,6 +21,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          persist-credentials: false
 
       - name: Install uv
         uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78  # v7
@@ -31,6 +33,7 @@ jobs:
         run: |
           git config user.name "pyvista-bot"
           git config user.email "pyvista-bot@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.RELEASE_PLEASE_TOKEN }}@github.com/${{ github.repository }}.git
           git add uv.lock
           git diff --cached --quiet || git commit -m "chore: update uv.lock"
           git push
