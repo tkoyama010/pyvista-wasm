@@ -398,6 +398,26 @@ class Plotter:
         # Render the scene
         self._renderer.render()
 
+    def generate_standalone_html(self) -> str:
+        """Generate a complete standalone HTML page with the current scene.
+
+        Returns
+        -------
+        str
+            A full HTML document string containing the visualization.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_mesh(pv.Sphere())
+        >>> html = plotter.generate_standalone_html()
+        >>> '<!DOCTYPE html>' in html
+        True
+
+        """
+        return self._renderer.generate_standalone_html()
+
     def view_vector(
         self,
         vector: tuple[float, float, float],
