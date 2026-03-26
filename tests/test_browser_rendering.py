@@ -67,7 +67,7 @@ def _load_plotter_html(page: Page, plotter: Plotter) -> None:
     """
     # Simulate what show() does
     plotter._renderer.create_container(plotter._container_id)
-    html = plotter._renderer._generate_standalone_html()
+    html = plotter.generate_standalone_html()
 
     # Write to temp file and navigate to it
     with tempfile.NamedTemporaryFile(mode="w", suffix=".html", delete=False) as f:

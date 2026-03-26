@@ -271,7 +271,7 @@ def test_multiple_meshes_unique_variables(monkeypatch) -> None:
 
 
 def test_generate_standalone_html(monkeypatch) -> None:
-    """Test that _generate_standalone_html produces a complete HTML page with scene data."""
+    """Test that generate_standalone_html produces a complete HTML page with scene data."""
     from tests.conftest import extract_scene_data  # noqa: PLC0415
 
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
@@ -279,7 +279,7 @@ def test_generate_standalone_html(monkeypatch) -> None:
     renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="red")
 
-    html = renderer._generate_standalone_html()
+    html = renderer.generate_standalone_html()
 
     assert "<!DOCTYPE html>" in html
     assert 'id="scene-data"' in html
