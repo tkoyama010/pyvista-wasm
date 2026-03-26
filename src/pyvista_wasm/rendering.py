@@ -97,7 +97,7 @@ from .examples import CubeMap
 
 # Load JavaScript templates
 _TEMPLATES_DIR = pathlib.Path(__file__).parent / "templates"
-_RENDERING_TEMPLATE = (_TEMPLATES_DIR / "renderer.html").read_text()
+_RENDERING_TEMPLATE = (_TEMPLATES_DIR / "standalone.html").read_text()
 _RENDERER_JS = (_TEMPLATES_DIR / "renderer.js").read_text()
 
 _jinja_env = Environment(undefined=StrictUndefined, autoescape=False)  # noqa: S701
