@@ -94,6 +94,14 @@ build.hooks.build-scripts.scripts = [
 [tool.ruff]
 line-length = 100
 lint.select = [ "ALL" ]
+lint.per-file-ignores."jupyterlite/content/*" = [
+  "D100",    # missing docstring - jupytext files
+  "E402",    # module import not at top - cell-based structure
+  "ERA001",  # commented-out code - jupytext metadata
+  "F704",    # await outside async - top-level await valid in Pyodide
+  "INP001",  # implicit namespace package
+  "PLE1142", # await outside async - top-level await valid in Pyodide
+]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
   "INP001",  # implicit namespace package
