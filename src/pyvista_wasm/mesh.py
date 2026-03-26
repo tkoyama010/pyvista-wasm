@@ -480,12 +480,9 @@ class PolyData:
 
         .. note::
 
-            The clipping is computed in JavaScript at render time by
-            evaluating the signed distance of each vertex from the clip plane.
-            Cells with all vertices on the clipped side are removed.
-            ``VTK.wasm`` does not include a built-in clipping filter with
-            the exact PyVista API, so this filter is implemented as a
-            custom JavaScript pass.
+            The clipping is performed at render time using VTK.wasm's
+            built-in ``vtkClipPolyData`` filter with a ``vtkPlane``
+            clip function.
 
         Parameters
         ----------
