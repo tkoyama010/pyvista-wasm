@@ -475,14 +475,9 @@ class PolyData:
         """Clip the mesh with a plane.
 
         This filter clips the mesh with a plane defined by a normal vector
-        and an origin point. Points on one side of the plane are removed.
-        It mirrors the PyVista ``clip`` filter API.
-
-        .. note::
-
-            The clipping is performed at render time using VTK.wasm's
-            built-in ``vtkClipPolyData`` filter with a ``vtkPlane``
-            clip function.
+        and an origin point using VTK.wasm's built-in ``vtkClipPolyData``
+        filter with a ``vtkPlane`` clip function. Points on one side of
+        the plane are removed. It mirrors the PyVista ``clip`` filter API.
 
         Parameters
         ----------
