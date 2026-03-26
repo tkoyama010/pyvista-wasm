@@ -77,9 +77,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 
   // Ensure the container has a usable size.  In JupyterLite the parent
   // output area may have no intrinsic height, so we guarantee a minimum.
-  if (!container.style.minHeight) {
-    container.style.minHeight = "400px";
-  }
+  container.style.minHeight ||= "400px";
 
   const bbox = container.getBoundingClientRect();
   const canvasId = `${sceneData.containerId}-canvas`;
