@@ -815,7 +815,7 @@ class _BaseHTMLRenderer:
             "  var container = document.createElement('div');\n"
             f"  container.id = {_json.dumps(self.container_id)};\n"
             "  container.style.cssText = "
-            "'width:600px;height:400px;border:2px solid #333;position:relative';\n"
+            "'width:600px;height:400px;min-height:400px;border:2px solid #333;position:relative';\n"
             "  var parent = (typeof element !== 'undefined' && element)"
             " ? element : document.body;\n"
             "  parent.appendChild(container);\n"
