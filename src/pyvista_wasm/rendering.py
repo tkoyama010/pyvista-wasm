@@ -1439,6 +1439,23 @@ class MockRenderer:
         """
         logger.info("Rendering %d actors", len(self.actors))
 
+    def generate_standalone_html(self) -> str:
+        """Return a minimal HTML string for mock rendering.
+
+        Returns
+        -------
+        str
+            A placeholder HTML document.
+
+        """
+        return (
+            "<!DOCTYPE html>\n"
+            "<html>\n"
+            "<head><meta charset='utf-8'></head>\n"
+            "<body><!-- mock renderer --></body>\n"
+            "</html>\n"
+        )
+
     def add_light(self, light: Light) -> None:
         """Mock add_light.
 
