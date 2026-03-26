@@ -403,15 +403,10 @@ class PolyData:
 
         This filter shrinks the individual cells of a mesh towards their
         centroids, producing visual separation between adjacent cells.
-        It mirrors the PyVista ``shrink`` filter API.
-
-        .. note::
-
-            The shrink is computed in JavaScript at render time by
-            iterating over the cell array from the VTK.wasm source,
-            moving each vertex toward its cell's centroid.
-            ``VTK.wasm`` does not include ``vtkShrinkFilter``, so this
-            filter is implemented as a custom JavaScript pass.
+        It mirrors the PyVista ``shrink`` filter API. The shrink is
+        computed in JavaScript at render time as a manual implementation
+        because ``vtkShrinkPolyData`` is not registered with the
+        ``vtkDeserializer`` in VTK.wasm's rendering-mode binary.
 
         Parameters
         ----------
@@ -676,16 +671,10 @@ class PolyData:
 
         This filter extracts isolines from the mesh at specified scalar values
         using a marching triangles algorithm implemented in JavaScript.
-        It mirrors the PyVista ``contour`` filter API.
-
-        .. note::
-
-            The contour is computed in JavaScript at render time by applying
-            the marching triangles algorithm to each triangle of the mesh,
-            interpolating edge crossings at the specified iso-values.
-            ``VTK.wasm`` does not support ``vtkPolyData`` input for
-            ``vtkContourFilter``, so this filter is implemented as a custom
-            JavaScript pass.
+        It mirrors the PyVista ``contour`` filter API. The contour is
+        computed at render time as a manual implementation because
+        ``vtkContourFilter`` is not registered with the
+        ``vtkDeserializer`` in VTK.wasm's rendering-mode binary.
 
         Parameters
         ----------

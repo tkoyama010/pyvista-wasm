@@ -705,6 +705,11 @@ async function applyFilters(
 
 /**
  * Manual shrink filter — move each cell's vertices toward its centroid.
+ *
+ * VTK.wasm exposes `vtkShrinkPolyData` as a factory function, but the
+ * rendering-mode WASM binary does not register a deserializer for it,
+ * so the `vtkObjectManager` cannot track the object. This manual
+ * implementation is used as a workaround.
  * @param vtk
  * @param sourceResult
  * @param shrinkFactor
@@ -823,6 +828,11 @@ async function applyClipFilter(
 
 /**
  * Inject scalar data into PolyData and extract isocontour lines.
+ *
+ * VTK.wasm exposes `vtkContourFilter` as a factory function, but the
+ * rendering-mode WASM binary does not register a deserializer for it,
+ * so the `vtkObjectManager` cannot track the object. Scalar injection
+ * is done here, then {@link applyContourManual} performs the extraction.
  * @param vtk
  * @param sourceResult
  * @param options - Contour parameters.
@@ -881,6 +891,9 @@ function collectEdgeIntersections(
 
 /**
  * Manual marching-triangles contour extraction.
+ *
+ * See {@link applyContourFilter} for why this manual implementation is
+ * needed instead of VTK.wasm's `vtkContourFilter`.
  * @param vtk
  * @param inputPd
  * @param values
