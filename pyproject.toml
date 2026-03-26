@@ -52,6 +52,8 @@ optional-dependencies.dev = [
   "tox>=4",
 ]
 optional-dependencies.docs = [
+  "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.12' and python_version<'3.14'",
+  "jupyterlite-sphinx==0.22.1; python_version>='3.12' and python_version<'3.14'",
   "myst-parser>=4; python_version>='3.12'",
   "sphinx>=8; python_version>='3.12'",
   "sphinx-book-theme>=1.1; python_version>='3.12'",
