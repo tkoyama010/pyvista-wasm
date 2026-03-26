@@ -218,6 +218,10 @@ type VtkWasmNamespace = {
   vtkPlaneSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkPolyDataNormals(): VtkAlgorithm;
   vtkTubeFilter(options?: Record<string, unknown>): VtkAlgorithm;
+  vtkClipPolyData(): VtkAlgorithm & {
+    setClipFunction(plane: VtkPlane): void;
+    setInsideOut(value: number): void;
+  };
   vtkPlane(): VtkPlane;
   vtkTexture(): VtkTexture;
 };

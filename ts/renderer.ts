@@ -670,7 +670,7 @@ function setupTextActor(cfg: TextActorConfig, containerElement: HTMLElement): vo
 }
 
 /**
- * Apply a chain of filters (shrink, tube) to a source.
+ * Apply a chain of filters (shrink, tube, clip, contour) to a source.
  * @param vtk
  * @param sourceResult
  * @param filters
@@ -689,7 +689,7 @@ async function applyFilters(
       current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (f.type === "clip" && f.normal && f.origin && f.invert !== undefined) {
       // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
-      current = await applyClipManual(vtk, current, {
+      current = await applyClipFilter(vtk, current, {
         normal: f.normal,
         origin: f.origin,
         invert: f.invert,
@@ -709,6 +709,11 @@ async function applyFilters(
 
 /**
  * Manual shrink filter — move each cell's vertices toward its centroid.
+ *
+ * VTK.wasm exposes `vtkShrinkPolyData` as a factory function, but the
+ * rendering-mode WASM binary does not register a deserializer for it,
+ * so the `vtkObjectManager` cannot track the object. This manual
+ * implementation is used as a workaround.
  * @param vtk
  * @param sourceResult
  * @param shrinkFactor
@@ -799,7 +804,7 @@ async function applyTubeFilter(
 }
 
 /**
- * Manual clip — discard cells whose centroid is on the wrong side of a plane.
+ * Apply a clip filter using VTK.wasm's built-in vtkClipPolyData.
  * @param vtk
  * @param sourceResult
  * @param options - Clip plane parameters.
@@ -808,79 +813,30 @@ async function applyTubeFilter(
  * @param options.invert - Whether to invert the clip.
  * @returns A {@link SourceResult} containing only kept cells.
  */
-async function applyClipManual(
+async function applyClipFilter(
   vtk: VtkWasmNamespace,
   sourceResult: SourceResult,
   options: { normal: [number, number, number]; origin: [number, number, number]; invert: boolean },
 ): Promise<SourceResult> {
   const { normal, origin, invert } = options;
-  const inputPd = await getPolyData(sourceResult);
-  const pointsObject = await inputPd.getPoints();
-  const inPoints = await pointsObject.getData();
-  const polysObject = await inputPd.getPolys();
-  const polys = await polysObject.getData();
-  if (polys.length === 0) {
-    return sourceResult;
-  }
+  const plane = vtk.vtkPlane();
+  plane.setOrigin(origin[0], origin[1], origin[2]);
+  plane.setNormal(normal[0], normal[1], normal[2]);
 
-  const [nx, ny, nz] = normal;
-  const [ox, oy, oz] = origin;
-
-  const resultPoints: number[] = [];
-  const resultPolys: number[] = [];
-  const pointMap = new Map<number, number>();
-  let nextIndex = 0;
-  let index = 0;
-  while (index < polys.length) {
-    const nVerts = at(polys, index);
-    index++;
-    let cx = 0;
-    let cy = 0;
-    let cz = 0;
-    const cellIndices: number[] = [];
-    for (let index_ = 0; index_ < nVerts; index_++) {
-      const vi = at(polys, index + index_);
-      cellIndices.push(vi);
-      cx += at(inPoints, vi * 3);
-      cy += at(inPoints, vi * 3 + 1);
-      cz += at(inPoints, vi * 3 + 2);
-    }
-
-    cx /= nVerts;
-    cy /= nVerts;
-    cz /= nVerts;
-    const dot = (cx - ox) * nx + (cy - oy) * ny + (cz - oz) * nz;
-    const keep = invert ? dot >= 0 : dot <= 0;
-    if (keep) {
-      resultPolys.push(nVerts);
-      for (let k = 0; k < nVerts; k++) {
-        const pi = cellIndices[k] ?? 0;
-        if (!pointMap.has(pi)) {
-          pointMap.set(pi, nextIndex++);
-          resultPoints.push(
-            at(inPoints, pi * 3),
-            at(inPoints, pi * 3 + 1),
-            at(inPoints, pi * 3 + 2),
-          );
-        }
-
-        resultPolys.push(pointMap.get(pi) ?? 0);
-      }
-    }
-
-    index += nVerts;
-  }
-
-  const outputPd = vtk.vtkPolyData();
-  const outPointsObject = await outputPd.getPoints();
-  await outPointsObject.setData(new Float32Array(resultPoints), 3);
-  const outPolysObject = await outputPd.getPolys();
-  await outPolysObject.setData(new Uint32Array(resultPolys));
-  return { output: outputPd, isFilter: false };
+  const clipFilter = vtk.vtkClipPolyData();
+  clipFilter.setClipFunction(plane);
+  clipFilter.setInsideOut(invert ? 1 : 0);
+  await connectInput(clipFilter, sourceResult);
+  return { output: clipFilter, isFilter: true };
 }
 
 /**
  * Inject scalar data into PolyData and extract isocontour lines.
+ *
+ * VTK.wasm exposes `vtkContourFilter` as a factory function, but the
+ * rendering-mode WASM binary does not register a deserializer for it,
+ * so the `vtkObjectManager` cannot track the object. Scalar injection
+ * is done here, then {@link applyContourManual} performs the extraction.
  * @param vtk
  * @param sourceResult
  * @param options - Contour parameters.
@@ -939,6 +895,9 @@ function collectEdgeIntersections(
 
 /**
  * Manual marching-triangles contour extraction.
+ *
+ * See {@link applyContourFilter} for why this manual implementation is
+ * needed instead of VTK.wasm's `vtkContourFilter`.
  * @param vtk
  * @param inputPd
  * @param values
