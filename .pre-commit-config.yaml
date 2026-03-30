@@ -56,9 +56,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: xo
-        name: xo
-        entry: npx xo
+      - id: biome
+        name: biome
+        entry: npx @biomejs/biome check
         language: node
         types_or: [javascript, ts]
         pass_filenames: false
@@ -106,5 +106,5 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   autoupdate_schedule: weekly
-  skip: [xo]
+  skip: [biome]
   submodules: false
