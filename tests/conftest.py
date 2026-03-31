@@ -19,8 +19,7 @@ def extract_scene_data(html: str) -> dict:
     Parameters
     ----------
     html : str
-        HTML string containing a ``<script type="application/json" id="scene-data">``
-        block.
+        HTML string containing a ``var __pvwasmSceneData = {...};`` assignment.
 
     Returns
     -------
@@ -28,13 +27,9 @@ def extract_scene_data(html: str) -> dict:
         Parsed scene configuration dictionary.
 
     """
-    match = re.search(
-        r'<script type="application/json" id="scene-data">\s*(.*?)\s*</script>',
-        html,
-        re.DOTALL,
-    )
+    match = re.search(r"var __pvwasmSceneData\s*=\s*(\{.*?\})\s*;", html, re.DOTALL)
     if match is None:
-        msg = "No scene-data JSON block found in HTML"
+        msg = "No __pvwasmSceneData found in HTML"
         raise ValueError(msg)
     return json.loads(match.group(1))
 

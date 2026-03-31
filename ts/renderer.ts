@@ -4,9 +4,9 @@
  * Pyvista-wasm renderer — reads scene configuration from JSON and creates
  * VTK.wasm objects.
  *
- * In JupyterLite, `_generate_render_js()` sets `__pvwasmSceneData` and
- * `__pvwasmContainer` before evaluating this code. In standalone HTML,
- * the scene data is read from the DOM.
+ * The caller (standalone.html or `_generate_render_js()`) must set
+ * `__pvwasmSceneData` and `__pvwasmContainer` in the enclosing scope
+ * before this code runs.
  *
  * VTK.wasm uses an async initialisation model: the wasm namespace must be
  * created via `vtkWASM.createNamespace()` or the `vtkReady` promise before
@@ -61,56 +61,15 @@ async function connectInput(
     : filter.setInputData(sourceResult.output));
 }
 
-// Capture the currently executing script element synchronously so that
-// buildScene() can later locate the sibling scene-data element even after
-// the script has finished executing (document.currentScript is null in
-// async callbacks).
-const _pvwasmCurrentScript: HTMLOrSVGScriptElement | null =
-  document.currentScript;
-
-/**
- * Walk backwards through element siblings to find the nearest
- * <script type="application/json"> element, which holds the scene data
- * for this particular render call.  Falling back to the legacy
- * document-level "#scene-data" selector keeps standalone HTML working.
- */
-function _findSceneDataElement(): Element | null {
-  let el = _pvwasmCurrentScript?.previousElementSibling ?? null;
-  while (el) {
-    if (
-      el.tagName === "SCRIPT" &&
-      el.getAttribute("type") === "application/json"
-    ) {
-      return el;
-    }
-    el = el.previousElementSibling;
-  }
-  return document.querySelector("#scene-data");
-}
-
 /**
  * Main entry point — initialise VTK.wasm and build the scene.
  * @param vtk
  */
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: Complex scene initialization function
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
-  let rawSceneJson = "{}";
-  if (typeof __pvwasmSceneData === "undefined") {
-    rawSceneJson = _findSceneDataElement()?.textContent ?? "{}";
-  }
-  const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
-  const sceneData: SceneData =
-    // biome-ignore lint/nursery/noTernary: Simple conditional for scene data source
-    typeof __pvwasmSceneData === "undefined"
-      ? parsedSceneData
-      : __pvwasmSceneData;
+  const sceneData: SceneData = __pvwasmSceneData ?? ({} as SceneData);
   const container: HTMLElement =
-    // biome-ignore lint/nursery/noTernary: Simple conditional for container element
-    typeof __pvwasmContainer === "undefined"
-      ? (document.querySelector<HTMLElement>(
-          `#${CSS.escape(sceneData.containerId)}`,
-        ) ?? document.createElement("div"))
-      : __pvwasmContainer;
+    __pvwasmContainer ?? document.createElement("div");
   const bg = sceneData.background;
 
   const renderer = vtk.vtkRenderer();

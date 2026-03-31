@@ -282,7 +282,7 @@ def test_generate_standalone_html(monkeypatch) -> None:
     html = renderer.generate_standalone_html()
 
     assert "<!DOCTYPE html>" in html
-    assert 'id="scene-data"' in html
+    assert "__pvwasmSceneData" in html
     scene = extract_scene_data(html)
     assert len(scene["actors"]) == 1
     assert scene["actors"][0]["source"]["type"] == "sphere"
