@@ -144,9 +144,9 @@ type VtkAlgorithm = {
   update(): Promise<void>;
   setInputConnection(port: VtkOutputPort): Promise<void>;
   setInputData(data: VtkPolyData): Promise<void>;
-  setComputePointNormals?(v: number): void;
-  setComputeCellNormals?(v: number): void;
-  setNormal?(x: number, y: number, z: number): void;
+  setComputePointNormals?: (v: number) => void;
+  setComputeCellNormals?: (v: number) => void;
+  setNormal?: (x: number, y: number, z: number) => void;
   delete(): void;
 };
 
@@ -196,23 +196,26 @@ type VtkWasmNamespace = {
   vtkPolyData(): VtkPolyData;
   vtkPoints(): VtkPoints;
   vtkCellArray(): VtkCellArray;
-  vtkFloatArray(options?: {
+  vtkFloatArray: (options?: {
     numberOfComponents?: number;
     name?: string;
     values?: Float32Array;
-  }): VtkDataArray;
-  vtkIntArray(options?: { numberOfComponents?: number; name?: string }): VtkDataArray;
+  }) => VtkDataArray;
+  vtkIntArray: (options?: {
+    numberOfComponents?: number;
+    name?: string;
+  }) => VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
-  vtkRenderWindowInteractor(options?: {
+  vtkRenderWindowInteractor: (options?: {
     canvasSelector?: string;
     renderWindow?: VtkRenderWindow;
-  }): VtkInteractor;
+  }) => VtkInteractor;
   vtkSphereSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkConeSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkCubeSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkCylinderSource(options?: Record<string, unknown>): VtkAlgorithm;
-  vtkDiskSource?(options?: Record<string, unknown>): VtkAlgorithm;
+  vtkDiskSource?: (options?: Record<string, unknown>) => VtkAlgorithm;
   vtkArrowSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkLineSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkPlaneSource(options?: Record<string, unknown>): VtkAlgorithm;
@@ -370,10 +373,10 @@ declare const __pvwasmContainer: HTMLElement | undefined;
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention -- external API name from @kitware/vtk-wasm
 declare const vtkWASM: {
-  createNamespace(
+  createNamespace: (
     url?: string,
     config?: { rendering?: string; mode?: string },
-  ): Promise<VtkWasmNamespace>;
+  ) => Promise<VtkWasmNamespace>;
 };
 
 /**

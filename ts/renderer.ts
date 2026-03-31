@@ -49,7 +49,10 @@ async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
  * @param filter
  * @param sourceResult
  */
-async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): Promise<void> {
+async function connectInput(
+  filter: VtkAlgorithm,
+  sourceResult: SourceResult,
+): Promise<void> {
   await (sourceResult.isFilter
     ? filter.setInputConnection(await sourceResult.output.getOutputPort())
     : filter.setInputData(sourceResult.output));
@@ -60,15 +63,19 @@ async function connectInput(filter: VtkAlgorithm, sourceResult: SourceResult): P
  * @param vtk
  */
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
-  const rawSceneJson = document.querySelector("#scene-data")?.textContent ?? "{}";
+  const rawSceneJson =
+    document.querySelector("#scene-data")?.textContent ?? "{}";
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
   const sceneData: SceneData =
-    typeof __pvwasmSceneData === "undefined" ? parsedSceneData : __pvwasmSceneData;
+    typeof __pvwasmSceneData === "undefined"
+      ? parsedSceneData
+      : __pvwasmSceneData;
   const container: HTMLElement =
     typeof __pvwasmContainer === "undefined"
-      ? (document.querySelector<HTMLElement>(`#${CSS.escape(sceneData.containerId)}`) ??
-        document.createElement("div"))
+      ? (document.querySelector<HTMLElement>(
+          `#${CSS.escape(sceneData.containerId)}`,
+        ) ?? document.createElement("div"))
       : __pvwasmContainer;
   const bg = sceneData.background;
 
@@ -142,7 +149,11 @@ if (typeof vtkReady !== "undefined") {
  * @param ren
  * @returns Nothing; mutates the renderer in place.
  */
-function setupLights(vtk: VtkWasmNamespace, lightsConfig: LightConfig[], ren: VtkRenderer): void {
+function setupLights(
+  vtk: VtkWasmNamespace,
+  lightsConfig: LightConfig[],
+  ren: VtkRenderer,
+): void {
   if (lightsConfig.length === 0) {
     return;
   }
@@ -163,7 +174,11 @@ function setupLights(vtk: VtkWasmNamespace, lightsConfig: LightConfig[], ren: Vt
     }
 
     light.setPosition(cfg.position[0], cfg.position[1], cfg.position[2]);
-    light.setFocalPoint(cfg.focalPoint[0], cfg.focalPoint[1], cfg.focalPoint[2]);
+    light.setFocalPoint(
+      cfg.focalPoint[0],
+      cfg.focalPoint[1],
+      cfg.focalPoint[2],
+    );
     light.setColor(cfg.color[0], cfg.color[1], cfg.color[2]);
     light.setIntensity(cfg.intensity);
     light.setPositional(cfg.positional ? 1 : 0);
@@ -184,7 +199,10 @@ function setupLights(vtk: VtkWasmNamespace, lightsConfig: LightConfig[], ren: Vt
  * @param cfg
  * @returns A {@link SourceResult} for the configured source type, or `undefined` if unknown.
  */
-function createSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult | undefined {
+function createSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult | undefined {
   switch (cfg.type) {
     case "sphere": {
       return createSphereSource(vtk, cfg);
@@ -223,13 +241,11 @@ function createSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult | 
     }
 
     case "points": {
-      console.error("points source must be awaited; use createPointsSource directly");
-      return undefined;
+      return;
     }
 
     default: {
-      console.error("Unknown source type:", cfg.type);
-      return undefined;
+      return;
     }
   }
 }
@@ -240,7 +256,10 @@ function createSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult | 
  * @param cfg
  * @returns A {@link SourceResult} wrapping the sphere source.
  */
-function createSphereSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createSphereSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkSphereSource({
     center: cfg.center,
     radius: cfg.radius,
@@ -256,7 +275,10 @@ function createSphereSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceRes
  * @param cfg
  * @returns A {@link SourceResult} wrapping the cone source filter.
  */
-function createConeSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createConeSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkConeSource({
     height: cfg.height,
     radius: cfg.radius,
@@ -271,7 +293,10 @@ function createConeSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
  * @param cfg
  * @returns A {@link SourceResult} wrapping the cube source.
  */
-function createCubeSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createCubeSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkCubeSource({
     xLength: cfg.xLength,
     yLength: cfg.yLength,
@@ -286,7 +311,10 @@ function createCubeSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
  * @param cfg
  * @returns A {@link SourceResult} wrapping the cylinder source filter.
  */
-function createCylinderSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createCylinderSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkCylinderSource({
     height: cfg.height,
     radius: cfg.radius,
@@ -301,7 +329,10 @@ function createCylinderSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceR
  * @param cfg
  * @returns A {@link SourceResult} wrapping the disk source or empty PolyData fallback.
  */
-function createDiskSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createDiskSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const diskFactory = vtk.vtkDiskSource;
   const source = diskFactory
     ? diskFactory({
@@ -322,7 +353,10 @@ function createDiskSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
  * @param cfg
  * @returns A {@link SourceResult} wrapping the disk source configured as a circle.
  */
-function createCircleSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createCircleSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   return createDiskSource(vtk, {
     type: "disk",
     innerRadius: 0,
@@ -337,7 +371,10 @@ function createCircleSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceRes
  * @param cfg
  * @returns A {@link SourceResult} wrapping the arrow source filter.
  */
-function createArrowSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createArrowSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkArrowSource({
     tipLength: cfg.tipLength,
     tipRadius: cfg.tipRadius,
@@ -352,7 +389,10 @@ function createArrowSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResu
  * @param cfg
  * @returns A {@link SourceResult} wrapping the line source filter.
  */
-function createLineSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createLineSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkLineSource({
     point1: cfg.point1,
     point2: cfg.point2,
@@ -366,7 +406,10 @@ function createLineSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResul
  * @param cfg
  * @returns A {@link SourceResult} wrapping the plane source filter.
  */
-function createPlaneSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResult {
+function createPlaneSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): SourceResult {
   const source = vtk.vtkPlaneSource({
     origin: cfg.origin,
   });
@@ -383,7 +426,10 @@ function createPlaneSource(vtk: VtkWasmNamespace, cfg: SourceConfig): SourceResu
  * @param cfg
  * @returns A {@link SourceResult} wrapping the constructed mesh PolyData.
  */
-async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
+async function createMeshSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
   const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
   await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
@@ -423,7 +469,10 @@ async function createMeshSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promi
  * @param cfg
  * @returns A {@link SourceResult} wrapping the point cloud PolyData.
  */
-async function createPointsSource(vtk: VtkWasmNamespace, cfg: SourceConfig): Promise<SourceResult> {
+async function createPointsSource(
+  vtk: VtkWasmNamespace,
+  cfg: SourceConfig,
+): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
   const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
   await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
@@ -512,8 +561,13 @@ async function setupNormals(
  * @param actor
  * @param pbr
  */
-async function applyPbr(actor: VtkActor, pbr: PbrConfig | undefined): Promise<void> {
-  if (!pbr) return;
+async function applyPbr(
+  actor: VtkActor,
+  pbr: PbrConfig | undefined,
+): Promise<void> {
+  if (!pbr) {
+    return;
+  }
   const prop = await actor.getProperty();
   prop.setInterpolationToPhong();
   const m = pbr.metallic;
@@ -591,7 +645,11 @@ async function setupActor(
 
   if (cfg.edges) {
     prop.setEdgeVisibility(1);
-    prop.setEdgeColor(cfg.edges.color[0], cfg.edges.color[1], cfg.edges.color[2]);
+    prop.setEdgeColor(
+      cfg.edges.color[0],
+      cfg.edges.color[1],
+      cfg.edges.color[2],
+    );
   }
 
   await applyPbr(actor, cfg.pbr);
@@ -609,18 +667,33 @@ async function setupActor(
  * @param ren
  * @param camConfig
  */
-async function setupCamera(ren: VtkRenderer, camConfig: CameraConfig): Promise<void> {
+async function setupCamera(
+  ren: VtkRenderer,
+  camConfig: CameraConfig,
+): Promise<void> {
   const cam = await ren.getActiveCamera();
   if (camConfig.position) {
-    cam.setPosition(camConfig.position[0], camConfig.position[1], camConfig.position[2]);
+    cam.setPosition(
+      camConfig.position[0],
+      camConfig.position[1],
+      camConfig.position[2],
+    );
   }
 
   if (camConfig.focalPoint) {
-    cam.setFocalPoint(camConfig.focalPoint[0], camConfig.focalPoint[1], camConfig.focalPoint[2]);
+    cam.setFocalPoint(
+      camConfig.focalPoint[0],
+      camConfig.focalPoint[1],
+      camConfig.focalPoint[2],
+    );
   }
 
   if (camConfig.viewUp) {
-    cam.setViewUp(camConfig.viewUp[0], camConfig.viewUp[1], camConfig.viewUp[2]);
+    cam.setViewUp(
+      camConfig.viewUp[0],
+      camConfig.viewUp[1],
+      camConfig.viewUp[2],
+    );
   }
 
   if (camConfig.viewAngle !== undefined) {
@@ -628,7 +701,10 @@ async function setupCamera(ren: VtkRenderer, camConfig: CameraConfig): Promise<v
   }
 
   if (camConfig.clippingRange) {
-    cam.setClippingRange(camConfig.clippingRange[0], camConfig.clippingRange[1]);
+    cam.setClippingRange(
+      camConfig.clippingRange[0],
+      camConfig.clippingRange[1],
+    );
   }
 
   if (camConfig.parallelProjection) {
@@ -636,8 +712,16 @@ async function setupCamera(ren: VtkRenderer, camConfig: CameraConfig): Promise<v
   }
 
   if (camConfig.viewVector && camConfig.viewUp) {
-    cam.setPosition(camConfig.viewVector[0], camConfig.viewVector[1], camConfig.viewVector[2]);
-    cam.setViewUp(camConfig.viewUp[0], camConfig.viewUp[1], camConfig.viewUp[2]);
+    cam.setPosition(
+      camConfig.viewVector[0],
+      camConfig.viewVector[1],
+      camConfig.viewVector[2],
+    );
+    cam.setViewUp(
+      camConfig.viewUp[0],
+      camConfig.viewUp[1],
+      camConfig.viewUp[2],
+    );
     cam.setFocalPoint(0, 0, 0);
     ren.resetCamera();
     ren.resetCameraClippingRange();
@@ -649,7 +733,10 @@ async function setupCamera(ren: VtkRenderer, camConfig: CameraConfig): Promise<v
  * @param cfg
  * @param containerElement
  */
-function setupTextActor(cfg: TextActorConfig, containerElement: HTMLElement): void {
+function setupTextActor(
+  cfg: TextActorConfig,
+  containerElement: HTMLElement,
+): void {
   const div = document.createElement("div");
   div.textContent = cfg.text;
   div.style.position = "absolute";
@@ -665,7 +752,8 @@ function setupTextActor(cfg: TextActorConfig, containerElement: HTMLElement): vo
   div.style.pointerEvents = "none";
   div.style.zIndex = "10";
   div.style.whiteSpace = "pre";
-  div.style.textShadow = "1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)";
+  div.style.textShadow =
+    "1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)";
   containerElement.append(div);
 }
 
@@ -685,16 +773,30 @@ async function applyFilters(
   for (const f of filters) {
     if (f.type === "shrink" && f.shrinkFactor !== undefined) {
       current = await applyShrinkFilter(vtk, current, f.shrinkFactor); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
-    } else if (f.type === "tube" && f.radius !== undefined && f.numberOfSides !== undefined) {
+    } else if (
+      f.type === "tube" &&
+      f.radius !== undefined &&
+      f.numberOfSides !== undefined
+    ) {
       current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
-    } else if (f.type === "clip" && f.normal && f.origin && f.invert !== undefined) {
+    } else if (
+      f.type === "clip" &&
+      f.normal &&
+      f.origin &&
+      f.invert !== undefined
+    ) {
       // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
       current = await applyClipFilter(vtk, current, {
         normal: f.normal,
         origin: f.origin,
         invert: f.invert,
       });
-    } else if (f.type === "contour" && f.values && f.scalarName && f.scalarData) {
+    } else if (
+      f.type === "contour" &&
+      f.values &&
+      f.scalarName &&
+      f.scalarData
+    ) {
       // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
       current = await applyContourFilter(vtk, current, {
         values: f.values,
@@ -816,7 +918,11 @@ async function applyTubeFilter(
 async function applyClipFilter(
   vtk: VtkWasmNamespace,
   sourceResult: SourceResult,
-  options: { normal: [number, number, number]; origin: [number, number, number]; invert: boolean },
+  options: {
+    normal: [number, number, number];
+    origin: [number, number, number];
+    invert: boolean;
+  },
 ): Promise<SourceResult> {
   const { normal, origin, invert } = options;
   const plane = vtk.vtkPlane();
@@ -873,7 +979,7 @@ async function applyContourFilter(
  * @returns Flat array of intersection coordinates (0 or 6 elements).
  */
 function collectEdgeIntersections(
-  tri: Array<[number, number, number, number]>,
+  tri: [number, number, number, number][],
   value: number,
   inPoints: Float32Array | Uint32Array,
 ): number[] {
@@ -883,9 +989,12 @@ function collectEdgeIntersections(
     if ((sa <= value && value < sb) || (sb <= value && value < sa)) {
       const t = (value - sa) / (sb - sa);
       edgePoints.push(
-        at(inPoints, ai * 3) + t * (at(inPoints, bi * 3) - at(inPoints, ai * 3)),
-        at(inPoints, ai * 3 + 1) + t * (at(inPoints, bi * 3 + 1) - at(inPoints, ai * 3 + 1)),
-        at(inPoints, ai * 3 + 2) + t * (at(inPoints, bi * 3 + 2) - at(inPoints, ai * 3 + 2)),
+        at(inPoints, ai * 3) +
+          t * (at(inPoints, bi * 3) - at(inPoints, ai * 3)),
+        at(inPoints, ai * 3 + 1) +
+          t * (at(inPoints, bi * 3 + 1) - at(inPoints, ai * 3 + 1)),
+        at(inPoints, ai * 3 + 2) +
+          t * (at(inPoints, bi * 3 + 2) - at(inPoints, ai * 3 + 2)),
       );
     }
   }
@@ -937,7 +1046,7 @@ async function applyContourManual(
       const s0 = at(scalarValues, index0);
       const s1 = at(scalarValues, index1);
       const s2 = at(scalarValues, index2);
-      const tri: Array<[number, number, number, number]> = [
+      const tri: [number, number, number, number][] = [
         [index0, index1, s0, s1],
         [index1, index2, s1, s2],
         [index2, index0, s2, s0],
