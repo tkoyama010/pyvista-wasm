@@ -243,14 +243,10 @@ function createSource(
     }
 
     case "points": {
-      console.error(
-        "points source must be awaited; use createPointsSource directly",
-      );
       return;
     }
 
     default: {
-      console.error("Unknown source type:", cfg.type);
       return;
     }
   }
@@ -571,7 +567,9 @@ async function applyPbr(
   actor: VtkActor,
   pbr: PbrConfig | undefined,
 ): Promise<void> {
-  if (!pbr) return;
+  if (!pbr) {
+    return;
+  }
   const prop = await actor.getProperty();
   prop.setInterpolationToPhong();
   const m = pbr.metallic;
@@ -983,7 +981,7 @@ async function applyContourFilter(
  * @returns Flat array of intersection coordinates (0 or 6 elements).
  */
 function collectEdgeIntersections(
-  tri: Array<[number, number, number, number]>,
+  tri: [number, number, number, number][],
   value: number,
   inPoints: Float32Array | Uint32Array,
 ): number[] {
@@ -1050,7 +1048,7 @@ async function applyContourManual(
       const s0 = at(scalarValues, index0);
       const s1 = at(scalarValues, index1);
       const s2 = at(scalarValues, index2);
-      const tri: Array<[number, number, number, number]> = [
+      const tri: [number, number, number, number][] = [
         [index0, index1, s0, s1],
         [index1, index2, s1, s2],
         [index2, index0, s2, s0],

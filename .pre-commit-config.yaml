@@ -54,14 +54,11 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
 
-  - repo: local
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.10
     hooks:
-      - id: xo
-        name: xo
-        entry: npx xo
-        language: node
-        types_or: [javascript, ts]
-        pass_filenames: false
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@2.4.10"]
 
   - repo: https://github.com/scientific-python/cookie
     rev: 2026.03.02
