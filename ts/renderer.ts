@@ -130,6 +130,12 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 
   renderWindow.render();
   await interactor.start();
+
+  // Force re-render after a small delay to handle initial sizing issues in JupyterLite
+  const InitialRenderDelayMs = 100;
+  setTimeout(() => {
+    renderWindow.render();
+  }, InitialRenderDelayMs);
 }
 
 if (typeof vtkReady !== "undefined") {
