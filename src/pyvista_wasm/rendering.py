@@ -127,13 +127,12 @@ else:
 
 # Check if IPython is available
 try:
-    from IPython.display import HTML, Javascript, display
+    from IPython.display import HTML, display
 
     IPYTHON_AVAILABLE = True
 except ImportError:
     IPYTHON_AVAILABLE = False
     HTML = None  # type: ignore[assignment]
-    Javascript = None  # type: ignore[assignment]
     display = None  # type: ignore[assignment]
 
 
@@ -160,18 +159,7 @@ class _VTKWasmLoader:
             return
 
         if IPYTHON_AVAILABLE:
-            try:
-                display(
-                    HTML(f"""
-<script src="{_VTKWASM_UMD}" id="vtk-wasm" data-url="{_VTKWASM_DATA_URL}"></script>
-"""),
-                )
-                # Wait for VTK.wasm to load from CDN
-                time.sleep(2)
-                self._loaded = True
-            except (NameError, TypeError):
-                # display/HTML not available (e.g., in tests)
-                pass
+            self._loaded = True
         elif PYODIDE_ENV and document is not None:
             # In pure Pyodide environment without IPython
             script = document.createElement("script")
@@ -1020,8 +1008,7 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
         """
         if self.use_ipython:
-            js_code = self._generate_render_js()
-            display(Javascript(js_code))
+            display(HTML(self._generate_html()))
         else:
             # Direct rendering
             self.renderer.resetCamera()  # type: ignore[attr-defined]
