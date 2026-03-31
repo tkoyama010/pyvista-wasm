@@ -31,27 +31,7 @@
     {
       "includes": ["**"],
       "linter": {
-        "rules": {
-          "complexity": {
-            "noExcessiveLinesPerFunction": "off",
-            "useMaxParams": "off"
-          },
-          "nursery": {
-            "noIncrementDecrement": "off",
-            "noTernary": "off"
-          },
-          "performance": {
-            "noAwaitInLoops": "off"
-          },
-          "style": {
-            "noMagicNumbers": "off",
-            "noNestedTernary": "off",
-            "useConsistentArrayType": "off"
-          },
-          "suspicious": {
-            "noConsole": "off"
-          }
-        }
+        "rules": {}
       }
     }
   ]

@@ -55,6 +55,7 @@ async function connectInput(
   filter: VtkAlgorithm,
   sourceResult: SourceResult,
 ): Promise<void> {
+  // biome-ignore lint/nursery/noTernary: Conditional dispatch based on source type
   await (sourceResult.isFilter
     ? filter.setInputConnection(await sourceResult.output.getOutputPort())
     : filter.setInputData(sourceResult.output));
@@ -64,15 +65,18 @@ async function connectInput(
  * Main entry point — initialise VTK.wasm and build the scene.
  * @param vtk
  */
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: Complex scene initialization function
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const rawSceneJson =
     document.querySelector("#scene-data")?.textContent ?? "{}";
   const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
   const sceneData: SceneData =
+    // biome-ignore lint/nursery/noTernary: Simple conditional for scene data source
     typeof __pvwasmSceneData === "undefined"
       ? parsedSceneData
       : __pvwasmSceneData;
   const container: HTMLElement =
+    // biome-ignore lint/nursery/noTernary: Simple conditional for container element
     typeof __pvwasmContainer === "undefined"
       ? (document.querySelector<HTMLElement>(
           `#${CSS.escape(sceneData.containerId)}`,
@@ -91,7 +95,9 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const canvasId = `${sceneData.containerId}-canvas`;
   const canvas = document.createElement("canvas");
   canvas.id = canvasId;
+  // biome-ignore lint/style/noMagicNumbers: Default canvas width fallback
   canvas.width = bbox.width || 600;
+  // biome-ignore lint/style/noMagicNumbers: Default canvas height fallback
   canvas.height = bbox.height || 400;
   canvas.style.width = "100%";
   canvas.style.height = "100%";
@@ -113,6 +119,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   }
 
   for (const [index, actorConfig] of sceneData.actors.entries()) {
+    // biome-ignore lint/performance/noAwaitInLoops: Sequential actor setup required for VTK ordering
     await setupActor(vtk, actorConfig, index, renderer);
   }
 
@@ -188,6 +195,7 @@ function setupLights(
     );
     light.setColor(cfg.color[0], cfg.color[1], cfg.color[2]);
     light.setIntensity(cfg.intensity);
+    // biome-ignore lint/nursery/noTernary: Simple boolean to integer conversion
     light.setPositional(cfg.positional ? 1 : 0);
     light.setConeAngle(cfg.coneAngle);
     light.setExponent(cfg.coneFalloff);
@@ -248,6 +256,7 @@ function createSource(
     }
 
     case "points": {
+      // biome-ignore lint/suspicious/noConsole: Error logging for developer guidance
       console.error(
         "points source must be awaited; use createPointsSource directly",
       );
@@ -255,6 +264,7 @@ function createSource(
     }
 
     default: {
+      // biome-ignore lint/suspicious/noConsole: Error logging for unknown source types
       console.error("Unknown source type:", cfg.type);
       return;
     }
@@ -345,6 +355,7 @@ function createDiskSource(
   cfg: SourceConfig,
 ): SourceResult {
   const diskFactory = vtk.vtkDiskSource;
+  // biome-ignore lint/nursery/noTernary: Conditional fallback for missing VTK factory
   const source = diskFactory
     ? diskFactory({
         innerRadius: cfg.innerRadius,
@@ -353,6 +364,7 @@ function createDiskSource(
         circumferentialResolution: cfg.resolution,
       })
     : undefined;
+  // biome-ignore lint/nursery/noTernary: Conditional dispatch based on source availability
   return source
     ? { output: source, isFilter: true }
     : { output: vtk.vtkPolyData(), isFilter: false };
@@ -372,6 +384,7 @@ function createCircleSource(
     type: "disk",
     innerRadius: 0,
     outerRadius: cfg.radius ?? 1,
+    // biome-ignore lint/style/noMagicNumbers: Default resolution value for circle
     resolution: cfg.resolution ?? 50,
   });
 }
@@ -454,6 +467,7 @@ async function createMeshSource(
     let i = 0;
     while (i < legacyPolys.length) {
       const count = legacyPolys[i] ?? 0;
+      // biome-ignore lint/nursery/noIncrementDecrement: Standard loop increment pattern
       for (let j = 1; j <= count; j++) {
         connectivityList.push(legacyPolys[i + j] ?? 0);
       }
@@ -514,6 +528,7 @@ async function injectPointData(
       numberOfComponents: array.numberOfComponents,
       name: array.name,
     });
+    // biome-ignore lint/performance/noAwaitInLoops: Sequential data injection required for VTK array ordering
     await dataArray.setArray(Float32Array.from(array.values));
     pd.addArray(dataArray);
   }
@@ -560,7 +575,9 @@ async function setupNormals(
   }
 
   const normals = vtk.vtkPolyDataNormals();
+  // biome-ignore lint/nursery/noTernary: Boolean to integer conversion for VTK API
   normals.setComputePointNormals?.(normalsConfig.computePointNormals ? 1 : 0);
+  // biome-ignore lint/nursery/noTernary: Boolean to integer conversion for VTK API
   normals.setComputeCellNormals?.(normalsConfig.computeCellNormals ? 1 : 0);
   await connectInput(normals, sourceResult);
   await normals.update();
@@ -582,9 +599,13 @@ async function applyPbr(
   prop.setInterpolationToPhong();
   const m = pbr.metallic;
   const r = pbr.roughness;
+  // biome-ignore lint/style/noMagicNumbers: PBR lighting coefficients
   prop.setAmbient(0.1);
+  // biome-ignore lint/style/noMagicNumbers: PBR specular formula coefficients
   prop.setSpecular(0.75 * m + 0.25);
+  // biome-ignore lint/style/noMagicNumbers: PBR specular power formula coefficients
   prop.setSpecularPower(Math.max(1, 100 * (1 - r)));
+  // biome-ignore lint/style/noMagicNumbers: PBR diffuse formula coefficients
   prop.setDiffuse(0.65 + 0.35 * (1 - m));
 }
 
@@ -595,6 +616,7 @@ async function applyPbr(
  * @param _index
  * @param ren
  */
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: Complex actor configuration requiring many VTK API calls
 async function setupActor(
   vtk: VtkWasmNamespace,
   cfg: ActorConfig,
@@ -602,9 +624,12 @@ async function setupActor(
   ren: VtkRenderer,
 ): Promise<void> {
   const sourceResult: SourceResult | undefined =
+    // biome-ignore lint/nursery/noTernary: Conditional dispatch based on source type
     cfg.source.type === "mesh"
       ? await createMeshSource(vtk, cfg.source)
-      : cfg.source.type === "points"
+      : // biome-ignore lint/nursery/noTernary: Nested ternary for source type selection
+        // biome-ignore lint/style/noNestedTernary: Nested ternary for source type selection
+        cfg.source.type === "points"
         ? await createPointsSource(vtk, cfg.source)
         : createSource(vtk, cfg.source);
 
@@ -626,6 +651,7 @@ async function setupActor(
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
   const mapper = vtk.vtkPolyDataMapper();
+  // biome-ignore lint/nursery/noTernary: Conditional dispatch based on mapper input type
   await (mapperInput.isFilter
     ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
     : mapper.setInputData(mapperInput.output));
@@ -663,6 +689,7 @@ async function setupActor(
   await applyPbr(actor, cfg.pbr);
 
   if (cfg.actorType === "points") {
+    // biome-ignore lint/style/noMagicNumbers: Default point size fallback
     prop.setPointSize(cfg.pointSize ?? 5);
     prop.setRepresentationToPoints();
   }
@@ -748,14 +775,21 @@ function setupTextActor(
   const div = document.createElement("div");
   div.textContent = cfg.text;
   div.style.position = "absolute";
+  // biome-ignore lint/style/noMagicNumbers: Percentage conversion factor for CSS positioning
   div.style.left = `${String(cfg.position[0] * 100)}%`;
+  // biome-ignore lint/style/noMagicNumbers: Percentage conversion factor for CSS positioning
   div.style.bottom = `${String(cfg.position[1] * 100)}%`;
+  // biome-ignore lint/style/noMagicNumbers: RGB color channel scale factor
   const r = Math.round(cfg.color[0] * 255);
+  // biome-ignore lint/style/noMagicNumbers: RGB color channel scale factor
   const g = Math.round(cfg.color[1] * 255);
+  // biome-ignore lint/style/noMagicNumbers: RGB color channel scale factor
   const b = Math.round(cfg.color[2] * 255);
   div.style.color = `rgba(${String(r)},${String(g)},${String(b)},${String(cfg.opacity)})`;
   div.style.fontSize = `${String(cfg.fontSize)}px`;
+  // biome-ignore lint/nursery/noTernary: Simple conditional for font weight string
   div.style.fontWeight = cfg.bold ? "bold" : "normal";
+  // biome-ignore lint/nursery/noTernary: Simple conditional for font style string
   div.style.fontStyle = cfg.italic ? "italic" : "normal";
   div.style.pointerEvents = "none";
   div.style.zIndex = "10";
@@ -780,6 +814,7 @@ async function applyFilters(
   let current = sourceResult;
   for (const f of filters) {
     if (f.type === "shrink" && f.shrinkFactor !== undefined) {
+      // biome-ignore lint/performance/noAwaitInLoops: Sequential filter application required for VTK pipeline ordering
       current = await applyShrinkFilter(vtk, current, f.shrinkFactor);
     } else if (
       f.type === "tube" &&
@@ -827,6 +862,7 @@ async function applyFilters(
  * @param shrinkFactor
  * @returns A {@link SourceResult} with each cell shrunk toward its centroid.
  */
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: Manual shrink filter implementation requires many steps
 async function applyShrinkFilter(
   vtk: VtkWasmNamespace,
   sourceResult: SourceResult,
@@ -847,16 +883,21 @@ async function applyShrinkFilter(
   let index = 0;
   while (index < polys.length) {
     const nVerts = at(polys, index);
+    // biome-ignore lint/nursery/noIncrementDecrement: Standard index increment in while loop
     index++;
     let cx = 0;
     let cy = 0;
     let cz = 0;
     const indices: number[] = [];
+    // biome-ignore lint/nursery/noIncrementDecrement: Standard loop increment pattern
     for (let index_ = 0; index_ < nVerts; index_++) {
       const vi = at(polys, index + index_);
       indices.push(vi);
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       cx += at(inPoints, vi * 3);
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       cy += at(inPoints, vi * 3 + 1);
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       cz += at(inPoints, vi * 3 + 2);
     }
 
@@ -864,10 +905,14 @@ async function applyShrinkFilter(
     cy /= nVerts;
     cz /= nVerts;
     resultPolys.push(nVerts);
+    // biome-ignore lint/nursery/noIncrementDecrement: Standard loop increment pattern
     for (let k = 0; k < nVerts; k++) {
       const pi = indices[k] ?? 0;
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       const px = at(inPoints, pi * 3);
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       const py = at(inPoints, pi * 3 + 1);
+      // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
       const pz = at(inPoints, pi * 3 + 2);
       resultPoints.push(
         cx + (px - cx) * shrinkFactor,
@@ -883,6 +928,7 @@ async function applyShrinkFilter(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
+  // biome-ignore lint/style/noMagicNumbers: 3D point stride for VTK points array
   await outPointsObject.setData(new Float32Array(resultPoints), 3);
   const outPolysObject = await outputPd.getPolys();
   await outPolysObject.setData(new Uint32Array(resultPolys));
@@ -937,6 +983,7 @@ async function applyClipFilter(
 
   const clipFilter = vtk.vtkClipPolyData();
   clipFilter.setClipFunction(plane);
+  // biome-ignore lint/nursery/noTernary: Boolean to integer conversion for VTK API
   clipFilter.setInsideOut(invert ? 1 : 0);
   await connectInput(clipFilter, sourceResult);
   return { output: clipFilter, isFilter: true };
@@ -985,6 +1032,7 @@ async function applyContourFilter(
  * @returns Flat array of intersection coordinates (0 or 6 elements).
  */
 function collectEdgeIntersections(
+  // biome-ignore lint/style/useConsistentArrayType: Tuple type requires Array<> notation
   tri: Array<[number, number, number, number]>,
   value: number,
   inPoints: Float32Array | Uint32Array,
@@ -995,11 +1043,17 @@ function collectEdgeIntersections(
     if ((sa <= value && value < sb) || (sb <= value && value < sa)) {
       const t = (value - sa) / (sb - sa);
       edgePoints.push(
+        // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
         at(inPoints, ai * 3) +
+          // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
           t * (at(inPoints, bi * 3) - at(inPoints, ai * 3)),
+        // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
         at(inPoints, ai * 3 + 1) +
+          // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
           t * (at(inPoints, bi * 3 + 1) - at(inPoints, ai * 3 + 1)),
+        // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
         at(inPoints, ai * 3 + 2) +
+          // biome-ignore lint/style/noMagicNumbers: 3D vector stride for interleaved point arrays
           t * (at(inPoints, bi * 3 + 2) - at(inPoints, ai * 3 + 2)),
       );
     }
@@ -1011,7 +1065,9 @@ function collectEdgeIntersections(
 /**
  * Process contour triangles for a given triangle and values.
  */
+// biome-ignore lint/complexity/useMaxParams: All parameters are required for contour triangle processing
 function processContourTriangle(
+  // biome-ignore lint/style/useConsistentArrayType: Tuple type requires Array<> notation
   tri: Array<[number, number, number, number]>,
   values: number[],
   inPoints: Float32Array | Uint32Array,
@@ -1022,6 +1078,7 @@ function processContourTriangle(
   for (const value of values) {
     const edgePoints = collectEdgeIntersections(tri, value, inPoints);
 
+    // biome-ignore lint/style/noMagicNumbers: 6 = two 3D intersection points
     if (edgePoints.length === 6) {
       outPoints.push(
         edgePoints[0] ?? 0,
@@ -1048,6 +1105,7 @@ function processContourTriangle(
  * @param scalarName
  * @returns A {@link SourceResult} containing the marching-triangles contour line segments.
  */
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: Manual marching-triangles implementation requires many steps
 async function applyContourManual(
   vtk: VtkWasmNamespace,
   inputPd: VtkPolyData,
@@ -1073,7 +1131,9 @@ async function applyContourManual(
   let index = 0;
   while (index < polys.length) {
     const nVerts = at(polys, index);
+    // biome-ignore lint/nursery/noIncrementDecrement: Standard index increment in while loop
     index++;
+    // biome-ignore lint/style/noMagicNumbers: Triangle has exactly 3 vertices
     if (nVerts === 3) {
       const index0 = at(polys, index);
       const index1 = at(polys, index + 1);
@@ -1081,6 +1141,7 @@ async function applyContourManual(
       const s0 = at(scalarValues, index0);
       const s1 = at(scalarValues, index1);
       const s2 = at(scalarValues, index2);
+      // biome-ignore lint/style/useConsistentArrayType: Tuple type requires Array<> notation
       const tri: Array<[number, number, number, number]> = [
         [index0, index1, s0, s1],
         [index1, index2, s1, s2],
@@ -1103,6 +1164,7 @@ async function applyContourManual(
   const outputPd = vtk.vtkPolyData();
   if (outPoints.length > 0) {
     const outPointsObject = await outputPd.getPoints();
+    // biome-ignore lint/style/noMagicNumbers: 3D point stride for VTK points array
     await outPointsObject.setData(new Float32Array(outPoints), 3);
     const outLinesObject = await outputPd.getLines();
     await outLinesObject.setData(new Uint32Array(outPolys));

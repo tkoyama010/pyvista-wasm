@@ -54,14 +54,10 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
 
-  - repo: local
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.10
     hooks:
-      - id: biome
-        name: biome
-        entry: npx @biomejs/biome check
-        language: node
-        types_or: [javascript, ts]
-        pass_filenames: false
+      - id: biome-check
 
   - repo: https://github.com/scientific-python/cookie
     rev: 2026.03.02
@@ -106,5 +102,5 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   autoupdate_schedule: weekly
-  skip: [biome]
+
   submodules: false
