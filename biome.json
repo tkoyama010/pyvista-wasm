@@ -11,7 +11,8 @@
   "javascript": {
     "formatter": {
       "semicolons": "always"
-    }
+    },
+    "globals": ["__pvwasmSceneData", "__pvwasmContainer", "vtkReady", "vtkWASM"]
   },
   "linter": {
     "enabled": true,

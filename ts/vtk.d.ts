@@ -1,11 +1,10 @@
+// biome-ignore-all lint/nursery/noExcessiveLinesPerFile: Type definition file with many interfaces
 /**
  * Type definitions for VTK.wasm JavaScript API.
  *
  * This file contains type definitions for the VTK.wasm library.
  * It provides TypeScript definitions for all VTK.wasm interfaces and functions.
  */
-
-// biome-ignore lint/nursery/noExcessiveLinesPerFile: Type definition file with many interfaces
 /** A VTK.wasm render window that owns the canvas. */
 interface VtkRenderWindow {
   render: () => void;
