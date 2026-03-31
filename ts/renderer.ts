@@ -55,7 +55,6 @@ async function connectInput(
   filter: VtkAlgorithm,
   sourceResult: SourceResult,
 ): Promise<void> {
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for input connection
   await (sourceResult.isFilter
     ? filter.setInputConnection(await sourceResult.output.getOutputPort())
     : filter.setInputData(sourceResult.output));
@@ -68,14 +67,11 @@ async function connectInput(
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const rawSceneJson =
     document.querySelector("#scene-data")?.textContent ?? "{}";
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for scene data
   const sceneData: SceneData =
     typeof __pvwasmSceneData === "undefined"
       ? parsedSceneData
       : __pvwasmSceneData;
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for container
   const container: HTMLElement =
     typeof __pvwasmContainer === "undefined"
       ? (document.querySelector<HTMLElement>(
@@ -95,9 +91,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const canvasId = `${sceneData.containerId}-canvas`;
   const canvas = document.createElement("canvas");
   canvas.id = canvasId;
-  // biome-ignore lint/style/noMagicNumbers: Default canvas dimensions
   canvas.width = bbox.width || 600;
-  // biome-ignore lint/style/noMagicNumbers: Default canvas dimensions
   canvas.height = bbox.height || 400;
   canvas.style.width = "100%";
   canvas.style.height = "100%";
@@ -119,8 +113,7 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   }
 
   for (const [index, actorConfig] of sceneData.actors.entries()) {
-    // biome-ignore lint/performance/noAwaitInLoops: VTK.wasm requires sequential await
-    await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+    await setupActor(vtk, actorConfig, index, renderer);
   }
 
   if (sceneData.textActors) {
@@ -146,10 +139,10 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 
 if (typeof vtkReady !== "undefined") {
   // biome-ignore lint/complexity/noVoid: Required for top-level await polyfill
-  void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkReady.then(buildScene);
 } else if (typeof vtkWASM !== "undefined") {
   // biome-ignore lint/complexity/noVoid: Required for top-level await polyfill
-  void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkWASM.createNamespace().then(buildScene);
 }
 
 /**
@@ -172,7 +165,6 @@ function setupLights(
   ren.setAutomaticLightCreation(0);
   for (const cfg of lightsConfig) {
     const light = vtk.vtkLight();
-    // biome-ignore lint/security/noSecrets: False positive - these are VTK method names
     const typeMap: Record<string, string> = {
       // biome-ignore lint/security/noSecrets: False positive - VTK method name
       scene: "setLightTypeToSceneLight",
@@ -196,7 +188,6 @@ function setupLights(
     );
     light.setColor(cfg.color[0], cfg.color[1], cfg.color[2]);
     light.setIntensity(cfg.intensity);
-    // biome-ignore lint/nursery/noTernary: Simple binary choice for positional light
     light.setPositional(cfg.positional ? 1 : 0);
     light.setConeAngle(cfg.coneAngle);
     light.setExponent(cfg.coneFalloff);
@@ -354,7 +345,6 @@ function createDiskSource(
   cfg: SourceConfig,
 ): SourceResult {
   const diskFactory = vtk.vtkDiskSource;
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for disk factory
   const source = diskFactory
     ? diskFactory({
         innerRadius: cfg.innerRadius,
@@ -363,7 +353,6 @@ function createDiskSource(
         circumferentialResolution: cfg.resolution,
       })
     : undefined;
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for source result
   return source
     ? { output: source, isFilter: true }
     : { output: vtk.vtkPolyData(), isFilter: false };
@@ -383,7 +372,6 @@ function createCircleSource(
     type: "disk",
     innerRadius: 0,
     outerRadius: cfg.radius ?? 1,
-    // biome-ignore lint/style/noMagicNumbers: Default disk resolution
     resolution: cfg.resolution ?? 50,
   });
 }
@@ -466,7 +454,6 @@ async function createMeshSource(
     let i = 0;
     while (i < legacyPolys.length) {
       const count = legacyPolys[i] ?? 0;
-      // biome-ignore lint/nursery/noIncrementDecrement: Standard loop iteration
       for (let j = 1; j <= count; j++) {
         connectivityList.push(legacyPolys[i + j] ?? 0);
       }
@@ -527,7 +514,7 @@ async function injectPointData(
       numberOfComponents: array.numberOfComponents,
       name: array.name,
     });
-    await dataArray.setArray(Float32Array.from(array.values)); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+    await dataArray.setArray(Float32Array.from(array.values));
     pd.addArray(dataArray);
   }
 }
@@ -573,9 +560,7 @@ async function setupNormals(
   }
 
   const normals = vtk.vtkPolyDataNormals();
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for point normals
   normals.setComputePointNormals?.(normalsConfig.computePointNormals ? 1 : 0);
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for cell normals
   normals.setComputeCellNormals?.(normalsConfig.computeCellNormals ? 1 : 0);
   await connectInput(normals, sourceResult);
   await normals.update();
@@ -597,13 +582,9 @@ async function applyPbr(
   prop.setInterpolationToPhong();
   const m = pbr.metallic;
   const r = pbr.roughness;
-  // biome-ignore lint/style/noMagicNumbers: PBR material coefficients
   prop.setAmbient(0.1);
-  // biome-ignore lint/style/noMagicNumbers: PBR material coefficients
   prop.setSpecular(0.75 * m + 0.25);
-  // biome-ignore lint/style/noMagicNumbers: PBR material coefficients
   prop.setSpecularPower(Math.max(1, 100 * (1 - r)));
-  // biome-ignore lint/style/noMagicNumbers: PBR material coefficients
   prop.setDiffuse(0.65 + 0.35 * (1 - m));
 }
 
@@ -621,11 +602,9 @@ async function setupActor(
   ren: VtkRenderer,
 ): Promise<void> {
   const sourceResult: SourceResult | undefined =
-    // biome-ignore lint/nursery/noTernary: Simple binary choice for source type
     cfg.source.type === "mesh"
       ? await createMeshSource(vtk, cfg.source)
-      : // biome-ignore lint/style/noNestedTernary: Complex but clear source type selection
-        cfg.source.type === "points"
+      : cfg.source.type === "points"
         ? await createPointsSource(vtk, cfg.source)
         : createSource(vtk, cfg.source);
 
@@ -647,7 +626,6 @@ async function setupActor(
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
   const mapper = vtk.vtkPolyDataMapper();
-  // biome-ignore lint/nursery/noTernary: Simple binary choice for mapper input
   await (mapperInput.isFilter
     ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
     : mapper.setInputData(mapperInput.output));
@@ -802,20 +780,19 @@ async function applyFilters(
   let current = sourceResult;
   for (const f of filters) {
     if (f.type === "shrink" && f.shrinkFactor !== undefined) {
-      current = await applyShrinkFilter(vtk, current, f.shrinkFactor); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+      current = await applyShrinkFilter(vtk, current, f.shrinkFactor);
     } else if (
       f.type === "tube" &&
       f.radius !== undefined &&
       f.numberOfSides !== undefined
     ) {
-      current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+      current = await applyTubeFilter(vtk, current, f.radius, f.numberOfSides);
     } else if (
       f.type === "clip" &&
       f.normal &&
       f.origin &&
       f.invert !== undefined
     ) {
-      // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
       current = await applyClipFilter(vtk, current, {
         normal: f.normal,
         origin: f.origin,
@@ -827,7 +804,6 @@ async function applyFilters(
       f.scalarName &&
       f.scalarData
     ) {
-      // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
       current = await applyContourFilter(vtk, current, {
         values: f.values,
         scalarName: f.scalarName,

@@ -437,7 +437,7 @@ class PolyData:
             msg = f"shrink_factor must be between 0 and 1, got {shrink_factor}"
             raise ValueError(msg)
 
-        base_scene = (
+        base_scene: dict[str, object] = (
             dict(self._scene_data)
             if self._scene_data
             else {
@@ -556,7 +556,7 @@ class PolyData:
             o = [float(x) for x in origin]
             origin = (o[0], o[1], o[2])
 
-        base_scene = (
+        base_scene: dict[str, object] = (
             dict(self._scene_data)
             if self._scene_data
             else {
@@ -637,7 +637,7 @@ class PolyData:
             msg = f"n_sides must be at least {_TUBE_MIN_SIDES}, got {n_sides}"
             raise ValueError(msg)
 
-        base_scene = (
+        base_scene: dict[str, object] = (
             dict(self._scene_data)
             if self._scene_data
             else {
@@ -727,7 +727,7 @@ class PolyData:
         # Generate contour values
         contour_values = self._get_contour_values(isosurfaces, scalar_data)
 
-        base_scene = (
+        base_scene: dict[str, object] = (
             dict(self._scene_data)
             if self._scene_data
             else {
