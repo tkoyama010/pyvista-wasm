@@ -5,7 +5,7 @@ Provides geometric primitives and mesh handling compatible with PyVista API.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
@@ -150,7 +150,7 @@ class PolyData:
         t_coords: ArrayLike | None = None,
         scalars: ArrayLike | None = None,
         scalar_name: str = "scalars",
-        _scene_data: dict[str, object] | None = None,
+        _scene_data: dict[str, Any] | None = None,
     ) -> None:
         """Initialize a PolyData mesh."""
         self.points = np.asarray(points)
