@@ -309,7 +309,7 @@ def test_generate_render_js(monkeypatch) -> None:
 
 
 def test_render_with_ipython_calls_display(monkeypatch) -> None:
-    """Test that VTKWasmRenderer.render() calls display(Javascript(...)) in IPython mode."""
+    """Test that VTKWasmRenderer.render() calls display(HTML(...)) in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
 
     displayed = []
@@ -317,20 +317,20 @@ def test_render_with_ipython_calls_display(monkeypatch) -> None:
     def mock_display(obj) -> None:
         displayed.append(obj)
 
-    class MockJavascript:
-        def __init__(self, code: str) -> None:
-            self.code = code
+    class MockHTML:
+        def __init__(self, data: str) -> None:
+            self.data = data
 
     monkeypatch.setattr(rendering, "display", mock_display)
-    monkeypatch.setattr(rendering, "Javascript", MockJavascript)
+    monkeypatch.setattr(rendering, "HTML", MockHTML)
 
     renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere(), color="blue")
     renderer.render()
 
-    js_displays = [d for d in displayed if isinstance(d, MockJavascript)]
-    assert len(js_displays) == 1
-    assert "vtkRenderer" in js_displays[0].code
+    html_displays = [d for d in displayed if isinstance(d, MockHTML)]
+    assert len(html_displays) == 1
+    assert "vtkRenderer" in html_displays[0].data
 
 
 def test_create_container_with_ipython(monkeypatch) -> None:
