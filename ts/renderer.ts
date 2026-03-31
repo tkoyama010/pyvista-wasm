@@ -61,14 +61,43 @@ async function connectInput(
     : filter.setInputData(sourceResult.output));
 }
 
+// Capture the currently executing script element synchronously so that
+// buildScene() can later locate the sibling scene-data element even after
+// the script has finished executing (document.currentScript is null in
+// async callbacks).
+const _pvwasmCurrentScript: HTMLOrSVGScriptElement | null =
+  document.currentScript;
+
+/**
+ * Walk backwards through element siblings to find the nearest
+ * <script type="application/json"> element, which holds the scene data
+ * for this particular render call.  Falling back to the legacy
+ * document-level "#scene-data" selector keeps standalone HTML working.
+ */
+function _findSceneDataElement(): Element | null {
+  let el = _pvwasmCurrentScript?.previousElementSibling ?? null;
+  while (el) {
+    if (
+      el.tagName === "SCRIPT" &&
+      el.getAttribute("type") === "application/json"
+    ) {
+      return el;
+    }
+    el = el.previousElementSibling;
+  }
+  return document.querySelector("#scene-data");
+}
+
 /**
  * Main entry point — initialise VTK.wasm and build the scene.
  * @param vtk
  */
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: Complex scene initialization function
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
-  const rawSceneJson =
-    document.querySelector("#scene-data")?.textContent ?? "{}";
+  let rawSceneJson = "{}";
+  if (typeof __pvwasmSceneData === "undefined") {
+    rawSceneJson = _findSceneDataElement()?.textContent ?? "{}";
+  }
   const parsedSceneData = JSON.parse(rawSceneJson) as SceneData;
   const sceneData: SceneData =
     // biome-ignore lint/nursery/noTernary: Simple conditional for scene data source
