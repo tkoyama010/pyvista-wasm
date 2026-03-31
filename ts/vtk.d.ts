@@ -9,7 +9,10 @@
  * Boolean parameters use number (0/1) instead of boolean due to C++ WASM bindings.
  */
 
+// biome-ignore lint/nursery/noExcessiveLinesPerFile: VTK type declarations require comprehensive definitions
 /** A VTK.wasm render window that owns the canvas. */
+// biome-ignore lint/style/useConsistentTypeDefinitions: Keeping existing type alias style
+// biome-ignore lint/nursery/useConsistentMethodSignatures: Keeping existing method signature style
 type VtkRenderWindow = {
   render(): void;
   addRenderer(renderer: VtkRenderer): void;
@@ -201,7 +204,10 @@ type VtkWasmNamespace = {
     name?: string;
     values?: Float32Array;
   }): VtkDataArray;
-  vtkIntArray(options?: { numberOfComponents?: number; name?: string }): VtkDataArray;
+  vtkIntArray(options?: {
+    numberOfComponents?: number;
+    name?: string;
+  }): VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
   vtkRenderWindowInteractor(options?: {

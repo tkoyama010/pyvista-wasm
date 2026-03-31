@@ -1,5 +1,7 @@
+// biome-ignore lint/correctness/noUndeclaredVariables: ESLint plugin import
 import jsdocPlugin from "eslint-plugin-jsdoc";
 
+// biome-ignore lint/style/noDefaultExport: ESLint config requires default export
 export default [
   {
     space: true,
@@ -16,8 +18,11 @@ export default [
         "error",
         {
           require: {
+            // biome-ignore lint/style/useNamingConvention: ESLint plugin convention
             FunctionDeclaration: true,
+            // biome-ignore lint/style/useNamingConvention: ESLint plugin convention
             MethodDefinition: true,
+            // biome-ignore lint/style/useNamingConvention: ESLint plugin convention
             ClassDeclaration: true,
           },
           contexts: ["TSInterfaceDeclaration", "TSTypeAliasDeclaration"],
@@ -28,8 +33,11 @@ export default [
       "jsdoc/no-blank-block-descriptions": "error",
       "jsdoc/require-param": "error",
       "jsdoc/require-returns": "error",
-      "complexity": ["error", 20],
+      // biome-ignore lint/style/noMagicNumbers: ESLint rule configuration value
+      complexity: ["error", 20],
+      // biome-ignore lint/style/noMagicNumbers: ESLint rule configuration value
       "max-depth": ["error", 4],
+      // biome-ignore lint/style/noMagicNumbers: ESLint rule configuration value
       "max-params": ["error", 4],
     },
   },
