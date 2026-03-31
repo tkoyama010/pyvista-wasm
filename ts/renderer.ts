@@ -1,4 +1,3 @@
-// biome-ignore lint/nursery/noExcessiveLinesPerFile: Renderer implementation requires comprehensive functionality
 /**
  * Pyvista-wasm renderer — reads scene configuration from JSON and creates
  * VTK.wasm objects.
@@ -27,7 +26,6 @@ function at(array: Float32Array | Uint32Array, index: number): number {
 }
 
 /** Wraps either a VTK algorithm (filter/source) or raw PolyData. */
-// biome-ignore lint/style/useConsistentTypeDefinitions: Keeping existing union type style
 type SourceResult =
   | { output: VtkAlgorithm; isFilter: true }
   | { output: VtkPolyData; isFilter: false };

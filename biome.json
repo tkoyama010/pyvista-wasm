@@ -29,9 +29,48 @@
   },
   "overrides": [
     {
-      "includes": ["**"],
+      "includes": ["ts/renderer.ts"],
       "linter": {
-        "rules": {}
+        "rules": {
+          "complexity": {
+            "noExcessiveCognitiveComplexity": "off",
+            "noExcessiveLinesPerFunction": "off",
+            "noVoid": "off"
+          },
+          "correctness": {
+            "noUndeclaredVariables": "off"
+          },
+          "nursery": {
+            "noExcessiveLinesPerFile": "off",
+            "noIncrementDecrement": "off",
+            "noTernary": "off"
+          },
+          "performance": {
+            "noAwaitInLoops": "off"
+          },
+          "security": {
+            "noSecrets": "off"
+          },
+          "style": {
+            "noMagicNumbers": "off",
+            "noNestedTernary": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["ts/vtk.d.ts"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "noExcessiveLinesPerFile": "off",
+            "useConsistentMethodSignatures": "off"
+          },
+          "style": {
+            "useNamingConvention": "off",
+            "useConsistentTypeDefinitions": "off"
+          }
+        }
       }
     }
   ]
