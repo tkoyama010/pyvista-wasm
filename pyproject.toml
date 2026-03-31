@@ -4,7 +4,7 @@ requires = [ "hatch-build-scripts", "hatchling" ]
 
 [project]
 name = "pyvista-wasm"
-version = "0.1.1"
+version = "0.2.0"
 description = "PyVista-like API for VTK.wasm"
 readme = "README.md"
 license = "Apache-2.0"

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.1.1...pyvista-wasm-v0.2.0) (2026-03-31)
+
+
+### Features
+
+* add "Try it with JupyterLite\!" button to Sphinx docs ([#40](https://github.com/tkoyama010/pyvista-wasm/issues/40)) ([39de62b](https://github.com/tkoyama010/pyvista-wasm/commit/39de62ba611133660f5c78fd3430deb63f30fef9))
+* add preview table and JupyterLite deployment ([#41](https://github.com/tkoyama010/pyvista-wasm/issues/41)) ([ed5d76c](https://github.com/tkoyama010/pyvista-wasm/commit/ed5d76c206ee5283db54c76a1e289297a2b91877))
+
+
+### Bug Fixes
+
+* resolve mypy type errors in mesh.py ([#48](https://github.com/tkoyama010/pyvista-wasm/issues/48)) ([f01c4a8](https://github.com/tkoyama010/pyvista-wasm/commit/f01c4a84dca1ef1c935aa545b3f8b2370514fc4f))
+
+
+### Documentation
+
+* add stlite badge to README ([#34](https://github.com/tkoyama010/pyvista-wasm/issues/34)) ([f68169a](https://github.com/tkoyama010/pyvista-wasm/commit/f68169a3ceda6cebb00dfedab2bfeb6306acd90d))
+
 ## [0.1.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.1.0...pyvista-wasm-v0.1.1) (2026-03-25)
 
 ### Bug Fixes
