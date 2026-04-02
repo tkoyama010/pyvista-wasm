@@ -607,6 +607,7 @@ def _make_mock_playwright():
     return mock_pw_cm, mock_page, mock_context, mock_browser
 
 
+@pytest.mark.playwright
 def test_capture_stlite_screenshots_with_rotate(tmp_path) -> None:
     """_capture_stlite_screenshots creates screenshots with rotation."""
     mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
@@ -626,6 +627,7 @@ def test_capture_stlite_screenshots_with_rotate(tmp_path) -> None:
     mock_browser.close.assert_called_once()
 
 
+@pytest.mark.playwright
 def test_capture_stlite_screenshots_without_rotate(tmp_path) -> None:
     """_capture_stlite_screenshots creates screenshots without rotation."""
     mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
@@ -644,6 +646,7 @@ def test_capture_stlite_screenshots_without_rotate(tmp_path) -> None:
     mock_browser.close.assert_called_once()
 
 
+@pytest.mark.playwright
 def test_capture_stlite_screenshots_handles_exception(tmp_path) -> None:
     """_capture_stlite_screenshots handles exceptions gracefully."""
     mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
