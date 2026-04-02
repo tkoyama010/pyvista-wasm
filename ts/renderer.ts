@@ -15,6 +15,11 @@
  * getOutputData, etc.) all return Promises and must be awaited.
  */
 
+const PointStride = 3;
+const Xoffset = 0;
+const Yoffset = 1;
+const Zoffset = 2;
+
 /**
  * Access a typed array element, returning 0 for out-of-bounds.
  * @param array
@@ -88,10 +93,12 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 
   const bbox = container.getBoundingClientRect();
   const canvasId = `${sceneData.containerId}-canvas`;
+  const DefaultCanvasWidth = 600;
+  const DefaultCanvasHeight = 400;
   const canvas = document.createElement("canvas");
   canvas.id = canvasId;
-  canvas.width = bbox.width || 600;
-  canvas.height = bbox.height || 400;
+  canvas.width = bbox.width || DefaultCanvasWidth;
+  canvas.height = bbox.height || DefaultCanvasHeight;
   canvas.style.width = "100%";
   canvas.style.height = "100%";
   canvas.tabIndex = -1;
@@ -334,11 +341,12 @@ function createDiskSource(
   cfg: SourceConfig,
 ): SourceResult {
   const diskFactory = vtk.vtkDiskSource;
+  const RadialResolution = 1;
   const source = diskFactory
     ? diskFactory({
         innerRadius: cfg.innerRadius,
         outerRadius: cfg.outerRadius,
-        radialResolution: 1,
+        radialResolution: RadialResolution,
         circumferentialResolution: cfg.resolution,
       })
     : undefined;
@@ -357,11 +365,13 @@ function createCircleSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
 ): SourceResult {
+  const DefaultCircleRadius = 1;
+  const DefaultCircleResolution = 50;
   return createDiskSource(vtk, {
     type: "disk",
     innerRadius: 0,
-    outerRadius: cfg.radius ?? 1,
-    resolution: cfg.resolution ?? 50,
+    outerRadius: cfg.radius ?? DefaultCircleRadius,
+    resolution: cfg.resolution ?? DefaultCircleResolution,
   });
 }
 
@@ -431,7 +441,10 @@ async function createMeshSource(
   cfg: SourceConfig,
 ): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
+  const PointsComponents = 3;
+  const pointsFloatArray = vtk.vtkFloatArray({
+    numberOfComponents: PointsComponents,
+  });
   await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
   const vtkPts = vtk.vtkPoints();
   await vtkPts.setData(pointsFloatArray);
@@ -451,9 +464,12 @@ async function createMeshSource(
       i += count + 1;
     }
 
-    const offsetsArray = vtk.vtkIntArray({ numberOfComponents: 1 });
+    const ComponentsOne = 1;
+    const offsetsArray = vtk.vtkIntArray({ numberOfComponents: ComponentsOne });
     await offsetsArray.setArray(Int32Array.from(offsetsList));
-    const connectivityArray = vtk.vtkIntArray({ numberOfComponents: 1 });
+    const connectivityArray = vtk.vtkIntArray({
+      numberOfComponents: ComponentsOne,
+    });
     await connectivityArray.setArray(Int32Array.from(connectivityList));
     const cellArray = vtk.vtkCellArray();
     await cellArray.setData(offsetsArray, connectivityArray);
@@ -474,7 +490,10 @@ async function createPointsSource(
   cfg: SourceConfig,
 ): Promise<SourceResult> {
   const polydata = vtk.vtkPolyData();
-  const pointsFloatArray = vtk.vtkFloatArray({ numberOfComponents: 3 });
+  const PointsComponents = 3;
+  const pointsFloatArray = vtk.vtkFloatArray({
+    numberOfComponents: PointsComponents,
+  });
   await pointsFloatArray.setArray(Float32Array.from(cfg.points ?? []));
   const vtkPts = vtk.vtkPoints();
   await vtkPts.setData(pointsFloatArray);
@@ -523,8 +542,9 @@ async function injectTcoords(
     return;
   }
 
+  const TcoordsComponents = 2;
   const tcArray = vtk.vtkFloatArray({
-    numberOfComponents: 2,
+    numberOfComponents: TcoordsComponents,
     name: "TextureCoordinates",
   });
   await tcArray.setArray(Float32Array.from(tCoords));
@@ -568,16 +588,25 @@ async function applyPbr(
   if (!pbr) {
     return;
   }
+  const AmbientValue = 0.1;
+  const SpecularBase = 0.75;
+  const SpecularOffset = 0.25;
+  const SpecularPowerBase = 100;
+  const SpecularPowerMin = 1;
+  const DiffuseBase = 0.65;
+  const DiffuseVariance = 0.35;
   const prop = await actor.getProperty();
   prop.setInterpolationToPhong();
   const m = pbr.metallic;
   const r = pbr.roughness;
   prop.setMetallic(m);
   prop.setRoughness(r);
-  prop.setAmbient(0.1);
-  prop.setSpecular(0.75 * m + 0.25);
-  prop.setSpecularPower(Math.max(1, 100 * (1 - r)));
-  prop.setDiffuse(0.65 + 0.35 * (1 - m));
+  prop.setAmbient(AmbientValue);
+  prop.setSpecular(SpecularBase * m + SpecularOffset);
+  prop.setSpecularPower(
+    Math.max(SpecularPowerMin, SpecularPowerBase * (1 - r)),
+  );
+  prop.setDiffuse(DiffuseBase + DiffuseVariance * (1 - m));
 }
 
 /**
@@ -655,7 +684,8 @@ async function setupActor(
   await applyPbr(actor, cfg.pbr);
 
   if (cfg.actorType === "points") {
-    prop.setPointSize(cfg.pointSize ?? 5);
+    const DefaultPointSize = 5;
+    prop.setPointSize(cfg.pointSize ?? DefaultPointSize);
     prop.setRepresentationToPoints();
   }
 
@@ -722,7 +752,10 @@ async function setupCamera(
       camConfig.viewUp[1],
       camConfig.viewUp[2],
     );
-    cam.setFocalPoint(0, 0, 0);
+    const OriginX = 0;
+    const OriginY = 0;
+    const OriginZ = 0;
+    cam.setFocalPoint(OriginX, OriginY, OriginZ);
     ren.resetCamera();
     ren.resetCameraClippingRange();
   }
@@ -737,14 +770,16 @@ function setupTextActor(
   cfg: TextActorConfig,
   containerElement: HTMLElement,
 ): void {
+  const PercentageMultiplier = 100;
+  const RgbMax = 255;
   const div = document.createElement("div");
   div.textContent = cfg.text;
   div.style.position = "absolute";
-  div.style.left = `${String(cfg.position[0] * 100)}%`;
-  div.style.bottom = `${String(cfg.position[1] * 100)}%`;
-  const r = Math.round(cfg.color[0] * 255);
-  const g = Math.round(cfg.color[1] * 255);
-  const b = Math.round(cfg.color[2] * 255);
+  div.style.left = `${String(cfg.position[0] * PercentageMultiplier)}%`;
+  div.style.bottom = `${String(cfg.position[1] * PercentageMultiplier)}%`;
+  const r = Math.round(cfg.color[0] * RgbMax);
+  const g = Math.round(cfg.color[1] * RgbMax);
+  const b = Math.round(cfg.color[2] * RgbMax);
   div.style.color = `rgba(${String(r)},${String(g)},${String(b)},${String(cfg.opacity)})`;
   div.style.fontSize = `${String(cfg.fontSize)}px`;
   div.style.fontWeight = cfg.bold ? "bold" : "normal";
@@ -849,9 +884,9 @@ async function applyShrinkFilter(
     for (let index_ = 0; index_ < nVerts; index_++) {
       const vi = at(polys, index + index_);
       indices.push(vi);
-      cx += at(inPoints, vi * 3);
-      cy += at(inPoints, vi * 3 + 1);
-      cz += at(inPoints, vi * 3 + 2);
+      cx += at(inPoints, vi * PointStride + Xoffset);
+      cy += at(inPoints, vi * PointStride + Yoffset);
+      cz += at(inPoints, vi * PointStride + Zoffset);
     }
 
     cx /= nVerts;
@@ -860,9 +895,9 @@ async function applyShrinkFilter(
     resultPolys.push(nVerts);
     for (let k = 0; k < nVerts; k++) {
       const pi = indices[k] ?? 0;
-      const px = at(inPoints, pi * 3);
-      const py = at(inPoints, pi * 3 + 1);
-      const pz = at(inPoints, pi * 3 + 2);
+      const px = at(inPoints, pi * PointStride + Xoffset);
+      const py = at(inPoints, pi * PointStride + Yoffset);
+      const pz = at(inPoints, pi * PointStride + Zoffset);
       resultPoints.push(
         cx + (px - cx) * shrinkFactor,
         cy + (py - cy) * shrinkFactor,
@@ -877,7 +912,11 @@ async function applyShrinkFilter(
 
   const outputPd = vtk.vtkPolyData();
   const outPointsObject = await outputPd.getPoints();
-  await outPointsObject.setData(new Float32Array(resultPoints), 3);
+  const PointComponents = 3;
+  await outPointsObject.setData(
+    new Float32Array(resultPoints),
+    PointComponents,
+  );
   const outPolysObject = await outputPd.getPolys();
   await outPolysObject.setData(new Uint32Array(resultPolys));
   return { output: outputPd, isFilter: false };
@@ -959,8 +998,9 @@ async function applyContourFilter(
   const { values, scalarName, scalarData } = options;
   const inputPd = await getPolyData(sourceResult);
 
+  const ComponentsOne = 1;
   const scalars = vtk.vtkFloatArray({
-    numberOfComponents: 1,
+    numberOfComponents: ComponentsOne,
     values: Float32Array.from(scalarData),
     name: scalarName,
   });
@@ -989,12 +1029,18 @@ function collectEdgeIntersections(
     if ((sa <= value && value < sb) || (sb <= value && value < sa)) {
       const t = (value - sa) / (sb - sa);
       edgePoints.push(
-        at(inPoints, ai * 3) +
-          t * (at(inPoints, bi * 3) - at(inPoints, ai * 3)),
-        at(inPoints, ai * 3 + 1) +
-          t * (at(inPoints, bi * 3 + 1) - at(inPoints, ai * 3 + 1)),
-        at(inPoints, ai * 3 + 2) +
-          t * (at(inPoints, bi * 3 + 2) - at(inPoints, ai * 3 + 2)),
+        at(inPoints, ai * PointStride + Xoffset) +
+          t *
+            (at(inPoints, bi * PointStride + Xoffset) -
+              at(inPoints, ai * PointStride + Xoffset)),
+        at(inPoints, ai * PointStride + Yoffset) +
+          t *
+            (at(inPoints, bi * PointStride + Yoffset) -
+              at(inPoints, ai * PointStride + Yoffset)),
+        at(inPoints, ai * PointStride + Zoffset) +
+          t *
+            (at(inPoints, bi * PointStride + Zoffset) -
+              at(inPoints, ai * PointStride + Zoffset)),
       );
     }
   }
@@ -1036,10 +1082,14 @@ async function applyContourManual(
   let pointIndex = 0;
 
   let index = 0;
+  const TriangleVerts = 3;
+  const EdgePointsRequired = 6;
+  const PointIndexIncrement = 2;
+  const OutPolyVerts = 2;
   while (index < polys.length) {
     const nVerts = at(polys, index);
     index++;
-    if (nVerts === 3) {
+    if (nVerts === TriangleVerts) {
       const index0 = at(polys, index);
       const index1 = at(polys, index + 1);
       const index2 = at(polys, index + 2);
@@ -1054,17 +1104,23 @@ async function applyContourManual(
       for (const value of values) {
         const edgePoints = collectEdgeIntersections(tri, value, inPoints);
 
-        if (edgePoints.length === 6) {
+        if (edgePoints.length === EdgePointsRequired) {
+          const Index0 = 0;
+          const Index1 = 1;
+          const Index2 = 2;
+          const Index3 = 3;
+          const Index4 = 4;
+          const Index5 = 5;
           outPoints.push(
-            edgePoints[0] ?? 0,
-            edgePoints[1] ?? 0,
-            edgePoints[2] ?? 0,
-            edgePoints[3] ?? 0,
-            edgePoints[4] ?? 0,
-            edgePoints[5] ?? 0,
+            edgePoints[Index0] ?? 0,
+            edgePoints[Index1] ?? 0,
+            edgePoints[Index2] ?? 0,
+            edgePoints[Index3] ?? 0,
+            edgePoints[Index4] ?? 0,
+            edgePoints[Index5] ?? 0,
           );
-          outPolys.push(2, pointIndex, pointIndex + 1);
-          pointIndex += 2;
+          outPolys.push(OutPolyVerts, pointIndex, pointIndex + 1);
+          pointIndex += PointIndexIncrement;
         }
       }
     }
@@ -1075,7 +1131,8 @@ async function applyContourManual(
   const outputPd = vtk.vtkPolyData();
   if (outPoints.length > 0) {
     const outPointsObject = await outputPd.getPoints();
-    await outPointsObject.setData(new Float32Array(outPoints), 3);
+    const PointComponents = 3;
+    await outPointsObject.setData(new Float32Array(outPoints), PointComponents);
     const outLinesObject = await outputPd.getLines();
     await outLinesObject.setData(new Uint32Array(outPolys));
   }

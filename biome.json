@@ -52,7 +52,6 @@
             "noSecrets": "off"
           },
           "style": {
-            "noMagicNumbers": "off",
             "noNestedTernary": "off"
           }
         }
