@@ -32,12 +32,12 @@ repos:
       - id: pyproject-fmt
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.10.12
+    rev: 0.11.2
     hooks:
       - id: uv-lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.7
+    rev: v0.15.8
     hooks:
       # Run the linter
       - id: ruff-check
@@ -54,14 +54,11 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
 
-  - repo: local
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.10
     hooks:
-      - id: xo
-        name: xo
-        entry: npx xo
-        language: node
-        types_or: [javascript, ts]
-        pass_filenames: false
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@2.4.10"]
 
   - repo: https://github.com/scientific-python/cookie
     rev: 2026.03.02
@@ -106,5 +103,4 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   autoupdate_schedule: weekly
-  skip: [xo]
   submodules: false

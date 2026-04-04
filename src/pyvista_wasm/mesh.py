@@ -5,7 +5,7 @@ Provides geometric primitives and mesh handling compatible with PyVista API.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
@@ -150,7 +150,7 @@ class PolyData:
         t_coords: ArrayLike | None = None,
         scalars: ArrayLike | None = None,
         scalar_name: str = "scalars",
-        _scene_data: dict[str, object] | None = None,
+        _scene_data: dict[str, Any] | None = None,
     ) -> None:
         """Initialize a PolyData mesh."""
         self.points = np.asarray(points)
@@ -403,15 +403,10 @@ class PolyData:
 
         This filter shrinks the individual cells of a mesh towards their
         centroids, producing visual separation between adjacent cells.
-        It mirrors the PyVista ``shrink`` filter API.
-
-        .. note::
-
-            The shrink is computed in JavaScript at render time by
-            iterating over the cell array from the VTK.wasm source,
-            moving each vertex toward its cell's centroid.
-            ``VTK.wasm`` does not include ``vtkShrinkFilter``, so this
-            filter is implemented as a custom JavaScript pass.
+        It mirrors the PyVista ``shrink`` filter API. The shrink is
+        computed in JavaScript at render time as a manual implementation
+        because ``vtkShrinkPolyData`` is not registered with the
+        ``vtkDeserializer`` in VTK.wasm's rendering-mode binary.
 
         Parameters
         ----------
@@ -475,17 +470,9 @@ class PolyData:
         """Clip the mesh with a plane.
 
         This filter clips the mesh with a plane defined by a normal vector
-        and an origin point. Points on one side of the plane are removed.
-        It mirrors the PyVista ``clip`` filter API.
-
-        .. note::
-
-            The clipping is computed in JavaScript at render time by
-            evaluating the signed distance of each vertex from the clip plane.
-            Cells with all vertices on the clipped side are removed.
-            ``VTK.wasm`` does not include a built-in clipping filter with
-            the exact PyVista API, so this filter is implemented as a
-            custom JavaScript pass.
+        and an origin point using VTK.wasm's built-in ``vtkClipPolyData``
+        filter with a ``vtkPlane`` clip function. Points on one side of
+        the plane are removed. It mirrors the PyVista ``clip`` filter API.
 
         Parameters
         ----------
@@ -684,16 +671,10 @@ class PolyData:
 
         This filter extracts isolines from the mesh at specified scalar values
         using a marching triangles algorithm implemented in JavaScript.
-        It mirrors the PyVista ``contour`` filter API.
-
-        .. note::
-
-            The contour is computed in JavaScript at render time by applying
-            the marching triangles algorithm to each triangle of the mesh,
-            interpolating edge crossings at the specified iso-values.
-            ``VTK.wasm`` does not support ``vtkPolyData`` input for
-            ``vtkContourFilter``, so this filter is implemented as a custom
-            JavaScript pass.
+        It mirrors the PyVista ``contour`` filter API. The contour is
+        computed at render time as a manual implementation because
+        ``vtkContourFilter`` is not registered with the
+        ``vtkDeserializer`` in VTK.wasm's rendering-mode binary.
 
         Parameters
         ----------

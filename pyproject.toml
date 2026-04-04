@@ -4,7 +4,7 @@ requires = [ "hatch-build-scripts", "hatchling" ]
 
 [project]
 name = "pyvista-wasm"
-version = "0.1.0"
+version = "0.2.0"
 description = "PyVista-like API for VTK.wasm"
 readme = "README.md"
 license = "Apache-2.0"
@@ -51,6 +51,15 @@ optional-dependencies.dev = [
   "ruff>=0.1",
   "tox>=4",
 ]
+optional-dependencies.docs = [
+  "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.12' and python_version<'3.14'",
+  "jupyterlite-sphinx==0.22.1; python_version>='3.12' and python_version<'3.14'",
+  "myst-parser>=4; python_version>='3.12'",
+  "sphinx>=8; python_version>='3.12'",
+  "sphinx-book-theme>=1.1; python_version>='3.12'",
+  "sphinx-design>=0.6; python_version>='3.12'",
+  "sphinx-intl>=2.2; python_version>='3.12'",
+]
 optional-dependencies.streamlit = [
   "streamlit>=1.30",
 ]
@@ -85,6 +94,14 @@ build.hooks.build-scripts.scripts = [
 [tool.ruff]
 line-length = 100
 lint.select = [ "ALL" ]
+lint.per-file-ignores."jupyterlite/content/*" = [
+  "D100",    # missing docstring - jupytext files
+  "E402",    # module import not at top - cell-based structure
+  "ERA001",  # commented-out code - jupytext metadata
+  "F704",    # await outside async - top-level await valid in Pyodide
+  "INP001",  # implicit namespace package
+  "PLE1142", # await outside async - top-level await valid in Pyodide
+]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
   "INP001",  # implicit namespace package

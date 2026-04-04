@@ -1177,6 +1177,7 @@ def test_scalar_bar_updates_renderer() -> None:
     assert plotter._renderer._scalar_bar["title"] == "Height"
 
 
+@pytest.mark.playwright
 def test_screenshot_returns_array() -> None:
     """Test that screenshot returns a numpy array."""
     plotter = Plotter()
@@ -1191,6 +1192,7 @@ def test_screenshot_returns_array() -> None:
     assert img.shape[2] in (3, 4)  # RGB or RGBA
 
 
+@pytest.mark.playwright
 def test_screenshot_with_filename(tmp_path) -> None:
     """Test that screenshot saves to file."""
     plotter = Plotter()
@@ -1206,6 +1208,7 @@ def test_screenshot_with_filename(tmp_path) -> None:
     assert result is not None
 
 
+@pytest.mark.playwright
 def test_screenshot_no_return_img(tmp_path) -> None:
     """Test screenshot with return_img=False."""
     plotter = Plotter()
@@ -1220,6 +1223,7 @@ def test_screenshot_no_return_img(tmp_path) -> None:
     assert filepath.exists()
 
 
+@pytest.mark.playwright
 def test_screenshot_transparent_background() -> None:
     """Test screenshot with transparent background."""
     plotter = Plotter()
@@ -1233,6 +1237,7 @@ def test_screenshot_transparent_background() -> None:
     assert img.shape[2] == 4
 
 
+@pytest.mark.playwright
 def test_screenshot_window_size() -> None:
     """Test screenshot with custom window size."""
     plotter = Plotter()
@@ -1246,6 +1251,7 @@ def test_screenshot_window_size() -> None:
     assert img.shape[1] == 800  # width
 
 
+@pytest.mark.playwright
 def test_screenshot_with_scale() -> None:
     """Test screenshot with scale factor."""
     plotter = Plotter()
@@ -1260,6 +1266,7 @@ def test_screenshot_with_scale() -> None:
     assert img.shape[1] == 600  # width
 
 
+@pytest.mark.playwright
 def test_screenshot_filename_only() -> None:
     """Test screenshot with only filename, no return."""
     plotter = Plotter()
@@ -1276,6 +1283,7 @@ def test_screenshot_filename_only() -> None:
         pathlib.Path(tmp_path).unlink()
 
 
+@pytest.mark.playwright
 def test_screenshot_default_parameters() -> None:
     """Test screenshot with default parameters."""
     plotter = Plotter()

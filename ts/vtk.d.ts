@@ -57,8 +57,8 @@ type VtkProperty = {
 
 /** Maps data to graphics primitives for rendering. */
 type VtkMapper = {
-  setInputData(data: VtkPolyData): void;
-  setInputConnection(port: VtkOutputPort): void;
+  setInputData(data: VtkPolyData): Promise<void>;
+  setInputConnection(port: VtkOutputPort): Promise<void>;
   delete(): void;
 };
 
@@ -70,22 +70,28 @@ type VtkOutputPort = {
 /** Polygonal mesh data structure — the core VTK data object. */
 type VtkPolyData = {
   getPoints(): Promise<VtkPoints>;
-  setPoints(points: VtkPoints): void;
+  setPoints(points: VtkPoints): Promise<void>;
   getPolys(): Promise<VtkCellArray>;
+  setPolys(cellArray: VtkCellArray): Promise<void>;
   getLines(): Promise<VtkCellArray>;
+  setLines(cellArray: VtkCellArray): Promise<void>;
   getPointData(): Promise<VtkPointData>;
+  getNumberOfPoints(): Promise<number>;
+  getNumberOfCells(): Promise<number>;
   delete(): void;
 };
 
 /** A set of 3D points. */
 type VtkPoints = {
-  setData(data: Float32Array, numberOfComponents: number): void;
+  setData(data: VtkDataArray): Promise<void>;
+  setData(data: Float32Array, numberOfComponents: number): Promise<void>;
   getData(): Promise<Float32Array>;
 };
 
 /** A VTK cell array (polygons, lines, etc.). */
 type VtkCellArray = {
-  setData(data: Uint32Array): void;
+  setData(offsets: VtkDataArray, connectivity: VtkDataArray): Promise<void>;
+  setData(data: Uint32Array): Promise<void>;
   getData(): Promise<Uint32Array>;
 };
 
@@ -99,6 +105,8 @@ type VtkPointData = {
 
 /** A VTK data array holding typed numeric values. */
 type VtkDataArray = {
+  /** Transfer typed-array values into the C++ VTK array (bypasses JSON serialization). */
+  setArray(data: Float32Array | Int32Array): Promise<void>;
   getData(): Promise<Float32Array>;
 };
 
@@ -133,12 +141,12 @@ type VtkLight = {
 type VtkAlgorithm = {
   getOutputPort(): Promise<VtkOutputPort>;
   getOutputData(): Promise<VtkPolyData>;
-  update(): void;
-  setInputConnection(port: VtkOutputPort): void;
-  setInputData(data: VtkPolyData): void;
-  setComputePointNormals?(v: number): void;
-  setComputeCellNormals?(v: number): void;
-  setNormal?(x: number, y: number, z: number): void;
+  update(): Promise<void>;
+  setInputConnection(port: VtkOutputPort): Promise<void>;
+  setInputData(data: VtkPolyData): Promise<void>;
+  setComputePointNormals?: (v: number) => void;
+  setComputeCellNormals?: (v: number) => void;
+  setNormal?: (x: number, y: number, z: number) => void;
   delete(): void;
 };
 
@@ -188,27 +196,35 @@ type VtkWasmNamespace = {
   vtkPolyData(): VtkPolyData;
   vtkPoints(): VtkPoints;
   vtkCellArray(): VtkCellArray;
-  vtkFloatArray(options?: {
+  vtkFloatArray: (options?: {
     numberOfComponents?: number;
-    values?: Float32Array;
     name?: string;
-  }): VtkDataArray;
+    values?: Float32Array;
+  }) => VtkDataArray;
+  vtkIntArray: (options?: {
+    numberOfComponents?: number;
+    name?: string;
+  }) => VtkDataArray;
   vtkLight(): VtkLight;
   vtkCamera(): VtkCamera;
-  vtkRenderWindowInteractor(options?: {
+  vtkRenderWindowInteractor: (options?: {
     canvasSelector?: string;
     renderWindow?: VtkRenderWindow;
-  }): VtkInteractor;
+  }) => VtkInteractor;
   vtkSphereSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkConeSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkCubeSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkCylinderSource(options?: Record<string, unknown>): VtkAlgorithm;
-  vtkDiskSource?(options?: Record<string, unknown>): VtkAlgorithm;
+  vtkDiskSource?: (options?: Record<string, unknown>) => VtkAlgorithm;
   vtkArrowSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkLineSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkPlaneSource(options?: Record<string, unknown>): VtkAlgorithm;
   vtkPolyDataNormals(): VtkAlgorithm;
   vtkTubeFilter(options?: Record<string, unknown>): VtkAlgorithm;
+  vtkClipPolyData(): VtkAlgorithm & {
+    setClipFunction(plane: VtkPlane): void;
+    setInsideOut(value: number): void;
+  };
   vtkPlane(): VtkPlane;
   vtkTexture(): VtkTexture;
 };
@@ -357,10 +373,10 @@ declare const __pvwasmContainer: HTMLElement | undefined;
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention -- external API name from @kitware/vtk-wasm
 declare const vtkWASM: {
-  createNamespace(
+  createNamespace: (
     url?: string,
     config?: { rendering?: string; mode?: string },
-  ): Promise<VtkWasmNamespace>;
+  ) => Promise<VtkWasmNamespace>;
 };
 
 /**
