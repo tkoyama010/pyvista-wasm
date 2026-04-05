@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.2.0...pyvista-wasm-v0.3.0) (2026-04-05)
+
+### Features
+
+- add __main__.py to enable python -m pyvista_wasm ([#80](https://github.com/tkoyama010/pyvista-wasm/issues/80)) ([d3f4346](https://github.com/tkoyama010/pyvista-wasm/commit/d3f4346cba0cdc32f20ec70fc255d5e09552ae82))
+- add intro.ipynb notebook and update ReadTheDocs config for JupyterLite ([#83](https://github.com/tkoyama010/pyvista-wasm/issues/83)) ([291f90e](https://github.com/tkoyama010/pyvista-wasm/commit/291f90eba1dc81560615f12735d6d26b779168dd))
+- Update Try Lite Now link to ReadTheDocs and remove JupyterLite deploy action ([#82](https://github.com/tkoyama010/pyvista-wasm/issues/82)) ([0baad4c](https://github.com/tkoyama010/pyvista-wasm/commit/0baad4cb91b420141149b1be159edab677903bf1))
+
+### Bug Fixes
+
+- **workflow:** add site verification step and increase timeout for preview capture ([#81](https://github.com/tkoyama010/pyvista-wasm/issues/81)) ([3d56501](https://github.com/tkoyama010/pyvista-wasm/commit/3d5650186de66ebc63d47529e5919d35895aa93d))
+
+### Documentation
+
+- add SECURITY.md ([#73](https://github.com/tkoyama010/pyvista-wasm/issues/73)) ([cce04b1](https://github.com/tkoyama010/pyvista-wasm/commit/cce04b18ccdc5677a932d3df5e7ea8f4abef4720))
+- update stlite badge URL to new share.stlite.net domain ([#55](https://github.com/tkoyama010/pyvista-wasm/issues/55)) ([d55d33d](https://github.com/tkoyama010/pyvista-wasm/commit/d55d33d89f41fe69c8676682babb17136176c07a))
+
 ## [0.2.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.1.1...pyvista-wasm-v0.2.0) (2026-03-31)
 
 ### Features
