@@ -61,7 +61,7 @@ optional-dependencies.docs = [
   "sphinx-intl>=2.2.0,<2.4.0; python_version>='3.12'",
 ]
 optional-dependencies.streamlit = [
-  "streamlit>=1.30.0,<1.42.0",
+  "streamlit>=1.30.0,<1.56.0",
 ]
 urls.Documentation = "https://github.com/tkoyama010/pyvista-wasm"
 urls.Homepage = "https://github.com/tkoyama010/pyvista-wasm"
