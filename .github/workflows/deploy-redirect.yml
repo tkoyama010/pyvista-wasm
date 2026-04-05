@@ -1,0 +1,44 @@
+name: Deploy Redirect to ReadTheDocs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-redirect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
+        with:
+          persist-credentials: false
+
+      - name: Create redirect page
+        run: |
+          mkdir -p _site
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8" />
+              <meta http-equiv="refresh" content="0; url=https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb" />
+              <title>Redirecting to JupyterLite on ReadTheDocs...</title>
+            </head>
+            <body>
+              <p>Redirecting to <a href="https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb">JupyterLite on ReadTheDocs</a>...</p>
+            </body>
+          </html>
+          EOF
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e  # v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          destination_dir: .
+          keep_files: false
