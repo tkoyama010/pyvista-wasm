@@ -661,7 +661,7 @@ def _capture_screenshots(output_dir: Path, demo_url: str, *, rotate: bool = Fals
             page.wait_for_timeout(15000)
 
             logger.info("Looking for intro.ipynb...")
-            page.wait_for_selector(".jp-DirListing-content", timeout=20000)
+            page.wait_for_selector(".jp-DirListing-content", timeout=60000)
 
             if not _open_notebook(page, screenshots_dir):
                 return screenshots_dir
