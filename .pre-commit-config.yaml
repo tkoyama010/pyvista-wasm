@@ -30,6 +30,7 @@ repos:
     rev: "v2.20.0"
     hooks:
       - id: pyproject-fmt
+        args: ["--keep-full-version"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.11.2
