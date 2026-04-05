@@ -58,7 +58,7 @@ optional-dependencies.docs = [
   "sphinx>=8.0.0,<9.0.0; python_version>='3.12'",
   "sphinx-book-theme>=1.1.0,<1.2.0; python_version>='3.12'",
   "sphinx-design>=0.6.0,<0.7.0; python_version>='3.12'",
-  "sphinx-intl>=2.2.0,<2.3.0; python_version>='3.12'",
+  "sphinx-intl>=2.2.0,<2.4.0; python_version>='3.12'",
 ]
 optional-dependencies.streamlit = [
   "streamlit>=1.30.0,<1.42.0",
