@@ -10,6 +10,14 @@ build:
   tools:
     python: "3.13"
     nodejs: "22"
+  jobs:
+    pre_build:
+      # Convert jupytext .py files to .ipynb
+      - mkdir -p docs/content
+      - jupytext --to notebook jupyterlite/content/intro.py --output docs/content/intro.ipynb
+    post_build:
+      # Build JupyterLite for the docs site
+      - jupyter lite build --contents docs/content --output-dir docs/_build/html/lite
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
