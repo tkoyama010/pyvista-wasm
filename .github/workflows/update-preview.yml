@@ -22,6 +22,14 @@ jobs:
       - run: |
           pip install . playwright "imageio[ffmpeg]" pillow
           playwright install chromium
+      - name: Verify JupyterLite site is accessible
+        run: |
+          curl -sSf https://tkoyama010.github.io/pyvista-wasm/lab/ > /dev/null || {
+            echo "Error: JupyterLite site is not accessible at https://tkoyama010.github.io/pyvista-wasm/"
+            echo "Please ensure GitHub Pages is enabled and the site has been deployed from the main branch."
+            exit 1
+          }
+          echo "JupyterLite site is accessible, proceeding with capture..."
       - run: python -m pyvista_wasm capture-preview --rotate
       - name: Upload preview GIF to latest release
         env:
