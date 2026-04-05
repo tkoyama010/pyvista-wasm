@@ -5,9 +5,9 @@
 
 ## Supported Versions
 
-| Version | Supported          |
+| Version | Supported |
 | ------- | ------------------ |
-| latest  | :white_check_mark: |
+| latest | :white_check_mark: |
 
 ## SPEC 8 — Securing the Release Process
 
