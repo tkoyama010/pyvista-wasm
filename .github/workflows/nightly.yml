@@ -45,7 +45,7 @@ jobs:
 
     - name: Run tests
       run: |
-        uv run --system pytest -m "not playwright" --cov=pyvista_wasm --cov-report=xml -x
+        uv run pytest -m "not playwright" --cov=pyvista_wasm --cov-report=xml -x
 
     - name: Create issue on failure
       if: failure()
