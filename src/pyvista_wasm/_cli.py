@@ -765,7 +765,7 @@ def capture_preview(
             help="URL of the JupyterLite demo.",
             metavar="URL",
         ),
-    ] = "https://tkoyama010.github.io/pyvista-wasm/",
+    ] = "https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html",
     fps: Annotated[
         int,
         typer.Option(
