@@ -1048,6 +1048,77 @@ function collectEdgeIntersections(
   return edgePoints;
 }
 
+/** Options for processing triangle contours. */
+interface TriangleContourOptions {
+  polys: Uint32Array;
+  polysIndex: number;
+  scalarValues: Float32Array;
+  inPoints: Float32Array;
+  values: number[];
+  outPoints: number[];
+  outPolys: number[];
+  pointIndex: number;
+}
+
+/**
+ * Process a single triangle and extract contour line segments.
+ * @param options
+ * @returns Updated point index after processing the triangle.
+ */
+function processTriangleContour(options: TriangleContourOptions): number {
+  const {
+    polys,
+    polysIndex,
+    scalarValues,
+    inPoints,
+    values,
+    outPoints,
+    outPolys,
+    pointIndex,
+  } = options;
+  let currentPointIndex = pointIndex;
+  const index0 = at(polys, polysIndex);
+  const index1 = at(polys, polysIndex + 1);
+  const index2 = at(polys, polysIndex + 2);
+  const s0 = at(scalarValues, index0);
+  const s1 = at(scalarValues, index1);
+  const s2 = at(scalarValues, index2);
+  const tri: [number, number, number, number][] = [
+    [index0, index1, s0, s1],
+    [index1, index2, s1, s2],
+    [index2, index0, s2, s0],
+  ];
+
+  const EdgePointsRequired = 6;
+  const PointIndexIncrement = 2;
+  const OutPolyVerts = 2;
+
+  for (const value of values) {
+    const edgePoints = collectEdgeIntersections(tri, value, inPoints);
+
+    if (edgePoints.length === EdgePointsRequired) {
+      const Index0 = 0;
+      const Index1 = 1;
+      const Index2 = 2;
+      const Index3 = 3;
+      const Index4 = 4;
+      const Index5 = 5;
+      outPoints.push(
+        edgePoints[Index0] ?? 0,
+        edgePoints[Index1] ?? 0,
+        edgePoints[Index2] ?? 0,
+        edgePoints[Index3] ?? 0,
+        edgePoints[Index4] ?? 0,
+        edgePoints[Index5] ?? 0,
+      );
+      outPolys.push(OutPolyVerts, currentPointIndex, currentPointIndex + 1);
+      currentPointIndex += PointIndexIncrement;
+    }
+  }
+
+  return currentPointIndex;
+}
+
 /**
  * Manual marching-triangles contour extraction.
  *
@@ -1083,46 +1154,20 @@ async function applyContourManual(
 
   let index = 0;
   const TriangleVerts = 3;
-  const EdgePointsRequired = 6;
-  const PointIndexIncrement = 2;
-  const OutPolyVerts = 2;
   while (index < polys.length) {
     const nVerts = at(polys, index);
     index++;
     if (nVerts === TriangleVerts) {
-      const index0 = at(polys, index);
-      const index1 = at(polys, index + 1);
-      const index2 = at(polys, index + 2);
-      const s0 = at(scalarValues, index0);
-      const s1 = at(scalarValues, index1);
-      const s2 = at(scalarValues, index2);
-      const tri: [number, number, number, number][] = [
-        [index0, index1, s0, s1],
-        [index1, index2, s1, s2],
-        [index2, index0, s2, s0],
-      ];
-      for (const value of values) {
-        const edgePoints = collectEdgeIntersections(tri, value, inPoints);
-
-        if (edgePoints.length === EdgePointsRequired) {
-          const Index0 = 0;
-          const Index1 = 1;
-          const Index2 = 2;
-          const Index3 = 3;
-          const Index4 = 4;
-          const Index5 = 5;
-          outPoints.push(
-            edgePoints[Index0] ?? 0,
-            edgePoints[Index1] ?? 0,
-            edgePoints[Index2] ?? 0,
-            edgePoints[Index3] ?? 0,
-            edgePoints[Index4] ?? 0,
-            edgePoints[Index5] ?? 0,
-          );
-          outPolys.push(OutPolyVerts, pointIndex, pointIndex + 1);
-          pointIndex += PointIndexIncrement;
-        }
-      }
+      pointIndex = processTriangleContour({
+        polys,
+        polysIndex: index,
+        scalarValues,
+        inPoints,
+        values,
+        outPoints,
+        outPolys,
+        pointIndex,
+      });
     }
 
     index += nVerts;
