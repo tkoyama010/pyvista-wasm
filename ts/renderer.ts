@@ -1130,7 +1130,7 @@ async function applyContourManual(
   const polysObject = await inputPd.getPolys();
   const polys = await polysObject.getData();
   const pointDataObject = await inputPd.getPointData();
-  const scalarsArray = pointDataObject.getArrayByName(scalarName);
+  const scalarsArray = await pointDataObject.getArrayByName(scalarName);
   if (polys.length === 0 || !scalarsArray) {
     return { output: inputPd, isFilter: false };
   }
