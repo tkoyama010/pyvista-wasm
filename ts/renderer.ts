@@ -1001,12 +1001,12 @@ async function applyContourFilter(
   const ComponentsOne = 1;
   const scalars = vtk.vtkFloatArray({
     numberOfComponents: ComponentsOne,
-    values: Float32Array.from(scalarData),
     name: scalarName,
   });
+  await scalars.setArray(Float32Array.from(scalarData));
   const pd = await inputPd.getPointData();
-  pd.addArray(scalars);
-  pd.setActiveScalars(scalarName);
+  await pd.addArray(scalars);
+  await pd.setActiveScalars(scalarName);
 
   return applyContourManual(vtk, inputPd, values, scalarName);
 }
@@ -1024,9 +1024,13 @@ function collectEdgeIntersections(
   inPoints: Float32Array | Uint32Array,
 ): number[] {
   const edgePoints: number[] = [];
+  const Epsilon = 1e-10;
   for (const edge of tri) {
     const [ai, bi, sa, sb] = edge;
-    if ((sa <= value && value < sb) || (sb <= value && value < sa)) {
+    // Use epsilon for floating point comparison
+    const minVal = Math.min(sa, sb) - Epsilon;
+    const maxVal = Math.max(sa, sb) + Epsilon;
+    if (value >= minVal && value <= maxVal && Math.abs(sa - sb) > Epsilon) {
       const t = (value - sa) / (sb - sa);
       edgePoints.push(
         at(inPoints, ai * PointStride + Xoffset) +
