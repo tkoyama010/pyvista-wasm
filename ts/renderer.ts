@@ -43,7 +43,16 @@ type SourceResult =
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
     await sourceResult.output.update();
-    return sourceResult.output.getOutputData();
+    // Try to get output data if available (not available in VTK.wasm rendering mode)
+    const output = sourceResult.output as {
+      getOutputData?: () => Promise<VtkPolyData>;
+    };
+    if (typeof output.getOutputData === "function") {
+      return await output.getOutputData();
+    }
+    // If getOutputData is not available (rendering mode), return output as-is
+    // Note: This may not have the expected VtkPolyData methods
+    return sourceResult.output as unknown as VtkPolyData;
   }
 
   return sourceResult.output;
@@ -830,13 +839,17 @@ async function applyFilters(
       f.type === "contour" &&
       f.values &&
       f.scalarName &&
-      f.scalarData
+      f.scalarData &&
+      f.points &&
+      f.polys
     ) {
       // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
       current = await applyContourFilter(vtk, current, {
         values: f.values,
         scalarName: f.scalarName,
         scalarData: f.scalarData,
+        points: f.points,
+        polys: f.polys,
       });
     }
   }
@@ -992,11 +1005,54 @@ async function applyClipFilter(
  */
 async function applyContourFilter(
   vtk: VtkWasmNamespace,
-  sourceResult: SourceResult,
-  options: { values: number[]; scalarName: string; scalarData: number[] },
+  _sourceResult: SourceResult, // Not used - we create mesh from filter config directly
+  options: {
+    values: number[];
+    scalarName: string;
+    scalarData: number[];
+    points: number[];
+    polys: number[];
+  },
 ): Promise<SourceResult> {
-  const { values, scalarName, scalarData } = options;
-  const inputPd = await getPolyData(sourceResult);
+  const { values, scalarName, scalarData, points, polys } = options;
+
+  // Create PolyData directly from the provided mesh geometry
+  // This avoids the getOutputData() issue in VTK.wasm rendering mode
+  const inputPd = vtk.vtkPolyData();
+  const PointsComponents = 3;
+  const pointsFloatArray = vtk.vtkFloatArray({
+    numberOfComponents: PointsComponents,
+  });
+  await pointsFloatArray.setArray(Float32Array.from(points));
+  const vtkPts = vtk.vtkPoints();
+  await vtkPts.setData(pointsFloatArray);
+  await inputPd.setPoints(vtkPts);
+
+  if (polys && polys.length > 0) {
+    const legacyPolys = polys;
+    const offsetsList: number[] = [0];
+    const connectivityList: number[] = [];
+    let i = 0;
+    while (i < legacyPolys.length) {
+      const count = legacyPolys[i] ?? 0;
+      for (let j = 1; j <= count; j++) {
+        connectivityList.push(legacyPolys[i + j] ?? 0);
+      }
+      offsetsList.push(connectivityList.length);
+      i += count + 1;
+    }
+
+    const ComponentsOne = 1;
+    const offsetsArray = vtk.vtkIntArray({ numberOfComponents: ComponentsOne });
+    await offsetsArray.setArray(Int32Array.from(offsetsList));
+    const connectivityArray = vtk.vtkIntArray({
+      numberOfComponents: ComponentsOne,
+    });
+    await connectivityArray.setArray(Int32Array.from(connectivityList));
+    const cellArray = vtk.vtkCellArray();
+    await cellArray.setData(offsetsArray, connectivityArray);
+    await inputPd.setPolys(cellArray);
+  }
 
   const ComponentsOne = 1;
   const scalars = vtk.vtkFloatArray({
