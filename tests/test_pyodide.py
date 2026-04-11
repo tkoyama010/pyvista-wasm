@@ -270,8 +270,6 @@ def test_full_workflow(selenium):
         The pytest-pyodide selenium fixture.
 
     """
-    import numpy as np
-
     from pyvista_wasm import Plotter, Sphere
 
     # Create and configure a plotter
