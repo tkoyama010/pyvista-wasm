@@ -54,8 +54,6 @@ def test_create_sphere_mesh(selenium):
         The pytest-pyodide selenium fixture.
 
     """
-    import numpy as np
-
     from pyvista_wasm import Sphere
 
     # Create a sphere mesh
