@@ -259,13 +259,12 @@ def test_opacity_setting(selenium):
     assert actor is not None
 
 
-@pytest.mark.skip(reason="Requires network access for micropip install of jinja2")
 @run_in_pyodide(packages=["pyvista-wasm", "numpy"])
-def test_full_workflow_with_micropip(selenium):
-    """Test a complete workflow using micropip in Pyodide.
+def test_full_workflow(selenium):
+    """Test a complete workflow in Pyodide.
 
     This test demonstrates the typical usage pattern in a Pyodide environment
-    where dependencies may need to be installed via micropip.
+    with all dependencies pre-loaded.
 
     Parameters
     ----------
@@ -273,11 +272,6 @@ def test_full_workflow_with_micropip(selenium):
         The pytest-pyodide selenium fixture.
 
     """
-    import micropip
-
-    # Ensure numpy is available (usually pre-installed in Pyodide)
-    await micropip.install("numpy")  # noqa: PLE0001
-
     import numpy as np
 
     from pyvista_wasm import Plotter, Sphere
