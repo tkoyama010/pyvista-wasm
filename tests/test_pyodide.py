@@ -54,8 +54,6 @@ def test_create_sphere_mesh(selenium):
         The pytest-pyodide selenium fixture.
 
     """
-    import numpy as np
-
     from pyvista_wasm import Sphere
 
     # Create a sphere mesh
@@ -276,9 +274,7 @@ def test_full_workflow_with_micropip(selenium):
     import micropip
 
     # Ensure numpy is available (usually pre-installed in Pyodide)
-    await micropip.install("numpy")  # noqa: PLE0001
-
-    import numpy as np
+    await micropip.install("numpy")
 
     from pyvista_wasm import Plotter, Sphere
 
