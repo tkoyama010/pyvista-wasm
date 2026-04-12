@@ -1,0 +1,20 @@
+{
+  "name": "@pyvista-wasm/vtk-wasm-binary",
+  "version": "9.6.20260228",
+  "description": "Mirrored VTK.wasm binary for pyvista-wasm (served via jsDelivr CDN)",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tkoyama010/pyvista-wasm.git",
+    "directory": "packages/vtk-wasm-binary"
+  },
+  "files": [
+    "vtk-wasm32-emscripten.tar.gz"
+  ],
+  "scripts": {
+    "download": "node download.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

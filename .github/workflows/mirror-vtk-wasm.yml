@@ -1,0 +1,77 @@
+name: Mirror VTK.wasm Binary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/vtk-wasm-binary/package.json"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Extract version
+        id: version
+        working-directory: packages/vtk-wasm-binary
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "VTK.wasm version: $version"
+
+      - name: Check if already published
+        id: check
+        working-directory: packages/vtk-wasm-binary
+        run: |
+          pkg=$(node -p "require('./package.json').name")
+          version="${{ steps.version.outputs.version }}"
+          if npm view "${pkg}@${version}" version 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "${pkg}@${version} already published, skipping."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "${pkg}@${version} not found, will publish."
+          fi
+
+      - name: Download WASM binary from upstream
+        if: steps.check.outputs.exists == 'false'
+        working-directory: packages/vtk-wasm-binary
+        run: node download.mjs
+
+      - name: Verify downloaded file
+        if: steps.check.outputs.exists == 'false'
+        working-directory: packages/vtk-wasm-binary
+        run: |
+          file="vtk-wasm32-emscripten.tar.gz"
+          if [ ! -f "$file" ]; then
+            echo "::error::Download failed — $file not found"
+            exit 1
+          fi
+          size=$(stat --format=%s "$file")
+          echo "File size: $((size / 1024 / 1024)) MB"
+          if [ "$size" -lt 1000000 ]; then
+            echo "::error::File is suspiciously small ($size bytes)"
+            exit 1
+          fi
+
+      - name: Publish to npm
+        if: steps.check.outputs.exists == 'false'
+        working-directory: packages/vtk-wasm-binary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
