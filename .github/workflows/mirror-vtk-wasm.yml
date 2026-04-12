@@ -72,6 +72,4 @@ jobs:
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
         working-directory: packages/vtk-wasm-binary
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --provenance --access public
+        run: npm publish --access public
