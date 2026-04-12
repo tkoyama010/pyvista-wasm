@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild ts/renderer.ts --bundle --format=iife --outfile=src/pyvista_wasm/templates/renderer.js --target=es2017",
+    "build": "esbuild ts/renderer.ts --bundle --format=iife --outfile=src/pyvista_wasm/templates/renderer.js --target=es2017 && esbuild ts/src/App.tsx --bundle --format=iife --outfile=src/pyvista_wasm/templates/app.js --target=es2017 --define:process.env.NODE_ENV=\\\"production\\\"",
     "lint": "biome check",
     "format": "biome format --write",
     "typecheck": "tsc --noEmit -p ts/tsconfig.json",
@@ -10,8 +10,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "esbuild": "^0.27",
     "eslint-plugin-jsdoc": "^62.9.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "typescript": "^6.0"
   }
 }
