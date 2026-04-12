@@ -352,6 +352,12 @@ type TextActorConfig = {
   italic: boolean;
 };
 
+/** VTK.wasm configuration options for createNamespace(). */
+type WasmConfig = {
+  rendering?: "webgl" | "webgpu";
+  mode?: "sync" | "async";
+};
+
 /** Top-level scene description passed from Python as JSON. */
 type SceneData = {
   containerId: string;
@@ -362,6 +368,7 @@ type SceneData = {
   textActors?: TextActorConfig[];
   axes: boolean;
   camera?: CameraConfig;
+  wasmConfig?: WasmConfig;
 };
 
 declare const __pvwasmSceneData: SceneData | undefined;
@@ -375,7 +382,7 @@ declare const __pvwasmContainer: HTMLElement | undefined;
 declare const vtkWASM: {
   createNamespace: (
     url?: string,
-    config?: { rendering?: string; mode?: string },
+    config?: WasmConfig,
   ) => Promise<VtkWasmNamespace>;
 };
 
