@@ -17,8 +17,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "jsx": "react-jsx"
+    "isolatedModules": true
   },
-  "include": ["renderer.ts", "vtk.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["renderer.ts", "vtk.d.ts"]
 }
