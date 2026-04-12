@@ -1,0 +1,94 @@
+name: Check VTK.wasm Update
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Every Monday at 09:00 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: release-please
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: true
+
+      - name: Get current version
+        id: current
+        run: |
+          version=$(node -p "require('./packages/vtk-wasm-binary/package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Current version: $version"
+
+      - name: Get latest upstream version
+        id: latest
+        run: |
+          version=$(curl -sf "https://gitlab.kitware.com/api/v4/projects/13/packages?package_name=vtk-wasm32-emscripten&sort=desc&per_page=1" | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'))[0].version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Latest upstream version: $version"
+
+      - name: Compare versions
+        id: compare
+        env:
+          CURRENT: ${{ steps.current.outputs.version }}
+          LATEST: ${{ steps.latest.outputs.version }}
+        run: |
+          if [ "$CURRENT" = "$LATEST" ]; then
+            echo "needs_update=false" >> "$GITHUB_OUTPUT"
+            echo "Already up to date ($CURRENT)"
+          else
+            echo "needs_update=true" >> "$GITHUB_OUTPUT"
+            echo "Update available: $CURRENT -> $LATEST"
+          fi
+
+      - name: Update version references
+        if: steps.compare.outputs.needs_update == 'true'
+        env:
+          CURRENT: ${{ steps.current.outputs.version }}
+          LATEST: ${{ steps.latest.outputs.version }}
+        run: |
+          # Update npm package version
+          cd packages/vtk-wasm-binary
+          npm version "$LATEST" --no-git-tag-version
+          cd ../..
+
+          # Update rendering.py
+          sed -i "s/_VTKWASM_VERSION = \"${CURRENT}\"/_VTKWASM_VERSION = \"${LATEST}\"/" src/pyvista_wasm/rendering.py
+
+          # Update streamlit.html
+          sed -i "s/vtk-wasm-binary@${CURRENT}/vtk-wasm-binary@${LATEST}/g" src/pyvista_wasm/templates/streamlit.html
+
+          # Update docstring example URL
+          sed -i "s/vtk-wasm-binary@${CURRENT}/vtk-wasm-binary@${LATEST}/g" src/pyvista_wasm/rendering.py
+
+          echo "Updated all references from $CURRENT to $LATEST"
+
+      - name: Create pull request
+        if: steps.compare.outputs.needs_update == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          LATEST: ${{ steps.latest.outputs.version }}
+          CURRENT: ${{ steps.current.outputs.version }}
+        run: |
+          branch="update-vtk-wasm-${LATEST}"
+          git config user.name "Tetsuo Koyama"
+          git config user.email "tkoyama010@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "chore: update VTK.wasm binary to ${LATEST}"
+          git push origin "$branch"
+          gh pr create \
+            --title "chore: update VTK.wasm binary to ${LATEST}" \
+            --body "Update VTK.wasm binary from \`${CURRENT}\` to \`${LATEST}\`.
+
+          Detected by the [check-vtk-wasm-update](${{ github.server_url }}/${{ github.repository }}/actions/workflows/check-vtk-wasm-update.yml) workflow.
+
+          Once merged, the [mirror-vtk-wasm](${{ github.server_url }}/${{ github.repository }}/actions/workflows/mirror-vtk-wasm.yml) workflow will automatically publish the new binary to npm." \
+            --head "$branch" \
+            --base main

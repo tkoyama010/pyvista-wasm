@@ -46,7 +46,7 @@ For manual loading or custom versions:
     <script
       src="https://unpkg.com/@kitware/vtk-wasm/vtk-umd.js"
       id="vtk-wasm"
-      data-url="https://gitlab.kitware.com/api/v4/projects/13/packages/generic/vtk-wasm32-emscripten/9.6.20260228/vtk-9.6.20260228-wasm32-emscripten.tar.gz"
+      data-url="https://cdn.jsdelivr.net/npm/@pyvista-wasm/vtk-wasm-binary@9.6.20260228/vtk-wasm32-emscripten.tar.gz"
     ></script>
 
 Examples
@@ -105,9 +105,10 @@ _jinja_env = Environment(undefined=StrictUndefined, autoescape=False)  # noqa: S
 
 # VTK.wasm CDN URLs used across renderers
 _VTKWASM_UMD = "https://unpkg.com/@kitware/vtk-wasm@1.7.4/vtk-umd.js"
+_VTKWASM_VERSION = "9.6.20260228"
 _VTKWASM_DATA_URL = (
-    "https://gitlab.kitware.com/api/v4/projects/13/packages/generic/"
-    "vtk-wasm32-emscripten/9.6.20260228/vtk-9.6.20260228-wasm32-emscripten.tar.gz"
+    "https://cdn.jsdelivr.net/npm/@pyvista-wasm/vtk-wasm-binary"
+    f"@{_VTKWASM_VERSION}/vtk-wasm32-emscripten.tar.gz"
 )
 
 # Check if running in Pyodide environment
