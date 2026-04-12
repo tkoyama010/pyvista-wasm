@@ -71,13 +71,13 @@ jobs:
       - name: Create pull request
         if: steps.compare.outputs.needs_update == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           LATEST: ${{ steps.latest.outputs.version }}
           CURRENT: ${{ steps.current.outputs.version }}
         run: |
           branch="update-vtk-wasm-${LATEST}"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Tetsuo Koyama"
+          git config user.email "tkoyama010@users.noreply.github.com"
           git checkout -b "$branch"
           git add -A
           git commit -m "chore: update VTK.wasm binary to ${LATEST}"
