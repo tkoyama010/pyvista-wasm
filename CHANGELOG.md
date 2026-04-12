@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.3.0...pyvista-wasm-v0.4.0) (2026-04-12)
+
+
+### Features
+
+* add loading overlay components for 3D rendering UX ([#107](https://github.com/tkoyama010/pyvista-wasm/issues/107)) ([a312ffd](https://github.com/tkoyama010/pyvista-wasm/commit/a312ffd40828ebba1af6163effdbbfe817d4cae8))
+
+
+### Bug Fixes
+
+* update preview workflow to use ReadTheDocs JupyterLite URL ([#90](https://github.com/tkoyama010/pyvista-wasm/issues/90)) ([fc695bb](https://github.com/tkoyama010/pyvista-wasm/commit/fc695bb823fa9fdc0c5a489c46c7d1f419a96d4b))
+* **workflow:** remove --system flag from uv run to fix nightly tests ([#88](https://github.com/tkoyama010/pyvista-wasm/issues/88)) ([42526e5](https://github.com/tkoyama010/pyvista-wasm/commit/42526e5da211afa68fc497935a0ef090fe717fb2))
+
 ## [0.3.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.2.0...pyvista-wasm-v0.3.0) (2026-04-05)
 
 ### Features
