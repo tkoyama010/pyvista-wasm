@@ -531,3 +531,84 @@ def test_smooth_shading_with_actor_index(monkeypatch) -> None:
     # Second actor (Cube with smooth_shading=False): flat shading
     actor1 = scene["actors"][1]
     assert actor1["shading"] == "flat"
+
+
+def test_wasm_config_defaults_in_scene_data(monkeypatch) -> None:
+    """Test that default wasm config is included in scene data."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer()
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer._repr_html_()
+    scene = extract_scene_data(html)
+
+    assert "wasmConfig" in scene
+    assert scene["wasmConfig"]["rendering"] == "webgl"
+    assert scene["wasmConfig"]["mode"] == "sync"
+
+
+def test_wasm_config_webgpu_in_scene_data(monkeypatch) -> None:
+    """Test that webgpu config is included in scene data."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer._repr_html_()
+    scene = extract_scene_data(html)
+
+    assert scene["wasmConfig"]["rendering"] == "webgpu"
+    assert scene["wasmConfig"]["mode"] == "async"
+
+
+def test_wasm_config_in_standalone_html(monkeypatch) -> None:
+    """Test that data-config attribute is present in standalone HTML."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer.generate_standalone_html()
+
+    assert 'data-config="' in html
+    assert '"rendering": "webgpu"' in html
+
+
+def test_wasm_config_in_render_js(monkeypatch) -> None:
+    """Test that data-config is set on script element in generated JS."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    js = renderer._generate_render_js()
+
+    assert "script.dataset.config" in js
+    assert "webgpu" in js
+
+
+def test_wasm_config_invalid_rendering() -> None:
+    """Test that invalid wasm_rendering raises ValueError."""
+    with pytest.raises(ValueError, match="wasm_rendering"):
+        rendering.BrowserRenderer(wasm_rendering="invalid")
+
+
+def test_wasm_config_invalid_mode() -> None:
+    """Test that invalid wasm_mode raises ValueError."""
+    with pytest.raises(ValueError, match="wasm_mode"):
+        rendering.BrowserRenderer(wasm_mode="invalid")
+
+
+def test_wasm_config_browser_renderer() -> None:
+    """Test that BrowserRenderer stores wasm config."""
+    renderer = rendering.BrowserRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    assert renderer._wasm_rendering == "webgpu"
+    assert renderer._wasm_mode == "async"
+
+
+def test_mock_renderer_stores_wasm_config() -> None:
+    """Test that MockRenderer stores wasm config."""
+    renderer = rendering.MockRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    assert renderer._wasm_rendering == "webgpu"
+    assert renderer._wasm_mode == "async"

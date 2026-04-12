@@ -221,7 +221,12 @@ class _BaseHTMLRenderer:
     respective environments (Jupyter notebook, standalone browser, etc.).
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize shared renderer state.
 
         Parameters
@@ -229,8 +234,31 @@ class _BaseHTMLRenderer:
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. ``"async"`` requires WebAssembly JavaScript Promise
+            Integration (JSPI) browser support. ``"webgpu"`` rendering always
+            uses ``"async"`` regardless of this setting. Default is ``"sync"``.
+
+        Raises
+        ------
+        ValueError
+            If ``wasm_rendering`` is not ``"webgl"`` or ``"webgpu"``, or
+            ``wasm_mode`` is not ``"sync"`` or ``"async"``.
 
         """
+        valid_rendering = {"webgl", "webgpu"}
+        if wasm_rendering not in valid_rendering:
+            msg = f"wasm_rendering must be one of {valid_rendering!r}, got {wasm_rendering!r}"
+            raise ValueError(msg)
+        valid_mode = {"sync", "async"}
+        if wasm_mode not in valid_mode:
+            msg = f"wasm_mode must be one of {valid_mode!r}, got {wasm_mode!r}"
+            raise ValueError(msg)
+
         self.actors: list[dict[str, object]] = []
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
@@ -244,6 +272,8 @@ class _BaseHTMLRenderer:
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
         self._scalar_bar: dict[str, object] | None = None
+        self._wasm_rendering: str = wasm_rendering
+        self._wasm_mode: str = wasm_mode
 
     def create_container(self, element_id: str = "pyvista-container") -> object | None:
         """Store the container ID for later HTML generation.
@@ -760,6 +790,10 @@ class _BaseHTMLRenderer:
             "axes": self._axes_enabled,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
+            "wasmConfig": {
+                "rendering": self._wasm_rendering,
+                "mode": self._wasm_mode,
+            },
         }
 
         # Validate JSON serializable
@@ -773,10 +807,14 @@ class _BaseHTMLRenderer:
 
         scene_data = self._build_scene_data()
         scene_json = _json.dumps(scene_data)
+        wasm_config_json = _json.dumps(
+            {"rendering": self._wasm_rendering, "mode": self._wasm_mode},
+        )
 
         return _jinja_env.from_string(_RENDERING_TEMPLATE).render(
             VTKWASM_UMD=_VTKWASM_UMD,
             VTKWASM_DATA_URL=_VTKWASM_DATA_URL,
+            WASM_CONFIG=wasm_config_json,
             CONTAINER_ID=self.container_id,
             SCENE_JSON=scene_json,
             RENDERER_JS=_RENDERER_JS,
@@ -807,6 +845,9 @@ class _BaseHTMLRenderer:
 
         scene_data = self._build_scene_data()
         scene_json = _json.dumps(scene_data)
+        wasm_config_json = _json.dumps(
+            {"rendering": self._wasm_rendering, "mode": self._wasm_mode},
+        )
 
         # For JupyterLite: pass scene data and container via JS variables
         # so renderer.js can use them directly without DOM lookups.
@@ -831,6 +872,7 @@ class _BaseHTMLRenderer:
             f"    script.src = {_json.dumps(_VTKWASM_UMD)};\n"
             "    script.id = 'vtk-wasm';\n"
             f"    script.dataset.url = {_json.dumps(_VTKWASM_DATA_URL)};\n"
+            f"    script.dataset.config = {_json.dumps(wasm_config_json)};\n"
             "    script.onload = doRender;\n"
             "    document.head.appendChild(script);\n"
             "  }\n"
@@ -940,7 +982,12 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize the VTK.wasm renderer.
 
         Automatically loads VTK.wasm library if in IPython/Jupyter environment.
@@ -950,6 +997,12 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
 
         Raises
         ------
@@ -963,7 +1016,11 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
             msg = "VTKWasmRenderer requires either Pyodide environment or IPython"
             raise RuntimeError(msg)
 
-        super().__init__(lighting=lighting)
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
 
         # Automatically load VTK.wasm in IPython/Jupyter (including Pyodide)
         if IPYTHON_AVAILABLE or PYODIDE_ENV:
@@ -1269,7 +1326,12 @@ class MockRenderer:
 
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize mock renderer.
 
         Parameters
@@ -1277,6 +1339,10 @@ class MockRenderer:
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend (stored but not used). Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode (stored but not used). Default is ``"sync"``.
 
         """
         self.actors: list[dict[str, object]] = []
@@ -1288,6 +1354,8 @@ class MockRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._scalar_bar: dict[str, object] | None = None
+        self._wasm_rendering: str = wasm_rendering
+        self._wasm_mode: str = wasm_mode
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.
@@ -1657,6 +1725,8 @@ class MockRenderer:
 
 def get_renderer(
     lighting: str | None = "default",
+    wasm_rendering: str = "webgl",
+    wasm_mode: str = "sync",
 ) -> VTKWasmRenderer | BrowserRenderer | MockRenderer:
     """Get appropriate renderer for current environment.
 
@@ -1668,6 +1738,12 @@ def get_renderer(
     lighting : str or None, optional
         Lighting mode. ``"default"`` creates a default directional light,
         ``None`` creates no default lights. Default is ``"default"``.
+    wasm_rendering : str, optional
+        WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+        Default is ``"webgl"``.
+    wasm_mode : str, optional
+        Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+        ``"async"``. Default is ``"sync"``.
 
     Returns
     -------
@@ -1700,8 +1776,20 @@ def get_renderer(
     """
     # Use VTKWasmRenderer if in Pyodide with VTK.wasm OR if IPython is available
     if (PYODIDE_ENV and VTK_AVAILABLE) or IPYTHON_AVAILABLE:
-        return VTKWasmRenderer(lighting=lighting)
+        return VTKWasmRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
     # Respect opt-out env var for CI/testing
     if os.environ.get("PYVISTA_JS_NO_BROWSER"):
-        return MockRenderer(lighting=lighting)
-    return BrowserRenderer(lighting=lighting)
+        return MockRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+    return BrowserRenderer(
+        lighting=lighting,
+        wasm_rendering=wasm_rendering,
+        wasm_mode=wasm_mode,
+    )

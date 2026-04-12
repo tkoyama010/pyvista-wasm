@@ -334,7 +334,7 @@ if (typeof vtkReady !== "undefined") {
   ); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
   void vtkWASM
-    .createNamespace()
+    .createNamespace(undefined, pvSceneData.wasmConfig)
     .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)); // eslint-disable-line unicorn/prefer-top-level-await
 }
 

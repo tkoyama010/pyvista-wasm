@@ -1325,3 +1325,29 @@ def test_add_mesh_with_smooth_shading_disabled() -> None:
 
     assert len(plotter.actors) == 1
     assert plotter.actors[0]["smooth_shading"] is False
+
+
+def test_plotter_wasm_config_defaults() -> None:
+    """Test that Plotter creates renderer with default wasm config."""
+    plotter = Plotter()
+    assert plotter._renderer._wasm_rendering == "webgl"
+    assert plotter._renderer._wasm_mode == "sync"
+
+
+def test_plotter_wasm_config_webgpu() -> None:
+    """Test that Plotter passes wasm config to renderer."""
+    plotter = Plotter(wasm_rendering="webgpu", wasm_mode="async")
+    assert plotter._renderer._wasm_rendering == "webgpu"
+    assert plotter._renderer._wasm_mode == "async"
+
+
+def test_plotter_wasm_config_invalid_rendering() -> None:
+    """Test that Plotter raises ValueError for invalid wasm_rendering."""
+    with pytest.raises(ValueError, match="wasm_rendering"):
+        Plotter(wasm_rendering="opengl")
+
+
+def test_plotter_wasm_config_invalid_mode() -> None:
+    """Test that Plotter raises ValueError for invalid wasm_mode."""
+    with pytest.raises(ValueError, match="wasm_mode"):
+        Plotter(wasm_mode="parallel")
