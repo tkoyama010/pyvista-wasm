@@ -195,15 +195,17 @@ async function connectInput(
 }
 
 /**
- * Main entry point — initialise VTK.wasm and build the scene.
+ * Resolve the container element that will hold the VTK canvas.
  *
- * Creates a loading overlay on the container before any heavy work
- * begins.  The overlay message is updated as the scene progresses
- * through initialisation → actor setup → rendering.  On success it
- * fades out; on failure it shows an error message.
- * @param vtk - The initialised VTK.wasm namespace.
+ * In JupyterLite the container is provided via `__pvwasmContainer`.
+ * In standalone HTML it is looked up by the `containerId` from the
+ * scene data embedded in a `<script id="scene-data">` element.
+ * @returns The container element and the parsed scene data.
  */
-async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
+function resolveContainerAndScene(): {
+  container: HTMLElement;
+  sceneData: SceneData;
+} {
   const rawSceneJson =
     document.querySelector("#scene-data")?.textContent ?? "{}";
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -221,12 +223,31 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
 
   container.style.minHeight ||= "400px";
 
-  const overlay = createLoadingOverlay(
-    container,
-    "Initializing WASM Environment\u2026",
-  );
+  return { container, sceneData };
+}
 
+/**
+ * Main entry point — initialise VTK.wasm and build the scene.
+ *
+ * Receives a pre-created loading overlay so that the user sees
+ * feedback even while the WASM binary is still being downloaded.
+ * The overlay message is updated as the scene progresses through
+ * initialisation → actor setup → rendering.  On success it fades
+ * out; on failure it shows an error message.
+ * @param vtk - The initialised VTK.wasm namespace.
+ * @param overlay - The loading overlay element to update / dismiss.
+ * @param container - The DOM element that holds the canvas.
+ * @param sceneData - The parsed scene configuration.
+ */
+async function buildScene(
+  vtk: VtkWasmNamespace,
+  overlay: HTMLDivElement,
+  container: HTMLElement,
+  sceneData: SceneData,
+): Promise<void> {
   try {
+    setOverlayMessage(overlay, "Generating 3D Model\u2026");
+
     const bg = sceneData.background;
 
     const renderer = vtk.vtkRenderer();
@@ -251,8 +272,6 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
     const canvasSelector = `#${CSS.escape(canvasId)}`;
     const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
     renderWindow.addRenderer(renderer);
-
-    setOverlayMessage(overlay, "Generating 3D Model\u2026");
 
     if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
       renderer.removeAllLights();
@@ -295,10 +314,28 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   }
 }
 
+/**
+ * Bootstrap the renderer: show the overlay immediately, then wait
+ * for VTK.wasm to become available before building the scene.
+ */
+const {
+  container: pvContainer,
+  sceneData: pvSceneData,
+}: { container: HTMLElement; sceneData: SceneData } =
+  resolveContainerAndScene();
+const pvOverlay: HTMLDivElement = createLoadingOverlay(
+  pvContainer,
+  "Initializing WASM Environment\u2026",
+);
+
 if (typeof vtkReady !== "undefined") {
-  void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkReady.then((vtk) =>
+    buildScene(vtk, pvOverlay, pvContainer, pvSceneData),
+  ); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
-  void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkWASM
+    .createNamespace()
+    .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
 /**
