@@ -68,6 +68,9 @@ jupyterlite/content/*.ipynb
 # Preview GIFs (stored in GitHub Releases, not in the repo)
 assets/*.gif
 
+# Environment variables
+.envrc
+
 # Node.js (TypeScript build)
 node_modules/
 src/pyvista_wasm/templates/renderer.js
