@@ -2,11 +2,10 @@
 
 ## [0.5.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.4.0...pyvista-wasm-v0.5.0) (2026-04-12)
 
-
 ### Features
 
-* add VTK.wasm configuration options (rendering backend and execution mode) ([#108](https://github.com/tkoyama010/pyvista-wasm/issues/108)) ([d5a3347](https://github.com/tkoyama010/pyvista-wasm/commit/d5a334773c462e95b3aaf3eaecd06087f090f2a8))
-* mirror VTK.wasm binary to npm and serve via jsDelivr CDN ([#110](https://github.com/tkoyama010/pyvista-wasm/issues/110)) ([2c85e37](https://github.com/tkoyama010/pyvista-wasm/commit/2c85e379095f4017bb8333712fa49d7c2f6a74b4))
+- add VTK.wasm configuration options (rendering backend and execution mode) ([#108](https://github.com/tkoyama010/pyvista-wasm/issues/108)) ([d5a3347](https://github.com/tkoyama010/pyvista-wasm/commit/d5a334773c462e95b3aaf3eaecd06087f090f2a8))
+- mirror VTK.wasm binary to npm and serve via jsDelivr CDN ([#110](https://github.com/tkoyama010/pyvista-wasm/issues/110)) ([2c85e37](https://github.com/tkoyama010/pyvista-wasm/commit/2c85e379095f4017bb8333712fa49d7c2f6a74b4))
 
 ## [0.4.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.3.0...pyvista-wasm-v0.4.0) (2026-04-12)
 
