@@ -19,6 +19,137 @@ const PointStride = 3;
 const Xoffset = 0;
 const Yoffset = 1;
 const Zoffset = 2;
+const FadeOutMs = 500;
+
+/**
+ * Inject scoped CSS for the loading overlay into the document head.
+ *
+ * The rules are scoped by the `.pv-loading-overlay` class prefix so they
+ * do not interfere with the host page. The stylesheet is inserted at most
+ * once thanks to the `data-pv-overlay-styles` sentinel attribute.
+ */
+function injectOverlayStyles(): void {
+  if (document.querySelector("style[data-pv-overlay-styles]")) {
+    return;
+  }
+  const style = document.createElement("style");
+  style.setAttribute("data-pv-overlay-styles", "");
+  style.textContent = [
+    ".pv-loading-overlay {",
+    "  position: absolute; inset: 0;",
+    "  display: flex; align-items: center; justify-content: center;",
+    "  background: rgba(24, 26, 31, 0.88); z-index: 100;",
+    "  transition: opacity 0.5s ease;",
+    "}",
+    ".pv-loading-overlay .pv-spinner {",
+    "  width: 48px; height: 48px;",
+    "  border: 4px solid rgba(255,255,255,0.15);",
+    "  border-top-color: #58a6ff; border-radius: 50%;",
+    "  animation: pv-spin 0.8s linear infinite;",
+    "}",
+    "@keyframes pv-spin { to { transform: rotate(360deg); } }",
+    ".pv-loading-overlay .pv-msg {",
+    "  margin: 12px 0 0; color: #c9d1d9;",
+    "  font: 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',",
+    "    Helvetica,Arial,sans-serif;",
+    "  text-align: center; max-width: 360px;",
+    "}",
+    ".pv-loading-overlay .pv-error-icon {",
+    "  font-size: 36px; color: #f85149;",
+    "}",
+    ".pv-loading-overlay .pv-error-msg {",
+    "  margin: 12px 0 0; color: #f85149;",
+    "  font: 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',",
+    "    Helvetica,Arial,sans-serif;",
+    "  text-align: center; max-width: 360px;",
+    "}",
+  ].join("\n");
+  document.head.append(style);
+}
+
+/**
+ * Create a loading overlay element and append it to the given container.
+ *
+ * The overlay shows a CSS spinner and a status message while the
+ * VTK.wasm scene is being initialised and built.
+ * @param container - The DOM element to overlay.
+ * @param message - Initial status text shown below the spinner.
+ * @returns The overlay element for later manipulation.
+ */
+function createLoadingOverlay(
+  container: HTMLElement,
+  message: string,
+): HTMLDivElement {
+  injectOverlayStyles();
+
+  const overlay = document.createElement("div");
+  overlay.className = "pv-loading-overlay";
+
+  const spinner = document.createElement("div");
+  spinner.className = "pv-spinner";
+
+  const msg = document.createElement("p");
+  msg.className = "pv-msg";
+  msg.textContent = message;
+
+  const wrap = document.createElement("div");
+  wrap.style.display = "flex";
+  wrap.style.flexDirection = "column";
+  wrap.style.alignItems = "center";
+  wrap.append(spinner, msg);
+
+  overlay.append(wrap);
+  container.append(overlay);
+  return overlay;
+}
+
+/**
+ * Update the status text displayed on a loading overlay.
+ * @param overlay - The overlay element returned by {@link createLoadingOverlay}.
+ * @param text - The new status message.
+ */
+function setOverlayMessage(overlay: HTMLDivElement, text: string): void {
+  const msg = overlay.querySelector<HTMLElement>(".pv-msg");
+  if (msg) {
+    msg.textContent = text;
+  }
+}
+
+/**
+ * Fade the overlay out and remove it from the DOM once the transition ends.
+ * @param overlay - The overlay element to dismiss.
+ */
+function dismissOverlay(overlay: HTMLDivElement): void {
+  overlay.style.opacity = "0";
+  setTimeout(() => {
+    overlay.remove();
+  }, FadeOutMs);
+}
+
+/**
+ * Replace the spinner with an error icon and message, keeping the
+ * overlay visible so the user can read the problem description.
+ * @param overlay - The overlay element to update.
+ * @param errorMessage - A user-friendly description of the failure.
+ */
+function showOverlayError(overlay: HTMLDivElement, errorMessage: string): void {
+  const wrap = overlay.firstElementChild;
+  if (!wrap) {
+    return;
+  }
+  wrap.innerHTML = "";
+
+  const icon = document.createElement("span");
+  icon.className = "pv-error-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = "\u26A0";
+
+  const msg = document.createElement("p");
+  msg.className = "pv-error-msg";
+  msg.textContent = errorMessage;
+
+  wrap.append(icon, msg);
+}
 
 /**
  * Access a typed array element, returning 0 for out-of-bounds.
@@ -65,7 +196,12 @@ async function connectInput(
 
 /**
  * Main entry point — initialise VTK.wasm and build the scene.
- * @param vtk
+ *
+ * Creates a loading overlay on the container before any heavy work
+ * begins.  The overlay message is updated as the scene progresses
+ * through initialisation → actor setup → rendering.  On success it
+ * fades out; on failure it shows an error message.
+ * @param vtk - The initialised VTK.wasm namespace.
  */
 async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
   const rawSceneJson =
@@ -82,65 +218,81 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
           `#${CSS.escape(sceneData.containerId)}`,
         ) ?? document.createElement("div"))
       : __pvwasmContainer;
-  const bg = sceneData.background;
 
-  const renderer = vtk.vtkRenderer();
-  renderer.setBackground(bg[0], bg[1], bg[2]);
-
-  // Ensure the container has a usable size.  In JupyterLite the parent
-  // output area may have no intrinsic height, so we guarantee a minimum.
   container.style.minHeight ||= "400px";
 
-  const bbox = container.getBoundingClientRect();
-  const canvasId = `${sceneData.containerId}-canvas`;
-  const DefaultCanvasWidth = 600;
-  const DefaultCanvasHeight = 400;
-  const canvas = document.createElement("canvas");
-  canvas.id = canvasId;
-  canvas.width = bbox.width || DefaultCanvasWidth;
-  canvas.height = bbox.height || DefaultCanvasHeight;
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.tabIndex = -1;
-  canvas.addEventListener("click", () => {
-    canvas.focus();
-  });
-  container.append(canvas);
+  const overlay = createLoadingOverlay(
+    container,
+    "Initializing WASM Environment\u2026",
+  );
 
-  const canvasSelector = `#${CSS.escape(canvasId)}`;
-  const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
-  renderWindow.addRenderer(renderer);
+  try {
+    const bg = sceneData.background;
 
-  if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
-    renderer.removeAllLights();
-    renderer.setAutomaticLightCreation(0);
-  } else {
-    setupLights(vtk, sceneData.lights, renderer);
-  }
+    const renderer = vtk.vtkRenderer();
+    renderer.setBackground(bg[0], bg[1], bg[2]);
 
-  for (const [index, actorConfig] of sceneData.actors.entries()) {
-    await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
-  }
+    const bbox = container.getBoundingClientRect();
+    const canvasId = `${sceneData.containerId}-canvas`;
+    const DefaultCanvasWidth = 600;
+    const DefaultCanvasHeight = 400;
+    const canvas = document.createElement("canvas");
+    canvas.id = canvasId;
+    canvas.width = bbox.width || DefaultCanvasWidth;
+    canvas.height = bbox.height || DefaultCanvasHeight;
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.tabIndex = -1;
+    canvas.addEventListener("click", () => {
+      canvas.focus();
+    });
+    container.append(canvas);
 
-  if (sceneData.textActors) {
-    for (const textConfig of sceneData.textActors) {
-      setupTextActor(textConfig, container);
+    const canvasSelector = `#${CSS.escape(canvasId)}`;
+    const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
+    renderWindow.addRenderer(renderer);
+
+    setOverlayMessage(overlay, "Generating 3D Model\u2026");
+
+    if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
+      renderer.removeAllLights();
+      renderer.setAutomaticLightCreation(0);
+    } else {
+      setupLights(vtk, sceneData.lights, renderer);
     }
+
+    for (const [index, actorConfig] of sceneData.actors.entries()) {
+      await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+    }
+
+    if (sceneData.textActors) {
+      for (const textConfig of sceneData.textActors) {
+        setupTextActor(textConfig, container);
+      }
+    }
+
+    renderer.resetCamera();
+    if (sceneData.camera) {
+      await setupCamera(renderer, sceneData.camera);
+    }
+
+    const interactor = vtk.vtkRenderWindowInteractor({
+      canvasSelector,
+      renderWindow,
+    });
+    await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+
+    renderWindow.render();
+    await interactor.start();
+
+    dismissOverlay(overlay);
+  } catch (error: unknown) {
+    const msg =
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred while rendering the scene.";
+    showOverlayError(overlay, msg);
   }
-
-  renderer.resetCamera();
-  if (sceneData.camera) {
-    await setupCamera(renderer, sceneData.camera);
-  }
-
-  const interactor = vtk.vtkRenderWindowInteractor({
-    canvasSelector,
-    renderWindow,
-  });
-  await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
-
-  renderWindow.render();
-  await interactor.start();
 }
 
 if (typeof vtkReady !== "undefined") {
