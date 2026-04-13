@@ -22,15 +22,15 @@ def _(micropip):
 
 @app.cell
 def _(mo, pv):
-    import base64
+    from js import Blob, URL, Object
 
     plotter = pv.Plotter()
     plotter.add_mesh(pv.Sphere(), color="red")
     html = plotter.generate_standalone_html()
-    b64 = base64.b64encode(html.encode()).decode()
-    data_url = f"data:text/html;charset=utf-8;base64,{b64}"
+    blob = Blob.new([html], Object.fromEntries([["type", "text/html"]]))
+    blob_url = URL.createObjectURL(blob)
     iframe = (
-        f'<iframe src="{data_url}" '
+        f'<iframe src="{blob_url}" '
         'style="width:600px;height:400px;min-height:400px;border:2px solid #333;" '
         'sandbox="allow-scripts allow-same-origin"></iframe>'
     )
