@@ -1078,8 +1078,23 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
         """
         if self.use_ipython:
-            js_code = self._generate_render_js()
-            display(Javascript(js_code))
+            import sys  # noqa: PLC0415
+
+            if "marimo" in sys.modules:
+                # marimo does not execute display(Javascript(...)); use an iframe instead
+                html_content = self.generate_standalone_html()
+                escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+                display(
+                    HTML(
+                        f'<iframe srcdoc="{escaped}" '
+                        'style="width:600px;height:400px;min-height:400px;'
+                        'border:2px solid #333;" '
+                        'sandbox="allow-scripts"></iframe>',
+                    ),
+                )
+            else:
+                js_code = self._generate_render_js()
+                display(Javascript(js_code))
         else:
             # Direct rendering
             self.renderer.resetCamera()  # type: ignore[attr-defined]
