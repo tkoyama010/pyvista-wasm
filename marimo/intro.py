@@ -28,13 +28,11 @@ def _(mo, pv):
 
     escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
 
-    mo.output.append(
-        mo.Html(
-            f'<iframe srcdoc="{escaped}" '
-            'style="width:100%;height:400px;min-height:400px;border:2px solid #333;" '
-            'sandbox="allow-scripts"></iframe>',
-        )
-    )
+    mo.output.append(mo.Html(
+        f'<iframe srcdoc="{escaped}" '
+        'style="width:100%;height:400px;min-height:400px;border:2px solid #333;" '
+        'sandbox="allow-scripts"></iframe>',
+    ))
 
 
 if __name__ == "__main__":
