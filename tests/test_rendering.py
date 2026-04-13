@@ -572,7 +572,7 @@ def test_wasm_config_in_standalone_html(monkeypatch) -> None:
 
     html = renderer.generate_standalone_html()
 
-    assert 'data-config="' in html
+    assert "data-config='" in html
     assert '"rendering": "webgpu"' in html
 
 
