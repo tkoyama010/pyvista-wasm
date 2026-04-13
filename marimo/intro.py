@@ -22,19 +22,39 @@ def _(micropip):
 
 @app.cell
 def _(mo, pv):
-    from js import URL, Blob, Object
+    from js import document, window
+    from pyodide.ffi import create_proxy
 
     plotter = pv.Plotter()
     plotter.add_mesh(pv.Sphere(), color="red")
-    html = plotter.generate_standalone_html()
-    blob = Blob.new([html], Object.fromEntries([["type", "text/html"]]))
-    blob_url = URL.createObjectURL(blob)
-    iframe = (
-        f'<iframe src="{blob_url}" '
-        'style="width:600px;height:400px;min-height:400px;border:2px solid #333;" '
-        'sandbox="allow-scripts allow-same-origin"></iframe>'
+    html_content = plotter.generate_standalone_html()
+
+    container_id = "vtk-wasm-container"
+
+    def inject_vtk():
+        container = document.getElementById(container_id)
+        if container is None:
+            return
+        iframe = document.createElement("iframe")
+        iframe.srcdoc = html_content
+        iframe.style.cssText = (
+            "width:600px;height:400px;"
+            "min-height:400px;border:2px solid #333;"
+        )
+        iframe.sandbox = "allow-scripts"
+        container.innerHTML = ""
+        container.appendChild(iframe)
+
+    proxy = create_proxy(inject_vtk)
+    window.setTimeout(proxy, 500)
+
+    return mo.Html(
+        f'<div id="{container_id}" '
+        'style="width:600px;height:400px;background:#f0f0f0;'
+        'display:flex;align-items:center;justify-content:center;">'
+        "<p>Loading VTK.wasm...</p>"
+        "</div>"
     )
-    return mo.Html(iframe)
 
 
 if __name__ == "__main__":
