@@ -26,7 +26,17 @@ def _(mo, pv):
     plotter.add_mesh(pv.Sphere(), color="red")
     html_content = plotter.generate_standalone_html()
 
-    return mo.iframe(html_content, height="400px")
+    escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+
+    return mo.Html(
+        "<div style='border:3px solid green;padding:10px;background:#efffef;'>"
+        f"<p><strong>OK: HTML generated ({len(html_content)} bytes)</strong></p>"
+        "</div>"
+        f'<iframe srcdoc="{escaped}" '
+        'style="width:100%;height:400px;min-height:400px;border:2px solid #333;" '
+        "sandbox=\"allow-scripts allow-same-origin\">"
+        "</iframe>"
+    )
 
 
 if __name__ == "__main__":
