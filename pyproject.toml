@@ -103,7 +103,6 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
 ]
-
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
   "INP001",  # implicit namespace package
