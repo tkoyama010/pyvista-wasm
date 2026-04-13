@@ -26,12 +26,14 @@ def _(mo, pv):
     plotter.add_mesh(pv.Sphere(), color="red")
     html_content = plotter.generate_standalone_html()
 
-    mo.output.append(mo.Html(
-        "<div style='border:4px solid green;padding:15px;"
-        "background:#efffef;font-size:18px;'>"
-        f"<strong>OK: HTML = {len(html_content)} bytes</strong>"
-        "</div>"
-    ))
+    mo.output.append(
+        mo.Html(
+            "<div style='border:4px solid green;padding:15px;"
+            "background:#efffef;font-size:18px;'>"
+            f"<strong>OK: HTML = {len(html_content)} bytes</strong>"
+            "</div>",
+        )
+    )
 
 
 if __name__ == "__main__":
