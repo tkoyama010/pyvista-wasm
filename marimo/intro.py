@@ -37,10 +37,7 @@ def _(mo, pv):
             return
         iframe = document.createElement("iframe")
         iframe.srcdoc = html_content
-        iframe.style.cssText = (
-            "width:600px;height:400px;"
-            "min-height:400px;border:2px solid #333;"
-        )
+        iframe.style.cssText = "width:600px;height:400px;min-height:400px;border:2px solid #333;"
         iframe.sandbox = "allow-scripts"
         container.innerHTML = ""
         container.appendChild(iframe)
@@ -53,7 +50,7 @@ def _(mo, pv):
         'style="width:600px;height:400px;background:#f0f0f0;'
         'display:flex;align-items:center;justify-content:center;">'
         "<p>Loading VTK.wasm...</p>"
-        "</div>"
+        "</div>",
     )
 
 
