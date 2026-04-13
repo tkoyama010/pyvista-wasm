@@ -22,7 +22,7 @@ def _(micropip):
 
 @app.cell
 def _(mo, pv):
-    from js import Blob, URL, Object
+    from js import URL, Blob, Object
 
     plotter = pv.Plotter()
     plotter.add_mesh(pv.Sphere(), color="red")
