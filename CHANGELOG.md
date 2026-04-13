@@ -2,10 +2,9 @@
 
 ## [0.5.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.5.0...pyvista-wasm-v0.5.1) (2026-04-13)
 
-
 ### Bug Fixes
 
-* escape WASM_CONFIG JSON in standalone.html data-config attribute ([#113](https://github.com/tkoyama010/pyvista-wasm/issues/113)) ([1a3e5b4](https://github.com/tkoyama010/pyvista-wasm/commit/1a3e5b4a612bfce45963073fa326be0819c31bea))
+- escape WASM_CONFIG JSON in standalone.html data-config attribute ([#113](https://github.com/tkoyama010/pyvista-wasm/issues/113)) ([1a3e5b4](https://github.com/tkoyama010/pyvista-wasm/commit/1a3e5b4a612bfce45963073fa326be0819c31bea))
 
 ## [0.5.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.4.0...pyvista-wasm-v0.5.0) (2026-04-12)
 
