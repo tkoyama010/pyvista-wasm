@@ -13,26 +13,19 @@ async def _():
 
 
 @app.cell
-def _():
+def _(micropip):
     import marimo as mo
     import pyvista_wasm as pv
-    from pyvista_wasm import examples
 
-    return examples, mo, pv
+    return mo, pv
 
 
 @app.cell
-def _(examples, pv):
+def _(mo, pv):
     plotter = pv.Plotter()
-    mesh = examples.download_bunny()
-    plotter.add_mesh(mesh)
+    plotter.add_mesh(pv.Sphere(), color="red")
     html = plotter.generate_standalone_html()
-    return html, mesh, plotter
-
-
-@app.cell
-def _(html, mo):
-    mo.Html(html)
+    return mo.Html(html)
 
 
 if __name__ == "__main__":
