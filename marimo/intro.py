@@ -22,14 +22,17 @@ def _(micropip):
 
 @app.cell
 def _(mo, pv):
+    import base64
+
     plotter = pv.Plotter()
     plotter.add_mesh(pv.Sphere(), color="red")
     html = plotter.generate_standalone_html()
-    escaped = html.replace("&", "&amp;").replace('"', "&quot;")
+    b64 = base64.b64encode(html.encode()).decode()
+    data_url = f"data:text/html;charset=utf-8;base64,{b64}"
     iframe = (
-        f'<iframe srcdoc="{escaped}" '
+        f'<iframe src="{data_url}" '
         'style="width:600px;height:400px;min-height:400px;border:2px solid #333;" '
-        'sandbox="allow-scripts"></iframe>'
+        'sandbox="allow-scripts allow-same-origin"></iframe>'
     )
     return mo.Html(iframe)
 
