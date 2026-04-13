@@ -743,6 +743,9 @@ class PolyData:
                 "values": contour_values,
                 "scalarName": scalar_name_final,
                 "scalarData": scalar_data.flatten().tolist(),
+                # Include mesh geometry for manual contour implementation
+                "points": self.points.flatten().tolist(),
+                "polys": self.faces.flatten().tolist() if self.faces is not None else [],
             },
         )
 
