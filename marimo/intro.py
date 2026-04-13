@@ -34,8 +34,8 @@ def _(mo, pv):
         "</div>"
         f'<iframe srcdoc="{escaped}" '
         'style="width:100%;height:400px;min-height:400px;border:2px solid #333;" '
-        "sandbox=\"allow-scripts allow-same-origin\">"
-        "</iframe>"
+        'sandbox="allow-scripts allow-same-origin">'
+        "</iframe>",
     )
 
 
