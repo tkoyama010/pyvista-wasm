@@ -1089,8 +1089,8 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
                         f'<iframe srcdoc="{escaped}" '
                         'style="width:600px;height:400px;min-height:400px;'
                         'border:2px solid #333;" '
-                        'sandbox="allow-scripts"></iframe>'
-                    )
+                        'sandbox="allow-scripts"></iframe>',
+                    ),
                 )
             else:
                 js_code = self._generate_render_js()
