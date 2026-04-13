@@ -31,7 +31,7 @@ def _(mo, pv):
     return mo.Html(
         f'<iframe srcdoc="{escaped}" '
         'style="width:600px;height:400px;min-height:400px;border:2px solid #333;" '
-        'sandbox="allow-scripts allow-same-origin"></iframe>'
+        'sandbox="allow-scripts allow-same-origin"></iframe>',
     )
 
 
