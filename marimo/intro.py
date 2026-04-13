@@ -22,7 +22,7 @@ def _(micropip):
 
 @app.cell
 def _(mo, pv):
-    from js import document, window
+    import js
     from pyodide.ffi import create_proxy
 
     plotter = pv.Plotter()
@@ -32,10 +32,10 @@ def _(mo, pv):
     container_id = "vtk-wasm-container"
 
     def inject_vtk():
-        container = document.getElementById(container_id)
+        container = js.document.getElementById(container_id)
         if container is None:
             return
-        iframe = document.createElement("iframe")
+        iframe = js.document.createElement("iframe")
         iframe.srcdoc = html_content
         iframe.style.cssText = "width:600px;height:400px;min-height:400px;border:2px solid #333;"
         iframe.sandbox = "allow-scripts"
@@ -43,7 +43,7 @@ def _(mo, pv):
         container.appendChild(iframe)
 
     proxy = create_proxy(inject_vtk)
-    window.setTimeout(proxy, 500)
+    js.window.setTimeout(proxy, 500)
 
     return mo.Html(
         f'<div id="{container_id}" '
