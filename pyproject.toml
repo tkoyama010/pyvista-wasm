@@ -61,6 +61,9 @@ optional-dependencies.docs = [
   "sphinx-design>=0.6.0,<0.8.0; python_version>='3.12'",
   "sphinx-intl>=2.2.0,<2.4.0; python_version>='3.12'",
 ]
+optional-dependencies.marimo = [
+  "marimo>=0.10.0,<0.14.0",
+]
 optional-dependencies.streamlit = [
   "streamlit>=1.30.0,<1.57.0",
 ]
@@ -102,6 +105,18 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "F704",    # await outside async - top-level await valid in Pyodide
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
+]
+lint.per-file-ignores."marimo/*" = [
+  "ANN001",  # missing type annotation for function argument - marimo cell params
+  "ANN202",  # missing return type annotation - marimo cell functions
+  "ARG001",  # unused function argument - marimo dependency injection
+  "D100",    # missing docstring - marimo app files
+  "D103",    # missing docstring in public function - marimo cell functions
+  "E402",    # module import not at top - cell-based structure
+  "F704",    # await outside async - top-level await valid in Pyodide/WASM
+  "INP001",  # implicit namespace package
+  "PLC0415", # import not at top level - imports inside marimo cells
+  "PLE1142", # await outside async - top-level await valid in Pyodide/WASM
 ]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
