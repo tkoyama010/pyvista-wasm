@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
-    "esbuild": "^0.27",
+    "esbuild": "^0.28",
     "eslint-plugin-jsdoc": "^62.9.0",
     "typescript": "^6.0"
   }
