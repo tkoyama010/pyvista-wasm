@@ -1086,8 +1086,8 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
                 html_content = self.generate_standalone_html()
                 escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
-                mo.output.append(
-                    mo.Html(
+                mo.output.append(  # type: ignore[attr-defined]
+                    mo.Html(  # type: ignore[attr-defined]
                         f'<iframe srcdoc="{escaped}" '
                         'style="width:100%;height:400px;min-height:400px;'
                         'border:2px solid #333;" '
