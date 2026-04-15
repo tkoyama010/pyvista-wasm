@@ -1081,13 +1081,15 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
             import sys  # noqa: PLC0415
 
             if "marimo" in sys.modules:
-                # marimo does not execute display(Javascript(...)); use an iframe instead
+                # marimo does not execute display(Javascript(...)); use mo.output.append instead
+                import marimo as mo  # noqa: PLC0415
+
                 html_content = self.generate_standalone_html()
                 escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
-                display(
-                    HTML(
+                mo.output.append(
+                    mo.Html(
                         f'<iframe srcdoc="{escaped}" '
-                        'style="width:600px;height:400px;min-height:400px;'
+                        'style="width:100%;height:400px;min-height:400px;'
                         'border:2px solid #333;" '
                         'sandbox="allow-scripts"></iframe>',
                     ),
