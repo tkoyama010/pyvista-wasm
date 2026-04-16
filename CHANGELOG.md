@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.5.1...pyvista-wasm-v0.6.0) (2026-04-16)
+
+
+### Features
+
+* add marimo badge and notebook for browser-based demo ([#115](https://github.com/tkoyama010/pyvista-wasm/issues/115)) ([d215fe2](https://github.com/tkoyama010/pyvista-wasm/commit/d215fe2730b38bf4cc804904b83d4f418a8d65a7))
+* add marimo support like jupyterlite ([#120](https://github.com/tkoyama010/pyvista-wasm/issues/120)) ([93a12e9](https://github.com/tkoyama010/pyvista-wasm/commit/93a12e908f62faee4d6ea0ddd27e39ce881deab5))
+
+
+### Bug Fixes
+
+* add pytest-cov to dev and test dependencies ([#121](https://github.com/tkoyama010/pyvista-wasm/issues/121)) ([e89ffd1](https://github.com/tkoyama010/pyvista-wasm/commit/e89ffd1b9eb4c2b318a5b097e8ba0ccca79f0479))
+
 ## [0.5.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.5.0...pyvista-wasm-v0.5.1) (2026-04-13)
 
 ### Bug Fixes
