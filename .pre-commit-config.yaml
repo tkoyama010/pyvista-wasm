@@ -33,12 +33,12 @@ repos:
         args: ["--keep-full-version"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.6
+    rev: 0.11.7
     hooks:
       - id: uv-lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.10
+    rev: v0.15.11
     hooks:
       # Run the linter
       - id: ruff-check
@@ -56,7 +56,7 @@ repos:
         files: src/pyvista_wasm/templates/.*\.html$
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.4.11
+    rev: v2.4.12
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.4.10"]
@@ -86,7 +86,7 @@ repos:
       - id: codespell
 
   - repo: https://github.com/tkoyama010/standard-readme-pre-commit
-    rev: 810adb53324d6891fc270081b58e21db67fdafcb
+    rev: 06556851a2b176081b1e9af76392f6326201a7c8
     hooks:
       - id: standard-readme
 
