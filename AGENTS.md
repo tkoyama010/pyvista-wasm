@@ -15,4 +15,3 @@ CI runs the full test suite on every PR. [pre-commit.ci](https://pre-commit.ci) 
 - Remove descriptions of **what** changed from commit messages and PR descriptions. The diff shows what changed; the message should explain the motivation.
 - Remove test information from commit messages and PR descriptions. The diff shows test code, and CI shows test results.
 - Remove AI coding agent co-author lines (e.g. `Co-Authored-By: Claude`) from commit messages and PR descriptions.
-- Ignore `src/pyvista_wasm/templates/renderer.js` �it is a generated build artifact.
