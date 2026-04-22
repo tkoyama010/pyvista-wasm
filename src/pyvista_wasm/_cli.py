@@ -744,7 +744,8 @@ def _create_gif(screenshots_dir: Path, output_path: Path, fps: int = 2) -> bool:
         for img in images:
             pil_img = Image.fromarray(img)
             pil_img = pil_img.resize(
-                (target_shape[1], target_shape[0]), Image.LANCZOS
+                (target_shape[1], target_shape[0]),
+                Image.LANCZOS,
             )
             resized.append(np.array(pil_img))
         images = resized
