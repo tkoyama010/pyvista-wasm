@@ -11,6 +11,7 @@ CI runs the full test suite on every PR. [pre-commit.ci](https://pre-commit.ci) 
 ## PR instructions
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
-- Write commit messages and PR descriptions to explain **why**, not what. The diff shows what changed; the message should explain the motivation.
+- Write commit messages and PR descriptions to explain **why**; the message and descriptions should explain the motivation.
+- Remove commit messages and PR descriptions to explain **what**; the diff shows what changed.
+- Remove commit messages and PR descriptions to explain **test information**; the diff shows test code, and CI shows test results.
 - Remove AI coding agent co-author lines (e.g. `Co-Authored-By: Claude`) from commit messages and PR descriptions.
-- Ignore `src/pyvista_wasm/templates/renderer.js` — it is a generated build artifact.
