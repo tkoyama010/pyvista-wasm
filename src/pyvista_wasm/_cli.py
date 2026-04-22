@@ -735,6 +735,20 @@ def _create_gif(screenshots_dir: Path, output_path: Path, fps: int = 2) -> bool:
     logger.info("Found %d screenshots", len(screenshot_files))
     images = [iio.imread(f) for f in screenshot_files]
 
+    target_shape = images[0].shape[:2]
+    if any(img.shape[:2] != target_shape for img in images):
+        import numpy as np  # noqa: PLC0415
+        from PIL import Image  # noqa: PLC0415
+
+        resized = []
+        for img in images:
+            pil_img = Image.fromarray(img)
+            pil_img = pil_img.resize(
+                (target_shape[1], target_shape[0]), Image.LANCZOS
+            )
+            resized.append(np.array(pil_img))
+        images = resized
+
     duration_ms = int(1000 / fps)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
