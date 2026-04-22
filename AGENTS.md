@@ -6,7 +6,7 @@ No local setup is required. CI verifies the dev environment on every PR.
 
 ## Testing instructions
 
-CI runs the full test suite on every PR. [pre-commit.ci](https://pre-commit.ci) automatically runs linting and formatting checks. Keep fixing and pushing until all CI checks pass.
+CI runs the full test suite on every PR. [pre-commit.ci](https://pre-commit.ci) automatically runs linting and formatting checks. [Read the Docs](https://readthedocs.org) builds a documentation preview for every PR. Keep fixing and pushing until all CI checks pass.
 
 ## PR instructions
 
