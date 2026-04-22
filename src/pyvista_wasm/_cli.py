@@ -929,6 +929,138 @@ def _capture_stlite_screenshots(output_dir: Path, demo_url: str, *, rotate: bool
     return screenshots_dir
 
 
+def _capture_marimo_screenshots(output_dir: Path, demo_url: str, *, rotate: bool = True) -> Path:
+    """Capture screenshots from the marimo demo using Playwright.
+
+    Parameters
+    ----------
+    output_dir : Path
+        Directory to save temporary screenshots.
+    demo_url : str
+        URL of the marimo demo.
+    rotate : bool
+        If ``True``, rotate the 3D model by mouse drag between
+        screenshots. Default: ``True``.
+
+    Returns
+    -------
+    Path
+        Path to the directory containing screenshots.
+
+    """
+    import contextlib  # noqa: PLC0415
+
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    screenshots_dir = output_dir / "screenshots"
+    screenshots_dir.mkdir(parents=True, exist_ok=True)
+
+    logger.info("Capturing marimo demo from: %s", demo_url)
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(viewport={"width": 1200, "height": 800})
+        page = context.new_page()
+
+        try:
+            logger.info("Navigating to marimo demo...")
+            page.goto(demo_url, wait_until="networkidle", timeout=120000)
+
+            logger.info("Waiting for marimo to load and install dependencies...")
+            page.wait_for_timeout(60000)
+
+            logger.info("Waiting for 3D rendering to appear in iframes...")
+            _wait_for_canvas_in_frames(page)
+
+            page.wait_for_timeout(5000)
+
+            if rotate:
+                logger.info("Capturing rendering screenshots with rotation...")
+                page.screenshot(path=str(screenshots_dir / "screenshot_01.png"))
+                page.wait_for_timeout(300)
+
+                for i in range(2, 15):
+                    _rotate_canvas_with_mouse(page)
+                    page.wait_for_timeout(300)
+                    page.screenshot(path=str(screenshots_dir / f"screenshot_{i:02d}.png"))
+                    page.wait_for_timeout(300)
+            else:
+                logger.info("Capturing rendering screenshots...")
+                for i in range(1, 15):
+                    page.screenshot(path=str(screenshots_dir / f"screenshot_{i:02d}.png"))
+                    page.wait_for_timeout(500)
+
+            logger.info("Captured 14 screenshots successfully")
+
+        except Exception:
+            logger.exception("Error during marimo demo capture")
+            with contextlib.suppress(Exception):
+                page.screenshot(path=str(screenshots_dir / "error_screenshot.png"))
+        finally:
+            context.close()
+            browser.close()
+
+    return screenshots_dir
+
+
+@app.command(name="capture-marimo-preview")
+def capture_marimo_preview(
+    output: Annotated[
+        Path,
+        typer.Option(
+            help="Output path for the GIF. Default: assets/marimo-preview.gif.",
+            metavar="PATH",
+        ),
+    ] = Path("assets/marimo-preview.gif"),
+    url: Annotated[
+        str,
+        typer.Option(
+            help="URL of the marimo demo.",
+            metavar="URL",
+        ),
+    ] = "https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HgkFBAIeJsEdDi5kMKSsupEatW4MCLYgPrG5vXu49P+4yGrNFGPNogbk+m4sAsIGDIoOIThwAAq-f7ELwzfw-P4AjiIciUNQ2OhyYEAZTAdGIeC8N1MEF+UBU9XIumhcDoMBAFkwhIIZEZQPB8PwRBIZEwZQI5FyECImGptKhlLwNlMIgo4mFdIZTJgHHqP0Q5nyADIWDcWOrEOAANy6JV4FVqgDkLDN2vVAEcNH9DX04ssOBANDAwO6EaJCOQ3hwABI0ixySlxVxmgA8wFcJDUcBsUFM5AgphUAG9xZKwBQAL4sOBmsMBM3ZOwWPAqRT0bxcNhsACk+pxwBw1O8ABZ62AAB769oEcottswTvdvsAI2gLig3gATL2E0TgOQ4ABiHibw2F4v+UuIXlTnsqXK-KjlCUoMAwGwsAB8kYA9DG43g71bKTo+mgYx5MAQ9TwbAmGYFhsCQTJsBYXw4geKANAIKEgA",
+    fps: Annotated[
+        int,
+        typer.Option(
+            help="Frames per second for the GIF. Default: 2.",
+            metavar="INT",
+        ),
+    ] = 2,
+    rotate: Annotated[
+        bool | None,
+        typer.Option(
+            help="Rotate the 3D model by mouse drag while capturing screenshots. Default: True.",
+        ),
+    ] = None,
+) -> None:
+    """Capture a preview GIF of the marimo demo.
+
+    Automate capturing a preview GIF showing pyvista-wasm rendering in marimo.
+    Requires: playwright, imageio[ffmpeg], pillow.
+    """
+    import tempfile  # noqa: PLC0415
+
+    if rotate is None:
+        rotate = True
+
+    output_path = output
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_dir = Path(tmp)
+        screenshots_dir = _capture_marimo_screenshots(tmp_dir, url, rotate=rotate)
+
+        screenshot_files = list(screenshots_dir.glob("screenshot_*.png"))
+        if not screenshot_files:
+            logger.error("No screenshots were captured")
+            sys.exit(1)
+
+        if not _create_gif(screenshots_dir, output_path, fps=fps):
+            logger.error("Failed to create GIF")
+            sys.exit(1)
+
+    logger.info("marimo preview GIF saved to: %s", output_path)
+
+
 @app.command(name="capture-stlite-preview")
 def capture_stlite_preview(
     output: Annotated[

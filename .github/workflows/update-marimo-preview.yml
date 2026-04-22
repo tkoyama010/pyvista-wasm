@@ -1,0 +1,31 @@
+name: Update marimo Preview GIF
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update-marimo-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f  # v6.3.0
+        with:
+          node-version: "22"
+      - run: |
+          pip install . playwright "imageio[ffmpeg]" pillow
+          playwright install chromium
+      - run: python -m pyvista_wasm capture-marimo-preview
+      - name: Upload marimo preview GIF to latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=$(gh release view --json tagName -q .tagName)
+          gh release upload "$TAG" assets/marimo-preview.gif --clobber
