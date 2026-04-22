@@ -21,5 +21,6 @@ uv run pytest --cov=pyvista_wasm    # with coverage
 ## PR instructions
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
+- Write commit messages and PR descriptions to explain **why**, not what. The diff shows what changed; the message should explain the motivation.
 - Run `uv run pre-commit run --all-files` before opening a PR.
 - Do not edit `src/pyvista_wasm/templates/renderer.js` directly — it is a generated build artifact.
