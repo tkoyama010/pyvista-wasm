@@ -6,7 +6,7 @@ No local setup is required. CI verifies the dev environment on every PR.
 
 ## Testing instructions
 
-No local test runs are required. CI runs the full test suite on every PR.
+CI runs the full test suite on every PR. Keep fixing and pushing until all CI checks pass.
 
 ## PR instructions
 
