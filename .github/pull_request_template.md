@@ -1,6 +1,6 @@
-## Description
+## Motivation
 
-<!-- Provide a clear and concise description of what this PR does. Include any relevant context, motivation, or background information. -->
+<!-- Explain why this change is needed. What problem does it solve? What is the context or background? -->
 
 ## Related Issue
 
@@ -31,19 +31,8 @@ Closes #
 - [ ] My PR title follows the [Conventional Commits](https://conventionalcommits.org) format (e.g., `feat: add new feature` or `fix: resolve issue`)
 - [ ] I have read and followed the [Code of Conduct](../CODE_OF_CONDUCT.md)
 - [ ] My code follows the project's code style (linting passes)
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
 - [ ] I have added/updated documentation as needed
-- [ ] I have updated type hints where applicable
 - [ ] Any dependent changes have been merged and published
-
-## Testing
-
-<!-- Describe the tests you ran and how to reproduce them. Include relevant details about your test configuration. -->
-
-## Screenshots/Examples (if applicable)
-
-<!-- If your changes include visual updates or new functionality, provide screenshots, GIFs, or code examples. -->
 
 ## Additional Notes
 
