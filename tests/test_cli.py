@@ -842,6 +842,8 @@ def _write_png(path: Path, array: np.ndarray) -> None:
 
 
 class TestCreateGif:
+    """Tests for the ``_create_gif`` helper."""
+
     def test_uniform_rgb(self, tmp_path) -> None:
         """_create_gif creates a GIF from uniformly-shaped RGB screenshots."""
         for i in range(1, 4):
@@ -875,6 +877,8 @@ class TestCreateGif:
 
 
 class TestCaptureMarimoPreview:
+    """Tests for the ``capture_marimo_preview`` command."""
+
     def test_rotate_default(self, tmp_path) -> None:
         """capture_marimo_preview defaults to rotate=True when rotate is not specified."""
         with (
@@ -937,6 +941,8 @@ class TestCaptureMarimoPreview:
 
 @pytest.mark.playwright
 class TestCaptureMarimoScreenshots:
+    """Tests for the ``_capture_marimo_screenshots`` helper."""
+
     def test_with_rotate(self, tmp_path) -> None:
         """_capture_marimo_screenshots creates 14 screenshots with rotation."""
         mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
