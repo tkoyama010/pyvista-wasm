@@ -571,3 +571,36 @@ def test_ply_reader_from_file_renders_in_browser(page: Page) -> None:
     canvas = page.query_selector("canvas")
     assert canvas is not None, "Canvas element not found for PLY reader mesh"
     assert len(js_errors) == 0, f"JavaScript errors during PLY rendering: {js_errors}"
+
+
+@pytest.mark.playwright
+def test_scalar_coloring_on_builtin_source_renders_in_browser(page: Page) -> None:
+    """Test that point_data scalars on a built-in source render without errors.
+
+    Regression test for the TypeError "Cannot read properties of null
+    (reading 'getPointData')" that occurred when rendering a Sphere with
+    scalars from point_data.  The root cause was that getOutputData() could
+    return null for built-in VTK sources, and even when it succeeded the
+    injected arrays were discarded because the mapper used setInputConnection
+    instead of setInputData.
+
+    Parameters
+    ----------
+    page : Page
+        Playwright page fixture for browser automation.
+
+    """
+    mesh = Sphere()
+    mesh.point_data["elevation"] = mesh.points[:, 2]
+
+    plotter = Plotter()
+    plotter.add_mesh(mesh, scalars="elevation", cmap="viridis")
+
+    js_errors: list[str] = []
+    page.on("console", lambda msg: js_errors.append(msg.text) if msg.type == "error" else None)
+
+    _load_plotter_html(page, plotter)
+
+    canvas = page.query_selector("canvas")
+    assert canvas is not None, "Canvas element not found for scalar-colored sphere"
+    assert len(js_errors) == 0, f"JavaScript errors during scalar rendering: {js_errors}"

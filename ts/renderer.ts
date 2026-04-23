@@ -811,7 +811,7 @@ async function setupActor(
   _index: number,
   ren: VtkRenderer,
 ): Promise<void> {
-  const sourceResult: SourceResult | undefined =
+  let sourceResult: SourceResult | undefined =
     cfg.source.type === "mesh"
       ? await createMeshSource(vtk, cfg.source)
       : cfg.source.type === "points"
@@ -824,8 +824,14 @@ async function setupActor(
 
   if (cfg.source.pointData ?? cfg.source.tCoords) {
     const pd = await getPolyData(sourceResult);
+    if (!pd) {
+      return;
+    }
     await injectPointData(vtk, pd, cfg.source.pointData);
     await injectTcoords(vtk, pd, cfg.source.tCoords);
+    // Use setInputData instead of setInputConnection so the injected arrays
+    // are not discarded when VTK re-runs the source pipeline.
+    sourceResult = { output: pd, isFilter: false };
   }
 
   let currentResult = sourceResult;
