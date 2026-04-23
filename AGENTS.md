@@ -1,5 +1,9 @@
 # AGENTS.md
 
+This repository aims to fully realize PyVista's API using vtk-wasm, enabling PyVista to run entirely in the browser via WebAssembly.
+
+The architecture calls vtk-wasm from TypeScript: TypeScript acts as the glue layer that loads the vtk-wasm module and bridges its C++ VTK bindings to the Python-facing PyVista API.
+
 ## Dev environment tips
 
 No local setup is required. CI verifies the dev environment on every PR.
