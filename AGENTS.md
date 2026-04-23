@@ -20,6 +20,10 @@ No local setup is required. CI verifies the dev environment on every PR.
 - Group related tests into a class named after the function or command under test (e.g. `TestCreateGif`, `TestCaptureMarimoPreview`).
 - Do not use comment banners (e.g. `# ---`) to separate test sections; use classes instead.
 
+## Issue instructions
+
+- When creating an issue, follow the templates in `.github/ISSUE_TEMPLATE/` (`bug_report.yml`, `feature_request.yml`, `documentation.yml`).
+
 ## PR instructions
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
