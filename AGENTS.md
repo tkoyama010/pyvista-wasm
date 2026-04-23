@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Project goal
+
+This repository aims to fully realize PyVista's API using vtk-wasm, enabling PyVista to run entirely in the browser via WebAssembly.
+
 ## Dev environment tips
 
 No local setup is required. CI verifies the dev environment on every PR.
