@@ -27,6 +27,7 @@ No local setup is required. CI verifies the dev environment on every PR.
 ## PR instructions
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
+- When creating a PR, follow the template in `.github/pull_request_template.md`.
 - Write commit messages and PR descriptions to explain **why**; the message and descriptions should explain the motivation.
 - Remove commit messages and PR descriptions to explain **what**; the diff shows what changed.
 - Remove commit messages and PR descriptions to explain **test information**; the diff shows test code, and CI shows test results.
