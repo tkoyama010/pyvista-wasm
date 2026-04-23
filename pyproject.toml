@@ -83,6 +83,7 @@ dev = [
   { include-group = "test" },
 ]
 test = [
+  "imageio>=2.28.0,<2.38.0",
   "pillow>=9.0.0,<13.0.0",
   "playwright>=1.40.0,<1.50.0",
   "pytest>=7.0.0,<9.1.0",

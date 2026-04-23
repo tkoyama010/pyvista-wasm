@@ -12,10 +12,13 @@ import pytest
 import pyvista_wasm as pv
 from pyvista_wasm._cli import (
     _apply_camera_movement,
+    _capture_marimo_screenshots,
     _capture_stlite_screenshots,
+    _create_gif,
     _find_canvas_in_frames,
     _rotate_canvas_with_mouse,
     _wait_for_canvas_in_frames,
+    capture_marimo_preview,
     capture_preview,
     capture_stlite_preview,
     cli_main,
@@ -829,3 +832,160 @@ def test_plot_new_plotter_with_camera_movement() -> None:
     """Camera movement options work with new plotters (not just pickle)."""
     with patch("pyvista_wasm.Plotter.show"):
         cli_main(["plot", str(VTK_FILE), "--azimuth", "45", "--zoom", "1.5"])
+
+
+def _write_png(path: Path, array: np.ndarray) -> None:
+    """Save a numpy array as a PNG file."""
+    from PIL import Image  # noqa: PLC0415
+
+    Image.fromarray(array).save(path)
+
+
+class TestCreateGif:
+    """Tests for the ``_create_gif`` helper."""
+
+    def test_uniform_rgb(self, tmp_path) -> None:
+        """_create_gif creates a GIF from uniformly-shaped RGB screenshots."""
+        for i in range(1, 4):
+            _write_png(
+                tmp_path / f"screenshot_{i:02d}.png",
+                np.zeros((100, 100, 3), dtype=np.uint8),
+            )
+
+        assert _create_gif(tmp_path, tmp_path / "out.gif", fps=2) is True
+        assert (tmp_path / "out.gif").exists()
+
+    def test_mixed_channels(self, tmp_path) -> None:
+        """_create_gif handles screenshots with mixed channel counts (RGB and RGBA)."""
+        _write_png(tmp_path / "screenshot_01.png", np.zeros((100, 100, 3), dtype=np.uint8))
+        _write_png(tmp_path / "screenshot_02.png", np.zeros((100, 100, 4), dtype=np.uint8))
+        _write_png(tmp_path / "screenshot_03.png", np.zeros((100, 100, 3), dtype=np.uint8))
+
+        assert _create_gif(tmp_path, tmp_path / "out.gif", fps=2) is True
+        assert (tmp_path / "out.gif").exists()
+
+    def test_different_sizes(self, tmp_path) -> None:
+        """_create_gif resizes screenshots that differ from the first frame's dimensions."""
+        _write_png(tmp_path / "screenshot_01.png", np.zeros((100, 200, 3), dtype=np.uint8))
+        _write_png(tmp_path / "screenshot_02.png", np.zeros((120, 180, 3), dtype=np.uint8))
+
+        assert _create_gif(tmp_path, tmp_path / "out.gif", fps=2) is True
+        assert (tmp_path / "out.gif").exists()
+
+    def test_no_screenshots(self, tmp_path) -> None:
+        """_create_gif returns False when no screenshot files are present."""
+        assert _create_gif(tmp_path, tmp_path / "out.gif") is False
+
+
+class TestCaptureMarimoPreview:
+    """Tests for the ``capture_marimo_preview`` command."""
+
+    def test_rotate_default(self, tmp_path) -> None:
+        """capture_marimo_preview defaults to rotate=True when rotate is not specified."""
+        with (
+            patch("pyvista_wasm._cli._capture_marimo_screenshots") as mock_capture,
+            patch("pyvista_wasm._cli._create_gif", return_value=True),
+        ):
+            mock_capture.return_value = tmp_path
+            (tmp_path / "screenshot_01.png").write_bytes(b"fake")
+
+            capture_marimo_preview(output=tmp_path / "out.gif")
+
+            assert mock_capture.call_args.kwargs["rotate"] is True
+
+    def test_with_rotate(self, tmp_path) -> None:
+        """capture_marimo_preview passes rotate=True to _capture_marimo_screenshots."""
+        with (
+            patch("pyvista_wasm._cli._capture_marimo_screenshots") as mock_capture,
+            patch("pyvista_wasm._cli._create_gif", return_value=True),
+        ):
+            mock_capture.return_value = tmp_path
+            (tmp_path / "screenshot_01.png").write_bytes(b"fake")
+
+            capture_marimo_preview(output=tmp_path / "out.gif", rotate=True)
+
+            assert mock_capture.call_args.kwargs["rotate"] is True
+
+    def test_with_no_rotate(self, tmp_path) -> None:
+        """capture_marimo_preview passes rotate=False to _capture_marimo_screenshots."""
+        with (
+            patch("pyvista_wasm._cli._capture_marimo_screenshots") as mock_capture,
+            patch("pyvista_wasm._cli._create_gif", return_value=True),
+        ):
+            mock_capture.return_value = tmp_path
+            (tmp_path / "screenshot_01.png").write_bytes(b"fake")
+
+            capture_marimo_preview(output=tmp_path / "out.gif", rotate=False)
+
+            assert mock_capture.call_args.kwargs["rotate"] is False
+
+    def test_no_screenshots(self, tmp_path) -> None:
+        """capture_marimo_preview exits when no screenshots are captured."""
+        with patch("pyvista_wasm._cli._capture_marimo_screenshots") as mock_capture:
+            mock_capture.return_value = tmp_path
+
+            with pytest.raises(SystemExit, match="1"):
+                capture_marimo_preview(output=tmp_path / "out.gif")
+
+    def test_gif_creation_fails(self, tmp_path) -> None:
+        """capture_marimo_preview exits when GIF creation fails."""
+        with (
+            patch("pyvista_wasm._cli._capture_marimo_screenshots") as mock_capture,
+            patch("pyvista_wasm._cli._create_gif", return_value=False),
+        ):
+            mock_capture.return_value = tmp_path
+            (tmp_path / "screenshot_01.png").write_bytes(b"fake")
+
+            with pytest.raises(SystemExit, match="1"):
+                capture_marimo_preview(output=tmp_path / "out.gif")
+
+
+@pytest.mark.playwright
+class TestCaptureMarimoScreenshots:
+    """Tests for the ``_capture_marimo_screenshots`` helper."""
+
+    def test_with_rotate(self, tmp_path) -> None:
+        """_capture_marimo_screenshots creates 14 screenshots with rotation."""
+        mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
+
+        def fake_screenshot(path: str) -> None:
+            Path(path).write_bytes(b"fake-png")
+
+        mock_page.screenshot.side_effect = fake_screenshot
+
+        with patch("playwright.sync_api.sync_playwright", return_value=mock_pw_cm):
+            result = _capture_marimo_screenshots(tmp_path, "http://example.com", rotate=True)
+
+        assert result == tmp_path / "screenshots"
+        assert mock_page.screenshot.call_count == 14
+        mock_context.close.assert_called_once()
+        mock_browser.close.assert_called_once()
+
+    def test_without_rotate(self, tmp_path) -> None:
+        """_capture_marimo_screenshots creates 14 screenshots without rotation."""
+        mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
+
+        def fake_screenshot(path: str) -> None:
+            Path(path).write_bytes(b"fake-png")
+
+        mock_page.screenshot.side_effect = fake_screenshot
+
+        with patch("playwright.sync_api.sync_playwright", return_value=mock_pw_cm):
+            result = _capture_marimo_screenshots(tmp_path, "http://example.com", rotate=False)
+
+        assert result == tmp_path / "screenshots"
+        assert mock_page.screenshot.call_count == 14
+        mock_context.close.assert_called_once()
+        mock_browser.close.assert_called_once()
+
+    def test_handles_exception(self, tmp_path) -> None:
+        """_capture_marimo_screenshots handles exceptions and still closes browser."""
+        mock_pw_cm, mock_page, mock_context, mock_browser = _make_mock_playwright()
+        mock_page.goto.side_effect = Exception("Connection refused")
+
+        with patch("playwright.sync_api.sync_playwright", return_value=mock_pw_cm):
+            result = _capture_marimo_screenshots(tmp_path, "http://example.com", rotate=True)
+
+        assert result == tmp_path / "screenshots"
+        mock_context.close.assert_called_once()
+        mock_browser.close.assert_called_once()
