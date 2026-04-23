@@ -604,3 +604,35 @@ def test_scalar_coloring_on_builtin_source_renders_in_browser(page: Page) -> Non
     canvas = page.query_selector("canvas")
     assert canvas is not None, "Canvas element not found for scalar-colored sphere"
     assert len(js_errors) == 0, f"JavaScript errors during scalar rendering: {js_errors}"
+
+
+@pytest.mark.playwright
+def test_contour_on_builtin_source_renders_in_browser(page: Page) -> None:
+    """Test that contour lines on a built-in source render without errors.
+
+    Regression test for the TypeError "Cannot read properties of null
+    (reading 'getPointData')" that occurred when calling contours.plot() on a
+    Sphere.  applyContourFilter called getPolyData, which could return null when
+    getOutputData() had not produced output for the built-in source.
+
+    Parameters
+    ----------
+    page : Page
+        Playwright page fixture for browser automation.
+
+    """
+    sphere = Sphere()
+    elevation = sphere.points[:, 2]
+    contours = sphere.contour(isosurfaces=[-0.5, 0.0, 0.5], scalars=elevation)
+
+    plotter = Plotter()
+    plotter.add_mesh(contours, color="white")
+
+    js_errors: list[str] = []
+    page.on("console", lambda msg: js_errors.append(msg.text) if msg.type == "error" else None)
+
+    _load_plotter_html(page, plotter)
+
+    canvas = page.query_selector("canvas")
+    assert canvas is not None, "Canvas element not found for contour mesh"
+    assert len(js_errors) == 0, f"JavaScript errors during contour rendering: {js_errors}"
