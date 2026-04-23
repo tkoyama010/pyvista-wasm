@@ -171,7 +171,9 @@ type SourceResult =
  * @param sourceResult
  * @returns The underlying {@link VtkPolyData} from the source or filter output.
  */
-async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
+async function getPolyData(
+  sourceResult: SourceResult,
+): Promise<VtkPolyData | null> {
   if (sourceResult.isFilter) {
     await sourceResult.output.update();
     return sourceResult.output.getOutputData();
@@ -811,7 +813,7 @@ async function setupActor(
   _index: number,
   ren: VtkRenderer,
 ): Promise<void> {
-  const sourceResult: SourceResult | undefined =
+  let sourceResult: SourceResult | undefined =
     cfg.source.type === "mesh"
       ? await createMeshSource(vtk, cfg.source)
       : cfg.source.type === "points"
@@ -824,8 +826,14 @@ async function setupActor(
 
   if (cfg.source.pointData ?? cfg.source.tCoords) {
     const pd = await getPolyData(sourceResult);
+    if (!pd) {
+      return;
+    }
     await injectPointData(vtk, pd, cfg.source.pointData);
     await injectTcoords(vtk, pd, cfg.source.tCoords);
+    // Use setInputData instead of setInputConnection so the injected arrays
+    // are not discarded when VTK re-runs the source pipeline.
+    sourceResult = { output: pd, isFilter: false };
   }
 
   let currentResult = sourceResult;
@@ -1051,6 +1059,9 @@ async function applyShrinkFilter(
   shrinkFactor: number,
 ): Promise<SourceResult> {
   const inputPd = await getPolyData(sourceResult);
+  if (!inputPd) {
+    return sourceResult;
+  }
   const pointsObject = await inputPd.getPoints();
   const inPoints = await pointsObject.getData();
   const polysObject = await inputPd.getPolys();
@@ -1186,6 +1197,9 @@ async function applyContourFilter(
 ): Promise<SourceResult> {
   const { values, scalarName, scalarData } = options;
   const inputPd = await getPolyData(sourceResult);
+  if (!inputPd) {
+    return sourceResult;
+  }
 
   const ComponentsOne = 1;
   const scalars = vtk.vtkFloatArray({
