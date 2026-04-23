@@ -11,6 +11,11 @@ No local setup is required. CI verifies the dev environment on every PR.
 - [Read the Docs](https://readthedocs.org) builds a documentation preview for every PR.
 - After creating a PR, monitor CI continuously, keep fixing and pushing until all checks pass.
 
+## Test conventions
+
+- Group related tests into a class named after the function or command under test (e.g. `TestCreateGif`, `TestCaptureMarimoPreview`).
+- Do not use comment banners (e.g. `# ---`) to separate test sections; use classes instead.
+
 ## PR instructions
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
