@@ -845,7 +845,9 @@ class TestCreateGif:
     def test_uniform_rgb(self, tmp_path) -> None:
         """_create_gif creates a GIF from uniformly-shaped RGB screenshots."""
         for i in range(1, 4):
-            _write_png(tmp_path / f"screenshot_{i:02d}.png", np.zeros((100, 100, 3), dtype=np.uint8))
+            _write_png(
+                tmp_path / f"screenshot_{i:02d}.png", np.zeros((100, 100, 3), dtype=np.uint8)
+            )
 
         assert _create_gif(tmp_path, tmp_path / "out.gif", fps=2) is True
         assert (tmp_path / "out.gif").exists()
