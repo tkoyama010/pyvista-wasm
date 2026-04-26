@@ -48,6 +48,16 @@ def test_sphere_parameters() -> None:
     assert np.allclose(center, [1, 2, 3], atol=0.1)
 
 
+def test_sphere_has_faces() -> None:
+    """Test that Sphere generates face connectivity for mesh serialization."""
+    sphere = Sphere(theta_resolution=10, phi_resolution=10)
+    assert sphere.faces is not None
+    assert sphere.n_faces > 0
+    # All face indices must be valid point indices
+    assert sphere.faces.max() < sphere.n_points
+    assert sphere.faces.min() >= 0
+
+
 def test_cube_creation() -> None:
     """Test cube primitive creation."""
     cube = Cube()
@@ -171,12 +181,12 @@ def test_shrink_scene_data_contains_shrink_filter() -> None:
     assert filters[-1]["shrinkFactor"] == 0.5
 
 
-def test_shrink_scene_data_has_source_type() -> None:
-    """Test that shrunk mesh scene data preserves the source type."""
+def test_shrink_scene_data_uses_mesh_type() -> None:
+    """Test that shrunk mesh scene data uses 'mesh' type so JS avoids getOutputData()."""
     sphere = Sphere()
     shrunk = sphere.shrink(shrink_factor=0.8)
     scene = shrunk.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
 
 
 def test_shrink_invalid_factor() -> None:
@@ -258,12 +268,12 @@ def test_clip_scene_data_contains_clip_filter() -> None:
     assert filters[-1]["origin"] == [0.0, 0.0, 0.0]
 
 
-def test_clip_scene_data_has_source_type() -> None:
-    """Test that clipped mesh scene data preserves the source type."""
+def test_clip_scene_data_uses_mesh_type() -> None:
+    """Test that clipped mesh scene data uses 'mesh' type so JS avoids getOutputData()."""
     sphere = Sphere()
     clipped = sphere.clip(normal="x", origin=(0, 0, 0))
     scene = clipped.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
 
 
 def test_clip_invalid_normal_string() -> None:
@@ -404,13 +414,13 @@ def test_contour_with_list_isosurfaces() -> None:
     assert contour_filter["values"] == [0.0, 0.5, 1.0]
 
 
-def test_contour_scene_data_has_source_type() -> None:
-    """Test that contour scene data preserves the source type."""
+def test_contour_scene_data_uses_mesh_type() -> None:
+    """Test that contour scene data uses 'mesh' type so JS avoids getOutputData()."""
     sphere = Sphere()
     scalars = sphere.points[:, 2]
     contours = sphere.contour(isosurfaces=5, scalars=scalars)
     scene = contours.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
     assert scene["filters"][-1]["type"] == "contour"
 
 

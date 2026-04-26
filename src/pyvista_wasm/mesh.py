@@ -437,14 +437,7 @@ class PolyData:
             msg = f"shrink_factor must be between 0 and 1, got {shrink_factor}"
             raise ValueError(msg)
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._to_mesh_scene_data()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -556,14 +549,7 @@ class PolyData:
             o = [float(x) for x in origin]
             origin = (o[0], o[1], o[2])
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._to_mesh_scene_data()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -727,14 +713,7 @@ class PolyData:
         # Generate contour values
         contour_values = self._get_contour_values(isosurfaces, scalar_data)
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._to_mesh_scene_data()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -831,6 +810,50 @@ class PolyData:
             _scene_data=self._scene_data,
         )
 
+    def _faces_to_legacy_polys(self) -> list[int]:
+        """Convert faces to flat VTK legacy polys format.
+
+        Returns
+        -------
+        list of int
+            Flat array ``[n0, v0, v1, ..., n1, w0, w1, ...]`` consumed by
+            ``createMeshSource`` in the TypeScript renderer.
+
+        """
+        if self.faces is None:
+            return []
+        if self.faces.ndim == 1:
+            return self.faces.tolist()
+        result: list[int] = []
+        for face in self.faces:
+            result.append(len(face))
+            result.extend(int(v) for v in face)
+        return result
+
+    def _to_mesh_scene_data(self) -> dict[str, object]:
+        """Serialize geometry as ``type: "mesh"`` with explicit points and polys.
+
+        Built-in source types (sphere, cone, etc.) delegate geometry generation
+        to VTK.wasm algorithms whose ``getOutputData()`` returns null in
+        rendering-mode WASM.  Calling this method produces a plain mesh payload
+        that JavaScript can build directly via ``createMeshSource()`` without
+        ever calling ``getOutputData()``.
+
+        Returns
+        -------
+        dict
+            Scene data with ``"type": "mesh"`` and ``"points"``/``"polys"`` fields.
+
+        """
+        data: dict[str, object] = {
+            "type": "mesh",
+            "points": self.points.flatten().tolist(),
+        }
+        polys = self._faces_to_legacy_polys()
+        if polys:
+            data["polys"] = polys
+        return data
+
     def to_scene_data(self) -> dict[str, object]:
         """Return a JSON-serializable dict describing this mesh source.
 
@@ -847,8 +870,9 @@ class PolyData:
                 "type": "mesh",
                 "points": self.points.flatten().tolist(),
             }
-            if self.faces is not None:
-                data["polys"] = self.faces.tolist()
+            polys = self._faces_to_legacy_polys()
+            if polys:
+                data["polys"] = polys
 
         # Inject texture coordinates
         if self.t_coords is not None:
@@ -960,8 +984,29 @@ def Sphere(  # noqa: N802
             z = radius * np.cos(phi) + center[2]
             points.append([x, y, z])
 
+    # Generate triangulated faces matching the point ordering above.
+    # intermediate_count = phi_resolution - 2 rows per theta strip
+    ic = phi_resolution - 2
+    T = theta_resolution
+    faces = []
+    for i in range(T):
+        ni = (i + 1) % T
+        # North-pole cap triangle
+        faces.append([0, 2 + i * ic, 2 + ni * ic])
+        # South-pole cap triangle
+        faces.append([1, 2 + ni * ic + ic - 1, 2 + i * ic + ic - 1])
+        # Side quads split into two triangles
+        for j in range(ic - 1):
+            p0 = 2 + i * ic + j
+            p1 = 2 + ni * ic + j
+            p2 = 2 + ni * ic + j + 1
+            p3 = 2 + i * ic + j + 1
+            faces.append([p0, p1, p2])
+            faces.append([p0, p2, p3])
+
     return PolyData(
         points=np.array(points),
+        faces=np.array(faces),
         _scene_data={
             "type": "sphere",
             "center": list(center),
