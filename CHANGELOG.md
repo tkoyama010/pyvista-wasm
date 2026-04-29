@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.7.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.6.0...pyvista-wasm-v0.7.0) (2026-04-29)
+
+
+### Features
+
+* add marimo preview GIF capture workflow and CLI command ([#144](https://github.com/tkoyama010/pyvista-wasm/issues/144)) ([8eeb2d4](https://github.com/tkoyama010/pyvista-wasm/commit/8eeb2d4c44833fd88e63beb247184c4f1e6f4201))
+
+
+### Bug Fixes
+
+* always normalize screenshot channels when creating GIF ([#148](https://github.com/tkoyama010/pyvista-wasm/issues/148)) ([1d6e8d8](https://github.com/tkoyama010/pyvista-wasm/commit/1d6e8d838bae3bc0be7ca0e94be2bf90ef8a8288))
+* normalize screenshot sizes before creating GIF ([#146](https://github.com/tkoyama010/pyvista-wasm/issues/146)) ([c64db0a](https://github.com/tkoyama010/pyvista-wasm/commit/c64db0a8652a717a0903e03905d556aef77d36f1))
+
+
+### Documentation
+
+* add AGENTS.md and CLAUDE.md for AI coding agents ([#142](https://github.com/tkoyama010/pyvista-wasm/issues/142)) ([46e1645](https://github.com/tkoyama010/pyvista-wasm/commit/46e164574c9f07efe497bf8df639e5c2d210bcea))
+* add issue template instructions to AGENTS.md ([#153](https://github.com/tkoyama010/pyvista-wasm/issues/153)) ([f061ab5](https://github.com/tkoyama010/pyvista-wasm/commit/f061ab5e1d5f26fa26b10d98af692fbf017fdff4))
+* add project goal to AGENTS.md ([#150](https://github.com/tkoyama010/pyvista-wasm/issues/150)) ([0d78779](https://github.com/tkoyama010/pyvista-wasm/commit/0d7877966928ad5a95c4713b3e29db9b6cdcc708))
+* add test conventions to AGENTS.md ([#149](https://github.com/tkoyama010/pyvista-wasm/issues/149)) ([feb0e1e](https://github.com/tkoyama010/pyvista-wasm/commit/feb0e1eb0c7213d0ff04c712ea9d6a313a9d34d8))
+* align PR template with why-focused writing guidelines ([#152](https://github.com/tkoyama010/pyvista-wasm/issues/152)) ([f9cb7c6](https://github.com/tkoyama010/pyvista-wasm/commit/f9cb7c68bd19bd53b71c62f48de34f879d6caa8b))
+* clarify PR instructions for commit message content ([#145](https://github.com/tkoyama010/pyvista-wasm/issues/145)) ([6dac1dd](https://github.com/tkoyama010/pyvista-wasm/commit/6dac1dd9f9c4eda3e05c0c52d007098535bb4f3e))
+* instruct agents to monitor CI after creating a PR ([#147](https://github.com/tkoyama010/pyvista-wasm/issues/147)) ([6fad018](https://github.com/tkoyama010/pyvista-wasm/commit/6fad018e357ed35e4c799c7edab70179f4d4d6ac))
+
 ## [0.6.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.5.1...pyvista-wasm-v0.6.0) (2026-04-16)
 
 ### Features
