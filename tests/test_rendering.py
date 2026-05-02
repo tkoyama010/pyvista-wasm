@@ -633,7 +633,7 @@ class TestMarimoRenderer:
 
         # Mock marimo module
         class MockMarimo:
-            class output:
+            class output:  # noqa: N801
                 @staticmethod
                 def append(obj):
                     pass
@@ -654,7 +654,7 @@ class TestMarimoRenderer:
         monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
 
         class MockMarimo:
-            class output:
+            class output:  # noqa: N801
                 @staticmethod
                 def append(obj):
                     pass
@@ -704,7 +704,7 @@ class TestMarimoRenderer:
         monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
 
         class MockMarimo:
-            class output:
+            class output:  # noqa: N801
                 @staticmethod
                 def append(obj):
                     pass
@@ -727,7 +727,7 @@ class TestMarimoRenderer:
         monkeypatch.setattr(rendering, "VTK_AVAILABLE", True)
 
         class MockMarimo:
-            class output:
+            class output:  # noqa: N801
                 @staticmethod
                 def append(obj):
                     pass

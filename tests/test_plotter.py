@@ -1372,11 +1372,11 @@ class TestCaptureMarimoPreview:
         render_called = []
 
         class MockMarimoRenderer:
-            def __init__(self, **kwargs):
+            def __init__(self, **_kwargs):
                 self.actors = []
                 self._container_id = "test-container"
 
-            def add_mesh_actor(self, mesh, **kwargs):
+            def add_mesh_actor(self, mesh, **_kwargs):
                 self.actors.append({"mesh": mesh})
                 return {"mesh": mesh}
 

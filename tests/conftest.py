@@ -12,6 +12,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from pyvista_wasm import rendering
+
 
 @pytest.fixture(autouse=True)
 def reset_renderer_flags(monkeypatch):
@@ -25,8 +27,6 @@ def reset_renderer_flags(monkeypatch):
     causes get_renderer() to return VTKWasmRenderer instead of BrowserRenderer
     or MockRenderer.
     """
-    from pyvista_wasm import rendering
-
     monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
     monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
