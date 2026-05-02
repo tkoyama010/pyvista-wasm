@@ -138,14 +138,7 @@ except ImportError:
     display = None  # type: ignore[assignment]
 
 # Check if marimo is available
-MARIMO_AVAILABLE = False
-if "marimo" in sys.modules:
-    try:
-        import marimo as _marimo
-
-        MARIMO_AVAILABLE = True
-    except ImportError:
-        pass
+MARIMO_AVAILABLE = "marimo" in sys.modules
 
 
 class _VTKWasmLoader:
