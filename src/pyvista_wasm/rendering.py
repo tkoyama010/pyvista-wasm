@@ -137,6 +137,9 @@ except ImportError:
     Javascript = None  # type: ignore[assignment]
     display = None  # type: ignore[assignment]
 
+# Check if marimo is available
+MARIMO_AVAILABLE = "marimo" in sys.modules
+
 
 class _VTKWasmLoader:
     """Singleton class to manage VTK.wasm library loading."""
@@ -1078,25 +1081,8 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
         """
         if self.use_ipython:
-            import sys  # noqa: PLC0415
-
-            if "marimo" in sys.modules:
-                # marimo does not execute display(Javascript(...)); use mo.output.append instead
-                import marimo as mo  # noqa: PLC0415
-
-                html_content = self.generate_standalone_html()
-                escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
-                mo.output.append(  # type: ignore[attr-defined]
-                    mo.Html(  # type: ignore[attr-defined]
-                        f'<iframe srcdoc="{escaped}" '
-                        'style="width:100%;height:400px;min-height:400px;'
-                        'border:2px solid #333;" '
-                        'sandbox="allow-scripts"></iframe>',
-                    ),
-                )
-            else:
-                js_code = self._generate_render_js()
-                display(Javascript(js_code))
+            js_code = self._generate_render_js()
+            display(Javascript(js_code))
         else:
             # Direct rendering
             self.renderer.resetCamera()  # type: ignore[attr-defined]
@@ -1145,6 +1131,131 @@ def _playwright_capture(html_path: str, w: int, h: int, omit_bg: bool) -> bytes:
         data = pg.screenshot(type="png", omit_background=omit_bg)
         browser.close()
     return data
+
+
+class MarimoRenderer(_BaseHTMLRenderer):
+    """Renderer for marimo notebooks.
+
+    This renderer generates an iframe with the visualization and appends
+    it to marimo's output using mo.output.append(). This enables
+    automatic inline rendering when plotter.show() is called in marimo.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> plotter = pv.Plotter()  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(pv.Sphere(), color='red')  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
+        """Initialize the marimo renderer.
+
+        Parameters
+        ----------
+        lighting : str or None, optional
+            Lighting mode. ``"default"`` creates a default directional light,
+            ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
+
+        Raises
+        ------
+        RuntimeError
+            If marimo is not available.
+
+        """
+        if not MARIMO_AVAILABLE:
+            msg = "MarimoRenderer requires marimo to be installed and imported"
+            raise RuntimeError(msg)
+
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+
+    def render(self) -> object:
+        """Render the scene in marimo.
+
+        Generates an iframe with the visualization and appends it to
+        marimo's output using mo.output.append().
+
+        Returns
+        -------
+        object
+            The marimo Html object that was appended to output.
+
+        Examples
+        --------
+        >>> renderer = MarimoRenderer()  # doctest: +SKIP
+        >>> renderer.add_mesh_actor(Sphere(), color='red')  # doctest: +SKIP
+        >>> renderer.render()  # doctest: +SKIP
+
+        """
+        import marimo as mo  # noqa: PLC0415
+
+        html_content = self.generate_standalone_html()
+        escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+        html_widget = mo.Html(
+            f'<iframe srcdoc="{escaped}" '
+            'style="width:100%;height:400px;min-height:400px;'
+            'border:2px solid #333;" '
+            'sandbox="allow-scripts"></iframe>',
+        )
+        mo.output.append(html_widget)
+        return html_widget
+
+    def screenshot(
+        self,
+        filename: str | Path | None = None,
+        transparent_background: bool | None = None,  # noqa: FBT001
+        return_img: bool = True,  # noqa: FBT001, FBT002
+        window_size: tuple[int, int] | list[int] | None = None,
+        scale: int | None = None,
+    ) -> np.ndarray | None:
+        """Take a screenshot of the rendered scene.
+
+        This method raises NotImplementedError because marimo does not
+        support direct screenshot capture. Use BrowserRenderer for
+        screenshots in standard Python environments.
+
+        Parameters
+        ----------
+        filename : str, Path, or None, optional
+            File path to save the image.
+        transparent_background : bool or None, optional
+            Whether to make the background transparent.
+        return_img : bool, optional
+            If True, return a numpy array of the image.
+        window_size : tuple or list of int, optional
+            Window size as (width, height).
+        scale : int or None, optional
+            Scale factor for higher resolution.
+
+        Returns
+        -------
+        numpy.ndarray or None
+            Image data as numpy array if return_img is True, otherwise None.
+
+        Raises
+        ------
+        NotImplementedError
+            Screenshots are not supported in marimo environments.
+
+        """
+        msg = "screenshot() is not supported in marimo. Use BrowserRenderer instead."
+        raise NotImplementedError(msg)
 
 
 class BrowserRenderer(_BaseHTMLRenderer):
@@ -1745,10 +1856,10 @@ def get_renderer(
     lighting: str | None = "default",
     wasm_rendering: str = "webgl",
     wasm_mode: str = "sync",
-) -> VTKWasmRenderer | BrowserRenderer | MockRenderer:
+) -> VTKWasmRenderer | MarimoRenderer | BrowserRenderer | MockRenderer:
     """Get appropriate renderer for current environment.
 
-    Automatically detects whether running in Pyodide/browser and
+    Automatically detects whether running in Pyodide/browser/marimo and
     returns the appropriate renderer implementation.
 
     Parameters
@@ -1765,7 +1876,8 @@ def get_renderer(
 
     Returns
     -------
-    VTKWasmRenderer or BrowserRenderer or MockRenderer
+    VTKWasmRenderer or MarimoRenderer or BrowserRenderer or MockRenderer
+        - MarimoRenderer if in marimo environment
         - VTKWasmRenderer if in Pyodide or IPython environment
         - BrowserRenderer in standard Python (opens the default browser)
         - MockRenderer if ``PYVISTA_JS_NO_BROWSER=1`` is set (for testing/CI)
@@ -1774,9 +1886,10 @@ def get_renderer(
     --------
     >>> # Automatically gets the right renderer
     >>> renderer = get_renderer()  # doctest: +SKIP
+    >>> # In marimo: returns MarimoRenderer
     >>> # In Pyodide or Jupyter: returns VTKWasmRenderer
     >>> # In standard Python: returns BrowserRenderer (opens browser)
-    >>> # Same code works in both environments
+    >>> # Same code works in all environments
     >>> from pyvista_wasm import Sphere  # doctest: +SKIP
     >>> mesh = Sphere()  # doctest: +SKIP
     >>> renderer.add_mesh_actor(mesh, color='blue')  # doctest: +SKIP
@@ -1792,6 +1905,13 @@ def get_renderer(
     browser opening (useful for CI/CD and automated testing).
 
     """
+    # Check for marimo first (highest priority for WASM notebooks)
+    if MARIMO_AVAILABLE:
+        return MarimoRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
     # Use VTKWasmRenderer if in Pyodide with VTK.wasm OR if IPython is available
     if (PYODIDE_ENV and VTK_AVAILABLE) or IPYTHON_AVAILABLE:
         return VTKWasmRenderer(
