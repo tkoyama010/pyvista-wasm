@@ -1,6 +1,7 @@
 """Test vtk.js rendering backend."""
 
 import logging
+import sys
 
 import pytest
 
@@ -8,8 +9,11 @@ from pyvista_wasm import Cube, Cylinder, PolyData, Sphere, rendering
 from pyvista_wasm.rendering import BrowserRenderer, MockRenderer, get_renderer
 
 
-def test_get_renderer_returns_browser() -> None:
-    """Test that get_renderer returns BrowserRenderer in standard Python env."""
+def test_get_renderer_returns_browser(monkeypatch) -> None:
+    """Test that get_renderer returns BrowserRenderer when IPython not available."""
+    monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
     renderer = get_renderer()
     assert isinstance(renderer, BrowserRenderer)
 
@@ -612,3 +616,158 @@ def test_mock_renderer_stores_wasm_config() -> None:
     renderer = rendering.MockRenderer(wasm_rendering="webgpu", wasm_mode="async")
     assert renderer._wasm_rendering == "webgpu"
     assert renderer._wasm_mode == "async"
+
+
+class TestMarimoRenderer:
+    """Tests for MarimoRenderer class."""
+
+    def test_marimo_renderer_requires_marimo(self, monkeypatch) -> None:
+        """Test that MarimoRenderer raises RuntimeError when marimo is not available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        with pytest.raises(RuntimeError, match="marimo"):
+            rendering.MarimoRenderer()
+
+    def test_marimo_renderer_creation(self, monkeypatch) -> None:
+        """Test MarimoRenderer initialization when marimo is available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        # Mock marimo module
+        class MockMarimo:
+            class output:
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        assert renderer is not None
+        assert renderer._wasm_rendering == "webgl"
+        assert renderer._wasm_mode == "sync"
+
+    def test_marimo_renderer_with_wasm_config(self, monkeypatch) -> None:
+        """Test MarimoRenderer with custom wasm config."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer(wasm_rendering="webgpu", wasm_mode="async")
+        assert renderer._wasm_rendering == "webgpu"
+        assert renderer._wasm_mode == "async"
+
+    def test_marimo_renderer_render_returns_html(self, monkeypatch) -> None:
+        """Test that MarimoRenderer.render() returns Html object."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        captured = []
+
+        class MockHtml:
+            def __init__(self, content):
+                self.content = content
+                captured.append(self)
+
+        class MockOutput:
+            @staticmethod
+            def append(obj):
+                pass
+
+        class MockMarimo:
+            output = MockOutput()
+            Html = MockHtml
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+        result = renderer.render()
+
+        assert result is not None
+        assert isinstance(result, MockHtml)
+        assert "iframe" in result.content
+
+    def test_marimo_renderer_screenshot_raises(self, monkeypatch) -> None:
+        """Test that MarimoRenderer.screenshot() raises NotImplementedError."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        with pytest.raises(NotImplementedError):
+            renderer.screenshot()
+
+    def test_get_renderer_returns_marimo_when_available(self, monkeypatch) -> None:
+        """Test that get_renderer returns MarimoRenderer when marimo is available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", True)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.MarimoRenderer)
+
+    def test_marimo_renderer_html_escaping(self, monkeypatch) -> None:
+        """Test that HTML content is properly escaped for iframe srcdoc."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        captured = []
+
+        class MockHtml:
+            def __init__(self, content):
+                self.content = content
+                captured.append(self)
+
+        class MockOutput:
+            @staticmethod
+            def append(obj):
+                pass
+
+        class MockMarimo:
+            output = MockOutput()
+            Html = MockHtml
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red&blue")
+        result = renderer.render()
+
+        # Check that & is escaped to &amp;
+        assert "&amp;" in result.content
+        # Check that " is escaped to &quot;
+        assert "&quot;" in result.content
