@@ -31,7 +31,6 @@ def reset_renderer_flags(monkeypatch):
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
     monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
     monkeypatch.setattr(rendering, "VTK_AVAILABLE", False)
-    yield
 
 
 def extract_scene_data(html: str) -> dict:

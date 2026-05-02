@@ -141,7 +141,7 @@ except ImportError:
 MARIMO_AVAILABLE = False
 if "marimo" in sys.modules:
     try:
-        import marimo as _marimo  # noqa: PLC0415
+        import marimo as _marimo
 
         MARIMO_AVAILABLE = True
     except ImportError:

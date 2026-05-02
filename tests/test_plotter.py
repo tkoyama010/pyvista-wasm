@@ -53,7 +53,7 @@ def test_multiple_meshes() -> None:
 
 def test_show(monkeypatch) -> None:
     """Test show method opens browser with a file:// URL."""
-    import pyvista_wasm.rendering as rendering  # noqa: PLC0415
+    from pyvista_wasm import rendering  # noqa: PLC0415
 
     opened: list[str] = []
 
@@ -1363,10 +1363,6 @@ class TestCaptureMarimoPreview:
 
     def test_plotter_show_returns_result_in_marimo(self, monkeypatch) -> None:
         """Test that plotter.show() returns renderer result in marimo."""
-        import sys  # noqa: PLC0415
-
-        from pyvista_wasm.rendering import MarimoRenderer  # noqa: PLC0415
-
         # Mock marimo environment
         monkeypatch.setattr("pyvista_wasm.rendering.MARIMO_AVAILABLE", True)
         monkeypatch.setattr("pyvista_wasm.rendering.IPYTHON_AVAILABLE", False)
