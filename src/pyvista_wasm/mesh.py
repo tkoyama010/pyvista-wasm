@@ -987,10 +987,10 @@ def Sphere(  # noqa: N802
     # Generate triangulated faces matching the point ordering above.
     # intermediate_count = phi_resolution - 2 rows per theta strip
     ic = phi_resolution - 2
-    T = theta_resolution
+    t = theta_resolution
     faces = []
-    for i in range(T):
-        ni = (i + 1) % T
+    for i in range(t):
+        ni = (i + 1) % t
         # North-pole cap triangle
         faces.append([0, 2 + i * ic, 2 + ni * ic])
         # South-pole cap triangle
