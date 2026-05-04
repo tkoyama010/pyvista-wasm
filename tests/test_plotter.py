@@ -53,7 +53,7 @@ def test_multiple_meshes() -> None:
 
 def test_show(monkeypatch) -> None:
     """Test show method opens browser with a file:// URL."""
-    from pyvista_wasm import rendering
+    from pyvista_wasm import rendering  # noqa: PLC0415
 
     opened: list[str] = []
 
@@ -61,7 +61,9 @@ def test_show(monkeypatch) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
 
     plotter = Plotter()
     plotter.add_mesh(Sphere())
@@ -1370,3 +1372,75 @@ def test_plotter_wasm_config_invalid_mode() -> None:
     """Test that Plotter raises ValueError for invalid wasm_mode."""
     with pytest.raises(ValueError, match="wasm_mode"):
         Plotter(wasm_mode="parallel")
+
+
+class TestCaptureMarimoPreview:
+    """Tests for marimo integration in Plotter.show()."""
+
+    def test_plotter_show_returns_result_in_marimo(self, monkeypatch) -> None:
+        """Test that plotter.show() returns renderer result in marimo."""
+        # Mock marimo environment
+        monkeypatch.setattr("pyvista_wasm.rendering.MARIMO_AVAILABLE", True)
+        monkeypatch.setattr("pyvista_wasm.rendering.IPYTHON_AVAILABLE", False)
+        monkeypatch.setattr("pyvista_wasm.rendering.PYODIDE_ENV", False)
+
+        # Track whether render was called and what it returned
+        render_called = []
+
+        class MockMarimoRenderer:
+            def __init__(self, **_kwargs):
+                self.actors = []
+                self._container_id = "test-container"
+
+            def add_mesh_actor(self, mesh, **_kwargs):
+                self.actors.append({"mesh": mesh})
+                return {"mesh": mesh}
+
+            def create_container(self, element_id):
+                self._container_id = element_id
+
+            def render(self):
+                mock_result = "mock_html_result"
+                render_called.append(mock_result)
+                return mock_result
+
+        monkeypatch.setattr("pyvista_wasm.rendering.MarimoRenderer", MockMarimoRenderer)
+
+        # Mock get_renderer to return our mock
+        def mock_get_renderer(**kwargs):
+            return MockMarimoRenderer(**kwargs)
+
+        monkeypatch.setattr("pyvista_wasm.plotter.get_renderer", mock_get_renderer)
+
+        plotter = Plotter()
+        plotter.add_mesh(Sphere())
+        result = plotter.show()
+
+        assert render_called
+        assert result == "mock_html_result"
+
+    def test_plotter_show_returns_none_in_browser(self, monkeypatch) -> None:
+        """Test that plotter.show() returns None in standard browser mode."""
+        import webbrowser  # noqa: PLC0415
+
+        from pyvista_wasm.rendering import BrowserRenderer  # noqa: PLC0415
+
+        opened = []
+
+        def mock_open(url):
+            opened.append(url)
+
+        monkeypatch.setattr(webbrowser, "open", mock_open)
+
+        # Ensure BrowserRenderer is returned by mocking get_renderer
+        def mock_get_renderer(**kwargs):
+            return BrowserRenderer(**kwargs)
+
+        monkeypatch.setattr("pyvista_wasm.plotter.get_renderer", mock_get_renderer)
+
+        plotter = Plotter()
+        plotter.add_mesh(Sphere())
+        result = plotter.show()
+
+        assert opened
+        assert result is None

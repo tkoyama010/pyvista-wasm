@@ -368,10 +368,11 @@ class Plotter:
         | list[tuple[float, float, float]]
         | list[list[float]]
         | None = None,
-    ) -> None:
+    ) -> object | None:
         """Display the visualization.
 
         In browser environments, this will render the scene using VTK.wasm.
+        In marimo, returns the Html object for display.
 
         Parameters
         ----------
@@ -386,6 +387,12 @@ class Plotter:
             - Direction vector: 3-element tuple/list (x, y, z)
             - Full camera spec: 3-tuple/list of 3-tuples/lists:
               [(position), (focal_point), (view_up)]
+
+        Returns
+        -------
+        object or None
+            In marimo environments, returns the Html widget for display.
+            In other environments, returns None.
 
         Examples
         --------
@@ -422,8 +429,8 @@ class Plotter:
         # Create container if needed
         self._renderer.create_container(container_id or self._container_id)
 
-        # Render the scene
-        self._renderer.render()
+        # Render the scene and return the result (for marimo Html)
+        return self._renderer.render()
 
     def generate_standalone_html(self) -> str:
         """Generate a complete standalone HTML page with the current scene.

@@ -12,6 +12,26 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from pyvista_wasm import rendering
+
+
+@pytest.fixture(autouse=True)
+def reset_renderer_flags(monkeypatch):
+    """Reset renderer environment flags to simulate standard Python environment.
+
+    This fixture ensures tests run in a consistent environment by default,
+    with MARIMO_AVAILABLE, IPYTHON_AVAILABLE, and PYODIDE_ENV set to False.
+    Tests that need specific environments should mock these values explicitly.
+
+    This prevents issues where IPython being available in the test environment
+    causes get_renderer() to return VTKWasmRenderer instead of BrowserRenderer
+    or MockRenderer.
+    """
+    monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
+    monkeypatch.setattr(rendering, "VTK_AVAILABLE", False)
+
 
 def extract_scene_data(html: str) -> dict:
     """Extract and parse the JSON scene data from generated HTML.
