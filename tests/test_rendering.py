@@ -8,8 +8,9 @@ from pyvista_wasm import Cube, Cylinder, PolyData, Sphere, rendering
 from pyvista_wasm.rendering import BrowserRenderer, MockRenderer, get_renderer
 
 
-def test_get_renderer_returns_browser() -> None:
-    """Test that get_renderer returns BrowserRenderer in standard Python env."""
+def test_get_renderer_returns_browser(monkeypatch) -> None:
+    """Test that get_renderer returns BrowserRenderer when IPython not available."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
     renderer = get_renderer()
     assert isinstance(renderer, BrowserRenderer)
 

@@ -121,8 +121,11 @@ def test_bounding_sphere(mesh_factory, expected_radius, expected_center) -> None
 
 def test_mesh_plot(monkeypatch) -> None:
     """Test that Mesh.plot() creates a plotter, adds the mesh, and shows it."""
+    from pyvista_wasm import rendering
+
     opened: list[str] = []
     monkeypatch.setattr(webbrowser, "open", opened.append)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     sphere = Sphere(radius=1.0)
     sphere.plot(color="red")
@@ -133,8 +136,11 @@ def test_mesh_plot(monkeypatch) -> None:
 
 def test_mesh_plot_with_kwargs(monkeypatch) -> None:
     """Test that Mesh.plot() passes kwargs to add_mesh."""
+    from pyvista_wasm import rendering
+
     opened: list[str] = []
     monkeypatch.setattr(webbrowser, "open", opened.append)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     cube = Cube()
     cube.plot(color="blue", opacity=0.5)
@@ -144,8 +150,11 @@ def test_mesh_plot_with_kwargs(monkeypatch) -> None:
 
 def test_generic_mesh_plot(monkeypatch) -> None:
     """Test that generic PolyData instances can also use plot()."""
+    from pyvista_wasm import rendering
+
     opened: list[str] = []
     monkeypatch.setattr(webbrowser, "open", opened.append)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0]])
     mesh = PolyData(points)

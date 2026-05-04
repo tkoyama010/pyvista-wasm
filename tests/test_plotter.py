@@ -7,7 +7,7 @@ import webbrowser
 import numpy as np
 import pytest
 
-from pyvista_wasm import Camera, Cube, Cylinder, Plotter, PolyData, Sphere
+from pyvista_wasm import Camera, Cube, Cylinder, Plotter, PolyData, Sphere, rendering
 
 
 def test_plotter_creation() -> None:
@@ -53,12 +53,15 @@ def test_multiple_meshes() -> None:
 
 def test_show(monkeypatch) -> None:
     """Test show method opens browser with a file:// URL."""
+    from pyvista_wasm import rendering
+
     opened: list[str] = []
 
     def _capture(url: str) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     plotter = Plotter()
     plotter.add_mesh(Sphere())
@@ -1178,8 +1181,10 @@ def test_scalar_bar_updates_renderer() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_returns_array() -> None:
+def test_screenshot_returns_array(monkeypatch) -> None:
     """Test that screenshot returns a numpy array."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1193,8 +1198,10 @@ def test_screenshot_returns_array() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_with_filename(tmp_path) -> None:
+def test_screenshot_with_filename(tmp_path, monkeypatch) -> None:
     """Test that screenshot saves to file."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1209,8 +1216,10 @@ def test_screenshot_with_filename(tmp_path) -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_no_return_img(tmp_path) -> None:
+def test_screenshot_no_return_img(tmp_path, monkeypatch) -> None:
     """Test screenshot with return_img=False."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1224,8 +1233,10 @@ def test_screenshot_no_return_img(tmp_path) -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_transparent_background() -> None:
+def test_screenshot_transparent_background(monkeypatch) -> None:
     """Test screenshot with transparent background."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1238,8 +1249,10 @@ def test_screenshot_transparent_background() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_window_size() -> None:
+def test_screenshot_window_size(monkeypatch) -> None:
     """Test screenshot with custom window size."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1252,8 +1265,10 @@ def test_screenshot_window_size() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_with_scale() -> None:
+def test_screenshot_with_scale(monkeypatch) -> None:
     """Test screenshot with scale factor."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1267,8 +1282,10 @@ def test_screenshot_with_scale() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_filename_only() -> None:
+def test_screenshot_filename_only(monkeypatch) -> None:
     """Test screenshot with only filename, no return."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
@@ -1284,8 +1301,10 @@ def test_screenshot_filename_only() -> None:
 
 
 @pytest.mark.playwright
-def test_screenshot_default_parameters() -> None:
+def test_screenshot_default_parameters(monkeypatch) -> None:
     """Test screenshot with default parameters."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
