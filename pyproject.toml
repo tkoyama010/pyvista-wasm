@@ -54,6 +54,7 @@ optional-dependencies.dev = [
   "tox>=4.0.0,<4.54.0",
 ]
 optional-dependencies.docs = [
+  "jupyter-server>=2.18.0; python_version>='3.12' and python_version<'3.14'",
   "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.12' and python_version<'3.14'",
   "jupyterlite-sphinx==0.22.1; python_version>='3.12' and python_version<'3.14'",
   "jupytext>=1.16.0,<1.20.0; python_version>='3.12'",
