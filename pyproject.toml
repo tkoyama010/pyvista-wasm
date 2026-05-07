@@ -67,7 +67,7 @@ optional-dependencies.marimo = [
   "marimo>=0.10.0,<0.24.0",
 ]
 optional-dependencies.streamlit = [
-  "streamlit>=1.30.0,<1.57.0",
+  "streamlit>=1.30.0,<1.58.0",
 ]
 urls.Documentation = "https://github.com/tkoyama010/pyvista-wasm"
 urls.Homepage = "https://github.com/tkoyama010/pyvista-wasm"
