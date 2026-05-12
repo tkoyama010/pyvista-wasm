@@ -27,13 +27,13 @@ repos:
         additional_dependencies: ['mdformat-toc==0.5.0']
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.21.1"
+    rev: "v2.21.2"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.8
+    rev: 0.11.13
     hooks:
       - id: uv-lock
 
@@ -56,7 +56,7 @@ repos:
         files: src/pyvista_wasm/templates/.*\.html$
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.4.14
+    rev: v2.4.15
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.4.10"]
@@ -77,7 +77,7 @@ repos:
       - id: sp-repo-review
         additional_dependencies: ["repo-review[cli]"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.20.2
+    rev: v2.0.0
     hooks:
       - id: mypy
         files: ^src/.*\.py$
@@ -96,7 +96,7 @@ repos:
       - id: codespell
 
   - repo: https://github.com/tkoyama010/standard-readme-pre-commit
-    rev: 06556851a2b176081b1e9af76392f6326201a7c8
+    rev: 8a8642b27b2d8dad2413a7df7eb5c8c1c635d0a2
     hooks:
       - id: standard-readme
 
