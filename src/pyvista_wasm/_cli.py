@@ -1145,11 +1145,6 @@ def capture_stlite_preview(
     logger.info("stlite preview GIF saved to: %s", output_path)
 
 
-# ---------------------------------------------------------------------------
-# api-coverage subcommand
-# ---------------------------------------------------------------------------
-
-
 def _get_public_api(cls: type, module_prefix: str) -> set[str]:
     """Return public method/property names defined within module_prefix."""
     skip = set(dir(object))
