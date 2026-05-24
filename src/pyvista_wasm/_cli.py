@@ -20,9 +20,6 @@ from ._capture import (
     _capture_screenshots,
     _capture_stlite_screenshots,
     _create_gif,
-    _find_canvas_in_frames,
-    _rotate_canvas_with_mouse,
-    _wait_for_canvas_in_frames,
 )
 
 if TYPE_CHECKING:
