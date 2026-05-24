@@ -1223,7 +1223,7 @@ def api_coverage(
     typer.echo("-" * 36)
     for name, data in results.items():
         typer.echo(
-            f"{name:<12} {data['covered']:>8} {data['pyvista']:>7} {data['percent']:>6.1f}%"
+            f"{name:<12} {data['covered']:>8} {data['pyvista']:>7} {data['percent']:>6.1f}%",
         )
 
     summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
@@ -1235,8 +1235,7 @@ def api_coverage(
             f.write("|-------|---------|-------|------|\n")
             for name, data in results.items():
                 f.write(
-                    f"| {name} | {data['covered']} | {data['pyvista']}"
-                    f" | {data['percent']}% |\n"
+                    f"| {name} | {data['covered']} | {data['pyvista']} | {data['percent']}% |\n",
                 )
 
     if output is not None:
