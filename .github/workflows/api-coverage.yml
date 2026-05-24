@@ -1,20 +1,22 @@
-name: API Coverage Badge
+name: API Coverage
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
 
 permissions: {}
 
 jobs:
-  badge:
+  coverage:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
         with:
@@ -25,19 +27,7 @@ jobs:
           enable-cache: false
 
       - name: Install dependencies
-        run: uv pip install --system pyvista "pyvista-wasm[dev]"
+        run: uv pip install --system pyvista ".[dev]"
 
-      - name: Generate coverage badge
-        run: pyvista-wasm api-coverage --output badges/coverage.json
-
-      - name: Commit badge
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add badges/coverage.json
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update API coverage badge [skip ci]"
-            git push
-          fi
+      - name: Report API coverage
+        run: pyvista-wasm api-coverage
