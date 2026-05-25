@@ -1145,6 +1145,115 @@ def capture_stlite_preview(
     logger.info("stlite preview GIF saved to: %s", output_path)
 
 
+def _get_public_api(cls: type, module_prefix: str) -> set[str]:
+    """Return public method/property names defined within module_prefix."""
+    skip = set(dir(object))
+    result: set[str] = set()
+    for klass in cls.__mro__:
+        mod = getattr(klass, "__module__", "") or ""
+        if not mod.startswith(module_prefix):
+            continue
+        for name, val in klass.__dict__.items():
+            if name.startswith("_") or name in skip:
+                continue
+            if callable(val) or isinstance(val, (property, classmethod, staticmethod)):
+                result.add(name)
+    return result
+
+
+@app.command(name="api-coverage")
+def api_coverage(
+    output: Annotated[
+        Path | None,
+        typer.Option(
+            help="Write shields.io badge JSON to this path (e.g. badges/coverage.json).",
+            metavar="PATH",
+        ),
+    ] = None,
+) -> None:
+    """Report PyVista API coverage for pyvista-wasm.
+
+    Compares the public APIs of Plotter, PolyData, Camera, and Light
+    against their pyvista equivalents and prints a coverage table.
+    """
+    import json  # noqa: PLC0415
+    import os  # noqa: PLC0415
+
+    try:
+        import pyvista as pv  # noqa: PLC0415
+    except ImportError:
+        typer.echo("Error: pyvista is required. Install it with: pip install pyvista", err=True)
+        raise typer.Exit(1) from None
+    import pyvista_wasm as pw  # noqa: PLC0415
+
+    class_pairs = [
+        ("Plotter", pv.Plotter, pw.Plotter),
+        ("PolyData", pv.PolyData, pw.PolyData),
+        ("Camera", pv.Camera, pw.Camera),
+        ("Light", pv.Light, pw.Light),
+    ]
+
+    results: dict[str, dict] = {}
+    total_pv = 0
+    total_covered = 0
+
+    for class_name, pv_cls, pw_cls in class_pairs:
+        pv_api = _get_public_api(pv_cls, "pyvista")
+        pw_api = _get_public_api(pw_cls, "pyvista_wasm")
+        covered = pv_api & pw_api
+        pct = len(covered) / len(pv_api) * 100 if pv_api else 0.0
+        results[class_name] = {
+            "pyvista": len(pv_api),
+            "covered": len(covered),
+            "percent": round(pct, 1),
+            "missing_methods": sorted(pv_api - pw_api),
+        }
+        total_pv += len(pv_api)
+        total_covered += len(covered)
+
+    overall = total_covered / total_pv * 100 if total_pv else 0.0
+
+    typer.echo(f"Overall: {overall:.1f}% ({total_covered}/{total_pv})\n")
+    typer.echo(f"{'Class':<12} {'Covered':>8} {'Total':>7} {'Rate':>7}")
+    typer.echo("-" * 36)
+    for name, data in results.items():
+        typer.echo(
+            f"{name:<12} {data['covered']:>8} {data['pyvista']:>7} {data['percent']:>6.1f}%",
+        )
+
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary_path:
+        with open(summary_path, "a") as f:  # noqa: PTH123
+            f.write("## PyVista API Coverage\n\n")
+            f.write(f"**Overall: {overall:.1f}% ({total_covered}/{total_pv})**\n\n")
+            f.write("| Class | Covered | Total | Rate |\n")
+            f.write("|-------|---------|-------|------|\n")
+            for name, data in results.items():
+                f.write(
+                    f"| {name} | {data['covered']} | {data['pyvista']} | {data['percent']}% |\n",
+                )
+
+    if output is not None:
+        if overall < 25:  # noqa: PLR2004
+            color = "red"
+        elif overall < 50:  # noqa: PLR2004
+            color = "orange"
+        elif overall < 75:  # noqa: PLR2004
+            color = "yellow"
+        else:
+            color = "brightgreen"
+
+        badge = {
+            "schemaVersion": 1,
+            "label": "API coverage",
+            "message": f"{overall:.0f}%",
+            "color": color,
+        }
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(badge, indent=2) + "\n")
+        typer.echo(f"\nBadge written to {output}")
+
+
 # ---------------------------------------------------------------------------
 # CLI entry point wrapper for backwards compatibility
 # ---------------------------------------------------------------------------
