@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.7.0...pyvista-wasm-v0.8.0) (2026-05-31)
+
+
+### Features
+
+* add shfmt to pre-commit for shell script formatting ([#175](https://github.com/tkoyama010/pyvista-wasm/issues/175)) ([0e29708](https://github.com/tkoyama010/pyvista-wasm/commit/0e297087c1947b826aab57181cf5ce4333f1fe15))
+* replace generate_standalone_html() iframe with plotter.show() in marimo demo ([#171](https://github.com/tkoyama010/pyvista-wasm/issues/171)) ([399642f](https://github.com/tkoyama010/pyvista-wasm/commit/399642fc012b720179ae14b166aed20346755e3c))
+
 ## [0.7.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.6.0...pyvista-wasm-v0.7.0) (2026-05-02)
 
 ### Features
