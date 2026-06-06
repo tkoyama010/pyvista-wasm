@@ -93,11 +93,11 @@ test = [
 ]
 
 [tool.hatch]
-build.targets.wheel.packages = [ "src/pyvista_wasm" ]
 build.artifacts = [ "src/pyvista_wasm/templates/renderer.js" ]
 build.hooks.build-scripts.scripts = [
   { commands = [ "npm ci", "npm run build" ], artifacts = [ "src/pyvista_wasm/templates/renderer.js" ] }
 ]
+build.targets.wheel.packages = [ "src/pyvista_wasm" ]
 
 [tool.ruff]
 line-length = 100
@@ -122,34 +122,31 @@ lint.flake8-pytest-style.parametrize-values-row-type = "tuple"
 lint.flake8-pytest-style.parametrize-values-type = "list"
 
 [tool.mypy]
+exclude = [ "src/pyvista_wasm/__init__\\.pyi" ]
+ignore_missing_imports = true
 python_version = "3.12"
-strict = false
-warn_unused_configs = true
+disallow_any_generics = false
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false
 warn_redundant_casts = true
+warn_unused_ignores = false
+warn_return_any = false
 warn_unreachable = true
-strict_equality = true
-no_implicit_optional = true
 enable_error_code = [
   "ignore-without-code",
   "redundant-expr",
   "truthy-bool",
 ]
-disallow_untyped_defs = false
-disallow_any_generics = false
-disallow_incomplete_defs = false
-warn_return_any = false
-warn_unused_ignores = false
-check_untyped_defs = false
-ignore_missing_imports = true
-exclude = [ "src/pyvista_wasm/__init__\\.pyi" ]
+strict_equality = true
+strict = false
+warn_unused_configs = true
 overrides = [ { module = "tests.*", disallow_untyped_defs = false, check_untyped_defs = false } ]
+no_implicit_optional = true
 
 [tool.pytest]
 ini_options.minversion = "6.0"
 ini_options.testpaths = [ "tests" ]
-ini_options.log_level = "INFO"
-ini_options.log_cli_level = "INFO"
-ini_options.xfail_strict = true
 ini_options.addopts = [
   "-ra",
   "--strict-config",
@@ -157,9 +154,12 @@ ini_options.addopts = [
   "--doctest-modules",
   "--import-mode=importlib",
 ]
-ini_options.filterwarnings = [
-  "error",
-]
 ini_options.markers = [
   "playwright: marks tests that use Playwright for browser automation (deselect with '-m \"not playwright\"')",
 ]
+ini_options.xfail_strict = true
+ini_options.filterwarnings = [
+  "error",
+]
+ini_options.log_level = "INFO"
+ini_options.log_cli_level = "INFO"
