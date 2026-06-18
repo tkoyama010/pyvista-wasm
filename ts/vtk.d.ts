@@ -267,6 +267,9 @@ type FilterConfig = {
   values?: number[];
   scalarName?: string;
   scalarData?: number[];
+  // Mesh geometry for contour filter (manual implementation needs raw data)
+  points?: number[];
+  polys?: number[];
 };
 
 /** Configuration for a geometry source (primitive, mesh, or file reader). */
