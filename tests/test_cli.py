@@ -10,14 +10,16 @@ import numpy as np
 import pytest
 
 import pyvista_wasm as pv
-from pyvista_wasm._cli import (
-    _apply_camera_movement,
+from pyvista_wasm._capture import (
     _capture_marimo_screenshots,
     _capture_stlite_screenshots,
     _create_gif,
     _find_canvas_in_frames,
     _rotate_canvas_with_mouse,
     _wait_for_canvas_in_frames,
+)
+from pyvista_wasm._cli import (
+    _apply_camera_movement,
     capture_marimo_preview,
     capture_preview,
     capture_stlite_preview,
