@@ -92,6 +92,14 @@ test = [
   "pytest-playwright>=0.4.0,<0.9.0",
 ]
 
+[tool.uv]
+constraint-dependencies = [
+    "bleach>=6.4.0",
+    "jupyter-server>=2.20.0",
+    "starlette>=1.3.1",
+    "tornado>=6.5.7",
+]
+
 [tool.hatch]
 build.artifacts = [ "src/pyvista_wasm/templates/renderer.js" ]
 build.hooks.build-scripts.scripts = [
