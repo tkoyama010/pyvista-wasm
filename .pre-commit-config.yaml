@@ -27,18 +27,18 @@ repos:
         additional_dependencies: ['mdformat-toc==0.5.0']
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.24.1"
+    rev: "v2.25.0"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.21
+    rev: 0.11.23
     hooks:
       - id: uv-lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.17
+    rev: v0.15.18
     hooks:
       # Run the linter
       - id: ruff-check
@@ -72,7 +72,7 @@ repos:
       - id: shfmt
 
   - repo: https://github.com/scientific-python/cookie
-    rev: 2026.04.04
+    rev: 2026.06.18
     hooks:
       - id: sp-repo-review
         additional_dependencies: ["repo-review[cli]"]
@@ -96,12 +96,12 @@ repos:
       - id: codespell
 
   - repo: https://github.com/tkoyama010/standard-readme-pre-commit
-    rev: 8a8642b27b2d8dad2413a7df7eb5c8c1c635d0a2
+    rev: 8869bd54acb6e51b01e48318b0716c525f358213
     hooks:
       - id: standard-readme
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.25.2
+    rev: v1.26.1
     hooks:
       - id: zizmor
 
