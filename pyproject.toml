@@ -48,7 +48,7 @@ dependencies = [
 optional-dependencies.dev = [
   "mypy>=1.0.0,<2.2.0",
   "pre-commit>=3.0.0,<5.0.0",
-  "pytest>=7.0.0,<9.1.0",
+  "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
   "ruff>=0.1.0,<0.16.0",
   "tox>=4.0.0,<4.56.0",
@@ -87,7 +87,7 @@ test = [
   "imageio>=2.28.0,<2.38.0",
   "pillow>=9.0.0,<13.0.0",
   "playwright>=1.40.0,<1.61.0",
-  "pytest>=7.0.0,<9.1.0",
+  "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
   "pytest-playwright>=0.4.0,<0.9.0",
 ]
