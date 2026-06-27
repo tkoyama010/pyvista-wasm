@@ -5,7 +5,7 @@ import webbrowser
 import numpy as np
 import pytest
 
-from pyvista_wasm import Plotter, PolyData, Sphere
+from pyvista_wasm import Plotter, PolyData, Sphere, rendering
 
 
 def test_point_data_creation() -> None:
@@ -187,6 +187,7 @@ def test_plotter_show_with_scalars(monkeypatch) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     plotter = Plotter()
     mesh = Sphere()

@@ -822,13 +822,15 @@ async function setupActor(
     return;
   }
 
+  let currentResult = sourceResult;
   if (cfg.source.pointData ?? cfg.source.tCoords) {
     const pd = await getPolyData(sourceResult);
     await injectPointData(vtk, pd, cfg.source.pointData);
     await injectTcoords(vtk, pd, cfg.source.tCoords);
+    // Switch to setInputData so injected arrays are not discarded when
+    // the VTK pipeline re-runs via setInputConnection.
+    currentResult = { output: pd, isFilter: false };
   }
-
-  let currentResult = sourceResult;
   if (cfg.source.filters && cfg.source.filters.length > 0) {
     currentResult = await applyFilters(vtk, sourceResult, cfg.source.filters);
   }
