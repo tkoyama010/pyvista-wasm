@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "files": {
     "includes": ["ts/**/*.ts", "*.js", "*.json", "*.md"]
   },
@@ -40,11 +40,6 @@
           "correctness": {
             "noUndeclaredVariables": "off"
           },
-          "nursery": {
-            "noExcessiveLinesPerFile": "off",
-            "noIncrementDecrement": "off",
-            "noTernary": "off"
-          },
           "performance": {
             "noAwaitInLoops": "off"
           },
@@ -52,7 +47,10 @@
             "noSecrets": "off"
           },
           "style": {
-            "noNestedTernary": "off"
+            "noExcessiveLinesPerFile": "off",
+            "noIncrementDecrement": "off",
+            "noNestedTernary": "off",
+            "noTernary": "off"
           }
         }
       }
@@ -61,11 +59,9 @@
       "includes": ["ts/vtk.d.ts"],
       "linter": {
         "rules": {
-          "nursery": {
-            "noExcessiveLinesPerFile": "off",
-            "useConsistentMethodSignatures": "off"
-          },
           "style": {
+            "noExcessiveLinesPerFile": "off",
+            "useConsistentMethodSignatures": "off",
             "useNamingConvention": "off",
             "useConsistentTypeDefinitions": "off"
           }
