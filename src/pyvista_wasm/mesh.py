@@ -398,6 +398,37 @@ class PolyData:
         _CELL_TYPES = {3: "triangle", 4: "quad"}  # noqa: N806
         return [(_CELL_TYPES.get(n, "polygon"), np.array(faces)) for n, faces in groups.items()]
 
+    def _filter_base_scene(self) -> dict[str, object]:
+        """Return a base scene dict for filter operations using explicit mesh geometry.
+
+        Serialises the source as ``type: "mesh"`` with explicit points and polys
+        so that the JavaScript renderer can access the PolyData directly via
+        ``createMeshSource``, without calling ``getOutputData()`` on a VTK
+        algorithm.  ``getOutputData()`` can return ``null`` in vtk-wasm
+        environments, which causes a TypeError in manual filter implementations
+        (shrink, contour) that read geometry from the PolyData directly.
+
+        Any filters already stored in ``_scene_data`` are preserved so that
+        chained filter calls (e.g. ``sphere.shrink().clip()``) work correctly.
+        """
+        base: dict[str, object] = {
+            "type": "mesh",
+            "points": self.points.flatten().tolist(),
+        }
+        if self.faces is not None:
+            # createMeshSource expects flat VTK legacy format: [n, v1, v2, …, n, v1, …].
+            # Faces stored as a 2D array (one row per face) need to be flattened; faces
+            # already stored as a 1D flat array (e.g. from PLY reader) are used as-is.
+            if self.faces.ndim == 2:
+                n_verts = self.faces.shape[1]
+                counts = np.full((len(self.faces), 1), n_verts, dtype=self.faces.dtype)
+                base["polys"] = np.hstack([counts, self.faces]).flatten().tolist()
+            else:
+                base["polys"] = self.faces.tolist()
+        if self._scene_data and "filters" in self._scene_data:
+            base["filters"] = list(self._scene_data["filters"])  # type: ignore[arg-type]
+        return base
+
     def shrink(self, shrink_factor: float = 0.8) -> PolyData:
         """Shrink the cells of a mesh towards their centroid.
 
@@ -437,14 +468,7 @@ class PolyData:
             msg = f"shrink_factor must be between 0 and 1, got {shrink_factor}"
             raise ValueError(msg)
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._filter_base_scene()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -556,14 +580,7 @@ class PolyData:
             o = [float(x) for x in origin]
             origin = (o[0], o[1], o[2])
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._filter_base_scene()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -727,14 +744,7 @@ class PolyData:
         # Generate contour values
         contour_values = self._get_contour_values(isosurfaces, scalar_data)
 
-        base_scene = (
-            dict(self._scene_data)
-            if self._scene_data
-            else {
-                "type": "mesh",
-                "points": self.points.flatten().tolist(),
-            }
-        )
+        base_scene = self._filter_base_scene()
         base_scene.setdefault("filters", [])
         filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
         filters_list.append(
@@ -960,8 +970,33 @@ def Sphere(  # noqa: N802
             z = radius * np.cos(phi) + center[2]
             points.append([x, y, z])
 
+    # Generate face connectivity matching vtkSphereSource triangle ordering.
+    # Intermediate point helper: row i (theta), column j (phi, 1-indexed from 1)
+    n_phi_mid = phi_resolution - 2  # number of intermediate phi rows
+
+    def mid(i: int, j: int) -> int:
+        return 2 + (i % theta_resolution) * n_phi_mid + (j - 1)
+
+    faces = []
+    # North pole cap: triangles from north pole (0) to first intermediate row
+    for i in range(theta_resolution):
+        faces.append([0, mid(i, 1), mid(i + 1, 1)])
+    # Middle quads: each quad split into two triangles
+    for i in range(theta_resolution):
+        for j in range(1, phi_resolution - 2):
+            p0 = mid(i, j)
+            p1 = mid(i, j + 1)
+            p2 = mid(i + 1, j + 1)
+            p3 = mid(i + 1, j)
+            faces.append([p0, p1, p2])
+            faces.append([p0, p2, p3])
+    # South pole cap: triangles from south pole (1) to last intermediate row
+    for i in range(theta_resolution):
+        faces.append([1, mid(i + 1, phi_resolution - 2), mid(i, phi_resolution - 2)])
+
     return PolyData(
         points=np.array(points),
+        faces=np.array(faces),
         _scene_data={
             "type": "sphere",
             "center": list(center),
