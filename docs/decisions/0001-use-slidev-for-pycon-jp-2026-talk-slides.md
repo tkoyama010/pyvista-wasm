@@ -24,6 +24,7 @@ pyvista-wasm was accepted as a talk at PyCon JP 2026 — ["PyVista on WebAssembl
 ## Considered Options
 
 - [Slidev](https://sli.dev/) — Vue-powered presentation framework for developers
+- [sphinx-revealjs](https://github.com/attakei/sphinx-revealjs) — Sphinx extension to build reveal.js presentations
 - [reveal.js](https://revealjs.com/) — The HTML presentation framework
 - [Marp](https://marp.app/) — Markdown presentation ecosystem
 - Google Slides — Cloud-based WYSIWYG presentation tool
@@ -67,6 +68,19 @@ See [https://sli.dev/](https://sli.dev/)
 - Good, because it exports to PDF, PNG, and a standalone SPA, satisfying the portability driver.
 - Neutral, because it requires a Node.js toolchain, which is a new build dependency for this predominantly Python project.
 - Neutral, because its community (~40k GitHub stars) is active and growing but smaller than reveal.js's.
+
+### sphinx-revealjs — Sphinx extension to build reveal.js presentations
+
+See [https://github.com/attakei/sphinx-revealjs](https://github.com/attakei/sphinx-revealjs)
+
+- Good, because it reuses the project's existing Sphinx toolchain (`docs/conf.py` already configures Sphinx + MyST parser), requiring no new build dependency.
+- Good, because slides are authored in reStructuredText or MyST Markdown, which is already enabled in this project, satisfying the version-control-friendliness driver.
+- Good, because it stays within the Python ecosystem, consistent with a predominantly Python project.
+- Good, because the maintainer is a Japanese developer active in the PyCon JP community, offering natural community alignment.
+- Neutral, because it wraps reveal.js, so live demo embedding is iframe-based — functional but less seamless than Slidev's native Vue component model.
+- Neutral, because code syntax highlighting relies on reveal.js's highlight.js, which lacks Slidev's Shiki features (line highlighting, code animations, Monaco integration).
+- Bad, because its community (~129 GitHub stars) is significantly smaller than Slidev's or reveal.js's, meaning fewer third-party themes and less community support.
+- Bad, because it lacks a dedicated hot-reload dev server comparable to Slidev's `slidev dev` (only `sphinx-autobuild` is available, which is less tailored to slideshow authoring).
 
 ### reveal.js — The HTML presentation framework
 
@@ -126,20 +140,22 @@ See [https://rise.readthedocs.io/](https://rise.readthedocs.io/)
 
 The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak.
 
-| Criterion | Slidev | reveal.js | Marp | Google Slides | PowerPoint | JupyterLab/RISE |
-|-------------------------------|:------:|:---------:|:----:|:-------------:|:----------:|:---------------:|
-| Live web demo embedding | ✓ | ~ | ~ | ✗ | ✗ | ~ |
-| Code syntax highlighting | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ |
-| Ease of authoring | ✓ | ~ | ✓ | ✓ | ✓ | ~ |
-| Portability | ✓ | ✓ | ✓ | ~ | ✓ | ~ |
-| Version-control friendliness | ✓ | ~ | ✓ | ✗ | ✗ | ~ |
-| Community adoption | ~ | ✓ | ~ | ✓ | ✓ | ~ |
+| Criterion | Slidev | sphinx-revealjs | reveal.js | Marp | Google Slides | PowerPoint | JupyterLab/RISE |
+|-------------------------------|:------:|:---------------:|:---------:|:----:|:-------------:|:----------:|:---------------:|
+| Live web demo embedding | ✓ | ~ | ~ | ~ | ✗ | ✗ | ~ |
+| Code syntax highlighting | ✓ | ~ | ✓ | ✓ | ✗ | ✗ | ✓ |
+| Ease of authoring | ✓ | ~ | ~ | ✓ | ✓ | ✓ | ~ |
+| Portability | ✓ | ✓ | ✓ | ✓ | ~ | ✓ | ~ |
+| Version-control friendliness | ✓ | ✓ | ~ | ✓ | ✗ | ✗ | ~ |
+| Community adoption | ~ | ~ | ✓ | ~ | ✓ | ✓ | ~ |
 
 ### Links
 
 - Slidev homepage: [https://sli.dev/](https://sli.dev/)
 - Slidev documentation: [https://sli.dev/guide/](https://sli.dev/guide/)
 - Slidev GitHub: [https://github.com/slidevjs/slidev](https://github.com/slidevjs/slidev)
+- sphinx-revealjs GitHub: [https://github.com/attakei/sphinx-revealjs](https://github.com/attakei/sphinx-revealjs)
+- sphinx-revealjs documentation: [https://sphinx-revealjs.readthedocs.io/](https://sphinx-revealjs.readthedocs.io/)
 - Parent issue: [#275](https://github.com/tkoyama010/pyvista-wasm/issues/275)
 - This decision unblocks [#278](https://github.com/tkoyama010/pyvista-wasm/issues/278) (Design and create the PyCon JP 2026 talk slide deck).
 - Talk proposal: [PyVista on WebAssembly: サーバーレス3D可視化の実現](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)
