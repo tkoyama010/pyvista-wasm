@@ -1,11 +1,8 @@
----
+______________________________________________________________________
+
 # These are optional metadata elements. Feel free to remove any of them.
-status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: {YYYY-MM-DD when the decision was last updated}
-decision-makers: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
-informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
----
+
+## status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123" date: {YYYY-MM-DD when the decision was last updated} decision-makers: {list everyone involved in the decision} consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication} informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
 
 # {short title, representative of solved problem and found solution}
 
@@ -14,6 +11,7 @@ informed: {list everyone who is kept up-to-date on progress; and with whom there
 {Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story. You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
 
 <!-- This is an optional element. Feel free to remove. -->
+
 ## Decision Drivers
 
 - {decision driver 1, e.g., a force, facing concern, …}
