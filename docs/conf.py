@@ -72,7 +72,7 @@ autodoc_default_options = {
 autosummary_generate = True
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "decisions/adr-template.md"]
 
 # -- Options for internationalization ----------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-internationalization
@@ -98,6 +98,7 @@ html_css_files = ["custom.css"]
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
+    "front_matter",
 ]
 
 # -- Options for jupyterlite-sphinx ------------------------------------------
