@@ -1,0 +1,55 @@
+name: User Story
+description: Describe a backlog item from the user's perspective for the Scrum board
+labels: ["user story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for adding a user story! Please fill out the form below.
+  - type: textarea
+    id: story
+    attributes:
+      label: User Story
+      description: Describe the story from the user's perspective.
+      placeholder: As a <type of user>, I want <some goal>, so that <some reason / value>.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: The conditions that must be met for this story to be considered done.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any background, mockups, links, or notes.
+  - type: textarea
+    id: pyvista
+    attributes:
+      label: PyVista Comparison
+      description: If this behavior exists in PyVista, please link to the relevant documentation.
+      placeholder: "https://docs.pyvista.org/..."
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: The priority aligned with the Scrum board's Priority field.
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the [Code of Conduct](https://github.com/tkoyama010/pyvista-wasm/blob/main/CODE_OF_CONDUCT.md)
+          required: true
