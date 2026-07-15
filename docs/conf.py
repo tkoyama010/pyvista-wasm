@@ -98,7 +98,6 @@ html_css_files = ["custom.css"]
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
-    "front_matter",
 ]
 
 # -- Options for jupyterlite-sphinx ------------------------------------------
