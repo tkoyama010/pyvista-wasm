@@ -95,13 +95,11 @@ repos:
     rev: v2.4.2
     hooks:
       - id: codespell
-        exclude: ^docs/decisions/
 
   - repo: https://github.com/tkoyama010/standard-readme-pre-commit
     rev: 8869bd54acb6e51b01e48318b0716c525f358213
     hooks:
       - id: standard-readme
-        exclude: ^docs/decisions/
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.26.1
