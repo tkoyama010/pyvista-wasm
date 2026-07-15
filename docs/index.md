@@ -66,4 +66,5 @@ Installation <self>
 howtos/index
 explanation/index
 api/index
+decisions/index
 ```
