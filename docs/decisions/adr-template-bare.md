@@ -1,10 +1,6 @@
----
-status:
-date:
-decision-makers:
-consulted:
-informed:
----
+______________________________________________________________________
+
+## status: date: decision-makers: consulted: informed:
 
 # <!-- short title, representative of solved problem and found solution -->
 
@@ -12,11 +8,11 @@ informed:
 
 ## Decision Drivers
 
-* <!-- decision driver -->
+- <!-- decision driver -->
 
 ## Considered Options
 
-* <!-- option -->
+- <!-- option -->
 
 ## Decision Outcome
 
@@ -24,8 +20,8 @@ Chosen option: "", because
 
 ### Consequences
 
-* Good, because
-* Bad, because
+- Good, because
+- Bad, because
 
 ### Confirmation
 
@@ -33,8 +29,8 @@ Chosen option: "", because
 
 ### <!-- title of option -->
 
-* Good, because
-* Neutral, because
-* Bad, because
+- Good, because
+- Neutral, because
+- Bad, because
 
 ## More Information
