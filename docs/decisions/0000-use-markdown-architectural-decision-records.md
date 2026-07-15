@@ -1,6 +1,10 @@
-______________________________________________________________________
-
-## status: accepted date: 2026-07-16 decision-makers: [tkoyama010] consulted: [] informed: []
+---
+status: accepted
+date: 2026-07-16
+decision-makers: [tkoyama010]
+consulted: []
+informed: []
+---
 
 # Use Markdown Architectural Decision Records
 
