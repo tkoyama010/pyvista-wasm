@@ -1,0 +1,14 @@
+{
+  "name": "pyvista-wasm-pyconjp-2026-slides",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.18.0",
+    "@slidev/theme-default": "^0.25.0"
+  }
+}

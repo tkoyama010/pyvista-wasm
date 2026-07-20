@@ -74,3 +74,8 @@ assets/*.gif
 # Node.js (TypeScript build)
 node_modules/
 src/pyvista_wasm/templates/renderer.js
+
+# Slidev (PyCon JP 2026 talk deck)
+slides/dist/
+slides/*.pdf
+slides/*.png
