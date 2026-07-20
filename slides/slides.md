@@ -30,10 +30,9 @@ Running PyVista entirely in the browser via WebAssembly — no server required
   <div>Tetsuo Koyama</div>
 </div>
 
----
-layout: two-cols
-class: text-left
----
+______________________________________________________________________
+
+## layout: two-cols class: text-left
 
 # Agenda
 
