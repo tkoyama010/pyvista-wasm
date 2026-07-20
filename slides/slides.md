@@ -29,3 +29,92 @@ Running PyVista entirely in the browser via WebAssembly — no server required
   <div class="opacity-40">·</div>
   <div>Tetsuo Koyama</div>
 </div>
+
+---
+layout: two-cols
+class: text-left
+---
+
+# Agenda
+
+<div class="text-sm opacity-70 mb-6">A 30-minute tour, from the why to the how</div>
+
+<div class="flex flex-col gap-4">
+
+<div class="flex items-baseline gap-3">
+  <div class="text-2xl opacity-40 w-8">1</div>
+  <div>
+    <div class="font-medium">PyVista and WASM overview</div>
+    <div class="text-sm opacity-60">Why run 3D visualization in the browser</div>
+  </div>
+  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">5 min</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="text-2xl opacity-40 w-8">2</div>
+  <div>
+    <div class="font-medium">Technical stack & implementation</div>
+    <div class="text-sm opacity-60">vtk-wasm, TypeScript glue, PyVista API</div>
+  </div>
+  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">12 min</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="text-2xl opacity-40 w-8">3</div>
+  <div>
+    <div class="font-medium">Live demo in browser</div>
+    <div class="text-sm opacity-60">PyVista running with no server</div>
+  </div>
+  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">8 min</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="text-2xl opacity-40 w-8">4</div>
+  <div>
+    <div class="font-medium">Performance & limitations</div>
+    <div class="text-sm opacity-60">What works today, what does not yet</div>
+  </div>
+  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">5 min</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="ml-8">
+
+# Speaker
+
+<div class="text-lg font-medium mt-2">Tetsuo Koyama</div>
+<div class="text-sm opacity-60 mb-6">小山 哲央</div>
+
+<div class="flex flex-col gap-3 text-sm">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧩</div>
+  <div>PyVista contributor — bug fixes and feature PRs</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔧</div>
+  <div>pyvista-wasm co-maintainer</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div>SciPy Conference 2022–2025 — MyST, PyVista, GeoVista sprints</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🗾</div>
+  <div>SciPyData Japan 2025 co-organizer</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎤</div>
+  <div>PyCon JP speaker and organizer</div>
+</div>
+
+</div>
+
+</div>
