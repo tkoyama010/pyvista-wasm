@@ -12,6 +12,7 @@
     "@slidev/theme-default": "^0.25.0"
   },
   "overrides": {
-    "dompurify": "^3.4.12"
+    "dompurify": "^3.4.12",
+    "@hono/node-server": "^2.0.5"
   }
 }
