@@ -47,7 +47,6 @@ class: text-left
     <div class="font-medium">PyVista and WASM overview</div>
     <div class="text-sm opacity-60">Why run 3D visualization in the browser</div>
   </div>
-  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">5 min</div>
 </div>
 
 <div class="flex items-baseline gap-3">
@@ -56,7 +55,6 @@ class: text-left
     <div class="font-medium">Technical stack & implementation</div>
     <div class="text-sm opacity-60">vtk-wasm, TypeScript glue, PyVista API</div>
   </div>
-  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">12 min</div>
 </div>
 
 <div class="flex items-baseline gap-3">
@@ -65,7 +63,6 @@ class: text-left
     <div class="font-medium">Live demo in browser</div>
     <div class="text-sm opacity-60">PyVista running with no server</div>
   </div>
-  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">8 min</div>
 </div>
 
 <div class="flex items-baseline gap-3">
@@ -74,7 +71,6 @@ class: text-left
     <div class="font-medium">Performance & limitations</div>
     <div class="text-sm opacity-60">What works today, what does not yet</div>
   </div>
-  <div class="ml-auto text-sm opacity-50 whitespace-nowrap">5 min</div>
 </div>
 
 </div>
