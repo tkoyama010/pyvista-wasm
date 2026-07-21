@@ -13,5 +13,9 @@
     "esbuild": "^0.28",
     "eslint-plugin-jsdoc": "^63.0.12",
     "typescript": "^7.0"
+  },
+  "overrides": {
+    "brace-expansion": "^1.1.16",
+    "js-yaml": "^4.3.0"
   }
 }
