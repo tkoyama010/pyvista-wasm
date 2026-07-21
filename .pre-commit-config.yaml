@@ -25,6 +25,11 @@ repos:
     hooks:
       - id: mdformat
         additional_dependencies: ['mdformat-toc==0.5.0', 'mdformat-frontmatter==2.1.2']
+        # The Slidev deck uses per-slide "---" separators. mdformat rewrites
+        # every thematic break to underscores and reads mid-document frontmatter
+        # as a setext heading, collapsing the deck into a single slide. mdformat
+        # has no per-rule ignore, so scope out just this one file.
+        exclude: ^slides/slides\.md$
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.25.3"
