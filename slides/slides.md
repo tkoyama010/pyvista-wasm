@@ -114,3 +114,85 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols
+class: text-left
+---
+
+# What is PyVista?
+
+<div class="text-sm opacity-70 mb-6">A Pythonic interface to the Visualization Toolkit</div>
+
+<div class="flex flex-col gap-4">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏛️</div>
+  <div>
+    <div class="font-medium">Built on VTK</div>
+    <div class="text-sm opacity-60">The Visualization Toolkit — a C++ scientific visualization library by Kitware, 30+ years of development since 1993</div>
+  </div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div>
+    <div class="font-medium">PyVista wraps VTK for Python</div>
+    <div class="text-sm opacity-60">An intuitive, high-level API over VTK's powerful but verbose C++ core</div>
+  </div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔬</div>
+  <div>
+    <div class="font-medium">Hundreds of filters</div>
+    <div class="text-sm opacity-60">Point clouds, meshes, and volume data, rendered via OpenGL / Vulkan</div>
+  </div>
+</div>
+
+</div>
+
+::right::
+
+<div class="ml-8">
+
+# Where it is used
+
+<div class="text-sm opacity-60 mb-6">A de facto standard across scientific and engineering fields</div>
+
+<div class="flex flex-col gap-3 text-sm">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🩻</div>
+  <div>Medical imaging — diagnostics and analysis</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚙️</div>
+  <div>CAE — manufacturing and simulation</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌏</div>
+  <div>Geoscience and meteorology</div>
+</div>
+
+</div>
+
+<div class="text-sm opacity-60 mt-8 mb-3">A rich ecosystem</div>
+
+<div class="flex flex-col gap-3 text-sm">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧠</div>
+  <div>ITK — medical image processing</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔢</div>
+  <div>NumPy / SciPy — arrays and scientific computing</div>
+</div>
+
+</div>
+
+</div>
