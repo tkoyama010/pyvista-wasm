@@ -170,3 +170,49 @@ const demoUrl = import.meta.env.BASE_URL + 'pyvista-demo.html'
 <div class="text-xs opacity-60 mt-3 text-center">A triangulated 3D mesh, rendered by PyVista — <span class="font-medium">drag to rotate it</span>.</div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# The Problem
+
+<div class="text-lg opacity-80 mt-1">Sharing 3D results on the web still means running a server</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎨</div>
+  <div><span class="font-medium">Three.js is not enough</span> — the go-to browser 3D library has no direct path to render physics and simulation results</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🖥️</div>
+  <div><span class="font-medium">SSR needs a server</span> — server-side rendering fills the gap, but someone has to build and maintain a dedicated visualization server</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">💸</div>
+  <div><span class="font-medium">Cost</span> — standing up and operating that infrastructure is an ongoing expense</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔒</div>
+  <div><span class="font-medium">Security risk</span> — confidential simulation data has to leave the analyst's machine and travel to the server</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">These barriers make it hard to share analysis results <span class="font-medium">quickly and securely</span> — what if the browser could do it all?</div>
+</div>
+
+</div>
