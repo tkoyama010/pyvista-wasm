@@ -116,83 +116,57 @@ class: text-left
 </div>
 
 ---
-layout: two-cols
+layout: two-cols-header
 class: text-left
 ---
 
+<script setup>
+// Public assets are served at the deck's base path, which differs between
+// the PR preview and the deployed deck — resolve it at runtime so the live
+// demo iframe loads under either base.
+const demoUrl = import.meta.env.BASE_URL + 'pyvista-demo.html'
+</script>
+
 # What is PyVista?
 
-<div class="text-sm opacity-70 mb-6">A Pythonic interface to the Visualization Toolkit</div>
+<div class="text-lg opacity-80 mt-1">30 years of VTK's 3D power — made Pythonic</div>
 
-<div class="flex flex-col gap-4">
+::left::
+
+<div class="pr-8 pt-6 flex flex-col gap-5">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🏛️</div>
-  <div>
-    <div class="font-medium">Built on VTK</div>
-    <div class="text-sm opacity-60">The Visualization Toolkit — a C++ scientific visualization library by Kitware, 30+ years of development since 1993</div>
-  </div>
+  <div><span class="font-medium">Built on VTK</span> — Kitware's C++ visualization toolkit, 30+ years of development since 1993</div>
 </div>
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🐍</div>
-  <div>
-    <div class="font-medium">PyVista wraps VTK for Python</div>
-    <div class="text-sm opacity-60">An intuitive, high-level API over VTK's powerful but verbose C++ core</div>
-  </div>
+  <div><span class="font-medium">Pythonic API</span> — wraps VTK's powerful but verbose C++ core in a few intuitive lines</div>
 </div>
 
 <div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔬</div>
-  <div>
-    <div class="font-medium">Hundreds of filters</div>
-    <div class="text-sm opacity-60">Point clouds, meshes, and volume data, rendered via OpenGL / Vulkan</div>
-  </div>
+  <div class="opacity-50 w-5">🩺</div>
+  <div><span class="font-medium">De facto standard</span> — medical imaging, CAE, geoscience, and meteorology</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔢</div>
+  <div><span class="font-medium">Rich ecosystem</span> — ITK, NumPy, and SciPy</div>
 </div>
 
 </div>
 
 ::right::
 
-<div class="ml-8">
+<div class="pt-6 pl-2">
 
-# Where it is used
+<iframe
+  :src="demoUrl"
+  class="w-full rounded-lg shadow-xl"
+  style="height: 340px; border: 1px solid rgba(125,125,125,0.3)"
+></iframe>
 
-<div class="text-sm opacity-60 mb-6">A de facto standard across scientific and engineering fields</div>
-
-<div class="flex flex-col gap-3 text-sm">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🩻</div>
-  <div>Medical imaging — diagnostics and analysis</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚙️</div>
-  <div>CAE — manufacturing and simulation</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌏</div>
-  <div>Geoscience and meteorology</div>
-</div>
-
-</div>
-
-<div class="text-sm opacity-60 mt-8 mb-3">A rich ecosystem</div>
-
-<div class="flex flex-col gap-3 text-sm">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧠</div>
-  <div>ITK — medical image processing</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔢</div>
-  <div>NumPy / SciPy — arrays and scientific computing</div>
-</div>
-
-</div>
+<div class="text-xs opacity-60 mt-3 text-center">A triangulated 3D mesh, rendered by PyVista — <span class="font-medium">drag to rotate it</span>.</div>
 
 </div>

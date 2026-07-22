@@ -1145,6 +1145,46 @@ def capture_stlite_preview(
     logger.info("stlite preview GIF saved to: %s", output_path)
 
 
+@app.command(name="export-demo")
+def export_demo(
+    output: Annotated[
+        Path,
+        typer.Option(
+            help="Output path for the standalone HTML. Default: slides/public/pyvista-demo.html.",
+            metavar="PATH",
+        ),
+    ] = Path("slides/public/pyvista-demo.html"),
+) -> None:
+    """Export a self-contained VTK.wasm demo page for the talk slide deck.
+
+    Generate a standalone HTML file that renders a triangulated sphere mesh
+    entirely in the browser via VTK.wasm. The surface edges are drawn so the
+    audience can see it is a genuine 3-D mesh, not an image. The page is
+    embedded as a live ``<iframe>`` in the PyCon JP 2026 slide deck so the
+    audience can grab and rotate a real PyVista scene during the talk.
+    """
+    import pyvista_wasm as pv  # noqa: PLC0415
+    from pyvista_wasm.rendering import BrowserRenderer  # noqa: PLC0415
+
+    # Use BrowserRenderer explicitly so the page is full-viewport and
+    # self-contained, independent of whether IPython happens to be importable.
+    renderer = BrowserRenderer()
+
+    sphere = pv.Sphere(theta_resolution=24, phi_resolution=24)
+    renderer.add_mesh_actor(
+        sphere,
+        color=(0.20, 0.55, 0.90),
+        smooth_shading=True,
+        show_edges=True,
+        edge_color=(1.0, 1.0, 1.0),
+    )
+    renderer.add_axes()
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(renderer.generate_standalone_html(), encoding="utf-8")
+    logger.info("Demo page written to: %s", output)
+
+
 # ---------------------------------------------------------------------------
 # CLI entry point wrapper for backwards compatibility
 # ---------------------------------------------------------------------------

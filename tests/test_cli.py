@@ -989,3 +989,24 @@ class TestCaptureMarimoScreenshots:
         assert result == tmp_path / "screenshots"
         mock_context.close.assert_called_once()
         mock_browser.close.assert_called_once()
+
+
+class TestExportDemo:
+    """Tests for the ``export-demo`` CLI command."""
+
+    def test_writes_standalone_html(self, tmp_path) -> None:
+        """``export-demo`` writes a self-contained VTK.wasm page to the given path."""
+        out = tmp_path / "pyvista-demo.html"
+        cli_main(["export-demo", "--output", str(out)])
+
+        assert out.exists()
+        html = out.read_text(encoding="utf-8")
+        assert "<!DOCTYPE html>" in html
+        assert "vtk-wasm" in html
+
+    def test_creates_missing_parent_dirs(self, tmp_path) -> None:
+        """``export-demo`` creates missing parent directories for the output path."""
+        out = tmp_path / "nested" / "dir" / "demo.html"
+        cli_main(["export-demo", "--output", str(out)])
+
+        assert out.exists()
