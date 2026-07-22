@@ -8,7 +8,7 @@ This package uses lazy loading (SPEC 0001) to improve import performance.
 
 import sys
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
 __author__ = "Tetsuo Koyama"
 __license__ = "Apache-2.0"
 
