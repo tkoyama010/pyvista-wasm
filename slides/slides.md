@@ -216,3 +216,54 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Why WASM?
+
+<div class="text-lg opacity-80 mt-1">The browser can do it all — every barrier falls away at once</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧠</div>
+  <div><span class="font-medium">Nothing is sent anywhere</span> — WebAssembly runs the whole visualization pipeline in the browser, so the round trip to a rendering server disappears</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔒</div>
+  <div><span class="font-medium">Data never leaves the machine</span> — confidential simulation results stay client-side, so there is no transfer to secure in the first place</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">💸</div>
+  <div><span class="font-medium">No infrastructure to stand up</span> — no visualization server to provision, scale, or pay for month after month</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔬</div>
+  <div><span class="font-medium">Where this came from</span> — a physics simulation project asked for one thing: <span class="italic">drop the analyzed mesh into the browser and see it</span></div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">💼</div>
+  <div><span class="font-medium">Demos anywhere</span> — show results in the field or at a client site with a browser and nothing else</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">A URL becomes the whole delivery mechanism — <span class="font-medium">so how do we get PyVista in there?</span></div>
+</div>
+
+</div>
