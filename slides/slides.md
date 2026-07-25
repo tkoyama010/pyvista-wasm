@@ -267,3 +267,57 @@ class: text-left
 </div>
 
 </div>
+
+---
+class: text-left
+---
+
+# Architecture: SSR vs Wasm
+
+<div class="text-lg opacity-80 mt-1">SSR puts a server in the loop — Wasm closes the loop inside the browser</div>
+
+<div class="grid grid-cols-2 gap-12 mt-10">
+
+<div class="flex flex-col items-center">
+
+<div class="text-sm font-medium opacity-60 mb-6">Traditional · Server-Side Rendering</div>
+
+<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-xl">💻</div>
+  <div class="font-medium text-sm">Client</div>
+</div>
+<div class="text-xs opacity-70 my-2">↓ data send</div>
+<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-xl">🖥️</div>
+  <div class="font-medium text-sm">Server</div>
+</div>
+<div class="text-xs opacity-70 my-2">↓ render and return</div>
+<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-xl">💻</div>
+  <div class="font-medium text-sm">Client</div>
+</div>
+
+<div class="text-xs opacity-60 mt-5 text-center">Every frame round-trips over the network</div>
+
+</div>
+
+<div class="flex flex-col items-center">
+
+<div class="text-sm font-medium opacity-60 mb-6">Wasm · Browser-Complete</div>
+
+<div class="rounded-lg px-8 py-6 text-center" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-2xl">🌐</div>
+  <div class="font-medium">Client</div>
+  <div class="text-xs opacity-60 mt-1">render in browser</div>
+</div>
+
+<div class="text-xs opacity-60 mt-5 text-center">No server — the pipeline runs entirely client-side</div>
+
+</div>
+
+</div>
+
+<div class="flex items-baseline gap-3 mt-8">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">The round-trip is gone entirely — <span class="font-medium">rendering happens where the data already is</span></div>
+</div>
