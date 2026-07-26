@@ -321,3 +321,64 @@ class: text-left
   <div class="opacity-50 w-5">➡️</div>
   <div class="opacity-90">The round-trip is gone entirely — <span class="font-medium">rendering happens where the data already is</span></div>
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# What is vtk.wasm?
+
+<div class="text-lg opacity-80 mt-1">30 years of VTK's capability — now running in the browser</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏛️</div>
+  <div><span class="font-medium">Built by Kitware</span> — the C++ Visualization Toolkit, maintained since 1993, 30+ years of accumulated capability</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🩺</div>
+  <div><span class="font-medium">Field-proven</span> — medical imaging, CAE, and geoscience run on VTK every day</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📊</div>
+  <div><span class="font-medium">Hundreds of filters</span> — point clouds, meshes, and volume data out of the box</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎨</div>
+  <div><span class="font-medium">OpenGL/Vulkan renderers</span> — production-grade GPU pipelines</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔢</div>
+  <div><span class="font-medium">Rich ecosystem</span> — PyVista (Python wrapper), ITK (medical imaging), and the NumPy/SciPy scientific stack</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Wasm port</span> — all of these capabilities now run without a server, entirely in the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">💼</div>
+  <div><span class="font-medium">Demos anywhere</span> — particularly significant for field demos and client-site presentations</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">VTK's full power in a URL — <span class="font-medium">so how do we glue it to PyVista?</span></div>
+</div>
+
+</div>
