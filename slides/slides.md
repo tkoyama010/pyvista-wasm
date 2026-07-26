@@ -1025,27 +1025,7 @@ class: text-left
 
 <div class="pl-6 pt-6">
 
-<div class="text-sm font-medium opacity-60 mb-3">notebook.py</div>
-
-```python
-import marimo as mo
-import pyvista_wasm as pv
-
-color = mo.ui.dropdown(["red", "blue", "green"], value="red")
-opacity = mo.ui.slider(start=0.0, stop=1.0, value=0.8, step=0.1)
-
-color, opacity
-
-plotter = pv.Plotter()
-plotter.add_mesh(
-    pv.Sphere(),
-    color=color.value,
-    opacity=opacity.value,
-)
-plotter.show()
-```
-
-<div class="rounded-lg px-5 py-4 mt-6" style="border:1px solid rgba(125,125,125,0.3)">
+<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
   <div class="text-sm font-medium opacity-60 mb-1">Live demo</div>
   <a href="https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA" class="text-sm break-all opacity-80 hover:opacity-100">marimo.app — pyvista-wasm reactive demo</a>
 </div>
