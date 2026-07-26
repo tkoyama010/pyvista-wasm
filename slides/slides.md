@@ -696,3 +696,63 @@ VTK (C++) → WebAssembly
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# WebGL / WebGPU Rendering Integration
+
+<div class="text-lg opacity-80 mt-1">Two render backends, one runtime — WebGL keeps it everywhere, WebGPU pushes it further</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">WebGL · the baseline</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Universally supported</span> — available in every modern browser, the reliable render path that always works</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎨</div>
+  <div><span class="font-medium">OpenGL ES heritage</span> — a mature, well-understood graphics API with years of tooling and driver support</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🛡️</div>
+  <div><span class="font-medium">Safe default</span> — guarantees a working visualization even on older or conservative browsers</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">WebGPU · the next step</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚡</div>
+  <div><span class="font-medium">Higher performance</span> — lower driver overhead and closer-to-the-metal access than WebGL</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧮</div>
+  <div><span class="font-medium">GPU compute</span> — exposes general-purpose compute shaders, not just the fixed rendering pipeline</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚩</div>
+  <div><span class="font-medium">Experimental in places</span> — some browsers still require flags; 2023–2024 brought significant backend progress</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">🔄</div>
+  <div><span class="font-medium">Runtime switching</span> — current packages select between WebGL and WebGPU at runtime, with automatic fallback when WebGPU is unavailable</div>
+</div>
+
+</div>
