@@ -624,3 +624,75 @@ export default {
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Pyodide + PyVista in the Browser
+
+<div class="text-lg opacity-80 mt-1">CPython in Wasm meets a Pythonic VTK wrapper — write Python, render 3D meshes, no server required</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div><span class="font-medium">Pyodide</span> — CPython compiled to WebAssembly, running the real CPython interpreter inside the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧊</div>
+  <div><span class="font-medium">PyVista</span> — a Pythonic wrapper over VTK, the same API scientists already use on the desktop</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔗</div>
+  <div><span class="font-medium">The combination</span> — write Python in the browser, visualize 3D meshes on the same page, zero backend</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌉</div>
+  <div><span class="font-medium">pyvista-wasm</span> — bridges the gap with a PyVista-like API built on top of vtk-wasm</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">TypeScript is the glue — <span class="font-medium">loading vtk-wasm and bridging C++ VTK bindings to the Python-facing API</span></div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="text-sm font-medium opacity-60 mb-3">Layered architecture</div>
+
+```text
+Python (Pyodide)
+       │  pyvista_wasm
+       ▼
+TypeScript glue layer
+       │  @kitware/vtk-wasm
+       ▼
+VTK (C++) → WebAssembly
+```
+
+<div class="flex flex-col gap-4 mt-6">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚙️</div>
+  <div><span class="font-medium">Glue layer</span> — TypeScript loads the vtk-wasm module and exposes its VTK classes to Python</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🛰️</div>
+  <div><span class="font-medium">Runtime fallback</span> — when <code>"pyodide" in sys.modules</code>, mesh fetches use XMLHttpRequest instead of urllib</div>
+</div>
+
+</div>
+
+</div>
