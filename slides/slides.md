@@ -501,3 +501,58 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Build & Distribution Mechanism
+
+<div class="text-lg opacity-80 mt-1">A hours-long Emscripten build collapses to <code>npm install</code> — the binary streams from CDN at runtime</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Build</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏗️</div>
+  <div><span class="font-medium">Emscripten</span> — VTK's C++ compiled to WebAssembly; the build takes hours, but consumers just <code>npm install</code></div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">@kitware/vtk-wasm</span> — the JavaScript binding npm package that exposes the VTK API to the browser</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Distribution</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">CDN at runtime</span> — the WASM binary is loaded separately from CDN, not bundled into the JS package</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚙️</div>
+  <div><span class="font-medium">createNamespace(url)</span> — loads VTK classes asynchronously from a tarball URL</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚀</div>
+  <div><span class="font-medium">jsDelivr over GitLab</span> — multi-CDN (Cloudflare, Fastly, Bunny CDN) edge caching beats Kitware's GitLab direct delivery in the Asia region</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">⏳</div>
+  <div class="opacity-90">First load is ~12–15 MB (gzip) — pair with a spinner and lazy loading (Intersection Observer)</div>
+</div>
+
+</div>
