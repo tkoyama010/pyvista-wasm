@@ -556,3 +556,71 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# VTK Emscripten Build Pipeline
+
+<div class="text-lg opacity-80 mt-1">C++ compiled to WebAssembly once — consumers just <code>npm install</code> and add two Vite lines</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏗️</div>
+  <div><span class="font-medium">Emscripten</span> — VTK's entire C++ codebase compiled to WebAssembly, bringing 30 years of capability into the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">Heavy build, light consumption</span> — the build itself takes hours, but consumers simply <code>npm install @kitware/vtk-wasm</code></div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">Tarball at runtime</span> — the WASM binary streams from CDN as a tarball, not bundled into the JS package</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">One Vite config unlocks it all — <span class="font-medium">two lines stand between you and browser-native VTK</span></div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="text-sm font-medium opacity-60 mb-3">vite.config.js</div>
+
+```js
+export default {
+  build: {
+    target: 'esnext',
+  },
+  optimizeDeps: {
+    exclude: ['@kitware/vtk-wasm'],
+  },
+};
+```
+
+<div class="flex flex-col gap-4 mt-6">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎯</div>
+  <div><span class="font-medium">build.target: 'esnext'</span> — vtk-wasm relies on modern JS features that require next-generation build targets</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚫</div>
+  <div><span class="font-medium">optimizeDeps.exclude</span> — Vite must not pre-bundle the WASM package; it loads asynchronously at runtime</div>
+</div>
+
+</div>
+
+</div>
