@@ -1031,10 +1031,8 @@ class: text-left
 import marimo as mo
 import pyvista_wasm as pv
 
-color = mo.ui.dropdown(
-    ["red", "blue", "green"], value="red")
-opacity = mo.ui.slider(
-    start=0.0, stop=1.0, value=0.8, step=0.1)
+color = mo.ui.dropdown(["red", "blue", "green"], value="red")
+opacity = mo.ui.slider(start=0.0, stop=1.0, value=0.8, step=0.1)
 
 color, opacity
 
