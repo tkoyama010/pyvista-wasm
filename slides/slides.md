@@ -431,3 +431,73 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Capabilities & Current Limitations
+
+<div class="text-lg opacity-80 mt-1">What vtk.wasm can do today — and where the edges still are</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Capabilities</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚙️</div>
+  <div><span class="font-medium">VTK filter pipeline</span> — full filter execution runs entirely in the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">Mesh loading</span> — VTP, VTU, and STL formats load directly client-side</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎮</div>
+  <div><span class="font-medium">Interactive camera</span> — rotate, pan, and zoom with direct manipulation</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div><span class="font-medium">Python integration</span> — the PyVista API drives it all from Python</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Limitations</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📏</div>
+  <div><span class="font-medium">Module size</span> — 30–50 MB, 10–15 MB after gzip</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧵</div>
+  <div><span class="font-medium">COOP/COEP headers</span> — multi-threading requires cross-origin isolation</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚩</div>
+  <div><span class="font-medium">WebGPU flags</span> — may need experimental flags in some browsers</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">Initial load</span> — several seconds to 10+ seconds before first render</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">Large-scale meshes still have constraints — but <span class="font-medium">~100K elements run at practical interactive speed</span></div>
+</div>
+
+</div>
