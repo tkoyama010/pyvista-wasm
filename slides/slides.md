@@ -1147,3 +1147,73 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# WASM Constraints & Workarounds
+
+<div class="text-lg opacity-80 mt-1">Four constraints the browser imposes — and the workaround that clears each one</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Constraints</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">Module size</span> — 30–50 MB, 10–15 MB after gzip; a heavy first download</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧵</div>
+  <div><span class="font-medium">COOP/COEP headers</span> — <code>SharedArrayBuffer</code> requires cross-origin isolation, so the server must return <code>Cross-Origin-Opener-Policy: same-origin</code> and <code>Cross-Origin-Embedder-Policy: require-corp</code></div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚩</div>
+  <div><span class="font-medium">WebGPU flags</span> — some browsers still require experimental flags to enable the WebGPU backend</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">Initial load time</span> — several seconds to 10+ seconds before the first render appears</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Workarounds</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌀</div>
+  <div><span class="font-medium">Spinner & lazy loading</span> — show a spinner and defer loading with <code>Intersection Observer</code> until the canvas enters the viewport</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔌</div>
+  <div><span class="font-medium">vite-plugin-cross-origin-isolation</span> — injects the COOP/COEP headers for you in Vite dev and preview</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔄</div>
+  <div><span class="font-medium">Automatic fallback to WebGL</span> — when WebGPU is unavailable, the runtime falls back to the universally supported WebGL backend</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📊</div>
+  <div><span class="font-medium">Progress indicators</span> — pair lazy loading with progress bars so the user knows the module is streaming</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">Every constraint has a proven workaround — <span class="font-medium">none of them block a working demo</span></div>
+</div>
+
+</div>
