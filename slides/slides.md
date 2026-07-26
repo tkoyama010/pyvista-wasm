@@ -756,3 +756,71 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Development & CI Challenges
+
+<div class="text-lg opacity-80 mt-1">Three pitfalls every vtk.wasm integration hits — and the fix for each</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">async/await everywhere</span> — <code>createNamespace()</code> returns a Promise, so every VTK object operation must be <code>async/await</code>; forgetting <code>await</code> touches objects before WASM loads and errors out</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧵</div>
+  <div><span class="font-medium">SharedArrayBuffer</span> — parallel processing filters need it, so the server must return <code>Cross-Origin-Opener-Policy: same-origin</code> and <code>Cross-Origin-Embedder-Policy: require-corp</code></div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">Cross-origin isolation is the gate for multi-threading — <span class="font-medium">without those headers, threaded filters silently break</span></div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="text-sm font-medium opacity-60 mb-3">vite.config.js</div>
+
+```js
+import crossOriginIsolation
+  from 'vite-plugin-cross-origin-isolation';
+
+export default {
+  plugins: [crossOriginIsolation()],
+  build: { target: 'esnext' },
+  optimizeDeps: { exclude: ['@kitware/vtk-wasm'] },
+};
+```
+
+<div class="flex flex-col gap-4 mt-6">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔌</div>
+  <div><span class="font-medium">vite-plugin-cross-origin-isolation</span> — injects the COOP/COEP headers for you in dev and preview</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">CORS on the tarball URL</span> — <code>createNamespace(url)</code> fetches cross-origin, so the CDN must send CORS headers</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚀</div>
+  <div><span class="font-medium">jsDelivr over GitLab</span> — Kitware's GitLab direct URL is slow in Asia; jsDelivr's multi-CDN edge cache is both CORS-enabled and faster</div>
+</div>
+
+</div>
+
+</div>
