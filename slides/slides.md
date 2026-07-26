@@ -912,3 +912,71 @@ createNamespace(WASM_URL).then(async (vtk) => {
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Demo: JupyterLite
+
+<div class="text-lg opacity-80 mt-1">A browser-only Jupyter environment — write Python, render 3D meshes, share by URL</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">JupyterLite</span> — a browser-only Jupyter environment; no installation needed, 3D meshes display interactively in notebooks</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div><span class="font-medium">pv.Sphere() and pv.read()</span> — pre-prepared notebooks let you start rendering with a single cell</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">▶️</div>
+  <div><span class="font-medium">Run a cell, see it render</span> — running a cell launches the 3D viewer right in the notebook</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🚀</div>
+  <div><span class="font-medium">No local setup</span> — the ideal entry point to experience vtk.wasm rendering quality without installing anything</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">Static hosting</span> — deployable to GitHub Pages or any static host, no server required</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">🔗</div>
+  <div class="opacity-90">Share by URL — <span class="font-medium">a reproducible analysis environment in one click</span></div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="text-sm font-medium opacity-60 mb-3">intro.ipynb</div>
+
+```python
+import pyvista as pv
+
+sphere = pv.Sphere()
+sphere.plot()
+
+mesh = pv.read("disk_out.vtp")
+mesh.plot()
+```
+
+<div class="rounded-lg px-5 py-4 mt-6" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-sm font-medium opacity-60 mb-1">Live demo</div>
+  <a href="https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb" class="text-sm break-all opacity-80 hover:opacity-100">pyvista-wasm.readthedocs.io/en/latest/lite/lab/</a>
+</div>
+
+</div>
