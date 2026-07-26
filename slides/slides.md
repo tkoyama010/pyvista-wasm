@@ -1087,3 +1087,63 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Performance: Native vs Wasm
+
+<div class="text-lg opacity-80 mt-1">Initial load costs seconds — but once loaded, ~100K-element meshes run at practical interactive speed</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Wasm overhead</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">Initial load</span> — several seconds to 10+ seconds before first render, as the WASM binary streams in from CDN</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">Network transfer</span> — ~12–15 MB (gzip) downloaded on first load; cached thereafter by the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📏</div>
+  <div><span class="font-medium">Large-scale constraints</span> — mesh processing at native-desktop scale still has practical limits in the browser</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Where it holds up</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚡</div>
+  <div><span class="font-medium">Practical interactive speed</span> — once loaded, rotate, pan, and zoom feel responsive, matching the native experience</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔢</div>
+  <div><span class="font-medium">~100K elements</span> — meshes of this scale run at practical interactive speed, the sweet spot for analysis review</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">👥</div>
+  <div><span class="font-medium">Small-team review</span> — sufficient quality for sharing analysis results within a small team at the current stage</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">PoC confirmed — <span class="font-medium">a dedicated server is not needed to share analysis results</span></div>
+</div>
+
+</div>
