@@ -762,6 +762,7 @@ layout: two-cols-header
 class: text-left
 ---
 
+
 # Development & CI Challenges
 
 <div class="text-lg opacity-80 mt-1">Three pitfalls every vtk.wasm integration hits — and the fix for each</div>
@@ -819,6 +820,93 @@ export default {
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🚀</div>
   <div><span class="font-medium">jsDelivr over GitLab</span> — Kitware's GitLab direct URL is slow in Asia; jsDelivr's multi-CDN edge cache is both CORS-enabled and faster</div>
+</div>
+
+</div>
+
+</div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Minimal Sample: Sphere Rendering
+
+<div class="text-lg opacity-80 mt-1">Four VTK objects from geometry to pixels — the smallest complete pipeline</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Pipeline</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">1</div>
+  <div><span class="font-medium">vtkSphereSource</span> — generates sphere geometry as <code>vtkPolyData</code></div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">2</div>
+  <div><span class="font-medium">vtkPolyDataMapper</span> — maps polygonal data to graphics primitives</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">3</div>
+  <div><span class="font-medium">vtkActor</span> — holds the sphere's position, properties, and mapper</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">4</div>
+  <div><span class="font-medium">vtkRenderer</span> — renders the actor into the viewport</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">✏️</div>
+  <div><span class="font-medium">StackBlitz</span> — edit parameters in the browser and watch the preview update in real time</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="text-sm font-medium opacity-60 mb-3">sphere.js</div>
+
+```js
+createNamespace(WASM_URL).then(async (vtk) => {
+  const sphere = vtk.vtkSphereSource.newInstance();
+  sphere.setRadius(0.5);
+  sphere.setThetaResolution(16);
+
+  const mapper = vtk.vtkPolyDataMapper.newInstance();
+  mapper.setInputConnection(sphere.getOutputPort());
+
+  const actor = vtk.vtkActor.newInstance();
+  actor.setMapper(mapper);
+
+  const renderer = vtk.vtkRenderer.newInstance();
+  renderer.addActor(actor);
+  renderer.resetCamera();
+});
+```
+
+<div class="flex flex-col gap-4 mt-6">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⏳</div>
+  <div><span class="font-medium">async/await</span> — <code>createNamespace()</code> returns a Promise; all VTK operations must be awaited</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧵</div>
+  <div><span class="font-medium">COOP/COEP</span> — <code>SharedArrayBuffer</code> requires cross-origin isolation headers</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">CORS-enabled CDN</span> — the tarball URL must allow CORS; prefer jsDelivr</div>
 </div>
 
 </div>
