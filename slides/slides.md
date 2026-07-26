@@ -382,3 +382,52 @@ class: text-left
 </div>
 
 </div>
+
+---
+class: text-left
+---
+
+# Wasm Build History & Current Status
+
+<div class="text-lg opacity-80 mt-1">From experimental builds to runtime GPU switching — a steady maturity trajectory</div>
+
+<div class="grid grid-cols-3 gap-8 mt-10">
+
+<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-2xl font-medium">2018</div>
+  <div class="text-sm opacity-60 mb-3">Experimental</div>
+  <div class="text-sm">Emscripten builds began — early proof-of-concept bringing VTK to the browser</div>
+</div>
+
+<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-2xl font-medium">2021</div>
+  <div class="text-sm opacity-60 mb-3">Official</div>
+  <div class="text-sm">Integrated into the official build pipeline; <span class="font-medium">vtk.wasm</span> published on npm — distinct from <span class="font-medium">vtk.js</span> (the JavaScript reimplementation)</div>
+</div>
+
+<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-2xl font-medium">2023–2024</div>
+  <div class="text-sm opacity-60 mb-3">WebGPU</div>
+  <div class="text-sm">WebGPU backend support progressed — higher rendering performance and GPU compute compared to WebGL</div>
+</div>
+
+</div>
+
+<div class="flex flex-col gap-4 mt-8">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔄</div>
+  <div><span class="font-medium">Runtime switching</span> — current packages can switch between WebGL and WebGPU at runtime</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🛡️</div>
+  <div><span class="font-medium">Automatic fallback</span> — gracefully degrades based on browser support, a design still progressing</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">From experiment to production-ready — <span class="font-medium">the technology is maturing steadily</span></div>
+</div>
+
+</div>
