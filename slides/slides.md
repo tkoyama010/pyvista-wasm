@@ -1031,3 +1031,59 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Demo: stlite
+
+<div class="text-lg opacity-80 mt-1">Streamlit in the browser — sliders, select boxes, and widgets driving 3D mesh rendering, no server needed</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Streamlit in the browser</span> — stlite runs Streamlit entirely client-side; no server, no install, share the app by URL</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎛️</div>
+  <div><span class="font-medium">Declarative widgets</span> — a few lines of slider and selectbox code build a full interactive UI around 3D mesh visualization</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐰</div>
+  <div><span class="font-medium">Stanford Bunny demo</span> — pick from 8 colors via a select box and tune opacity 0–1 with a slider, watching the mesh update live</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🧑‍💼</div>
+  <div><span class="font-medium">Built for non-engineers</span> — Streamlit's declarative UI plus pyvista-wasm rendering yields a server-less tool anyone can use</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🆚</div>
+  <div><span class="font-medium">Complementary, not competing</span> — JupyterLite and marimo suit exploratory notebook visualization; stlite suits widget-based interactive apps</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">Best for publishing — <span class="font-medium">when you need an interactive app with widgets, stlite is the natural choice</span></div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6">
+
+<div class="rounded-lg px-5 py-4 mt-6" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-sm font-medium opacity-60 mb-1">Live demo</div>
+  <a href="https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt" class="text-sm break-all opacity-80 hover:opacity-100">share.stlite.net — pyvista-wasm stlite demo</a>
+</div>
+
+</div>
