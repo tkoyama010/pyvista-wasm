@@ -578,7 +578,7 @@ def _find_canvas_in_frames(page) -> tuple:  # noqa: ANN001
             canvas = frame.query_selector("canvas")
             if canvas is not None:
                 return frame, canvas
-        except Exception:  # noqa: BLE001
+        except Exception:
             logger.debug("Failed to query canvas in frame", exc_info=True)
             continue
     return None, None
@@ -616,7 +616,7 @@ def _rotate_canvas_with_mouse(page) -> None:  # noqa: ANN001
         page.mouse.up()
 
         logger.info("Performed mouse drag rotation on canvas")
-    except Exception:  # noqa: BLE001
+    except Exception:
         logger.warning("Failed to perform mouse drag rotation", exc_info=True)
 
 

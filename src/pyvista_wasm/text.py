@@ -211,16 +211,20 @@ class Text:
             f"  textOverlay{idx}.style.position = 'absolute';",
             f"  textOverlay{idx}.style.left = '{left_pct}%';",
             f"  textOverlay{idx}.style.bottom = '{bottom_pct}%';",
-            f"  textOverlay{idx}.style.color = "
-            f"'rgba({r_css}, {g_css}, {b_css}, {self.prop.opacity})';",
+            (
+                f"  textOverlay{idx}.style.color = "
+                f"'rgba({r_css}, {g_css}, {b_css}, {self.prop.opacity})';"
+            ),
             f"  textOverlay{idx}.style.fontSize = '{self.prop.font_size}px';",
             f"  textOverlay{idx}.style.fontWeight = '{font_weight}';",
             f"  textOverlay{idx}.style.fontStyle = '{font_style}';",
             f"  textOverlay{idx}.style.pointerEvents = 'none';",
             f"  textOverlay{idx}.style.zIndex = '10';",
             f"  textOverlay{idx}.style.whiteSpace = 'pre';",
-            f"  textOverlay{idx}.style.textShadow = "
-            f"'1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)';",
+            (
+                f"  textOverlay{idx}.style.textShadow = "
+                f"'1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)';"
+            ),
             f"  container.appendChild(textOverlay{idx});",
             "})();",
         ]

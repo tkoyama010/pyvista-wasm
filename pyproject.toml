@@ -50,7 +50,7 @@ optional-dependencies.dev = [
   "pre-commit>=3.0.0,<5.0.0",
   "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
-  "ruff>=0.1.0,<0.16.0",
+  "ruff>=0.1.0,<0.17.0",
   "tox>=4.0.0,<4.57.0",
 ]
 optional-dependencies.docs = [
@@ -79,7 +79,7 @@ scripts.pyvista-wasm = "pyvista_wasm._cli:cli_main"
 dev = [
   "mypy>=1.0.0,<2.4.0",
   "pre-commit>=3.0.0,<5.0.0",
-  "ruff>=0.1.0,<0.16.0",
+  "ruff>=0.1.0,<0.17.0",
   "tox>=4.0.0,<4.57.0",
   { include-group = "test" },
 ]
@@ -113,6 +113,7 @@ override-dependencies = [
 [tool.ruff]
 line-length = 100
 lint.select = [ "ALL" ]
+lint.ignore = [ "CPY001", "PLR0917" ]
 lint.per-file-ignores."jupyterlite/content/*" = [
   "D100",    # missing docstring - jupytext files
   "E402",    # module import not at top - cell-based structure
