@@ -1287,3 +1287,63 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Future Roadmap
+
+<div class="text-lg opacity-80 mt-1">WebGPU stabilization and Pyodide + PyVista maturity — the application range keeps widening</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Key milestones</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚡</div>
+  <div><span class="font-medium">WebGPU stabilization</span> — as the backend matures, GPU compute will run entirely in the browser, beyond the fixed rendering pipeline</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div><span class="font-medium">Pyodide + PyVista maturity</span> — the integration is steadily maturing, enabling a seamless bridge to the Python ecosystem</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔄</div>
+  <div><span class="font-medium">Runtime backend switching</span> — WebGL/WebGPU selection and automatic fallback keep improving as browser support grows</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Why it matters</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏛️</div>
+  <div><span class="font-medium">30 years of VTK in the browser</span> — a heritage maintained since 1993 is now reachable from a single URL</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Accessibility keeps expanding</span> — server-less delivery is steadily broadening who can use scientific visualization</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📈</div>
+  <div><span class="font-medium">Broader applications ahead</span> — as WebGPU stabilizes, the practical application range is expected to widen further</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">The technology is maturing steadily — <span class="font-medium">the next chapter is browser-native GPU compute</span></div>
+</div>
+
+</div>
