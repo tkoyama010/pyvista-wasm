@@ -1217,3 +1217,73 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Suitable & Unsuitable Use Cases
+
+<div class="text-lg opacity-80 mt-1">Where vtk.wasm shines today — and where its edges still are</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Suitable</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔬</div>
+  <div><span class="font-medium">Simulation sharing</span> — physics simulation result distribution and sharing</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📂</div>
+  <div><span class="font-medium">Local file viewer</span> — a quick viewer for local analysis files</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Serverless static sites</span> — embedding in static sites with no backend</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">👥</div>
+  <div><span class="font-medium">Small-team review</span> — sharing analysis results within a small team</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">💼</div>
+  <div><span class="font-medium">Field demos & client sites</span> — presentations with a browser and nothing else</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Unsuitable</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📐</div>
+  <div><span class="font-medium">Massive meshes</span> — real-time processing of meshes with hundreds of millions of elements</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📱</div>
+  <div><span class="font-medium">Low-spec devices</span> — slow network connections or underpowered hardware</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🎨</div>
+  <div><span class="font-medium">Non-WebGPU browsers</span> — high-quality rendering on browsers without WebGPU support</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">✅</div>
+  <div class="opacity-90">PoC confirmed — <span class="font-medium">analysis results can be shared without a dedicated server</span></div>
+</div>
+
+</div>
