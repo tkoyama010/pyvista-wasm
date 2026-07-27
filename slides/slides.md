@@ -1347,3 +1347,80 @@ class: text-left
 </div>
 
 </div>
+
+---
+layout: two-cols-header
+class: text-left
+---
+
+# Call to Action & Q&A
+
+<div class="text-lg opacity-80 mt-1">pyvista-wasm is an actively developed open source project — contributions and discussion are welcome</div>
+
+::left::
+
+<div class="pr-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Contribution areas</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚙️</div>
+  <div><span class="font-medium">New VTK filters</span> — expand the filter pipeline available in the browser</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📦</div>
+  <div><span class="font-medium">More file formats</span> — support additional mesh and data formats client-side</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚡</div>
+  <div><span class="font-medium">Performance improvements</span> — push the interactive speed further</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📖</div>
+  <div><span class="font-medium">Docs & translations</span> — documentation fixes and Japanese translation improvements</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">💬</div>
+  <div class="opacity-90">Small documentation fixes and translations are very welcome</div>
+</div>
+
+<div class="rounded-lg px-5 py-4 mt-2" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-sm font-medium opacity-60 mb-1">Repository</div>
+  <a href="https://github.com/tkoyama010/pyvista-wasm" class="text-sm break-all opacity-80 hover:opacity-100">github.com/tkoyama010/pyvista-wasm</a>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">Discussion topics</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏗️</div>
+  <div><span class="font-medium">Porting to WASM</span> — build challenges and bottlenecks when porting heavyweight Python libraries to WebAssembly</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">Browser-based science</span> — use cases for browser-based scientific computing: education, paper reproduction, internal dashboards</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">❓</div>
+  <div><span class="font-medium">Is WASM necessary?</span> — or is a Jupyter server sufficient? Discussing the value of serverless visualization</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-6">
+  <div class="opacity-50 w-5">🎤</div>
+  <div class="text-2xl font-medium">Q&A</div>
+</div>
+
+<div class="text-sm opacity-70">Thank you — questions and discussion are welcome</div>
+
+</div>
