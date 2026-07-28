@@ -14,18 +14,12 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Presentation](#presentation)
 - [Install](#install)
 - [Usage](#usage)
+- [Presentation](#presentation)
 - [Differences from pyvista-js](#differences-from-pyvista-js)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Presentation
-
-The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep dive into the WASM rendering architecture:
-
-👉 [**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)
 
 ## Install
 
@@ -52,6 +46,12 @@ plotter = pv.Plotter()
 plotter.add_mesh(pv.Sphere(), color="red")
 plotter.show()
 ```
+
+## Presentation
+
+The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep dive into the WASM rendering architecture:
+
+👉 [**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)
 
 ## Differences from pyvista-js
 
