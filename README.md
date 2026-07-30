@@ -49,9 +49,22 @@ plotter.show()
 
 ## Presentation
 
-The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep dive into the WASM rendering architecture:
+pyvista-wasm was presented at [PyCon JP 2026](https://2026.pycon.jp/) — "PyVista on WebAssembly: サーバーレス3D可視化の実現".
 
-👉 [**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)
+### Talk Materials
+
+| Material | Link |
+| :------- | :--- |
+| Slide deck (Slidev) | <https://tkoyama010.github.io/pyvista-wasm/slides/> |
+| Live demo — JupyterLite | [JupyterLite notebook][try it with jupyterlite] |
+| Live demo — marimo | [marimo reactive notebook][try it with marimo] |
+| Live demo — stlite | [stlite Streamlit app][try it with stlite] |
+| Talk proposal | [pretalx session page](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9) |
+| Talk summary | [PyCon JP 2026 talk summary](https://pyvista-wasm.readthedocs.io/en/latest/explanation/pycon-jp-2026-talk.html) |
+
+The live demo links above correspond to the badge URLs at the top of this README.
+A full talk summary with community feedback is available in the
+[documentation](https://pyvista-wasm.readthedocs.io/en/latest/explanation/pycon-jp-2026-talk.html).
 
 ## Differences from pyvista-js
 

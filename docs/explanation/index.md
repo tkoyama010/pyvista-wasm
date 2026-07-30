@@ -22,3 +22,14 @@ pyvista-wasm separates concerns between Python and JavaScript:
 - Support for JupyterLite, marimo, and stlite
 - Physically Based Rendering (PBR) with metallic and roughness controls
 - PLY, OBJ, STL, GLTF, and PolyData file format readers
+
+## PyCon JP 2026 Talk
+
+- [PyCon JP 2026 Talk — PyVista on WebAssembly](pycon-jp-2026-talk) — talk summary, materials, and community feedback
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+pycon-jp-2026-talk
+```
