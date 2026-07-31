@@ -20,4 +20,5 @@ worked example.
 0001-use-slidev-for-pycon-jp-2026-talk-slides
 0002-decide-slide-preview-and-deployment-strategy
 0003-decide-how-to-internationalize-the-slidev-deck
+0004-adopt-one-slide-one-message-principle
 ```
