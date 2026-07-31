@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@slidev/cli": "^52.18.0",
-    "@slidev/theme-default": "^0.25.0"
+    "@slidev/theme-default": "^0.25.0",
+    "slidev-addon-i18nb": "^0.2.6"
   },
   "overrides": {
     "dompurify": "^3.4.12",
