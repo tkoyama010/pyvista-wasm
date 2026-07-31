@@ -48,11 +48,11 @@ Chosen option: **"1 slide, 1 message"**, because it directly satisfies the knock
 Compliance with this decision will be confirmed by:
 
 1. Every slide in `slides/slides.md` conveys a single core message that can be stated in one short sentence.
-2. Slides identified as overloaded in the [#332](https://github.com/tkoyama010/pyvista-wasm/issues/332) audit have been split or trimmed so that no slide carries more than one core idea.
-3. Each slide's headline (title or primary heading) states its single message clearly.
-4. Supporting detail that does not constitute the slide's core message has been moved to speaker notes (`Speaker notes` / Slidev note blocks) rather than cramming it onto the slide.
-5. Bullet lists on each slide support only the slide's single message; lists that introduce a second idea have been split into a separate slide.
-6. A deck review confirms that the talk's time budget still fits the PyCon JP 2026 slot after any slide splits.
+1. Slides identified as overloaded in the [#332](https://github.com/tkoyama010/pyvista-wasm/issues/332) audit have been split or trimmed so that no slide carries more than one core idea.
+1. Each slide's headline (title or primary heading) states its single message clearly.
+1. Supporting detail that does not constitute the slide's core message has been moved to speaker notes (`Speaker notes` / Slidev note blocks) rather than cramming it onto the slide.
+1. Bullet lists on each slide support only the slide's single message; lists that introduce a second idea have been split into a separate slide.
+1. A deck review confirms that the talk's time budget still fits the PyCon JP 2026 slot after any slide splits.
 
 ## Pros and Cons of the Options
 
