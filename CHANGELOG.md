@@ -1,5 +1,61 @@
 # Changelog
 
+## [0.9.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.8.0...pyvista-wasm-v0.9.0) (2026-07-31)
+
+### Features
+
+- add user-story-format issue template ([#272](https://github.com/tkoyama010/pyvista-wasm/issues/272)) ([8f7ec2d](https://github.com/tkoyama010/pyvista-wasm/commit/8f7ec2d3911aa642ade5785258a692cf990474ca))
+- internationalize Slidev deck with slidev-addon-i18nb (JA/EN) ([#390](https://github.com/tkoyama010/pyvista-wasm/issues/390)) ([661c9bc](https://github.com/tkoyama010/pyvista-wasm/commit/661c9bce52578a178676e7133ba9fb64bc2235de))
+
+### Bug Fixes
+
+- bump GitPython to 3.1.55 in the lockfile ([#349](https://github.com/tkoyama010/pyvista-wasm/issues/349)) ([47ca090](https://github.com/tkoyama010/pyvista-wasm/commit/47ca09073d0f016a9132372369e99dcff9edd9ef))
+- cap ruff below 0.16.0 in the tox lint env ([#346](https://github.com/tkoyama010/pyvista-wasm/issues/346)) ([72420f8](https://github.com/tkoyama010/pyvista-wasm/commit/72420f8463422df167d1266fc3b582211523ad9b))
+- **deps:** override pymdown-extensions to >=11.0.0 to resolve GHSA-9xwg-3r6f-jcx2 ([#358](https://github.com/tkoyama010/pyvista-wasm/issues/358)) ([71b8262](https://github.com/tkoyama010/pyvista-wasm/commit/71b826276b4002a8f9d9cbafcbfce9ef416b1140))
+- **deps:** pin fast-uri to 3.1.4 to resolve GHSA-v2hh-gcrm-f6hx ([#344](https://github.com/tkoyama010/pyvista-wasm/issues/344)) ([105a841](https://github.com/tkoyama010/pyvista-wasm/commit/105a841ba71e6509976815c8f81da552762a63a1))
+- force dompurify to a patched version in slides deck ([#325](https://github.com/tkoyama010/pyvista-wasm/issues/325)) ([73c4b96](https://github.com/tkoyama010/pyvista-wasm/commit/73c4b961357470bca035b774bb4801b15af870bd))
+- resolve remaining Dependabot security alerts ([#328](https://github.com/tkoyama010/pyvista-wasm/issues/328)) ([1e33c11](https://github.com/tkoyama010/pyvista-wasm/commit/1e33c115d4c2a70153449fc752e1edb2e7d775e7))
+- show landing page at GitHub Pages root instead of redirecting to ReadTheDocs ([#375](https://github.com/tkoyama010/pyvista-wasm/issues/375)) ([155a51b](https://github.com/tkoyama010/pyvista-wasm/commit/155a51b403020eb6839d196c756670909129e847))
+
+### Reverts
+
+- "fix: show landing page at GitHub Pages root instead of redirecting to ReadTheDocs" ([#377](https://github.com/tkoyama010/pyvista-wasm/issues/377)) ([a1ecb7b](https://github.com/tkoyama010/pyvista-wasm/commit/a1ecb7b4d0ab2e6a3391228ca7f49b5f5bb24b16))
+
+### Documentation
+
+- add presentation link to README ([#376](https://github.com/tkoyama010/pyvista-wasm/issues/376)) ([c380c44](https://github.com/tkoyama010/pyvista-wasm/commit/c380c441a4e61f097d2865388fd6746f354967b7))
+- add PyCon JP 2026 "Architecture: SSR vs Wasm" slide ([#299](https://github.com/tkoyama010/pyvista-wasm/issues/299)) ([#350](https://github.com/tkoyama010/pyvista-wasm/issues/350)) ([11f9fb8](https://github.com/tkoyama010/pyvista-wasm/commit/11f9fb8834bd91b563cce572b0888c13352210bd))
+- add PyCon JP 2026 "Build & distribution mechanism" slide ([#355](https://github.com/tkoyama010/pyvista-wasm/issues/355)) ([731a8c9](https://github.com/tkoyama010/pyvista-wasm/commit/731a8c986f03f700312423880d75f7a3aae5153d))
+- add PyCon JP 2026 "Capabilities & current limitations" slide ([#354](https://github.com/tkoyama010/pyvista-wasm/issues/354)) ([e67566e](https://github.com/tkoyama010/pyvista-wasm/commit/e67566eb63d27fb2f4f2bb5327714de904b62235))
+- add PyCon JP 2026 "Demo: JupyterLite" slide ([#364](https://github.com/tkoyama010/pyvista-wasm/issues/364)) ([618eaa4](https://github.com/tkoyama010/pyvista-wasm/commit/618eaa401d93d29ba795080e3d37771bd17071df))
+- add PyCon JP 2026 "Demo: marimo" slide ([#365](https://github.com/tkoyama010/pyvista-wasm/issues/365)) ([a4d00e2](https://github.com/tkoyama010/pyvista-wasm/commit/a4d00e22aee5203d932af9d95a92d74e059cefbe))
+- add PyCon JP 2026 "Demo: stlite" slide ([#366](https://github.com/tkoyama010/pyvista-wasm/issues/366)) ([c2259e5](https://github.com/tkoyama010/pyvista-wasm/commit/c2259e5a319417e1e2d6bfaf4e8ad7bb32dd0667))
+- add PyCon JP 2026 "Development & CI challenges" slide ([#362](https://github.com/tkoyama010/pyvista-wasm/issues/362)) ([6f442f8](https://github.com/tkoyama010/pyvista-wasm/commit/6f442f85a59105d94ebeaf226e9da6784a144cb3))
+- add PyCon JP 2026 "Minimal sample: sphere rendering" slide ([#363](https://github.com/tkoyama010/pyvista-wasm/issues/363)) ([1ef43f2](https://github.com/tkoyama010/pyvista-wasm/commit/1ef43f27656bd98ff6490d22ec232ad7016e904c))
+- add PyCon JP 2026 "Performance: Native vs Wasm" slide ([#367](https://github.com/tkoyama010/pyvista-wasm/issues/367)) ([781183d](https://github.com/tkoyama010/pyvista-wasm/commit/781183dab6e5eb9ae1d54d7d60b034ecc6ec3381))
+- add PyCon JP 2026 "Pyodide + PyVista integration" slide ([#357](https://github.com/tkoyama010/pyvista-wasm/issues/357)) ([6a66020](https://github.com/tkoyama010/pyvista-wasm/commit/6a660208ccf052242a33809756f43aea6a3ffbeb))
+- add PyCon JP 2026 "The problem" slide ([#297](https://github.com/tkoyama010/pyvista-wasm/issues/297)) ([#341](https://github.com/tkoyama010/pyvista-wasm/issues/341)) ([7010d64](https://github.com/tkoyama010/pyvista-wasm/commit/7010d647b60f5b31dee57191be7e165091bbcc6b))
+- add PyCon JP 2026 "VTK Emscripten build pipeline" slide ([#356](https://github.com/tkoyama010/pyvista-wasm/issues/356)) ([43e9d79](https://github.com/tkoyama010/pyvista-wasm/commit/43e9d795cd104f570c78b6dd5feb17472b1d33f3))
+- add PyCon JP 2026 "Wasm build history & current status" slide ([#353](https://github.com/tkoyama010/pyvista-wasm/issues/353)) ([c9650d7](https://github.com/tkoyama010/pyvista-wasm/commit/c9650d760c2116d112765be884365b5bdfdbb06d))
+- add PyCon JP 2026 "WASM constraints & workarounds" slide ([#368](https://github.com/tkoyama010/pyvista-wasm/issues/368)) ([f089522](https://github.com/tkoyama010/pyvista-wasm/commit/f089522f5ea429f342fe904a5aa13aafcb84b158))
+- add PyCon JP 2026 "WebGL/WebGPU rendering integration" slide ([#359](https://github.com/tkoyama010/pyvista-wasm/issues/359)) ([72de4e5](https://github.com/tkoyama010/pyvista-wasm/commit/72de4e5ace6f5272ea3d960fab48af2f5729b7fd))
+- add PyCon JP 2026 "What is PyVista?" slide ([#330](https://github.com/tkoyama010/pyvista-wasm/issues/330)) ([0343d81](https://github.com/tkoyama010/pyvista-wasm/commit/0343d81fa3b576a38e23e72e2692d4f210f7b271))
+- add PyCon JP 2026 "What is vtk.wasm?" slide ([#300](https://github.com/tkoyama010/pyvista-wasm/issues/300)) ([#351](https://github.com/tkoyama010/pyvista-wasm/issues/351)) ([854b542](https://github.com/tkoyama010/pyvista-wasm/commit/854b542f4c6cc3c0ae757a2a43e693151e6a09e0))
+- add PyCon JP 2026 "Why WASM?" slide ([#298](https://github.com/tkoyama010/pyvista-wasm/issues/298)) ([#348](https://github.com/tkoyama010/pyvista-wasm/issues/348)) ([9870cc7](https://github.com/tkoyama010/pyvista-wasm/commit/9870cc7009a00d56d4bdd3623bc95d0289be1ddc))
+- add PyCon JP 2026 agenda and speaker slide ([#322](https://github.com/tkoyama010/pyvista-wasm/issues/322)) ([f785a47](https://github.com/tkoyama010/pyvista-wasm/commit/f785a4760509b4873a362aff5c134a41a44380a7))
+- add PyCon JP 2026 title slide ([#317](https://github.com/tkoyama010/pyvista-wasm/issues/317)) ([ff3a056](https://github.com/tkoyama010/pyvista-wasm/commit/ff3a056ddb8a69e59088f374d744319b4a1cdeb6))
+- add slide 21 — Suitable & unsuitable use cases ([#371](https://github.com/tkoyama010/pyvista-wasm/issues/371)) ([61049f4](https://github.com/tkoyama010/pyvista-wasm/commit/61049f40b97cb6a477dec43ec0dce1ef1bedcfc1))
+- add slide 22 — Future roadmap ([#372](https://github.com/tkoyama010/pyvista-wasm/issues/372)) ([0cc1cbe](https://github.com/tkoyama010/pyvista-wasm/commit/0cc1cbe216d31817b6f4eef4a67897e5c21dca21))
+- add slide 23 — Call to action & Q&A ([#373](https://github.com/tkoyama010/pyvista-wasm/issues/373)) ([3e764c7](https://github.com/tkoyama010/pyvista-wasm/commit/3e764c7f68c060502059ec8399985850d60e3f6f))
+- adopt MADR 4.0.0 for architectural decision records ([#289](https://github.com/tkoyama010/pyvista-wasm/issues/289)) ([43619c8](https://github.com/tkoyama010/pyvista-wasm/commit/43619c8f6c2ab39f56aaa963c6fcfcbf6eec69cd))
+- decide slide preview and deployment strategy for GitHub Pages ([#319](https://github.com/tkoyama010/pyvista-wasm/issues/319)) ([2278d1d](https://github.com/tkoyama010/pyvista-wasm/commit/2278d1d68766dd178dcc26536dd678fdd759f83a))
+- select Slidev for PyCon JP 2026 talk slides ([#291](https://github.com/tkoyama010/pyvista-wasm/issues/291)) ([40d19d7](https://github.com/tkoyama010/pyvista-wasm/commit/40d19d759037d28f92c71b35238d1ef59dee8eea))
+- write ADR-0003 deciding how to internationalize the Slidev deck (JA/EN) ([#387](https://github.com/tkoyama010/pyvista-wasm/issues/387)) ([e0ff150](https://github.com/tkoyama010/pyvista-wasm/commit/e0ff150bbb940176f90b9e6fd44bab126d407499))
+
+### Continuous Integration
+
+- implement slide preview and deployment strategy for GitHub Pages ([#321](https://github.com/tkoyama010/pyvista-wasm/issues/321)) ([969ae36](https://github.com/tkoyama010/pyvista-wasm/commit/969ae36d1ae56535983b5b3270a63688c970d83e))
+
 ## [0.8.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.7.0...pyvista-wasm-v0.8.0) (2026-06-27)
 
 ### Features
