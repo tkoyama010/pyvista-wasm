@@ -140,8 +140,8 @@ The table below summarises how each option scores against the evaluation criteri
 - This decision: [#391](https://github.com/tkoyama010/pyvista-wasm/issues/391)
 - Garr Reynolds, *Presentation Zen* — advocates one idea per slide and minimal text
 - Nancy Duarte, *Slide:ology* — guides slide design around a single message per slide
-- Lawrence Lessig's presentation style — [https://www.lessig.org/](https://www.lessig.org/)
-- Masayoshi Takahashi's presentation method — [https://www.slideshare.net/takahashim/takahashi-method](https://www.slideshare.net/takahashim/takahashi-method)
+- Lawrence Lessig — [https://en.wikipedia.org/wiki/Lawrence_Lessig](https://en.wikipedia.org/wiki/Lawrence_Lessig)
+- Takahashi method — [https://en.wikipedia.org/wiki/Takahashi_method](https://en.wikipedia.org/wiki/Takahashi_method)
 - Related: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) (selected Slidev and bootstrapped the deck under `slides/`)
 - Related: [ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md) (established the GitHub Pages + pr-preview deployment pipeline)
 - Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md) (established the i18n structure for the deck)
