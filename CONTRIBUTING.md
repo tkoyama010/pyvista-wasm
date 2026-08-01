@@ -106,8 +106,11 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
 You can develop entirely in the browser without any local setup using [GitHub Codespaces](https://docs.github.com/en/codespaces):
 
 1. Click the **Code** button on the [repository page](https://github.com/tkoyama010/pyvista-wasm) and select the **Codespaces** tab
+
 1. Click **Create codespace on main** (or on your feature branch)
+
 1. Wait for the Codespace to build — the `.devcontainer/devcontainer.json` configuration automatically installs Node.js, Python, Slidev dependencies, and Python dev dependencies
+
 1. To preview the Slidev presentation, open a terminal and run:
 
    ```bash
