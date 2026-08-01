@@ -45,10 +45,10 @@ Chosen option: **Option A — Custom CI job with a quality-check script**, becau
 Compliance with this decision will be confirmed by:
 
 1. A Python script (e.g., `ci/check_agents_md.py`) exists in the repository and parses `AGENTS.md` to verify that every required section heading is present.
-2. The script asserts a minimum content threshold (e.g., minimum word count or bullet count) for each required section so that empty or stub sections fail the check.
-3. A GitHub Actions workflow (either a step in `.github/workflows/test.yml` or a dedicated workflow file) runs the script on every PR that touches `AGENTS.md`.
-4. A PR that removes a required section or shrinks it below the minimum threshold causes the CI job to fail with a message naming the offending section.
-5. The script's required-sections list mirrors the quality checklist defined in [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) and can be updated in one place when the checklist evolves.
+1. The script asserts a minimum content threshold (e.g., minimum word count or bullet count) for each required section so that empty or stub sections fail the check.
+1. A GitHub Actions workflow (either a step in `.github/workflows/test.yml` or a dedicated workflow file) runs the script on every PR that touches `AGENTS.md`.
+1. A PR that removes a required section or shrinks it below the minimum threshold causes the CI job to fail with a message naming the offending section.
+1. The script's required-sections list mirrors the quality checklist defined in [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) and can be updated in one place when the checklist evolves.
 
 ## Pros and Cons of the Options
 
