@@ -30,8 +30,9 @@ layout: cover
   <div>{{ $t("cover.speaker") }}</div>
 </div>
 
+<!-- Single message: this talk is about running PyVista entirely in the browser via WebAssembly — no server required. -->
+
 ---
-layout: two-cols
 class: text-left
 ---
 
@@ -39,7 +40,7 @@ class: text-left
 
 <div class="text-sm opacity-70 mb-6">{{ $t("agenda.subtitle") }}</div>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="text-2xl opacity-40 w-8">1</div>
@@ -75,15 +76,19 @@ class: text-left
 
 </div>
 
-::right::
+<!-- Single message: here is the four-part agenda for the talk. -->
 
-<div class="ml-8">
+---
+class: text-left
+---
 
 # {{ $t("agenda.speaker_title") }}
 
+<div class="text-sm opacity-70 mb-6">{{ $t("agenda.speaker_subtitle") }}</div>
+
 <div class="text-lg font-medium mt-2">{{ $t("agenda.speaker_name") }}</div>
 
-<div class="flex flex-col gap-3 text-sm">
+<div class="flex flex-col gap-3 text-sm mt-4 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🧩</div>
@@ -112,7 +117,7 @@ class: text-left
 
 </div>
 
-</div>
+<!-- Single message: who the speaker is and why they are qualified to give this talk. -->
 
 ---
 layout: two-cols-header
@@ -167,6 +172,8 @@ const demoUrl = import.meta.env.BASE_URL + 'pyvista-demo.html'
 
 </div>
 
+<!-- Single message: PyVista is a Pythonic wrapper over VTK's 30-year C++ visualization toolkit — the de facto standard for 3D visualization in Python. The live demo shows a mesh you can rotate. -->
+
 ---
 layout: two-cols-header
 class: text-left
@@ -213,8 +220,9 @@ class: text-left
 
 </div>
 
+<!-- Single message: sharing 3D results on the web still means running a server — Three.js lacks simulation rendering, SSR needs a server, costs are ongoing, and confidential data must travel to the server. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -222,9 +230,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("why_wasm.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🧠</div>
@@ -241,28 +247,14 @@ class: text-left
   <div><span class="font-medium">{{ $t("why_wasm.i3t") }}</span> — {{ $t("why_wasm.i3d") }}</div>
 </div>
 
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔬</div>
-  <div><span class="font-medium">{{ $t("why_wasm.i4t") }}</span> — {{ $t("why_wasm.i4d_pre") }} <span class="italic">{{ $t("why_wasm.i4d_italic") }}</span></div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">💼</div>
-  <div><span class="font-medium">{{ $t("why_wasm.i5t") }}</span> — {{ $t("why_wasm.i5d") }}</div>
-</div>
-
 <div class="flex items-baseline gap-3 mt-2">
   <div class="opacity-50 w-5">➡️</div>
   <div class="opacity-90">{{ $t("why_wasm.conc_pre") }} <span class="font-medium">{{ $t("why_wasm.conc_bold") }}</span></div>
 </div>
 
 </div>
+
+<!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. Origin: a physics simulation project asked to drop a mesh into the browser and see it (i4). Demos anywhere with just a browser (i5). -->
 
 ---
 class: text-left
@@ -318,8 +310,9 @@ class: text-left
   <div class="opacity-90">{{ $t("arch.conc_pre") }} <span class="font-medium">{{ $t("arch.conc_bold") }}</span></div>
 </div>
 
+<!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -327,9 +320,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("vtk_wasm.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🏛️</div>
@@ -347,29 +338,8 @@ class: text-left
 </div>
 
 <div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎨</div>
-  <div><span class="font-medium">{{ $t("vtk_wasm.i4t") }}</span> — {{ $t("vtk_wasm.i4d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔢</div>
-  <div><span class="font-medium">{{ $t("vtk_wasm.i5t") }}</span> — {{ $t("vtk_wasm.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🌐</div>
   <div><span class="font-medium">{{ $t("vtk_wasm.i6t") }}</span> — {{ $t("vtk_wasm.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">💼</div>
-  <div><span class="font-medium">{{ $t("vtk_wasm.i7t") }}</span> — {{ $t("vtk_wasm.i7d") }}</div>
 </div>
 
 <div class="flex items-baseline gap-3 mt-2">
@@ -378,6 +348,8 @@ class: text-left
 </div>
 
 </div>
+
+<!-- Single message: vtk.wasm brings VTK's 30 years of capability to the browser — built by Kitware, field-proven, hundreds of filters, now running entirely without a server. Additional detail: OpenGL/Vulkan renderers provide production-grade GPU pipelines (i4). Rich ecosystem includes PyVista, ITK, and NumPy/SciPy (i5). Particularly significant for field demos and client-site presentations (i7). -->
 
 ---
 class: text-left
@@ -428,20 +400,17 @@ class: text-left
 
 </div>
 
+<!-- Single message: from experimental Emscripten builds in 2018 to official npm publication in 2021 to WebGPU support in 2023–2024 — the technology is maturing steadily, with runtime WebGL/WebGPU switching and automatic fallback. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
-# {{ $t("caps.title") }}
+# {{ $t("caps.caps_title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("caps.subtitle") }}</div>
+<div class="text-lg opacity-80 mt-1">{{ $t("caps.caps_subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("caps.caps_label") }}</div>
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">⚙️</div>
@@ -465,11 +434,17 @@ class: text-left
 
 </div>
 
-::right::
+<!-- Single message: vtk.wasm can run the full VTK filter pipeline, load meshes, handle interactive camera, and integrate with Python — all in the browser. -->
 
-<div class="pl-6 pt-6 flex flex-col gap-5">
+---
+class: text-left
+---
 
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("caps.lim_label") }}</div>
+# {{ $t("caps.lim_title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("caps.lim_subtitle") }}</div>
+
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">📏</div>
@@ -498,20 +473,17 @@ class: text-left
 
 </div>
 
+<!-- Single message: there are real limitations — module size, COOP/COEP, WebGPU flags, initial load — but ~100K elements run at practical interactive speed. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
-# {{ $t("build_dist.title") }}
+# {{ $t("build_dist.build_title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("build_dist.subtitle_pre") }} <code>npm install</code> {{ $t("build_dist.subtitle_post") }}</div>
+<div class="text-lg opacity-80 mt-1">{{ $t("build_dist.build_subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("build_dist.build_label") }}</div>
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🏗️</div>
@@ -525,11 +497,17 @@ class: text-left
 
 </div>
 
-::right::
+<!-- Single message: VTK's C++ is compiled to WebAssembly via Emscripten (a hours-long build), and consumers just npm install the @kitware/vtk-wasm binding package. -->
 
-<div class="pl-6 pt-6 flex flex-col gap-5">
+---
+class: text-left
+---
 
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("build_dist.dist_label") }}</div>
+# {{ $t("build_dist.dist_title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("build_dist.dist_subtitle") }}</div>
+
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🌐</div>
@@ -552,6 +530,8 @@ class: text-left
 </div>
 
 </div>
+
+<!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. First load is ~12–15 MB (gzip). -->
 
 ---
 layout: two-cols-header
@@ -620,6 +600,8 @@ export default {
 </div>
 
 </div>
+
+<!-- Single message: one Vite config unlocks the entire VTK Emscripten build pipeline — C++ compiled to Wasm once, consumers just npm install, and two Vite lines (build.target esnext + optimizeDeps.exclude) are all that stands between you and browser-native VTK. -->
 
 ---
 layout: two-cols-header
@@ -693,6 +675,8 @@ VTK (C++) → WebAssembly
 
 </div>
 
+<!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
+
 ---
 layout: two-cols-header
 class: text-left
@@ -753,6 +737,8 @@ class: text-left
 
 </div>
 
+<!-- Single message: two render backends, one runtime — WebGL is the universally supported baseline, WebGPU pushes performance further with GPU compute, and the runtime switches between them with automatic fallback. -->
+
 ---
 layout: two-cols-header
 class: text-left
@@ -802,24 +788,11 @@ export default {
 
 <div class="flex flex-col gap-4 mt-6">
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔌</div>
-  <div><span class="font-medium">{{ $t("dev_ci.i3t") }}</span> — {{ $t("dev_ci.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("dev_ci.i4t") }}</span> — <code>createNamespace(url)</code> {{ $t("dev_ci.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚀</div>
-  <div><span class="font-medium">{{ $t("dev_ci.i5t") }}</span> — {{ $t("dev_ci.i5d") }}</div>
 </div>
 
 </div>
 
-</div>
+<!-- Single message: three pitfalls every vtk.wasm integration hits — async/await for all VTK operations, SharedArrayBuffer requiring COOP/COEP headers — and the fixes: vite-plugin-cross-origin-isolation injects the headers (i3), CDN must send CORS headers for the tarball URL (i4), jsDelivr's multi-CDN edge cache is CORS-enabled and faster in Asia than GitLab (i5). -->
 
 ---
 layout: two-cols-header
@@ -889,24 +862,11 @@ createNamespace(WASM_URL).then(async (vtk) => {
 
 <div class="flex flex-col gap-4 mt-6">
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⏳</div>
-  <div><span class="font-medium">{{ $t("sphere.i6t") }}</span> — <code>createNamespace()</code> {{ $t("sphere.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧵</div>
-  <div><span class="font-medium">{{ $t("sphere.i7t") }}</span> — <code>SharedArrayBuffer</code> {{ $t("sphere.i7d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("sphere.i8t") }}</span> — {{ $t("sphere.i8d") }}</div>
 </div>
 
 </div>
 
-</div>
+<!-- Single message: four VTK objects form the minimal complete pipeline — vtkSphereSource → vtkPolyDataMapper → vtkActor → vtkRenderer. Additional detail: StackBlitz lets you edit parameters in the browser (i5). createNamespace() returns a Promise; all VTK operations must be awaited (i6). SharedArrayBuffer requires COOP/COEP headers (i7). The tarball URL must allow CORS; prefer jsDelivr (i8). -->
 
 ---
 layout: two-cols-header
@@ -927,18 +887,8 @@ class: text-left
 </div>
 
 <div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div><span class="font-medium">{{ $t("demo_jl.i2t") }}</span> — {{ $t("demo_jl.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">▶️</div>
   <div><span class="font-medium">{{ $t("demo_jl.i3t") }}</span> — {{ $t("demo_jl.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚀</div>
-  <div><span class="font-medium">{{ $t("demo_jl.i4t") }}</span> — {{ $t("demo_jl.i4d") }}</div>
 </div>
 
 <div class="flex items-baseline gap-3">
@@ -975,6 +925,8 @@ mesh.plot()
 </div>
 
 </div>
+
+<!-- Single message: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL. Additional detail: pre-prepared notebooks with pv.Sphere() and pv.read() let you start rendering with a single cell (i2). No local setup needed — the ideal entry point to experience vtk.wasm rendering quality without installing anything (i4). -->
 
 ---
 layout: two-cols-header
@@ -1027,6 +979,8 @@ class: text-left
 
 </div>
 
+<!-- Single message: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed. Share by URL for a reactive 3D exploration environment in one click. -->
+
 ---
 layout: two-cols-header
 class: text-left
@@ -1046,18 +1000,8 @@ class: text-left
 </div>
 
 <div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎛️</div>
-  <div><span class="font-medium">{{ $t("demo_stlite.i2t") }}</span> — {{ $t("demo_stlite.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🐰</div>
   <div><span class="font-medium">{{ $t("demo_stlite.i3t") }}</span> — {{ $t("demo_stlite.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧑‍💼</div>
-  <div><span class="font-medium">{{ $t("demo_stlite.i4t") }}</span> — {{ $t("demo_stlite.i4d") }}</div>
 </div>
 
 <div class="flex items-baseline gap-3">
@@ -1082,6 +1026,8 @@ class: text-left
 </div>
 
 </div>
+
+<!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. Additional detail: a few lines of slider and selectbox code build a full interactive UI (i2). Streamlit's declarative UI plus pyvista-wasm rendering yields a server-less tool anyone can use (i4). -->
 
 ---
 layout: two-cols-header
@@ -1143,20 +1089,17 @@ class: text-left
 
 </div>
 
+<!-- Single message: initial load costs seconds (WASM overhead: binary download, several seconds to first render, large-scale constraints) — but once loaded, ~100K-element meshes run at practical interactive speed, sufficient for small-team analysis review. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
-# {{ $t("constraints.title") }}
+# {{ $t("constraints.constraints_title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("constraints.subtitle") }}</div>
+<div class="text-lg opacity-80 mt-1">{{ $t("constraints.constraints_subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("constraints.constraints_label") }}</div>
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">📦</div>
@@ -1180,11 +1123,17 @@ class: text-left
 
 </div>
 
-::right::
+<!-- Single message: the browser imposes four constraints — module size, COOP/COEP headers for SharedArrayBuffer, WebGPU flags, and initial load time. -->
 
-<div class="pl-6 pt-6 flex flex-col gap-5">
+---
+class: text-left
+---
 
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("constraints.workarounds_label") }}</div>
+# {{ $t("constraints.workarounds_title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("constraints.workarounds_subtitle") }}</div>
+
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="flex items-baseline gap-3">
   <div class="opacity-50 w-5">🌀</div>
@@ -1212,6 +1161,8 @@ class: text-left
 </div>
 
 </div>
+
+<!-- Single message: every constraint has a proven workaround — spinner & lazy loading, vite-plugin-cross-origin-isolation, automatic WebGL fallback, progress indicators — none block a working demo. -->
 
 ---
 layout: two-cols-header
@@ -1283,6 +1234,8 @@ class: text-left
 
 </div>
 
+<!-- Single message: vtk.wasm shines for simulation sharing, local file viewing, serverless static sites, small-team review, and field demos — but is unsuitable for massive meshes, low-spec devices, or non-WebGPU browsers needing high-quality rendering. PoC confirmed: analysis results can be shared without a dedicated server. -->
+
 ---
 layout: two-cols-header
 class: text-left
@@ -1343,18 +1296,17 @@ class: text-left
 
 </div>
 
+<!-- Single message: the technology is maturing steadily — key milestones are WebGPU stabilization, Pyodide + PyVista maturity, and runtime backend switching. Why it matters: 30 years of VTK in the browser, expanding accessibility, broader applications ahead. The next chapter is browser-native GPU compute. -->
+
 ---
-layout: two-cols-header
 class: text-left
 ---
 
-# {{ $t("cta.title") }}
+# {{ $t("cta.cta_title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cta.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="text-sm font-medium opacity-60 mb-1">{{ $t("cta.areas_label") }}</div>
 
@@ -1390,9 +1342,17 @@ class: text-left
 
 </div>
 
-::right::
+<!-- Single message: pyvista-wasm welcomes contributions — new VTK filters, file formats, performance improvements, docs & translations. Small fixes are very welcome. -->
 
-<div class="pl-6 pt-6 flex flex-col gap-5">
+---
+class: text-left
+---
+
+# {{ $t("cta.qa_title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("cta.qa_subtitle") }}</div>
+
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <div class="text-sm font-medium opacity-60 mb-1">{{ $t("cta.topics_label") }}</div>
 
@@ -1419,3 +1379,5 @@ class: text-left
 <div class="text-sm opacity-70">{{ $t("cta.thank_you") }}</div>
 
 </div>
+
+<!-- Single message: Q&A — discussion topics include porting to WASM, browser-based science, and whether WASM is necessary. Thank you. -->

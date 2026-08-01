@@ -17,6 +17,7 @@ agenda:
   i4t: パフォーマンスと制限
   i4d: 現在機能するもの、まだ機能しないもの
   speaker_title: スピーカー
+  speaker_subtitle: PyVistaコントリビューター兼pyvista-wasm共同メンテナー
   speaker_name: 小山 哲央
   speaker_i1: PyVistaコントリビューター — バグ修正と機能PR
   speaker_i2: pyvista-wasm共同メンテナー
@@ -131,6 +132,10 @@ history:
 caps:
   title: 機能と現在の制限
   subtitle: vtk.wasmが今日できること — そして限界はどこか
+  caps_title: 機能
+  caps_subtitle: vtk.wasmが今日できること
+  lim_title: 現在の制限
+  lim_subtitle: 限界はどこか
   caps_label: 機能
   i1t: VTKフィルターパイプライン
   i1d: フィルター実行全体がブラウザで完結
@@ -156,6 +161,10 @@ build_dist:
   title: ビルドと配布の仕組み
   subtitle_pre: 数時間のEmscriptenビルドが
   subtitle_post: 一つに — バイナリは実行時にCDNからストリーミング
+  build_title: vtk-wasmのビルド方法
+  build_subtitle: VTKのC++をWebAssemblyにコンパイル — 利用者はnpm installするだけ
+  dist_title: パッケージの配布方法
+  dist_subtitle: バイナリは実行時にCDNからストリーミング — JSパッケージにはバンドルされない
   build_label: ビルド
   i1t: Emscripten
   i1d: VTKのC++をWebAssemblyにコンパイル；ビルドには数時間かかるが、利用者は単に
@@ -343,6 +352,10 @@ perf:
 constraints:
   title: WASMの制約と対策
   subtitle: ブラウザが課す4つの制約 — それぞれを解除する対策
+  constraints_title: WASMの制約
+  constraints_subtitle: ブラウザが課す4つの制約
+  workarounds_title: 対策
+  workarounds_subtitle: それぞれを解除する対策
   constraints_label: 制約
   i1t: モジュールサイズ
   i1d: 30–50 MB、gzip後10–15 MB；重い初回ダウンロード
@@ -412,6 +425,9 @@ roadmap:
 
 cta:
   title: コールトゥアクション & Q&A
+  cta_title: コールトゥアクション
+  qa_title: Q&A
+  qa_subtitle: 質問と議論を歓迎します
   subtitle: pyvista-wasmは活発に開発中のオープンソースプロジェクト — コントリビューションと議論を歓迎
   areas_label: コントリビューション領域
   i1t: 新しいVTKフィルター
