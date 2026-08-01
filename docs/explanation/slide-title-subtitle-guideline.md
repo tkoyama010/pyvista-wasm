@@ -119,8 +119,8 @@ still follow the general rule for consistency.
 When reviewing a slide against this guideline:
 
 1. Read the `<!-- Single message: ... -->` comment for the slide.
-2. Check that the **title** is a topic label or question — not a message.
-3. Check that the **subtitle** restates the single message as a one-sentence
+1. Check that the **title** is a topic label or question — not a message.
+1. Check that the **subtitle** restates the single message as a one-sentence
    takeaway — not a vague descriptive phrase.
-4. Check that the **subtitle** in `en.yml` and `ja.yml` carry the same message.
-5. If the subtitle is non-conforming, rewrite it to restate the single message.
+1. Check that the **subtitle** in `en.yml` and `ja.yml` carry the same message.
+1. If the subtitle is non-conforming, rewrite it to restate the single message.
