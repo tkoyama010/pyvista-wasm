@@ -1,13 +1,13 @@
 cover:
   title: PyVista on WebAssembly
-  subtitle: PyVistaをブラウザで完全に実行 — サーバー不要
+  subtitle: サーバーレス3D可視化の実現
   tagline: サーバー不要、インストール不要、データはマシンから出ない
   event: PyCon JP 2026
   speaker: 小山 哲央
 
 agenda:
-  title: アジェンダ
-  subtitle: なぜからどうやってまで、4部構成のツアー
+  title: Python×WASMのリアル：重量級ライブラリ移植の壁と、ブラウザ完結型・科学技術計算の未来を語る
+  subtitle: アジェンダ
   i1t: PyVistaとWASMの概要
   i1d: なぜブラウザで3D可視化を行うのか
   i2t: 技術スタックと実装
