@@ -16,7 +16,7 @@ agenda:
   i3d: サーバー不要で動くPyVista
   i4t: パフォーマンスと制限
   i4d: 現在機能するもの、まだ機能しないもの
-  speaker_title: スピーカーは3D可視化ライブラリ「PyVista」本体への継続的な貢献と、WebAssemblyを活用したブラウザ上でのレンダリング統合を牽引しています
+  speaker_title: スピーカーはPyVistaのWASMを牽引しています
   speaker_subtitle: スピーカープロフィール
   speaker_name: 小山 哲央
   speaker_i1: PyVistaコントリビューター — バグ修正と機能PR
@@ -26,8 +26,8 @@ agenda:
   speaker_i5: PyCon JP スピーカー兼 organizer
 
 pyvista:
-  title: PyVistaとは？
-  subtitle: VTKの30年の3Dパワー — Pythonicに
+  title: PyVistaは科学計算における3D可視化とメッシュ解析の基盤となるPythonライブラリ
+  subtitle: PyVistaの歴史
   i1t: VTKを基盤とする
   i1d: KitwareのC++可視化ツールキット、1993年から30年以上の開発の歴史
   i2t: Pythonic API
