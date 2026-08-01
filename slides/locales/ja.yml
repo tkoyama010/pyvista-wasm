@@ -87,8 +87,8 @@ arch:
   conc_bold: レンダリングはデータのある場所で行われる
 
 vtk_wasm:
-  title: vtk.wasmとは？
-  subtitle: VTKの30年の機能 — 今ブラウザで動く
+  title: VTKは世界の科学技術計算や医療画像分野において最も広く普及している最高峰の可視化ライブラリです
+  subtitle: VTKの活用事例
   i1t: Kitwareが構築
   i1d: C++可視化ツールキット、1993年から維持、30年以上の蓄積された機能
   i2t: 実績あり
@@ -107,8 +107,8 @@ vtk_wasm:
   conc_bold: ではPyVistaにどう繋ぐ？
 
 history:
-  title: Wasmビルドの歴史と現状
-  subtitle: 実験的ビルドからランタイムGPU切替まで — 確実な成熟の軌跡
+  title: VTK.wasmは実用化に向け着実に成熟している
+  subtitle: 実験的ビルドからランタイムGPU切替までの軌跡
   y1: "2018"
   y1l: 実験段階
   y1d: Emscriptenビルド開始 — VTKをブラウザに持ってくる初期のプロトタイプ
@@ -132,8 +132,8 @@ history:
 caps:
   title: 機能と現在の制限
   subtitle: vtk.wasmは今日ブラウザで多くのことができる — そしてその限界は明確
-  caps_title: 機能
-  caps_subtitle: VTKパイプライン、メッシュ読み込み、インタラクティブカメラ、Python統合 — 全てブラウザで
+  caps_title: VTKパイプライン、メッシュ読み込み、インタラクティブカメラ、Python統合 — 全てブラウザで
+  caps_subtitle: 機能
   lim_title: 現在の制限
   lim_subtitle: 実制約は存在する — ただし~100K要素は実用的な対話速度で動く
   caps_label: 機能
