@@ -16,8 +16,8 @@ agenda:
   i3d: サーバー不要で動くPyVista
   i4t: パフォーマンスと制限
   i4d: 現在機能するもの、まだ機能しないもの
-  speaker_title: スピーカー
-  speaker_subtitle: PyVistaコントリビューター兼pyvista-wasm共同メンテナー
+  speaker_title: スピーカーは3D可視化ライブラリ「PyVista」本体への継続的な貢献と、WebAssemblyを活用したブラウザ上でのレンダリング統合を牽引しています
+  speaker_subtitle: スピーカープロフィール
   speaker_name: 小山 哲央
   speaker_i1: PyVistaコントリビューター — バグ修正と機能PR
   speaker_i2: pyvista-wasm共同メンテナー
