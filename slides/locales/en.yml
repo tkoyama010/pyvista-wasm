@@ -17,6 +17,7 @@ agenda:
   i4t: Performance & limitations
   i4d: What works today, what does not yet
   speaker_title: Speaker
+  speaker_subtitle: PyVista contributor and pyvista-wasm co-maintainer
   speaker_name: Tetsuo Koyama
   speaker_i1: "PyVista contributor — bug fixes and feature PRs"
   speaker_i2: pyvista-wasm co-maintainer
@@ -131,6 +132,10 @@ history:
 caps:
   title: Capabilities & Current Limitations
   subtitle: What vtk.wasm can do today — and where the edges still are
+  caps_title: Capabilities
+  caps_subtitle: What vtk.wasm can do today
+  lim_title: Current Limitations
+  lim_subtitle: Where the edges still are
   caps_label: Capabilities
   i1t: VTK filter pipeline
   i1d: full filter execution runs entirely in the browser
@@ -156,6 +161,10 @@ build_dist:
   title: Build & Distribution Mechanism
   subtitle_pre: A hours-long Emscripten build collapses to
   subtitle_post: — the binary streams from CDN at runtime
+  build_title: How vtk-wasm is Built
+  build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
+  dist_title: How the Package is Distributed
+  dist_subtitle: The binary streams from CDN at runtime — not bundled into the JS package
   build_label: Build
   i1t: Emscripten
   i1d: "VTK's C++ compiled to WebAssembly; the build takes hours, but consumers just"
@@ -343,6 +352,10 @@ perf:
 constraints:
   title: WASM Constraints & Workarounds
   subtitle: Four constraints the browser imposes — and the workaround that clears each one
+  constraints_title: WASM Constraints
+  constraints_subtitle: Four constraints the browser imposes
+  workarounds_title: Workarounds
+  workarounds_subtitle: The workaround that clears each one
   constraints_label: Constraints
   i1t: Module size
   i1d: 30–50 MB, 10–15 MB after gzip; a heavy first download
@@ -412,6 +425,9 @@ roadmap:
 
 cta:
   title: Call to Action & Q&A
+  cta_title: Call to Action
+  qa_title: Q&A
+  qa_subtitle: Questions and discussion are welcome
   subtitle: pyvista-wasm is an actively developed open source project — contributions and discussion are welcome
   areas_label: Contribution areas
   i1t: New VTK filters
