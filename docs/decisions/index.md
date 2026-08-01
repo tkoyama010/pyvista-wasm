@@ -21,4 +21,5 @@ worked example.
 0002-decide-slide-preview-and-deployment-strategy
 0003-decide-how-to-internationalize-the-slidev-deck
 0004-adopt-one-slide-one-message-principle
+0005-verify-agents-md-quality-in-ci
 ```
