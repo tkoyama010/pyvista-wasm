@@ -72,8 +72,8 @@ why_wasm:
   conc_bold: ではPyVistaをどうやってそこに？
 
 arch:
-  title: "アーキテクチャ: SSR vs Wasm"
-  subtitle: SSRはサーバーを挟む — Wasmはブラウザ内でループを完結
+  title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
+  subtitle: "SSR と Wasm のアーキテクチャ比較"
   traditional: 従来 · サーバーサイドレンダリング
   client: クライアント
   data_send: ↓ データ送信
