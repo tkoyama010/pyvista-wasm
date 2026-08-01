@@ -40,8 +40,8 @@ pyvista:
   mesh_caption_bold: ドラッグで回転
 
 problem:
-  title: 課題
-  subtitle: ウェブで3D結果を共有するには、依然としてサーバーが必要
+  title: Web上での科学計算の3D計算結果の共有には、サーバーの用意がネックとなる
+  subtitle: 課題
   i1t: Three.jsだけでは不十分
   i1d: ブラウザ3Dの定番ライブラリに、物理・シミュレーション結果をレンダリングする直接の道はない
   i2t: SSRにはサーバーが必要
