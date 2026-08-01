@@ -51,7 +51,9 @@ plotter.show()
 
 The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep dive into the WASM rendering architecture:
 
-👉 [**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)
+[**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)
+
+[**Talk details on pretalx**](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)
 
 ## Differences from pyvista-js
 
