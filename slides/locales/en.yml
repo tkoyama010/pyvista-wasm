@@ -1,13 +1,13 @@
 cover:
   title: PyVista on WebAssembly
-  subtitle: Server-less 3D Visualization
-  tagline: Running PyVista entirely in the browser via WebAssembly — no server required
+  subtitle: Running PyVista entirely in the browser — no server required
+  tagline: No server, no install, no data leaving your machine
   event: PyCon JP 2026
   speaker: Tetsuo Koyama
 
 agenda:
   title: Agenda
-  subtitle: A 30-minute tour, from the why to the how
+  subtitle: A four-part tour, from the why to the how
   i1t: PyVista and WASM overview
   i1d: Why run 3D visualization in the browser
   i2t: Technical stack & implementation
@@ -131,11 +131,11 @@ history:
 
 caps:
   title: Capabilities & Current Limitations
-  subtitle: What vtk.wasm can do today — and where the edges still are
+  subtitle: vtk.wasm can do a lot in the browser today — and its edges are known
   caps_title: Capabilities
-  caps_subtitle: What vtk.wasm can do today
+  caps_subtitle: The full VTK pipeline, mesh loading, interactive camera, and Python — all in the browser
   lim_title: Current Limitations
-  lim_subtitle: Where the edges still are
+  lim_subtitle: Real limitations exist — but ~100K elements run at practical interactive speed
   caps_label: Capabilities
   i1t: VTK filter pipeline
   i1d: full filter execution runs entirely in the browser
@@ -355,7 +355,7 @@ constraints:
   constraints_title: WASM Constraints
   constraints_subtitle: Four constraints the browser imposes
   workarounds_title: Workarounds
-  workarounds_subtitle: The workaround that clears each one
+  workarounds_subtitle: Every constraint has a proven workaround — none block a working demo
   constraints_label: Constraints
   i1t: Module size
   i1d: 30–50 MB, 10–15 MB after gzip; a heavy first download

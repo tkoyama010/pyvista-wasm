@@ -1,13 +1,13 @@
 cover:
   title: PyVista on WebAssembly
-  subtitle: サーバーレス3D可視化の実現
-  tagline: PyVistaをWebAssemblyでブラウザ上で完全に実行 — サーバー不要
+  subtitle: PyVistaをブラウザで完全に実行 — サーバー不要
+  tagline: サーバー不要、インストール不要、データはマシンから出ない
   event: PyCon JP 2026
   speaker: 小山 哲央
 
 agenda:
   title: アジェンダ
-  subtitle: なぜからどうやってまで、30分のツアー
+  subtitle: なぜからどうやってまで、4部構成のツアー
   i1t: PyVistaとWASMの概要
   i1d: なぜブラウザで3D可視化を行うのか
   i2t: 技術スタックと実装
@@ -131,11 +131,11 @@ history:
 
 caps:
   title: 機能と現在の制限
-  subtitle: vtk.wasmが今日できること — そして限界はどこか
+  subtitle: vtk.wasmは今日ブラウザで多くのことができる — そしてその限界は明確
   caps_title: 機能
-  caps_subtitle: vtk.wasmが今日できること
+  caps_subtitle: VTKパイプライン、メッシュ読み込み、インタラクティブカメラ、Python統合 — 全てブラウザで
   lim_title: 現在の制限
-  lim_subtitle: 限界はどこか
+  lim_subtitle: 実制約は存在する — ただし~100K要素は実用的な対話速度で動く
   caps_label: 機能
   i1t: VTKフィルターパイプライン
   i1d: フィルター実行全体がブラウザで完結
@@ -355,7 +355,7 @@ constraints:
   constraints_title: WASMの制約
   constraints_subtitle: ブラウザが課す4つの制約
   workarounds_title: 対策
-  workarounds_subtitle: それぞれを解除する対策
+  workarounds_subtitle: 全ての制約に実証された対策あり — どれもデモの動作を妨げない
   constraints_label: 制約
   i1t: モジュールサイズ
   i1d: 30–50 MB、gzip後10–15 MB；重い初回ダウンロード
