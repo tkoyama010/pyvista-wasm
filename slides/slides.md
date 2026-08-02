@@ -274,13 +274,13 @@ class: text-left
 flowchart TB
   subgraph Wasm["Wasm · Browser-Complete"]
     direction TB
-    WD["📁 Local Data"] --> WC["🌐 Browser (Pyodide + PyVista)"]
-    WC -->|"VTK pipeline in-browser"| WR["🎨 WebGL / WebGPU Render"]
+    WD["📁 Local Data"] --> WC["🌐 Browser\n(Pyodide + PyVista)"]
+    WC -->|"VTK pipeline in-browser"| WR["🎨 WebGL / WebGPU\nRender"]
   end
   subgraph Traditional["Traditional · Server-Side Rendering"]
     direction TB
-    TD["📁 Local Data"] --> TC["🌐 Client (Browser)"]
-    TC -->|"data send (every frame)"| S["🖥️ Server (VTK + GPU)"]
+    TD["📁 Local Data"] --> TC["🌐 Client\n(Browser)"]
+    TC -->|"data send (every frame)"| S["🖥️ Server\n(VTK + GPU)"]
     S -->|"render & return (every frame)"| TC
   end
 ```
