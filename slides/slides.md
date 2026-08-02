@@ -886,46 +886,66 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 <!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
 
 ---
+layout: two-cols-header
 class: text-left
 ---
 
-# {{ $t("use_cases.title") }}
+# {{ $t("roadmap.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("use_cases.subtitle") }}</div>
+<div class="text-lg opacity-80 mt-1">{{ $t("roadmap.subtitle") }}</div>
 
-```mermaid {scale: 0.55}
-flowchart TB
-  subgraph System["pyvista-wasm System"]
-    direction TB
-    UC1(("Simulation sharing"))
-    UC2(("Local file viewer"))
-    UC3(("Serverless static sites"))
-    UC4(("Small-team review"))
-    UC5(("Field demos"))
-  end
+::left::
 
-  ENG(["Engineer"]) --- UC1
-  ENG --- UC2
-  ENG --- UC5
-  DEV(["Web developer"]) --- UC3
-  REV(["Team reviewer"]) --- UC4
-  PRESENTER(["Field presenter"]) --- UC5
+<div class="pr-6 pt-6 flex flex-col gap-5">
 
-  subgraph Outside["Limitations (outside system boundary)"]
-    direction LR
-    L1["Massive meshes"]
-    L2["Low-spec devices"]
-    L3["Non-WebGPU browsers"]
-  end
-```
+<div class="text-sm font-medium opacity-60 mb-1">{{ $t("roadmap.milestones_label") }}</div>
 
-<div class="flex items-baseline gap-3 mt-4">
-  <div class="opacity-50 w-5">✅</div>
-  <div class="opacity-90">{{ $t("use_cases.conc_pre") }} <span class="font-medium">{{ $t("use_cases.conc_bold") }}</span></div>
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">⚡</div>
+  <div><span class="font-medium">{{ $t("roadmap.i1t") }}</span> — {{ $t("roadmap.i1d") }}</div>
 </div>
 
-<!-- Single message: vtk.wasm shines for simulation sharing, local file viewing, serverless static sites, small-team review, and field demos — but is unsuitable for massive meshes, low-spec devices, or non-WebGPU browsers needing high-quality rendering. PoC confirmed: analysis results can be shared without a dedicated server. -->
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🐍</div>
+  <div><span class="font-medium">{{ $t("roadmap.i2t") }}</span> — {{ $t("roadmap.i2d") }}</div>
+</div>
 
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🔄</div>
+  <div><span class="font-medium">{{ $t("roadmap.i3t") }}</span> — {{ $t("roadmap.i3d") }}</div>
+</div>
+
+</div>
+
+::right::
+
+<div class="pl-6 pt-6 flex flex-col gap-5">
+
+<div class="text-sm font-medium opacity-60 mb-1">{{ $t("roadmap.matters_label") }}</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🏛️</div>
+  <div><span class="font-medium">{{ $t("roadmap.i4t") }}</span> — {{ $t("roadmap.i4d") }}</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">🌐</div>
+  <div><span class="font-medium">{{ $t("roadmap.i5t") }}</span> — {{ $t("roadmap.i5d") }}</div>
+</div>
+
+<div class="flex items-baseline gap-3">
+  <div class="opacity-50 w-5">📈</div>
+  <div><span class="font-medium">{{ $t("roadmap.i6t") }}</span> — {{ $t("roadmap.i6d") }}</div>
+</div>
+
+<div class="flex items-baseline gap-3 mt-2">
+  <div class="opacity-50 w-5">➡️</div>
+  <div class="opacity-90">{{ $t("roadmap.conc_pre") }} <span class="font-medium">{{ $t("roadmap.conc_bold") }}</span></div>
+</div>
+
+</div>
+
+<!-- Single message: the technology is maturing steadily — key milestones are WebGPU stabilization, Pyodide + PyVista maturity, and runtime backend switching. Why it matters: 30 years of VTK in the browser, expanding accessibility, broader applications ahead. The next chapter is browser-native GPU compute. -->
 
 ---
 class: text-left
