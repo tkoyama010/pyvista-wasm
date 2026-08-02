@@ -210,14 +210,18 @@ pyodide:
 rendering:
   title: WebGL / WebGPU Rendering Integration
   subtitle: Two render backends, one runtime — WebGL keeps it everywhere, WebGPU pushes it further
-  webgl_label: WebGL · the baseline
+  col_backend: Backend
+  col_feature: Feature
+  col_detail: Detail
+  webgl_label: WebGL
+  runtime_label: Runtime
   i1t: Universally supported
   i1d: available in every modern browser, the reliable render path that always works
   i2t: OpenGL ES heritage
   i2d: a mature, well-understood graphics API with years of tooling and driver support
   i3t: Safe default
   i3d: guarantees a working visualization even on older or conservative browsers
-  webgpu_label: WebGPU · the next step
+  webgpu_label: WebGPU
   i4t: Higher performance
   i4d: lower driver overhead and closer-to-the-metal access than WebGL
   i5t: GPU compute

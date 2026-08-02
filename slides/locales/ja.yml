@@ -182,14 +182,18 @@ pyodide:
 rendering:
   title: vtk.wasmはWebGPUの実験的サポートを提供し、WebGLより高い性能とGPU使用が可能になっている
   subtitle: WebGLとWebGPUの比較
-  webgl_label: WebGL · ベースライン
+  col_backend: バックエンド
+  col_feature: 特徴
+  col_detail: 詳細
+  webgl_label: WebGL
+  runtime_label: ランタイム
   i1t: 普遍的にサポート
   i1d: 全てのモダンブラウザで利用可能、常に機能する信頼できるレンダーパス
   i2t: OpenGL ESの系譜
   i2d: 長年のツールとドライバーサポートを持つ成熟したグラフィックスAPI
   i3t: 安全なデフォルト
   i3d: 古いまたは保守的なブラウザでも可視化が動作することを保証
-  webgpu_label: WebGPU · 次のステップ
+  webgpu_label: WebGPU
   i4t: より高い性能
   i4d: WebGLより低いドライバーオーバーヘッドとメタルに近いアクセス
   i5t: GPU使用

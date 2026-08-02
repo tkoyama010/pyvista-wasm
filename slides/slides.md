@@ -477,7 +477,6 @@ sequenceDiagram
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -485,56 +484,35 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("rendering.subtitle") }}</div>
 
-::left::
+<div class="pt-6 problem-table">
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("rendering.webgl_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("rendering.i1t") }}</span> — {{ $t("rendering.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎨</div>
-  <div><span class="font-medium">{{ $t("rendering.i2t") }}</span> — {{ $t("rendering.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🛡️</div>
-  <div><span class="font-medium">{{ $t("rendering.i3t") }}</span> — {{ $t("rendering.i3d") }}</div>
-</div>
+| {{ $t("rendering.col_backend") }} | {{ $t("rendering.col_feature") }} | {{ $t("rendering.col_detail") }} |
+|---|---|---|
+| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i1t") }} | {{ $t("rendering.i1d") }} |
+| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i2t") }} | {{ $t("rendering.i2d") }} |
+| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i3t") }} | {{ $t("rendering.i3d") }} |
+| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i4t") }} | {{ $t("rendering.i4d") }} |
+| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i5t") }} | {{ $t("rendering.i5d") }} |
+| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i6t") }} | {{ $t("rendering.i6d") }} |
+| {{ $t("rendering.runtime_label") }} | {{ $t("rendering.i7t") }} | {{ $t("rendering.i7d") }} |
 
 </div>
 
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("rendering.webgpu_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚡</div>
-  <div><span class="font-medium">{{ $t("rendering.i4t") }}</span> — {{ $t("rendering.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧮</div>
-  <div><span class="font-medium">{{ $t("rendering.i5t") }}</span> — {{ $t("rendering.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚩</div>
-  <div><span class="font-medium">{{ $t("rendering.i6t") }}</span> — {{ $t("rendering.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">🔄</div>
-  <div><span class="font-medium">{{ $t("rendering.i7t") }}</span> — {{ $t("rendering.i7d") }}</div>
-</div>
-
-</div>
+<style>
+.problem-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.problem-table th,
+.problem-table td {
+  border: 2px solid #555;
+  padding: 10px 16px;
+}
+.problem-table th {
+  border-bottom: 3px solid #333;
+  background-color: rgba(125,125,125,0.1);
+}
+</style>
 
 <!-- Single message: two render backends, one runtime — WebGL is the universally supported baseline, WebGPU pushes performance further with GPU compute, and the runtime switches between them with automatic fallback. -->
 
