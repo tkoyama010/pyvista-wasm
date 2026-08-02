@@ -576,12 +576,12 @@ class: text-left
 
 ```mermaid {scale: 0.75}
 flowchart TB
-  subgraph row1[" "]
+  subgraph row1["Frontend"]
     direction LR
     P["🐍 Pyodide (CPython in Wasm)"] --> PV["pyvista_wasm (PyVista-like API)"]
     PV -->|"Python ↔ JS"| TS["TypeScript Glue Layer"]
   end
-  subgraph row2[" "]
+  subgraph row2["Backend"]
     direction LR
     TS2["TypeScript Glue Layer"] -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
     VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
