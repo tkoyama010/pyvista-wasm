@@ -240,7 +240,6 @@ sequenceDiagram
     B-->>U: 3D mesh displayed (rotate/pan/zoom)
 
     Note over U,B: No server needed — all processing in-browser
-    Note over U,B: Data never leaves the client machine
 ```
 
 </div>
