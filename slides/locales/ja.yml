@@ -42,6 +42,8 @@ pyvista:
 problem:
   title: Web上での科学計算の3D計算結果の共有には、サーバーの用意がネックとなる
   subtitle: 課題
+  col_issue: 課題
+  col_detail: 詳細
   i1t: Three.jsだけでは不十分
   i1d: ブラウザ3Dの定番ライブラリに、物理・シミュレーション結果をレンダリングする直接の道はない
   i2t: SSRにはサーバーが必要

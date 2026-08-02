@@ -42,6 +42,8 @@ pyvista:
 problem:
   title: The Problem
   subtitle: Sharing 3D results on the web still means running a server
+  col_issue: Issue
+  col_detail: Detail
   i1t: Three.js is not enough
   i1d: the go-to browser 3D library has no direct path to render physics and simulation results
   i2t: SSR needs a server

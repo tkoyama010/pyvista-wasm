@@ -188,9 +188,9 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("problem.subtitle") }}</div>
 
-<div class="pt-6 max-w-2xl">
+<div class="pt-6">
 
-| | |
+| {{ $t("problem.col_issue") }} | {{ $t("problem.col_detail") }} |
 |---|---|
 | 🎨 {{ $t("problem.i1t") }} | {{ $t("problem.i1d") }} |
 | 🖥️ {{ $t("problem.i2t") }} | {{ $t("problem.i2d") }} |
