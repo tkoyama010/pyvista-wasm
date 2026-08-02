@@ -26,8 +26,8 @@ agenda:
   speaker_i5: PyCon JP スピーカー兼 organizer
 
 pyvista:
-  title: PyVistaは科学計算における3D可視化とメッシュ解析の基盤となるPythonライブラリ
-  subtitle: PyVistaの歴史
+  title: PyVistaは科学計算3D可視化のPythonライブラリ
+  subtitle: PyVistaのホームページ
   i1t: VTKを基盤とする
   i1d: KitwareのC++可視化ツールキット、1993年から30年以上の開発の歴史
   i2t: Pythonic API
