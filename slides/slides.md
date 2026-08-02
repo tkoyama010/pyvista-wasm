@@ -572,28 +572,20 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-```mermaid {scale: 0.5}
+```mermaid {scale: 0.7}
 flowchart TB
-  subgraph Browser["Browser"]
-    subgraph Python["Python Layer"]
-      P["Pyodide<br/>(CPython in Wasm)"]
-      PV["pyvista_wasm<br/>(PyVista-like API)"]
-    end
-    subgraph TSL["TypeScript Glue Layer"]
-      GL["pyvista-wasm JS<br/>(loads vtk-wasm, bridges bindings)"]
-      FB["Runtime Fallback<br/>XMLHttpRequest in Pyodide"]
-    end
-    subgraph VTKE["VTK Engine"]
-      VW["@kitware/vtk-wasm<br/>(JS binding)"]
-      VB["VTK C++ to WebAssembly<br/>(loaded from CDN tarball)"]
-      R["Renderer<br/>(WebGL / WebGPU)"]
-    end
-  end
+  P["🐍 Pyodide — CPython in Wasm"]
+  PV["pyvista_wasm — PyVista-like API"]
+  GL["🔧 pyvista-wasm JS — loads vtk-wasm, bridges bindings"]
+  FB["Runtime Fallback — XMLHttpRequest in Pyodide"]
+  VW["📦 @kitware/vtk-wasm — JS binding"]
+  VB["VTK C++ → WebAssembly — CDN tarball"]
+  R["🎨 Renderer — WebGL / WebGPU"]
   P --> PV
   PV -->|"Python to JS"| GL
-  GL --> FB
+  GL --- FB
   GL -->|"createNamespace(url)"| VW
-  VW -->|"loads tarball from CDN"| VB
+  VW -->|"loads tarball"| VB
   VB --> R
 ```
 
