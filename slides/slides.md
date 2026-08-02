@@ -574,13 +574,20 @@ class: text-left
 
 <div class="mt-4">
 
-```mermaid {scale: 0.55}
-flowchart LR
-  P["🐍 Pyodide (CPython in Wasm)"] --> PV["pyvista_wasm (PyVista-like API)"]
-  PV -->|"Python ↔ JS"| TS["TypeScript Glue Layer"]
-  TS -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
-  VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
-  VTK --> R["Renderer (WebGL / WebGPU)"]
+```mermaid {scale: 0.6}
+flowchart TB
+  subgraph row1[" "]
+    direction LR
+    P["🐍 Pyodide (CPython in Wasm)"] --> PV["pyvista_wasm (PyVista-like API)"]
+    PV -->|"Python ↔ JS"| TS["TypeScript Glue Layer"]
+  end
+  subgraph row2[" "]
+    direction LR
+    TS2["TypeScript Glue Layer"] -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
+    VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
+    VTK --> R["Renderer (WebGL / WebGPU)"]
+  end
+  TS -.-> TS2
 ```
 
 <div class="text-sm font-medium opacity-60 mt-4 mb-2">Runtime Fallback (in Pyodide)</div>
