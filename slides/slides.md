@@ -345,29 +345,9 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("history.subtitle") }}</div>
 
-<div class="flex justify-center mt-6">
+<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full h-[420px] mt-4 rounded-lg" frameborder="0"></iframe>
 
-```mermaid {scale: 0.55}
-gantt
-    title VTK.wasm Development Timeline
-    dateFormat YYYY
-    axisFormat %Y
-
-    section Build
-    Experimental Emscripten builds     :2018, 3y
-    Official build pipeline integration :2021, 2y
-    npm publication (vtk.wasm)          :2021, 3y
-
-    section Rendering
-    WebGL backend                       :2018, 6y
-    WebGPU backend support              :2023, 2y
-    Runtime WebGL/WebGPU switching      :2024, 1y
-    Automatic fallback design           :2024, 1y
-```
-
-</div>
-
-<!-- Single message: from experimental Emscripten builds in 2018 to official npm publication in 2021 to WebGPU support in 2023–2024 — the technology is maturing steadily, with runtime WebGL/WebGPU switching and automatic fallback. -->
+<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
 
 ---
 class: text-left
