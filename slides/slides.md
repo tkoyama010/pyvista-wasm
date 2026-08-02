@@ -878,18 +878,17 @@ const jlDemoUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.
 
 # {{ $t("demo_jl.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("demo_jl.subtitle") }}</div>
+<div class="mt-2">
+  <a :href="jlDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">pyvista-wasm.readthedocs.io/en/latest/lite/lab/</a>
+</div>
 
-<div class="pt-2 h-full flex flex-col">
+<div class="pt-2">
   <iframe
     :src="jlDemoUrl"
-    class="w-full rounded-lg shadow-xl flex-1"
-    style="border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
-  <div class="mt-2">
-    <a :href="jlDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">pyvista-wasm.readthedocs.io/en/latest/lite/lab/</a>
-  </div>
 </div>
 
 <!-- Single message: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL. -->
@@ -904,18 +903,17 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
 
 # {{ $t("demo_marimo.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("demo_marimo.subtitle") }}</div>
+<div class="mt-2">
+  <a :href="marimoDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">marimo.app — pyvista-wasm reactive demo</a>
+</div>
 
-<div class="pt-2 h-full flex flex-col">
+<div class="pt-2">
   <iframe
     :src="marimoDemoUrl"
-    class="w-full rounded-lg shadow-xl flex-1"
-    style="border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
-  <div class="mt-2">
-    <a :href="marimoDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">marimo.app — pyvista-wasm reactive demo</a>
-  </div>
 </div>
 
 <!-- Single message: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed. -->
@@ -930,18 +928,17 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 
 # {{ $t("demo_stlite.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("demo_stlite.subtitle") }}</div>
+<div class="mt-2">
+  <a :href="stliteDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">share.stlite.net — pyvista-wasm stlite demo</a>
+</div>
 
-<div class="pt-2 h-full flex flex-col">
+<div class="pt-2">
   <iframe
     :src="stliteDemoUrl"
-    class="w-full rounded-lg shadow-xl flex-1"
-    style="border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
-  <div class="mt-2">
-    <a :href="stliteDemoUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">share.stlite.net — pyvista-wasm stlite demo</a>
-  </div>
 </div>
 
 <!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
