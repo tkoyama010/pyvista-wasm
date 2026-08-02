@@ -231,6 +231,7 @@ class: text-left
 sequenceDiagram
     actor U as User
     participant B as Browser
+    participant S as Server
 
     U->>B: Open URL
     B-->>U: 3D viewer ready
@@ -239,7 +240,7 @@ sequenceDiagram
     B->>B: Execute filter pipeline in-browser
     B-->>U: 3D mesh displayed (rotate/pan/zoom)
 
-    Note over U,B: No server needed — all processing in-browser
+    Note over B,S: No data exchange — all processing in-browser
 ```
 
 </div>
