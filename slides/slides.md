@@ -257,12 +257,14 @@ class: text-left
 <!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. Origin: a physics simulation project asked to drop a mesh into the browser and see it (i4). Demos anywhere with just a browser (i5). -->
 
 ---
-class: text-center
+class: text-left
 ---
 
 # {{ $t("arch.title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
+
+<div class="flex justify-center mt-6">
 
 ```mermaid {scale: 0.6}
 flowchart TB
@@ -278,6 +280,8 @@ flowchart TB
     S -->|"render & return (every frame)"| TC
   end
 ```
+
+</div>
 
 <!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
 
