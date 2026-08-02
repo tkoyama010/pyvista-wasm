@@ -493,20 +493,27 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("build_dist.dist_subtitle") }}</div>
 
-```mermaid {scale: 0.7}
-flowchart LR
-  V["VTK C++ source"] -->|Emscripten build| W["WASM binary tarball"]
-  W -->|published to| CDN["CDN (jsDelivr)"]
-  CDN -->|"createNamespace(url)"| BR["Browser (runtime fetch)"]
-  NPM["npm registry"] -->|npm install| BR
+```mermaid {scale: 0.55}
+flowchart TB
+  subgraph Build["Build (hours-long)"]
+    direction LR
+    V["VTK C++ source"] -->|"Emscripten"| W["WASM binary tarball"]
+  end
+  subgraph Dist["Distribution"]
+    direction LR
+    W -->|"published to"| CDN["CDN (jsDelivr)"]
+    NPM["npm registry"] -->|"npm install"| PKG["@kitware/vtk-wasm (JS binding)"]
+  end
+  subgraph Runtime["Runtime (browser)"]
+    direction LR
+    CDN -->|"createNamespace(url)"| BR["Browser"]
+    PKG --> BR
+    BR -->|"streams tarball"| MEM["WASM module loaded"]
+    MEM --> R["VTK classes available"]
+  end
 ```
 
-<div class="flex items-baseline gap-3 mt-4">
-  <div class="opacity-50 w-5">⏳</div>
-  <div class="opacity-90">{{ $t("build_dist.first_load") }}</div>
-</div>
-
-<!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. First load is ~12–15 MB (gzip). -->
+<!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. -->
 
 ---
 layout: two-cols-header
