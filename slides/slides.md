@@ -347,7 +347,7 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.85}
+```mermaid {scale: 0.70}
 gantt
     title VTK.wasm Development Timeline
     dateFormat YYYY
