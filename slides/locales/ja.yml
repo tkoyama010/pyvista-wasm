@@ -121,7 +121,7 @@ history:
   y2d_post: （JavaScript再実装）とは別物
   y3: "2023–2024"
   y3l: WebGPU
-  y3d: WebGPUバックエンドのサポートが進展 — WebGLより高いレンダリング性能とGPUコンピュート
+  y3d: WebGPUバックエンドのサポートが進展 — WebGLより高いレンダリング性能とGPU使用
   i1t: ランタイム切替
   i1d: 現在のパッケージはランタイムでWebGLとWebGPUを切替可能
   i2t: 自動フォールバック
@@ -217,7 +217,7 @@ pyodide:
   i6d_post: メッシュ取得はurllibの代わりにXMLHttpRequestを使用
 
 rendering:
-  title: vtk.wasmはWebGPUの実験的サポートを提供し、WebGLより高い性能とGPUコンピュートが可能になっている
+  title: vtk.wasmはWebGPUの実験的サポートを提供し、WebGLより高い性能とGPU使用が可能になっている
   subtitle: WebGLとWebGPUの比較
   webgl_label: WebGL · ベースライン
   i1t: 普遍的にサポート
@@ -229,7 +229,7 @@ rendering:
   webgpu_label: WebGPU · 次のステップ
   i4t: より高い性能
   i4d: WebGLより低いドライバーオーバーヘッドとメタルに近いアクセス
-  i5t: GPUコンピュート
+  i5t: GPU使用
   i5d: 固定レンダリングパイプラインだけでなく、汎用コンピュートシェーダーを公開
   i6t: 一部で実験的
   i6d: 一部のブラウザではフラグが必要；2023–2024でバックエンドが大きく進展
@@ -257,8 +257,8 @@ dev_ci:
   i5d: KitwareのGitLab直URLはアジアで遅い；jsDelivrのマルチCDNエッジキャッシュはCORS対応かつ高速
 
 sphere:
-  title: "最小サンプル: 球のレンダリング"
-  subtitle: ジオメトリからピクセルまで4つのVTKオブジェクト — 最小の完全パイプライン
+  title: javascriptでVTK.wasmを利用するためには行数が多くなるが、pyvista-wasmは数行で済む
+  subtitle: VTK.wamとpyvista-wasmの比較
   pipeline_label: パイプライン
   i1t: vtkSphereSource
   i1d: 球のジオメトリを
@@ -279,8 +279,8 @@ sphere:
   i8d: tarball URLはCORSを許可する必要；jsDelivrを推奨
 
 demo_jl:
-  title: "デモ: JupyterLite"
-  subtitle: ブラウザだけのJupyter環境 — Pythonを書き、3Dメッシュをレンダリング、URLで共有
+  title: JupyterLiteを使用すると、インストール不要でノートブック内に3Dメッシュを表示できる
+  subtitle: "デモ:JupyterLite"
   i1t: JupyterLite
   i1d: ブラウザだけのJupyter環境；インストール不要、ノートブックで3Dメッシュがインタラクティブに表示
   i2t: pv.Sphere()とpv.read()
@@ -297,8 +297,8 @@ demo_jl:
   demo_label: ライブデモ
 
 demo_marimo:
-  title: "デモ: marimo"
-  subtitle: リアクティブPythonノートブック — スライダーを変えるとメッシュが即座に再描画、再実行ボタン不要
+  title: marimoもブラウザ内で完全に動作するリアクティブノートブックであり、pyvista-wasmとの相性が良い
+  subtitle: "デモ: marimo"
   i1t: リアクティブノートブック
   i1d: marimoはブラウザ内で完全に動作；セルの値が変わると依存セルが自動再実行
   i2t: リアルタイムメッシュ更新
@@ -312,8 +312,8 @@ demo_marimo:
   demo_label: ライブデモ
 
 demo_stlite:
-  title: "デモ: stlite"
-  subtitle: ブラウザ内のStreamlit — スライダー、セレクトボックス、ウィジェットが3Dメッシュレンダリングを駆動、サーバー不要
+  title: stliteとpyvista-wasmと組み合わせることで、サーバー不要の3D可視化アプリを構築できる
+  subtitle: "デモ: stlite"
   i1t: ブラウザ内のStreamlit
   i1d: stliteはStreamlitを完全にクライアント側で実行；サーバー不要、インストール不要、URLでアプリ共有
   i2t: 宣言的ウィジェット
@@ -328,59 +328,9 @@ demo_stlite:
   conc_bold: ウィジェット付きインタラクティブアプリが必要な時、stliteが自然な選択
   demo_label: ライブデモ
 
-perf:
-  title: "パフォーマンス: Native vs Wasm"
-  subtitle: 初期ロードは数秒かかる — ロード後は~100K要素メッシュが実用的な対話速度で動作する
-  overhead_label: Wasmのオーバーヘッド
-  i1t: 初期ロード
-  i1d: WASMバイナリがCDNからストリーミングされる間、初回レンダリングまで数秒〜10秒以上
-  i2t: ネットワーク転送
-  i2d: 初回ロードで~12–15 MB（gzip）ダウンロード；以降はブラウザがキャッシュ
-  i3t: 大規模制約
-  i3d: ネイティブデスクトップ規模のメッシュ処理はブラウザではまだ実用的な限界あり
-  holds_label: 成立する領域
-  i4t: 実用的な対話速度
-  i4d: ロード後は回転、パン、ズームがレスポンシブ、ネイティブ体験に匹敵
-  i5t: ~100K要素
-  i5d: この規模のメッシュが実用的な対話速度で動作する、分析レビューのスイートスポット
-  i6t: 小チームレビュー
-  i6d: 現段階で小チーム内の分析結果共有に十分な品質
-  conc_pre: PoC確認 —
-  conc_bold: 分析結果の共有に専用サーバーは不要
-
-constraints:
-  title: WASMの制約と対策
-  subtitle: ブラウザが課す4つの制約 — それぞれを解除する対策
-  constraints_title: WASMの制約
-  constraints_subtitle: ブラウザが課す4つの制約
-  workarounds_title: 対策
-  workarounds_subtitle: 全ての制約に実証された対策あり — どれもデモの動作を妨げない
-  constraints_label: 制約
-  i1t: モジュールサイズ
-  i1d: 30–50 MB、gzip後10–15 MB；重い初回ダウンロード
-  i2t: COOP/COEPヘッダー
-  i2d1: にクロスオリジン分離が必要なため、サーバーは
-  i2d2: と
-  i3t: WebGPUフラグ
-  i3d: 一部のブラウザでWebGPUバックエンドを有効化に実験的フラグが必要
-  i4t: 初期ロード時間
-  i4d: 最初のレンダリングが表示されるまで数秒〜10秒以上
-  workarounds_label: 対策
-  i5t: スピナーと遅延ロード
-  i5d1: スピナーを表示し
-  i5d2: でキャンバスがビューポートに入るまでロードを遅延
-  i6t: vite-plugin-cross-origin-isolation
-  i6d: ViteのdevとpreviewでCOOP/COEPヘッダーを注入
-  i7t: WebGLへの自動フォールバック
-  i7d: WebGPU利用不可時、ランタイムは普遍的にサポートされたWebGLバックエンドにフォールバック
-  i8t: 進捗インジケーター
-  i8d: 遅延ロードとプログレスバーを組み合わせてモジュールストリーミングをユーザーに通知
-  conc_pre: 全ての制約に実証された対策あり —
-  conc_bold: どれもデモの動作を妨げない
-
 use_cases:
-  title: 適している・適していないユースケース
-  subtitle: vtk.wasmが今日輝く場所 — そして限界はどこか
+  title: PyVista on WebAssemblyは、サーバー不要で3D可視化データを共有するための新しい手段を提供
+  subtitle: 3D可視化データ共有のユースケース図
   suitable_label: 適している
   i1t: シミュレーション共有
   i1d: 物理シミュレーション結果の配布と共有
@@ -407,7 +357,7 @@ roadmap:
   subtitle: WebGPU安定化とPyodide + PyVistaの成熟 — 適用範囲が広がり続ける
   milestones_label: 主要マイルストーン
   i1t: WebGPU安定化
-  i1d: バックエンドの成熟に伴い、GPUコンピュートが固定レンダリングパイプラインを超えてブラウザで完全に動作する
+  i1d: バックエンドの成熟に伴い、GPU使用が固定レンダリングパイプラインを超えてブラウザで完全に動作する
   i2t: Pyodide + PyVistaの成熟
   i2d: 統合が着実に成熟し、Pythonエコシステムへのシームレスなブリッジを実現
   i3t: ランタイムバックエンド切替
@@ -420,14 +370,14 @@ roadmap:
   i6t: より広い応用へ
   i6d: WebGPUが安定化するにつれ、実用適用範囲はさらに広がると予想
   conc_pre: 技術は着実に成熟 —
-  conc_bold: 次の章はブラウザネイティブのGPUコンピュート
+  conc_bold: 次の章はブラウザネイティブのGPU使用
 
 cta:
-  title: コールトゥアクション & Q&A
-  cta_title: コールトゥアクション
-  qa_title: Q&A
-  qa_subtitle: 質問と議論を歓迎します
-  subtitle: pyvista-wasmは活発に開発中のオープンソースプロジェクト — コントリビューションと議論を歓迎
+  title: pyvista-wasmは活発に開発中のオープンソースプロジェクトでありコントリビューションと議論を歓迎します
+  cta_title: pyvista-wasmは活発に開発中のオープンソースプロジェクトでありコントリビューションを歓迎します
+  qa_title: 質問と議論を歓迎します
+  qa_subtitle: Q&A
+  subtitle: コントリビューション募集中
   areas_label: コントリビューション領域
   i1t: 新しいVTKフィルター
   i1d: ブラウザで利用可能なフィルターパイプラインを拡張
