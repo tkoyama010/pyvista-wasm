@@ -572,46 +572,24 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-<div class="flex gap-8 mt-4 items-start">
+<div class="mt-4">
 
-<div class="flex-1">
-
-```mermaid {scale: 0.65}
-flowchart TB
-  P["🐍 Pyodide (CPython in Wasm)"]
-  PV["pyvista_wasm (PyVista-like API)"]
-  TS["TypeScript Glue Layer"]
-  VW["@kitware/vtk-wasm (JS binding)"]
-  VTK["VTK C++ → WebAssembly (CDN tarball)"]
-  R["Renderer (WebGL / WebGPU)"]
-  P --> PV
-  PV -->|"Python ↔ JS"| TS
-  TS -->|"createNamespace(url)"| VW
-  VW -->|"loads tarball"| VTK
-  VTK --> R
+```mermaid {scale: 0.55}
+flowchart LR
+  P["🐍 Pyodide (CPython in Wasm)"] --> PV["pyvista_wasm (PyVista-like API)"]
+  PV -->|"Python ↔ JS"| TS["TypeScript Glue Layer"]
+  TS -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
+  VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
+  VTK --> R["Renderer (WebGL / WebGPU)"]
 ```
 
-</div>
+<div class="text-sm font-medium opacity-60 mt-4 mb-2">Runtime Fallback (in Pyodide)</div>
 
-<div class="flex-1">
-
-<div class="text-sm font-medium opacity-60 mb-2">Runtime Fallback</div>
-
-```mermaid {scale: 0.65}
+```mermaid {scale: 0.7}
 flowchart LR
-  subgraph Normal["Normal (Desktop)"]
-    direction LR
-    NP["Python code"] -->|"urllib"| NS["HTTP Server"]
-  end
-  subgraph Pyodide["In Pyodide (Browser)"]
-    direction LR
-    PP["Python code"] -->|"pyodide detected"| XL["XMLHttpRequest"]
-  end
-  NS --> NM["Mesh data"]
+  PP["Python code"] -->|"pyodide detected"| XL["XMLHttpRequest"]
   XL --> PM["Mesh data (same origin)"]
 ```
-
-</div>
 
 </div>
 
