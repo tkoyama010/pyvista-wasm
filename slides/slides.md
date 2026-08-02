@@ -251,7 +251,8 @@ sequenceDiagram
     B2->>B2: Execute filter pipeline in-browser
     B2-->>U2: 3D mesh displayed (rotate/pan/zoom)
 
-    Note over B,S,B2: No data exchange
+    Note over B,S: No data exchange
+    Note over B2,S: No data exchange
 ```
 
 </div>
