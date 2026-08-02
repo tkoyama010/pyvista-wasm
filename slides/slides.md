@@ -126,59 +126,17 @@ class: text-left
 <!-- Single message: who the speaker is and why they are qualified to give this talk. -->
 
 ---
-layout: two-cols-header
 class: text-left
+layout: full
 ---
-
-<script setup>
-const demoUrl = import.meta.env.BASE_URL + 'pyvista-demo.html'
-</script>
 
 # {{ $t("pyvista.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("pyvista.subtitle") }}</div>
+<div class="text-sm opacity-80 mb-2">{{ $t("pyvista.subtitle") }}</div>
 
-::left::
+<iframe src="https://pyvista.org/" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
 
-<div class="pr-8 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🏛️</div>
-  <div><span class="font-medium">{{ $t("pyvista.i1t") }}</span> — {{ $t("pyvista.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div><span class="font-medium">{{ $t("pyvista.i2t") }}</span> — {{ $t("pyvista.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🩺</div>
-  <div><span class="font-medium">{{ $t("pyvista.i3t") }}</span> — {{ $t("pyvista.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔢</div>
-  <div><span class="font-medium">{{ $t("pyvista.i4t") }}</span> — {{ $t("pyvista.i4d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pt-6 pl-2">
-
-<iframe
-  :src="demoUrl"
-  class="w-full rounded-lg shadow-xl"
-  style="height: 340px; border: 1px solid rgba(125,125,125,0.3)"
-></iframe>
-
-<div class="text-xs opacity-60 mt-3 text-center">{{ $t("pyvista.mesh_caption_pre") }} <span class="font-medium">{{ $t("pyvista.mesh_caption_bold") }}</span>.</div>
-
-</div>
-
-<!-- Single message: PyVista is a Pythonic wrapper over VTK's 30-year C++ visualization toolkit — the de facto standard for 3D visualization in Python. The live demo shows a mesh you can rotate. -->
+<!-- Single message: PyVista is a Pythonic wrapper over VTK's 30-year C++ visualization toolkit — the de facto standard for 3D visualization in Python. -->
 
 ---
 class: text-left
