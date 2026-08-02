@@ -154,7 +154,7 @@ build_dist:
   subtitle_post: 一つに — バイナリは実行時にCDNからストリーミング
   build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるがユーザーには影響なし
   build_subtitle: vtk-wasmのビルドと使用方法
-  dist_title: パッケージ配布方法デプロイメント図
+  dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
   dist_subtitle: パッケージの配布方法デプロイメント図
   build_label: ビルド
   i1t: Emscripten
