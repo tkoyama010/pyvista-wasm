@@ -361,106 +361,33 @@ layout: full
 
 <div class="grid grid-cols-3 gap-3">
   <div>
-    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-porsche.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-porsche.html" class="w-full rounded-lg" style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
     <div class="text-xs mt-1 font-medium">Porsche</div>
     <div class="text-xs opacity-60">Multi-actor CAD assembly, picking</div>
   </div>
   <div>
-    <iframe src="https://kitware.github.io/vtk-wasm/demo/terrain.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/terrain.html" class="w-full rounded-lg" style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
     <div class="text-xs mt-1 font-medium">Procedural terrain</div>
     <div class="text-xs opacity-60">351k triangles built in the browser</div>
   </div>
   <div>
-    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-starfighter2.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-starfighter2.html" class="w-full rounded-lg" style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
     <div class="text-xs mt-1 font-medium">Starfighter</div>
     <div class="text-xs opacity-60">Glyphs, scalar bar, interactive widgets</div>
   </div>
   <div>
-    <iframe src="https://kitware.github.io/vtk-wasm/demo/volume.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/volume.html" class="w-full rounded-lg" style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
     <div class="text-xs mt-1 font-medium">Volume rendering</div>
     <div class="text-xs opacity-60">531k voxels ray cast on the GPU</div>
   </div>
   <div>
-    <iframe src="https://kitware.github.io/vtk-wasm/demo/actors.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/actors.html" class="w-full rounded-lg" style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
     <div class="text-xs mt-1 font-medium">A thousand actors and more</div>
     <div class="text-xs opacity-60">Every object its own vtkActor</div>
   </div>
 </div>
 
 <!-- Single message: five live demos running entirely in the browser — CAD assembly, terrain, starfighter, volume rendering, and thousands of actors, all without a server. -->
-
----
-class: text-left
----
-
-# {{ $t("caps.caps_title") }}
-
-<div class="text-lg opacity-80 mt-1">{{ $t("caps.caps_subtitle") }}</div>
-
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚙️</div>
-  <div><span class="font-medium">{{ $t("caps.i1t") }}</span> — {{ $t("caps.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📦</div>
-  <div><span class="font-medium">{{ $t("caps.i2t") }}</span> — {{ $t("caps.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎮</div>
-  <div><span class="font-medium">{{ $t("caps.i3t") }}</span> — {{ $t("caps.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div><span class="font-medium">{{ $t("caps.i4t") }}</span> — {{ $t("caps.i4d") }}</div>
-</div>
-
-</div>
-
-<!-- Single message: vtk.wasm can run the full VTK filter pipeline, load meshes, handle interactive camera, and integrate with Python — all in the browser. -->
-
----
-class: text-left
----
-
-# {{ $t("caps.lim_title") }}
-
-<div class="text-lg opacity-80 mt-1">{{ $t("caps.lim_subtitle") }}</div>
-
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📏</div>
-  <div><span class="font-medium">{{ $t("caps.i5t") }}</span> — {{ $t("caps.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧵</div>
-  <div><span class="font-medium">{{ $t("caps.i6t") }}</span> — {{ $t("caps.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚩</div>
-  <div><span class="font-medium">{{ $t("caps.i7t") }}</span> — {{ $t("caps.i7d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⏳</div>
-  <div><span class="font-medium">{{ $t("caps.i8t") }}</span> — {{ $t("caps.i8d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("caps.conc_pre") }} <span class="font-medium">{{ $t("caps.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-<!-- Single message: there are real limitations — module size, COOP/COEP, WebGPU flags, initial load — but ~100K elements run at practical interactive speed. -->
 
 ---
 class: text-left

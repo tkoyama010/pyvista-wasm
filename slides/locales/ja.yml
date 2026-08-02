@@ -123,36 +123,8 @@ history:
   conc_bold: 技術は着実に成熟している
 
 demos:
-  title: VTK.wasmのサンプル
+  title: 3DCG・画像処理・可視化がブラウザで動作します
   subtitle: ブラウザで今すぐ動くライブデモ
-
-caps:
-  title: 機能と現在の制限
-  subtitle: 3DCG・画像処理・可視化がブラウザで動作します
-  caps_title: 3DCG・画像処理・可視化がブラウザで動作します
-  caps_subtitle: 制約はあるが~100K要素は実用的な速度で動作
-  lim_title: 制約はあるが~100K要素は実用的な速度で動作
-  lim_subtitle: 現在の制限
-  caps_label: 機能
-  i1t: VTKフィルターパイプライン
-  i1d: フィルター実行全体がブラウザで完結
-  i2t: メッシュ読み込み
-  i2d: VTP、VTU、STL形式をクライアント側で直接読み込み
-  i3t: インタラクティブカメラ
-  i3d: 回転、パン、ズームを直接操作で
-  i4t: Python統合
-  i4d: PyVista APIが全てをPythonから駆動
-  lim_label: 制限
-  i5t: モジュールサイズ
-  i5d: 30–50 MB、gzip後10–15 MB
-  i6t: COOP/COEPヘッダー
-  i6d: マルチスレッドにはクロスオリジン分離が必要
-  i7t: WebGPUフラグ
-  i7d: 一部のブラウザで実験的フラグが必要な場合あり
-  i8t: 初期ロード
-  i8d: 初回レンダリングまで数秒〜10秒以上
-  conc_pre: 大規模メッシュには依然制約 — ただし
-  conc_bold: ~100K要素は実用的な対話速度で動作する
 
 build_dist:
   title: ビルドと配布の仕組み
