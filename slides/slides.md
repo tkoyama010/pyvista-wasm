@@ -266,7 +266,7 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.6}
+```mermaid {scale: 0.7}
 flowchart TB
   subgraph Wasm["Wasm · Browser-Complete"]
     direction TB
