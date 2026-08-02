@@ -574,7 +574,7 @@ class: text-left
 
 <div class="mt-4">
 
-```mermaid {scale: 0.6}
+```mermaid {scale: 0.75}
 flowchart TB
   subgraph row1[" "]
     direction LR
