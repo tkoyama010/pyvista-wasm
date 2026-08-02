@@ -493,6 +493,8 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("build_dist.dist_subtitle") }}</div>
 
+<div class="flex justify-center mt-6">
+
 ```mermaid {scale: 0.55}
 flowchart TB
   subgraph Build["Build (hours-long)"]
@@ -511,6 +513,8 @@ flowchart TB
     MEM --> R["VTK classes available"]
   end
 ```
+
+</div>
 
 <!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. -->
 
