@@ -229,13 +229,12 @@ class: text-left
 
 ```mermaid {scale: 0.65}
 sequenceDiagram
+    participant B2 as Browser
+    actor U2 as Other User
     actor U as User
     participant B as Browser
     participant S as Server
-    actor U2 as Other User
-    participant B2 as Browser
 
-    U->>B: Open URL
     B-->>U: 3D viewer ready
 
     U->>B: Load mesh file (VTP/VTU/STL)
@@ -245,14 +244,8 @@ sequenceDiagram
     U->>U2: Share URL
 
     U2->>B2: Open URL
-    B2-->>U2: 3D viewer ready
-
-    U2->>B2: Load mesh file (VTP/VTU/STL)
-    B2->>B2: Execute filter pipeline in-browser
-    B2-->>U2: 3D mesh displayed (rotate/pan/zoom)
 
     Note over B,S: No data exchange
-    Note over B2,S: No data exchange
 ```
 
 </div>
