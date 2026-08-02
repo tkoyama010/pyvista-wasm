@@ -100,7 +100,7 @@ vtk_wasm:
   conc_bold: ではPyVistaにどう繋ぐ？
 
 history:
-  title: VTK.wasmのサンプル
+  title: VTK.wasmは実用化に向け開発が進められている
   subtitle: VTK.wasmのサンプル
   y1: "2018"
   y1l: 実験段階
