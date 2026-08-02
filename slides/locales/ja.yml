@@ -279,7 +279,7 @@ sphere:
   i8d: tarball URLはCORSを許可する必要；jsDelivrを推奨
 
 demo_jl:
-  title: JupyterLiteを使用すると、インストール不要でノートブック内に3Dメッシュを表示できる
+  title: JupyterLiteでインストール不要の3Dメッシュを表示
   subtitle: "デモ:JupyterLite"
   i1t: JupyterLite
   i1d: ブラウザだけのJupyter環境；インストール不要、ノートブックで3Dメッシュがインタラクティブに表示
@@ -297,7 +297,7 @@ demo_jl:
   demo_label: ライブデモ
 
 demo_marimo:
-  title: marimoもブラウザ内で完全に動作するリアクティブノートブックであり、pyvista-wasmとの相性が良い
+  title: marimoでもブラウザ内で完全に動作する
   subtitle: "デモ: marimo"
   i1t: リアクティブノートブック
   i1d: marimoはブラウザ内で完全に動作；セルの値が変わると依存セルが自動再実行
@@ -312,7 +312,7 @@ demo_marimo:
   demo_label: ライブデモ
 
 demo_stlite:
-  title: stliteとpyvista-wasmと組み合わせることで、サーバー不要の3D可視化アプリを構築できる
+  title: stliteでサーバー不要の3D可視化アプリを構築
   subtitle: "デモ: stlite"
   i1t: ブラウザ内のStreamlit
   i1d: stliteはStreamlitを完全にクライアント側で実行；サーバー不要、インストール不要、URLでアプリ共有
