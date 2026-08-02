@@ -181,7 +181,7 @@ build_dist:
 
 pipeline:
   title: VTK Emscripten Build Pipeline
-  subtitle: How to use VTK.wasm with Vite
+  subtitle: C++ compiled to WebAssembly once — consumers just npm install and add two Vite lines
   i1t: Emscripten
   i1d: "VTK's entire C++ codebase compiled to WebAssembly, bringing 30 years of capability into the browser"
   i2t: Heavy build, light consumption
