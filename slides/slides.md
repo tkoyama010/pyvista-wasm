@@ -572,21 +572,14 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-```mermaid {scale: 0.7}
-flowchart TB
-  P["🐍 Pyodide — CPython in Wasm"]
-  PV["pyvista_wasm — PyVista-like API"]
-  GL["🔧 pyvista-wasm JS — loads vtk-wasm, bridges bindings"]
-  FB["Runtime Fallback — XMLHttpRequest in Pyodide"]
-  VW["📦 @kitware/vtk-wasm — JS binding"]
-  VB["VTK C++ → WebAssembly — CDN tarball"]
-  R["🎨 Renderer — WebGL / WebGPU"]
-  P --> PV
-  PV -->|"Python to JS"| GL
-  GL --- FB
-  GL -->|"createNamespace(url)"| VW
-  VW -->|"loads tarball"| VB
-  VB --> R
+```mermaid {scale: 0.5}
+flowchart LR
+  P["🐍 Pyodide\nCPython in Wasm"] --> PV["pyvista_wasm\nPyVista-like API"]
+  PV -->|"Python to JS"| GL["🔧 pyvista-wasm JS\nloads vtk-wasm\nbridges bindings"]
+  GL --> FB["Runtime Fallback\nXMLHttpRequest\nin Pyodide"]
+  GL -->|"createNamespace\n(url)"| VW["📦 @kitware/vtk-wasm\nJS binding"]
+  VW -->|"loads tarball"| VB["VTK C++ → WebAssembly\nCDN tarball"]
+  VB --> R["🎨 Renderer\nWebGL / WebGPU"]
 ```
 
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
