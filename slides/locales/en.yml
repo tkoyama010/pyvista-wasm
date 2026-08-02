@@ -422,6 +422,15 @@ roadmap:
   conc_pre: The technology is maturing steadily —
   conc_bold: the next chapter is browser-native GPU compute
 
+inspiration:
+  title: Inspired by
+  subtitle: This talk builds on a longer write-up — read it for the full picture
+  article_label: Source article
+  article_title: "vtk.wasm で実現するブラウザ完結3D可視化"
+  article_source: Akari Inc. tech blog, 2026-05-03
+  article_link_text: tech.akariinc.co.jp/entry/2026/05/03/115708
+  note: The framing of this deck — the motivation for leaving server-side rendering behind, the vtk.wasm background, the JupyterLite / marimo / stlite demos, and the use-case discussion — follows the structure of the article above.
+
 cta:
   title: Call to Action & Q&A
   cta_title: Call to Action

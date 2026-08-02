@@ -372,6 +372,15 @@ roadmap:
   conc_pre: 技術は着実に成熟 —
   conc_bold: 次の章はブラウザネイティブのGPU使用
 
+inspiration:
+  title: 参考にした記事
+  subtitle: 詳しくは燈株式会社のtech blogをご覧ください
+  article_label: 参考記事
+  article_title: "vtk.wasm で実現するブラウザ完結3D可視化"
+  article_source: Akari Inc. tech blog, 2026-05-03
+  article_link_text: tech.akariinc.co.jp/entry/2026/05/03/115708
+  note: このデッキの構成 — サーバーサイドレンダリングから脱する動機、vtk.wasmの背景、JupyterLite / marimo / stliteのデモ、ユースケースの議論 — は上記記事の構成に沿っています。
+
 cta:
   title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションと議論を歓迎します
   cta_title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションを歓迎します
