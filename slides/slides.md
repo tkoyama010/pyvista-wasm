@@ -869,7 +869,6 @@ createNamespace(WASM_URL).then(async (vtk) => {
 <!-- Single message: four VTK objects form the minimal complete pipeline — vtkSphereSource → vtkPolyDataMapper → vtkActor → vtkRenderer. Additional detail: StackBlitz lets you edit parameters in the browser (i5). createNamespace() returns a Promise; all VTK operations must be awaited (i6). SharedArrayBuffer requires COOP/COEP headers (i7). The tarball URL must allow CORS; prefer jsDelivr (i8). -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -881,54 +880,11 @@ const jlDemoUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_jl.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("demo_jl.i1t") }}</span> — {{ $t("demo_jl.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">▶️</div>
-  <div><span class="font-medium">{{ $t("demo_jl.i3t") }}</span> — {{ $t("demo_jl.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📦</div>
-  <div><span class="font-medium">{{ $t("demo_jl.i5t") }}</span> — {{ $t("demo_jl.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">🔗</div>
-  <div class="opacity-90">{{ $t("demo_jl.conc_pre") }} <span class="font-medium">{{ $t("demo_jl.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div class="text-sm font-medium opacity-60 mb-3">{{ $t("demo_jl.code_label") }}</div>
-
-```python
-import pyvista as pv
-
-sphere = pv.Sphere()
-sphere.plot()
-
-mesh = pv.read("disk_out.vtp")
-mesh.plot()
-```
-
-<div class="mt-6">
-  <div class="text-sm font-medium opacity-60 mb-2">{{ $t("demo_jl.demo_label") }}</div>
+<div class="pt-6">
   <iframe
     :src="jlDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 240px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -936,12 +892,9 @@ mesh.plot()
   </div>
 </div>
 
-</div>
-
-<!-- Single message: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL. Additional detail: pre-prepared notebooks with pv.Sphere() and pv.read() let you start rendering with a single cell (i2). No local setup needed — the ideal entry point to experience vtk.wasm rendering quality without installing anything (i4). -->
+<!-- Single message: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -953,47 +906,11 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_marimo.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔄</div>
-  <div><span class="font-medium">{{ $t("demo_marimo.i1t") }}</span> — {{ $t("demo_marimo.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎨</div>
-  <div><span class="font-medium">{{ $t("demo_marimo.i2t") }}</span> — {{ $t("demo_marimo.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚫</div>
-  <div><span class="font-medium">{{ $t("demo_marimo.i3t") }}</span> — {{ $t("demo_marimo.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔍</div>
-  <div><span class="font-medium">{{ $t("demo_marimo.i4t") }}</span> — {{ $t("demo_marimo.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">🔗</div>
-  <div class="opacity-90">{{ $t("demo_marimo.conc_pre") }} <span class="font-medium">{{ $t("demo_marimo.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div>
-  <div class="text-sm font-medium opacity-60 mb-2">{{ $t("demo_marimo.demo_label") }}</div>
+<div class="pt-6">
   <iframe
     :src="marimoDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 340px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -1001,12 +918,9 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
   </div>
 </div>
 
-</div>
-
-<!-- Single message: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed. Share by URL for a reactive 3D exploration environment in one click. -->
+<!-- Single message: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -1018,42 +932,11 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_stlite.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("demo_stlite.i1t") }}</span> — {{ $t("demo_stlite.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐰</div>
-  <div><span class="font-medium">{{ $t("demo_stlite.i3t") }}</span> — {{ $t("demo_stlite.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🆚</div>
-  <div><span class="font-medium">{{ $t("demo_stlite.i5t") }}</span> — {{ $t("demo_stlite.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("demo_stlite.conc_pre") }} <span class="font-medium">{{ $t("demo_stlite.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div class="mt-6">
-  <div class="text-sm font-medium opacity-60 mb-2">{{ $t("demo_stlite.demo_label") }}</div>
+<div class="pt-6">
   <iframe
     :src="stliteDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 340px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -1061,9 +944,7 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
   </div>
 </div>
 
-</div>
-
-<!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. Additional detail: a few lines of slider and selectbox code build a full interactive UI (i2). Streamlit's declarative UI plus pyvista-wasm rendering yields a server-less tool anyone can use (i4). -->
+<!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
 
 ---
 layout: two-cols-header
