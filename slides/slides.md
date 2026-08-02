@@ -483,7 +483,7 @@ class: text-left
 flowchart LR
   V["VTK C++ source"] -->|Emscripten build| W["WASM binary tarball"]
   W -->|published to| CDN["CDN (jsDelivr)"]
-  CDN -->|createNamespace(url)| BR["Browser (runtime fetch)"]
+  CDN -->|"createNamespace(url)"| BR["Browser (runtime fetch)"]
   NPM["npm registry"] -->|npm install| BR
 ```
 
