@@ -488,22 +488,25 @@ class: text-left
 <div class="flex justify-center mt-6">
 
 ```mermaid {scale: 0.55}
-flowchart TB
-  subgraph Build["Build (hours-long)"]
-    direction LR
-    V["VTK C++ source"] -->|"Emscripten"| W["WASM binary tarball"]
-  end
-  subgraph Dist["Distribution"]
-    direction LR
-    W -->|"published to"| CDN["CDN (jsDelivr)"]
-    NPM["npm registry"] -->|"npm install"| PKG["vtk-wasm JS binding"]
-  end
-  subgraph Runtime["Runtime (browser)"]
-    direction LR
-    CDN -->|"createNamespace(url)"| BR["Browser"]
-    BR -->|"streams tarball"| MEM["WASM module loaded"]
-    MEM --> R["VTK classes available"]
-  end
+sequenceDiagram
+    actor D as Developer
+    participant E as Emscripten
+    participant CDN as CDN (jsDelivr)
+    participant NPM as npm registry
+    actor U as User
+    participant B as Browser
+
+    D->>E: Compile VTK C++ to WASM
+    E-->>D: WASM binary tarball (hours-long build)
+    D->>CDN: Publish WASM binary tarball
+    D->>NPM: Publish vtk-wasm JS binding
+
+    U->>NPM: npm install @kitware/vtk-wasm
+    NPM-->>U: vtk-wasm JS binding
+    U->>B: import vtk-wasm + createNamespace(url)
+    B->>CDN: Stream WASM tarball at runtime
+    CDN-->>B: WASM module loaded
+    B-->>U: VTK classes available in-browser
 ```
 
 </div>
