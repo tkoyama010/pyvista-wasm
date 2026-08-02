@@ -446,19 +446,6 @@ sequenceDiagram
 
 ---
 class: text-left
-layout: full
----
-
-# {{ $t("pipeline.title") }}
-
-<div class="text-sm opacity-80 mb-2">{{ $t("pipeline.subtitle") }}</div>
-
-<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
-
-<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
-
----
-class: text-left
 ---
 
 # {{ $t("pyodide.title") }}

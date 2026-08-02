@@ -160,7 +160,7 @@ pipeline:
   i5d: ViteはWASMパッケージを事前バンドルしてはいけない；実行時に非同期ロード
 
 pyodide:
-  title: VTK.wasmをBEとする pyvista-wasm は、PythonコードをFEとしてブラウザ上に3D可視化を構築
+  title: PythonコードをFEとしてブラウザ上に3D可視化
   subtitle: pyvista-wasmのシーケンス図
   i1t: Pyodide
   i1d: CPythonをWebAssemblyにコンパイル、ブラウザ内で本物のCPythonインタープリターを実行
