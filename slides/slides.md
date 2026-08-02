@@ -225,31 +225,32 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("why_wasm.subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
+<div class="flex justify-center mt-4">
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧠</div>
-  <div><span class="font-medium">{{ $t("why_wasm.i1t") }}</span> — {{ $t("why_wasm.i1d") }}</div>
+```mermaid {scale: 0.7}
+flowchart TB
+  subgraph Browser["Browser (Wasm)"]
+    direction TB
+    UC1(("Render 3D meshes in-browser"))
+    UC2(("Run VTK filter pipeline locally"))
+    UC3(("Load mesh files (VTP/VTU/STL)"))
+    UC4(("Interactive camera (rotate/pan/zoom)"))
+    UC5(("Share by URL — no server needed"))
+    UC6(("Keep data on client machine"))
+  end
+
+  ENG(["Engineer"]) --- UC1
+  ENG --- UC2
+  ENG --- UC3
+  ENG --- UC4
+  USR(["User"]) --- UC5
+  USR --- UC6
+  USR --- UC1
+```
+
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔒</div>
-  <div><span class="font-medium">{{ $t("why_wasm.i2t") }}</span> — {{ $t("why_wasm.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">💸</div>
-  <div><span class="font-medium">{{ $t("why_wasm.i3t") }}</span> — {{ $t("why_wasm.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("why_wasm.conc_pre") }} <span class="font-medium">{{ $t("why_wasm.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-<!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. Origin: a physics simulation project asked to drop a mesh into the browser and see it (i4). Demos anywhere with just a browser (i5). -->
+<!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. -->
 
 ---
 class: text-left
