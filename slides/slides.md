@@ -347,22 +347,35 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.55}
+```mermaid {scale: 0.75}
 gantt
     title VTK.wasm Development Timeline
     dateFormat YYYY
     axisFormat %Y
 
-    section Build
-    Experimental Emscripten builds     :2018, 3y
-    Official build pipeline integration :2021, 2y
-    npm publication (vtk.wasm)          :2021, 3y
+    section 2018
+    Experimental Emscripten builds :done, 2018, 1y
+    WebGL backend                  :done, 2018, 1y
 
-    section Rendering
-    WebGL backend                       :2018, 6y
-    WebGPU backend support              :2023, 2y
-    Runtime WebGL/WebGPU switching      :2024, 1y
-    Automatic fallback design           :2024, 1y
+    section 2019-2020
+    Emscripten builds continued    :done, 2019, 2y
+    WebGL backend continued        :done, 2019, 2y
+
+    section 2021
+    Official build pipeline        :done, 2021, 1y
+    npm publication (vtk.wasm)     :done, 2021, 1y
+
+    section 2022
+    npm package maintenance        :done, 2022, 1y
+    WebGL backend continued        :done, 2022, 1y
+
+    section 2023
+    WebGPU backend support         :done, 2023, 1y
+    npm package continued          :done, 2023, 1y
+
+    section 2024
+    Runtime WebGL/WebGPU switching :2024, 1y
+    Automatic fallback design      :2024, 1y
 ```
 
 </div>
