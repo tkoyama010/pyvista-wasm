@@ -353,8 +353,8 @@ use_cases:
   conc_bold: 専用サーバーなしで分析結果を共有可能
 
 roadmap:
-  title: 今後のロードマップ
-  subtitle: WebGPU安定化とPyodide + PyVistaの成熟 — 適用範囲が広がり続ける
+  title: Pyodideと組み合わせることで、ブラウザ内での科学技術計算と可視化の適用範囲はさらに広がる
+  subtitle: ブラウザ完結型科学技術計算のユースケース図
   milestones_label: 主要マイルストーン
   i1t: WebGPU安定化
   i1d: バックエンドの成熟に伴い、GPU使用が固定レンダリングパイプラインを超えてブラウザで完全に動作する
