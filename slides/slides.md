@@ -227,25 +227,30 @@ class: text-left
 
 <div class="flex justify-center mt-4">
 
-```mermaid {scale: 0.7}
-flowchart TB
-  subgraph Browser["Browser (Wasm)"]
-    direction TB
-    UC1(("Render 3D meshes in-browser"))
-    UC2(("Run VTK filter pipeline locally"))
-    UC3(("Load mesh files (VTP/VTU/STL)"))
-    UC4(("Interactive camera (rotate/pan/zoom)"))
-    UC5(("Share by URL — no server needed"))
-    UC6(("Keep data on client machine"))
-  end
+```mermaid {scale: 0.55}
+sequenceDiagram
+    participant U as User
+    participant B as Browser
+    participant W as vtk-wasm (Wasm)
+    participant V as VTK C++ Engine
 
-  ENG(["Engineer"]) --- UC1
-  ENG --- UC2
-  ENG --- UC3
-  ENG --- UC4
-  USR(["User"]) --- UC5
-  USR --- UC6
-  USR --- UC1
+    U->>B: Open URL
+    B->>W: createNamespace(tarball URL)
+    W->>W: Fetch WASM tarball from CDN
+    W->>V: Load VTK classes into memory
+    V-->>W: VTK ready
+    W-->>B: Wasm module loaded
+    B-->>U: 3D viewer ready
+
+    U->>B: Load mesh file (VTP/VTU/STL)
+    B->>W: Read mesh data
+    W->>V: Execute VTK filter pipeline
+    V-->>W: Processed mesh
+    W-->>B: Render result
+    B-->>U: 3D mesh displayed (rotate/pan/zoom)
+
+    Note over U,B: No server needed — all processing in-browser
+    Note over U,B: Data never leaves the client machine
 ```
 
 </div>

@@ -58,7 +58,7 @@ problem:
 
 why_wasm:
   title: Why WASM?
-  subtitle: Browser-complete use case diagram
+  subtitle: Browser-complete sequence diagram
   i1t: Nothing is sent anywhere
   i1d: WebAssembly runs the whole visualization pipeline in the browser, so the round trip to a rendering server disappears
   i2t: Data never leaves the machine
