@@ -585,7 +585,6 @@ flowchart TB
     direction LR
     TS2["TypeScript Glue Layer"] -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
     VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
-    VTK --> R["Renderer (WebGL / WebGPU)"]
   end
   TS -.-> TS2
 ```
