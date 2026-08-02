@@ -266,14 +266,14 @@ class: text-left
 
 ```mermaid {scale: 0.75}
 flowchart LR
+  subgraph Wasm["Wasm · Browser-Complete"]
+    direction LR
+    WC["Client<br/>render in browser"]
+  end
   subgraph Traditional["Traditional · Server-Side Rendering"]
     direction LR
     TC1["Client"] -->|data send| S["Server"]
     S -->|render and return| TC2["Client"]
-  end
-  subgraph Wasm["Wasm · Browser-Complete"]
-    direction LR
-    WC["Client<br/>render in browser"]
   end
 ```
 
