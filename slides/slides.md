@@ -8,6 +8,10 @@ class: text-center
 highlighter: shiki
 transition: slide-left
 mdc: true
+mermaidConfig:
+  flowchart:
+    htmlLabels: false
+    useMaxWidth: true
 fonts:
   sans: Noto Sans JP
   mono: JetBrains Mono
@@ -271,13 +275,13 @@ flowchart TB
   subgraph Wasm["Wasm · Browser-Complete"]
     direction TB
     WD["📁 Local Data"] --> WC["🌐 Browser (Pyodide + PyVista)"]
-    WC --> WR["🎨 WebGL / WebGPU Render"]
+    WC -->|"VTK pipeline in-browser"| WR["🎨 WebGL / WebGPU Render"]
   end
   subgraph Traditional["Traditional · Server-Side Rendering"]
     direction TB
     TD["📁 Local Data"] --> TC["🌐 Client (Browser)"]
-    TC --> S["🖥️ Server (VTK + GPU)"]
-    S --> TC
+    TC -->|"data send (every frame)"| S["🖥️ Server (VTK + GPU)"]
+    S -->|"render & return (every frame)"| TC
   end
 ```
 
