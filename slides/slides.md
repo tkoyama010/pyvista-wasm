@@ -453,9 +453,9 @@ layout: full
 
 <div class="text-sm opacity-80 mb-2">{{ $t("pipeline.subtitle") }}</div>
 
-<iframe src="https://eribmiga-4cm46gjp.stackblitz.io" style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;" allowfullscreen></iframe>
+<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
 
-<!-- Single message: a live StackBlitz demo showing vtk-wasm usage in the browser. -->
+<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
 
 ---
 class: text-left
