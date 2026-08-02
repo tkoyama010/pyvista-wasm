@@ -260,24 +260,29 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
 
-<div class="flex justify-center mt-6 mermaid-nowrap">
+<div class="flex justify-center mt-6 gap-8">
 
-```mermaid {scale: 0.65}
+```mermaid {scale: 0.6}
 sequenceDiagram
     participant SSRS as SSR Server
     participant SSRB as SSR Browser
-    actor U as User
-    participant WASMB as Wasm Browser
+    actor U1 as User
 
-    U->>SSRB: Open URL
+    U1->>SSRB: Open URL
     SSRB->>SSRS: Request 3D view
     SSRS->>SSRS: Render with VTK + GPU
     SSRS-->>SSRB: Return rendered image
-    SSRB-->>U: 3D image displayed
+    SSRB-->>U1: 3D image displayed
+```
 
-    U->>WASMB: Open URL
+```mermaid {scale: 0.6}
+sequenceDiagram
+    actor U2 as User
+    participant WASMB as Wasm Browser
+
+    U2->>WASMB: Open URL
     WASMB->>WASMB: Execute VTK pipeline in-browser
-    WASMB-->>U: 3D mesh displayed (interactive)
+    WASMB-->>U2: 3D mesh displayed (interactive)
 ```
 
 </div>
