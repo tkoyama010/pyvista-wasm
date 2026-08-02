@@ -572,7 +572,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-```mermaid {scale: 0.65}
+```mermaid {scale: 0.5}
 flowchart TB
   subgraph Browser["Browser"]
     subgraph Python["Python Layer"]
