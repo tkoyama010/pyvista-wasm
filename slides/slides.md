@@ -345,44 +345,25 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("history.subtitle") }}</div>
 
-<div class="grid grid-cols-3 gap-8 mt-10">
+<div class="flex justify-center mt-6">
 
-<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-2xl font-medium">{{ $t("history.y1") }}</div>
-  <div class="text-sm opacity-60 mb-3">{{ $t("history.y1l") }}</div>
-  <div class="text-sm">{{ $t("history.y1d") }}</div>
-</div>
+```mermaid {scale: 0.55}
+gantt
+    title VTK.wasm Development Timeline
+    dateFormat YYYY
+    axisFormat %Y
 
-<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-2xl font-medium">{{ $t("history.y2") }}</div>
-  <div class="text-sm opacity-60 mb-3">{{ $t("history.y2l") }}</div>
-  <div class="text-sm">{{ $t("history.y2d_pre") }} <span class="font-medium">{{ $t("history.y2d_bold1") }}</span> {{ $t("history.y2d_mid") }} <span class="font-medium">{{ $t("history.y2d_bold2") }}</span> {{ $t("history.y2d_post") }}</div>
-</div>
+    section Build
+    Experimental Emscripten builds     :2018, 3y
+    Official build pipeline integration :2021, 2y
+    npm publication (vtk.wasm)          :2021, 3y
 
-<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-2xl font-medium">{{ $t("history.y3") }}</div>
-  <div class="text-sm opacity-60 mb-3">{{ $t("history.y3l") }}</div>
-  <div class="text-sm">{{ $t("history.y3d") }}</div>
-</div>
-
-</div>
-
-<div class="flex flex-col gap-4 mt-8">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔄</div>
-  <div><span class="font-medium">{{ $t("history.i1t") }}</span> — {{ $t("history.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🛡️</div>
-  <div><span class="font-medium">{{ $t("history.i2t") }}</span> — {{ $t("history.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("history.conc_pre") }} <span class="font-medium">{{ $t("history.conc_bold") }}</span></div>
-</div>
+    section Rendering
+    WebGL backend                       :2018, 6y
+    WebGPU backend support              :2023, 2y
+    Runtime WebGL/WebGPU switching      :2024, 1y
+    Automatic fallback design           :2024, 1y
+```
 
 </div>
 

@@ -101,7 +101,7 @@ vtk_wasm:
 
 history:
   title: Wasm Build History & Current Status
-  subtitle: From experimental builds to runtime GPU switching — a steady maturity trajectory
+  subtitle: VTK.wasm Development Gantt Chart
   y1: "2018"
   y1l: Experimental
   y1d: Emscripten builds began — early proof-of-concept bringing VTK to the browser

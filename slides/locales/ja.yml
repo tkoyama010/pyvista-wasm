@@ -101,7 +101,7 @@ vtk_wasm:
 
 history:
   title: VTK.wasmは実用化に向け着実に成熟している
-  subtitle: 実験的ビルドからランタイムGPU切替までの軌跡
+  subtitle: VTK.wasmの開発ガントチャート
   y1: "2018"
   y1l: 実験段階
   y1d: Emscriptenビルド開始 — VTKをブラウザに持ってくる初期のプロトタイプ
