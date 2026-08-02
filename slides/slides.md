@@ -909,7 +909,7 @@ flowchart TB
   ENG --- UC5
   DEV(["Web developer"]) --- UC3
   REV(["Team reviewer"]) --- UC4
-  PRES(["Field presenter"]) --- UC5
+  PRESENTER(["Field presenter"]) --- UC5
 
   subgraph Outside["Limitations (outside system boundary)"]
     direction LR
