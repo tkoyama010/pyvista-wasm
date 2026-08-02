@@ -264,18 +264,18 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
 
-```mermaid {scale: 0.65}
+```mermaid {scale: 0.6}
 flowchart TB
   subgraph Wasm["Wasm · Browser-Complete"]
-    direction LR
-    WD["📁 Local Data"] --> WC["🌐 Browser\n(Pyodide + PyVista)"]
-    WC -->|"VTK pipeline\nin-browser"| WR["🎨 WebGL / WebGPU\nRender"]
+    direction TB
+    WD["📁 Local Data"] --> WC["🌐 Browser (Pyodide + PyVista)"]
+    WC -->|"VTK pipeline in-browser"| WR["🎨 WebGL / WebGPU Render"]
   end
   subgraph Traditional["Traditional · Server-Side Rendering"]
-    direction LR
-    TD["📁 Local Data"] --> TC["🌐 Client\n(Browser)"]
-    TC -->|"data send\n(every frame)"| S["🖥️ Server\n(VTK + GPU)"]
-    S -->|"render & return\n(every frame)"| TC
+    direction TB
+    TD["📁 Local Data"] --> TC["🌐 Client (Browser)"]
+    TC -->|"data send (every frame)"| S["🖥️ Server (VTK + GPU)"]
+    S -->|"render & return (every frame)"| TC
   end
 ```
 
