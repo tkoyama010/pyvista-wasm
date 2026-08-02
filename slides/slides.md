@@ -10,8 +10,8 @@ transition: slide-left
 mdc: true
 mermaidConfig:
   flowchart:
+    useMaxWidth: false
     htmlLabels: false
-    useMaxWidth: true
 fonts:
   sans: Noto Sans JP
   mono: JetBrains Mono
@@ -268,7 +268,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
 
-<div class="flex justify-center mt-6">
+<div class="flex justify-center mt-6 mermaid-nowrap">
 
 ```mermaid {scale: 0.7}
 flowchart TB
@@ -286,6 +286,15 @@ flowchart TB
 ```
 
 </div>
+
+<style>
+.mermaid-nowrap .nodeLabel {
+  white-space: nowrap !important;
+}
+.mermaid-nowrap .edgeLabel {
+  white-space: nowrap !important;
+}
+</style>
 
 <!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
 
