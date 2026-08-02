@@ -884,7 +884,7 @@ const jlDemoUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.
   <iframe
     :src="jlDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 520px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -910,7 +910,7 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
   <iframe
     :src="marimoDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 520px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -936,7 +936,7 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
   <iframe
     :src="stliteDemoUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 520px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
