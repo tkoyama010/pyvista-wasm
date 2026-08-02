@@ -572,15 +572,48 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-```mermaid {scale: 0.5}
-flowchart LR
-  P["🐍 Pyodide\nCPython in Wasm"] --> PV["pyvista_wasm\nPyVista-like API"]
-  PV -->|"Python to JS"| GL["🔧 pyvista-wasm JS\nloads vtk-wasm\nbridges bindings"]
-  GL --> FB["Runtime Fallback\nXMLHttpRequest\nin Pyodide"]
-  GL -->|"createNamespace\n(url)"| VW["📦 @kitware/vtk-wasm\nJS binding"]
-  VW -->|"loads tarball"| VB["VTK C++ → WebAssembly\nCDN tarball"]
-  VB --> R["🎨 Renderer\nWebGL / WebGPU"]
+<div class="flex gap-8 mt-4 items-start">
+
+<div class="flex-1">
+
+```mermaid {scale: 0.65}
+flowchart TB
+  P["🐍 Pyodide (CPython in Wasm)"]
+  PV["pyvista_wasm (PyVista-like API)"]
+  TS["TypeScript Glue Layer"]
+  VW["@kitware/vtk-wasm (JS binding)"]
+  VTK["VTK C++ → WebAssembly (CDN tarball)"]
+  R["Renderer (WebGL / WebGPU)"]
+  P --> PV
+  PV -->|"Python ↔ JS"| TS
+  TS -->|"createNamespace(url)"| VW
+  VW -->|"loads tarball"| VTK
+  VTK --> R
 ```
+
+</div>
+
+<div class="flex-1">
+
+<div class="text-sm font-medium opacity-60 mb-2">Runtime Fallback</div>
+
+```mermaid {scale: 0.65}
+flowchart LR
+  subgraph Normal["Normal (Desktop)"]
+    direction LR
+    NP["Python code"] -->|"urllib"| NS["HTTP Server"]
+  end
+  subgraph Pyodide["In Pyodide (Browser)"]
+    direction LR
+    PP["Python code"] -->|"pyodide detected"| XL["XMLHttpRequest"]
+  end
+  NS --> NM["Mesh data"]
+  XL --> PM["Mesh data (same origin)"]
+```
+
+</div>
+
+</div>
 
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
 
