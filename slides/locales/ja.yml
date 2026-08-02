@@ -75,7 +75,7 @@ why_wasm:
 
 arch:
   title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
-  subtitle: "SSR と Wasm のアーキテクチャ図比較"
+  subtitle: "SSR と Wasm のシーケンス図比較"
   conc_pre: 往復が完全に消える —
   conc_bold: レンダリングはデータのある場所で行われる
 

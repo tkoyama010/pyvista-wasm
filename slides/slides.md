@@ -262,19 +262,22 @@ class: text-left
 
 <div class="flex justify-center mt-6 mermaid-nowrap">
 
-```mermaid {scale: 0.7}
-flowchart TB
-  subgraph Wasm["Wasm · Browser-Complete"]
-    direction TB
-    WD["📁 Local Data"] --> WC["🌐 Browser\n(Pyodide + PyVista)"]
-    WC -->|"VTK pipeline in-browser"| WR["🎨 WebGL / WebGPU\nRender"]
-  end
-  subgraph Traditional["Traditional · Server-Side Rendering"]
-    direction TB
-    TD["📁 Local Data"] --> TC["🌐 Client\n(Browser)"]
-    TC -->|"data send (every frame)"| S["🖥️ Server\n(VTK + GPU)"]
-    S -->|"render & return (every frame)"| TC
-  end
+```mermaid {scale: 0.65}
+sequenceDiagram
+    participant SSRS as SSR Server
+    participant SSRB as SSR Browser
+    actor U as User
+    participant WASMB as Wasm Browser
+
+    U->>SSRB: Open URL
+    SSRB->>SSRS: Request 3D view
+    SSRS->>SSRS: Render with VTK + GPU
+    SSRS-->>SSRB: Return rendered image
+    SSRB-->>U: 3D image displayed
+
+    U->>WASMB: Open URL
+    WASMB->>WASMB: Execute VTK pipeline in-browser
+    WASMB-->>U: 3D mesh displayed (interactive)
 ```
 
 </div>

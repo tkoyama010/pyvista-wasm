@@ -75,7 +75,7 @@ why_wasm:
 
 arch:
   title: "Architecture: SSR vs Wasm"
-  subtitle: Architecture diagram — SSR vs Wasm
+  subtitle: Sequence diagram — SSR vs Wasm
   conc_pre: "The round-trip is gone entirely —"
   conc_bold: rendering happens where the data already is
 
