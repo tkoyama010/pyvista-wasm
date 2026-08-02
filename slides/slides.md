@@ -445,74 +445,17 @@ sequenceDiagram
 <!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. -->
 
 ---
-layout: two-cols-header
 class: text-left
+layout: full
 ---
 
 # {{ $t("pipeline.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("pipeline.subtitle") }}</div>
+<div class="text-sm opacity-80 mb-2">{{ $t("pipeline.subtitle") }}</div>
 
-::left::
+<iframe src="https://stackblitz.com/edit/eribmiga-4cm46gjp?embed=1&file=main.js" style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"></iframe>
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🏗️</div>
-  <div><span class="font-medium">{{ $t("pipeline.i1t") }}</span> — {{ $t("pipeline.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⏳</div>
-  <div><span class="font-medium">{{ $t("pipeline.i2t") }}</span> — {{ $t("pipeline.i2d") }} <code>npm install @kitware/vtk-wasm</code></div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📦</div>
-  <div><span class="font-medium">{{ $t("pipeline.i3t") }}</span> — {{ $t("pipeline.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("pipeline.conc_pre") }} <span class="font-medium">{{ $t("pipeline.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div class="text-sm font-medium opacity-60 mb-3">{{ $t("pipeline.config_label") }}</div>
-
-```js
-export default {
-  build: {
-    target: 'esnext',
-  },
-  optimizeDeps: {
-    exclude: ['@kitware/vtk-wasm'],
-  },
-};
-```
-
-<div class="flex flex-col gap-4 mt-6">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎯</div>
-  <div><span class="font-medium">{{ $t("pipeline.i4t") }}</span> — {{ $t("pipeline.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚫</div>
-  <div><span class="font-medium">{{ $t("pipeline.i5t") }}</span> — {{ $t("pipeline.i5d") }}</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- Single message: one Vite config unlocks the entire VTK Emscripten build pipeline — C++ compiled to Wasm once, consumers just npm install, and two Vite lines (build.target esnext + optimizeDeps.exclude) are all that stands between you and browser-native VTK. -->
+<!-- Single message: a live StackBlitz demo showing vtk-wasm usage in the browser. -->
 
 ---
 class: text-left
