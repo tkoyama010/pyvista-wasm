@@ -272,8 +272,8 @@ flowchart LR
   end
   subgraph Traditional["Traditional · Server-Side Rendering"]
     direction LR
-    TC1["Client"] -->|data send| S["Server"]
-    S -->|render and return| TC2["Client"]
+    TC["Client"] -->|data send| S["Server"]
+    S -->|render and return| TC
   end
 ```
 
