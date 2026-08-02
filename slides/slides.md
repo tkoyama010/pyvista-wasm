@@ -589,14 +589,6 @@ flowchart TB
   TS -.-> TS2
 ```
 
-<div class="text-sm font-medium opacity-60 mt-4 mb-2">Runtime Fallback (in Pyodide)</div>
-
-```mermaid {scale: 0.7}
-flowchart LR
-  PP["Python code"] -->|"pyodide detected"| XL["XMLHttpRequest"]
-  XL --> PM["Mesh data (same origin)"]
-```
-
 </div>
 
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
