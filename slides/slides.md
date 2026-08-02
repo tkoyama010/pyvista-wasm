@@ -345,7 +345,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("history.subtitle") }}</div>
 
-<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full h-[420px] mt-4 rounded-lg" frameborder="0"></iframe>
+<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full h-[520px] mt-2 rounded-lg" frameborder="0"></iframe>
 
 <!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
 
