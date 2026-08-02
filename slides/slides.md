@@ -344,11 +344,37 @@ layout: full
 
 # {{ $t("history.title") }}
 
-<div class="text-sm opacity-80">{{ $t("history.subtitle") }}</div>
+<div class="text-sm opacity-80 mb-2">{{ $t("history.subtitle") }}</div>
 
-<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full mt-1 rounded-lg" style="height: 380px" frameborder="0"></iframe>
+<div class="grid grid-cols-3 gap-3">
+  <div>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-porsche.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <div class="text-xs mt-1 font-medium">Porsche</div>
+    <div class="text-xs opacity-60">Multi-actor CAD assembly, picking</div>
+  </div>
+  <div>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/terrain.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <div class="text-xs mt-1 font-medium">Procedural terrain</div>
+    <div class="text-xs opacity-60">351k triangles built in the browser</div>
+  </div>
+  <div>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/viewer-starfighter2.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <div class="text-xs mt-1 font-medium">Starfighter</div>
+    <div class="text-xs opacity-60">Glyphs, scalar bar, interactive widgets</div>
+  </div>
+  <div>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/volume.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <div class="text-xs mt-1 font-medium">Volume rendering</div>
+    <div class="text-xs opacity-60">531k voxels ray cast on the GPU</div>
+  </div>
+  <div>
+    <iframe src="https://kitware.github.io/vtk-wasm/demo/actors.html" class="w-full rounded-lg" style="height: 200px; border: 1px solid rgba(125,125,125,0.3)"></iframe>
+    <div class="text-xs mt-1 font-medium">A thousand actors and more</div>
+    <div class="text-xs opacity-60">Every object its own vtkActor</div>
+  </div>
+</div>
 
-<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
+<!-- Single message: five live demos running entirely in the browser — CAD assembly, terrain, starfighter, volume rendering, and thousands of actors, all without a server. -->
 
 ---
 class: text-left
