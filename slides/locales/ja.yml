@@ -100,8 +100,8 @@ vtk_wasm:
   conc_bold: ではPyVistaにどう繋ぐ？
 
 history:
-  title: VTK.wasmのサンプル
-  subtitle: ブラウザで今すぐ動くライブデモ
+  title: VTK.wasmは実用化に向け開発が進められている
+  subtitle: VTK.wasmのサンプル
   y1: "2018"
   y1l: 実験段階
   y1d: Emscriptenビルド開始 — VTKをブラウザに持ってくる初期のプロトタイプ
@@ -121,6 +121,10 @@ history:
   i2d: ブラウザサポートに基づき適切に劣化、まだ進行中の設計
   conc_pre: 実験から本番へ —
   conc_bold: 技術は着実に成熟している
+
+demos:
+  title: VTK.wasmのサンプル
+  subtitle: ブラウザで今すぐ動くライブデモ
 
 caps:
   title: 機能と現在の制限

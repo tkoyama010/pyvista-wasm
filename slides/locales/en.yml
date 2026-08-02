@@ -100,8 +100,8 @@ vtk_wasm:
   conc_bold: so how do we glue it to PyVista?
 
 history:
-  title: VTK.wasm Demos
-  subtitle: Running in your browser, right now
+  title: Wasm Build History & Current Status
+  subtitle: VTK.wasm Sample
   y1: "2018"
   y1l: Experimental
   y1d: Emscripten builds began — early proof-of-concept bringing VTK to the browser
@@ -121,6 +121,10 @@ history:
   i2d: gracefully degrades based on browser support, a design still progressing
   conc_pre: From experiment to production-ready —
   conc_bold: the technology is maturing steadily
+
+demos:
+  title: VTK.wasm Demos
+  subtitle: Running in your browser, right now
 
 caps:
   title: Capabilities & Current Limitations
