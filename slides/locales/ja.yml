@@ -73,7 +73,7 @@ why_wasm:
 
 arch:
   title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
-  subtitle: "SSR と Wasm のアーキテクチャ比較"
+  subtitle: "SSR と Wasm のアーキテクチャ図比較"
   traditional: 従来 · サーバーサイドレンダリング
   client: クライアント
   data_send: ↓ データ送信
@@ -164,7 +164,7 @@ build_dist:
   build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるがユーザーには影響なし
   build_subtitle: vtk-wasmのビルドと使用方法
   dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
-  dist_subtitle: パッケージの配布方法
+  dist_subtitle: パッケージの配布方法アーキテクチャ図
   build_label: ビルド
   i1t: Emscripten
   i1d: VTKのC++をWebAssemblyにコンパイル；ビルドには数時間かかるが、ユーザーは単に
@@ -198,7 +198,7 @@ pipeline:
 
 pyodide:
   title: VTK.wasmをBEとする pyvista-wasm は、Pythonコードだけでブラウザ上に直感的な3D可視化を構築
-  subtitle: pyvista-wasmのアーキテクチャ
+  subtitle: pyvista-wasmのアーキテクチャ図
   i1t: Pyodide
   i1d: CPythonをWebAssemblyにコンパイル、ブラウザ内で本物のCPythonインタープリターを実行
   i2t: PyVista
@@ -373,8 +373,8 @@ roadmap:
   conc_bold: 次の章はブラウザネイティブのGPU使用
 
 cta:
-  title: pyvista-wasmは活発に開発中のオープンソースプロジェクトでありコントリビューションと議論を歓迎します
-  cta_title: pyvista-wasmは活発に開発中のオープンソースプロジェクトでありコントリビューションを歓迎します
+  title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションと議論を歓迎します
+  cta_title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションを歓迎します
   qa_title: 質問と議論を歓迎します
   qa_subtitle: Q&A
   subtitle: コントリビューション募集中
