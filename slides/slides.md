@@ -257,7 +257,7 @@ class: text-left
 <!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. Origin: a physics simulation project asked to drop a mesh into the browser and see it (i4). Demos anywhere with just a browser (i5). -->
 
 ---
-class: text-left
+class: text-center
 ---
 
 # {{ $t("arch.title") }}
