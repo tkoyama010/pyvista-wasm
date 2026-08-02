@@ -540,7 +540,7 @@ class: text-left
 
 # {{ $t("pipeline.title") }}
 
-<div class="text-lg opacity-80 mt-1">{{ $t("pipeline.subtitle_pre") }} <code>npm install</code> {{ $t("pipeline.subtitle_post") }}</div>
+<div class="text-lg opacity-80 mt-1">{{ $t("pipeline.subtitle") }}</div>
 
 ::left::
 

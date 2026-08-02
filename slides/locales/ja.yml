@@ -87,7 +87,7 @@ arch:
   conc_bold: レンダリングはデータのある場所で行われる
 
 vtk_wasm:
-  title: VTKは世界の科学技術計算や医療画像分野において最も広く普及している可視化C++ライブラリ
+  title: PyVistaがエンジンとするVTKは世界の科学技術計算において最も広く普及している可視化C++ライブラリ
   subtitle: VTKの活用事例
   i1t: Kitwareが構築
   i1d: C++可視化ツールキット、1993年から維持、30年以上の蓄積された機能
@@ -134,7 +134,7 @@ caps:
   subtitle: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
   caps_title: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
   caps_subtitle: 機能の紹介
-  lim_title: 100K要素までであれば実用的な速度で動作する
+  lim_title: XXX要素までであればXXXで動作する
   lim_subtitle: 現在の制限
   caps_label: 機能
   i1t: VTKフィルターパイプライン
@@ -161,13 +161,13 @@ build_dist:
   title: ビルドと配布の仕組み
   subtitle_pre: 数時間のEmscriptenビルドが
   subtitle_post: 一つに — バイナリは実行時にCDNからストリーミング
-  build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるが使用はnpm installするだけ
+  build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるがユーザーには影響なし
   build_subtitle: vtk-wasmのビルドと使用方法
-  dist_title: パッケージの配布方法
-  dist_subtitle: バイナリは実行時にCDNからストリーミング — JSパッケージにはバンドルされない
+  dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
+  dist_subtitle: パッケージの配布方法
   build_label: ビルド
   i1t: Emscripten
-  i1d: VTKのC++をWebAssemblyにコンパイル；ビルドには数時間かかるが、利用者は単に
+  i1d: VTKのC++をWebAssemblyにコンパイル；ビルドには数時間かかるが、ユーザーは単に
   i2t: "{'@'}kitware/vtk-wasm"
   i2d: VTK APIをブラウザに公開するJavaScriptバインディングnpmパッケージ
   dist_label: 配布
@@ -180,13 +180,12 @@ build_dist:
   first_load: 初回ロードは~12–15 MB（gzip）— スピナーと遅延ロード（Intersection Observer）の併用を推奨
 
 pipeline:
-  title: VTK Emscriptenビルドパイプライン
-  subtitle_pre: C++を一度WebAssemblyにコンパイル — 利用者は
-  subtitle_post: してViteに2行追加するだけ
+  title: ユーザーはViteの設定で、VTK.wasmが利用可能
+  subtitle: ViteにおけるVTK.wasmの利用方法
   i1t: Emscripten
   i1d: VTKのC++コードベース全体をWebAssemblyにコンパイル、30年の機能をブラウザに
   i2t: ビルドは重く、利用は軽く
-  i2d: ビルド自体は数時間かかるが、利用者は単に
+  i2d: ビルド自体は数時間かかるが、ユーザーは単に
   i3t: 実行時のtarball
   i3d: WASMバイナリはCDNからtarballとしてストリーミング、JSパッケージにバンドルされない
   conc_pre: Vite設定一つで全て解放 —
@@ -198,8 +197,8 @@ pipeline:
   i5d: ViteはWASMパッケージを事前バンドルしてはいけない；実行時に非同期ロード
 
 pyodide:
-  title: ブラウザでのPyodide + PyVista
-  subtitle: WasmのCPythonとPythonicなVTKラッパーが出会う — Pythonを書き、3Dメッシュをレンダリング、サーバー不要
+  title: VTK.wasmをBEとする pyvista-wasm は、Pythonコードだけでブラウザ上に直感的な3D可視化を構築
+  subtitle: pyvista-wasmのアーキテクチャ
   i1t: Pyodide
   i1d: CPythonをWebAssemblyにコンパイル、ブラウザ内で本物のCPythonインタープリターを実行
   i2t: PyVista
@@ -218,8 +217,8 @@ pyodide:
   i6d_post: メッシュ取得はurllibの代わりにXMLHttpRequestを使用
 
 rendering:
-  title: WebGL / WebGPUレンダリング統合
-  subtitle: 2つのレンダーバックエンド、1つのランタイム — WebGLはどこでも、WebGPUはさらに先へ
+  title: vtk.wasmはWebGPUの実験的サポートを提供し、WebGLより高い性能とGPUコンピュートが可能になっている
+  subtitle: WebGLとWebGPUの比較
   webgl_label: WebGL · ベースライン
   i1t: 普遍的にサポート
   i1d: 全てのモダンブラウザで利用可能、常に機能する信頼できるレンダーパス
@@ -238,8 +237,8 @@ rendering:
   i7d: 現在のパッケージはランタイムでWebGLとWebGPUを選択、WebGPU不可時に自動フォールバック
 
 dev_ci:
-  title: 開発とCIの課題
-  subtitle: vtk.wasm統合で必ずぶつかる3つの落とし穴 — それぞれの対策
+  title: vtk.wasmをpyvista-wasmに統合した際には課題が発生したが、全て解決済み
+  subtitle: 開発時に発生した問題とその解決策
   i1t: 至る所でasync/await
   i1d1: はPromiseを返すため、全てのVTKオブジェクト操作を
   i1d2: に；
@@ -417,7 +416,7 @@ roadmap:
   i4t: ブラウザ内のVTK 30年の歴史
   i4d: 1993年から維持される遺産がURL一つで利用可能に
   i5t: アクセシビリティの拡大
-  i5d: サーバーレス配信が科学技術可視化の利用者を着実に広げる
+  i5d: サーバーレス配信が科学技術可視化のユーザーを着実に広げる
   i6t: より広い応用へ
   i6d: WebGPUが安定化するにつれ、実用適用範囲はさらに広がると予想
   conc_pre: 技術は着実に成熟 —
