@@ -880,11 +880,11 @@ const jlDemoUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_jl.subtitle") }}</div>
 
-<div class="pt-2">
+<div class="pt-2 h-full flex flex-col">
   <iframe
     :src="jlDemoUrl"
-    class="w-full rounded-lg shadow-xl"
-    style="height: 380px; border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl flex-1"
+    style="border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -906,11 +906,11 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_marimo.subtitle") }}</div>
 
-<div class="pt-2">
+<div class="pt-2 h-full flex flex-col">
   <iframe
     :src="marimoDemoUrl"
-    class="w-full rounded-lg shadow-xl"
-    style="height: 380px; border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl flex-1"
+    style="border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
@@ -932,11 +932,11 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 
 <div class="text-lg opacity-80 mt-1">{{ $t("demo_stlite.subtitle") }}</div>
 
-<div class="pt-2">
+<div class="pt-2 h-full flex flex-col">
   <iframe
     :src="stliteDemoUrl"
-    class="w-full rounded-lg shadow-xl"
-    style="height: 380px; border: 1px solid rgba(125,125,125,0.3)"
+    class="w-full rounded-lg shadow-xl flex-1"
+    style="border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
   <div class="mt-2">
