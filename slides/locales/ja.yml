@@ -13,7 +13,7 @@ agenda:
   i2t: 技術スタックと実装
   i2d: vtk-wasm、TypeScriptグルー、PyVista API
   i3t: ブラウザでのライブデモ
-  i3d: サーバー不要で動くPyVista
+  i3d: サーバー不要で動作するPyVista
   i4t: パフォーマンスと制限
   i4d: 現在機能するもの、まだ機能しないもの
   speaker_title: スピーカーはPyVistaのWASMを牽引しています
@@ -87,7 +87,7 @@ arch:
   conc_bold: レンダリングはデータのある場所で行われる
 
 vtk_wasm:
-  title: VTKは世界の科学技術計算や医療画像分野において最も広く普及している可視化C++ライブラリです
+  title: VTKは世界の科学技術計算や医療画像分野において最も広く普及している可視化C++ライブラリ
   subtitle: VTKの活用事例
   i1t: Kitwareが構築
   i1d: C++可視化ツールキット、1993年から維持、30年以上の蓄積された機能
@@ -100,7 +100,7 @@ vtk_wasm:
   i5t: 豊富なエコシステム
   i5d: PyVista（Pythonラッパー）、ITK（医用画像）、NumPy/SciPy科学スタック
   i6t: Wasmポート
-  i6d: これら全ての機能がサーバーなしでブラウザで完全に動く
+  i6d: これら全ての機能がサーバーなしでブラウザで完全に動作する
   i7t: どこでもデモ
   i7d: 現場デモやクライアント先でのプレゼンに特に重要
   conc_pre: VTKの全機能がURL一つ —
@@ -131,11 +131,11 @@ history:
 
 caps:
   title: 機能と現在の制限
-  subtitle: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作します
-  caps_title: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作します
+  subtitle: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
+  caps_title: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
   caps_subtitle: 機能の紹介
-  lim_title: 現在の制限
-  lim_subtitle: 実制約は存在する — ただし~100K要素は実用的な対話速度で動く
+  lim_title: 100K要素までであれば実用的な速度で動作する
+  lim_subtitle: 現在の制限
   caps_label: 機能
   i1t: VTKフィルターパイプライン
   i1d: フィルター実行全体がブラウザで完結
@@ -155,14 +155,14 @@ caps:
   i8t: 初期ロード
   i8d: 初回レンダリングまで数秒〜10秒以上
   conc_pre: 大規模メッシュには依然制約 — ただし
-  conc_bold: ~100K要素は実用的な対話速度で動く
+  conc_bold: ~100K要素は実用的な対話速度で動作する
 
 build_dist:
   title: ビルドと配布の仕組み
   subtitle_pre: 数時間のEmscriptenビルドが
   subtitle_post: 一つに — バイナリは実行時にCDNからストリーミング
-  build_title: vtk-wasmのビルド方法
-  build_subtitle: VTKのC++をWebAssemblyにコンパイル — 利用者はnpm installするだけ
+  build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるが使用はnpm installするだけ
+  build_subtitle: vtk-wasmのビルドと使用方法
   dist_title: パッケージの配布方法
   dist_subtitle: バイナリは実行時にCDNからストリーミング — JSパッケージにはバンドルされない
   build_label: ビルド
@@ -226,7 +226,7 @@ rendering:
   i2t: OpenGL ESの系譜
   i2d: 長年のツールとドライバーサポートを持つ成熟したグラフィックスAPI
   i3t: 安全なデフォルト
-  i3d: 古いまたは保守的なブラウザでも可視化が動くことを保証
+  i3d: 古いまたは保守的なブラウザでも可視化が動作することを保証
   webgpu_label: WebGPU · 次のステップ
   i4t: より高い性能
   i4d: WebGLより低いドライバーオーバーヘッドとメタルに近いアクセス
@@ -331,7 +331,7 @@ demo_stlite:
 
 perf:
   title: "パフォーマンス: Native vs Wasm"
-  subtitle: 初期ロードは数秒かかる — ロード後は~100K要素メッシュが実用的な対話速度で動く
+  subtitle: 初期ロードは数秒かかる — ロード後は~100K要素メッシュが実用的な対話速度で動作する
   overhead_label: Wasmのオーバーヘッド
   i1t: 初期ロード
   i1d: WASMバイナリがCDNからストリーミングされる間、初回レンダリングまで数秒〜10秒以上
@@ -343,7 +343,7 @@ perf:
   i4t: 実用的な対話速度
   i4d: ロード後は回転、パン、ズームがレスポンシブ、ネイティブ体験に匹敵
   i5t: ~100K要素
-  i5d: この規模のメッシュが実用的な対話速度で動く、分析レビューのスイートスポット
+  i5d: この規模のメッシュが実用的な対話速度で動作する、分析レビューのスイートスポット
   i6t: 小チームレビュー
   i6d: 現段階で小チーム内の分析結果共有に十分な品質
   conc_pre: PoC確認 —
@@ -408,7 +408,7 @@ roadmap:
   subtitle: WebGPU安定化とPyodide + PyVistaの成熟 — 適用範囲が広がり続ける
   milestones_label: 主要マイルストーン
   i1t: WebGPU安定化
-  i1d: バックエンドの成熟に伴い、GPUコンピュートが固定レンダリングパイプラインを超えてブラウザで完全に動く
+  i1d: バックエンドの成熟に伴い、GPUコンピュートが固定レンダリングパイプラインを超えてブラウザで完全に動作する
   i2t: Pyodide + PyVistaの成熟
   i2d: 統合が着実に成熟し、Pythonエコシステムへのシームレスなブリッジを実現
   i3t: ランタイムバックエンド切替
