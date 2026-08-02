@@ -188,7 +188,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("problem.subtitle") }}</div>
 
-<div class="pt-6">
+<div class="pt-6 problem-table">
 
 | {{ $t("problem.col_issue") }} | {{ $t("problem.col_detail") }} |
 |---|---|
@@ -198,6 +198,22 @@ class: text-left
 | {{ $t("problem.i4t") }} | {{ $t("problem.i4d") }} |
 
 </div>
+
+<style>
+.problem-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.problem-table th,
+.problem-table td {
+  border: 2px solid #555;
+  padding: 10px 16px;
+}
+.problem-table th {
+  border-bottom: 3px solid #333;
+  background-color: rgba(125,125,125,0.1);
+}
+</style>
 
 <!-- Single message: sharing 3D results on the web still means running a server — Three.js lacks simulation rendering, SSR needs a server, costs are ongoing, and confidential data must travel to the server. -->
 
