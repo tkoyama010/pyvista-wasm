@@ -613,7 +613,7 @@ class: text-left
 ```mermaid {scale: 0.7}
 flowchart TB
   P["Python (Pyodide)"] -->|pyvista_wasm| TS["TypeScript glue layer"]
-  TS -->|@kitware/vtk-wasm| V["VTK (C++) → WebAssembly"]
+  TS -->|"@kitware/vtk-wasm"| V["VTK (C++) → WebAssembly"]
 ```
 
 <div class="flex flex-col gap-4 mt-6">
