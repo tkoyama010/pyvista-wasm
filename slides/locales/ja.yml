@@ -74,15 +74,6 @@ why_wasm:
 arch:
   title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
   subtitle: "SSR と Wasm のアーキテクチャ図比較"
-  traditional: 従来 · サーバーサイドレンダリング
-  client: クライアント
-  data_send: ↓ データ送信
-  server: サーバー
-  render_return: ↓ レンダリングして返す
-  roundtrip_note: 全てのフレームがネットワーク往復
-  wasm_complete: Wasm · ブラウザ完結
-  render_in_browser: ブラウザでレンダリング
-  no_server_note: サーバー不要 — パイプラインは完全にクライアント側で実行
   conc_pre: 往復が完全に消える —
   conc_bold: レンダリングはデータのある場所で行われる
 
@@ -171,12 +162,6 @@ build_dist:
   i2t: "{'@'}kitware/vtk-wasm"
   i2d: VTK APIをブラウザに公開するJavaScriptバインディングnpmパッケージ
   dist_label: 配布
-  i3t: CDNから実行時
-  i3d: WASMバイナリはCDNから別途ロード、JSパッケージにはバンドルされない
-  i4t: createNamespace(url)
-  i4d: tarball URLからVTKクラスを非同期にロード
-  i5t: GitLabよりjsDelivr
-  i5d: マルチCDN（Cloudflare、Fastly、Bunny CDN）のエッジキャッシュがアジア地域でKitwareのGitLab直配信より高速
   first_load: 初回ロードは~12–15 MB（gzip）— スピナーと遅延ロード（Intersection Observer）の併用を推奨
 
 pipeline:
@@ -331,24 +316,6 @@ demo_stlite:
 use_cases:
   title: PyVista on WebAssemblyは、サーバー不要で3D可視化データを共有するための新しい手段を提供
   subtitle: 3D可視化データ共有のユースケース図
-  suitable_label: 適している
-  i1t: シミュレーション共有
-  i1d: 物理シミュレーション結果の配布と共有
-  i2t: ローカルファイルビューアー
-  i2d: ローカルの分析ファイルのクイックビューアー
-  i3t: サーバーレス静的サイト
-  i3d: バックエンドなしの静的サイトに埋め込み
-  i4t: 小チームレビュー
-  i4d: 小チーム内での分析結果共有
-  i5t: 現場デモとクライアント先
-  i5d: ブラウザだけでプレゼン
-  unsuitable_label: 適していない
-  i6t: 巨大メッシュ
-  i6d: 数億要素のメッシュのリアルタイム処理
-  i7t: 低スペックデバイス
-  i7d: 遅いネットワーク接続や性能不足のハードウェア
-  i8t: 非WebGPUブラウザ
-  i8d: WebGPUサポートなしのブラウザでの高品質レンダリング
   conc_pre: PoC確認 —
   conc_bold: 専用サーバーなしで分析結果を共有可能
 

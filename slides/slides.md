@@ -264,46 +264,18 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
 
-<div class="grid grid-cols-2 gap-12 mt-10">
-
-<div class="flex flex-col items-center">
-
-<div class="text-sm font-medium opacity-60 mb-6">{{ $t("arch.traditional") }}</div>
-
-<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-xl">💻</div>
-  <div class="font-medium text-sm">{{ $t("arch.client") }}</div>
-</div>
-<div class="text-xs opacity-70 my-2">{{ $t("arch.data_send") }}</div>
-<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-xl">🖥️</div>
-  <div class="font-medium text-sm">{{ $t("arch.server") }}</div>
-</div>
-<div class="text-xs opacity-70 my-2">{{ $t("arch.render_return") }}</div>
-<div class="rounded-lg px-6 py-4 text-center" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-xl">💻</div>
-  <div class="font-medium text-sm">{{ $t("arch.client") }}</div>
-</div>
-
-<div class="text-xs opacity-60 mt-5 text-center">{{ $t("arch.roundtrip_note") }}</div>
-
-</div>
-
-<div class="flex flex-col items-center">
-
-<div class="text-sm font-medium opacity-60 mb-6">{{ $t("arch.wasm_complete") }}</div>
-
-<div class="rounded-lg px-8 py-6 text-center" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-2xl">🌐</div>
-  <div class="font-medium">{{ $t("arch.client") }}</div>
-  <div class="text-xs opacity-60 mt-1">{{ $t("arch.render_in_browser") }}</div>
-</div>
-
-<div class="text-xs opacity-60 mt-5 text-center">{{ $t("arch.no_server_note") }}</div>
-
-</div>
-
-</div>
+```mermaid {scale: 0.75}
+flowchart LR
+  subgraph Traditional["Traditional · Server-Side Rendering"]
+    direction TB
+    TC1["Client"] -->|data send| S["Server"]
+    S -->|render and return| TC2["Client"]
+  end
+  subgraph Wasm["Wasm · Browser-Complete"]
+    direction TB
+    WC["Client<br/>render in browser"]
+  end
+```
 
 <div class="flex items-baseline gap-3 mt-8">
   <div class="opacity-50 w-5">➡️</div>
@@ -507,28 +479,17 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("build_dist.dist_subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
+```mermaid {scale: 0.7}
+flowchart LR
+  V["VTK C++ source"] -->|Emscripten build| W["WASM binary tarball"]
+  W -->|published to| CDN["CDN (jsDelivr)"]
+  CDN -->|createNamespace(url)| BR["Browser (runtime fetch)"]
+  NPM["npm registry"] -->|npm install| BR
+```
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("build_dist.i3t") }}</span> — {{ $t("build_dist.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚙️</div>
-  <div><span class="font-medium">{{ $t("build_dist.i4t") }}</span> — {{ $t("build_dist.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🚀</div>
-  <div><span class="font-medium">{{ $t("build_dist.i5t") }}</span> — {{ $t("build_dist.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
+<div class="flex items-baseline gap-3 mt-4">
   <div class="opacity-50 w-5">⏳</div>
   <div class="opacity-90">{{ $t("build_dist.first_load") }}</div>
-</div>
-
 </div>
 
 <!-- Single message: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia. First load is ~12–15 MB (gzip). -->
@@ -649,14 +610,10 @@ class: text-left
 
 <div class="text-sm font-medium opacity-60 mb-3">{{ $t("pyodide.arch_label") }}</div>
 
-```text
-Python (Pyodide)
-       │  pyvista_wasm
-       ▼
-TypeScript glue layer
-       │  @kitware/vtk-wasm
-       ▼
-VTK (C++) → WebAssembly
+```mermaid {scale: 0.7}
+flowchart TB
+  P["Python (Pyodide)"] -->|pyvista_wasm| TS["TypeScript glue layer"]
+  TS -->|@kitware/vtk-wasm| V["VTK (C++) → WebAssembly"]
 ```
 
 <div class="flex flex-col gap-4 mt-6">
@@ -944,7 +901,6 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 <!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -952,65 +908,24 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("use_cases.subtitle") }}</div>
 
-::left::
+```mermaid {scale: 0.65}
+flowchart LR
+  E["Engineer"] --> UC1(("Simulation<br/>sharing"))
+  E --> UC2(("Local file<br/>viewer"))
+  WD["Web developer"] --> UC3(("Serverless<br/>static sites"))
+  TR["Team reviewer"] --> UC4(("Small-team<br/>review"))
+  FP["Field presenter"] --> UC5(("Field demos &<br/>client sites"))
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
+  subgraph Limitations["Limitations — outside the system boundary"]
+    L1["Massive meshes"]
+    L2["Low-spec devices"]
+    L3["Non-WebGPU browsers"]
+  end
+```
 
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("use_cases.suitable_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔬</div>
-  <div><span class="font-medium">{{ $t("use_cases.i1t") }}</span> — {{ $t("use_cases.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📂</div>
-  <div><span class="font-medium">{{ $t("use_cases.i2t") }}</span> — {{ $t("use_cases.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("use_cases.i3t") }}</span> — {{ $t("use_cases.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">👥</div>
-  <div><span class="font-medium">{{ $t("use_cases.i4t") }}</span> — {{ $t("use_cases.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">💼</div>
-  <div><span class="font-medium">{{ $t("use_cases.i5t") }}</span> — {{ $t("use_cases.i5d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("use_cases.unsuitable_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📐</div>
-  <div><span class="font-medium">{{ $t("use_cases.i6t") }}</span> — {{ $t("use_cases.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📱</div>
-  <div><span class="font-medium">{{ $t("use_cases.i7t") }}</span> — {{ $t("use_cases.i7d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎨</div>
-  <div><span class="font-medium">{{ $t("use_cases.i8t") }}</span> — {{ $t("use_cases.i8d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
+<div class="flex items-baseline gap-3 mt-4">
   <div class="opacity-50 w-5">✅</div>
   <div class="opacity-90">{{ $t("use_cases.conc_pre") }} <span class="font-medium">{{ $t("use_cases.conc_bold") }}</span></div>
-</div>
-
 </div>
 
 <!-- Single message: vtk.wasm shines for simulation sharing, local file viewing, serverless static sites, small-team review, and field demos — but is unsuitable for massive meshes, low-spec devices, or non-WebGPU browsers needing high-quality rendering. PoC confirmed: analysis results can be shared without a dedicated server. -->

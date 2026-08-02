@@ -73,16 +73,7 @@ why_wasm:
 
 arch:
   title: "Architecture: SSR vs Wasm"
-  subtitle: SSR puts a server in the loop — Wasm closes the loop inside the browser
-  traditional: Traditional · Server-Side Rendering
-  client: Client
-  data_send: ↓ data send
-  server: Server
-  render_return: ↓ render and return
-  roundtrip_note: Every frame round-trips over the network
-  wasm_complete: Wasm · Browser-Complete
-  render_in_browser: render in browser
-  no_server_note: "No server — the pipeline runs entirely client-side"
+  subtitle: Architecture diagram — SSR vs Wasm
   conc_pre: "The round-trip is gone entirely —"
   conc_bold: rendering happens where the data already is
 
@@ -164,19 +155,13 @@ build_dist:
   build_title: How vtk-wasm is Built
   build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
   dist_title: How the Package is Distributed
-  dist_subtitle: The binary streams from CDN at runtime — not bundled into the JS package
+  dist_subtitle: Architecture diagram — how the package is distributed
   build_label: Build
   i1t: Emscripten
   i1d: "VTK's C++ compiled to WebAssembly; the build takes hours, but consumers just"
   i2t: "{'@'}kitware/vtk-wasm"
   i2d: the JavaScript binding npm package that exposes the VTK API to the browser
   dist_label: Distribution
-  i3t: CDN at runtime
-  i3d: the WASM binary is loaded separately from CDN, not bundled into the JS package
-  i4t: createNamespace(url)
-  i4d: loads VTK classes asynchronously from a tarball URL
-  i5t: jsDelivr over GitLab
-  i5d: "multi-CDN (Cloudflare, Fastly, Bunny CDN) edge caching beats Kitware's GitLab direct delivery in the Asia region"
   first_load: "First load is ~12–15 MB (gzip) — pair with a spinner and lazy loading (Intersection Observer)"
 
 pipeline:
@@ -198,7 +183,7 @@ pipeline:
 
 pyodide:
   title: Pyodide + PyVista in the Browser
-  subtitle: CPython in Wasm meets a Pythonic VTK wrapper — write Python, render 3D meshes, no server required
+  subtitle: Architecture diagram — Pyodide + PyVista layered in the browser
   i1t: Pyodide
   i1d: CPython compiled to WebAssembly, running the real CPython interpreter inside the browser
   i2t: PyVista
@@ -380,25 +365,7 @@ constraints:
 
 use_cases:
   title: Suitable & Unsuitable Use Cases
-  subtitle: Where vtk.wasm shines today — and where its edges still are
-  suitable_label: Suitable
-  i1t: Simulation sharing
-  i1d: physics simulation result distribution and sharing
-  i2t: Local file viewer
-  i2d: a quick viewer for local analysis files
-  i3t: Serverless static sites
-  i3d: embedding in static sites with no backend
-  i4t: Small-team review
-  i4d: sharing analysis results within a small team
-  i5t: Field demos & client sites
-  i5d: presentations with a browser and nothing else
-  unsuitable_label: Unsuitable
-  i6t: Massive meshes
-  i6d: real-time processing of meshes with hundreds of millions of elements
-  i7t: Low-spec devices
-  i7d: slow network connections or underpowered hardware
-  i8t: Non-WebGPU browsers
-  i8d: high-quality rendering on browsers without WebGPU support
+  subtitle: Use case diagram — where vtk.wasm shines today and where its edges are
   conc_pre: PoC confirmed —
   conc_bold: analysis results can be shared without a dedicated server
 
