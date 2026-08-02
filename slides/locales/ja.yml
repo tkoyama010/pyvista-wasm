@@ -131,10 +131,10 @@ history:
 
 caps:
   title: 機能と現在の制限
-  subtitle: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
-  caps_title: 3Dコンピュータグラフィックス・画像処理・可視化が全てブラウザで動作する
-  caps_subtitle: 機能の紹介
-  lim_title: XXX要素までであればXXXで動作する
+  subtitle: 3DCG・画像処理・可視化がブラウザで動作します
+  caps_title: 3DCG・画像処理・可視化がブラウザで動作します
+  caps_subtitle: 制約はあるが~100K要素は実用的な速度で動作
+  lim_title: 制約はあるが~100K要素は実用的な速度で動作
   lim_subtitle: 現在の制限
   caps_label: 機能
   i1t: VTKフィルターパイプライン
