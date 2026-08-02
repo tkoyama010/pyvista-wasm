@@ -264,23 +264,18 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
 
-```mermaid {scale: 0.75}
-flowchart LR
+```mermaid {scale: 0.5}
+flowchart TB
   subgraph Wasm["Wasm · Browser-Complete"]
-    direction LR
-    WC["Client<br/>render in browser"]
+    WD["📁 Local Data"] --> WC["🌐 Browser\n(Pyodide + PyVista)"]
+    WC -->|"VTK pipeline\nin-browser"| WR["🎨 WebGL / WebGPU\nRender"]
   end
   subgraph Traditional["Traditional · Server-Side Rendering"]
-    direction LR
-    TC["Client"] -->|data send| S["Server"]
-    S -->|render and return| TC
+    TD["📁 Local Data"] -->|"upload"| TC["🌐 Client\n(Browser)"]
+    TC -->|"data send\n(every frame)"| S["🖥️ Server\n(VTK + GPU)"]
+    S -->|"render & return\n(every frame)"| TC
   end
 ```
-
-<div class="flex items-baseline gap-3 mt-8">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("arch.conc_pre") }} <span class="font-medium">{{ $t("arch.conc_bold") }}</span></div>
-</div>
 
 <!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
 
