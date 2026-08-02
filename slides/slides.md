@@ -181,7 +181,6 @@ const demoUrl = import.meta.env.BASE_URL + 'pyvista-demo.html'
 <!-- Single message: PyVista is a Pythonic wrapper over VTK's 30-year C++ visualization toolkit — the de facto standard for 3D visualization in Python. The live demo shows a mesh you can rotate. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -189,37 +188,16 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("problem.subtitle") }}</div>
 
-::left::
+<div class="pt-6 max-w-2xl">
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
+| | |
+|---|---|
+| 🎨 {{ $t("problem.i1t") }} | {{ $t("problem.i1d") }} |
+| 🖥️ {{ $t("problem.i2t") }} | {{ $t("problem.i2d") }} |
+| 💸 {{ $t("problem.i3t") }} | {{ $t("problem.i3d") }} |
+| 🔒 {{ $t("problem.i4t") }} | {{ $t("problem.i4d") }} |
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎨</div>
-  <div><span class="font-medium">{{ $t("problem.i1t") }}</span> — {{ $t("problem.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🖥️</div>
-  <div><span class="font-medium">{{ $t("problem.i2t") }}</span> — {{ $t("problem.i2d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">💸</div>
-  <div><span class="font-medium">{{ $t("problem.i3t") }}</span> — {{ $t("problem.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔒</div>
-  <div><span class="font-medium">{{ $t("problem.i4t") }}</span> — {{ $t("problem.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
+<div class="flex items-baseline gap-3 mt-6">
   <div class="opacity-50 w-5">➡️</div>
   <div class="opacity-90">{{ $t("problem.conc_pre") }} <span class="font-medium">{{ $t("problem.conc_bold") }}</span> {{ $t("problem.conc_post") }}</div>
 </div>
