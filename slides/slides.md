@@ -1164,7 +1164,6 @@ class: text-left
 <!-- Single message: the technology is maturing steadily — key milestones are WebGPU stabilization, Pyodide + PyVista maturity, and runtime backend switching. Why it matters: 30 years of VTK in the browser, expanding accessibility, broader applications ahead. The next chapter is browser-native GPU compute. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -1172,29 +1171,13 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("inspiration.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6">
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
 
 <a href="https://tech.akariinc.co.jp/entry/2026/05/03/115708" class="block rounded-lg overflow-hidden shadow-xl hover:opacity-90 transition-opacity" style="border:1px solid rgba(125,125,125,0.3)">
   <img src="https://cdn.image.st-hatena.com/image/scale/2b5139c41384e885bb555481846547927fda5963/backend=imagemagick;version=1;width=1300/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fa%2Fakariinc%2F20260508%2F20260508131822.png" class="w-full" alt="{{ $t('inspiration.article_title') }}">
 </a>
 
-<div class="text-xs opacity-60 mt-2 text-center">{{ $t("inspiration.article_source") }}</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-sm font-medium opacity-60 mb-1">{{ $t("inspiration.article_label") }}</div>
-  <div class="font-medium">{{ $t("inspiration.article_title") }}</div>
-  <a href="https://tech.akariinc.co.jp/entry/2026/05/03/115708" class="text-sm break-all opacity-80 hover:opacity-100 mt-2 inline-block">{{ $t("inspiration.article_link_text") }}</a>
-</div>
-
-<div class="text-sm opacity-70">{{ $t("inspiration.note") }}</div>
+<div class="text-xs opacity-60 text-center">{{ $t("inspiration.article_source") }}</div>
 
 </div>
 
