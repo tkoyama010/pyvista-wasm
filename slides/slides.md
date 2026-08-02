@@ -346,7 +346,7 @@ layout: full
 
 <div class="text-sm opacity-80">{{ $t("history.subtitle") }}</div>
 
-<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full h-full mt-1 rounded-lg" frameborder="0"></iframe>
+<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full mt-1 rounded-lg" style="height: 380px" frameborder="0"></iframe>
 
 <!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
 
