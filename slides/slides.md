@@ -497,7 +497,7 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.55}
+```mermaid {scale: 0.45}
 flowchart TB
   subgraph Build["Build (hours-long)"]
     direction LR
@@ -514,6 +514,11 @@ flowchart TB
     BR -->|"streams tarball"| MEM["WASM module loaded"]
     MEM --> R["VTK classes available"]
   end
+
+  DEV(("🧑‍💻 Developer")) -->|"builds"| Build
+  DEV -->|"publishes"| Dist
+  USR(("🧑‍💻 User")) -->|"npm install"| PKG
+  USR -->|"opens URL"| BR
 ```
 
 </div>
