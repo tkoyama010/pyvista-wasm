@@ -487,14 +487,13 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.55}
+```mermaid {scale: 0.70}
 sequenceDiagram
-    actor D as Developer
-    participant E as Emscripten
-    participant CDN as CDN (jsDelivr)
-    participant NPM as npm registry
     actor U as User
-    participant B as Browser
+    participant NPM as npm registry
+    participant CDN as CDN (jsDelivr)
+    participant E as Emscripten
+    actor D as Developer
 
     D->>E: Compile VTK C++ to WASM
     E-->>D: WASM binary tarball (hours-long build)
@@ -503,10 +502,6 @@ sequenceDiagram
 
     U->>NPM: npm install @kitware/vtk-wasm
     NPM-->>U: vtk-wasm JS binding
-    U->>B: import vtk-wasm + createNamespace(url)
-    B->>CDN: Stream WASM tarball at runtime
-    CDN-->>B: WASM module loaded
-    B-->>U: VTK classes available in-browser
 ```
 
 </div>
