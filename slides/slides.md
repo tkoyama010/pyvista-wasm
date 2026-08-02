@@ -227,26 +227,17 @@ class: text-left
 
 <div class="flex justify-center mt-4">
 
-```mermaid {scale: 0.55}
+```mermaid {scale: 0.65}
 sequenceDiagram
     actor U as User
     participant B as Browser
-    participant W as vtk-wasm (Wasm)
-    participant V as VTK C++ Engine
 
     U->>B: Open URL
-    B->>W: createNamespace(tarball URL)
-    W->>W: Fetch WASM tarball from CDN
-    W->>V: Load VTK classes into memory
-    V-->>W: VTK ready
-    W-->>B: Wasm module loaded
+    B->>B: Load WASM module from CDN
     B-->>U: 3D viewer ready
 
     U->>B: Load mesh file (VTP/VTU/STL)
-    B->>W: Read mesh data
-    W->>V: Execute VTK filter pipeline
-    V-->>W: Processed mesh
-    W-->>B: Render result
+    B->>B: Execute filter pipeline in-browser
     B-->>U: 3D mesh displayed (rotate/pan/zoom)
 
     Note over U,B: No server needed — all processing in-browser
