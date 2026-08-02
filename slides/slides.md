@@ -565,7 +565,6 @@ export default {
 <!-- Single message: one Vite config unlocks the entire VTK Emscripten build pipeline — C++ compiled to Wasm once, consumers just npm install, and two Vite lines (build.target esnext + optimizeDeps.exclude) are all that stands between you and browser-native VTK. -->
 
 ---
-layout: two-cols-header
 class: text-left
 ---
 
@@ -573,64 +572,30 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("pyodide.subtitle") }}</div>
 
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div><span class="font-medium">{{ $t("pyodide.i1t") }}</span> — {{ $t("pyodide.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧊</div>
-  <div><span class="font-medium">{{ $t("pyodide.i2t") }}</span> — {{ $t("pyodide.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔗</div>
-  <div><span class="font-medium">{{ $t("pyodide.i3t") }}</span> — {{ $t("pyodide.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌉</div>
-  <div><span class="font-medium">{{ $t("pyodide.i4t") }}</span> — {{ $t("pyodide.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("pyodide.conc_pre") }} <span class="font-medium">{{ $t("pyodide.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div class="text-sm font-medium opacity-60 mb-3">{{ $t("pyodide.arch_label") }}</div>
-
-```mermaid {scale: 0.7}
+```mermaid {scale: 0.65}
 flowchart TB
-  P["Python (Pyodide)"] -->|pyvista_wasm| TS["TypeScript glue layer"]
-  TS -->|"@kitware/vtk-wasm"| V["VTK (C++) → WebAssembly"]
+  subgraph Browser["Browser"]
+    subgraph Python["Python Layer"]
+      P["Pyodide<br/>(CPython in Wasm)"]
+      PV["pyvista_wasm<br/>(PyVista-like API)"]
+    end
+    subgraph TSL["TypeScript Glue Layer"]
+      GL["pyvista-wasm JS<br/>(loads vtk-wasm, bridges bindings)"]
+      FB["Runtime Fallback<br/>XMLHttpRequest in Pyodide"]
+    end
+    subgraph VTKE["VTK Engine"]
+      VW["@kitware/vtk-wasm<br/>(JS binding)"]
+      VB["VTK C++ to WebAssembly<br/>(loaded from CDN tarball)"]
+      R["Renderer<br/>(WebGL / WebGPU)"]
+    end
+  end
+  P --> PV
+  PV -->|"Python to JS"| GL
+  GL --> FB
+  GL -->|"createNamespace(url)"| VW
+  VW -->|"loads tarball from CDN"| VB
+  VB --> R
 ```
-
-<div class="flex flex-col gap-4 mt-6">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚙️</div>
-  <div><span class="font-medium">{{ $t("pyodide.i5t") }}</span> — {{ $t("pyodide.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🛰️</div>
-  <div><span class="font-medium">{{ $t("pyodide.i6t") }}</span> — {{ $t("pyodide.i6d_pre") }} <code>"pyodide" in sys.modules</code>{{ $t("pyodide.i6d_post") }}</div>
-</div>
-
-</div>
-
-</div>
 
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
 
