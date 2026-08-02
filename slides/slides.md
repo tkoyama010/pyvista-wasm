@@ -507,7 +507,6 @@ flowchart TB
   subgraph Runtime["Runtime (browser)"]
     direction LR
     CDN -->|"createNamespace(url)"| BR["Browser"]
-    PKG --> BR
     BR -->|"streams tarball"| MEM["WASM module loaded"]
     MEM --> R["VTK classes available"]
   end
