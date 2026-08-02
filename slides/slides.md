@@ -233,7 +233,6 @@ sequenceDiagram
     participant B as Browser
 
     U->>B: Open URL
-    B->>B: Load WASM module from CDN
     B-->>U: 3D viewer ready
 
     U->>B: Load mesh file (VTP/VTU/STL)
