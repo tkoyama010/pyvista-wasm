@@ -1167,6 +1167,29 @@ class: text-left
 class: text-left
 ---
 
+# {{ $t("inspiration.title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("inspiration.subtitle") }}</div>
+
+<div class="pt-6 flex flex-col gap-5 max-w-2xl">
+
+<div class="rounded-lg px-5 py-4" style="border:1px solid rgba(125,125,125,0.3)">
+  <div class="text-sm font-medium opacity-60 mb-1">{{ $t("inspiration.article_label") }}</div>
+  <div class="font-medium">{{ $t("inspiration.article_title") }}</div>
+  <div class="text-sm opacity-60 mt-1">{{ $t("inspiration.article_source") }}</div>
+  <a href="https://tech.akariinc.co.jp/entry/2026/05/03/115708" class="text-sm break-all opacity-80 hover:opacity-100 mt-2 inline-block">{{ $t("inspiration.article_link_text") }}</a>
+</div>
+
+<div class="text-sm opacity-70">{{ $t("inspiration.note") }}</div>
+
+</div>
+
+<!-- Single message: this talk is inspired by the Akari Inc. tech blog article on browser-complete 3D visualization with vtk.wasm — read it for the longer write-up. -->
+
+---
+class: text-left
+---
+
 # {{ $t("cta.cta_title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cta.subtitle") }}</div>
