@@ -229,7 +229,7 @@ class: text-left
 
 ```mermaid {scale: 0.55}
 sequenceDiagram
-    participant U as User
+    actor U as User
     participant B as Browser
     participant W as vtk-wasm (Wasm)
     participant V as VTK C++ Engine
