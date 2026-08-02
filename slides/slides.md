@@ -192,15 +192,10 @@ class: text-left
 
 | {{ $t("problem.col_issue") }} | {{ $t("problem.col_detail") }} |
 |---|---|
-| 🎨 {{ $t("problem.i1t") }} | {{ $t("problem.i1d") }} |
-| 🖥️ {{ $t("problem.i2t") }} | {{ $t("problem.i2d") }} |
-| 💸 {{ $t("problem.i3t") }} | {{ $t("problem.i3d") }} |
-| 🔒 {{ $t("problem.i4t") }} | {{ $t("problem.i4d") }} |
-
-<div class="flex items-baseline gap-3 mt-6">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("problem.conc_pre") }} <span class="font-medium">{{ $t("problem.conc_bold") }}</span> {{ $t("problem.conc_post") }}</div>
-</div>
+| {{ $t("problem.i1t") }} | {{ $t("problem.i1d") }} |
+| {{ $t("problem.i2t") }} | {{ $t("problem.i2d") }} |
+| {{ $t("problem.i3t") }} | {{ $t("problem.i3d") }} |
+| {{ $t("problem.i4t") }} | {{ $t("problem.i4d") }} |
 
 </div>
 
