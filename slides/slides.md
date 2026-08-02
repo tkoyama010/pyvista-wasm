@@ -531,14 +531,11 @@ sequenceDiagram
     participant PV as pyvista_wasm
     participant TS as TypeScript Glue
     participant VW as vtk-wasm (JS binding)
-    participant VTK as VTK C++ → Wasm
 
     U->>P: Write Python code
     P->>PV: Call PyVista-like API
     PV->>TS: Python ↔ JS bridge
     TS->>VW: createNamespace(url)
-    VW->>VTK: Load WASM tarball from CDN
-    VTK-->>VW: VTK classes available
     VW-->>TS: Runtime ready
     TS-->>PV: Filter pipeline executed
     PV-->>P: 3D mesh result
