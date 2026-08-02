@@ -524,7 +524,7 @@ class: text-left
 
 <div class="mt-4">
 
-```mermaid {scale: 0.55}
+```mermaid {scale: 0.65}
 sequenceDiagram
     actor U as User
     participant P as Pyodide
