@@ -161,7 +161,7 @@ pipeline:
 
 pyodide:
   title: VTK.wasmをBEとする pyvista-wasm は、PythonコードをFEとしてブラウザ上に3D可視化を構築
-  subtitle: pyvista-wasmのアーキテクチャ図
+  subtitle: pyvista-wasmのシーケンス図
   i1t: Pyodide
   i1d: CPythonをWebAssemblyにコンパイル、ブラウザ内で本物のCPythonインタープリターを実行
   i2t: PyVista

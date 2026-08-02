@@ -189,7 +189,7 @@ pipeline:
 
 pyodide:
   title: Pyodide + PyVista in the Browser
-  subtitle: Architecture diagram — Pyodide + PyVista layered in the browser
+  subtitle: Sequence diagram — Pyodide + PyVista layered in the browser
   i1t: Pyodide
   i1d: CPython compiled to WebAssembly, running the real CPython interpreter inside the browser
   i2t: PyVista

@@ -525,18 +525,24 @@ class: text-left
 <div class="mt-4">
 
 ```mermaid {scale: 0.75}
-flowchart TB
-  subgraph row1["Frontend"]
-    direction LR
-    P["🐍 Pyodide (CPython in Wasm)"] --> PV["pyvista_wasm (PyVista-like API)"]
-    PV -->|"Python ↔ JS"| TS["TypeScript Glue Layer"]
-  end
-  subgraph row2["Backend"]
-    direction LR
-    TS2["TypeScript Glue Layer"] -->|"createNamespace(url)"| VW["@kitware/vtk-wasm (JS binding)"]
-    VW -->|"loads tarball"| VTK["VTK C++ → WebAssembly (CDN tarball)"]
-  end
-  TS -.-> TS2
+sequenceDiagram
+    actor U as User
+    participant P as Pyodide
+    participant PV as pyvista_wasm
+    participant TS as TypeScript Glue
+    participant VW as vtk-wasm (JS binding)
+    participant VTK as VTK C++ → Wasm
+
+    U->>P: Write Python code
+    P->>PV: Call PyVista-like API
+    PV->>TS: Python ↔ JS bridge
+    TS->>VW: createNamespace(url)
+    VW->>VTK: Load WASM tarball from CDN
+    VTK-->>VW: VTK classes available
+    VW-->>TS: Runtime ready
+    TS-->>PV: Filter pipeline executed
+    PV-->>P: 3D mesh result
+    P-->>U: 3D viewer displayed (interactive)
 ```
 
 </div>
