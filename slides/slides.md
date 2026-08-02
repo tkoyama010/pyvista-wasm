@@ -893,15 +893,26 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("use_cases.subtitle") }}</div>
 
-```mermaid {scale: 0.65}
-flowchart LR
-  E["Engineer"] --> UC1(("Simulation<br/>sharing"))
-  E --> UC2(("Local file<br/>viewer"))
-  WD["Web developer"] --> UC3(("Serverless<br/>static sites"))
-  TR["Team reviewer"] --> UC4(("Small-team<br/>review"))
-  FP["Field presenter"] --> UC5(("Field demos &<br/>client sites"))
+```mermaid {scale: 0.55}
+flowchart TB
+  subgraph System["pyvista-wasm System"]
+    direction TB
+    UC1(("Simulation sharing"))
+    UC2(("Local file viewer"))
+    UC3(("Serverless static sites"))
+    UC4(("Small-team review"))
+    UC5(("Field demos"))
+  end
 
-  subgraph Limitations["Limitations — outside the system boundary"]
+  ENG(["Engineer"]) --- UC1
+  ENG --- UC2
+  ENG --- UC5
+  DEV(["Web developer"]) --- UC3
+  REV(["Team reviewer"]) --- UC4
+  PRES(["Field presenter"]) --- UC5
+
+  subgraph Outside["Limitations (outside system boundary)"]
+    direction LR
     L1["Massive meshes"]
     L2["Low-spec devices"]
     L3["Non-WebGPU browsers"]
