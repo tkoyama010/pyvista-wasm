@@ -154,8 +154,8 @@ build_dist:
   subtitle_post: — the binary streams from CDN at runtime
   build_title: How vtk-wasm is Built
   build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
-  dist_title: How the Package is Distributed
-  dist_subtitle: Architecture diagram — how the package is distributed
+  dist_title: Package Distribution Deployment Diagram
+  dist_subtitle: Deployment diagram — how the package is distributed
   build_label: Build
   i1t: Emscripten
   i1d: "VTK's C++ compiled to WebAssembly; the build takes hours, but consumers just"

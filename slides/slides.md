@@ -495,23 +495,31 @@ class: text-left
 
 <div class="flex justify-center mt-6">
 
-```mermaid {scale: 0.55}
-flowchart TB
-  subgraph Build["Build (hours-long)"]
-    direction LR
-    V["VTK C++ source"] -->|"Emscripten"| W["WASM binary tarball"]
-  end
-  subgraph Dist["Distribution"]
-    direction LR
-    W -->|"published to"| CDN["CDN (jsDelivr)"]
-    NPM["npm registry"] -->|"npm install"| PKG["@kitware/vtk-wasm (JS binding)"]
-  end
-  subgraph Runtime["Runtime (browser)"]
-    direction LR
-    CDN -->|"createNamespace(url)"| BR["Browser"]
-    BR -->|"streams tarball"| MEM["WASM module loaded"]
-    MEM --> R["VTK classes available"]
-  end
+```mermaid {scale: 0.4}
+architecture beta
+    group build(cloud)[Build]
+        service source(database)[VTK C++ source] in build
+        service emscripten(server)[Emscripten] in build
+        service tarball(disk)[WASM binary tarball] in build
+
+    group dist(cloud)[Distribution]
+        service cdn(internet)[CDN jsDelivr] in dist
+        service npm(package)[npm registry] in dist
+        service pkg(database)[vtk-wasm JS binding] in dist
+
+    group runtime(cloud)[Runtime]
+        service browser(internet)[Browser] in runtime
+        service memory(disk)[WASM module loaded] in runtime
+        service vtk(database)[VTK classes available] in runtime
+
+    source:R --> L:emscripten
+    emscripten:R --> L:tarball
+    tarball:B --> T:cdn
+    npm:R --> L:pkg
+    pkg:B --> T:browser
+    cdn:B --> T:browser
+    browser:R --> L:memory
+    memory:R --> L:vtk
 ```
 
 </div>
