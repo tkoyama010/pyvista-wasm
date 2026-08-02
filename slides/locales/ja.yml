@@ -123,7 +123,7 @@ history:
   conc_bold: 技術は着実に成熟している
 
 demos:
-  title: 3DCG・画像処理・可視化がブラウザで動作します
+  title: 3DCG・画像処理・可視化がブラウザで動作する
   subtitle: ブラウザで今すぐ動くライブデモ
 
 build_dist:
