@@ -1171,7 +1171,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("inspiration.subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
+<div class="pt-6 flex flex-col gap-3">
 
 <a href="https://tech.akariinc.co.jp/entry/2026/05/03/115708" class="block rounded-lg overflow-hidden shadow-xl hover:opacity-90 transition-opacity" style="border:1px solid rgba(125,125,125,0.3)">
   <img src="https://cdn.image.st-hatena.com/image/scale/2b5139c41384e885bb555481846547927fda5963/backend=imagemagick;version=1;width=1300/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fa%2Fakariinc%2F20260508%2F20260508131822.png" class="w-full" alt="{{ $t('inspiration.article_title') }}">
