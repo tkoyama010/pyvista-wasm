@@ -265,9 +265,9 @@ layout: full
 
 <div class="text-sm opacity-80 mb-2">{{ $t("vtk_wasm.subtitle") }}</div>
 
-<iframe src="https://www.kitware.com/tag/vtk/" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
+<iframe src="https://tkoyama010.github.io/awesome-vtk/" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
 
-<!-- Single message: Kitware's VTK blog posts — the latest updates and use cases for VTK. -->
+<!-- Single message: a curated list of VTK projects — how widely VTK is actually used. -->
 
 ---
 class: text-left
