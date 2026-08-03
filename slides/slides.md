@@ -46,6 +46,12 @@ layout: cover
 class: text-left
 ---
 
+<script setup>
+// Assets under public/ must be prefixed with Vite's base — the deck is built
+// with --base /pyvista-wasm/slides/, so a root-absolute src would 404.
+const base = import.meta.env.BASE_URL
+</script>
+
 # {{ $t("agenda.title") }}
 
 <div class="text-sm opacity-70 mb-3">{{ $t("agenda.subtitle") }}</div>
@@ -54,7 +60,7 @@ class: text-left
 
 <Link :to="4">
 <div class="flex flex-col gap-2">
-<img src="/agenda/part1.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<img :src="`${base}agenda/part1.png`" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
 <div class="flex items-baseline gap-2">
 <div class="text-xl opacity-40">1</div>
 <div>
@@ -67,7 +73,7 @@ class: text-left
 
 <Link :to="11">
 <div class="flex flex-col gap-2">
-<img src="/agenda/part2.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<img :src="`${base}agenda/part2.png`" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
 <div class="flex items-baseline gap-2">
 <div class="text-xl opacity-40">2</div>
 <div>
@@ -80,7 +86,7 @@ class: text-left
 
 <Link :to="16">
 <div class="flex flex-col gap-2">
-<img src="/agenda/part3.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<img :src="`${base}agenda/part3.png`" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
 <div class="flex items-baseline gap-2">
 <div class="text-xl opacity-40">3</div>
 <div>
@@ -470,6 +476,12 @@ layout: two-cols-header
 class: text-left
 ---
 
+<script setup>
+// Assets under public/ must be prefixed with Vite's base — the deck is built
+// with --base /pyvista-wasm/slides/, so a root-absolute src would 404.
+const base = import.meta.env.BASE_URL
+</script>
+
 # {{ $t("sphere.title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("sphere.subtitle") }}</div>
@@ -523,7 +535,7 @@ plotter.show()
 <div class="text-xs font-medium opacity-60 mt-2 mb-1">{{ $t("sphere.output_label") }}</div>
 
 <iframe
-  src="/pyvista-demo.html"
+  :src="`${base}pyvista-demo.html`"
   class="w-full rounded-lg"
   style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"
   loading="lazy"
@@ -658,13 +670,19 @@ class: text-left
 class: text-left
 ---
 
+<script setup>
+// Assets under public/ must be prefixed with Vite's base — the deck is built
+// with --base /pyvista-wasm/slides/, so a root-absolute src would 404.
+const base = import.meta.env.BASE_URL
+</script>
+
 # {{ $t("cta.qa_title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cta.qa_subtitle") }}</div>
 
 <div class="pt-4 flex justify-center">
   <img
-    src="/discussions-qr.svg"
+    :src="`${base}discussions-qr.svg`"
     alt="QR code linking to the pyvista-wasm GitHub Discussions page"
     class="h-[360px] w-[360px]"
   />
