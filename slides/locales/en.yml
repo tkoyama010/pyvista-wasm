@@ -7,23 +7,15 @@ cover:
 
 agenda:
   title: Agenda
-  subtitle: A four-part tour, from the why to the how
+  subtitle: A three-part tour, from the why to the how
   i1t: PyVista and WASM overview
   i1d: Why run 3D visualization in the browser
   i2t: Technical stack & implementation
   i2d: vtk-wasm, TypeScript glue, PyVista API
   i3t: Live demo in browser
   i3d: PyVista running with no server
-  i4t: Performance & limitations
-  i4d: What works today, what does not yet
   speaker_title: Speaker
   speaker_subtitle: PyVista contributor and pyvista-wasm co-maintainer
-  speaker_name: Tetsuo Koyama
-  speaker_i1: "PyVista contributor — bug fixes and feature PRs"
-  speaker_i2: pyvista-wasm co-maintainer
-  speaker_i3: "SciPy Conference 2022–2025 — MyST, PyVista, GeoVista sprints"
-  speaker_i4: SciPyData Japan 2025 co-organizer
-  speaker_i5: PyCon JP speaker and organizer
 
 pyvista:
   title: What is PyVista?
@@ -46,9 +38,9 @@ problem:
   col_detail: Detail
   i1t: Three.js is not enough
   i1d: the go-to browser 3D library has no direct path to render physics and simulation results
-  i2t: SSR needs a server
+  i2t: Time cost
   i2d: server-side rendering fills the gap, but someone has to build and maintain a dedicated visualization server
-  i3t: Cost
+  i3t: Monetary cost
   i3d: standing up and operating that infrastructure is an ongoing expense
   i4t: Security risk
   i4d: "confidential simulation data has to leave the analyst's machine and travel to the server"
@@ -155,20 +147,10 @@ caps:
   conc_bold: ~100K elements run at practical interactive speed
 
 build_dist:
-  title: Build & Distribution Mechanism
-  subtitle_pre: A hours-long Emscripten build collapses to
-  subtitle_post: — the binary streams from CDN at runtime
   build_title: How vtk-wasm is Built
   build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
   dist_title: Package Distribution Sequence Diagram
   dist_subtitle: Sequence diagram — how the package is distributed
-  build_label: Build
-  i1t: Emscripten
-  i1d: "VTK's C++ compiled to WebAssembly; the build takes hours, but consumers just"
-  i2t: "{'@'}kitware/vtk-wasm"
-  i2d: the JavaScript binding npm package that exposes the VTK API to the browser
-  dist_label: Distribution
-  first_load: "First load is ~12–15 MB (gzip) — pair with a spinner and lazy loading (Intersection Observer)"
 
 pipeline:
   title: VTK Emscripten Build Pipeline
@@ -207,71 +189,26 @@ pyodide:
   i6d_pre: when
   i6d_post: ", mesh fetches use XMLHttpRequest instead of urllib"
 
-rendering:
-  title: WebGL / WebGPU Rendering Integration
-  subtitle: Two render backends, one runtime — WebGL keeps it everywhere, WebGPU pushes it further
-  col_backend: Backend
-  col_feature: Feature
-  col_detail: Detail
-  webgl_label: WebGL
-  runtime_label: Runtime
-  i1t: Universally supported
-  i1d: available in every modern browser, the reliable render path that always works
-  i2t: OpenGL ES heritage
-  i2d: a mature, well-understood graphics API with years of tooling and driver support
-  i3t: Safe default
-  i3d: guarantees a working visualization even on older or conservative browsers
-  webgpu_label: WebGPU
-  i4t: Higher performance
-  i4d: lower driver overhead and closer-to-the-metal access than WebGL
-  i5t: GPU compute
-  i5d: exposes general-purpose compute shaders, not just the fixed rendering pipeline
-  i6t: Experimental in places
-  i6d: some browsers still require flags; 2023–2024 brought significant backend progress
-  i7t: Runtime switching
-  i7d: current packages select between WebGL and WebGPU at runtime, with automatic fallback when WebGPU is unavailable
-
 dev_ci:
-  title: Development & CI Challenges
-  subtitle: Three pitfalls every vtk.wasm integration hits — and the fix for each
-  i1t: async/await everywhere
-  i1d1: returns a Promise, so every VTK object operation must be
-  i1d2: "; forgetting"
-  i1d3: touches objects before WASM loads and errors out
-  i2t: SharedArrayBuffer
-  i2d1: parallel processing filters need it, so the server must return
-  i2d2: and
-  conc_pre: Cross-origin isolation is the gate for multi-threading —
-  conc_bold: without those headers, threaded filters silently break
-  config_label: vite.config.js
-  i3t: vite-plugin-cross-origin-isolation
-  i3d: injects the COOP/COEP headers for you in dev and preview
-  i4t: CORS on the tarball URL
-  i4d: fetches cross-origin, so the CDN must send CORS headers
-  i5t: jsDelivr over GitLab
-  i5d: "Kitware's GitLab direct URL is slow in Asia; jsDelivr's multi-CDN edge cache is both CORS-enabled and faster"
+  title: Integrating vtk.wasm into pyvista-wasm surfaced real problems — all now solved
+  subtitle: Problems hit during development, and the fix for each
+  col_issue: Issue
+  col_solution: Solution
+  p1: createNamespace() returns a Promise
+  s1: await every VTK object operation
+  p2: threaded filters require SharedArrayBuffer
+  s2: inject COOP/COEP headers with vite-plugin-cross-origin-isolation
+  p3: the tarball URL is fetched cross-origin, so it needs CORS
+  s3: use a CDN that sends CORS headers
+  p4: "Kitware's GitLab direct URL is slow from Asia"
+  s4: "use jsDelivr's multi-CDN edge cache"
 
 sphere:
-  title: "Minimal Sample: Sphere Rendering"
-  subtitle: Four VTK objects from geometry to pixels — the smallest complete pipeline
-  pipeline_label: Pipeline
-  i1t: vtkSphereSource
-  i1d: generates sphere geometry as
-  i2t: vtkPolyDataMapper
-  i2d: maps polygonal data to graphics primitives
-  i3t: vtkActor
-  i3d: "holds the sphere's position, properties, and mapper"
-  i4t: vtkRenderer
-  i4d: renders the actor into the viewport
-  i5t: StackBlitz
-  i5d: edit parameters in the browser and watch the preview update in real time
-  code_label: sphere.js
-  i6t: async/await
-  i6d: returns a Promise; all VTK operations must be awaited
-  i7t: COOP/COEP
-  i7d: requires cross-origin isolation headers
-  i8t: CORS-enabled CDN
-  i8d: the tarball URL must allow CORS; prefer jsDelivr
+  title: pyvista-wasm makes 3D visualization more intuitive
+  subtitle: A code comparison between VTK.wasm and pyvista-wasm
+  js_label: VTK.wasm (JavaScript)
+  py_label: pyvista-wasm (Python / Pyodide)
+  output_label: Output
 
 demo_jl:
   title: "Demo: JupyterLite"
@@ -379,26 +316,6 @@ use_cases:
   conc_pre: PoC confirmed —
   conc_bold: analysis results can be shared without a dedicated server
 
-roadmap:
-  title: Future Roadmap
-  subtitle: WebGPU stabilization and Pyodide + PyVista maturity — the application range keeps widening
-  milestones_label: Key milestones
-  i1t: WebGPU stabilization
-  i1d: as the backend matures, GPU compute will run entirely in the browser, beyond the fixed rendering pipeline
-  i2t: Pyodide + PyVista maturity
-  i2d: the integration is steadily maturing, enabling a seamless bridge to the Python ecosystem
-  i3t: Runtime backend switching
-  i3d: WebGL/WebGPU selection and automatic fallback keep improving as browser support grows
-  matters_label: Why it matters
-  i4t: 30 years of VTK in the browser
-  i4d: a heritage maintained since 1993 is now reachable from a single URL
-  i5t: Accessibility keeps expanding
-  i5d: server-less delivery is steadily broadening who can use scientific visualization
-  i6t: Broader applications ahead
-  i6d: as WebGPU stabilizes, the practical application range is expected to widen further
-  conc_pre: The technology is maturing steadily —
-  conc_bold: the next chapter is browser-native GPU compute
-
 inspiration:
   title: Inspired by
   subtitle: This talk builds on a longer write-up — read it for the full picture
@@ -412,25 +329,5 @@ cta:
   title: Call to Action & Q&A
   cta_title: Call to Action
   qa_title: Q&A
-  qa_subtitle: Questions and discussion are welcome
+  qa_subtitle: https://github.com/tkoyama010/pyvista-wasm/discussions
   subtitle: pyvista-wasm is an actively developed open source project — contributions and discussion are welcome
-  areas_label: Contribution areas
-  i1t: New VTK filters
-  i1d: expand the filter pipeline available in the browser
-  i2t: More file formats
-  i2d: support additional mesh and data formats client-side
-  i3t: Performance improvements
-  i3d: push the interactive speed further
-  i4t: Docs & translations
-  i4d: documentation fixes and Japanese translation improvements
-  welcome: Small documentation fixes and translations are very welcome
-  repo_label: Repository
-  topics_label: Discussion topics
-  i5t: Porting to WASM
-  i5d: build challenges and bottlenecks when porting heavyweight Python libraries to WebAssembly
-  i6t: Browser-based science
-  i6d: "use cases for browser-based scientific computing: education, paper reproduction, internal dashboards"
-  i7t: Is WASM necessary?
-  i7d: or is a Jupyter server sufficient? Discussing the value of serverless visualization
-  qa: Q&A
-  thank_you: Thank you — questions and discussion are welcome

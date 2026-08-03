@@ -15,8 +15,12 @@ mermaidConfig:
   architecture:
     useMaxWidth: false
 fonts:
-  sans: Noto Sans JP
+  sans: M PLUS 1p
   mono: JetBrains Mono
+  # M PLUS 1p ships 100/300/400/500/700/800/900 — Slidev's default 200 and 600
+  # do not exist for it and would silently fall back to regular, flattening
+  # every bold heading in the deck.
+  weights: 300,400,500,700
 addons:
   - slidev-addon-i18nb
 layout: cover
@@ -44,84 +48,122 @@ class: text-left
 
 # {{ $t("agenda.title") }}
 
-<div class="text-sm opacity-70 mb-6">{{ $t("agenda.subtitle") }}</div>
+<div class="text-sm opacity-70 mb-3">{{ $t("agenda.subtitle") }}</div>
 
-<div class="flex flex-col gap-4 max-w-2xl">
+<div class="grid grid-cols-3 gap-5 pt-1 agenda-cards">
 
-<div class="flex items-baseline gap-3">
-  <div class="text-2xl opacity-40 w-8">1</div>
-  <div>
-    <div class="font-medium">{{ $t("agenda.i1t") }}</div>
-    <div class="text-sm opacity-60">{{ $t("agenda.i1d") }}</div>
-  </div>
+<Link :to="4">
+<div class="flex flex-col gap-2">
+<img src="/agenda/part1.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<div class="flex items-baseline gap-2">
+<div class="text-xl opacity-40">1</div>
+<div>
+<div class="font-medium text-sm">{{ $t("agenda.i1t") }}</div>
+<div class="text-xs opacity-60">{{ $t("agenda.i1d") }}</div>
+</div>
+</div>
+</div>
+</Link>
+
+<Link :to="11">
+<div class="flex flex-col gap-2">
+<img src="/agenda/part2.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<div class="flex items-baseline gap-2">
+<div class="text-xl opacity-40">2</div>
+<div>
+<div class="font-medium text-sm">{{ $t("agenda.i2t") }}</div>
+<div class="text-xs opacity-60">{{ $t("agenda.i2d") }}</div>
+</div>
+</div>
+</div>
+</Link>
+
+<Link :to="16">
+<div class="flex flex-col gap-2">
+<img src="/agenda/part3.png" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
+<div class="flex items-baseline gap-2">
+<div class="text-xl opacity-40">3</div>
+<div>
+<div class="font-medium text-sm">{{ $t("agenda.i3t") }}</div>
+<div class="text-xs opacity-60">{{ $t("agenda.i3d") }}</div>
+</div>
+</div>
+</div>
+</Link>
+
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="text-2xl opacity-40 w-8">2</div>
-  <div>
-    <div class="font-medium">{{ $t("agenda.i2t") }}</div>
-    <div class="text-sm opacity-60">{{ $t("agenda.i2d") }}</div>
-  </div>
-</div>
+<!-- Single message: the talk runs in three parts — click any thumbnail to jump straight to that section. -->
 
-<div class="flex items-baseline gap-3">
-  <div class="text-2xl opacity-40 w-8">3</div>
-  <div>
-    <div class="font-medium">{{ $t("agenda.i3t") }}</div>
-    <div class="text-sm opacity-60">{{ $t("agenda.i3d") }}</div>
-  </div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="text-2xl opacity-40 w-8">4</div>
-  <div>
-    <div class="font-medium">{{ $t("agenda.i4t") }}</div>
-    <div class="text-sm opacity-60">{{ $t("agenda.i4d") }}</div>
-  </div>
-</div>
-
-</div>
-
-<!-- Single message: here is the four-part agenda for the talk. -->
 
 ---
+layout: two-cols-header
 class: text-left
 ---
 
 # {{ $t("agenda.speaker_title") }}
 
-<div class="text-sm opacity-70 mb-6">{{ $t("agenda.speaker_subtitle") }}</div>
+<div class="text-sm opacity-70">{{ $t("agenda.speaker_subtitle") }}</div>
 
-<div class="text-lg font-medium mt-2">{{ $t("agenda.speaker_name") }}</div>
+::left::
 
-<div class="flex flex-col gap-3 text-sm mt-4 max-w-2xl">
+<div class="pr-4 pt-2">
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧩</div>
-  <div>{{ $t("agenda.speaker_i1") }}</div>
+```py
+class TetsuoKoyama:
+    def __init__(self):
+        self.name = "Tetsuo Koyama"
+        self.role = "AI Engineer"
+        self.location = "Japan 🇯🇵"
+        self.interests = [
+            "Scientific Computing",
+            "3D Visualization",
+            "Finite Element Method",
+            "Open Source Development"
+        ]
+        self.languages = ["Japanese", "English"]
+
+    def get_current_projects(self):
+        return {
+            "PyVista": "3D plotting and mesh analysis",
+            "GetFEM": "Finite Element Method library",
+            "pyOpenSci": "Scientific Python packaging"
+        }
+
+    def say_hi(self):
+        print("Thanks for visiting my profile! 🎉")
+        print("Feel free to explore my projects and connect!")
+
+me = TetsuoKoyama()
+me.say_hi()
+```
+
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔧</div>
-  <div>{{ $t("agenda.speaker_i2") }}</div>
+::right::
+
+<div class="pl-4 pt-2 flex flex-col items-center gap-4">
+  <img
+    src="https://github.com/tkoyama010.png"
+    alt="Tetsuo Koyama"
+    class="w-40 h-40 rounded-full"
+  />
+  <div class="text-sm opacity-80 text-center leading-relaxed">
+    AI engineer @AKARI-Inc 3D visualization library @pyvista maintainer,
+    @scipy-conference chairperson, Technical Steering Committee of @numfocus
+    photo @pyconjp
+  </div>
+  <a href="https://github.com/tkoyama010" class="text-xs opacity-70 hover:opacity-100">github.com/tkoyama010</a>
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div>{{ $t("agenda.speaker_i3") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🗾</div>
-  <div>{{ $t("agenda.speaker_i4") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🎤</div>
-  <div>{{ $t("agenda.speaker_i5") }}</div>
-</div>
-
-</div>
+<style>
+/* The profile snippet is ~28 lines, so it needs smaller code type to sit
+   beside the photo without overflowing the slide. */
+.slidev-code {
+  font-size: 0.55rem !important;
+  line-height: 1.3 !important;
+}
+</style>
 
 <!-- Single message: who the speaker is and why they are qualified to give this talk. -->
 
@@ -156,22 +198,6 @@ class: text-left
 | {{ $t("problem.i4t") }} | {{ $t("problem.i4d") }} |
 
 </div>
-
-<style>
-.problem-table table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.problem-table th,
-.problem-table td {
-  border: 2px solid #555;
-  padding: 10px 16px;
-}
-.problem-table th {
-  border-bottom: 3px solid #333;
-  background-color: rgba(125,125,125,0.1);
-}
-</style>
 
 <!-- Single message: sharing 3D results on the web still means running a server — Three.js lacks simulation rendering, SSR needs a server, costs are ongoing, and confidential data must travel to the server. -->
 
@@ -329,21 +355,29 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("build_dist.build_subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
+<div class="pt-4">
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🏗️</div>
-  <div><span class="font-medium">{{ $t("build_dist.i1t") }}</span> — {{ $t("build_dist.i1d") }} <code>npm install</code></div>
+```sh
+# 1. Install and activate the Emscripten SDK
+git clone https://github.com/emscripten-core/emsdk.git
+./emsdk/emsdk install latest
+./emsdk/emsdk activate latest
+source ./emsdk/emsdk_env.sh
+
+# 2. Cross-compile VTK to WebAssembly (takes hours)
+emcmake cmake -GNinja -S vtk -B build-wasm \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DBUILD_SHARED_LIBS=OFF
+cmake --build build-wasm
+
+# 3. Consumers never run any of the above — they just
+npm install @kitware/vtk-wasm
+```
+
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📦</div>
-  <div><span class="font-medium">{{ $t("build_dist.i2t") }}</span> — {{ $t("build_dist.i2d") }}</div>
-</div>
+<!-- Single message: the Emscripten cross-compile is an hours-long job, but nobody downstream pays for it — consumers just npm install. -->
 
-</div>
-
-<!-- Single message: VTK's C++ is compiled to WebAssembly via Emscripten (a hours-long build), and consumers just npm install the @kitware/vtk-wasm binding package. -->
 
 ---
 class: text-left
@@ -412,96 +446,23 @@ sequenceDiagram
 class: text-left
 ---
 
-# {{ $t("rendering.title") }}
-
-<div class="text-lg opacity-80 mt-1">{{ $t("rendering.subtitle") }}</div>
-
-<div class="pt-6 problem-table">
-
-| {{ $t("rendering.col_backend") }} | {{ $t("rendering.col_feature") }} | {{ $t("rendering.col_detail") }} |
-|---|---|---|
-| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i1t") }} | {{ $t("rendering.i1d") }} |
-| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i2t") }} | {{ $t("rendering.i2d") }} |
-| {{ $t("rendering.webgl_label") }} | {{ $t("rendering.i3t") }} | {{ $t("rendering.i3d") }} |
-| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i4t") }} | {{ $t("rendering.i4d") }} |
-| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i5t") }} | {{ $t("rendering.i5d") }} |
-| {{ $t("rendering.webgpu_label") }} | {{ $t("rendering.i6t") }} | {{ $t("rendering.i6d") }} |
-| {{ $t("rendering.runtime_label") }} | {{ $t("rendering.i7t") }} | {{ $t("rendering.i7d") }} |
-
-</div>
-
-<style>
-.problem-table table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.problem-table th,
-.problem-table td {
-  border: 2px solid #555;
-  padding: 10px 16px;
-}
-.problem-table th {
-  border-bottom: 3px solid #333;
-  background-color: rgba(125,125,125,0.1);
-}
-</style>
-
-<!-- Single message: two render backends, one runtime — WebGL is the universally supported baseline, WebGPU pushes performance further with GPU compute, and the runtime switches between them with automatic fallback. -->
-
----
-layout: two-cols-header
-class: text-left
----
-
 # {{ $t("dev_ci.title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("dev_ci.subtitle") }}</div>
 
-::left::
+<div class="pt-6 problem-table">
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⏳</div>
-  <div><span class="font-medium">{{ $t("dev_ci.i1t") }}</span> — <code>createNamespace()</code> {{ $t("dev_ci.i1d1") }} <code>async/await</code>{{ $t("dev_ci.i1d2") }} <code>await</code> {{ $t("dev_ci.i1d3") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🧵</div>
-  <div><span class="font-medium">{{ $t("dev_ci.i2t") }}</span> — {{ $t("dev_ci.i2d1") }} <code>Cross-Origin-Opener-Policy: same-origin</code> {{ $t("dev_ci.i2d2") }} <code>Cross-Origin-Embedder-Policy: require-corp</code></div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("dev_ci.conc_pre") }} <span class="font-medium">{{ $t("dev_ci.conc_bold") }}</span></div>
-</div>
+| {{ $t("dev_ci.col_issue") }} | {{ $t("dev_ci.col_solution") }} |
+|---|---|
+| {{ $t("dev_ci.p1") }} | {{ $t("dev_ci.s1") }} |
+| {{ $t("dev_ci.p2") }} | {{ $t("dev_ci.s2") }} |
+| {{ $t("dev_ci.p3") }} | {{ $t("dev_ci.s3") }} |
+| {{ $t("dev_ci.p4") }} | {{ $t("dev_ci.s4") }} |
 
 </div>
 
-::right::
+<!-- Single message: every problem hit while integrating vtk.wasm has a known fix — await all VTK calls, inject COOP/COEP, and serve the tarball from a CORS-enabled CDN. -->
 
-<div class="pl-6 pt-6">
-
-<div class="text-sm font-medium opacity-60 mb-3">{{ $t("dev_ci.config_label") }}</div>
-
-```js
-import crossOriginIsolation
-  from 'vite-plugin-cross-origin-isolation';
-
-export default {
-  plugins: [crossOriginIsolation()],
-  build: { target: 'esnext' },
-  optimizeDeps: { exclude: ['@kitware/vtk-wasm'] },
-};
-```
-
-<div class="flex flex-col gap-4 mt-6">
-
-</div>
-
-</div>
-
-<!-- Single message: three pitfalls every vtk.wasm integration hits — async/await for all VTK operations, SharedArrayBuffer requiring COOP/COEP headers — and the fixes: vite-plugin-cross-origin-isolation injects the headers (i3), CDN must send CORS headers for the tarball URL (i4), jsDelivr's multi-CDN edge cache is CORS-enabled and faster in Asia than GitLab (i5). -->
 
 ---
 layout: two-cols-header
@@ -514,54 +475,22 @@ class: text-left
 
 ::left::
 
-<div class="pr-6 pt-6 flex flex-col gap-5">
+<div class="pr-3 pt-2">
 
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("sphere.pipeline_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">1</div>
-  <div><span class="font-medium">{{ $t("sphere.i1t") }}</span> — {{ $t("sphere.i1d") }} <code>vtkPolyData</code></div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">2</div>
-  <div><span class="font-medium">{{ $t("sphere.i2t") }}</span> — {{ $t("sphere.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">3</div>
-  <div><span class="font-medium">{{ $t("sphere.i3t") }}</span> — {{ $t("sphere.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">4</div>
-  <div><span class="font-medium">{{ $t("sphere.i4t") }}</span> — {{ $t("sphere.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">✏️</div>
-  <div><span class="font-medium">{{ $t("sphere.i5t") }}</span> — {{ $t("sphere.i5d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6">
-
-<div class="text-sm font-medium opacity-60 mb-3">{{ $t("sphere.code_label") }}</div>
+<div class="text-xs font-medium opacity-60 mb-1">{{ $t("sphere.js_label") }}</div>
 
 ```js
 createNamespace(WASM_URL).then(async (vtk) => {
   const sphere = vtk.vtkSphereSource.newInstance();
-  sphere.setRadius(0.5);
-  sphere.setThetaResolution(16);
+  sphere.setThetaResolution(24);
+  sphere.setPhiResolution(24);
 
   const mapper = vtk.vtkPolyDataMapper.newInstance();
   mapper.setInputConnection(sphere.getOutputPort());
 
   const actor = vtk.vtkActor.newInstance();
   actor.setMapper(mapper);
+  actor.getProperty().setEdgeVisibility(true);
 
   const renderer = vtk.vtkRenderer.newInstance();
   renderer.addActor(actor);
@@ -569,13 +498,48 @@ createNamespace(WASM_URL).then(async (vtk) => {
 });
 ```
 
-<div class="flex flex-col gap-4 mt-6">
+</div>
+
+::right::
+
+<div class="pl-3 pt-2">
+
+<div class="text-xs font-medium opacity-60 mb-1">{{ $t("sphere.py_label") }}</div>
+
+```py
+import micropip
+await micropip.install("pyvista-wasm")
+
+import pyvista_wasm as pv
+
+mesh = pv.Sphere(theta_resolution=24, phi_resolution=24)
+plotter = pv.Plotter()
+plotter.add_mesh(mesh, show_edges=True)
+plotter.show()
+```
+
+<div class="text-xs font-medium opacity-60 mt-2 mb-1">{{ $t("sphere.output_label") }}</div>
+
+<iframe
+  src="/pyvista-demo.html"
+  class="w-full rounded-lg"
+  style="height: 150px; border: 1px solid rgba(125,125,125,0.3)"
+  loading="lazy"
+></iframe>
 
 </div>
 
-</div>
+<style>
+/* Two code blocks plus the live render share one slide, so shrink the code
+   type rather than let the output overflow the canvas. The heading size is
+   deck-wide and lives in style.css. */
+.slidev-code {
+  font-size: 0.6rem !important;
+  line-height: 1.25 !important;
+}
+</style>
 
-<!-- Single message: four VTK objects form the minimal complete pipeline — vtkSphereSource → vtkPolyDataMapper → vtkActor → vtkRenderer. Additional detail: StackBlitz lets you edit parameters in the browser (i5). createNamespace() returns a Promise; all VTK operations must be awaited (i6). SharedArrayBuffer requires COOP/COEP headers (i7). The tarball URL must allow CORS; prefer jsDelivr (i8). -->
+<!-- Single message: both columns build the same sphere — vtk.wasm needs the full four-object pipeline in JavaScript, pyvista-wasm needs four lines of Python. Additional detail: the right-hand render is a live vtk.wasm scene exported from this very Python snippet, so it can be grabbed and rotated during the talk. -->
 
 ---
 class: text-left
@@ -653,68 +617,6 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 <!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
 
 ---
-layout: two-cols-header
-class: text-left
----
-
-# {{ $t("roadmap.title") }}
-
-<div class="text-lg opacity-80 mt-1">{{ $t("roadmap.subtitle") }}</div>
-
-::left::
-
-<div class="pr-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("roadmap.milestones_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚡</div>
-  <div><span class="font-medium">{{ $t("roadmap.i1t") }}</span> — {{ $t("roadmap.i1d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🐍</div>
-  <div><span class="font-medium">{{ $t("roadmap.i2t") }}</span> — {{ $t("roadmap.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🔄</div>
-  <div><span class="font-medium">{{ $t("roadmap.i3t") }}</span> — {{ $t("roadmap.i3d") }}</div>
-</div>
-
-</div>
-
-::right::
-
-<div class="pl-6 pt-6 flex flex-col gap-5">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("roadmap.matters_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🏛️</div>
-  <div><span class="font-medium">{{ $t("roadmap.i4t") }}</span> — {{ $t("roadmap.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("roadmap.i5t") }}</span> — {{ $t("roadmap.i5d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📈</div>
-  <div><span class="font-medium">{{ $t("roadmap.i6t") }}</span> — {{ $t("roadmap.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">➡️</div>
-  <div class="opacity-90">{{ $t("roadmap.conc_pre") }} <span class="font-medium">{{ $t("roadmap.conc_bold") }}</span></div>
-</div>
-
-</div>
-
-<!-- Single message: the technology is maturing steadily — key milestones are WebGPU stabilization, Pyodide + PyVista maturity, and runtime backend switching. Why it matters: 30 years of VTK in the browser, expanding accessibility, broader applications ahead. The next chapter is browser-native GPU compute. -->
-
----
 class: text-left
 ---
 
@@ -740,43 +642,15 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cta.subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("cta.areas_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚙️</div>
-  <div><span class="font-medium">{{ $t("cta.i1t") }}</span> — {{ $t("cta.i1d") }}</div>
+<div class="pt-6 flex justify-center">
+  <img
+    src="https://camo.githubusercontent.com/7dea1c99a8ae08f72b5b814eddf6038e54ecae986e51a6bcddd6aed87ae62f6c/68747470733a2f2f636f6e747269622e726f636b732f696d6167653f7265706f3d707976697374612f70797669737461"
+    alt="PyVista contributors"
+    class="max-h-[380px] w-auto"
+  />
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📦</div>
-  <div><span class="font-medium">{{ $t("cta.i2t") }}</span> — {{ $t("cta.i2d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">⚡</div>
-  <div><span class="font-medium">{{ $t("cta.i3t") }}</span> — {{ $t("cta.i3d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">📖</div>
-  <div><span class="font-medium">{{ $t("cta.i4t") }}</span> — {{ $t("cta.i4d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-2">
-  <div class="opacity-50 w-5">💬</div>
-  <div class="opacity-90">{{ $t("cta.welcome") }}</div>
-</div>
-
-<div class="rounded-lg px-5 py-4 mt-2" style="border:1px solid rgba(125,125,125,0.3)">
-  <div class="text-sm font-medium opacity-60 mb-1">{{ $t("cta.repo_label") }}</div>
-  <a href="https://github.com/tkoyama010/pyvista-wasm" class="text-sm break-all opacity-80 hover:opacity-100">github.com/tkoyama010/pyvista-wasm</a>
-</div>
-
-</div>
-
-<!-- Single message: pyvista-wasm welcomes contributions — new VTK filters, file formats, performance improvements, docs & translations. Small fixes are very welcome. -->
+<!-- Single message: PyVista is built by this many people — contributions to pyvista-wasm are welcome too. -->
 
 ---
 class: text-left
@@ -786,32 +660,12 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cta.qa_subtitle") }}</div>
 
-<div class="pt-6 flex flex-col gap-5 max-w-2xl">
-
-<div class="text-sm font-medium opacity-60 mb-1">{{ $t("cta.topics_label") }}</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🏗️</div>
-  <div><span class="font-medium">{{ $t("cta.i5t") }}</span> — {{ $t("cta.i5d") }}</div>
+<div class="pt-4 flex justify-center">
+  <img
+    src="/discussions-qr.svg"
+    alt="QR code linking to the pyvista-wasm GitHub Discussions page"
+    class="h-[360px] w-[360px]"
+  />
 </div>
 
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">🌐</div>
-  <div><span class="font-medium">{{ $t("cta.i6t") }}</span> — {{ $t("cta.i6d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3">
-  <div class="opacity-50 w-5">❓</div>
-  <div><span class="font-medium">{{ $t("cta.i7t") }}</span> — {{ $t("cta.i7d") }}</div>
-</div>
-
-<div class="flex items-baseline gap-3 mt-6">
-  <div class="opacity-50 w-5">🎤</div>
-  <div class="text-2xl font-medium">{{ $t("cta.qa") }}</div>
-</div>
-
-<div class="text-sm opacity-70">{{ $t("cta.thank_you") }}</div>
-
-</div>
-
-<!-- Single message: Q&A — discussion topics include porting to WASM, browser-based science, and whether WASM is necessary. Thank you. -->
+<!-- Single message: take the discussion to GitHub Discussions — scan the code to open the thread. -->
