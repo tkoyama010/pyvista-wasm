@@ -119,7 +119,7 @@ class TetsuoKoyama:
             "Scientific Computing",
             "3D Visualization",
             "Finite Element Method",
-            "Open Source Development"
+            "Open Source Development",
         ]
         self.languages = ["Japanese", "English"]
 
@@ -127,12 +127,13 @@ class TetsuoKoyama:
         return {
             "PyVista": "3D plotting and mesh analysis",
             "GetFEM": "Finite Element Method library",
-            "pyOpenSci": "Scientific Python packaging"
+            "pyOpenSci": "Scientific Python packaging",
         }
 
     def say_hi(self):
         print("Thanks for visiting my profile! 🎉")
         print("Feel free to explore my projects and connect!")
+
 
 me = TetsuoKoyama()
 me.say_hi()
@@ -508,6 +509,7 @@ createNamespace(WASM_URL).then(async (vtk) => {
 
 ```py
 import micropip
+
 await micropip.install("pyvista-wasm")
 
 import pyvista_wasm as pv
