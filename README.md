@@ -18,6 +18,7 @@
 - [Usage](#usage)
 - [Presentation](#presentation)
 - [Differences from pyvista-js](#differences-from-pyvista-js)
+- [Citation](#citation)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -65,6 +66,21 @@ Key differences:
 - **API style**: VTK.wasm uses `vtk.vtkRenderer()` factory functions on a namespace object, vs vtk.js's `vtk.Rendering.Core.vtkRenderer.newInstance()` hierarchy
 - **Initialization**: VTK.wasm requires async initialization via `vtkWASM.createNamespace()` to load the WASM binary
 - **Feature parity**: VTK.wasm provides access to the full VTK C++ API, enabling features not available in vtk.js
+
+## Citation
+
+If you use pyvista-wasm in academic or project work, please cite it. See [`CITATION.cff`](CITATION.cff) for the full citation metadata, or use the BibTeX entry below:
+
+```bibtex
+@software{Koyama2026pyvista-wasm,
+  author       = {Tetsuo Koyama},
+  title        = {{pyvista-wasm: PyVista-like API for VTK.wasm}},
+  year         = {2026},
+  version      = {0.9.0},
+  license      = {Apache-2.0},
+  url          = {https://github.com/tkoyama010/pyvista-wasm}
+}
+```
 
 ## Contributing
 
