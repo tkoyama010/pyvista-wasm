@@ -312,6 +312,19 @@ def test_generate_render_js(monkeypatch) -> None:
     assert scene["actors"][0]["source"]["type"] == "sphere"
 
 
+def test_generate_render_js_has_script_onerror(monkeypatch) -> None:
+    """Test that _generate_render_js includes onerror handler for script loading."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+
+    renderer = rendering.VTKWasmRenderer()
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    js = renderer._generate_render_js()
+
+    assert "script.onerror" in js
+    assert "Failed to load VTK.wasm" in js
+
+
 def test_render_with_ipython_calls_display(monkeypatch) -> None:
     """Test that VTKWasmRenderer.render() calls display(Javascript(...)) in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)

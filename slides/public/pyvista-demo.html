@@ -234,11 +234,24 @@
     "Initializing WASM Environment\u2026"
   );
   if (typeof vtkReady !== "undefined") {
-    void vtkReady.then(
-      (vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)
+    void vtkReady.then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)).catch((err) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm."
+      );
+    });
+  } else if (typeof vtkWASM === "undefined") {
+    showOverlayError(
+      pvOverlay,
+      "VTK.wasm is not loaded. Ensure the vtk-wasm script tag is present."
     );
-  } else if (typeof vtkWASM !== "undefined") {
-    void vtkWASM.createNamespace(void 0, pvSceneData.wasmConfig).then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData));
+  } else {
+    void vtkWASM.createNamespace(void 0, pvSceneData.wasmConfig).then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)).catch((err) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm."
+      );
+    });
   }
   function setupLights(vtk, lightsConfig, ren) {
     var _a;

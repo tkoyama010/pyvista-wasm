@@ -382,13 +382,29 @@ const pvOverlay: HTMLDivElement = createLoadingOverlay(
 );
 
 if (typeof vtkReady !== "undefined") {
-  void vtkReady.then((vtk) =>
-    buildScene(vtk, pvOverlay, pvContainer, pvSceneData),
-  ); // eslint-disable-line unicorn/prefer-top-level-await
-} else if (typeof vtkWASM !== "undefined") {
+  void vtkReady
+    .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData))
+    .catch((err: unknown) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm.",
+      );
+    }); // eslint-disable-line unicorn/prefer-top-level-await
+} else if (typeof vtkWASM === "undefined") {
+  showOverlayError(
+    pvOverlay,
+    "VTK.wasm is not loaded. Ensure the vtk-wasm script tag is present.",
+  );
+} else {
   void vtkWASM
     .createNamespace(undefined, pvSceneData.wasmConfig)
-    .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)); // eslint-disable-line unicorn/prefer-top-level-await
+    .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData))
+    .catch((err: unknown) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm.",
+      );
+    }); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
 /**
