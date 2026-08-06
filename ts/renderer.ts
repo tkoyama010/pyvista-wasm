@@ -227,6 +227,44 @@ function resolveContainerAndScene(): {
 }
 
 /**
+ * Wait for the container to report non-zero layout dimensions.
+ *
+ * Inside a cross-origin iframe on Chromium (especially with
+ * ``loading="lazy"``), ``getBoundingClientRect()`` can return 0x0
+ * before layout settles.  Creating a WebGL context on a zero-sized
+ * canvas produces a zero-sized drawing buffer, so ``renderWindow.render()``
+ * draws nothing — the bug described in issue #374.
+ *
+ * This function polls via ``requestAnimationFrame`` until the container
+ * has positive width and height, then resolves.  A timeout falls back
+ * to default dimensions so the scene still renders (at 600×400) if the
+ * container is permanently hidden.
+ * @param container - The DOM element that will hold the canvas.
+ * @returns The container's pixel width and height (both > 0, or defaults after timeout).
+ */
+function waitForContainerSize(
+  container: HTMLElement,
+): Promise<{ width: number; height: number }> {
+  const DefaultWidth = 600;
+  const DefaultHeight = 400;
+  const TimeoutMs = 10_000;
+  const start = performance.now();
+  return new Promise((resolve) => {
+    function check(): void {
+      const rect = container.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        resolve({ width: rect.width, height: rect.height });
+      } else if (performance.now() - start > TimeoutMs) {
+        resolve({ width: DefaultWidth, height: DefaultHeight });
+      } else {
+        requestAnimationFrame(check);
+      }
+    }
+    check();
+  });
+}
+
+/**
  * Main entry point — initialise VTK.wasm and build the scene.
  *
  * Receives a pre-created loading overlay so that the user sees
@@ -253,14 +291,12 @@ async function buildScene(
     const renderer = vtk.vtkRenderer();
     renderer.setBackground(bg[0], bg[1], bg[2]);
 
-    const bbox = container.getBoundingClientRect();
+    const { width, height } = await waitForContainerSize(container);
     const canvasId = `${sceneData.containerId}-canvas`;
-    const DefaultCanvasWidth = 600;
-    const DefaultCanvasHeight = 400;
     const canvas = document.createElement("canvas");
     canvas.id = canvasId;
-    canvas.width = bbox.width || DefaultCanvasWidth;
-    canvas.height = bbox.height || DefaultCanvasHeight;
+    canvas.width = Math.round(width);
+    canvas.height = Math.round(height);
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.tabIndex = -1;
@@ -300,6 +336,23 @@ async function buildScene(
       renderWindow,
     });
     await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+
+    // Keep the canvas backing store in sync with the container so the
+    // WebGL drawing buffer matches the CSS layout size.  Without this,
+    // a container that resizes after initial render (e.g. iframe layout
+    // shifting on Chromium) leaves the drawing buffer stale.
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const w = Math.round(entry.contentRect.width);
+        const h = Math.round(entry.contentRect.height);
+        if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+          canvas.width = w;
+          canvas.height = h;
+          renderWindow.render();
+        }
+      }
+    });
+    resizeObserver.observe(container);
 
     renderWindow.render();
     await interactor.start();
