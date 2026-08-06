@@ -591,7 +591,9 @@ class TestIframeRendering:
         html = plotter.generate_standalone_html()
 
         with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".html", delete=False,
+            mode="w",
+            suffix=".html",
+            delete=False,
         ) as f:
             f.write(html)
             inner_path = Path(f.name)
@@ -605,7 +607,9 @@ class TestIframeRendering:
 </body></html>"""
 
         with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".html", delete=False,
+            mode="w",
+            suffix=".html",
+            delete=False,
         ) as f:
             f.write(wrapper)
             wrapper_path = Path(f.name)

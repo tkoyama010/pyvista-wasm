@@ -783,7 +783,8 @@ class TestCanvasSizing:
     """
 
     def test_standalone_html_contains_wait_for_container_size(
-        self, monkeypatch,
+        self,
+        monkeypatch,
     ) -> None:
         """Generated HTML includes the ``waitForContainerSize`` guard."""
         monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
@@ -796,7 +797,8 @@ class TestCanvasSizing:
         assert "waitForContainerSize" in html
 
     def test_standalone_html_contains_resize_observer(
-        self, monkeypatch,
+        self,
+        monkeypatch,
     ) -> None:
         """Generated HTML includes a ``ResizeObserver`` for dynamic resizing."""
         monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
