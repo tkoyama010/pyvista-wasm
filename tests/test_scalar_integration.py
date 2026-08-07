@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import url2pathname
 
-from pyvista_wasm import Plotter, Sphere
+from pyvista_wasm import Plotter, Sphere, rendering
 
 
 def test_scalar_rendering_html_generation(monkeypatch) -> None:
@@ -16,6 +16,7 @@ def test_scalar_rendering_html_generation(monkeypatch) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     # Create mesh with scalars
     mesh = Sphere()
@@ -54,6 +55,7 @@ def test_multiple_colormaps_html_generation(monkeypatch) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     # Test viridis
     mesh1 = Sphere()
@@ -90,6 +92,7 @@ def test_no_scalars_no_lut(monkeypatch) -> None:
         opened.append(url)
 
     monkeypatch.setattr(webbrowser, "open", _capture)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
 
     mesh = Sphere()
     plotter = Plotter()
