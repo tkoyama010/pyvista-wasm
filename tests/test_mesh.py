@@ -172,11 +172,17 @@ def test_shrink_scene_data_contains_shrink_filter() -> None:
 
 
 def test_shrink_scene_data_has_source_type() -> None:
-    """Test that shrunk mesh scene data preserves the source type."""
+    """Test that shrunk mesh scene data uses explicit mesh geometry.
+
+    Filter methods serialize as type "mesh" so the JavaScript renderer can
+    access the PolyData directly without calling getOutputData() on a VTK
+    algorithm, which can return null in vtk-wasm environments.
+    """
     sphere = Sphere()
     shrunk = sphere.shrink(shrink_factor=0.8)
     scene = shrunk.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
+    assert "points" in scene
 
 
 def test_shrink_invalid_factor() -> None:
@@ -259,11 +265,12 @@ def test_clip_scene_data_contains_clip_filter() -> None:
 
 
 def test_clip_scene_data_has_source_type() -> None:
-    """Test that clipped mesh scene data preserves the source type."""
+    """Test that clipped mesh scene data uses explicit mesh geometry."""
     sphere = Sphere()
     clipped = sphere.clip(normal="x", origin=(0, 0, 0))
     scene = clipped.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
+    assert "points" in scene
 
 
 def test_clip_invalid_normal_string() -> None:
@@ -326,7 +333,12 @@ def test_tube_scene_data_contains_tube_filter() -> None:
 
 
 def test_tube_scene_data_has_source_type() -> None:
-    """Test that tubed mesh scene data preserves the source type."""
+    """Test that tubed mesh scene data preserves the source type.
+
+    Unlike shrink/contour/clip which need explicit geometry, the tube filter
+    uses VTK.wasm's vtkTubeFilter via setInputConnection and requires the
+    original line source type to generate line cell connectivity.
+    """
     line = Line()
     tube = line.tube(radius=0.5, n_sides=20)
     scene = tube.to_scene_data()
@@ -405,12 +417,14 @@ def test_contour_with_list_isosurfaces() -> None:
 
 
 def test_contour_scene_data_has_source_type() -> None:
-    """Test that contour scene data preserves the source type."""
+    """Test that contour scene data uses explicit mesh geometry."""
     sphere = Sphere()
     scalars = sphere.points[:, 2]
     contours = sphere.contour(isosurfaces=5, scalars=scalars)
     scene = contours.to_scene_data()
-    assert scene["type"] == "sphere"
+    assert scene["type"] == "mesh"
+    assert "points" in scene
+    assert "polys" in scene
     assert scene["filters"][-1]["type"] == "contour"
 
 
