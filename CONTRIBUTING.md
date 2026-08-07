@@ -12,6 +12,7 @@ Thank you for your interest in contributing to pyvista-wasm! This document provi
 - [Development Setup](#development-setup)
   - [Prerequisites](#prerequisites)
   - [Initial Setup](#initial-setup)
+  - [GitHub Codespaces](#github-codespaces)
 - [Development Workflow](#development-workflow)
   - [Creating a Branch](#creating-a-branch)
   - [Making Changes](#making-changes)
@@ -99,6 +100,26 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
    ```bash
    uv run playwright install chromium
    ```
+
+### GitHub Codespaces
+
+You can develop entirely in the browser without any local setup using [GitHub Codespaces](https://docs.github.com/en/codespaces):
+
+1. Click the **Code** button on the [repository page](https://github.com/tkoyama010/pyvista-wasm) and select the **Codespaces** tab
+
+1. Click **Create codespace on main** (or on your feature branch)
+
+1. Wait for the Codespace to build — the `.devcontainer/devcontainer.json` configuration automatically installs Node.js, Python, Slidev dependencies, and Python dev dependencies
+
+1. To preview the Slidev presentation, open a terminal and run:
+
+   ```bash
+   cd slides && npm run dev
+   ```
+
+1. VSCode automatically forwards port 3030 and opens the Slidev preview in a browser tab
+
+The devcontainer also installs the [Slidev](https://marketplace.visualstudio.com/items?itemName=slidev.slidev) and [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) VSCode extensions for editing slide content.
 
 ## Development Workflow
 
