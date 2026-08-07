@@ -1,6 +1,6 @@
 {
   "name": "@pyvista-wasm/vtk-wasm-binary",
-  "version": "9.6.20260228",
+  "version": "9.6.20260426",
   "description": "Mirrored VTK.wasm binary for pyvista-wasm (served via jsDelivr CDN)",
   "license": "BSD-3-Clause",
   "repository": {
