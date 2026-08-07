@@ -113,7 +113,7 @@ def test_plotter_all_mesh_types() -> None:
 def test_background_color_default() -> None:
     """Test default background color."""
     plotter = Plotter()
-    assert plotter.background_color == (1.0, 1.0, 1.0)
+    assert plotter.background_color == (0.3, 0.3, 0.3)
 
 
 def test_background_color_set_rgb() -> None:
@@ -1306,12 +1306,12 @@ def test_screenshot_default_parameters() -> None:
 
 
 def test_add_mesh_with_smooth_shading_default() -> None:
-    """Test adding mesh with default smooth shading (True)."""
+    """Test adding mesh with default smooth shading (False)."""
     plotter = Plotter()
     plotter.add_mesh(Sphere())
 
     assert len(plotter.actors) == 1
-    assert plotter.actors[0]["smooth_shading"] is True
+    assert plotter.actors[0]["smooth_shading"] is False
 
 
 def test_add_mesh_with_smooth_shading_enabled() -> None:
