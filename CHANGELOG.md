@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.10.0...pyvista-wasm-v0.11.0) (2026-08-08)
+
+
+### Features
+
+* add pyvista-wasm CLI slide to PyCon JP 2026 deck ([#488](https://github.com/tkoyama010/pyvista-wasm/issues/488)) ([fbd85b2](https://github.com/tkoyama010/pyvista-wasm/commit/fbd85b29128b2d2f7421facc91652edc755d1c3e))
+
+
+### Documentation
+
+* add CLI reference documentation mirroring pyvista-js ([#489](https://github.com/tkoyama010/pyvista-wasm/issues/489)) ([bac6394](https://github.com/tkoyama010/pyvista-wasm/commit/bac63942527b34ce9e7119ba1ff4efda6e321f19))
+
 ## [0.10.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.9.0...pyvista-wasm-v0.10.0) (2026-08-08)
 
 ### Features
