@@ -235,7 +235,7 @@ demo_stlite:
   demo_label: ライブデモ
 
 cli:
-  title: pyvista-wasm CLIでPythonコード不要で3D可視化が可能
+  title: pyvista-wasm CLIでPythonコード不要で3D可視化が可能、コーディングエージェントとの連携も容易になる
   subtitle: pyvista-wasm cliの使用方法
 
 use_cases:

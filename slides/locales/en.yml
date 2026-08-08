@@ -235,7 +235,7 @@ demo_stlite:
   demo_label: Live demo
 
 cli:
-  title: The pyvista-wasm CLI enables 3D visualization without writing Python code
+  title: The pyvista-wasm CLI enables 3D visualization without writing Python code, and makes integration with coding agents easier
   subtitle: How to use the pyvista-wasm CLI
 
 use_cases:
