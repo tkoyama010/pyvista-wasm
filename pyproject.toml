@@ -130,9 +130,9 @@ lint.per-file-ignores."tests/*" = [
   "SLF001",  # private member access - testing private APIs
 ]
 lint.per-file-ignores."tools/*" = [
-  "INP001",  # implicit namespace package - standalone script
-  "S607",    # partial executable path - git is expected on PATH
-  "T201",    # print - CLI tool output
+  "INP001", # implicit namespace package - standalone script
+  "S607",   # partial executable path - git is expected on PATH
+  "T201",   # print - CLI tool output
 ]
 lint.flake8-pytest-style.parametrize-names-type = "tuple"
 lint.flake8-pytest-style.parametrize-values-row-type = "tuple"
