@@ -8,7 +8,7 @@ SPHINXINTL    ?= sphinx-intl
 SOURCEDIR     = .
 BUILDDIR      = _build
 LOCALEDIR     = locale
-POTDIR        = pot
+POTDIR        = _build/gettext
 
 # Put it first so that "make" without argument is like "make help".
 help:
