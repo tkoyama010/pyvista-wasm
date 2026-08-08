@@ -17,6 +17,9 @@ Thank you for your interest in contributing to pyvista-wasm! This document provi
   - [Making Changes](#making-changes)
   - [Committing Changes](#committing-changes)
 - [Code Quality Standards](#code-quality-standards)
+- [README Internationalization](#readme-internationalization)
+  - [Adding a New Language](#adding-a-new-language)
+  - [Resolving a Stale-Translation Failure](#resolving-a-stale-translation-failure)
 - [TypeScript Development](#typescript-development)
   - [Setup](#setup)
   - [Building](#building)
@@ -158,6 +161,33 @@ git commit -m "feat(plotter): add support for physically based rendering"
 [![Biome](https://img.shields.io/badge/code_style-Biome-60A5FA.svg)](https://biomejs.dev)
 
 The project uses pre-commit hooks to ensure code quality.
+
+## README Internationalization
+
+The English `README.md` is the authoritative source of truth. Localized `README.<lang>.md` files (e.g. `README.ja.md`) are derived from it and must preserve the same heading/section structure. GitHub renders these files automatically and shows a language switcher on the repository page.
+
+A zero-dependency drift-detection script (`tools/check_readme_i18n.py`, Python stdlib only) enforces two checks:
+
+1. **Structural parity** — heading levels (H1-H6) must match between `README.md` and each `README.<lang>.md`. This catches missing, extra, or restructured sections.
+2. **Stale translation** — if a `README.<lang>.md` was last committed before the latest `README.md` change, CI flags it as stale.
+
+Both checks run in CI (`.github/workflows/readme-i18n-check.yml`) and the structural-parity check runs as a pre-commit hook (`check-readme-i18n`).
+
+### Adding a New Language
+
+1. Copy `README.md` to `README.<lang>.md` (e.g. `README.zh_CN.md`).
+2. Translate the prose while preserving the exact heading structure (same heading levels in the same order).
+3. The `standard-readme` pre-commit hook must pass on the new file.
+4. Run `python tools/check_readme_i18n.py --no-stale-check` to verify structural parity.
+5. Commit the new file. The stale-translation check will compare its commit date against `README.md` going forward.
+
+### Resolving a Stale-Translation Failure
+
+When CI reports a stale translation:
+
+1. Review the changes to `README.md` since the last translation update.
+2. Update `README.<lang>.md` to reflect the English changes and commit it.
+3. If the English change is cosmetic (e.g. a badge URL) and does not require translation, add the filename to `.github/readme-i18n-allowlist` (one filename per line) and commit that change.
 
 ## TypeScript Development
 
