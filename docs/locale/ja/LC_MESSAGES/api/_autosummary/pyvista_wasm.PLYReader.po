@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:2
 msgid "pyvista\\_wasm.PLYReader"
-msgstr ""
+msgstr "pyvista\\_wasm.PLYReader"
 
 #: of pyvista_wasm.readers.PLYReader:1
 msgid "Reader for PLY (Polygon File Format) files (``.ply``)."
-msgstr ""
+msgstr "PLY（Polygon File Format）ファイルのリーダー（``.ply``）。"
 
 #: of pyvista_wasm.readers.PLYReader:3
 msgid ""
@@ -35,64 +35,67 @@ msgid ""
 "only the vertex coordinates so that camera framing and bounding-sphere "
 "queries work before rendering."
 msgstr ""
+"PLY ASCIIファイルを読み込み、レンダリング時に VTK.wasm の ``vtkPLYReader`` に"
+"解析を委譲する :class:`Mesh` を生成します。Python は頂点座標のみを抽出するため、"
+"カメラフレーミングとバウンディングスフィアのクエリがレンダリング前に機能します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.readers.PLYReader:8
 msgid "Path to the ``.ply`` file."
-msgstr ""
+msgstr "``.ply`` ファイルのパス。"
 
 #: of pyvista_wasm.readers.PLYReader:12
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.PLYReader.__init__:1
 msgid "Initialize the reader with a file path."
-msgstr ""
+msgstr "ファイルパスでリーダーを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1
 msgid ":py:obj:`__init__ <pyvista_wasm.PLYReader.__init__>`\\ \\(path\\)"
-msgstr ""
+msgstr ":py:obj:`__init__ <pyvista_wasm.PLYReader.__init__>`\\ \\(path\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1
 msgid ":py:obj:`read <pyvista_wasm.PLYReader.read>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`read <pyvista_wasm.PLYReader.read>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.PLYReader.read:1
 msgid "Read the PLY file and return a Mesh."
-msgstr ""
+msgstr "PLYファイルを読み込んでMeshを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:24
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`path <pyvista_wasm.PLYReader.path>`"
-msgstr ""
+msgstr ":py:obj:`path <pyvista_wasm.PLYReader.path>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.PLYReader.path:1
 msgid "Return the file path."
-msgstr ""
+msgstr "ファイルパスを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.PLYReader.path:3
 msgid "The path to the PLY file."
-msgstr ""
+msgstr "PLYファイルのパス。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.readers.PLYReader.read:3
 msgid ""
@@ -100,15 +103,17 @@ msgid ""
 " so that the mesh can be rendered via the standard geometry pipeline "
 "without requiring a VTK.wasm file reader."
 msgstr ""
+"頂点座標と面の接続性は Python 側で抽出され、VTK.wasm ファイルリーダーを必要とせずに"
+"標準ジオメトリパイプラインを介してメッシュをレンダリングできます。"
 
 #: of pyvista_wasm.readers.PLYReader.read:7
 msgid "A mesh with extracted points and face connectivity."
-msgstr ""
+msgstr "抽出されたポイントと面の接続性を持つメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.readers.PLYReader.read:10
 msgid "If the file format is invalid or unsupported."
-msgstr ""
+msgstr "ファイルフォーマットが無効またはサポートされていない場合。"

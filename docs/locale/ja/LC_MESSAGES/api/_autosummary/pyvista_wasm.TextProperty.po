@@ -22,57 +22,59 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.TextProperty.rst:2
 msgid "pyvista\\_wasm.TextProperty"
-msgstr ""
+msgstr "pyvista\\_wasm.TextProperty"
 
 #: of pyvista_wasm.text.TextProperty:1
 msgid "Properties for text rendering."
-msgstr ""
+msgstr "テキストレンダリングのプロパティ。"
 
 #: of pyvista_wasm.text.TextProperty:3
 msgid ""
 "Provides control over text appearance including font size, color, and "
 "opacity."
-msgstr ""
+msgstr "フォントサイズ、色、不透明度を含むテキストの外観を制御します。"
 
 #: ../../api/_autosummary/pyvista_wasm.TextProperty.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.text.TextProperty:5
 msgid "Font size in points. Default is ``18``."
-msgstr ""
+msgstr "フォントサイズ（ポイント）。デフォルトは ``18``。"
 
 #: of pyvista_wasm.text.TextProperty:7
 msgid "RGB color with values between 0 and 1, or a color name. Default is white."
-msgstr ""
+msgstr "0から1の値を持つ RGB 色、または色名。デフォルトは白。"
 
 #: of pyvista_wasm.text.TextProperty:9
 msgid "Text opacity between 0 (transparent) and 1 (opaque). Default is ``1.0``."
-msgstr ""
+msgstr "テキストの不透明度。0（透明）から1（不透明）の間。デフォルトは ``1.0``。"
 
 #: of pyvista_wasm.text.TextProperty:11
 msgid "Enable bold text. Default is ``False``."
-msgstr ""
+msgstr "太字テキストを有効にします。デフォルトは ``False``。"
 
 #: of pyvista_wasm.text.TextProperty:13
 msgid "Enable italic text. Default is ``False``."
-msgstr ""
+msgstr "イタリックテキストを有効にします。デフォルトは ``False``。"
 
 #: of pyvista_wasm.text.TextProperty:17
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.TextProperty.rst:16:<autosummary>:1 of
 #: pyvista_wasm.text.TextProperty.__init__:1
 msgid "Initialize a TextProperty instance."
-msgstr ""
+msgstr "TextPropertyインスタンスを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.TextProperty.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.TextProperty.rst:16:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.TextProperty.__init__>`\\ "
 "\\(\\[font\\_size\\, color\\, opacity\\, bold\\, ...\\]\\)"
 msgstr ""
+":py:obj:`__init__ <pyvista_wasm.TextProperty.__init__>`\\ "
+"\\(\\[font\\_size\\, color\\, opacity\\, bold\\, ...\\]\\)"

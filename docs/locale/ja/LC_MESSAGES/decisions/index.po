@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../decisions/index.md:1
 msgid "Architecture Decision Records"
-msgstr ""
+msgstr "アーキテクチャ決定記録"
 
 #: ../../decisions/index.md:3
 msgid ""
@@ -30,6 +30,9 @@ msgid ""
 "(ADRs)](https://adr.github.io/madr/), recorded using the [MADR "
 "4.0.0](https://github.com/adr/madr/tree/4.0.0) format."
 msgstr ""
+"このディレクトリにはpyvista-wasmの[アーキテクチャ決定記録"
+"（ADR）](https://adr.github.io/madr/)が、[MADR "
+"4.0.0](https://github.com/adr/madr/tree/4.0.0)形式で記録されています。"
 
 #: ../../decisions/index.md:6
 msgid ""
@@ -40,6 +43,10 @@ msgid ""
 "with-dashes.md` filename convention so they stay discoverable and "
 "sortable."
 msgstr ""
+"アーキテクチャ、コード、ツールに関する重要な決定はここに記録され、"
+"決定の*理由*がそれが管理するコードと共に保存されます。記録はコードと"
+"同じレビュー/PRフローを経て、`NNNN-title-with-dashes.md`のファイル名"
+"規約を使用することで発見しやすく並べ替え可能な状態に保たれます。"
 
 #: ../../decisions/index.md:11
 msgid ""
@@ -47,3 +54,7 @@ msgid ""
 "your-title-with-dashes.md` and fill in the sections. See [ADR-0000](0000"
 "-use-markdown-architectural-decision-records.md) for a worked example."
 msgstr ""
+"新しい記録を追加するには、[`adr-template.md`](adr-template.md)を"
+"`NNNN-your-title-with-dashes.md`にコピーし、セクションを記入してください。"
+"実例は[ADR-0000](0000-use-markdown-architectural-decision-records.md)を"
+"参照してください。"

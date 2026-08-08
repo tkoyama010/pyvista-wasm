@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst:2
 msgid "pyvista\\_wasm.examples.download\\_cad\\_model"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_cad\\_model"
 
 #: of pyvista_wasm.examples.download_cad_model:1
 msgid "Download the CAD model dataset."
-msgstr ""
+msgstr "CADモデルデータセットをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_cad_model:3
 msgid ""
@@ -34,19 +34,22 @@ msgid ""
 "returns it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the "
 "``pyvista.examples.download_cad_model`` API."
 msgstr ""
+"PyVista vtk-data リポジトリから ``42400-IDGH.stl`` をダウンロードし、"
+":class:`~pyvista_wasm.PolyData` メッシュとして返します。"
+"``pyvista.examples.download_cad_model`` API をミラーリングします。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_cad_model:7
 msgid "The CAD model mesh."
-msgstr ""
+msgstr "CADモデルメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_cad_model:11
 msgid "Examples"
-msgstr ""
+msgstr "例"

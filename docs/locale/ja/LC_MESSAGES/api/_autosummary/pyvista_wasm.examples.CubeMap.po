@@ -22,89 +22,91 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:2
 msgid "pyvista\\_wasm.examples.CubeMap"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.CubeMap"
 
 #: of pyvista_wasm.examples.CubeMap:1
 msgid "Cubemap texture holding six face image URLs."
-msgstr ""
+msgstr "6面の画像URLを保持するキューブマップテクスチャ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.examples.CubeMap:3
 msgid "URL of the positive-X face image."
-msgstr ""
+msgstr "正のX面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:5
 msgid "URL of the negative-X face image."
-msgstr ""
+msgstr "負のX面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:7
 msgid "URL of the positive-Y face image."
-msgstr ""
+msgstr "正のY面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:9
 msgid "URL of the negative-Y face image."
-msgstr ""
+msgstr "負のY面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:11
 msgid "URL of the positive-Z face image."
-msgstr ""
+msgstr "正のZ面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:13
 msgid "URL of the negative-Z face image."
-msgstr ""
+msgstr "負のZ面画像のURL。"
 
 #: of pyvista_wasm.examples.CubeMap:17
 #: pyvista_wasm.examples.CubeMap.to_skybox:7
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
 #: of pyvista_wasm.examples.CubeMap.__init__:1
 msgid "Initialize a cubemap with six face URLs."
-msgstr ""
+msgstr "6面のURLでキューブマップを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.examples.CubeMap.__init__>`\\ \\(posx\\, "
 "negx\\, posy\\, negy\\, posz\\, negz\\)"
 msgstr ""
+":py:obj:`__init__ <pyvista_wasm.examples.CubeMap.__init__>`\\ \\(posx\\, "
+"negx\\, posy\\, negy\\, posz\\, negz\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
 msgid ":py:obj:`to_skybox <pyvista_wasm.examples.CubeMap.to_skybox>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`to_skybox <pyvista_wasm.examples.CubeMap.to_skybox>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
 #: of pyvista_wasm.examples.CubeMap.to_skybox:1
 msgid "Return self for API compatibility with PyVista."
-msgstr ""
+msgstr "PyVista との API 互換性のため self を返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:24
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`face_urls <pyvista_wasm.examples.CubeMap.face_urls>`"
-msgstr ""
+msgstr ":py:obj:`face_urls <pyvista_wasm.examples.CubeMap.face_urls>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.examples.CubeMap.face_urls:1
 msgid "Return face URLs in the order [+X, -X, +Y, -Y, +Z, -Z]."
-msgstr ""
+msgstr "[+X, -X, +Y, -Y, +Z, -Z] の順序で面URLを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.CubeMap.to_skybox:3
 msgid "This cubemap instance."
-msgstr ""
+msgstr "このキューブマップインスタンス。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"

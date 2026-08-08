@@ -22,30 +22,32 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst:2
 msgid "pyvista\\_wasm.examples.download\\_masonry\\_texture"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_masonry\\_texture"
 
 #: of pyvista_wasm.examples.download_masonry_texture:1
 msgid "Download the masonry texture dataset."
-msgstr ""
+msgstr "石材テクスチャデータセットをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_masonry_texture:3
 msgid ""
 "Downloads a brick masonry image from the PyVista data repository and "
 "returns it as a :class:`~pyvista_wasm.texture.Texture` object."
 msgstr ""
+"PyVista データリポジトリからレンガ石材画像をダウンロードし、"
+":class:`~pyvista_wasm.texture.Texture` オブジェクトとして返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_masonry_texture:6
 msgid "Texture wrapping the masonry image URL."
-msgstr ""
+msgstr "石材画像URLをラップするテクスチャ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_masonry_texture:10
 msgid "Examples"
-msgstr ""
+msgstr "例"

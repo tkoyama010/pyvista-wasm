@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:2
 msgid "pyvista\\_wasm.GLTFReader"
-msgstr ""
+msgstr "pyvista\\_wasm.GLTFReader"
 
 #: of pyvista_wasm.readers.GLTFReader:1
 msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
-msgstr ""
+msgstr "glTF（GL Transmission Format）ファイルのリーダー（``.gltf`` または ``.glb``）。"
 
 #: of pyvista_wasm.readers.GLTFReader:3
 msgid ""
@@ -35,81 +35,89 @@ msgid ""
 "coordinates from the JSON structure so that camera framing and bounding-"
 "sphere queries work before rendering."
 msgstr ""
+"glTFファイルを読み込み、レンダリング時に VTK.wasm の ``vtkGLTFImporter`` に"
+"解析を委譲する :class:`Mesh` を生成します。Python は JSON 構造から頂点座標を"
+"抽出するため、カメラフレーミングとバウンディングスフィアのクエリが"
+"レンダリング前に機能します。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.readers.GLTFReader:8
 #: pyvista_wasm.readers.GLTFReader.__init__:3
 msgid "Path to the ``.gltf`` or ``.glb`` file."
-msgstr ""
+msgstr "``.gltf`` または ``.glb`` ファイルのパス。"
 
 #: of pyvista_wasm.readers.GLTFReader:13
 msgid ":ref:`using-download-damaged-helmet`"
-msgstr ""
+msgstr ":ref:`using-download-damaged-helmet`"
 
 #: of pyvista_wasm.readers.GLTFReader:14
 msgid "Interactive browser tutorial for glTF rendering."
-msgstr ""
+msgstr "glTFレンダリングのインタラクティブなブラウザチュートリアル。"
 
 #: of pyvista_wasm.readers.GLTFReader:17
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.GLTFReader.__init__:1
 msgid "Initialize the reader with a file path."
-msgstr ""
+msgstr "ファイルパスでリーダーを初期化します。"
 
 #: of pyvista_wasm.readers.GLTFReader.__init__:5
 msgid ""
 "Source URL of the glTF file. When provided, the returned mesh will render"
 " using the URL directly (avoiding large base64 embedding)."
 msgstr ""
+"glTFファイルのソースURL。指定された場合、返されるメッシュはURLを直接使用して"
+"レンダリングします（大きなbase64エンベディングを回避）。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.GLTFReader.__init__>`\\ \\(path\\[\\, "
 "gltf\\_url\\]\\)"
 msgstr ""
+":py:obj:`__init__ <pyvista_wasm.GLTFReader.__init__>`\\ \\(path\\[\\, "
+"gltf\\_url\\]\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1
 msgid ":py:obj:`read <pyvista_wasm.GLTFReader.read>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`read <pyvista_wasm.GLTFReader.read>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.GLTFReader.read:1
 msgid "Read the glTF file and return a Mesh."
-msgstr ""
+msgstr "glTFファイルを読み込んでMeshを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:24
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`path <pyvista_wasm.GLTFReader.path>`"
-msgstr ""
+msgstr ":py:obj:`path <pyvista_wasm.GLTFReader.path>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.GLTFReader.path:1
 msgid "Return the file path."
-msgstr ""
+msgstr "ファイルパスを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.GLTFReader.path:3
 msgid "The path to the glTF file."
-msgstr ""
+msgstr "glTFファイルのパス。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.readers.GLTFReader.read:3
 msgid ""
@@ -117,15 +125,18 @@ msgid ""
 "parse it at render time.  Vertex coordinates are extracted on the Python "
 "side for bounding-sphere and camera-framing calculations."
 msgstr ""
+"ファイルの全内容はbase64エンコードされて保存され、VTK.wasm がレンダリング時に"
+"解析できます。頂点座標はバウンディングスフィアとカメラフレーミングの計算のために"
+"Python 側で抽出されます。"
 
 #: of pyvista_wasm.readers.GLTFReader.read:7
 msgid "A mesh backed by the glTF file content."
-msgstr ""
+msgstr "glTFファイルコンテンツによってバッキングされたメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.readers.GLTFReader.read:10
 msgid "If the file format is invalid."
-msgstr ""
+msgstr "ファイルフォーマットが無効な場合。"

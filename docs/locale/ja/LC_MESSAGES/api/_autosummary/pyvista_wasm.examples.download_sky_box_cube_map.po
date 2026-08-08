@@ -22,30 +22,32 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_sky_box_cube_map.rst:2
 msgid "pyvista\\_wasm.examples.download\\_sky\\_box\\_cube\\_map"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_sky\\_box\\_cube\\_map"
 
 #: of pyvista_wasm.examples.download_sky_box_cube_map:1
 msgid "Download the skybox cube map dataset."
-msgstr ""
+msgstr "スカイボックスキューブマップデータセットをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_sky_box_cube_map:3
 msgid ""
 "Downloads six face images of the sky box cubemap from the PyVista data "
 "repository and returns them as a :class:`CubeMap` object."
 msgstr ""
+"PyVista データリポジトリからスカイボックスキューブマップの6面画像をダウンロードし、"
+":class:`CubeMap` オブジェクトとして返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_sky_box_cube_map.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_sky_box_cube_map:6
 msgid "Cubemap containing the six skybox face image URLs."
-msgstr ""
+msgstr "6面のスカイボックス面画像URLを含むキューブマップ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_sky_box_cube_map.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_sky_box_cube_map:10
 msgid "Examples"
-msgstr ""
+msgstr "例"

@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../explanation/index.md:1
 msgid "Explanation"
-msgstr ""
+msgstr "解説"
 
 #: ../../explanation/index.md:3
 msgid "Deeper understanding of pyvista-wasm concepts and architecture."
-msgstr ""
+msgstr "pyvista-wasmの概念とアーキテクチャのより深い理解。"
 
 #: ../../explanation/index.md:5
 msgid "Overview"
-msgstr ""
+msgstr "概要"
 
 #: ../../explanation/index.md:7
 msgid ""
@@ -39,47 +39,55 @@ msgid ""
 "visualization in browser environments including Pyodide, JupyterLite, and"
 " Streamlit applications."
 msgstr ""
+"pyvista-wasmはVTK.wasmのPyVistaライクなAPIであり、直感的なPyVista"
+"インターフェースをWebAssemblyベースの3D可視化にもたらします。Pyodide、"
+"JupyterLite、Streamlitアプリケーションなどのブラウザ環境での3D可視化を"
+"可能にします。"
 
 #: ../../explanation/index.md:11
 msgid "Architecture"
-msgstr ""
+msgstr "アーキテクチャ"
 
 #: ../../explanation/index.md:13
 msgid "pyvista-wasm separates concerns between Python and JavaScript:"
-msgstr ""
+msgstr "pyvista-wasmはPythonとJavaScriptの責任を分離します:"
 
 #: ../../explanation/index.md:15
 msgid ""
 "**Python side**: Handles geometry preparation, scene configuration, and "
 "API surface."
 msgstr ""
+"**Python側**: ジオメトリの準備、シーンの設定、およびAPIサーフェスを"
+"担当します。"
 
 #: ../../explanation/index.md:16
 msgid ""
 "**JavaScript side (VTK.wasm)**: Handles the actual geometry parsing and "
 "WebGL rendering via WebAssembly."
 msgstr ""
+"**JavaScript側（VTK.wasm）**: 実際のジオメトリ解析とWebAssembly経由の"
+"WebGLレンダリングを担当します。"
 
 #: ../../explanation/index.md:18
 msgid "Features"
-msgstr ""
+msgstr "機能"
 
 #: ../../explanation/index.md:20
 msgid "PyVista-like API for familiar usage"
-msgstr ""
+msgstr "使い慣れたPyVistaライクなAPI"
 
 #: ../../explanation/index.md:21
 msgid "Integration with VTK.wasm for web-based visualization"
-msgstr ""
+msgstr "Webベースの可視化のためのVTK.wasmとの統合"
 
 #: ../../explanation/index.md:22
 msgid "Support for JupyterLite, marimo, and stlite"
-msgstr ""
+msgstr "JupyterLite、marimo、stliteのサポート"
 
 #: ../../explanation/index.md:23
 msgid "Physically Based Rendering (PBR) with metallic and roughness controls"
-msgstr ""
+msgstr "メタリックとラフネスを制御可能な物理ベースレンダリング（PBR）"
 
 #: ../../explanation/index.md:24
 msgid "PLY, OBJ, STL, GLTF, and PolyData file format readers"
-msgstr ""
+msgstr "PLY、OBJ、STL、GLTF、PolyDataファイル形式のリーダー"

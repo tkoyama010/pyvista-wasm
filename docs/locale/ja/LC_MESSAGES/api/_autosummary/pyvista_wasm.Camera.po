@@ -22,53 +22,56 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:2
 msgid "pyvista\\_wasm.Camera"
-msgstr ""
+msgstr "pyvista\\_wasm.Camera"
 
 #: of pyvista_wasm.camera.Camera:1
 msgid "Represents a virtual camera in a 3D scene."
-msgstr ""
+msgstr "3Dシーンの仮想カメラを表します。"
 
 #: of pyvista_wasm.camera.Camera:3
 msgid ""
 "Provides a PyVista-like API for controlling camera position, orientation,"
 " and projection settings in VTK.wasm scenes."
 msgstr ""
+"VTK.wasm シーンでカメラの位置、向き、投影設定を制御するための PyVista ライクな API を提供します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.camera.Camera:6
 msgid "Camera position as (x, y, z). Default is (0, 0, 1)."
-msgstr ""
+msgstr "カメラの位置 (x, y, z)。デフォルトは (0, 0, 1)。"
 
 #: of pyvista_wasm.camera.Camera:8
 msgid "Point the camera looks at as (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "カメラが見るポイント (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.camera.Camera:10
 msgid "View-up vector as (x, y, z). Default is (0, 1, 0)."
-msgstr ""
+msgstr "上方向ベクトル (x, y, z)。デフォルトは (0, 1, 0)。"
 
 #: of pyvista_wasm.camera.Camera:12
 msgid "Camera view angle (field of view) in degrees. Default is 30.0."
-msgstr ""
+msgstr "カメラの視野角（度）。デフォルトは30.0。"
 
 #: of pyvista_wasm.camera.Camera:14
 msgid ""
 "Near and far clipping plane distances as (near, far). Default is (0.01, "
 "1000.01)."
 msgstr ""
+"近接および遠方クリッピング平面の距離 (near, far)。デフォルトは (0.01, 1000.01)。"
 
 #: of pyvista_wasm.camera.Camera:17
 msgid ""
 "Enable parallel (orthographic) projection instead of perspective "
 "projection. Default is False."
 msgstr ""
+"透视投影の代わりに平行（正射影）投影を有効にします。デフォルトはFalse。"
 
 #: of pyvista_wasm.camera.Camera:20
 msgid "Camera elevation angle in degrees. Default is 0.0."
-msgstr ""
+msgstr "カメラの仰角（度）。デフォルトは0.0。"
 
 #: of pyvista_wasm.Camera.clipping_range:10 pyvista_wasm.Camera.elevation:15
 #: pyvista_wasm.Camera.focal_point:10
@@ -80,170 +83,181 @@ msgstr ""
 #: pyvista_wasm.camera.Camera.orbit_elevation:11
 #: pyvista_wasm.camera.Camera.roll:7 pyvista_wasm.camera.Camera.zoom:11
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.__init__:1
 msgid "Initialize a Camera instance."
-msgstr ""
+msgstr "Cameraインスタンスを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.Camera.__init__>`\\ \\(\\[position\\, "
 "focal\\_point\\, view\\_up\\, ...\\]\\)"
 msgstr ""
+":py:obj:`__init__ <pyvista_wasm.Camera.__init__>`\\ \\(\\[position\\, "
+"focal\\_point\\, view\\_up\\, ...\\]\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ":py:obj:`azimuth <pyvista_wasm.Camera.azimuth>`\\ \\(angle\\)"
-msgstr ""
+msgstr ":py:obj:`azimuth <pyvista_wasm.Camera.azimuth>`\\ \\(angle\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.azimuth:1
 msgid "Rotate the camera position horizontally around the focal point."
-msgstr ""
+msgstr "フォーカルポイントを中心にカメラの位置を水平方向に回転します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ""
 ":py:obj:`disable_parallel_projection "
 "<pyvista_wasm.Camera.disable_parallel_projection>`\\ \\(\\)"
 msgstr ""
+":py:obj:`disable_parallel_projection "
+"<pyvista_wasm.Camera.disable_parallel_projection>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.disable_parallel_projection:1
 msgid "Disable parallel projection (use perspective projection)."
-msgstr ""
+msgstr "平行投影を無効にします（透視投影を使用します）。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ""
 ":py:obj:`enable_parallel_projection "
 "<pyvista_wasm.Camera.enable_parallel_projection>`\\ \\(\\)"
 msgstr ""
+":py:obj:`enable_parallel_projection "
+"<pyvista_wasm.Camera.enable_parallel_projection>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.enable_parallel_projection:1
 msgid "Enable parallel (orthographic) projection."
-msgstr ""
+msgstr "平行（正射影）投影を有効にします。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ""
 ":py:obj:`orbit_elevation <pyvista_wasm.Camera.orbit_elevation>`\\ "
 "\\(angle\\)"
 msgstr ""
+":py:obj:`orbit_elevation <pyvista_wasm.Camera.orbit_elevation>`\\ "
+"\\(angle\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.orbit_elevation:1
 msgid "Rotate the camera position vertically around the focal point."
-msgstr ""
+msgstr "フォーカルポイントを中心にカメラの位置を垂直方向に回転します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ":py:obj:`roll <pyvista_wasm.Camera.roll>`\\ \\(angle\\)"
-msgstr ""
+msgstr ":py:obj:`roll <pyvista_wasm.Camera.roll>`\\ \\(angle\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.roll:1
 msgid "Roll the camera around the view direction axis."
-msgstr ""
+msgstr "視線方向軸を中心にカメラをロールします。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
 msgid ":py:obj:`zoom <pyvista_wasm.Camera.zoom>`\\ \\(factor\\)"
-msgstr ""
+msgstr ":py:obj:`zoom <pyvista_wasm.Camera.zoom>`\\ \\(factor\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
 #: pyvista_wasm.camera.Camera.zoom:1
 msgid "Move the camera closer to or farther from the focal point."
-msgstr ""
+msgstr "カメラをフォーカルポイントに近づけるか遠ざけます。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst:29
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`clipping_range <pyvista_wasm.Camera.clipping_range>`"
-msgstr ""
+msgstr ":py:obj:`clipping_range <pyvista_wasm.Camera.clipping_range>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.clipping_range:1
 msgid "Get or set the clipping range (near, far)."
-msgstr ""
+msgstr "クリッピング範囲 (near, far) を取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`elevation <pyvista_wasm.Camera.elevation>`"
-msgstr ""
+msgstr ":py:obj:`elevation <pyvista_wasm.Camera.elevation>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.elevation:1
 msgid "Get or set the camera elevation angle in degrees."
-msgstr ""
+msgstr "カメラの仰角（度）を取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`focal_point <pyvista_wasm.Camera.focal_point>`"
-msgstr ""
+msgstr ":py:obj:`focal_point <pyvista_wasm.Camera.focal_point>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.focal_point:1
 msgid "Get or set the camera focal point."
-msgstr ""
+msgstr "カメラのフォーカルポイントを取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`parallel_projection <pyvista_wasm.Camera.parallel_projection>`"
-msgstr ""
+msgstr ":py:obj:`parallel_projection <pyvista_wasm.Camera.parallel_projection>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.parallel_projection:1
 msgid "Get or set parallel projection mode."
-msgstr ""
+msgstr "平行投影モードを取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`position <pyvista_wasm.Camera.position>`"
-msgstr ""
+msgstr ":py:obj:`position <pyvista_wasm.Camera.position>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.position:1
 msgid "Get or set the camera position."
-msgstr ""
+msgstr "カメラの位置を取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`view_angle <pyvista_wasm.Camera.view_angle>`"
-msgstr ""
+msgstr ":py:obj:`view_angle <pyvista_wasm.Camera.view_angle>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.view_angle:1
 msgid "Get or set the camera view angle in degrees."
-msgstr ""
+msgstr "カメラの視野角（度）を取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`view_up <pyvista_wasm.Camera.view_up>`"
-msgstr ""
+msgstr ":py:obj:`view_up <pyvista_wasm.Camera.view_up>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.view_up:1
 msgid "Get or set the view-up vector."
-msgstr ""
+msgstr "上方向ベクトルを取得または設定します。"
 
 #: of pyvista_wasm.camera.Camera.azimuth:3
 msgid ""
 "Rotation angle in degrees.  Positive values rotate counter-clockwise when"
 " viewed from above the up vector."
 msgstr ""
+"回転角（度）。上方向ベクトルの上方から見た場合、正の値は反時計回りに回転します。"
 
 #: of pyvista_wasm.Camera.clipping_range:3
 msgid "Near and far clipping plane distances as (near, far)."
-msgstr ""
+msgstr "近接および遠方クリッピング平面の距離 (near, far)。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.Camera.clipping_range:6
 msgid "Clipping range as (near, far)."
-msgstr ""
+msgstr "クリッピング範囲 (near, far)。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.camera.Camera.disable_parallel_projection:3
 msgid ""
 "Switches the camera from parallel projection to perspective projection. "
 "This is equivalent to setting ``parallel_projection = False``."
 msgstr ""
+"カメラを平行投影から透視投影に切り替えます。"
+"これは ``parallel_projection = False`` と設定するのと同等です。"
 
 #: of pyvista_wasm.Camera.elevation:3
 msgid ""
@@ -252,30 +266,36 @@ msgid ""
 "direction of projection and the view up vector, using the focal point as "
 "the center of rotation."
 msgstr ""
+"仰角はカメラの垂直回転を制御します。投影方向の負と上方向ベクトルの外積を中心に、"
+"フォーカルポイントを回転の中心としてカメラを回転します。"
 
 #: of pyvista_wasm.Camera.elevation:8 pyvista_wasm.Camera.elevation:11
 msgid "Elevation angle in degrees."
-msgstr ""
+msgstr "仰角（度）。"
 
 #: of pyvista_wasm.camera.Camera.enable_parallel_projection:3
 msgid ""
 "Switches the camera from perspective projection to parallel projection. "
 "This is equivalent to setting ``parallel_projection = True``."
 msgstr ""
+"カメラを透視投影から平行投影に切り替えます。"
+"これは ``parallel_projection = True`` と設定するのと同等です。"
 
 #: of pyvista_wasm.Camera.focal_point:3 pyvista_wasm.Camera.focal_point:6
 msgid "Focal point as (x, y, z)."
-msgstr ""
+msgstr "フォーカルポイント (x, y, z)。"
 
 #: of pyvista_wasm.camera.Camera.orbit_elevation:3
 msgid ""
 "This method is named ``orbit_elevation`` to avoid conflict with the "
 ":attr:`elevation` property, which stores a static angle value."
 msgstr ""
+"このメソッドは ``orbit_elevation`` と名付けられています。これは静的な角度値を"
+"格納する :attr:`elevation` プロパティとの競合を避けるためです。"
 
 #: of pyvista_wasm.camera.Camera.orbit_elevation:6
 msgid "Rotation angle in degrees.  Positive values tilt the camera upward."
-msgstr ""
+msgstr "回転角（度）。正の値はカメラを上に傾けます。"
 
 #: of pyvista_wasm.Camera.parallel_projection:3
 msgid ""
@@ -284,45 +304,50 @@ msgid ""
 "like orthographic views, and scientific visualization where perspective "
 "distortion is undesirable."
 msgstr ""
+"True の場合、透視投影の代わりに平行（正射影）投影を使用します。"
+"平行投影は2Dデータセットの表示、CADライクな正射影ビュー、"
+"透视歪みが望ましくない科学可視化に有用です。"
 
 #: of pyvista_wasm.Camera.parallel_projection:8
 msgid "Enable (True) or disable (False) parallel projection."
-msgstr ""
+msgstr "平行投影を有効（True）または無効（False）にします。"
 
 #: of pyvista_wasm.Camera.parallel_projection:11
 msgid "Whether parallel projection is enabled."
-msgstr ""
+msgstr "平行投影が有効かどうか。"
 
 #: of pyvista_wasm.Camera.position:3 pyvista_wasm.Camera.position:6
 msgid "Camera position as (x, y, z)."
-msgstr ""
+msgstr "カメラの位置 (x, y, z)。"
 
 #: of pyvista_wasm.camera.Camera.roll:3
 msgid "Roll angle in degrees."
-msgstr ""
+msgstr "ロール角（度）。"
 
 #: of pyvista_wasm.Camera.view_angle:3
 msgid "View angle in degrees (field of view)."
-msgstr ""
+msgstr "視野角（度）。"
 
 #: of pyvista_wasm.Camera.view_angle:6
 msgid "View angle in degrees."
-msgstr ""
+msgstr "視野角（度）。"
 
 #: of pyvista_wasm.Camera.view_up:3 pyvista_wasm.Camera.view_up:6
 msgid "View-up vector as (x, y, z)."
-msgstr ""
+msgstr "上方向ベクトル (x, y, z)。"
 
 #: of pyvista_wasm.camera.Camera.zoom:3
 msgid ""
 "Zoom factor.  Values greater than 1 move the camera closer (zoom in); "
 "values between 0 and 1 move it farther away (zoom out)."
 msgstr ""
+"ズーム係数。1より大きい値はカメラを近づけ（ズームイン）、"
+"0から1の間の値は遠ざけます（ズームアウト）。"
 
 #: ../../api/_autosummary/pyvista_wasm.Camera.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.camera.Camera.zoom:8
 msgid "If *factor* is not positive."
-msgstr ""
+msgstr "*factor* が正でない場合。"

@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:9
 msgid "Use Slidev for the PyCon JP 2026 talk slide deck"
-msgstr ""
+msgstr "PyCon JP 2026 トークのスライドデッキに Slidev を使用する"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:11
 msgid "Context and Problem Statement"
-msgstr ""
+msgstr "コンテキストと問題記述"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:13
 msgid ""
@@ -41,10 +41,20 @@ msgid ""
 " rest of the repository, and is easy to author and review through the "
 "normal PR flow. Which slide tool should we adopt for this talk?"
 msgstr ""
+"pyvista-wasm は PyCon JP 2026 のトークとして採用された — [\"PyVista on "
+"WebAssembly: "
+"サーバーレス3D可視化の実現\"](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)。"
+"トークでは WebAssembly 経由でブラウザ上でライブ実行される PyVista を"
+"デモし、TypeScript グルーアーキテクチャを聴衆に説明し、シンタックス"
+"ハイライト付きの Python/TypeScript コードスニペットを示す必要がある。"
+"ライブブラウザデモをデッキに直接埋め込み、ソースをリポジトリの他の部分と"
+"並べてバージョン管理可能に保ち、通常の PR フローで作成・レビューしやすい"
+"スライドツールを選ぶ必要がある。このトークにどのスライドツールを採用"
+"すべきか？"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:15
 msgid "Decision Drivers"
-msgstr ""
+msgstr "決定ドライバ"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:17
 msgid ""
@@ -53,6 +63,10 @@ msgid ""
 " inside a slide without leaving the presentation context. This is a "
 "knock-out criterion."
 msgstr ""
+"**ライブウェブデモの埋め込み**: トークの中心はブラウザ内でライブ実行される"
+"PyVista WASM デモである。スライドツールはプレゼンテーションのコンテキストを"
+"離れることなく、スライド内でそのデモを実行または埋め込めなければならない。"
+"これはノックアウト基準である。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:18
 msgid ""
@@ -60,6 +74,9 @@ msgid ""
 "first-class syntax highlighting with line highlighting and code "
 "animations is essential for a technical audience."
 msgstr ""
+"**コードシンタックスハイライト**: デッキは Python と TypeScript のコードを"
+"示す。行ハイライトとコードアニメーションを備えたファーストクラスの"
+"シンタックスハイライトが技術系聴衆には不可欠である。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:19
 msgid ""
@@ -68,68 +85,84 @@ msgid ""
 " flow as code (see [ADR-0000](0000-use-markdown-architectural-decision-"
 "records.md))."
 msgstr ""
+"**バージョン管理との親和性**: スライドソースはプレーンテキストでなければ"
+"ならず、Git で差分確認とレビューがしやすいこと。デッキがコードと同じ PR "
+"フローを経られるようにする（[ADR-0000](0000-use-markdown-architectural-"
+"decision-records.md)を参照）。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:20
 msgid ""
 "**Ease of authoring**: The deck must be authorable efficiently with hot-"
 "reload preview, so iteration is fast before the talk."
 msgstr ""
+"**作成のしやすさ**: デッキはホットリロードプレビューで効率的に作成でき、"
+"トーク前の反復が高速である必要がある。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:21
 msgid ""
 "**Portability**: The deck should be presentable offline, exportable to "
 "PDF for sharing, and deployable as a static site."
 msgstr ""
+"**ポータビリティ**: デッキはオフラインで提示でき、PDF にエクスポートして"
+"共有でき、静的サイトとしてデプロイできるべきである。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:22
 msgid ""
 "**Community adoption**: Prefer a tool with an active community, "
 "documentation, and a healthy ecosystem to reduce risk."
 msgstr ""
+"**コミュニティの採用**: 活発なコミュニティ、ドキュメント、健全な"
+"エコシステムを持つツールを優先し、リスクを減らす。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:24
 msgid "Considered Options"
-msgstr ""
+msgstr "検討した選択肢"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:26
 msgid ""
 "[Slidev](https://sli.dev/) — Vue-powered presentation framework for "
 "developers"
 msgstr ""
+"[Slidev](https://sli.dev/) — 開発者向け Vue ベースのプレゼンテーション"
+"フレームワーク"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:27
 msgid ""
 "[sphinx-revealjs](https://github.com/attakei/sphinx-revealjs) — Sphinx "
 "extension to build reveal.js presentations"
 msgstr ""
+"[sphinx-revealjs](https://github.com/attakei/sphinx-revealjs) — reveal.js "
+"プレゼンテーションをビルドする Sphinx 拡張"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:28
 msgid "[reveal.js](https://revealjs.com/) — The HTML presentation framework"
-msgstr ""
+msgstr "[reveal.js](https://revealjs.com/) — HTML プレゼンテーションフレームワーク"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:29
 msgid "[Marp](https://marp.app/) — Markdown presentation ecosystem"
-msgstr ""
+msgstr "[Marp](https://marp.app/) — Markdown プレゼンテーションエコシステム"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:30
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:108
 msgid "Google Slides — Cloud-based WYSIWYG presentation tool"
-msgstr ""
+msgstr "Google Slides — クラウドベースの WYSIWYG プレゼンテーションツール"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:31
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:117
 msgid "Microsoft PowerPoint — Desktop WYSIWYG presentation tool"
-msgstr ""
+msgstr "Microsoft PowerPoint — デスクトップ WYSIWYG プレゼンテーションツール"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:32
 msgid ""
 "[JupyterLab Slides / RISE](https://rise.readthedocs.io/) — Live Jupyter "
 "notebook slideshow extension"
 msgstr ""
+"[JupyterLab Slides / RISE](https://rise.readthedocs.io/) — ライブ Jupyter "
+"ノートブックスライドショー拡張"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:34
 msgid "Decision Outcome"
-msgstr ""
+msgstr "決定結果"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:36
 msgid ""
@@ -141,16 +174,24 @@ msgid ""
 "embedded as a live Vue component or iframe and run directly inside a "
 "slide."
 msgstr ""
+"選択した選択肢: \"Slidev\"。ノックアウト基準 — ライブウェブデモの埋め込み — "
+"を満たす唯一の選択肢であり*かつ*最高クラスのコードハイライト、Markdown ベース"
+"のバージョン管理可能な作成、開発者フレンドリーな作成体験を提供するため。"
+"Slidev は Vue ベースのシングルページアプリケーションなので、PyVista WASM "
+"デモはライブ Vue コンポーネントまたは iframe として埋め込み、スライド内で"
+"直接実行できる。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:38
 msgid "Consequences"
-msgstr ""
+msgstr "結果"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:40
 msgid ""
 "Good, because live PyVista WASM demos can run inside slides via Vue "
 "components or iframes, making the talk fully interactive."
 msgstr ""
+"良い、なぜなら Vue コンポーネントまたは iframe 経由でスライド内でライブ "
+"PyVista WASM デモを実行でき、トークが完全にインタラクティブになるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:41
 msgid ""
@@ -158,6 +199,8 @@ msgid ""
 " travelling through the same PR review flow as the rest of the "
 "repository."
 msgstr ""
+"良い、なぜならスライドが Markdown で作成され、Git でクリーンに差分確認でき、"
+"リポジトリの他の部分と同じ PR レビューフローを経るため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:42
 msgid ""
@@ -165,24 +208,33 @@ msgid ""
 "highlighting, code animations, and code blocks with Monaco editor "
 "integration — ideal for a technical talk."
 msgstr ""
+"良い、なぜなら Slidev の Shiki ベースのシンタックスハイライトが行ハイライト、"
+"コードアニメーション、Monaco エディタ統合付きのコードブロックをサポート"
+"するため — 技術系トークに理想的。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:43
 msgid ""
 "Good, because Slidev exports to PDF, PNG, and a standalone SPA, giving us"
 " portable fallbacks for offline presenting and sharing."
 msgstr ""
+"良い、なぜなら Slidev が PDF、PNG、スタンドアロン SPA にエクスポートでき、"
+"オフライン提示と共有のためのポータブルなフォールバックが得られるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:44
 msgid ""
 "Good, because the deck can be deployed as a static site (e.g. on GitHub "
 "Pages) alongside the project documentation."
 msgstr ""
+"良い、なぜならデッキを静的サイト（例: GitHub Pages）としてプロジェクト"
+"ドキュメントと並べてデプロイできるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:45
 msgid ""
 "Bad, because Slidev requires a Node.js toolchain, adding a build "
 "dependency that the Python-only parts of the project do not need."
 msgstr ""
+"悪い、なぜなら Slidev が Node.js ツールチェーンを必要とし、プロジェクトの"
+"Python のみの部分には不要なビルド依存関係が追加されるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:46
 msgid ""
@@ -190,6 +242,8 @@ msgid ""
 "reveal.js's or Google Slides's, so fewer third-party themes and "
 "integrations are available."
 msgstr ""
+"悪い、なぜなら Slidev のコミュニティは活発だが reveal.js や Google Slides "
+"より小さく、サードパーティのテーマや統合が少ないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:47
 msgid ""
@@ -197,48 +251,59 @@ msgid ""
 "control, which is the desired outcome but does require maintaining slide "
 "source alongside code."
 msgstr ""
+"中立、なぜならデッキはバージョン管理下のリポジトリに配置され、これは"
+"望ましい結果だが、コードと並べてスライドソースをメンテナンスする必要が"
+"あるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:49
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:51
 msgid "Compliance with this decision will be confirmed by:"
-msgstr ""
+msgstr "この決定への準拠は以下によって確認されます:"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:53
 msgid ""
 "A Slidev project is initialised in the repository (e.g. under a `slides/`"
 " directory) with a `slides.md` entry point."
 msgstr ""
+"Slidev プロジェクトがリポジトリ内（例: `slides/` ディレクトリ配下）に"
+"初期化され、`slides.md` エントリポイントが存在する。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:54
 msgid ""
 "At least one slide embeds a live PyVista WASM demo (via Vue component or "
 "iframe) that renders a 3D plot in the browser during the presentation."
 msgstr ""
+"少なくとも1枚のスライドが（Vue コンポーネントまたは iframe 経由で）"
+"ライブ PyVista WASM デモを埋め込み、プレゼンテーション中にブラウザで"
+"3D プロットをレンダリングする。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:55
 msgid ""
 "The deck is reviewable through a PR linked to issue "
 "[#278](https://github.com/tkoyama010/pyvista-wasm/issues/278)."
 msgstr ""
+"デッキがイシュー "
+"[#278](https://github.com/tkoyama010/pyvista-wasm/issues/278) "
+"にリンクされた PR 経由でレビュー可能である。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:56
 msgid "The deck exports successfully to PDF for offline sharing."
-msgstr ""
+msgstr "デッキがオフライン共有のために PDF に正常にエクスポートできる。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:58
 msgid "Pros and Cons of the Options"
-msgstr ""
+msgstr "選択肢の長所と短所"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:60
 msgid "Slidev — Vue-powered presentation framework for developers"
-msgstr ""
+msgstr "Slidev — 開発者向け Vue ベースのプレゼンテーションフレームワーク"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:62
 msgid "See [https://sli.dev/](https://sli.dev/)"
-msgstr ""
+msgstr "[https://sli.dev/](https://sli.dev/)を参照"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:64
 msgid ""
@@ -246,6 +311,9 @@ msgid ""
 "out criterion — can be embedded as native Vue components or iframes and "
 "run inside a slide."
 msgstr ""
+"良い、なぜなら Vue/Vite ベースの SPA であり、ライブウェブデモ — "
+"ノックアウト基準 — をネイティブ Vue コンポーネントまたは iframe として"
+"埋め込み、スライド内で実行できるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:65
 msgid ""
@@ -253,46 +321,61 @@ msgid ""
 " highlighting, diff lines, and code animations, which is ideal for "
 "showing Python and TypeScript code."
 msgstr ""
+"良い、なぜなら Shiki をシンタックスハイライトに使用し、行ハイライト、"
+"差分行、コードアニメーションをサポートし、Python と TypeScript コードを"
+"示すのに理想的なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:66
 msgid ""
 "Good, because slides are authored in Markdown with YAML frontmatter per "
 "slide, satisfying the version-control-friendliness driver."
 msgstr ""
+"良い、なぜならスライドが Markdown で作成され、スライドごとに YAML "
+"フロントマターがあり、バージョン管理との親和性ドライバを満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:67
 msgid ""
 "Good, because it ships a hot-reload dev server (`slidev dev`) for fast "
 "authoring iteration, satisfying the ease-of-authoring driver."
 msgstr ""
+"良い、なぜならホットリロード開発サーバー（`slidev dev`）を同梱し、"
+"高速な作成反復を提供し、作成のしやすさドライバを満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:68
 msgid ""
 "Good, because it exports to PDF, PNG, and a standalone SPA, satisfying "
 "the portability driver."
 msgstr ""
+"良い、なぜなら PDF、PNG、スタンドアロン SPA にエクスポートでき、"
+"ポータビリティドライバを満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:69
 msgid ""
 "Neutral, because it requires a Node.js toolchain, which is a new build "
 "dependency for this predominantly Python project."
 msgstr ""
+"中立、なぜなら Node.js ツールチェーンを必要とし、この主に Python の"
+"プロジェクトにとって新しいビルド依存関係となるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:70
 msgid ""
 "Neutral, because its community (~40k GitHub stars) is active and growing "
 "but smaller than reveal.js's."
 msgstr ""
+"中立、なぜならコミュニティ（GitHub スター約40k）は活動的で成長しているが、"
+"reveal.js より小さいため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:72
 msgid "sphinx-revealjs — Sphinx extension to build reveal.js presentations"
-msgstr ""
+msgstr "sphinx-revealjs — reveal.js プレゼンテーションをビルドする Sphinx 拡張"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:74
 msgid ""
 "See [https://github.com/attakei/sphinx-"
 "revealjs](https://github.com/attakei/sphinx-revealjs)"
 msgstr ""
+"[https://github.com/attakei/sphinx-"
+"revealjs](https://github.com/attakei/sphinx-revealjs)を参照"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:76
 msgid ""
@@ -300,6 +383,9 @@ msgid ""
 "(`docs/conf.py` already configures Sphinx + MyST parser), requiring no "
 "new build dependency."
 msgstr ""
+"良い、なぜならプロジェクトの既存の Sphinx ツールチェーンを再利用し"
+"（`docs/conf.py` は既に Sphinx + MyST パーサーを設定済み）、新しいビルド"
+"依存関係が不要なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:77
 msgid ""
@@ -307,18 +393,25 @@ msgid ""
 "which is already enabled in this project, satisfying the version-control-"
 "friendliness driver."
 msgstr ""
+"良い、なぜならスライドが reStructuredText または MyST Markdown で作成され、"
+"これは本プロジェクトで既に有効であり、バージョン管理との親和性ドライバを"
+"満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:78
 msgid ""
 "Good, because it stays within the Python ecosystem, consistent with a "
 "predominantly Python project."
 msgstr ""
+"良い、なぜなら Python エコシステム内に留まり、主に Python のプロジェクトと"
+"一致するため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:79
 msgid ""
 "Good, because the maintainer is a Japanese developer active in the PyCon "
 "JP community, offering natural community alignment."
 msgstr ""
+"良い、なぜならメンテナーが PyCon JP コミュニティで活動的な日本人開発者で"
+"あり、自然なコミュニティの一致を提供するため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:80
 msgid ""
@@ -326,6 +419,9 @@ msgid ""
 "based — functional but less seamless than Slidev's native Vue component "
 "model."
 msgstr ""
+"中立、なぜなら reveal.js をラップするため、ライブデモの埋め込みが "
+"iframe ベースであり — 機能するが Slidev のネイティブ Vue コンポーネント"
+"モデルほどシームレスではないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:81
 msgid ""
@@ -333,6 +429,9 @@ msgid ""
 "highlight.js, which lacks Slidev's Shiki features (line highlighting, "
 "code animations, Monaco integration)."
 msgstr ""
+"中立、なぜならコードシンタックスハイライトが reveal.js の highlight.js に"
+"依存し、Slidev の Shiki 機能（行ハイライト、コードアニメーション、"
+"Monaco 統合）がないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:82
 msgid ""
@@ -340,6 +439,9 @@ msgid ""
 "than Slidev's or reveal.js's, meaning fewer third-party themes and less "
 "community support."
 msgstr ""
+"悪い、なぜならコミュニティ（GitHub スター約129）が Slidev や reveal.js "
+"より大幅に小さく、サードパーティのテーマが少なくコミュニティサポートが"
+"少ないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:83
 msgid ""
@@ -347,120 +449,158 @@ msgid ""
 "Slidev's `slidev dev` (only `sphinx-autobuild` is available, which is "
 "less tailored to slideshow authoring)."
 msgstr ""
+"悪い、なぜなら Slidev の `slidev dev` に匹敵する専用のホットリロード開発"
+"サーバーがないため（`sphinx-autobuild` しか利用できず、スライドショー作成に"
+"は適していない）。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:85
 msgid "reveal.js — The HTML presentation framework"
-msgstr ""
+msgstr "reveal.js — HTML プレゼンテーションフレームワーク"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:87
 msgid "See [https://revealjs.com/](https://revealjs.com/)"
-msgstr ""
+msgstr "[https://revealjs.com/](https://revealjs.com/)を参照"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:89
 msgid ""
 "Good, because it can embed live web demos via iframes and custom HTML, "
 "partially satisfying the knock-out criterion."
 msgstr ""
+"良い、なぜなら iframe とカスタム HTML 経由でライブウェブデモを埋め込め、"
+"ノックアウト基準を部分的に満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:90
 msgid "Good, because it has built-in syntax highlighting via highlight.js."
-msgstr ""
+msgstr "良い、なぜなら highlight.js 経由の組み込みシンタックスハイライトがあるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:91
 msgid ""
 "Good, because it has the largest community (~68k GitHub stars) and a "
 "long, proven track record."
 msgstr ""
+"良い、なぜなら最大のコミュニティ（GitHub スター約68k）と長く実績のある"
+"トラックレコードがあるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:92
 msgid ""
 "Good, because it is an HTML/JS framework that deploys as a static site, "
 "satisfying portability."
 msgstr ""
+"良い、なぜなら HTML/JS フレームワークであり、静的サイトとしてデプロイでき、"
+"ポータビリティを満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:93
 msgid ""
 "Neutral, because while a Markdown plugin exists, authoring is primarily "
 "HTML-based, which is more verbose than Markdown-first tools."
 msgstr ""
+"中立、なぜなら Markdown プラグインは存在するが、作成は主に HTML ベースで"
+"あり、Markdown ファーストのツールより冗長なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:94
 msgid ""
 "Bad, because embedding live Vue components is not native — iframes are "
 "the main mechanism, which is less seamless than Slidev's component model."
 msgstr ""
+"悪い、なぜならライブ Vue コンポーネントの埋め込みがネイティブではなく — "
+"iframe が主な仕組みであり、Slidev のコンポーネントモデルほどシームレス"
+"ではないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:95
 msgid ""
 "Bad, because the HTML-centric authoring flow is less ergonomic for a "
 "Markdown-heavy project than Slidev or Marp."
 msgstr ""
+"悪い、なぜなら HTML 中心の作成フローが Markdown 中心のプロジェクトには"
+"Slidev や Marp より使いにくいため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:97
 msgid "Marp — Markdown presentation ecosystem"
-msgstr ""
+msgstr "Marp — Markdown プレゼンテーションエコシステム"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:99
 msgid "See [https://marp.app/](https://marp.app/)"
-msgstr ""
+msgstr "[https://marp.app/](https://marp.app/)を参照"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:101
 msgid ""
 "Good, because it is pure Markdown, maximally satisfying the version-"
 "control-friendliness and ease-of-authoring drivers."
 msgstr ""
+"良い、なぜなら純粋な Markdown であり、バージョン管理との親和性と"
+"作成のしやすさのドライバを最大限に満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:102
 msgid "Good, because it exports to PDF, PPTX, and HTML, satisfying portability."
 msgstr ""
+"良い、なぜなら PDF、PPTX、HTML にエクスポートでき、ポータビリティを満たす"
+"ため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:103
 msgid ""
 "Good, because it has built-in syntax highlighting and a clean, minimal "
 "authoring experience."
 msgstr ""
+"良い、なぜなら組み込みのシンタックスハイライトとクリーンで最小限の"
+"作成体験があるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:104
 msgid ""
 "Neutral, because it is primarily a Markdown-to-slide *converter*, not an "
 "interactive runtime — live demos must be embedded as iframes."
 msgstr ""
+"中立、なぜなら主に Markdown からスライドへの*コンバーター*であり、"
+"インタラクティブなランタイムではないため — ライブデモは iframe として"
+"埋め込む必要がある。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:105
 msgid ""
 "Bad, because it cannot run live Vue components or interactive web content"
 " natively, making the live-demo embedding less seamless than Slidev."
 msgstr ""
+"悪い、なぜならライブ Vue コンポーネントやインタラクティブなウェブコンテンツ"
+"をネイティブに実行できず、ライブデモの埋め込みが Slidev ほどシームレス"
+"ではないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:106
 msgid ""
 "Bad, because it lacks presenter features like code animations and live "
 "component rendering that a technical talk benefits from."
 msgstr ""
+"悪い、なぜなら技術系トークに有益なコードアニメーションやライブコンポーネント"
+"レンダリングなどのプレゼンター機能がないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:110
 msgid ""
 "Good, because it is extremely easy to author with a WYSIWYG editor and "
 "requires no toolchain."
 msgstr ""
+"良い、なぜなら WYSIWYG エディターで極めて簡単に作成でき、ツールチェーンが"
+"不要なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:111
 msgid ""
 "Good, because it has massive general adoption and seamless cloud "
 "collaboration."
 msgstr ""
+"良い、なぜなら一般的な採用が圧倒的で、シームレスなクラウドコラボレーションが"
+"あるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:112
 msgid ""
 "Neutral, because it can embed external content via \"Insert > Embed "
 "link,\" but support is limited and not designed for live code execution."
 msgstr ""
+"中立、なぜなら「挿入 > リンクの埋め込み」で外部コンテンツを埋め込めるが、"
+"サポートが限定的でライブコード実行向けに設計されていないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:113
 msgid ""
 "Bad, because it has no native code syntax highlighting, requiring "
 "workarounds like images or third-party add-ons."
 msgstr ""
+"悪い、なぜならネイティブなコードシンタックスハイライトがなく、"
+"画像やサードパーティアドオンなどの回避策が必要なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:114
 msgid ""
@@ -468,66 +608,83 @@ msgid ""
 "version-control-friendliness driver — the deck cannot be reviewed in a "
 "PR."
 msgstr ""
+"悪い、なぜならスライドソースがバイナリのクラウドドキュメントであり、"
+"バージョン管理との親和性ドライバを満たさない — デッキを PR でレビュー"
+"できないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:115
 msgid ""
 "Bad, because embedding a live, interactive WASM demo is unreliable and "
 "constrained by the embed sandbox."
 msgstr ""
+"悪い、なぜならライブでインタラクティブな WASM デモの埋め込みが信頼性に"
+"欠け、埋め込みサンドボックスに制約されるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:119
 msgid "Good, because it is widely adopted and familiar to a general audience."
-msgstr ""
+msgstr "良い、なぜなら広く採用されており、一般の聴衆に馴染みがあるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:120
 msgid "Good, because it exports to PDF and runs offline, satisfying portability."
 msgstr ""
+"良い、なぜなら PDF にエクスポートでき、オフラインで実行でき、"
+"ポータビリティを満たすため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:121
 msgid ""
 "Neutral, because it supports web add-ins, but these are heavyweight and "
 "not designed for live WASM demos."
 msgstr ""
+"中立、なぜならウェブアドインをサポートするが、これらは重量級で"
+"ライブ WASM デモ向けに設計されていないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:122
 msgid "Bad, because it has no native code syntax highlighting."
-msgstr ""
+msgstr "悪い、なぜならネイティブなコードシンタックスハイライトがないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:123
 msgid ""
 "Bad, because slide source is a binary `.pptx` file, failing the version-"
 "control-friendliness driver."
 msgstr ""
+"悪い、なぜならスライドソースがバイナリの `.pptx` ファイルであり、"
+"バージョン管理との親和性ドライバを満たさないため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:124
 msgid ""
 "Bad, because embedding live, interactive browser content is severely "
 "limited."
 msgstr ""
+"悪い、なぜならライブでインタラクティブなブラウザコンテンツの埋め込みが"
+"厳しく制限されるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:126
 msgid "JupyterLab Slides / RISE — Live Jupyter notebook slideshow extension"
-msgstr ""
+msgstr "JupyterLab Slides / RISE — ライブ Jupyter ノートブックスライドショー拡張"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:128
 msgid "See [https://rise.readthedocs.io/](https://rise.readthedocs.io/)"
-msgstr ""
+msgstr "[https://rise.readthedocs.io/](https://rise.readthedocs.io/)を参照"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:130
 msgid ""
 "Good, because it can execute live Python code in notebook cells during "
 "the presentation, which is appealing for a Python audience."
 msgstr ""
+"良い、なぜならプレゼンテーション中にノートブックセルでライブ Python コードを"
+"実行でき、Python の聴衆にとって魅力的なため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:131
 msgid "Good, because notebook code cells have syntax highlighting built in."
-msgstr ""
+msgstr "良い、なぜならノートブックのコードセルにシンタックスハイライトが組み込まれているため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:132
 msgid ""
 "Neutral, because notebooks are JSON and can be version-controlled, but "
 "diffs are noisy when outputs are saved."
 msgstr ""
+"中立、なぜならノートブックは JSON でバージョン管理できるが、"
+"出力が保存されると差分がノイズになるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:133
 msgid ""
@@ -535,145 +692,167 @@ msgid ""
 "Jupyter slideshow is awkward — the WASM demo is a web app, not a notebook"
 " cell, so it would need an iframe workaround."
 msgstr ""
+"悪い、なぜならブラウザ内でライブな *WASM アプリケーション* を Jupyter "
+"スライドショー内に埋め込むのが厄介なため — WASM デモはウェブアプリであり、"
+"ノートブックセルではないので、iframe の回避策が必要になる。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:134
 msgid ""
 "Bad, because RISE is less actively maintained and has a smaller community"
 " than the other developer-oriented options."
 msgstr ""
+"悪い、なぜなら RISE は他の開発者向け選択肢より活発にメンテナンスされて"
+"おらず、コミュニティが小さいため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:135
 msgid ""
 "Bad, because the slideshow UX (navigation, transitions, layout control) "
 "is more limited than purpose-built slide frameworks."
 msgstr ""
+"悪い、なぜならスライドショーの UX（ナビゲーション、トランジション、"
+"レイアウト制御）が専用スライドフレームワークより制限されるため。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:137
 msgid "More Information"
-msgstr ""
+msgstr "詳細情報"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:139
 msgid "Comparison matrix"
-msgstr ""
+msgstr "比較マトリクス"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:141
 msgid ""
 "The table below summarises how each option scores against the evaluation "
 "criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
+"以下の表は各選択肢が評価基準に対してどのようにスコアするかを要約する。"
+"✓ = 強い、~ = 部分的、✗ = 弱い。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Criterion"
-msgstr ""
+msgstr "評価基準"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Slidev"
-msgstr ""
+msgstr "Slidev"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "sphinx-revealjs"
-msgstr ""
+msgstr "sphinx-revealjs"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "reveal.js"
-msgstr ""
+msgstr "reveal.js"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Marp"
-msgstr ""
+msgstr "Marp"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Google Slides"
-msgstr ""
+msgstr "Google Slides"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "PowerPoint"
-msgstr ""
+msgstr "PowerPoint"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "JupyterLab/RISE"
-msgstr ""
+msgstr "JupyterLab/RISE"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Live web demo embedding"
-msgstr ""
+msgstr "ライブウェブデモの埋め込み"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "✓"
-msgstr ""
+msgstr "✓"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "~"
-msgstr ""
+msgstr "~"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "✗"
-msgstr ""
+msgstr "✗"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Code syntax highlighting"
-msgstr ""
+msgstr "コードシンタックスハイライト"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Ease of authoring"
-msgstr ""
+msgstr "作成のしやすさ"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Portability"
-msgstr ""
+msgstr "ポータビリティ"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Version-control friendliness"
-msgstr ""
+msgstr "バージョン管理との親和性"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md
 msgid "Community adoption"
-msgstr ""
+msgstr "コミュニティの採用"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:152
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:154
 msgid "Slidev homepage: [https://sli.dev/](https://sli.dev/)"
-msgstr ""
+msgstr "Slidev ホームページ: [https://sli.dev/](https://sli.dev/)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:155
 msgid "Slidev documentation: [https://sli.dev/guide/](https://sli.dev/guide/)"
-msgstr ""
+msgstr "Slidev ドキュメント: [https://sli.dev/guide/](https://sli.dev/guide/)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:156
 msgid ""
 "Slidev GitHub: "
 "[https://github.com/slidevjs/slidev](https://github.com/slidevjs/slidev)"
 msgstr ""
+"Slidev GitHub: "
+"[https://github.com/slidevjs/slidev](https://github.com/slidevjs/slidev)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:157
 msgid ""
 "sphinx-revealjs GitHub: [https://github.com/attakei/sphinx-"
 "revealjs](https://github.com/attakei/sphinx-revealjs)"
 msgstr ""
+"sphinx-revealjs GitHub: [https://github.com/attakei/sphinx-"
+"revealjs](https://github.com/attakei/sphinx-revealjs)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:158
 msgid ""
 "sphinx-revealjs documentation: [https://sphinx-"
 "revealjs.readthedocs.io/](https://sphinx-revealjs.readthedocs.io/)"
 msgstr ""
+"sphinx-revealjs ドキュメント: [https://sphinx-"
+"revealjs.readthedocs.io/](https://sphinx-revealjs.readthedocs.io/)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:159
 msgid ""
 "Parent issue: [#275](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/275)"
 msgstr ""
+"親イシュー: [#275](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/275)"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:160
 msgid ""
 "This decision unblocks [#278](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/278) (Design and create the PyCon JP 2026 talk slide deck)."
 msgstr ""
+"この決定は [#278](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/278)（PyCon JP 2026 トークスライドデッキの設計と作成）を"
+"ブロック解除する。"
 
 #: ../../decisions/0001-use-slidev-for-pycon-jp-2026-talk-slides.md:161
 msgid ""
 "Talk proposal: [PyVista on WebAssembly: "
 "サーバーレス3D可視化の実現](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 msgstr ""
+"トーク提案: [PyVista on WebAssembly: "
+"サーバーレス3D可視化の実現](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"

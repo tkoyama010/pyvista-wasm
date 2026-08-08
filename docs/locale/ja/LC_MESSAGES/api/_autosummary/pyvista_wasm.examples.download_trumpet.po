@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_trumpet.rst:2
 msgid "pyvista\\_wasm.examples.download\\_trumpet"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_trumpet"
 
 #: of pyvista_wasm.examples.download_trumpet:1
 msgid "Download the trumpet dataset."
-msgstr ""
+msgstr "トランペットデータセットをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_trumpet:3
 msgid ""
@@ -34,19 +34,22 @@ msgid ""
 "returns it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the "
 "``pyvista.examples.download_trumpet`` API."
 msgstr ""
+"PyVista vtk-data リポジトリから ``trumpet.obj`` をダウンロードし、"
+":class:`~pyvista_wasm.PolyData` メッシュとして返します。"
+"``pyvista.examples.download_trumpet`` API をミラーリングします。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_trumpet.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_trumpet:7
 msgid "The trumpet mesh."
-msgstr ""
+msgstr "トランペットメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_trumpet.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_trumpet:11
 msgid "Examples"
-msgstr ""
+msgstr "例"

@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:9
 msgid "Adopt the \"1 slide, 1 message\" principle for the slide deck"
-msgstr ""
+msgstr "スライドデッキに「1スライド、1メッセージ」原則を採用する"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:11
 msgid "Context and Problem Statement"
-msgstr ""
+msgstr "コンテキストと問題記述"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:13
 msgid ""
@@ -48,18 +48,36 @@ msgid ""
 "message\" as the governing rule for this deck. Which presentation-design "
 "principle should govern how content is organised across slides?"
 msgstr ""
+"PyCon JP 2026 トークデッキ（`slides/slides.md`、[ADR-0001](0001-use-"
+"slidev-for-pycon-jp-2026-talk-slides.md) で選択され、[ADR-0003](0003-"
+"decide-how-to-internationalize-the-slidev-deck.md) で国際化された）は23枚"
+"のスライドプレゼンテーションであり、WebAssembly経由でブラウザで実行される"
+"PyVista、TypeScriptグルーアーキテクチャ、ライブデモ、そして行動喚起という"
+"複雑な技術ストーリーを、決められた会議時間内に伝える必要がある。1枚のスライド"
+"が複数のコアアイデアを担おうとすると、聴衆は競合するメッセージ間で注意力を"
+"分割せざるを得なくなり、理解度が低下し、話者は画面上のすべてを網羅するため"
+"に急ぐことになる。Issue [#332](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/332) は、よく知られた **「1スライド、1メッセージ」** プレゼン"
+"テーション原則に照らしてデッキを監査し、過積載スライドを特定して分割または"
+"切り詰める必要を捉えている。しかし、プレゼンテーションデザイン原則を評価し、"
+"「1スライド、1メッセージ」をこのデッキの統治ルールとして採用する根拠を記録"
+"したアーキテクチャ決定記録はまだ存在しない。どのプレゼンテーションデザイン"
+"原則がスライド間のコンテンツ編成を統治すべきか？"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:15
 msgid "Decision Drivers"
-msgstr ""
+msgstr "決定ドライバ"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:17
 msgid ""
 "**Audience focus and comprehension**: A conference audience can only "
 "absorb one core idea per slide at presentation pace. Overloaded slides "
 "force the audience to split attention, diluting the takeaway and reducing"
-" comprehension. This is a knock-out criterion."
+"comprehension. This is a knock-out criterion."
 msgstr ""
+"**聴衆の集中と理解**: 会議の聴衆はプレゼンテーションのペースで1スライド"
+"につき1つのコアアイデアしか吸収できない。過積載スライドは聴衆に注意力を"
+"分割させ、要点を希釈し、理解度を低下させる。これはノックアウト基準である。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:18
 msgid ""
@@ -67,6 +85,9 @@ msgid ""
 "throughline. A principle that forces each slide to advance the narrative "
 "by exactly one step produces a tighter, more logical flow."
 msgstr ""
+"**ナラティブの明確さ**: デッキは明確な筋書きを持つ首尾一貫したストーリーを"
+"語る必要がある。各スライドがナラティブを正確に1ステップ進めることを強制する"
+"原則は、より引き締まった論理的な流れを生み出す。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:19
 msgid ""
@@ -75,6 +96,10 @@ msgid ""
 "either slow the talk (the speaker dwells too long) or skim content (the "
 "audience cannot keep up)."
 msgstr ""
+"**ライブプレゼンテーションのペーシング**: 話者は話すトークのペースに合わせ"
+"てスライドを進める必要がある。複数のアイデアを詰め込んだスライドは、トーク"
+"を遅くする（話者が長く留まりすぎる）か、コンテンツを駆け足で流す（聴衆が"
+"ついていけない）かのいずれかを引き起こす。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:20
 msgid ""
@@ -84,6 +109,11 @@ msgid ""
 "should make the slide source easier to review — one idea per Markdown "
 "block boundary makes diffs cleaner and intent clearer."
 msgstr ""
+"**バージョン管理下でのスライドソースの可読性**: デッキはMarkdownで記述され"
+"PRを通じてレビューされる（[ADR-0000](0000-use-markdown-architectural-"
+"decision-records.md) を参照）。統治原則はスライドソースのレビューを容易に"
+"する必要がある — Markdownブロック境界ごとに1つのアイデアとすることで、"
+"diffがよりクリーンになり意図がより明確になる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:21
 msgid ""
@@ -92,44 +122,58 @@ msgid ""
 "guidance so that the rationale is defensible and reproducible by future "
 "contributors."
 msgstr ""
+"**確立されたプレゼンテーションデザインのベストプラクティスとの整合性**: "
+"原則は広く認識されたプレゼンテーションデザインのガイダンスに基づく必要が"
+"ある。そうすることで根拠が防御可能であり、将来の貢献者によって再現可能に"
+"なる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:23
 msgid "Considered Options"
-msgstr ""
+msgstr "検討した選択肢"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:25
 msgid ""
 "**\"1 slide, 1 message\"** — each slide carries exactly one core idea; "
 "overloaded slides are split into separate slides"
 msgstr ""
+"**「1スライド、1メッセージ」** — 各スライドは正確に1つのコアアイデアを"
+"担う。過積載スライドは別々のスライドに分割される"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:26
 msgid ""
 "**\"1 slide, 1 topic\"** — a looser rule allowing a topic and its related"
 " sub-points to coexist on one slide"
 msgstr ""
+"**「1スライド、1トピック」** — トピックとその関連サブポイントが1枚のスライド"
+"に共存できる緩いルール"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:27
 msgid ""
 "**Free-form** — no governing principle; slide content and density are "
 "left to author discretion"
 msgstr ""
+"**フリーフォーム** — 統治原則なし。スライドコンテンツと密度は作成者の"
+"裁量に任される"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:28
 msgid ""
 "**Lessig method** — minimal-text slides with very short phrases (often a "
 "single word), rapidly advanced; many short slides per talk"
 msgstr ""
+"**Lessigメソッド** — 非常に短いフレーズ（多くの場合単語1つ）の最小テキスト"
+"スライドで、急速に進める。トークあたり多数の短いスライド"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:29
 msgid ""
 "**Takahashi method** — slides with only a few very large words (often a "
 "single word) per slide; the spoken delivery carries the substance"
 msgstr ""
+"**Takahashiメソッド** — スライド1枚につき数個の非常に大きな単語（多くの場合"
+"単語1つ）のみ。話される内容が本質を担う"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:31
 msgid "Decision Outcome"
-msgstr ""
+msgstr "決定結果"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:33
 msgid ""
@@ -146,10 +190,21 @@ msgid ""
 "be applied during the [#332](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/332) deck audit."
 msgstr ""
+"選択した選択肢: **「1スライド、1メッセージ」**。なぜなら、ノックアウト基準を"
+"直接満たすからである — 各スライドは正確に1つのコアアイデアを伝え、聴衆の集中"
+"と理解を最大化する — と同時に、より明確なナラティブ、より予測可能なペーシング"
+"、そしてバージョン管理下でよりクリーンなMarkdown diffを生み出す。Lessigメ"
+"ソッドとTakahashiメソッドは1アイデア原則の上に固定された*フォーマット*"
+"（最小テキスト、大フォント）を課すが、「1スライド、1メッセージ」はスライド"
+"あたりの*セマンティックコンテンツ*のみを統治し、PyVista WASMトークが必要と"
+"するレイアウト、コードブロック、ライブデモを自由に使用できるようにする。"
+"「1スライド、1トピック」やフリーフォームとは異なり、[#332]"
+"(https://github.com/tkoyama010/pyvista-wasm/issues/332) デッキ監査中に適用"
+"できる具体的で検証可能なルールを提供する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:35
 msgid "Consequences"
-msgstr ""
+msgstr "結果"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:37
 msgid ""
@@ -157,12 +212,16 @@ msgid ""
 "audience never has to choose between competing messages on a single "
 "screen."
 msgstr ""
+"良い、なぜなら各スライドは1つの明確な要点を担うため、聴衆は1つの画面上で"
+"競合するメッセージから選択する必要がなくなる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:38
 msgid ""
 "Good, because the narrative advances one logical step at a time, making "
 "the talk easier to follow and easier to rehearse."
 msgstr ""
+"良い、なぜならナラティブが一度に1つの論理的ステップで進むため、トークが"
+"追いやすく、リハーサルしやすくなる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:39
 msgid ""
@@ -170,6 +229,8 @@ msgid ""
 "once the single message is delivered, without leaving unexplained content"
 " on screen."
 msgstr ""
+"良い、なぜならペーシングがより予測可能になる — 話者は単一のメッセージを"
+"伝えたら先に進むことができ、画面上に未説明のコンテンツを残す必要がない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:40
 msgid ""
@@ -177,6 +238,9 @@ msgid ""
 "`---` boundary means diffs touch the slide relevant to the change, and a "
 "reviewer can immediately see which message a slide conveys."
 msgstr ""
+"良い、なぜならスライドソースがPRでレビューしやすくなる — `---` 境界あたり"
+"1つのアイデアは、diffが変更に関連するスライドのみに触れることを意味し、"
+"レビューアーはスライドがどのメッセージを伝えるかをすぐに確認できる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:41
 msgid ""
@@ -184,6 +248,9 @@ msgid ""
 "the one message of this slide?\" and an ambiguous answer flags a slide to"
 " split."
 msgstr ""
+"良い、なぜなら原則は検証可能である — レビューアーは「このスライドの1つの"
+"メッセージは何か？」と尋ねることができ、曖昧な回答は分割すべきスライドを"
+"フラグする。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:42
 msgid ""
@@ -191,12 +258,17 @@ msgid ""
 "increase the slide count as overloaded slides are split, which requires "
 "rebalancing the talk's time budget."
 msgstr ""
+"悪い、なぜなら既存の23スライドデッキに原則を適用すると、過積載スライドが"
+"分割されてスライド数が増加する可能性があり、トークの時間予算の再調整が"
+"必要になる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:43
 msgid ""
 "Bad, because splitting slides can create transitions that feel choppy if "
 "the narrative flow between the new slides is not carefully designed."
 msgstr ""
+"悪い、なぜならスライドを分割すると、新しいスライド間のナラティブの流れが"
+"注意深く設計されていない場合、断続的に感じる移行が生じる可能性がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:44
 msgid ""
@@ -204,20 +276,25 @@ msgid ""
 "visual format — the author retains freedom over layout, font size, and "
 "use of diagrams or code, consistent with the Slidev-based deck structure."
 msgstr ""
+"中立、なぜなら原則はスライドあたりのセマンティックコンテンツを統治する"
+"ものであり、視覚フォーマットではない — 作成者はレイアウト、フォントサイズ"
+"、図やコードの使用に関する自由を保持し、Slidevベースのデッキ構造と整合する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:46
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:48
 msgid "Compliance with this decision will be confirmed by:"
-msgstr ""
+msgstr "この決定への準拠は以下によって確認されます:"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:50
 msgid ""
 "Every slide in `slides/slides.md` conveys a single core message that can "
 "be stated in one short sentence."
 msgstr ""
+"`slides/slides.md` のすべてのスライドは、短い文1つで表現できる単一のコア"
+"メッセージを伝える。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:51
 msgid ""
@@ -225,12 +302,17 @@ msgid ""
 "[#332](https://github.com/tkoyama010/pyvista-wasm/issues/332) audit have "
 "been split or trimmed so that no slide carries more than one core idea."
 msgstr ""
+"[#332](https://github.com/tkoyama010/pyvista-wasm/issues/332) 監査で過積載と"
+"特定されたスライドは、1つのコアアイデアを超えて担うスライドがないように"
+"分割または切り詰められている。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:52
 msgid ""
 "Each slide's headline (title or primary heading) states its single "
 "message clearly."
 msgstr ""
+"各スライドの見出し（タイトルまたは主要ヘッディング）は、その単一のメッセージ"
+"を明確に記述している。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:53
 msgid ""
@@ -238,28 +320,36 @@ msgid ""
 "been moved to speaker notes (`Speaker notes` / Slidev note blocks) rather"
 " than cramming it onto the slide."
 msgstr ""
+"スライドのコアメッセージを構成しない補足詳細は、スライドに詰め込むのではなく"
+"スピーカーノート（`Speaker notes` / Slidevノートブロック）に移動されている。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:54
 msgid ""
 "Bullet lists on each slide support only the slide's single message; lists"
 " that introduce a second idea have been split into a separate slide."
 msgstr ""
+"各スライドの箇条書きリストはスライドの単一メッセージのみをサポートする。"
+"2つ目のアイデアを導入するリストは別のスライドに分割されている。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:55
 msgid ""
 "A deck review confirms that the talk's time budget still fits the PyCon "
 "JP 2026 slot after any slide splits."
 msgstr ""
+"デッキレビューは、スライド分割後もトークの時間予算がPyCon JP 2026の枠に"
+"収まることを確認する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:57
 msgid "Pros and Cons of the Options"
-msgstr ""
+msgstr "選択肢の長所と短所"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:59
 msgid ""
 "\"1 slide, 1 message\" — each slide carries exactly one core idea; "
 "overloaded slides are split"
 msgstr ""
+"「1スライド、1メッセージ」— 各スライドは正確に1つのコアアイデアを担う。"
+"過積載スライドは分割される"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:61
 msgid ""
@@ -268,6 +358,9 @@ msgid ""
 "states the message; supporting detail lives in speaker notes or compact "
 "visual elements."
 msgstr ""
+"各スライドは正確に1つの要点を担う。ドラフトスライドが2つのアイデアを導入する"
+"場合、2枚のスライドに分割される。スライドの見出しがメッセージを記述し、補足"
+"詳細はスピーカーノートやコンパクトな視覚要素に置かれる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:63
 msgid ""
@@ -275,18 +368,24 @@ msgid ""
 " is never asked to absorb more than one idea per screen, maximising focus"
 " and comprehension."
 msgstr ""
+"良い、なぜならノックアウト基準を直接満たす — 聴衆は1画面あたり1つ以上の"
+"アイデアを吸収することを求められず、集中と理解を最大化する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:64
 msgid ""
 "Good, because it produces a clear narrative — the deck is a sequence of "
 "single steps, each advancing the story by one increment."
 msgstr ""
+"良い、なぜなら明確なナラティブを生み出す — デッキは単一ステップのシーケンス"
+"であり、各ステップがストーリーを1インクリメント進める。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:65
 msgid ""
 "Good, because pacing is predictable: the speaker advances once the single"
 " message is delivered, and no unexplained content is left on screen."
 msgstr ""
+"良い、なぜならペーシングが予測可能である — 話者は単一のメッセージを伝えたら"
+"先に進み、画面上に未説明のコンテンツが残らない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:66
 msgid ""
@@ -294,12 +393,16 @@ msgid ""
 "message?\" and a clear answer confirms compliance; an ambiguous answer "
 "flags a slide to split."
 msgstr ""
+"良い、なぜなら検証可能である — レビューアーが「1つのメッセージは何か？」と"
+"尋ね、明確な回答が準拠を確認する。曖昧な回答は分割すべきスライドをフラグする。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:67
 msgid ""
 "Good, because it produces cleaner Markdown diffs: one idea per `---` "
 "boundary means a content change touches only the slide for that idea."
 msgstr ""
+"良い、なぜならよりクリーンなMarkdown diffを生み出す — `---` 境界あたり1つの"
+"アイデアは、コンテンツ変更がそのアイデアのスライドのみに触れることを意味する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:68
 msgid ""
@@ -307,6 +410,9 @@ msgid ""
 "guidance (e.g. Garr Reynolds's *Presentation Zen*, Nancy Duarte's "
 "*Slide:ology*) that advocates one idea per slide."
 msgstr ""
+"良い、なぜなら広く認識されたプレゼンテーションデザインのガイダンス（例: Garr"
+" Reynoldsの *Presentation Zen*、Nancy Duarteの *Slide:ology*）に基づいており"
+"、スライドあたり1つのアイデアを提唱している。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:69
 msgid ""
@@ -314,12 +420,17 @@ msgid ""
 "author retains freedom over layout, diagrams, and code blocks, which is "
 "important for a demo-heavy technical talk."
 msgstr ""
+"中立、なぜならセマンティックコンテンツを統治するものであり、視覚フォーマット"
+"ではない — 作成者はレイアウト、図、コードブロックに関する自由を保持し、"
+"デモ中心の技術トークにとって重要である。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:70
 msgid ""
 "Bad, because splitting overloaded slides increases the slide count, which"
 " must be rebalanced against the talk's time budget."
 msgstr ""
+"悪い、なぜなら過積載スライドの分割はスライド数を増加させ、トークの時間予算と"
+"照らし合わせて再調整する必要がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:71
 msgid ""
@@ -327,12 +438,16 @@ msgid ""
 "argument into choppy micro-slides if transitions are not designed "
 "carefully."
 msgstr ""
+"悪い、なぜなら過度に文字通りの適用は、移行が注意深く設計されていない場合、"
+"密結合された論証を断続的なマイクロスライドに断片化する可能性がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:73
 msgid ""
 "\"1 slide, 1 topic\" — a looser rule allowing related sub-points on one "
 "slide"
 msgstr ""
+"「1スライド、1トピック」— 関連するサブポイントを1枚のスライドに許可する"
+"緩いルール"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:75
 msgid ""
@@ -340,24 +455,33 @@ msgid ""
 "is looser than \"1 slide, 1 message\": a topic with several facets is "
 "permitted on one slide as long as the facets are related."
 msgstr ""
+"スライドはトピックとその関連サブポイントを一緒にカバーできる。このルールは"
+"「1スライド、1メッセージ」より緩い — 各側面が関連している限り、複数の側面を"
+"持つトピックが1枚のスライドに許可される。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:77
 msgid ""
 "Good, because it is less disruptive to the existing deck — slides that "
 "group a concept with its sub-points do not need to be split."
 msgstr ""
+"良い、なぜなら既存のデッキへの影響が少ない — コンセプトとサブポイントを"
+"グループ化するスライドは分割する必要がない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:78
 msgid ""
 "Good, because it preserves a natural grouping when sub-points are tightly"
 " coupled and best understood together."
 msgstr ""
+"良い、なぜならサブポイントが密結合で一緒に理解するのが最善の場合、自然な"
+"グループ化を保持する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:79
 msgid ""
 "Neutral, because it is easier to apply without increasing slide count, "
 "keeping the time budget unchanged."
 msgstr ""
+"中立、なぜならスライド数を増やさずに適用しやすく、時間予算を変更せずに維持"
+"できる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:80
 msgid ""
@@ -366,6 +490,10 @@ msgid ""
 "out criterion: a slide can still be overloaded with several takeaways "
 "under the guise of \"one topic.\""
 msgstr ""
+"悪い、なぜなら「トピック」は曖昧である — トピックは複数の異なるメッセージを"
+"含むことができるため、ルールは聴衆の集中に関するノックアウト基準を満たさない"
+"— 「1つのトピック」の名目でスライドが複数の要点で過積載になる可能性がまだ"
+"ある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:81
 msgid ""
@@ -373,6 +501,9 @@ msgid ""
 "whether a set of sub-points constitutes \"one topic\" or multiple "
 "messages, making compliance subjective."
 msgstr ""
+"悪い、なぜなら検証が困難である — サブポイントのセットが「1つのトピック」を"
+"構成するか複数のメッセージかをレビューアーが容易に判断できず、準拠が主観的"
+"になる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:82
 msgid ""
@@ -380,6 +511,8 @@ msgid ""
 "time; a topic-level slide can bundle several steps, blurring the "
 "throughline."
 msgstr ""
+"悪い、なぜならナラティブを一度に1ステップ進めることを強制しない — トピック"
+"レベルのスライドは複数のステップを束ねることができ、筋書きを曖昧にする。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:83
 msgid ""
@@ -387,36 +520,47 @@ msgid ""
 "dwell on a multi-point slide, or skim sub-points the audience cannot "
 "absorb."
 msgstr ""
+"悪い、なぜならペーシングが予測しにくくなる — 話者は複数ポイントのスライドに"
+"留まる必要があるか、聴衆が吸収できないサブポイントを駆け足で流す必要がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:85
 msgid ""
 "Free-form — no governing principle; slide content left to author "
 "discretion"
 msgstr ""
+"フリーフォーム — 統治原則なし。スライドコンテンツは作成者の裁量に任される"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:87
 msgid ""
 "No rule constrains how many ideas a slide may carry. Content density and "
 "structure are decided by the author on a per-slide basis."
 msgstr ""
+"スライドがいくつのアイデアを担えるかを制約するルールはない。コンテンツの密度"
+"と構造はスライドごとに作成者が決定する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:89
 msgid ""
 "Good, because it imposes no constraints, giving the author maximum "
 "freedom to design each slide as they see fit."
 msgstr ""
+"良い、なぜなら制約を課さず、各スライドを適切と思うように設計する最大の自由を"
+"作成者に与える。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:90
 msgid ""
 "Good, because it requires no audit or restructuring effort — the deck is "
 "accepted as authored."
 msgstr ""
+"良い、なぜなら監査や再構築の労力を必要としない — デッキは作成された状態で"
+"受け入れられる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:91
 msgid ""
 "Neutral, because it is the default state of an unaudited deck; no process"
 " is needed to enforce it."
 msgstr ""
+"中立、なぜなら監査されていないデッキのデフォルト状態である — 強制するための"
+"プロセスは不要である。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:92
 msgid ""
@@ -424,12 +568,16 @@ msgid ""
 "prevents overloaded slides that dilute attention and reduce "
 "comprehension."
 msgstr ""
+"悪い、なぜなら聴衆の集中に関するノックアウト基準を満たさない — 注意力を希釈し"
+"理解度を低下させる過積載スライドを防ぐものがない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:93
 msgid ""
 "Bad, because narrative clarity is uncontrolled; the deck may have uneven "
 "pacing and unclear throughline."
 msgstr ""
+"悪い、なぜならナラティブの明確さが制御されない — デッキは不均一なペーシングと"
+"不明確な筋書きを持つ可能性がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:94
 msgid ""
@@ -437,18 +585,24 @@ msgid ""
 "criterion, so the [#332](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/332) audit cannot be performed."
 msgstr ""
+"悪い、なぜなら検証可能でない — ルールがないため準拠基準がなく、[#332]"
+"(https://github.com/tkoyama010/pyvista-wasm/issues/332) 監査を実行できない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:95
 msgid ""
 "Bad, because it is not grounded in presentation-design best practices, "
 "which uniformly advise constraining content per slide."
 msgstr ""
+"悪い、なぜならプレゼンテーションデザインのベストプラクティスに基づいていない"
+"— ベストプラクティスは一様にスライドあたりのコンテンツを制約することを推奨"
+"している。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:97
 msgid ""
 "Lessig method — minimal-text slides with very short phrases, rapidly "
 "advanced"
 msgstr ""
+"Lessigメソッド — 非常に短いフレーズの最小テキストスライドで、急速に進める"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:99
 msgid ""
@@ -456,6 +610,9 @@ msgid ""
 "single word or short phrase — and are advanced rapidly, producing many "
 "brief slides per talk. The visual pace reinforces the spoken narrative."
 msgstr ""
+"Lawrence Lessigにちなんで名付けられた。スライドは非常に短いテキスト — 多くの"
+"場合単語1つや短いフレーズ — を含み、急速に進められ、トークあたり多数の短い"
+"スライドを生み出す。視覚的なペースが話されるナラティブを補強する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:101
 msgid ""
@@ -463,24 +620,31 @@ msgid ""
 "minimal text fragment, so the audience is never overwhelmed by on-screen "
 "content."
 msgstr ""
+"良い、なぜなら聴衆の集中を強く満たす — 各スライドは最小のテキスト断片を担う"
+"ため、聴衆が画面上のコンテンツに圧倒されることはない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:102
 msgid ""
 "Good, because the rapid visual cadence can create a dynamic, engaging "
 "presentation rhythm."
 msgstr ""
+"良い、なぜなら急速な視覚的ケイデンスが動的で魅力的なプレゼンテーションリズム"
+"を生み出せる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:103
 msgid ""
 "Good, because it is grounded in a recognised, influential presentation "
 "style."
 msgstr ""
+"良い、なぜなら認識された影響力のあるプレゼンテーションスタイルに基づいている。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:104
 msgid ""
 "Neutral, because it is compatible with version control (slides are short "
 "Markdown blocks), though the high slide count makes diffs larger."
 msgstr ""
+"中立、なぜならバージョン管理と互換性がある（スライドは短いMarkdownブロック）"
+"が、スライド数が多いためdiffが大きくなる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:105
 msgid ""
@@ -489,6 +653,10 @@ msgid ""
 "snippets, architecture diagrams, and live in-browser demos (see "
 "[ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md))."
 msgstr ""
+"悪い、なぜなら固定された*フォーマット* — 最小テキスト、図なし、コードブロック"
+"なし — を課し、PyVista WASMトークが求めるコードスニペット、アーキテクチャ図、"
+"ブラウザ内ライブデモの必要性と競合する（[ADR-0001](0001-use-slidev-for-"
+"pycon-jp-2026-talk-slides.md) を参照）。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:106
 msgid ""
@@ -496,16 +664,21 @@ msgid ""
 "would make the deck unwieldy to author, review, and maintain for this "
 "project's PR-based workflow."
 msgstr ""
+"悪い、なぜならスライド数が多すぎる（1つのトークで数百枚になることが多い）ため"
+"、このプロジェクトのPRベースのワークフローでデッキの作成、レビュー、保守が"
+"困難になる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:107
 msgid ""
 "Bad, because the style demands significant rehearsal to deliver well; the"
 " rapid cadence can feel rushed if the speaker is not practiced in it."
 msgstr ""
+"悪い、なぜならこのスタイルはうまく伝えるためにかなりのリハーサルを必要とする"
+"— 話者が慣れていない場合、急速なケイデンスが慌ただしく感じられる可能性がある。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:109
 msgid "Takahashi method — slides with only a few very large words per slide"
-msgstr ""
+msgstr "Takahashiメソッド — スライド1枚につき数個の非常に大きな単語のみ"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:111
 msgid ""
@@ -513,28 +686,37 @@ msgid ""
 "often a single word — rendered in very large type. The spoken delivery "
 "carries the substance; the slide reinforces one keyword at a time."
 msgstr ""
+"高橋征義にちなんで名付けられた。各スライドは数個の単語 — 多くの場合単語1つ — "
+"のみを含み、非常に大きなフォントでレンダリングされる。話される内容が本質を"
+"担い、スライドは一度に1つのキーワードを補強する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:113
 msgid ""
 "Good, because it maximises audience focus: a single large word leaves no "
 "ambiguity about the slide's message."
 msgstr ""
+"良い、なぜなら聴衆の集中を最大化する — 1つの大きな単語はスライドのメッセージ"
+"について曖昧さを残さない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:114
 msgid "Good, because it forces the narrative into clear, keyword-sized steps."
-msgstr ""
+msgstr "良い、なぜならナラティブを明確なキーワードサイズのステップに強制する。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:115
 msgid ""
 "Good, because it is grounded in a recognised Japanese presentation style "
 "with natural community familiarity at PyCon JP."
 msgstr ""
+"良い、なぜならPyCon JPでコミュニティに自然に馴染みのある認識された日本の"
+"プレゼンテーションスタイルに基づいている。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:116
 msgid ""
 "Neutral, because the minimal slides are easy to version-control, though "
 "the deck becomes many short slides."
 msgstr ""
+"中立、なぜなら最小限のスライドはバージョン管理しやすいが、デッキが多数の短い"
+"スライドになる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:117
 msgid ""
@@ -543,6 +725,9 @@ msgid ""
 "incompatible with the technical and demo-heavy nature of the PyVista WASM"
 " talk."
 msgstr ""
+"悪い、Lessigメソッドと同様、なぜなら固定された*フォーマット* — 大きなテキスト"
+"のみ、図なし、コードブロックなし、ライブデモなし — を課し、PyVista WASMトーク"
+"の技術的でデモ中心の性質と互換性がない。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:118
 msgid ""
@@ -551,6 +736,9 @@ msgid ""
 "undermining the value of selecting Slidev in [ADR-0001](0001-use-slidev-"
 "for-pycon-jp-2026-talk-slides.md)."
 msgstr ""
+"悪い、なぜならトークの中心であるコードスニペット、アーキテクチャ図、ライブ"
+"ブラウザデモをデッキから取り除き、[ADR-0001](0001-use-slidev-for-pycon-jp-"
+"2026-talk-slides.md) でSlidevを選択した価値を損なう。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:119
 msgid ""
@@ -558,88 +746,92 @@ msgid ""
 "increasing rehearsal burden and leaving no on-screen reference for "
 "technical detail."
 msgstr ""
+"悪い、なぜなら話者がほぼすべてのコンテンツを口頭で伝える必要があり、リハーサル"
+"負担が増大し、技術的詳細の画面上の参照がなくなる。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:121
 msgid "More Information"
-msgstr ""
+msgstr "詳細情報"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:123
 msgid "Comparison matrix"
-msgstr ""
+msgstr "比較マトリクス"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:125
 msgid ""
 "The table below summarises how each option scores against the evaluation "
 "criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
+"以下の表は各選択肢が評価基準に対してどのようにスコアするかを要約する。"
+"✓ = 強い、~ = 部分的、✗ = 弱い。"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Criterion"
-msgstr ""
+msgstr "評価基準"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "1 slide, 1 message"
-msgstr ""
+msgstr "1スライド、1メッセージ"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "1 slide, 1 topic"
-msgstr ""
+msgstr "1スライド、1トピック"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Free-form"
-msgstr ""
+msgstr "フリーフォーム"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Lessig method"
-msgstr ""
+msgstr "Lessigメソッド"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Takahashi method"
-msgstr ""
+msgstr "Takahashiメソッド"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Audience focus and comprehension"
-msgstr ""
+msgstr "聴衆の集中と理解"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "✓"
-msgstr ""
+msgstr "✓"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "~"
-msgstr ""
+msgstr "~"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "✗"
-msgstr ""
+msgstr "✗"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Narrative clarity"
-msgstr ""
+msgstr "ナラティブの明確さ"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Live-presentation pacing"
-msgstr ""
+msgstr "ライブプレゼンテーションのペーシング"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Slide-source readability under VCS"
-msgstr ""
+msgstr "VCS下でのスライドソースの可読性"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Alignment with best practices"
-msgstr ""
+msgstr "ベストプラクティスとの整合性"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Compatibility with code/diagram/demo slides"
-msgstr ""
+msgstr "コード/図/デモスライドとの互換性"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md
 msgid "Verifiable compliance criterion"
-msgstr ""
+msgstr "検証可能な準拠基準"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:137
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:139
 msgid ""
@@ -647,51 +839,68 @@ msgid ""
 "wasm/issues/332) (follow \"1 slide, 1 message\" principle in the slide "
 "deck)"
 msgstr ""
+"親issue: [#332](https://github.com/tkoyama010/pyvista-wasm/issues/332)"
+"（スライドデッキで「1スライド、1メッセージ」原則に従う）"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:140
 msgid ""
 "This decision: [#391](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/391)"
 msgstr ""
+"この決定: [#391](https://github.com/tkoyama010/pyvista-wasm/issues/391)"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:141
 msgid ""
 "Garr Reynolds, *Presentation Zen* — advocates one idea per slide and "
 "minimal text"
 msgstr ""
+"Garr Reynolds、*Presentation Zen* — スライドあたり1つのアイデアと最小テキスト"
+"を提唱"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:142
 msgid ""
 "Nancy Duarte, *Slide:ology* — guides slide design around a single message"
 " per slide"
 msgstr ""
+"Nancy Duarte、*Slide:ology* — スライドあたりの単一メッセージを中心としたスライド"
+"デザインをガイド"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:143
 msgid ""
 "Lawrence Lessig — "
 "[https://en.wikipedia.org/wiki/Lawrence_Lessig](https://en.wikipedia.org/wiki/Lawrence_Lessig)"
 msgstr ""
+"Lawrence Lessig — "
+"[https://en.wikipedia.org/wiki/Lawrence_Lessig](https://en.wikipedia.org/wiki/Lawrence_Lessig)"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:144
 msgid ""
 "Takahashi method — "
 "[https://en.wikipedia.org/wiki/Takahashi_method](https://en.wikipedia.org/wiki/Takahashi_method)"
 msgstr ""
+"Takahashiメソッド — "
+"[https://en.wikipedia.org/wiki/Takahashi_method](https://en.wikipedia.org/wiki/Takahashi_method)"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:145
 msgid ""
 "Related: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) "
 "(selected Slidev and bootstrapped the deck under `slides/`)"
 msgstr ""
+"関連: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md)"
+"（Slidevを選択し `slides/` 下にデッキをブートストラップした）"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:146
 msgid ""
 "Related: [ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md)"
 " (established the GitHub Pages + pr-preview deployment pipeline)"
 msgstr ""
+"関連: [ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md)"
+"（GitHub Pages + pr-previewデプロイパイプラインを確立した）"
 
 #: ../../decisions/0004-adopt-one-slide-one-message-principle.md:147
 msgid ""
 "Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
 "deck.md) (established the i18n structure for the deck)"
 msgstr ""
+"関連: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)"
+"（デッキのi18n構造を確立した）"

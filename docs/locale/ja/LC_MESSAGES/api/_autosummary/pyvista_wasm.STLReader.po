@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:2
 msgid "pyvista\\_wasm.STLReader"
-msgstr ""
+msgstr "pyvista\\_wasm.STLReader"
 
 #: of pyvista_wasm.readers.STLReader:1
 msgid "Reader for STL (STereoLithography) files (``.stl``)."
-msgstr ""
+msgstr "STL（STereoLithography）ファイルのリーダー（``.stl``）。"
 
 #: of pyvista_wasm.readers.STLReader:3
 msgid ""
@@ -35,64 +35,68 @@ msgid ""
 "extracts only the vertex coordinates so that camera framing and bounding-"
 "sphere queries work before rendering."
 msgstr ""
+"STLファイル（ASCII またはバイナリ）を読み込み、レンダリング時に VTK.wasm の "
+"``vtkSTLReader`` に解析を委譲する :class:`Mesh` を生成します。Python は"
+"頂点座標のみを抽出するため、カメラフレーミングとバウンディングスフィアの"
+"クエリがレンダリング前に機能します。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.readers.STLReader:8
 msgid "Path to the ``.stl`` file."
-msgstr ""
+msgstr "``.stl`` ファイルのパス。"
 
 #: of pyvista_wasm.readers.STLReader:12
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.STLReader.__init__:1
 msgid "Initialize the reader with a file path."
-msgstr ""
+msgstr "ファイルパスでリーダーを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:22:<autosummary>:1
 msgid ":py:obj:`__init__ <pyvista_wasm.STLReader.__init__>`\\ \\(path\\)"
-msgstr ""
+msgstr ":py:obj:`__init__ <pyvista_wasm.STLReader.__init__>`\\ \\(path\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:22:<autosummary>:1
 msgid ":py:obj:`read <pyvista_wasm.STLReader.read>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`read <pyvista_wasm.STLReader.read>`\\ \\(\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:22:<autosummary>:1 of
 #: pyvista_wasm.readers.STLReader.read:1
 msgid "Read the STL file and return a Mesh."
-msgstr ""
+msgstr "STLファイルを読み込んでMeshを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst:24
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`path <pyvista_wasm.STLReader.path>`"
-msgstr ""
+msgstr ":py:obj:`path <pyvista_wasm.STLReader.path>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.STLReader.path:1
 msgid "Return the file path."
-msgstr ""
+msgstr "ファイルパスを返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.STLReader.path:3
 msgid "The path to the STL file."
-msgstr ""
+msgstr "STLファイルのパス。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.readers.STLReader.read:3
 msgid ""
@@ -100,15 +104,18 @@ msgid ""
 "parse it at render time.  Vertex coordinates are extracted on the Python "
 "side for bounding-sphere and camera-framing calculations."
 msgstr ""
+"ファイルの全内容はbase64エンコードされて保存され、VTK.wasm がレンダリング時に"
+"解析できます。頂点座標はバウンディングスフィアとカメラフレーミングの計算のために"
+"Python 側で抽出されます。"
 
 #: of pyvista_wasm.readers.STLReader.read:7
 msgid "A mesh backed by the STL file content."
-msgstr ""
+msgstr "STLファイルコンテンツによってバッキングされたメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.STLReader.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.readers.STLReader.read:10
 msgid "If the file format is invalid or unsupported."
-msgstr ""
+msgstr "ファイルフォーマットが無効またはサポートされていない場合。"

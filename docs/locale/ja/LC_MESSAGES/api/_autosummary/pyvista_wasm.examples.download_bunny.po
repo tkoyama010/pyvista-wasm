@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_bunny.rst:2
 msgid "pyvista\\_wasm.examples.download\\_bunny"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_bunny"
 
 #: of pyvista_wasm.examples.download_bunny:1
 msgid "Download the Stanford Bunny dataset."
-msgstr ""
+msgstr "Stanford Bunnyデータセットをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_bunny:3
 msgid ""
@@ -34,23 +34,26 @@ msgid ""
 "it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the "
 "``pyvista.examples.download_bunny`` API."
 msgstr ""
+"PyVista vtk-data リポジトリから ``bunny.ply`` をダウンロードし、"
+":class:`~pyvista_wasm.PolyData` メッシュとして返します。"
+"``pyvista.examples.download_bunny`` API をミラーリングします。"
 
 #: of pyvista_wasm.examples.download_bunny:7
 msgid "The Stanford Bunny is a widely used 3D test model in computer graphics."
-msgstr ""
+msgstr "Stanford Bunny はコンピュータグラフィックスで広く使用される3Dテストモデルです。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_bunny.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_bunny:9
 msgid "The Stanford Bunny mesh."
-msgstr ""
+msgstr "Stanford Bunnyメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_bunny.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_bunny:13
 msgid "Examples"
-msgstr ""
+msgstr "例"
