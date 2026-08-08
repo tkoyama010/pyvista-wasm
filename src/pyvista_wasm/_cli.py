@@ -1185,6 +1185,84 @@ def export_demo(
     logger.info("Demo page written to: %s", output)
 
 
+def _collect_locale_keys(node: object, prefix: str = "") -> set[str]:
+    """Recursively collect every dotted key path from a YAML mapping.
+
+    Parameters
+    ----------
+    node : object
+        Parsed YAML content (expected to be a dict at the top level).
+    prefix : str
+        Accumulated key path for recursive calls.
+
+    Returns
+    -------
+    set of str
+        Every key path in the mapping, e.g. ``{"cover", "cover.title"}``.
+
+    """
+    keys: set[str] = set()
+    if not isinstance(node, dict):
+        return keys
+    for key, value in node.items():
+        path = f"{prefix}.{key}" if prefix else str(key)
+        keys.add(path)
+        keys |= _collect_locale_keys(value, path)
+    return keys
+
+
+@app.command(name="check-locale-parity")
+def check_locale_parity(
+    ja: Annotated[
+        Path,
+        typer.Option(
+            help="Path to the authoritative JA locale file.",
+            metavar="PATH",
+        ),
+    ] = Path("slides/locales/ja.yml"),
+    en: Annotated[
+        Path,
+        typer.Option(
+            help="Path to the EN locale file to compare against JA.",
+            metavar="PATH",
+        ),
+    ] = Path("slides/locales/en.yml"),
+) -> None:
+    """Check that JA and EN slide locale files share the same key structure.
+
+    ja.yml is the authoritative locale for slide structure.  This command
+    recursively compares the key sets of the two YAML files and exits
+    non-zero if they differ, naming the offending keys.
+
+    See ADR-0006 for the decision this command enforces.
+    """
+    import yaml  # noqa: PLC0415
+
+    ja_keys = _collect_locale_keys(yaml.safe_load(ja.read_text(encoding="utf-8")))
+    en_keys = _collect_locale_keys(yaml.safe_load(en.read_text(encoding="utf-8")))
+
+    only_ja = ja_keys - en_keys
+    only_en = en_keys - ja_keys
+
+    if not only_ja and not only_en:
+        logger.info("Locale key parity check passed — ja.yml and en.yml match.")
+        return
+
+    if only_ja:
+        typer.echo("Keys in ja.yml but missing from en.yml:")
+        for key in sorted(only_ja):
+            typer.echo(f"  {key}")
+    if only_en:
+        typer.echo("Keys in en.yml but missing from ja.yml:")
+        for key in sorted(only_en):
+            typer.echo(f"  {key}")
+    typer.echo(
+        "\nja.yml is the authoritative locale for slide structure. "
+        "Update en.yml (or ja.yml) so both files share the same key set.",
+    )
+    sys.exit(1)
+
+
 # ---------------------------------------------------------------------------
 # CLI entry point wrapper for backwards compatibility
 # ---------------------------------------------------------------------------

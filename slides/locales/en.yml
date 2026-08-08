@@ -118,34 +118,6 @@ demos:
   title: VTK.wasm Demos
   subtitle: Running in your browser, right now
 
-caps:
-  title: Capabilities & Current Limitations
-  subtitle: vtk.wasm can do a lot in the browser today — and its edges are known
-  caps_title: Capabilities
-  caps_subtitle: The full VTK pipeline, mesh loading, interactive camera, and Python — all in the browser
-  lim_title: Current Limitations
-  lim_subtitle: Real limitations exist — but ~100K elements run at practical interactive speed
-  caps_label: Capabilities
-  i1t: VTK filter pipeline
-  i1d: full filter execution runs entirely in the browser
-  i2t: Mesh loading
-  i2d: VTP, VTU, and STL formats load directly client-side
-  i3t: Interactive camera
-  i3d: rotate, pan, and zoom with direct manipulation
-  i4t: Python integration
-  i4d: the PyVista API drives it all from Python
-  lim_label: Limitations
-  i5t: Module size
-  i5d: 30–50 MB, 10–15 MB after gzip
-  i6t: COOP/COEP headers
-  i6d: multi-threading requires cross-origin isolation
-  i7t: WebGPU flags
-  i7d: may need experimental flags in some browsers
-  i8t: Initial load
-  i8d: several seconds to 10+ seconds before first render
-  conc_pre: Large-scale meshes still have constraints — but
-  conc_bold: ~100K elements run at practical interactive speed
-
 build_dist:
   build_title: How vtk-wasm is Built
   build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
@@ -259,56 +231,6 @@ demo_stlite:
   conc_pre: Best for publishing —
   conc_bold: when you need an interactive app with widgets, stlite is the natural choice
   demo_label: Live demo
-
-perf:
-  title: "Performance: Native vs Wasm"
-  subtitle: Initial load costs seconds — but once loaded, ~100K-element meshes run at practical interactive speed
-  overhead_label: Wasm overhead
-  i1t: Initial load
-  i1d: several seconds to 10+ seconds before first render, as the WASM binary streams in from CDN
-  i2t: Network transfer
-  i2d: ~12–15 MB (gzip) downloaded on first load; cached thereafter by the browser
-  i3t: Large-scale constraints
-  i3d: mesh processing at native-desktop scale still has practical limits in the browser
-  holds_label: Where it holds up
-  i4t: Practical interactive speed
-  i4d: once loaded, rotate, pan, and zoom feel responsive, matching the native experience
-  i5t: ~100K elements
-  i5d: meshes of this scale run at practical interactive speed, the sweet spot for analysis review
-  i6t: Small-team review
-  i6d: sufficient quality for sharing analysis results within a small team at the current stage
-  conc_pre: PoC confirmed —
-  conc_bold: a dedicated server is not needed to share analysis results
-
-constraints:
-  title: WASM Constraints & Workarounds
-  subtitle: Four constraints the browser imposes — and the workaround that clears each one
-  constraints_title: WASM Constraints
-  constraints_subtitle: Four constraints the browser imposes
-  workarounds_title: Workarounds
-  workarounds_subtitle: Every constraint has a proven workaround — none block a working demo
-  constraints_label: Constraints
-  i1t: Module size
-  i1d: 30–50 MB, 10–15 MB after gzip; a heavy first download
-  i2t: COOP/COEP headers
-  i2d1: requires cross-origin isolation, so the server must return
-  i2d2: and
-  i3t: WebGPU flags
-  i3d: some browsers still require experimental flags to enable the WebGPU backend
-  i4t: Initial load time
-  i4d: several seconds to 10+ seconds before the first render appears
-  workarounds_label: Workarounds
-  i5t: Spinner & lazy loading
-  i5d1: show a spinner and defer loading with
-  i5d2: until the canvas enters the viewport
-  i6t: vite-plugin-cross-origin-isolation
-  i6d: injects the COOP/COEP headers for you in Vite dev and preview
-  i7t: Automatic fallback to WebGL
-  i7d: when WebGPU is unavailable, the runtime falls back to the universally supported WebGL backend
-  i8t: Progress indicators
-  i8d: pair lazy loading with progress bars so the user knows the module is streaming
-  conc_pre: Every constraint has a proven workaround —
-  conc_bold: none of them block a working demo
 
 use_cases:
   title: Suitable & Unsuitable Use Cases

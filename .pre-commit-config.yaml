@@ -110,6 +110,15 @@ repos:
     hooks:
       - id: check-readme-i18n
 
+  - repo: local
+    hooks:
+      - id: check-locale-parity
+        name: Slide locale JA/EN key-parity check
+        entry: python -m pyvista_wasm check-locale-parity
+        language: system
+        files: ^slides/locales/(ja|en)\.yml$
+        pass_filenames: false
+
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.29.0
     hooks:
@@ -124,4 +133,5 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   autoupdate_schedule: weekly
+  skip: [check-locale-parity]
   submodules: false
