@@ -9,6 +9,22 @@ from pathlib import Path
 
 import pyvista_wasm
 
+# Compatibility shim: typer 0.26.8 removed ``rich_utils.STYLE_METAVAR`` and
+# ``STYLE_METAVAR_SEPARATOR``, which sphinxcontrib-typer still references when
+# rendering CLI help. Restore them when missing so the docs build works across
+# any typer version. No-op once sphinxcontrib-typer ships a compatible release.
+try:
+    import typer.rich_utils as _typer_rich_utils
+
+    for _attr, _val in {
+        "STYLE_METAVAR": "bold yellow",
+        "STYLE_METAVAR_SEPARATOR": "dim",
+    }.items():
+        if not hasattr(_typer_rich_utils, _attr):
+            setattr(_typer_rich_utils, _attr, _val)
+except ImportError:  # pragma: no cover
+    pass
+
 # Copy source code to JupyterLite content directory
 docs_dir = Path(__file__).parent
 project_root = docs_dir.parent
@@ -60,6 +76,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
+    "sphinxcontrib.typer",
     "sphinx_design",
 ]
 
