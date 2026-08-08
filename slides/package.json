@@ -16,6 +16,7 @@
     "dompurify": "^3.4.12",
     "@hono/node-server": "^2.0.5",
     "fast-uri": "^3.1.4",
+    "hono": "^4.12.34",
     "postcss": "^8.5.23"
   }
 }
