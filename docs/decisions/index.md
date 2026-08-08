@@ -21,4 +21,8 @@ worked example.
 0002-decide-slide-preview-and-deployment-strategy
 0003-decide-how-to-internationalize-the-slidev-deck
 0004-adopt-one-slide-one-message-principle
+0005-verify-agents-md-quality-in-ci
+0006-decide-how-to-sync-slide-locale-files
+0007-decide-how-to-internationalize-and-sync-the-readme
+0008-decide-how-to-internationalize-the-readthedocs-documentation
 ```

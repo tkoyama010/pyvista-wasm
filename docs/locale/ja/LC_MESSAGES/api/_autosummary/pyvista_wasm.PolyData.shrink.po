@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.shrink.rst:2
+msgid "pyvista\\_wasm.PolyData.shrink"
+msgstr "pyvista\\_wasm.PolyData.shrink"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:1
+msgid "Shrink the cells of a mesh towards their centroid."
+msgstr "メッシュのセルを重心に向けて縮小します。"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:3
+msgid ""
+"This filter shrinks the individual cells of a mesh towards their "
+"centroids, producing visual separation between adjacent cells. It mirrors"
+" the PyVista ``shrink`` filter API. The shrink is computed in JavaScript "
+"at render time as a manual implementation because ``vtkShrinkPolyData`` "
+"is not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-"
+"mode binary."
+msgstr ""
+"このフィルタは、メッシュの個々のセルを重心に向けて縮小し、隣接セル間に視覚的な"
+"分離を生成します。PyVista の ``shrink`` フィルタ API をミラーリングします。"
+"縮小はレンダリング時に JavaScript で手動実装として計算されます。これは "
+"``vtkShrinkPolyData`` が VTK.wasm のレンダリングモードバイナリの "
+"``vtkDeserializer`` に登録されていないためです。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.shrink.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:10
+msgid ""
+"The factor to shrink each cell by, between 0 and 1. A value of 1.0 "
+"produces no change; lower values produce more shrinkage. Default is 0.8."
+msgstr ""
+"各セルを縮小する係数。0から1の間。1.0の値は変化を生成しません。値が低いほど"
+"縮小が大きくなります。デフォルトは0.8。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.shrink.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:15
+msgid "A new mesh with shrunk cells."
+msgstr "縮小されたセルを持つ新しいメッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.shrink.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:19
+msgid "Examples"
+msgstr "例"
+
+#: of pyvista_wasm.mesh.PolyData.shrink:29
+msgid "Render the shrunk mesh:"
+msgstr "縮小されたメッシュをレンダリングします:"

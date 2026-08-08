@@ -1,0 +1,598 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:9
+msgid "Verify AGENTS.md quality in CI"
+msgstr "CIでAGENTS.mdの品質を検証する"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:11
+msgid "Context and Problem Statement"
+msgstr "コンテキストと問題記述"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:13
+msgid ""
+"`AGENTS.md` is the system-prompt / instruction file that guides AI coding"
+" agents working on pyvista-wasm. Issue "
+"[#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) defines a "
+"quality checklist for this file — project overview, architecture, dev-"
+"environment setup, local build/run commands, testing instructions, code-"
+"style conventions, file/directory layout, security guidelines, and "
+"contribution workflow — and audits the current file against it. However, "
+"quality criteria documented only in an issue are enforced through manual "
+"review, which is inconsistent and easy to skip. Regressions — a section "
+"accidentally trimmed, a stale command left in, a security guideline "
+"removed — can slip through review unnoticed. We need a CI mechanism that "
+"automatically verifies `AGENTS.md` against the quality criteria on every "
+"PR so that compliance is enforced consistently rather than relying on a "
+"reviewer remembering to check. Which approach should we adopt for "
+"automated CI verification of `AGENTS.md` quality? (See "
+"[#398](https://github.com/tkoyama010/pyvista-wasm/issues/398).)"
+msgstr ""
+"`AGENTS.md` はpyvista-wasmに取り組むAIコーディングエージェントをガイドする"
+"システムプロンプト/指示ファイルである。Issue "
+"[#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) はこのファイル"
+"の品質チェックリスト — プロジェクト概要、アーキテクチャ、開発環境のセットアップ"
+"、ローカルビルド/実行コマンド、テスト手順、コードスタイル規約、ファイル/ディレ"
+"クトリレイアウト、セキュリティガイドライン、貢献ワークフロー — を定義し、"
+"現在のファイルをそれに対して監査する。しかし、issueにのみ文書化された品質基準は"
+"手動レビューを通じて強制され、一貫性がなくスキップしやすい。回帰 — セクションが"
+"誤って切り詰められる、古いコマンドが残る、セキュリティガイドラインが削除される — "
+"がレビューを通じて見過ごされる可能性がある。すべてのPRで `AGENTS.md` を品質基準"
+"に対して自動的に検証するCIメカニズムが必要であり、レビューアーがチェックを"
+"覚えていることに依存するのではなく、準拠を一貫して強制できるようにする。"
+"`AGENTS.md` 品質の自動CI検証にどのアプローチを採用すべきか？（"
+"[#398](https://github.com/tkoyama010/pyvista-wasm/issues/398) を参照。）"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:17
+msgid ""
+"**Regression prevention**: Edits to `AGENTS.md` should not silently "
+"remove required sections or shrink them below a useful threshold. The "
+"mechanism must catch regressions automatically on every PR that touches "
+"the file. This is a knock-out criterion."
+msgstr ""
+"**回帰防止**: `AGENTS.md` への編集は必要なセクションを黙って削除したり、"
+"有用な閾値を下回って縮小したりしてはならない。メカニズムはファイルに触れる"
+"すべてのPRで回帰を自動的に検出する必要がある。これはノックアウト基準である。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:18
+msgid ""
+"**Manual-review burden**: Reviewers should not have to remember a mental "
+"checklist of required sections. The CI check should encode the checklist "
+"so that a green run means \"all required sections are present and "
+"adequately filled.\""
+msgstr ""
+"**手動レビュー負担**: レビューアーが必要なセクションのメンタルチェックリストを"
+"覚えておく必要はない。CIチェックがチェックリストをエンコードし、グリーン実行が"
+"「すべての必要なセクションが存在し適切に記入されている」ことを意味するように"
+"すべきである。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:19
+msgid ""
+"**Usefulness for AI agents**: The verification must check *content-level*"
+" qualities (required sections, minimum content per section), not just "
+"*formatting* (line length, trailing whitespace). A file that passes "
+"markdownlint but omits the \"Security guidelines\" section is not useful "
+"for agents."
+msgstr ""
+"**AIエージェントにとっての有用性**: 検証は*フォーマット*（行長、末尾空白）だけで"
+"なく*コンテンツレベル*の品質（必要なセクション、セクションあたりの最小コンテンツ）"
+"をチェックする必要がある。markdownlintに合格しても「セキュリティガイドライン」"
+"セクションが欠落しているファイルはエージェントにとって有用ではない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:20
+msgid ""
+"**Low maintenance overhead**: pyvista-wasm is a small project. The "
+"verification mechanism should be easy to maintain and update when the "
+"quality criteria evolve (e.g., a new section is added to the checklist in"
+" [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397))."
+msgstr ""
+"**低い保守オーバーヘッド**: pyvista-wasmは小さなプロジェクトである。検証メカニズム"
+"は品質基準が進化した際（例: [#397](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/397) のチェックリストに新しいセクションが追加された際）に保守と更新が"
+"容易であるべきである。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:21
+msgid ""
+"**Integration with existing CI**: The mechanism should fit naturally "
+"alongside the existing GitHub Actions workflows "
+"(`.github/workflows/test.yml`) and pre-commit.ci pipeline without "
+"requiring heavyweight infrastructure."
+msgstr ""
+"**既存のCIとの統合**: メカニズムは既存のGitHub Actionsワークフロー"
+"（`.github/workflows/test.yml`）とpre-commit.ciパイプラインの隣に自然にフィットし"
+"、重量級のインフラを必要とせずに統合されるべきである。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:23
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:25
+msgid ""
+"**Option A: Custom CI job with a quality-check script** — a dedicated "
+"GitHub Actions job runs a script (e.g., Python) that parses `AGENTS.md` "
+"and asserts required sections exist with minimum content per section"
+msgstr ""
+"**選択肢A: 品質チェックスクリプトによるカスタムCIジョブ** — 専用のGitHub Actions"
+"ジョブがスクリプト（例: Python）を実行し、`AGENTS.md` を解析して必要なセクションが"
+"存在しセクションあたりの最小コンテンツがあることをアサートする"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:26
+msgid ""
+"**Option B: Existing linter with custom rules** — extend markdownlint (or"
+" a community agent-instruction validator) with custom rules that check "
+"for required headings and minimum content"
+msgstr ""
+"**選択肢B: カスタムルールを持つ既存のリンター** — markdownlint（またはコミュニティの"
+"エージェント指示バリデーター）を必要な見出しと最小コンテンツをチェックするカスタム"
+"ルールで拡張する"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:27
+msgid ""
+"**Option C: Pre-commit hooks only** — rely solely on the existing pre-"
+"commit.ci hooks (mdformat, codespell, etc.) without any content-level "
+"checks"
+msgstr ""
+"**選択肢C: pre-commitフックのみ** — コンテンツレベルのチェックなしで既存の"
+"pre-commit.ciフック（mdformat、codespellなど）のみに頼る"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:29
+msgid "Decision Outcome"
+msgstr "決定結果"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:31
+msgid ""
+"Chosen option: **Option A — Custom CI job with a quality-check script**, "
+"because it is the only option that satisfies the knock-out criterion of "
+"*content-level* verification. The script can assert that each required "
+"section from the [#397](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/397) checklist (Project overview, Architecture, Dev "
+"environment, Testing instructions, Test conventions, Issue instructions, "
+"PR instructions, Code-style conventions, File/directory layout, Security "
+"guidelines) is present as a Markdown heading and contains a minimum "
+"number of words or bullet points. markdownlint (Option B) is designed for"
+" formatting rules, not semantic content checks; writing a custom "
+"markdownlint plugin for \"heading X must have ≥ N words\" is more complex"
+" than a standalone script. Pre-commit hooks alone (Option C) verify "
+"formatting only and cannot detect a missing section. A custom script is "
+"also easy to maintain — updating the checklist means editing one Python "
+"file — and integrates naturally as a step in the existing `test.yml` "
+"workflow or a lightweight standalone workflow."
+msgstr ""
+"選択した選択肢: **選択肢A — 品質チェックスクリプトによるカスタムCIジョブ**。"
+"なぜなら、*コンテンツレベル*の検証というノックアウト基準を満たす唯一の選択肢だから"
+"である。スクリプトは [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) "
+"チェックリストの各必要セクション（プロジェクト概要、アーキテクチャ、開発環境、"
+"テスト手順、テスト規約、Issue手順、PR手順、コードスタイル規約、ファイル/ディレクトリ"
+"レイアウト、セキュリティガイドライン）がMarkdown見出しとして存在し、最小数の単語または"
+"箇条書きポイントを含むことをアサートできる。markdownlint（選択肢B）はフォーマットルール"
+"向けに設計されており、セマンティックコンテンツチェックではない — 「見出しXはN語以上でなけ"
+"ればならない」ためのカスタムmarkdownlintプラグインを書くのはスタンドアロンスクリプトより"
+"複雑である。pre-commitフックのみ（選択肢C）はフォーマットのみを検証し、欠落セクションを"
+"検出できない。カスタムスクリプトは保守も容易である — チェックリストの更新は1つのPython"
+"ファイルの編集で済む — そして既存の `test.yml` ワークフローのステップまたは軽量な"
+"スタンドアロンワークフローとして自然に統合される。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:33
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:35
+msgid ""
+"Good, because every PR that touches `AGENTS.md` is automatically checked "
+"for section completeness and minimum content, preventing silent "
+"regressions."
+msgstr ""
+"良い、なぜなら `AGENTS.md` に触れるすべてのPRがセクションの完全性と最小コンテンツ"
+"に対して自動的にチェックされ、黙然的な回帰を防ぐ。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:36
+msgid ""
+"Good, because the quality checklist is encoded in code rather than "
+"existing only in an issue thread, making it executable and self-"
+"documenting."
+msgstr ""
+"良い、なぜなら品質チェックリストがissueスレッドにのみ存在するのではなくコードに"
+"エンコードされ、実行可能で自己文書化される。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:37
+msgid ""
+"Good, because the script is a single Python file that is easy to read, "
+"update, and test, keeping maintenance overhead low for a small project."
+msgstr ""
+"良い、なぜならスクリプトは読みやすく更新・テストしやすい単一のPythonファイルであり"
+"、小さなプロジェクトの保守オーバーヘッドを低く保つ。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:38
+msgid ""
+"Good, because a CI failure produces an actionable message (e.g., "
+"\"Section 'Security guidelines' is missing\" or \"Section 'Testing "
+"instructions' has fewer than 20 words\") that tells the contributor "
+"exactly what to fix."
+msgstr ""
+"良い、なぜならCIの失敗が実行可能なメッセージ（例: 「セクション 'Security guidelines' "
+"がありません」や「セクション 'Testing instructions' が20語未満です」）を生成し"
+"、貢献者に何を修正すべきかを正確に伝える。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:39
+msgid ""
+"Bad, because the script introduces a small amount of custom "
+"infrastructure that must be maintained alongside the quality criteria."
+msgstr ""
+"悪い、なぜならスクリプトは品質基準と共に保守しなければならない少量のカスタム"
+"インフラを導入する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:40
+msgid ""
+"Bad, because a word-count threshold is a proxy for quality, not quality "
+"itself — a section can meet the minimum word count yet still be "
+"unhelpful. The check catches structural regressions, not prose quality."
+msgstr ""
+"悪い、なぜなら単語数の閾値は品質の代理指標であり、品質そのものではない — セクションは"
+"最小単語数を満たしてもなお役に立たない可能性がある。チェックは構造的回帰を検出するが"
+"、文章の品質は検出しない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:41
+msgid ""
+"Neutral, because the script runs in CI only; local pre-commit hooks "
+"continue to handle formatting, so contributors do not need to install the"
+" checker locally unless they want to."
+msgstr ""
+"中立、なぜならスクリプトはCIでのみ実行される — ローカルのpre-commitフックは"
+"フォーマットを引き続き処理するため、貢献者は希望しない限りチェッカーをローカルに"
+"インストールする必要がない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:43
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:45
+msgid "Compliance with this decision will be confirmed by:"
+msgstr "この決定への準拠は以下によって確認されます:"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:47
+msgid ""
+"A Python script (e.g., `ci/check_agents_md.py`) exists in the repository "
+"and parses `AGENTS.md` to verify that every required section heading is "
+"present."
+msgstr ""
+"Pythonスクリプト（例: `ci/check_agents_md.py`）がリポジトリに存在し、`AGENTS.md` "
+"を解析してすべての必要なセクション見出しが存在することを検証する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:48
+msgid ""
+"The script asserts a minimum content threshold (e.g., minimum word count "
+"or bullet count) for each required section so that empty or stub sections"
+" fail the check."
+msgstr ""
+"スクリプトは各必要セクションの最小コンテンツ閾値（例: 最小単語数または箇条書き数）を"
+"アサートし、空またはスタブのセクションがチェックに失敗するようにする。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:49
+msgid ""
+"A GitHub Actions workflow (either a step in `.github/workflows/test.yml` "
+"or a dedicated workflow file) runs the script on every PR that touches "
+"`AGENTS.md`."
+msgstr ""
+"GitHub Actionsワークフロー（`.github/workflows/test.yml` のステップまたは専用の"
+"ワークフローファイルのいずれか）が `AGENTS.md` に触れるすべてのPRでスクリプトを"
+"実行する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:50
+msgid ""
+"A PR that removes a required section or shrinks it below the minimum "
+"threshold causes the CI job to fail with a message naming the offending "
+"section."
+msgstr ""
+"必要なセクションを削除または最小閾値を下回って縮小するPRは、問題のセクションを"
+"名指しするメッセージでCIジョブを失敗させる。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:51
+msgid ""
+"The script's required-sections list mirrors the quality checklist defined"
+" in [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) and can"
+" be updated in one place when the checklist evolves."
+msgstr ""
+"スクリプトの必要セクションリストは [#397](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/397) で定義された品質チェックリストを反映し、チェックリストが進化した"
+"際に1箇所で更新できる。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:53
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の長所と短所"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:55
+msgid "Option A: Custom CI job with a quality-check script"
+msgstr "選択肢A: 品質チェックスクリプトによるカスタムCIジョブ"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:57
+msgid ""
+"A dedicated Python script (e.g., `ci/check_agents_md.py`) parses "
+"`AGENTS.md`, checks that each required section heading exists, and "
+"asserts a minimum content threshold per section. The script runs as a "
+"step in the existing `test.yml` workflow or a standalone workflow on "
+"every PR touching `AGENTS.md`."
+msgstr ""
+"専用のPythonスクリプト（例: `ci/check_agents_md.py`）が `AGENTS.md` を解析し"
+"、各必要セクション見出しが存在することをチェックし、セクションあたりの最小コンテンツ"
+"閾値をアサートする。スクリプトは既存の `test.yml` ワークフローのステップまたは"
+"スタンドアロンワークフローとして `AGENTS.md` に触れるすべてのPRで実行される。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:59
+msgid ""
+"Good, because it performs *content-level* verification — required "
+"sections, minimum content — which is the knock-out criterion that the "
+"other options cannot meet."
+msgstr ""
+"良い、なぜなら*コンテンツレベル*の検証 — 必要なセクション、最小コンテンツ — を"
+"実行し、これは他の選択肢が満たせないノックアウト基準である。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:60
+msgid ""
+"Good, because the failure message is actionable: the script can print "
+"\"Section 'Security guidelines' is missing\" or \"Section 'Testing "
+"instructions' has 5 words; minimum is 20,\" telling the contributor "
+"exactly what to fix."
+msgstr ""
+"良い、なぜなら失敗メッセージが実行可能である — スクリプトは「セクション 'Security "
+"guidelines' がありません」や「セクション 'Testing instructions' は5語です。最小は"
+"20語です」と出力し、貢献者に何を修正すべきかを正確に伝える。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:61
+msgid ""
+"Good, because the required-sections list and thresholds live in a single "
+"Python file that is trivial to update when the "
+"[#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) checklist "
+"evolves."
+msgstr ""
+"良い、なぜなら必要セクションリストと閾値が単一のPythonファイルに存在し"
+"、[#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) チェックリストが"
+"進化した際の更新が簡単である。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:62
+msgid ""
+"Good, because a Python script can be unit-tested (e.g., feed it a fixture"
+" `AGENTS.md` with a missing section and assert the script exits non-"
+"zero), giving confidence that the checker itself works."
+msgstr ""
+"良い、なぜならPythonスクリプトはユニットテスト可能であり（例: 欠落セクションを"
+"持つフィクスチャ `AGENTS.md` を入力しスクリプトが非ゼロで終了することをアサートする）"
+"、チェッカー自体が機能することに信頼を与える。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:63
+msgid ""
+"Good, because it integrates naturally with the existing GitHub Actions "
+"setup — a `run: python ci/check_agents_md.py` step alongside the existing"
+" lint and test jobs."
+msgstr ""
+"良い、なぜなら既存のGitHub Actionsセットアップと自然に統合される — 既存のlintおよび"
+"テストジョブの隣に `run: python ci/check_agents_md.py` ステップとして配置される。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:64
+msgid ""
+"Neutral, because the script is custom infrastructure that must be "
+"maintained, but the scope is small (one file, a list of sections, a word-"
+"count threshold)."
+msgstr ""
+"中立、なぜならスクリプトは保守すべきカスタムインフラだが、スコープは小さい"
+"（1ファイル、セクションのリスト、単語数の閾値）。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:65
+msgid ""
+"Bad, because a word-count threshold is a proxy: a section can meet the "
+"minimum yet still be low quality. The check catches structural "
+"regressions, not prose quality."
+msgstr ""
+"悪い、なぜなら単語数の閾値は代理指標である — セクションは最小を満たしてもなお"
+"低品質の可能性がある。チェックは構造的回帰を検出するが、文章の品質は検出しない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:66
+msgid ""
+"Bad, because the script is project-specific and not reusable across other"
+" repositories without modification."
+msgstr ""
+"悪い、なぜならスクリプトはプロジェクト固有であり、修正なしでは他のリポジトリで"
+"再利用できない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:68
+msgid "Option B: Existing linter with custom rules"
+msgstr "選択肢B: カスタムルールを持つ既存のリンター"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:70
+msgid ""
+"Extend markdownlint (already run via pre-commit.ci through mdformat) or "
+"adopt a community agent-instruction validator (e.g., a tool from the "
+"[agents.md](https://agents.md/) ecosystem) with custom rules that check "
+"for required headings and minimum content."
+msgstr ""
+"markdownlint（すでにpre-commit.ciを通じてmdformatで実行されている）を拡張するか"
+"、必要な見出しと最小コンテンツをチェックするカスタムルールを持つコミュニティの"
+"エージェント指示バリデーター（例: [agents.md](https://agents.md/) エコシステムの"
+"ツール）を採用する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:72
+msgid ""
+"Good, because it reuses the existing markdownlint / pre-commit "
+"infrastructure, so no new CI job is needed."
+msgstr ""
+"良い、なぜなら既存のmarkdownlint / pre-commitインフラを再利用し、新しいCIジョブが"
+"不要である。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:73
+msgid ""
+"Good, because markdownlint is well-maintained and widely understood by "
+"contributors."
+msgstr ""
+"良い、なぜならmarkdownlintはよく保守され貢献者に広く理解されている。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:74
+msgid ""
+"Neutral, because markdownlint's rule DSL is designed for formatting (line"
+" length, heading style, blank lines), not semantic content checks."
+msgstr ""
+"中立、なぜならmarkdownlintのルールDSLはフォーマット（行長、見出しスタイル、空行）"
+"向けに設計されており、セマンティックコンテンツチェックではない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:75
+msgid ""
+"Bad, because writing a custom markdownlint plugin for \"heading 'Security"
+" guidelines' must exist and contain ≥ N words\" is significantly more "
+"complex than a standalone Python script — the rule API is not designed "
+"for content thresholds."
+msgstr ""
+"悪い、なぜなら「見出し 'Security guidelines' が存在しN語以上を含む必要がある」ための"
+"カスタムmarkdownlintプラグインを書くのはスタンドアロンのPythonスクリプトより大幅に"
+"複雑である — ルールAPIはコンテンツ閾値向けに設計されていない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:76
+msgid ""
+"Bad, because no mature, community-maintained validator for AI-agent "
+"instruction files exists at the time of this decision; the "
+"[agents.md](https://agents.md/) ecosystem is nascent and does not offer a"
+" linter with configurable quality criteria."
+msgstr ""
+"悪い、なぜならこの決定時点でAIエージェント指示ファイル向けの成熟したコミュニティ保守の"
+"バリデーターが存在しない — [agents.md](https://agents.md/) エコシステムは初期段階であり"
+"、設定可能な品質基準を持つリンターを提供していない。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:77
+msgid ""
+"Bad, because coupling content-level checks to markdownlint blurs the line"
+" between formatting (markdownlint's job) and content (the quality "
+"checklist's job), making the linting configuration harder to reason "
+"about."
+msgstr ""
+"悪い、なぜならコンテンツレベルのチェックをmarkdownlintに結合するとフォーマット"
+"（markdownlintの役割）とコンテンツ（品質チェックリストの役割）の境界が曖昧になり"
+"、lint設定の推論が困難になる。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:79
+msgid "Option C: Pre-commit hooks only"
+msgstr "選択肢C: pre-commitフックのみ"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:81
+msgid ""
+"Rely solely on the existing pre-commit.ci hooks — mdformat, codespell, "
+"standard-readme, etc. — without adding any content-level checks. "
+"Formatting and spelling are verified; section completeness is left to "
+"manual review."
+msgstr ""
+"既存のpre-commit.ciフック — mdformat、codespell、standard-readmeなど — のみに頼り"
+"、コンテンツレベルのチェックを追加しない。フォーマットとスペルは検証されるが"
+"、セクションの完全性は手動レビューに任される。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:83
+msgid ""
+"Good, because it requires zero additional work — the hooks already run on"
+" every PR via pre-commit.ci."
+msgstr ""
+"良い、なぜなら追加の作業がゼロである — フックはすでにpre-commit.ciを通じてすべてのPR"
+"で実行されている。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:84
+msgid "Good, because it avoids introducing any custom infrastructure."
+msgstr "良い、なぜならカスタムインフラの導入を回避する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:85
+msgid ""
+"Neutral, because the existing hooks already catch formatting issues in "
+"`AGENTS.md` (mdformat normalises Markdown, codespell catches typos)."
+msgstr ""
+"中立、なぜなら既存のフックはすでに `AGENTS.md` のフォーマット問題を検出する"
+"（mdformatはMarkdownを正規化し、codespellは誤字を検出する）。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:86
+msgid ""
+"Bad, because it fails the knock-out criterion: pre-commit hooks verify "
+"*formatting*, not *content*. A PR that deletes the \"Security "
+"guidelines\" section entirely would pass all hooks."
+msgstr ""
+"悪い、なぜならノックアウト基準を満たさない — pre-commitフックは*フォーマット*を"
+"検証し*コンテンツ*は検証しない。「セキュリティガイドライン」セクションを完全に"
+"削除するPRがすべてのフックに合格する。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:87
+msgid ""
+"Bad, because it leaves section-completeness verification to manual "
+"review, which is exactly the inconsistent, skip-prone process that "
+"[#398](https://github.com/tkoyama010/pyvista-wasm/issues/398) seeks to "
+"replace."
+msgstr ""
+"悪い、なぜならセクション完全性の検証を手動レビューに残し、それはまさに "
+"[#398](https://github.com/tkoyama010/pyvista-wasm/issues/398) が置き換えようとする"
+"一貫性のなくスキップしやすいプロセスである。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:88
+msgid ""
+"Bad, because it does not encode the [#397](https://github.com/tkoyama010"
+"/pyvista-wasm/issues/397) quality checklist in any executable form, so "
+"the criteria remain advisory rather than enforced."
+msgstr ""
+"悪い、なぜなら [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397) 品質"
+"チェックリストをいかなる実行可能形式にもエンコードせず、基準が強制ではなく勧告の"
+"ままである。"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:90
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:92
+msgid "Links"
+msgstr "リンク"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:94
+msgid ""
+"Parent issue: [#397](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/397) (verify AGENTS.md against standard quality criteria and "
+"improve where gaps exist)"
+msgstr ""
+"親issue: [#397](https://github.com/tkoyama010/pyvista-wasm/issues/397)"
+"（AGENTS.mdを標準品質基準に対して検証し、ギャップがある場合は改善する）"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:95
+msgid ""
+"This decision: [#398](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/398) (create ADR for CI verification of AGENTS.md quality)"
+msgstr ""
+"この決定: [#398](https://github.com/tkoyama010/pyvista-wasm/issues/398)"
+"（AGENTS.md品質のCI検証のためのADRを作成する）"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:96
+msgid ""
+"Related: [ADR-0000](0000-use-markdown-architectural-decision-records.md) "
+"(established the ADR process and `docs/decisions/` convention)"
+msgstr ""
+"関連: [ADR-0000](0000-use-markdown-architectural-decision-records.md)"
+"（ADRプロセスと `docs/decisions/` 規約を確立した）"
+
+#: ../../decisions/0005-verify-agents-md-quality-in-ci.md:97
+msgid ""
+"Agent-instruction best practices: "
+"[https://agents.md/](https://agents.md/), [https://google.github.io"
+"/agents-in-repo/](https://google.github.io/agents-in-repo/)"
+msgstr ""
+"エージェント指示のベストプラクティス: "
+"[https://agents.md/](https://agents.md/), [https://google.github.io"
+"/agents-in-repo/](https://google.github.io/agents-in-repo/)"

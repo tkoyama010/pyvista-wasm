@@ -1,0 +1,383 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/index.md:1
+msgid "API Reference"
+msgstr "APIリファレンス"
+
+#: ../../api/index.md:3
+msgid ""
+"This section provides detailed documentation for the pyvista-wasm public "
+"API."
+msgstr "このセクションではpyvista-wasmのパブリックAPIの詳細ドキュメントを提供します。"
+
+#: ../../api/index.md:5
+msgid "Plotting"
+msgstr "プロット"
+
+#: ../../api/index.md:12:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Plotter <pyvista_wasm.Plotter>`"
+msgstr ":py:obj:`pyvista_wasm.Plotter <pyvista_wasm.Plotter>`"
+
+#: ../../api/index.md:12:<autosummary>:1
+msgid "Main plotting interface for pyvista-wasm."
+msgstr "pyvista-wasmのメインプロットインターフェース。"
+
+#: ../../api/index.md:15
+msgid "Camera"
+msgstr "カメラ"
+
+#: ../../api/index.md:22:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Camera <pyvista_wasm.Camera>`"
+msgstr ":py:obj:`pyvista_wasm.Camera <pyvista_wasm.Camera>`"
+
+#: ../../api/index.md:22:<autosummary>:1
+msgid "Represents a virtual camera in a 3D scene."
+msgstr "3Dシーンの仮想カメラを表します。"
+
+#: ../../api/index.md:25
+msgid "Lighting"
+msgstr "ライティング"
+
+#: ../../api/index.md:32:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Light <pyvista_wasm.Light>`"
+msgstr ":py:obj:`pyvista_wasm.Light <pyvista_wasm.Light>`"
+
+#: ../../api/index.md:32:<autosummary>:1
+msgid "Light class."
+msgstr "ライトクラス。"
+
+#: ../../api/index.md:35
+msgid "Data"
+msgstr "データ"
+
+#: ../../api/index.md:42:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PointData <pyvista_wasm.PointData>`"
+msgstr ":py:obj:`pyvista_wasm.PointData <pyvista_wasm.PointData>`"
+
+#: ../../api/index.md:42:<autosummary>:1
+msgid "Dict-like container for point data arrays."
+msgstr "ポイントデータ配列の辞書ライクなコンテナ。"
+
+#: ../../api/index.md:45
+msgid "Mesh"
+msgstr "メッシュ"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData <pyvista_wasm.PolyData>`"
+msgstr ":py:obj:`pyvista_wasm.PolyData <pyvista_wasm.PolyData>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Base polygonal mesh class."
+msgstr "基本ポリゴナルメッシュクラス。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Arrow <pyvista_wasm.Arrow>`"
+msgstr ":py:obj:`pyvista_wasm.Arrow <pyvista_wasm.Arrow>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create an arrow mesh."
+msgstr "矢印メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Sphere <pyvista_wasm.Sphere>`"
+msgstr ":py:obj:`pyvista_wasm.Sphere <pyvista_wasm.Sphere>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a sphere mesh."
+msgstr "球メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cube <pyvista_wasm.Cube>`"
+msgstr ":py:obj:`pyvista_wasm.Cube <pyvista_wasm.Cube>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cube mesh."
+msgstr "立方体メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cylinder <pyvista_wasm.Cylinder>`"
+msgstr ":py:obj:`pyvista_wasm.Cylinder <pyvista_wasm.Cylinder>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cylinder mesh."
+msgstr "円柱メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cone <pyvista_wasm.Cone>`"
+msgstr ":py:obj:`pyvista_wasm.Cone <pyvista_wasm.Cone>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cone mesh."
+msgstr "円錐メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Plane <pyvista_wasm.Plane>`"
+msgstr ":py:obj:`pyvista_wasm.Plane <pyvista_wasm.Plane>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a plane mesh."
+msgstr "平面メッシュを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Disc <pyvista_wasm.Disc>`"
+msgstr ":py:obj:`pyvista_wasm.Disc <pyvista_wasm.Disc>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a disc (annular ring) geometric primitive."
+msgstr "ディスク（環状リング）の幾何プリミティブを作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Circle <pyvista_wasm.Circle>`"
+msgstr ":py:obj:`pyvista_wasm.Circle <pyvista_wasm.Circle>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a circle defined by a set of points in the XY plane."
+msgstr "XY平面上の点集合で定義される円を作成します。"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Line <pyvista_wasm.Line>`"
+msgstr ":py:obj:`pyvista_wasm.Line <pyvista_wasm.Line>`"
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a line segment between two points."
+msgstr "2点間の線分を作成します。"
+
+#: ../../api/index.md:64
+msgid "Text"
+msgstr "テキスト"
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Text <pyvista_wasm.Text>`"
+msgstr ":py:obj:`pyvista_wasm.Text <pyvista_wasm.Text>`"
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid "A text annotation actor for 3D rendering."
+msgstr "3Dレンダリング用のテキスト注釈アクター。"
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.TextProperty <pyvista_wasm.TextProperty>`"
+msgstr ":py:obj:`pyvista_wasm.TextProperty <pyvista_wasm.TextProperty>`"
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid "Properties for text rendering."
+msgstr "テキストレンダリングのプロパティ。"
+
+#: ../../api/index.md:75
+msgid "Texture"
+msgstr "テクスチャ"
+
+#: ../../api/index.md:82:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Texture <pyvista_wasm.Texture>`"
+msgstr ":py:obj:`pyvista_wasm.Texture <pyvista_wasm.Texture>`"
+
+#: ../../api/index.md:82:<autosummary>:1
+msgid "Surface texture wrapping an image URL."
+msgstr "画像URLをラップするサーフェステクスチャ。"
+
+#: ../../api/index.md:85
+msgid "Filters"
+msgstr "フィルタ"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.clip <pyvista_wasm.PolyData.clip>`"
+msgstr ":py:obj:`pyvista_wasm.PolyData.clip <pyvista_wasm.PolyData.clip>`"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Clip the mesh with a plane."
+msgstr "平面でメッシュをクリップします。"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
+msgstr ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate contour lines at constant scalar values."
+msgstr "一定のスカラー値で等高線を生成します。"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.shrink <pyvista_wasm.PolyData.shrink>`"
+msgstr ":py:obj:`pyvista_wasm.PolyData.shrink <pyvista_wasm.PolyData.shrink>`"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Shrink the cells of a mesh towards their centroid."
+msgstr "メッシュのセルを重心に向けて縮小します。"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.PolyData.texture_map_to_plane "
+"<pyvista_wasm.PolyData.texture_map_to_plane>`"
+msgstr ""
+":py:obj:`pyvista_wasm.PolyData.texture_map_to_plane "
+"<pyvista_wasm.PolyData.texture_map_to_plane>`"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate texture coordinates by projecting points onto the XY plane."
+msgstr "ポイントをXY平面に投影してテクスチャ座標を生成します。"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.tube <pyvista_wasm.PolyData.tube>`"
+msgstr ":py:obj:`pyvista_wasm.PolyData.tube <pyvista_wasm.PolyData.tube>`"
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate a tube around a line polydata."
+msgstr "ラインポリデータの周囲にチューブを生成します。"
+
+#: ../../api/index.md:99
+msgid "Readers"
+msgstr "リーダー"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
+msgstr ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
+msgstr "glTF（GL Transmission Format）ファイルのリーダー（``.gltf``または``.glb``）。"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.OBJReader <pyvista_wasm.OBJReader>`"
+msgstr ":py:obj:`pyvista_wasm.OBJReader <pyvista_wasm.OBJReader>`"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for Wavefront OBJ files (``.obj``)."
+msgstr "Wavefront OBJファイルのリーダー（``.obj``）。"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PLYReader <pyvista_wasm.PLYReader>`"
+msgstr ":py:obj:`pyvista_wasm.PLYReader <pyvista_wasm.PLYReader>`"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for PLY (Polygon File Format) files (``.ply``)."
+msgstr "PLY（Polygon File Format）ファイルのリーダー（``.ply``）。"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyDataReader <pyvista_wasm.PolyDataReader>`"
+msgstr ":py:obj:`pyvista_wasm.PolyDataReader <pyvista_wasm.PolyDataReader>`"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for legacy VTK PolyData files (``.vtk``)."
+msgstr "レガシーVTK PolyDataファイルのリーダー（``.vtk``）。"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.STLReader <pyvista_wasm.STLReader>`"
+msgstr ":py:obj:`pyvista_wasm.STLReader <pyvista_wasm.STLReader>`"
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for STL (STereoLithography) files (``.stl``)."
+msgstr "STL（STereoLithography）ファイルのリーダー（``.stl``）。"
+
+#: ../../api/index.md:113
+msgid "Examples"
+msgstr "例"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
+msgstr ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Cubemap texture holding six face image URLs."
+msgstr "6面の画像URLを保持するキューブマップテクスチャ。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_bunny "
+"<pyvista_wasm.examples.download_bunny>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_bunny "
+"<pyvista_wasm.examples.download_bunny>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the Stanford Bunny dataset."
+msgstr "Stanford Bunnyデータセットをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_lucy "
+"<pyvista_wasm.examples.download_lucy>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_lucy "
+"<pyvista_wasm.examples.download_lucy>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the Lucy Angel dataset."
+msgstr "Lucy Angelデータセットをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_cad_model "
+"<pyvista_wasm.examples.download_cad_model>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_cad_model "
+"<pyvista_wasm.examples.download_cad_model>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the CAD model dataset."
+msgstr "CADモデルデータセットをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_damaged_helmet "
+"<pyvista_wasm.examples.download_damaged_helmet>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_damaged_helmet "
+"<pyvista_wasm.examples.download_damaged_helmet>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the damaged helmet glTF example."
+msgstr "破損したヘルメットのglTFサンプルをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_masonry_texture "
+"<pyvista_wasm.examples.download_masonry_texture>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_masonry_texture "
+"<pyvista_wasm.examples.download_masonry_texture>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the masonry texture dataset."
+msgstr "石材テクスチャデータセットをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map "
+"<pyvista_wasm.examples.download_sky_box_cube_map>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map "
+"<pyvista_wasm.examples.download_sky_box_cube_map>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the skybox cube map dataset."
+msgstr "スカイボックスキューブマップデータセットをダウンロードします。"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_trumpet "
+"<pyvista_wasm.examples.download_trumpet>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_trumpet "
+"<pyvista_wasm.examples.download_trumpet>`"
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the trumpet dataset."
+msgstr "トランペットデータセットをダウンロードします。"

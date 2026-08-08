@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Circle.rst:2
+msgid "pyvista\\_wasm.Circle"
+msgstr "pyvista\\_wasm.Circle"
+
+#: of pyvista_wasm.mesh.Circle:1
+msgid "Create a circle defined by a set of points in the XY plane."
+msgstr "XY平面上の点集合で定義される円を作成します。"
+
+#: of pyvista_wasm.mesh.Circle:3
+msgid ""
+"This mirrors the :func:`pyvista.Circle` API, producing a closed polygon "
+"outline of ``resolution`` points lying in the XY plane."
+msgstr ""
+"これは :func:`pyvista.Circle` API をミラーリングし、XY平面上に配置された "
+"``resolution`` 個のポイントからなる閉じたポリゴンアウトラインを生成します。"
+
+#: ../../api/_autosummary/pyvista_wasm.Circle.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.Circle:6
+msgid "Radius of the circle. Default is 0.5."
+msgstr "円の半径。デフォルトは0.5。"
+
+#: of pyvista_wasm.mesh.Circle:8
+msgid "Number of points on the circle. Default is 100."
+msgstr "円上のポイント数。デフォルトは100。"
+
+#: ../../api/_autosummary/pyvista_wasm.Circle.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.mesh.Circle:11
+msgid "A circle mesh (closed polyline in the XY plane)."
+msgstr "円メッシュ（XY平面上の閉じたポリライン）。"
+
+#: ../../api/_autosummary/pyvista_wasm.Circle.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.Circle:15
+msgid "Examples"
+msgstr "例"

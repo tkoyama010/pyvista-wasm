@@ -1,0 +1,1025 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:9
+msgid "Decide how to internationalize and sync the README"
+msgstr "READMEの国際化と同期方法を決定する"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:11
+msgid "Context and Problem Statement"
+msgstr "コンテキストと問題記述"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:13
+msgid ""
+"The project README (`README.md`, at the repo root) is English-only today."
+" It is a Markdown file distinct from the Sphinx ReadTheDocs documentation"
+" ([ADR-0008](https://github.com/tkoyama010/pyvista-wasm/issues/439)) and "
+"the Slidev talk deck ([ADR-0006](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/442), [ADR-0003](0003-decide-how-to-internationalize-the-"
+"slidev-deck.md)), so it needs its own internationalization strategy "
+"rather than reusing Sphinx gettext or `slidev-addon-i18nb`. Issue "
+"[#444](https://github.com/tkoyama010/pyvista-wasm/issues/444) captures "
+"the user-facing need to internationalize the README (e.g. JA, zh_CN, es) "
+"and keep translations in sync automatically, so non-English-speaking "
+"users can understand the project without a language barrier and "
+"translations never go stale when the English README changes. GitHub "
+"renders localized READMEs via `README.<lang>.md` files at the repo root "
+"and shows a language switcher automatically, and "
+"[#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) is aligning"
+" the README with the [Standard Readme](https://github.com/RichardLitt"
+"/standard-readme) specification — so the i18n structure must preserve "
+"that layout in every language. The repo already enforces the Standard "
+"Readme spec on `README.md` through a [`standard-"
+"readme`](https://github.com/tkoyama010/standard-readme-pre-commit) pre-"
+"commit hook. Which README i18n + sync strategy should we adopt so that "
+"translations are GitHub-native, layout-consistent, and drift is detected "
+"automatically?"
+msgstr ""
+"プロジェクトREADME（`README.md`、リポジトリルート）は現在英語のみである。"
+"Sphinx ReadTheDocsドキュメント（[ADR-0008](https://github.com/tkoyama010/pyvista-wasm/issues/439)）"
+"やSlidevトークデッキ（[ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442)、"
+"[ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)）とは異なる"
+"Markdownファイルであり、Sphinx gettextや `slidev-addon-i18nb` を再利用するのではなく"
+"独自の国際化戦略が必要である。Issue "
+"[#444](https://github.com/tkoyama010/pyvista-wasm/issues/444) はREADMEを国際化し"
+"（例: JA、zh_CN、es）翻訳を自動的に同期し続けるというユーザー向けのニーズを捉えている — "
+"英語を話さないユーザーが言語の壁なしにプロジェクトを理解でき、英語READMEが変更されても"
+"翻訳が古くならないようにする。GitHubはリポジトリルートの `README.<lang>.md` ファイルを"
+"通じてローカライズされたREADMEをレンダリングし、自動的に言語スイッチャーを表示する。また"
+"[#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) はREADMEを"
+"[Standard Readme](https://github.com/RichardLitt/standard-readme) 仕様に整合させている — "
+"したがってi18n構造はすべての言語でそのレイアウトを維持する必要がある。リポジトリはすでに"
+"[`standard-readme`](https://github.com/tkoyama010/standard-readme-pre-commit) pre-commit"
+"フックを通じて `README.md` にStandard Readme仕様を強制している。どのREADME i18n + 同期"
+"戦略を採択すべきか — 翻訳がGitHubネイティブでレイアウトが一貫し、ドリフトが自動的に"
+"検出されるようにするには？"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:17
+msgid ""
+"**English is the authoritative source of truth**: The English `README.md`"
+" is the source; every `README.<lang>.md` is derived from it. A localized "
+"README never leads the English README in content. This is a knock-out "
+"criterion."
+msgstr ""
+"**英語が権威ある情報源**: 英語の `README.md` が情報源であり、すべての "
+"`README.<lang>.md` はそこから派生する。ローカライズされたREADMEがコンテンツにおいて"
+"英語READMEに先行することはない。これはノックアウト基準である。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:18
+msgid ""
+"**Compatibility with GitHub's native `README.<lang>.md` rendering**: "
+"GitHub renders `README.<lang>.md` files at the repo root and shows an "
+"automatic language switcher. The solution must produce real, committed "
+"`README.<lang>.md` files so the native switcher works with no custom UI."
+msgstr ""
+"**GitHubのネイティブな `README.<lang>.md` レンダリングとの互換性**: "
+"GitHubはリポジトリルートの `README.<lang>.md` ファイルをレンダリングし、自動的な"
+"言語スイッチャーを表示する。ソリューションは実際にコミットされた `README.<lang>.md` "
+"ファイルを生成し、カスタムUIなしでネイティブスイッチャーが機能するようにする必要がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:19
+msgid ""
+"**Preserving the [Standard Readme](https://github.com/RichardLitt"
+"/standard-readme) layout in every language**: "
+"[#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) is aligning"
+" `README.md` with the Standard Readme specification. Every localized "
+"README must preserve the same section/heading structure so the spec holds"
+" across languages."
+msgstr ""
+"**すべての言語で[Standard Readme](https://github.com/RichardLitt/standard-readme)"
+"レイアウトを維持**: [#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) "
+"は `README.md` をStandard Readme仕様に整合させている。すべてのローカライズされたREADMEは"
+"同じセクション/見出し構造を維持し、仕様が言語間で成立するようにする必要がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:20
+msgid ""
+"**Detecting structural drift**: A translation that is missing or adds "
+"sections, or whose headings diverge from the English README, must be "
+"surfaced automatically — not left for a reviewer to spot by eye."
+msgstr ""
+"**構造的ドリフトの検出**: セクションが欠落または追加されている、または見出しが英語"
+"READMEから分岐している翻訳は、自動的に検出される必要がある — レビューアーが目で"
+"確認するのに任せてはならない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:21
+msgid ""
+"**Detecting content drift**: When the English `README.md` is updated, a "
+"translation that is not regenerated or updated must be flagged "
+"automatically, so stale translations cannot silently persist."
+msgstr ""
+"**コンテンツドリフトの検出**: 英語の `README.md` が更新された際、再生成または更新"
+"されていない翻訳は自動的にフラグされる必要があり、古い翻訳が黙って残存できないようにする。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:22
+msgid ""
+"**Automatic vs. manual sync; CI enforcement vs. PR-review-only**: The "
+"project favours automated, verifiable enforcement over reliance on "
+"reviewer vigilance, consistent with the pre-commit + CI pattern already "
+"used throughout the repo."
+msgstr ""
+"**自動 vs. 手動同期。CI強制 vs. PRレビューのみ**: プロジェクトはレビューアーの"
+"警戒への依存よりも自動化された検証可能な強制を好む。これはリポジトリ全体で既に"
+"使用されているpre-commit + CIパターンと整合する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:23
+msgid ""
+"**Zero-cost / GitHub-native tooling**: Per the drivers in [ADR-0003](0003"
+"-decide-how-to-internationalize-the-slidev-deck.md) and "
+"[ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442), the "
+"baseline must not require paid external services, API keys, or accounts "
+"beyond what is already in the repository."
+msgstr ""
+"**ゼロコスト / GitHubネイティブなツール**: [ADR-0003](0003-decide-how-to-"
+"internationalize-the-slidev-deck.md) と "
+"[ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442) のドライバに従い"
+"、ベースラインは有料の外部サービス、APIキー、またはリポジトリにすでにあるもの以外の"
+"アカウントを必要としない必要がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:24
+msgid ""
+"**Minimal maintenance burden for a single-maintainer open-source "
+"project**: The solution must be maintainable by one person; it should not"
+" introduce a heavy build pipeline or a tool that demands ongoing "
+"babysitting."
+msgstr ""
+"**単一メンテナーのオープンソースプロジェクトにとっての最小限の保守負担**: ソリューションは"
+"1人で保守可能でなければならない — 重量級のビルドパイプラインや継続的な管理を要求する"
+"ツールを導入すべきではない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:25
+msgid ""
+"**Consistency with ADR-0008 ([#439](https://github.com/tkoyama010"
+"/pyvista-wasm/issues/439), ReadTheDocs i18n) and ADR-0006 "
+"([#442](https://github.com/tkoyama010/pyvista-wasm/issues/442), slide "
+"locale sync)**: The README strategy should reuse the same drift-detection"
+" philosophy where sensible, so the project has one coherent i18n-sync "
+"story across docs, slides, and README."
+msgstr ""
+"**ADR-0008（[#439](https://github.com/tkoyama010/pyvista-wasm/issues/439)、"
+"ReadTheDocs i18n）およびADR-0006（[#442](https://github.com/tkoyama010/pyvista-wasm/issues/442)、"
+"スライドロケール同期）との整合性**: README戦略は可能な場合、同じドリフト検出哲学を"
+"再利用すべきであり、プロジェクトがドキュメント、スライド、README全体で一貫した"
+"i18n同期ストーリーを持つようにする。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:27
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:29
+msgid ""
+"**EN-authoritative with CI structural-parity check** — a script or pre-"
+"commit hook comparing section/heading structure between `README.md` and "
+"each `README.<lang>.md`, failing CI if they differ"
+msgstr ""
+"**CI構造パリティチェック付きEN権威** — `README.md` と各 `README.<lang>.md` の"
+"セクション/見出し構造を比較し、異なる場合にCIを失敗させるスクリプトまたはpre-commitフック"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:30
+msgid ""
+"**EN-authoritative with CI structural-parity + stale-translation check** "
+"— also flags localized READMEs not updated after the English README "
+"changes, via git-history/commit-date comparison"
+msgstr ""
+"**CI構造パリティ + 古い翻訳チェック付きEN権威** — git履歴/コミット日付比較により"
+"、英語README変更後に更新されていないローカライズREADMEもフラグする"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:31
+msgid ""
+"**EN-authoritative with automated translation GitHub Action** — an LLM- "
+"or API-based Action that opens a PR regenerating `README.<lang>.md` on "
+"every English README change"
+msgstr ""
+"**自動翻訳GitHub Action付きEN権威** — LLMまたはAPIベースのActionが英語READMEの"
+"変更ごとに `README.<lang>.md` を再生成するPRを開く"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:32
+msgid ""
+"**Dual-maintenance with no enforcement** — status quo; rely on PR review "
+"to keep translations in sync"
+msgstr ""
+"**強制なしのデュアル保守** — 現状。翻訳の同期はPRレビューに頼る"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:33
+msgid ""
+"**Single-source-of-truth with build-time locale generation** — one "
+"`README.md` source plus a build step producing per-language files"
+msgstr ""
+"**ビルド時ロケール生成付き単一情報源** — 1つの `README.md` 情報源とビルドステップが"
+"言語ごとのファイルを生成する"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:35
+msgid "Decision Outcome"
+msgstr "決定結果"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:37
+msgid ""
+"Chosen option: **\"EN-authoritative with CI structural-parity + stale-"
+"translation check\"**, because it is the only option that satisfies every"
+" decision driver simultaneously — it keeps English as the authoritative "
+"source, produces real committed `README.<lang>.md` files so GitHub's "
+"native language switcher works, enforces the Standard Readme "
+"section/heading structure across languages via structural parity, "
+"surfaces both structural drift and content (stale-translation) drift "
+"automatically, runs as zero-cost GitHub Actions plus a pre-commit hook "
+"(no paid services or API keys), imposes minimal burden on a single "
+"maintainer, and reuses the same drift-detection philosophy as ADR-0008 "
+"and ADR-0006. Translations are authored manually by contributors; CI "
+"flags drift rather than generating translations, so human judgement stays"
+" in the loop and no external dependency is introduced."
+msgstr ""
+"選択した選択肢: **「CI構造パリティ + 古い翻訳チェック付きEN権威」**。なぜなら、すべての"
+"決定ドライバを同時に満たす唯一の選択肢だからである — 英語を権威ある情報源として維持し"
+"、実際にコミットされた `README.<lang>.md` ファイルを生成してGitHubのネイティブ言語"
+"スイッチャーを機能させ、構造パリティを通じてStandard Readmeセクション/見出し構造を"
+"言語間で強制し、構造的ドリフトとコンテンツ（古い翻訳）ドリフトの両方を自動的に検出し"
+"、ゼロコストのGitHub Actions + pre-commitフックとして実行し（有料サービスやAPIキーなし）"
+"、単一メンテナーの負担を最小限にし、ADR-0008やADR-0006と同じドリフト検出哲学を再利用する。"
+"翻訳は貢献者によって手動で作成される — CIは翻訳を生成するのではなくドリフトをフラグするため"
+"、人間の判断がループ内に留まり外部依存関係は導入されない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:39
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:41
+msgid ""
+"Good, because GitHub's native `README.<lang>.md` rendering and automatic "
+"language switcher work with no custom UI — the localized files are real "
+"Markdown at the repo root."
+msgstr ""
+"良い、なぜならGitHubのネイティブな `README.<lang>.md` レンダリングと自動言語スイッチャーが"
+"カスタムUIなしで機能する — ローカライズされたファイルはリポジトリルートの実際のMarkdownである。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:42
+msgid ""
+"Good, because the structural-parity check guarantees every localized "
+"README preserves the Standard Readme section/heading structure, so "
+"[#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) alignment "
+"holds across languages."
+msgstr ""
+"良い、なぜなら構造パリティチェックがすべてのローカライズREADMEがStandard Readme"
+"セクション/見出し構造を維持することを保証し、[#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) "
+"の整合性が言語間で成立する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:43
+msgid ""
+"Good, because the stale-translation check surfaces content drift "
+"automatically — a localized README not updated after an English README "
+"change is flagged in CI, so stale translations cannot pass silently."
+msgstr ""
+"良い、なぜなら古い翻訳チェックがコンテンツドリフトを自動的に検出する — 英語README変更後に"
+"更新されていないローカライズREADMEがCIでフラグされ、古い翻訳が黙って合格できない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:44
+msgid ""
+"Good, because the checks run both as a pre-commit hook (fast local "
+"feedback before push) and a CI workflow (enforcement on every PR), "
+"matching the repo's existing quality-control pattern."
+msgstr ""
+"良い、なぜならチェックがpre-commitフック（push前の高速なローカルフィードバック）と"
+"CIワークフロー（すべてのPRでの強制）の両方として実行され、リポジトリの既存の品質管理"
+"パターンと一致する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:45
+msgid ""
+"Good, because it is zero-cost and GitHub-native — a small stdlib-only "
+"script invoked by GitHub Actions and pre-commit, with no paid services, "
+"API keys, or external accounts."
+msgstr ""
+"良い、なぜならゼロコストでGitHubネイティブである — 標準ライブラリのみの小さなスクリプトが"
+"GitHub Actionsとpre-commitによって呼び出され、有料サービスやAPIキー、外部アカウントがない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:46
+msgid ""
+"Good, because manual translation keeps human judgement in the loop and "
+"introduces no LLM/API dependency or generated-PR review load."
+msgstr ""
+"良い、なぜなら手動翻訳が人間の判断をループ内に維持し、LLM/API依存関係や生成PRの"
+"レビュー負荷を導入しない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:47
+msgid ""
+"Bad, because translations are not generated automatically, so a "
+"contributor must manually update each `README.<lang>.md` when the English"
+" README changes; the stale-translation check reminds them but does not do"
+" the work."
+msgstr ""
+"悪い、なぜなら翻訳が自動生成されず、英語READMEが変更された際に貢献者が各 `README.<lang>.md` "
+"を手動で更新する必要がある — 古い翻訳チェックはリマインドするが作業は行わない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:48
+msgid ""
+"Bad, because the structural-parity check compares structure, not "
+"translation quality — a correctly-structured but poorly translated README"
+" passes the check, so translation quality still relies on PR review."
+msgstr ""
+"悪い、なぜなら構造パリティチェックは構造を比較し翻訳品質は比較しない — 正しく構造化された"
+"が不十分に翻訳されたREADMEがチェックに合格し、翻訳品質は依然としてPRレビューに依存する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:49
+msgid ""
+"Neutral, because the stale-translation check uses git commit dates, which"
+" can produce false positives if an English README change is cosmetic "
+"(e.g. a badge URL) and does not require translation; contributors dismiss"
+" these by touching the localized file or the check's allowlist."
+msgstr ""
+"中立、なぜなら古い翻訳チェックはgitコミット日付を使用し、英語READMEの変更が表面的な場合"
+"（例: バッジURL）に偽陽性を生成する可能性がある — 貢献者はローカライズファイルに触れるか"
+"チェックの許可リストでこれらを却下する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:51
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:53
+msgid "Compliance with this decision will be confirmed by:"
+msgstr "この決定への準拠は以下によって確認されます:"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:55
+msgid ""
+"At least one localized README (e.g. `README.ja.md`) exists at the repo "
+"root alongside `README.md`."
+msgstr ""
+"少なくとも1つのローカライズされたREADME（例: `README.ja.md`）が `README.md` と共に"
+"リポジトリルートに存在する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:56
+msgid ""
+"GitHub renders the language switcher on the repository page and selecting"
+" a language displays the corresponding `README.<lang>.md`."
+msgstr ""
+"GitHubがリポジトリページに言語スイッチャーをレンダリングし、言語を選択すると対応する"
+"`README.<lang>.md` が表示される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:57
+msgid ""
+"Each `README.<lang>.md` follows the [Standard "
+"Readme](https://github.com/RichardLitt/standard-readme) layout, verified "
+"by the existing `standard-readme` pre-commit hook passing on every README"
+" file."
+msgstr ""
+"各 `README.<lang>.md` が[Standard Readme](https://github.com/RichardLitt/standard-readme)"
+"レイアウトに従い、既存の `standard-readme` pre-commitフックがすべてのREADMEファイルで"
+"合格することで検証される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:58
+msgid ""
+"A CI workflow file (e.g. `.github/workflows/readme-i18n-check.yml`) "
+"exists and passes, invoking the drift-detection script."
+msgstr ""
+"CIワークフローファイル（例: `.github/workflows/readme-i18n-check.yml`）が存在し"
+"合格し、ドリフト検出スクリプトを呼び出す。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:59
+msgid ""
+"The structural-parity check compares the heading/section structure of "
+"`README.md` against each `README.<lang>.md` and fails on divergence "
+"(missing, extra, or renamed sections/headings)."
+msgstr ""
+"構造パリティチェックが `README.md` の見出し/セクション構造を各 `README.<lang>.md` と"
+"比較し、分岐（欠落、追加、または改名されたセクション/見出し）で失敗する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:60
+msgid ""
+"The stale-translation check flags any `README.<lang>.md` whose last "
+"commit predates the latest `README.md` change, and fails CI until the "
+"translation is updated or explicitly allowlisted."
+msgstr ""
+"古い翻訳チェックが最後のコミットが最新の `README.md` 変更より前の `README.<lang>.md` を"
+"フラグし、翻訳が更新または明示的に許可リストに追加されるまでCIを失敗させる。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:61
+msgid ""
+"The drift-detection script has no third-party runtime dependencies "
+"(Python stdlib only) or reuses tooling already present in the repo."
+msgstr ""
+"ドリフト検出スクリプトにサードパーティのランタイム依存関係がなく（Python標準ライブラリのみ）"
+"、またはリポジトリにすでに存在するツールを再利用する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:62
+msgid ""
+"The translation and sync workflow is documented in `CONTRIBUTING.md`, "
+"including how to add a new language and how to resolve a stale-"
+"translation failure."
+msgstr ""
+"翻訳と同期のワークフローが `CONTRIBUTING.md` に文書化され、新しい言語の追加方法と"
+"古い翻訳失敗の解決方法が含まれる。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:63
+msgid ""
+"The check also runs as a pre-commit hook so drift is caught locally "
+"before a push."
+msgstr ""
+"チェックがpre-commitフックとしても実行され、push前にローカルでドリフトが検出される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:65
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の長所と短所"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:67
+msgid ""
+"EN-authoritative with CI structural-parity check — compare "
+"section/heading structure, fail on divergence"
+msgstr ""
+"CI構造パリティチェック付きEN権威 — セクション/見出し構造を比較し、分岐で失敗させる"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:69
+msgid ""
+"A zero-dependency script parses the headings/sections of `README.md` and "
+"each `README.<lang>.md` and fails if the structure differs. Runs in CI "
+"and/or as a pre-commit hook."
+msgstr ""
+"ゼロ依存のスクリプトが `README.md` と各 `README.<lang>.md` の見出し/セクションを解析し"
+"、構造が異なる場合に失敗する。CIおよび/またはpre-commitフックとして実行される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:71
+msgid ""
+"Good, because it keeps English authoritative and catches structural drift"
+" (missing, extra, or renamed sections) automatically."
+msgstr ""
+"良い、なぜなら英語を権威として維持し、構造的ドリフト（欠落、追加、または改名された"
+"セクション）を自動的に検出する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:72
+msgid ""
+"Good, because it preserves the Standard Readme layout across languages — "
+"every localized README must mirror the English section structure."
+msgstr ""
+"良い、なぜならStandard Readmeレイアウトを言語間で維持する — すべてのローカライズ"
+"READMEが英語のセクション構造をミラーする必要がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:73
+msgid ""
+"Good, because it is zero-cost and GitHub-native: a stdlib-only script in "
+"GitHub Actions, no paid services or API keys."
+msgstr ""
+"良い、なぜならゼロコストでGitHubネイティブである — GitHub Actions内の標準ライブラリのみの"
+"スクリプトで、有料サービスやAPIキーがない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:74
+msgid ""
+"Good, because it is low maintenance for a single maintainer — one small "
+"script, no build pipeline."
+msgstr ""
+"良い、なぜなら単一メンテナーにとって低保守である — 小さなスクリプト1つでビルドパイプラインなし。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:75
+msgid ""
+"Good, because it is consistent with the drift-detection philosophy of "
+"ADR-0008 and ADR-0006."
+msgstr ""
+"良い、なぜならADR-0008とADR-0006のドリフト検出哲学と整合する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:76
+msgid ""
+"Neutral, because it can run as both a pre-commit hook and a CI workflow, "
+"giving fast local feedback and PR enforcement."
+msgstr ""
+"中立、なぜならpre-commitフックとCIワークフローの両方として実行でき、高速なローカル"
+"フィードバックとPR強制を提供する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:77
+msgid ""
+"Bad, because it detects only structural drift, not content drift — a "
+"translation can be stale (English README updated, translation not) yet "
+"structurally identical, so it passes the check silently. This fails the "
+"content-drift decision driver."
+msgstr ""
+"悪い、なぜなら構造的ドリフトのみを検出しコンテンツドリフトは検出しない — 翻訳が古くても"
+"（英語READMEが更新され翻訳はされていない）構造的に同一であれば黙ってチェックに合格する。"
+"これはコンテンツドリフトの決定ドライバを満たさない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:79
+msgid ""
+"EN-authoritative with CI structural-parity + stale-translation check — "
+"also flag translations not updated after the English README changes"
+msgstr ""
+"CI構造パリティ + 古い翻訳チェック付きEN権威 — 英語README変更後に更新されていない"
+"翻訳もフラグする"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:81
+msgid ""
+"Builds on the structural-parity check by also comparing git history: if "
+"`README.md` was committed after a given `README.<lang>.md`, the "
+"translation is flagged as stale and CI fails until it is updated or "
+"explicitly allowlisted."
+msgstr ""
+"構造パリティチェックに加えてgit履歴も比較する — `README.md` が特定の `README.<lang>.md` "
+"より後にコミットされた場合、翻訳は古いとフラグされ、更新または明示的に許可リストに追加"
+"されるまでCIが失敗する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:83
+msgid ""
+"Good, because it satisfies every decision driver: English authoritative, "
+"GitHub-native `README.<lang>.md` rendering, Standard Readme layout "
+"preserved, structural drift detected, content drift detected, zero-cost, "
+"low maintenance, and consistent with ADR-0008/ADR-0006."
+msgstr ""
+"良い、なぜならすべての決定ドライバを満たす — 英語が権威、GitHubネイティブな "
+"`README.<lang>.md` レンダリング、Standard Readmeレイアウト維持、構造的ドリフト検出"
+"、コンテンツドリフト検出、ゼロコスト、低保守、ADR-0008/ADR-0006と整合。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:84
+msgid ""
+"Good, because it catches both kinds of drift — a localized README that "
+"diverges in structure or that falls behind the English README is surfaced"
+" automatically."
+msgstr ""
+"良い、なぜなら両方の種類のドリフトを検出する — 構造が分岐するか英語READMEに遅れをとる"
+"ローカライズREADMEが自動的に検出される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:85
+msgid ""
+"Good, because it is zero-cost and GitHub-native: a stdlib-only script "
+"using `git log`/commit dates, run in GitHub Actions and pre-commit, with "
+"no paid services or API keys."
+msgstr ""
+"良い、なぜならゼロコストでGitHubネイティブである — `git log`/コミット日付を使用する"
+"標準ライブラリのみのスクリプトがGitHub Actionsとpre-commitで実行され、有料サービスや"
+"APIキーがない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:86
+msgid ""
+"Good, because it keeps human judgement in the loop — translations are "
+"manual, so no LLM/API dependency and no generated-PR review load."
+msgstr ""
+"良い、なぜなら人間の判断をループ内に維持する — 翻訳は手動でLLM/API依存関係や生成PRの"
+"レビュー負荷がない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:87
+msgid ""
+"Good, because it is low maintenance for a single maintainer — one small "
+"script covering both checks, no build pipeline or external service to "
+"babysit."
+msgstr ""
+"良い、なぜなら単一メンテナーにとって低保守である — 両方のチェックをカバーする小さな"
+"スクリプト1つで、ビルドパイプラインや管理が必要な外部サービスがない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:88
+msgid ""
+"Neutral, because the stale-translation check uses commit dates and can "
+"false-flag cosmetic English changes (e.g. a badge URL); an allowlist or a"
+" trivial touch of the localized file dismisses these."
+msgstr ""
+"中立、なぜなら古い翻訳チェックはコミット日付を使用し、表面的な英語変更（例: バッジURL）を"
+"偽フラグする可能性がある — 許可リストまたはローカライズファイルへの些細な変更でこれらを"
+"却下できる。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:89
+msgid ""
+"Bad, because it does not generate translations — a contributor must still"
+" update each `README.<lang>.md` by hand; the check reminds them but does "
+"not do the work."
+msgstr ""
+"悪い、なぜなら翻訳を生成しない — 貢献者が各 `README.<lang>.md` を手動で更新する必要が"
+"まだある — チェックはリマインドするが作業は行わない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:90
+msgid ""
+"Bad, because it does not assess translation quality — a correctly "
+"structured but poorly translated README passes."
+msgstr ""
+"悪い、なぜなら翻訳品質を評価しない — 正しく構造化されたが不十分に翻訳されたREADMEが合格する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:92
+msgid ""
+"EN-authoritative with automated translation GitHub Action — LLM/API-based"
+" Action opens a PR regenerating README.<lang>.md"
+msgstr ""
+"自動翻訳GitHub Action付きEN権威 — LLM/APIベースのActionがREADME.<lang>.mdを"
+"再生成するPRを開く"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:94
+msgid ""
+"A GitHub Action watches `README.md` changes and uses an LLM or "
+"translation API to regenerate each `README.<lang>.md`, opening a PR with "
+"the result for review."
+msgstr ""
+"GitHub Actionが `README.md` の変更を監視し、LLMまたは翻訳APIを使用して各 "
+"`README.<lang>.md` を再生成し、レビュー用のPRを開く。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:96
+msgid ""
+"Good, because it eliminates manual translation effort for the initial "
+"generation and reduces content drift — the Action regenerates "
+"translations on every English change."
+msgstr ""
+"良い、なぜなら初期生成の手動翻訳労力を排除しコンテンツドリフトを削減する — Actionが"
+"英語の変更ごとに翻訳を再生成する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:97
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:124
+msgid ""
+"Good, because it keeps English authoritative and can produce committed "
+"`README.<lang>.md` files for GitHub's native switcher."
+msgstr ""
+"良い、なぜなら英語を権威として維持し、GitHubのネイティブスイッチャー用にコミットされた"
+"`README.<lang>.md` ファイルを生成できる。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:98
+msgid ""
+"Good, because content drift is largely eliminated — the Action runs on "
+"every English README change."
+msgstr ""
+"良い、なぜならコンテンツドリフトが大幅に排除される — Actionが英語READMEの変更ごとに"
+"実行される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:99
+msgid ""
+"Neutral, because it can produce committed `README.<lang>.md` files, but "
+"the generated Markdown may not exactly preserve the Standard Readme "
+"layout without prompt engineering and review."
+msgstr ""
+"中立、なぜならコミットされた `README.<lang>.md` ファイルを生成できるが、生成された"
+"MarkdownがプロンプトエンジニアリングとレビューなしではStandard Readmeレイアウトを正確に"
+"維持しない可能性がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:100
+msgid ""
+"Bad, because it violates the zero-cost / GitHub-native driver — LLM and "
+"translation APIs require paid API keys or accounts beyond what is in the "
+"repository."
+msgstr ""
+"悪い、なぜならゼロコスト / GitHubネイティブドライバに違反する — LLMと翻訳APIは"
+"リポジトリにあるもの以外に有料APIキーまたはアカウントを必要とする。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:101
+msgid ""
+"Bad, because every generated PR must be reviewed by a human for accuracy "
+"and layout, adding a recurring review load that is not \"minimal "
+"maintenance\" for a single maintainer."
+msgstr ""
+"悪い、なぜなら生成されたすべてのPRを正確性とレイアウトについて人間がレビューする必要があり"
+"、単一メンテナーにとって「最小限の保守」ではない再発するレビュー負荷を追加する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:102
+msgid ""
+"Bad, because LLM translations can hallucinate or drop content (e.g. code "
+"blocks, badge URLs), so structural-parity is not guaranteed without an "
+"additional check — meaning this option needs the structural-parity check "
+"on top anyway."
+msgstr ""
+"悪い、なぜならLLM翻訳はハルシネーションを起こしたりコンテンツを落としたりする可能性があり"
+"（例: コードブロック、バッジURL）、追加のチェックなしでは構造パリティが保証されない — "
+"つまりこの選択肢は結局構造パリティチェックを上に必要とする。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:103
+msgid ""
+"Bad, because it is inconsistent with the drift-detection philosophy of "
+"ADR-0008/ADR-0006, which favour detection over automatic generation."
+msgstr ""
+"悪い、なぜならADR-0008/ADR-0006のドリフト検出哲学と不整合であり、それらは自動生成よりも"
+"検出を好む。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:105
+msgid "Dual-maintenance with no enforcement — status quo, rely on PR review"
+msgstr "強制なしのデュアル保守 — 現状、PRレビューに頼る"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:107
+msgid ""
+"Localized READMEs are maintained by hand with no automated checks; "
+"keeping them in sync is left to reviewer vigilance during PR review."
+msgstr ""
+"ローカライズされたREADMEは自動チェックなしで手動で保守される — 同期の維持はPRレビュー中の"
+"レビューアーの警戒に任される。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:109
+msgid ""
+"Good, because it requires no tooling, scripts, or CI workflow — zero "
+"implementation effort."
+msgstr ""
+"良い、なぜならツール、スクリプト、CIワークフローが不要である — 実装労力がゼロである。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:110
+msgid "Good, because it is zero-cost and introduces no dependencies."
+msgstr "良い、なぜならゼロコストで依存関係を導入しない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:111
+msgid ""
+"Good, because it is low effort to start — a contributor simply adds a "
+"`README.<lang>.md`."
+msgstr ""
+"良い、なぜなら開始の労力が低い — 貢献者は単に `README.<lang>.md` を追加するだけである。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:112
+msgid ""
+"Neutral, because it is the default state of a repo with localized READMEs"
+" and no automation."
+msgstr ""
+"中立、なぜならローカライズされたREADMEと自動化のないリポジトリのデフォルト状態である。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:113
+msgid ""
+"Bad, because it fails the structural-drift and content-drift drivers — "
+"nothing detects a missing section or a stale translation, so drift "
+"accumulates silently."
+msgstr ""
+"悪い、なぜなら構造的ドリフトとコンテンツドリフトのドライバを満たさない — 欠落セクションや"
+"古い翻訳を検出するものがなく、ドリフトが黙って蓄積する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:114
+msgid ""
+"Bad, because it fails the CI-enforcement driver — reliance on reviewer "
+"vigilance is exactly what the project's pre-commit + CI pattern exists to"
+" avoid."
+msgstr ""
+"悪い、なぜならCI強制ドライバを満たさない — レビューアーの警戒への依存はまさにプロジェクトの"
+"pre-commit + CIパターンが回避するために存在するものである。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:115
+msgid ""
+"Bad, because it is inconsistent with ADR-0008/ADR-0006, which both "
+"automate drift detection rather than relying on review."
+msgstr ""
+"悪い、なぜならADR-0008/ADR-0006と不整合であり、それらはレビューに頼るのではなく"
+"ドリフト検出を自動化する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:116
+msgid ""
+"Bad, because for a single maintainer there often is no other reviewer, so"
+" \"rely on PR review\" reduces to \"rely on the same person remembering "
+"every language,\" which does not scale."
+msgstr ""
+"悪い、なぜなら単一メンテナーの場合、他のレビューアーがいないことが多く、「PRレビューに頼る」は"
+"「同じ人がすべての言語を覚えることに頼る」に還元され、スケールしない。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:118
+msgid ""
+"Single-source-of-truth with build-time locale generation — one README "
+"source, build step produces per-language files"
+msgstr ""
+"ビルド時ロケール生成付き単一情報源 — 1つのREADME情報源、ビルドステップが言語ごとの"
+"ファイルを生成する"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:120
+msgid ""
+"A single source (e.g. a template or a structured source file with "
+"translatable strings) is built into `README.md` and each "
+"`README.<lang>.md` at build time, so all languages share one structure by"
+" construction."
+msgstr ""
+"単一の情報源（例: テンプレートや翻訳可能な文字列を持つ構造化ソースファイル）がビルド時に"
+"`README.md` と各 `README.<lang>.md` にビルドされ、すべての言語が構造的に1つの構造を共有する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:122
+msgid ""
+"Good, because structural drift is impossible by construction — every "
+"language is generated from the same template, so headings and sections "
+"always match."
+msgstr ""
+"良い、なぜなら構造的ドリフトが構造的に不可能である — すべての言語が同じテンプレートから"
+"生成されるため、見出しとセクションが常に一致する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:123
+msgid ""
+"Good, because content drift is eliminated — regeneration from the source "
+"keeps every language current."
+msgstr ""
+"良い、なぜならコンテンツドリフトが排除される — 情報源からの再生成がすべての言語を最新に保つ。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:125
+msgid ""
+"Neutral, because the generated `README.<lang>.md` files are build "
+"artifacts that must be committed for GitHub to render them, which is "
+"unusual (committed artifacts) and can cause noisy diffs."
+msgstr ""
+"中立、なぜなら生成された `README.<lang>.md` ファイルはGitHubがレンダリングするために"
+"コミットする必要があるビルドアーティファクトであり、これは異例（コミットされたアーティファクト）"
+"でありノイズの多いdiffを引き起こす可能性がある。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:126
+msgid ""
+"Bad, because it violates the minimal-maintenance driver — it introduces a"
+" build pipeline (template engine, string store, generation script) that a"
+" single maintainer must build and maintain, far heavier than a drift-"
+"detection script."
+msgstr ""
+"悪い、なぜなら最小保守ドライバに違反する — 単一メンテナーが構築して保守しなければならない"
+"ビルドパイプライン（テンプレートエンジン、文字列ストア、生成スクリプト）を導入し"
+"、ドリフト検出スクリプトよりはるかに重い。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:127
+msgid ""
+"Bad, because it conflicts with the existing `standard-readme` pre-commit "
+"hook, which lints `README.md` directly; if `README.md` becomes a "
+"generated artifact, the hook must be reworked to lint the source or the "
+"generated output, adding complexity."
+msgstr ""
+"悪い、なぜなら既存の `standard-readme` pre-commitフックと競合する — フックは `README.md` "
+"を直接lintするが、`README.md` が生成されたアーティファクトになるとフックをソースまたは"
+"生成出力をlintするように再構築する必要があり複雑さが増す。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:128
+msgid ""
+"Bad, because contributors edit a template/string store rather than "
+"`README.md` itself, which is unfamiliar and raises the contribution "
+"barrier for a simple README fix."
+msgstr ""
+"悪い、なぜなら貢献者が `README.md` 自体ではなくテンプレート/文字列ストアを編集し"
+"、これは不慣れでシンプルなREADME修正の貢献障壁を高める。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:129
+msgid ""
+"Bad, because it is only partially zero-cost / GitHub-native — the "
+"generation tooling must be added and run in CI, adding build time and "
+"workflow complexity beyond the stdlib-only script of the drift-detection "
+"options."
+msgstr ""
+"悪い、なぜなら部分的にしかゼロコスト / GitHubネイティブでない — 生成ツールを追加してCIで"
+"実行する必要があり、ドリフト検出選択肢の標準ライブラリのみのスクリプトを超えるビルド時間と"
+"ワークフロー複雑さを追加する。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:131
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
+msgid "Comparison matrix"
+msgstr "比較マトリクス"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:135
+msgid ""
+"The table below summarises how each option scores against the evaluation "
+"criteria. ✓ = strong, ~ = partial, ✗ = weak."
+msgstr ""
+"以下の表は各選択肢が評価基準に対してどのようにスコアするかを要約する。"
+"✓ = 強い、~ = 部分的、✗ = 弱い。"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Criterion"
+msgstr "評価基準"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Structural parity only"
+msgstr "構造パリティのみ"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Structural parity + stale check"
+msgstr "構造パリティ + 古いチェック"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Automated translation action"
+msgstr "自動翻訳Action"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Dual-maintenance (status quo)"
+msgstr "デュアル保守（現状）"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Single-source build-time"
+msgstr "単一情報源ビルド時"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "English authoritative source"
+msgstr "英語権威ある情報源"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "✓"
+msgstr "✓"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "~"
+msgstr "~"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "GitHub native README.<lang>.md rendering"
+msgstr "GitHubネイティブなREADME.<lang>.mdレンダリング"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Standard Readme layout preserved"
+msgstr "Standard Readmeレイアウト維持"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Structural drift detected"
+msgstr "構造的ドリフト検出"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "✗"
+msgstr "✗"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Content drift detected"
+msgstr "コンテンツドリフト検出"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Zero-cost / GitHub-native"
+msgstr "ゼロコスト / GitHubネイティブ"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Low maintenance burden"
+msgstr "低保守負担"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md
+msgid "Consistency with ADR-0008/0006"
+msgstr "ADR-0008/0006との整合性"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:148
+msgid "Links"
+msgstr "リンク"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:150
+msgid ""
+"Standard Readme specification: [https://github.com/RichardLitt/standard-"
+"readme](https://github.com/RichardLitt/standard-readme)"
+msgstr ""
+"Standard Readme仕様: [https://github.com/RichardLitt/standard-"
+"readme](https://github.com/RichardLitt/standard-readme)"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:151
+msgid ""
+"GitHub localized READMEs: [https://docs.github.com/en/communities"
+"/setting-up-your-project-for-healthy-contributions/creating-a-default-"
+"community-health-file-for-your-"
+"organization](https://docs.github.com/en/communities/setting-up-your-"
+"project-for-healthy-contributions/creating-a-default-community-health-"
+"file-for-your-organization)"
+msgstr ""
+"GitHubローカライズREADME: [https://docs.github.com/en/communities"
+"/setting-up-your-project-for-healthy-contributions/creating-a-default-"
+"community-health-file-for-your-"
+"organization](https://docs.github.com/en/communities/setting-up-your-"
+"project-for-healthy-contributions/creating-a-default-community-health-"
+"file-for-your-organization)"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:152
+msgid ""
+"`standard-readme` pre-commit hook: [https://github.com/tkoyama010"
+"/standard-readme-pre-commit](https://github.com/tkoyama010/standard-"
+"readme-pre-commit)"
+msgstr ""
+"`standard-readme` pre-commitフック: [https://github.com/tkoyama010"
+"/standard-readme-pre-commit](https://github.com/tkoyama010/standard-"
+"readme-pre-commit)"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:153
+msgid ""
+"Parent issue: [#444](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/444) (i18n the README and keep translations in sync "
+"automatically)"
+msgstr ""
+"親issue: [#444](https://github.com/tkoyama010/pyvista-wasm/issues/444)"
+"（READMEをi18nし翻訳を自動的に同期し続ける）"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:154
+msgid ""
+"Standard Readme alignment: [#293](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/293) (Align README with the Standard Readme specification)"
+msgstr ""
+"Standard Readme整合: [#293](https://github.com/tkoyama010/pyvista-wasm/issues/293)"
+"（READMEをStandard Readme仕様に整合させる）"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:155
+msgid ""
+"This decision: [#445](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/445)"
+msgstr ""
+"この決定: [#445](https://github.com/tkoyama010/pyvista-wasm/issues/445)"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:156
+msgid ""
+"Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
+"deck.md) (i18n decision for the Slidev deck — same zero-cost / GitHub-"
+"native philosophy)"
+msgstr ""
+"関連: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)"
+"（Slidevデッキのi18n決定 — 同じゼロコスト / GitHubネイティブ哲学）"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:157
+msgid ""
+"Related: ADR-0008 [#439](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/439) (deciding how to internationalize the ReadTheDocs "
+"documentation)"
+msgstr ""
+"関連: ADR-0008 [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439)"
+"（ReadTheDocsドキュメントの国際化方法の決定）"
+
+#: ../../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:158
+msgid ""
+"Related: ADR-0006 [#442](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/442) (deciding how to keep slide locale files in sync)"
+msgstr ""
+"関連: ADR-0006 [#442](https://github.com/tkoyama010/pyvista-wasm/issues/442)"
+"（スライドロケールファイルの同期方法の決定)"

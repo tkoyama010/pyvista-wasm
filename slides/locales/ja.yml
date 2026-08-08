@@ -1,3 +1,5 @@
+# Authoritative locale for slide structure (see ADR-0006).
+# Add, remove, or rename keys here first, then mirror the structure in en.yml.
 cover:
   title: PyVista on WebAssembly
   subtitle: サーバーレス3D可視化の実現
@@ -14,20 +16,12 @@ agenda:
   i2d: vtk-wasm、TypeScriptグルー、PyVista API
   i3t: ブラウザでのライブデモ
   i3d: サーバー不要で動作するPyVista
-  i4t: パフォーマンスと制限
-  i4d: 現在機能するもの、まだ機能しないもの
   speaker_title: スピーカーはPyVistaのWASMを牽引しています
   speaker_subtitle: スピーカープロフィール
-  speaker_name: 小山 哲央
-  speaker_i1: PyVistaコントリビューター — バグ修正と機能PR
-  speaker_i2: pyvista-wasm共同メンテナー
-  speaker_i3: SciPy Conference 2022–2025 — MyST、PyVista、GeoVistaスプリント
-  speaker_i4: SciPyData Japan 2025 共同 organizer
-  speaker_i5: PyCon JP スピーカー兼 organizer
 
 pyvista:
-  title: PyVistaは科学計算における3D可視化とメッシュ解析の基盤となるPythonライブラリ
-  subtitle: PyVistaの歴史
+  title: PyVistaは科学計算3D可視化のPythonライブラリ
+  subtitle: PyVistaのホームページ
   i1t: VTKを基盤とする
   i1d: KitwareのC++可視化ツールキット、1993年から30年以上の開発の歴史
   i2t: Pythonic API
@@ -41,12 +35,14 @@ pyvista:
 
 problem:
   title: Web上での科学計算の3D計算結果の共有には、サーバーの用意がネックとなる
-  subtitle: 課題
-  i1t: Three.jsだけでは不十分
-  i1d: ブラウザ3Dの定番ライブラリに、物理・シミュレーション結果をレンダリングする直接の道はない
-  i2t: SSRにはサーバーが必要
-  i2d: サーバーサイドレンダリングがギャップを埋めるが、専用の可視化サーバーを構築・維持する必要がある
-  i3t: コスト
+  subtitle: 課題一覧
+  col_issue: 課題
+  col_detail: 詳細
+  i1t: Three.jsの機能不足
+  i1d: 科学技術計算の結果をレンダリングするには機能不足
+  i2t: 時間的コスト
+  i2d: 専用の可視化サーバーを構築・維持する必要がある
+  i3t: 金銭的コスト
   i3d: インフラの構築と運用は継続的な出費
   i4t: セキュリティリスク
   i4d: 機密のシミュレーションデータが分析者のマシンからサーバーへ送信される
@@ -55,8 +51,8 @@ problem:
   conc_post: 行いにくい — ブラウザで全てできれば？
 
 why_wasm:
-  title: ブラウザで完結することで、セキュリティとリソースの両方の問題を解決できる
-  subtitle: WASMの利点
+  title: ブラウザ完結でセキュリティとリソースの問題を解決
+  subtitle: ブラウザ完結のシーケンス図
   i1t: データはどこにも送られない
   i1d: WebAssemblyがブラウザ内で可視化パイプライン全体を実行、レンダリングサーバーへの往復が消える
   i2t: データはマシンから出ない
@@ -73,16 +69,7 @@ why_wasm:
 
 arch:
   title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
-  subtitle: "SSR と Wasm のアーキテクチャ図比較"
-  traditional: 従来 · サーバーサイドレンダリング
-  client: クライアント
-  data_send: ↓ データ送信
-  server: サーバー
-  render_return: ↓ レンダリングして返す
-  roundtrip_note: 全てのフレームがネットワーク往復
-  wasm_complete: Wasm · ブラウザ完結
-  render_in_browser: ブラウザでレンダリング
-  no_server_note: サーバー不要 — パイプラインは完全にクライアント側で実行
+  subtitle: "SSR と Wasm のシーケンス図比較"
   conc_pre: 往復が完全に消える —
   conc_bold: レンダリングはデータのある場所で行われる
 
@@ -107,8 +94,8 @@ vtk_wasm:
   conc_bold: ではPyVistaにどう繋ぐ？
 
 history:
-  title: VTK.wasmは実用化に向け着実に成熟している
-  subtitle: 実験的ビルドからランタイムGPU切替までの軌跡
+  title: VTK.wasmは実用化に向け開発が進められている
+  subtitle: VTK.wasmのサンプル
   y1: "2018"
   y1l: 実験段階
   y1d: Emscriptenビルド開始 — VTKをブラウザに持ってくる初期のプロトタイプ
@@ -129,55 +116,15 @@ history:
   conc_pre: 実験から本番へ —
   conc_bold: 技術は着実に成熟している
 
-caps:
-  title: 機能と現在の制限
-  subtitle: 3DCG・画像処理・可視化がブラウザで動作します
-  caps_title: 3DCG・画像処理・可視化がブラウザで動作します
-  caps_subtitle: 制約はあるが~100K要素は実用的な速度で動作
-  lim_title: 制約はあるが~100K要素は実用的な速度で動作
-  lim_subtitle: 現在の制限
-  caps_label: 機能
-  i1t: VTKフィルターパイプライン
-  i1d: フィルター実行全体がブラウザで完結
-  i2t: メッシュ読み込み
-  i2d: VTP、VTU、STL形式をクライアント側で直接読み込み
-  i3t: インタラクティブカメラ
-  i3d: 回転、パン、ズームを直接操作で
-  i4t: Python統合
-  i4d: PyVista APIが全てをPythonから駆動
-  lim_label: 制限
-  i5t: モジュールサイズ
-  i5d: 30–50 MB、gzip後10–15 MB
-  i6t: COOP/COEPヘッダー
-  i6d: マルチスレッドにはクロスオリジン分離が必要
-  i7t: WebGPUフラグ
-  i7d: 一部のブラウザで実験的フラグが必要な場合あり
-  i8t: 初期ロード
-  i8d: 初回レンダリングまで数秒〜10秒以上
-  conc_pre: 大規模メッシュには依然制約 — ただし
-  conc_bold: ~100K要素は実用的な対話速度で動作する
+demos:
+  title: 3DCG・画像処理・可視化がブラウザで動作する
+  subtitle: ブラウザで今すぐ動くライブデモ
 
 build_dist:
-  title: ビルドと配布の仕組み
-  subtitle_pre: 数時間のEmscriptenビルドが
-  subtitle_post: 一つに — バイナリは実行時にCDNからストリーミング
   build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるがユーザーには影響なし
   build_subtitle: vtk-wasmのビルドと使用方法
   dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
-  dist_subtitle: パッケージの配布方法アーキテクチャ図
-  build_label: ビルド
-  i1t: Emscripten
-  i1d: VTKのC++をWebAssemblyにコンパイル；ビルドには数時間かかるが、ユーザーは単に
-  i2t: "{'@'}kitware/vtk-wasm"
-  i2d: VTK APIをブラウザに公開するJavaScriptバインディングnpmパッケージ
-  dist_label: 配布
-  i3t: CDNから実行時
-  i3d: WASMバイナリはCDNから別途ロード、JSパッケージにはバンドルされない
-  i4t: createNamespace(url)
-  i4d: tarball URLからVTKクラスを非同期にロード
-  i5t: GitLabよりjsDelivr
-  i5d: マルチCDN（Cloudflare、Fastly、Bunny CDN）のエッジキャッシュがアジア地域でKitwareのGitLab直配信より高速
-  first_load: 初回ロードは~12–15 MB（gzip）— スピナーと遅延ロード（Intersection Observer）の併用を推奨
+  dist_subtitle: パッケージの配布方法シーケンス図
 
 pipeline:
   title: ユーザーはViteの設定で、VTK.wasmが利用可能
@@ -197,8 +144,8 @@ pipeline:
   i5d: ViteはWASMパッケージを事前バンドルしてはいけない；実行時に非同期ロード
 
 pyodide:
-  title: VTK.wasmをBEとする pyvista-wasm は、Pythonコードだけでブラウザ上に直感的な3D可視化を構築
-  subtitle: pyvista-wasmのアーキテクチャ図
+  title: PythonコードをFEとしてブラウザ上に3D可視化
+  subtitle: pyvista-wasmのシーケンス図
   i1t: Pyodide
   i1d: CPythonをWebAssemblyにコンパイル、ブラウザ内で本物のCPythonインタープリターを実行
   i2t: PyVista
@@ -216,67 +163,26 @@ pyodide:
   i6d_pre: の時、
   i6d_post: メッシュ取得はurllibの代わりにXMLHttpRequestを使用
 
-rendering:
-  title: vtk.wasmはWebGPUの実験的サポートを提供し、WebGLより高い性能とGPU使用が可能になっている
-  subtitle: WebGLとWebGPUの比較
-  webgl_label: WebGL · ベースライン
-  i1t: 普遍的にサポート
-  i1d: 全てのモダンブラウザで利用可能、常に機能する信頼できるレンダーパス
-  i2t: OpenGL ESの系譜
-  i2d: 長年のツールとドライバーサポートを持つ成熟したグラフィックスAPI
-  i3t: 安全なデフォルト
-  i3d: 古いまたは保守的なブラウザでも可視化が動作することを保証
-  webgpu_label: WebGPU · 次のステップ
-  i4t: より高い性能
-  i4d: WebGLより低いドライバーオーバーヘッドとメタルに近いアクセス
-  i5t: GPU使用
-  i5d: 固定レンダリングパイプラインだけでなく、汎用コンピュートシェーダーを公開
-  i6t: 一部で実験的
-  i6d: 一部のブラウザではフラグが必要；2023–2024でバックエンドが大きく進展
-  i7t: ランタイム切替
-  i7d: 現在のパッケージはランタイムでWebGLとWebGPUを選択、WebGPU不可時に自動フォールバック
-
 dev_ci:
   title: vtk.wasmをpyvista-wasmに統合した際には課題が発生したが、全て解決済み
   subtitle: 開発時に発生した問題とその解決策
-  i1t: 至る所でasync/await
-  i1d1: はPromiseを返すため、全てのVTKオブジェクト操作を
-  i1d2: に；
-  i1d3: 忘れるとWASMロード前にオブジェクトに触りエラー
-  i2t: SharedArrayBuffer
-  i2d1: 並列処理フィルターに必要なため、サーバーは
-  i2d2: と
-  conc_pre: クロスオリジン分離がマルチスレッドの鍵 —
-  conc_bold: これらのヘッダーがないとスレッドフィルターが黙って壊れる
-  config_label: vite.config.js
-  i3t: vite-plugin-cross-origin-isolation
-  i3d: devとpreviewでCOOP/COEPヘッダーを注入
-  i4t: tarball URLのCORS
-  i4d: はクロスオリジンでフェッチするため、CDNがCORSヘッダーを送信する必要
-  i5t: GitLabよりjsDelivr
-  i5d: KitwareのGitLab直URLはアジアで遅い；jsDelivrのマルチCDNエッジキャッシュはCORS対応かつ高速
+  col_issue: 問題
+  col_solution: 解決策
+  p1: createNamespace()がPromiseを返す
+  s1: 全てのVTKオブジェクト操作をawaitする
+  p2: 並列処理フィルターにSharedArrayBufferが必要
+  s2: vite-plugin-cross-origin-isolationでCOOP/COEPヘッダーを注入
+  p3: tarball URLをクロスオリジンで取得するためCORSが必要
+  s3: CORSヘッダーを送信するCDNを使う
+  p4: KitwareのGitLab直URLはアジアで遅い
+  s4: jsDelivrのマルチCDNエッジキャッシュを使う
 
 sphere:
-  title: javascriptでVTK.wasmを利用するためには行数が多くなるが、pyvista-wasmは数行で済む
-  subtitle: VTK.wamとpyvista-wasmの比較
-  pipeline_label: パイプライン
-  i1t: vtkSphereSource
-  i1d: 球のジオメトリを
-  i2t: vtkPolyDataMapper
-  i2d: ポリゴンデータをグラフィックスプリミティブにマッピング
-  i3t: vtkActor
-  i3d: 球の位置、プロパティ、マッパーを保持
-  i4t: vtkRenderer
-  i4d: アクターをビューポートにレンダリング
-  i5t: StackBlitz
-  i5d: ブラウザでパラメーターを編集しプレビューがリアルタイム更新
-  code_label: sphere.js
-  i6t: async/await
-  i6d: はPromiseを返す；全VTK操作をawait必要
-  i7t: COOP/COEP
-  i7d: にクロスオリジン分離ヘッダーが必要
-  i8t: CORS対応CDN
-  i8d: tarball URLはCORSを許可する必要；jsDelivrを推奨
+  title: pyvista-wasmはより直感的に3D可視化が可能
+  subtitle: VTK.wasmとpyvista-wasmのコード比較
+  js_label: VTK.wasm (JavaScript)
+  py_label: pyvista-wasm (Python / Pyodide)
+  output_label: 出力
 
 demo_jl:
   title: JupyterLiteでインストール不要の3Dメッシュを表示
@@ -331,46 +237,8 @@ demo_stlite:
 use_cases:
   title: PyVista on WebAssemblyは、サーバー不要で3D可視化データを共有するための新しい手段を提供
   subtitle: 3D可視化データ共有のユースケース図
-  suitable_label: 適している
-  i1t: シミュレーション共有
-  i1d: 物理シミュレーション結果の配布と共有
-  i2t: ローカルファイルビューアー
-  i2d: ローカルの分析ファイルのクイックビューアー
-  i3t: サーバーレス静的サイト
-  i3d: バックエンドなしの静的サイトに埋め込み
-  i4t: 小チームレビュー
-  i4d: 小チーム内での分析結果共有
-  i5t: 現場デモとクライアント先
-  i5d: ブラウザだけでプレゼン
-  unsuitable_label: 適していない
-  i6t: 巨大メッシュ
-  i6d: 数億要素のメッシュのリアルタイム処理
-  i7t: 低スペックデバイス
-  i7d: 遅いネットワーク接続や性能不足のハードウェア
-  i8t: 非WebGPUブラウザ
-  i8d: WebGPUサポートなしのブラウザでの高品質レンダリング
   conc_pre: PoC確認 —
   conc_bold: 専用サーバーなしで分析結果を共有可能
-
-roadmap:
-  title: Pyodideと組み合わせることで、ブラウザ内での科学技術計算と可視化の適用範囲はさらに広がる
-  subtitle: ブラウザ完結型科学技術計算のユースケース図
-  milestones_label: 主要マイルストーン
-  i1t: WebGPU安定化
-  i1d: バックエンドの成熟に伴い、GPU使用が固定レンダリングパイプラインを超えてブラウザで完全に動作する
-  i2t: Pyodide + PyVistaの成熟
-  i2d: 統合が着実に成熟し、Pythonエコシステムへのシームレスなブリッジを実現
-  i3t: ランタイムバックエンド切替
-  i3d: WebGL/WebGPU選択と自動フォールバックがブラウザサポートの成長と共に改善
-  matters_label: なぜ重要か
-  i4t: ブラウザ内のVTK 30年の歴史
-  i4d: 1993年から維持される遺産がURL一つで利用可能に
-  i5t: アクセシビリティの拡大
-  i5d: サーバーレス配信が科学技術可視化のユーザーを着実に広げる
-  i6t: より広い応用へ
-  i6d: WebGPUが安定化するにつれ、実用適用範囲はさらに広がると予想
-  conc_pre: 技術は着実に成熟 —
-  conc_bold: 次の章はブラウザネイティブのGPU使用
 
 inspiration:
   title: 参考にした記事
@@ -385,25 +253,5 @@ cta:
   title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションと議論を歓迎します
   cta_title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションを歓迎します
   qa_title: 質問と議論を歓迎します
-  qa_subtitle: Q&A
+  qa_subtitle: https://github.com/tkoyama010/pyvista-wasm/discussions
   subtitle: コントリビューション募集中
-  areas_label: コントリビューション領域
-  i1t: 新しいVTKフィルター
-  i1d: ブラウザで利用可能なフィルターパイプラインを拡張
-  i2t: より多くのファイル形式
-  i2d: 追加のメッシュ・データ形式をクライアント側でサポート
-  i3t: パフォーマンス改善
-  i3d: 対話速度をさらに向上
-  i4t: ドキュメントと翻訳
-  i4d: ドキュメント修正と日本語翻訳の改善
-  welcome: 小さなドキュメント修正や翻訳も大歓迎
-  repo_label: リポジトリ
-  topics_label: ディスカッショントピック
-  i5t: WASMへのポート
-  i5d: 重量級PythonライブラリをWebAssemblyにポートする際のビルドの課題とボトルネック
-  i6t: ブラウザベースの科学
-  i6d: "ブラウザベースの科学計算のユースケース: 教育、論文再現、社内ダッシュボード"
-  i7t: WASMは必要か？
-  i7d: それともJupyterサーバーで十分？サーバーレス可視化の価値を議論
-  qa: Q&A
-  thank_you: ありがとうございます — 質問と議論を歓迎します

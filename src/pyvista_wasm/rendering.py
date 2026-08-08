@@ -1296,7 +1296,9 @@ class BrowserRenderer(_BaseHTMLRenderer):
         container_id = self.container_id
         container_rule = (
             f"    #{container_id} "
-            "{ width: 100vw !important; height: 100vh !important; border: none !important; }\n"
+            "{ width: 100vw !important; height: 100vh !important;"
+            " min-width: 0 !important; min-height: 0 !important;"
+            " border: none !important; }\n"
         )
         style = (
             "  <style>\n"

@@ -39,10 +39,11 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Visualization",
 ]
 dependencies = [
-  "gitpython>=3.1.47",
+  "gitpython>=3.1.58",
   "jinja2>=3.1.0,<3.2.0",
   "lazy-loader>=0.4.0,<0.6.0",
   "numpy>=2.0.0,<2.6.0",
+  "pyyaml>=6.0",
   "typer>=0.9.0,<0.27.0",
 ]
 optional-dependencies.dev = [
@@ -59,7 +60,7 @@ optional-dependencies.docs = [
   "jupytext>=1.16.0,<1.20.0; python_version>='3.12'",
   "myst-parser>=4.0.0,<6.0.0; python_version>='3.12'",
   "sphinx>=8.0.0,<10.0.0; python_version>='3.12'",
-  "sphinx-book-theme>=1.1.0,<1.3.0; python_version>='3.12'",
+  "sphinx-book-theme>=1.1.0,<1.5.0; python_version>='3.12'",
   "sphinx-design>=0.6.0,<0.8.0; python_version>='3.12'",
   "sphinx-intl>=2.2.0,<2.4.0; python_version>='3.12'",
 ]
@@ -121,6 +122,10 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "F704",    # await outside async - top-level await valid in Pyodide
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
+]
+lint.per-file-ignores."scripts/*" = [
+  "INP001", # implicit namespace package - standalone scripts
+  "T201",   # print - CLI script output
 ]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests

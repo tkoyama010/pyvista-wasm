@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Texture.rst:2
+msgid "pyvista\\_wasm.Texture"
+msgstr "pyvista\\_wasm.Texture"
+
+#: of pyvista_wasm.texture.Texture:1
+msgid "Surface texture wrapping an image URL."
+msgstr "画像URLをラップするサーフェステクスチャ。"
+
+#: of pyvista_wasm.texture.Texture:3
+msgid ""
+"Mirrors the PyVista :class:`pyvista.Texture` API for browser-based "
+"rendering via VTK.wasm. A texture is applied to a mesh by passing it to "
+":meth:`~pyvista_wasm.Plotter.add_mesh` as the ``texture`` argument."
+msgstr ""
+"VTK.wasm を介したブラウザベースのレンダリング用に PyVista の :class:`pyvista.Texture` API "
+"をミラーリングします。テクスチャは ``texture`` 引数として "
+":meth:`~pyvista_wasm.Plotter.add_mesh` に渡すことでメッシュに適用されます。"
+
+#: ../../api/_autosummary/pyvista_wasm.Texture.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.texture.Texture:7
+msgid "URL of the image to use as a texture (PNG, JPEG, etc.)."
+msgstr "テクスチャとして使用する画像のURL（PNG, JPEG など）。"
+
+#: of pyvista_wasm.texture.Texture:11
+msgid "Examples"
+msgstr "例"
+
+#: ../../api/_autosummary/pyvista_wasm.Texture.rst:16:<autosummary>:1 of
+#: pyvista_wasm.texture.Texture.__init__:1
+msgid "Initialize a Texture from an image URL."
+msgstr "画像URLからTextureを初期化します。"
+
+#: ../../api/_autosummary/pyvista_wasm.Texture.rst:13
+msgid "Methods"
+msgstr "メソッド"
+
+#: ../../api/_autosummary/pyvista_wasm.Texture.rst:16:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.Texture.__init__>`\\ \\(url\\)"
+msgstr ":py:obj:`__init__ <pyvista_wasm.Texture.__init__>`\\ \\(url\\)"

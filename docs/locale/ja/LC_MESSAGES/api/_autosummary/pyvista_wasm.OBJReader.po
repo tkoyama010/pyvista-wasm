@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:2
+msgid "pyvista\\_wasm.OBJReader"
+msgstr "pyvista\\_wasm.OBJReader"
+
+#: of pyvista_wasm.readers.OBJReader:1
+msgid "Reader for Wavefront OBJ files (``.obj``)."
+msgstr "Wavefront OBJファイルのリーダー（``.obj``）。"
+
+#: of pyvista_wasm.readers.OBJReader:3
+msgid ""
+"Reads an OBJ ASCII file and produces a :class:`Mesh` that delegates "
+"parsing to VTK.wasm's ``vtkOBJReader`` at render time. Python extracts "
+"only the vertex coordinates so that camera framing and bounding-sphere "
+"queries work before rendering."
+msgstr ""
+"OBJ ASCIIファイルを読み込み、レンダリング時に VTK.wasm の ``vtkOBJReader`` に"
+"解析を委譲する :class:`Mesh` を生成します。Python は頂点座標のみを抽出するため、"
+"カメラフレーミングとバウンディングスフィアのクエリがレンダリング前に機能します。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.readers.OBJReader:8
+msgid "Path to the ``.obj`` file."
+msgstr "``.obj`` ファイルのパス。"
+
+#: of pyvista_wasm.readers.OBJReader:12
+msgid "Examples"
+msgstr "例"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.OBJReader.__init__:1
+msgid "Initialize the reader with a file path."
+msgstr "ファイルパスでリーダーを初期化します。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:13
+msgid "Methods"
+msgstr "メソッド"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:22:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.OBJReader.__init__>`\\ \\(path\\)"
+msgstr ":py:obj:`__init__ <pyvista_wasm.OBJReader.__init__>`\\ \\(path\\)"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:22:<autosummary>:1
+msgid ":py:obj:`read <pyvista_wasm.OBJReader.read>`\\ \\(\\)"
+msgstr ":py:obj:`read <pyvista_wasm.OBJReader.read>`\\ \\(\\)"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.OBJReader.read:1
+msgid "Read the OBJ file and return a Mesh."
+msgstr "OBJファイルを読み込んでMeshを返します。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst:24
+msgid "Attributes"
+msgstr "属性"
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`path <pyvista_wasm.OBJReader.path>`"
+msgstr ":py:obj:`path <pyvista_wasm.OBJReader.path>`"
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.OBJReader.path:1
+msgid "Return the file path."
+msgstr "ファイルパスを返します。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.OBJReader.path:3
+msgid "The path to the OBJ file."
+msgstr "OBJファイルのパス。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.readers.OBJReader.read:3
+msgid ""
+"The full file content is base64-encoded and stored so that VTK.wasm can "
+"parse it at render time.  Vertex coordinates are extracted on the Python "
+"side for bounding-sphere and camera-framing calculations."
+msgstr ""
+"ファイルの全内容はbase64エンコードされて保存され、VTK.wasm がレンダリング時に"
+"解析できます。頂点座標はバウンディングスフィアとカメラフレーミングの計算のために"
+"Python 側で抽出されます。"
+
+#: of pyvista_wasm.readers.OBJReader.read:7
+msgid "A mesh backed by the OBJ file content."
+msgstr "OBJファイルコンテンツによってバッキングされたメッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.OBJReader.rst
+msgid "Raises"
+msgstr "例外"
+
+#: of pyvista_wasm.readers.OBJReader.read:10
+msgid "If the file contains no vertex data."
+msgstr "ファイルに頂点データが含まれていない場合。"

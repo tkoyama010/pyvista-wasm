@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use pyvista-wasm in your work, please cite it using these metadata."
+title: "pyvista-wasm"
+abstract: "PyVista-like API for VTK.wasm — bring intuitive 3D visualization to the browser using WebAssembly."
+authors:
+  - given-names: "Tetsuo"
+    family-names: "Koyama"
+    email: "tkoyama010@gmail.com"
+type: software
+version: 0.9.0
+date-released: "2026-08-01"
+license: Apache-2.0
+repository-code: "https://github.com/tkoyama010/pyvista-wasm"
+url: "https://github.com/tkoyama010/pyvista-wasm"
+keywords:
+  - pyvista
+  - vtk
+  - wasm
+  - webassembly
+  - visualization
+preferred-citation:
+  type: software
+  title: "pyvista-wasm"
+  authors:
+    - given-names: "Tetsuo"
+      family-names: "Koyama"
+      email: "tkoyama010@gmail.com"
+  year: 2026
+  version: 0.9.0
+  license: Apache-2.0
+  url: "https://github.com/tkoyama010/pyvista-wasm"
