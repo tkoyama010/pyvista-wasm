@@ -1,5 +1,44 @@
 # Changelog
 
+## [0.10.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.9.0...pyvista-wasm-v0.10.0) (2026-08-08)
+
+### Features
+
+- add pre-commit hook for JA/EN slide locale key-parity check ([#478](https://github.com/tkoyama010/pyvista-wasm/issues/478)) ([03cc7c8](https://github.com/tkoyama010/pyvista-wasm/commit/03cc7c8120b5694dc256909a4baf7d4052cd7f46))
+- embed inline iframe previews on demo slides ([#419](https://github.com/tkoyama010/pyvista-wasm/issues/419)) ([8285b15](https://github.com/tkoyama010/pyvista-wasm/commit/8285b15f81812fe13bc44c357904540d8127db1a))
+- implement README i18n drift-detection per ADR-0007 ([#457](https://github.com/tkoyama010/pyvista-wasm/issues/457)) ([b1cde31](https://github.com/tkoyama010/pyvista-wasm/commit/b1cde31ed41fc794741da6c6f33ff1263ee27d94))
+
+### Bug Fixes
+
+- **deps:** bump fast-uri from 3.1.4 to 3.1.5 in /slides ([#434](https://github.com/tkoyama010/pyvista-wasm/issues/434)) ([bc61543](https://github.com/tkoyama010/pyvista-wasm/commit/bc615438335a8f170e4207d72e1209758f0bd533))
+- **deps:** bump GitPython to 3.1.58 ([#451](https://github.com/tkoyama010/pyvista-wasm/issues/451)) ([2f406ef](https://github.com/tkoyama010/pyvista-wasm/commit/2f406ef741e39501a84dada0e5966cd2a0b477b4))
+- **deps:** bump hono in /slides to fix Dependabot alert [#86](https://github.com/tkoyama010/pyvista-wasm/issues/86) ([#438](https://github.com/tkoyama010/pyvista-wasm/issues/438)) ([cb31df7](https://github.com/tkoyama010/pyvista-wasm/commit/cb31df7c8d2ad903e7246307d06c5bcb57cda89f))
+- **deps:** bump image-size, dompurify, js-yaml, mermaid in slides ([#453](https://github.com/tkoyama010/pyvista-wasm/issues/453)) ([1b84ccb](https://github.com/tkoyama010/pyvista-wasm/commit/1b84ccbffa0858f7f28ba0146c62e9de641bc411))
+- **deps:** bump js-yaml to 4.3.1 in root ([#452](https://github.com/tkoyama010/pyvista-wasm/issues/452)) ([7439ba5](https://github.com/tkoyama010/pyvista-wasm/commit/7439ba55fcf2f9cd280d6fe8082c94d3dc16624a))
+- **deps:** bump postcss in /slides to fix Dependabot alert [#90](https://github.com/tkoyama010/pyvista-wasm/issues/90) ([#436](https://github.com/tkoyama010/pyvista-wasm/issues/436)) ([0af5bea](https://github.com/tkoyama010/pyvista-wasm/commit/0af5bea17811ca16a0d2fdb46ec1c9a209e3b8dc))
+- enable key-parity hook in pre-commit.ci ([#481](https://github.com/tkoyama010/pyvista-wasm/issues/481)) ([070d5c4](https://github.com/tkoyama010/pyvista-wasm/commit/070d5c42a8a1caae27703b273374d3f68d0be276))
+- point JupyterLite links to pyvista-wasm readthedocs ([#454](https://github.com/tkoyama010/pyvista-wasm/issues/454)) ([0797636](https://github.com/tkoyama010/pyvista-wasm/commit/0797636c24c33179da6add00df411e32c22703e6))
+- remove metavar from typer.Option for 0.27+ compat ([#485](https://github.com/tkoyama010/pyvista-wasm/issues/485)) ([923cce1](https://github.com/tkoyama010/pyvista-wasm/commit/923cce14a29160ae6fecc5fa938e3c154a0fac7d))
+
+### Documentation
+
+- add ADR-0008 deciding how to internationalize the ReadTheDocs documentation ([#440](https://github.com/tkoyama010/pyvista-wasm/issues/440)) ([758bdbb](https://github.com/tkoyama010/pyvista-wasm/commit/758bdbbd829bf65831afbdc3c93f606f23f5803f))
+- add CITATION.cff and Citation section to README ([#433](https://github.com/tkoyama010/pyvista-wasm/issues/433)) ([fd868b9](https://github.com/tkoyama010/pyvista-wasm/commit/fd868b9eb4ffa46c95123dc7fe9b2c491354a4fd))
+- add mermaid architecture and use case diagrams to the slide deck ([#421](https://github.com/tkoyama010/pyvista-wasm/issues/421)) ([e447acd](https://github.com/tkoyama010/pyvista-wasm/commit/e447acdb4b8eb06cfce25ff648c67256ad4c2a88))
+- add PyCon JP 2026 pretalx talk page as reference ([#406](https://github.com/tkoyama010/pyvista-wasm/issues/406)) ([df4704e](https://github.com/tkoyama010/pyvista-wasm/commit/df4704eb873cf4ba3f5c004fb55dfe25b6dbec80))
+- add translation contributor guide and configure RTD Japanese project ([#479](https://github.com/tkoyama010/pyvista-wasm/issues/479)) ([a3590f6](https://github.com/tkoyama010/pyvista-wasm/commit/a3590f648458538827791d1b877771a08fd3fc5b))
+- apply 1-slide-1-message principle to slide deck ([#396](https://github.com/tkoyama010/pyvista-wasm/issues/396)) ([397643a](https://github.com/tkoyama010/pyvista-wasm/commit/397643ac8ea01f5944531c010bcc274905a0aed7))
+- bootstrap Japanese translation catalogs with sphinx-intl ([#471](https://github.com/tkoyama010/pyvista-wasm/issues/471)) ([01a4496](https://github.com/tkoyama010/pyvista-wasm/commit/01a44963278e0a57f408ca61eb257e5cf9eb5e70))
+- credit the vtk.wasm article the Slidev deck is inspired by ([#417](https://github.com/tkoyama010/pyvista-wasm/issues/417)) ([e0d9457](https://github.com/tkoyama010/pyvista-wasm/commit/e0d945795cd768f35bc1ee64d49a454dd80aac86))
+- define title/subtitle guideline and align slide deck subtitles ([#402](https://github.com/tkoyama010/pyvista-wasm/issues/402)) ([6814d3d](https://github.com/tkoyama010/pyvista-wasm/commit/6814d3dc74e6d369010eca1832132ccb28ed550b))
+- document ja.yml as authoritative locale for slide structure ([#482](https://github.com/tkoyama010/pyvista-wasm/issues/482)) ([e15f5e4](https://github.com/tkoyama010/pyvista-wasm/commit/e15f5e4cdbdaf7abe501222a43954867a8d4b6be))
+- generate .pot templates from documentation source ([#470](https://github.com/tkoyama010/pyvista-wasm/issues/470)) ([45c3453](https://github.com/tkoyama010/pyvista-wasm/commit/45c34539b3452c306e45607e9e9510bd24d8c87d))
+- translate Japanese .po files for ja locale ([#472](https://github.com/tkoyama010/pyvista-wasm/issues/472)) ([80954d8](https://github.com/tkoyama010/pyvista-wasm/commit/80954d8f51918fc26ae09c6b1cd19846e0a372d9))
+- write ADR-0004 deciding to adopt the "1 slide, 1 message" principle for the slide deck ([#392](https://github.com/tkoyama010/pyvista-wasm/issues/392)) ([db87294](https://github.com/tkoyama010/pyvista-wasm/commit/db87294000f381019a625c388431168dc0b89b62))
+- write ADR-0005 deciding how to verify AGENTS.md quality in CI ([#399](https://github.com/tkoyama010/pyvista-wasm/issues/399)) ([b33479f](https://github.com/tkoyama010/pyvista-wasm/commit/b33479f282b2edfec92d9270963aa258bf661674))
+- write ADR-0006 deciding how to keep slide locale files in sync ([#447](https://github.com/tkoyama010/pyvista-wasm/issues/447)) ([d399b38](https://github.com/tkoyama010/pyvista-wasm/commit/d399b384963750a78d2bd687a69ed384e73e0992))
+- write ADR-0007 for README i18n and sync strategy ([#446](https://github.com/tkoyama010/pyvista-wasm/issues/446)) ([c5cdcf1](https://github.com/tkoyama010/pyvista-wasm/commit/c5cdcf1f520cef5a9b16313d887bc501dbb31e2f))
+
 ## [0.9.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.8.0...pyvista-wasm-v0.9.0) (2026-07-31)
 
 ### Features
