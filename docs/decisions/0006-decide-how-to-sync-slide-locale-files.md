@@ -137,5 +137,5 @@ The table below summarises how each option scores against the evaluation criteri
 - This decision: [#442](https://github.com/tkoyama010/pyvista-wasm/issues/442)
 - Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md) (established the i18n structure with separate YAML locale files)
 - Related: [ADR-0004](0004-adopt-one-slide-one-message-principle.md) (governs slide content density, which affects when locale keys change)
-- Related: [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439) (ADR-0005 — deciding how to internationalize the ReadTheDocs documentation, not yet written)
+- Related: [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439) (ADR-0008 — deciding how to internationalize the ReadTheDocs documentation)
 - Existing pre-commit configuration: [`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)
