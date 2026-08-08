@@ -122,6 +122,10 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
 ]
+lint.per-file-ignores."slides/locales/check_locale_parity.py" = [
+  "INP001", # implicit namespace package - standalone dev script, not a package
+  "T201",   # print - CLI output is the purpose of this script
+]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
   "INP001",  # implicit namespace package
