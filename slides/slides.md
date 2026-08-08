@@ -645,9 +645,9 @@ pyvista-wasm --help
 ```
 
 ```
- Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...                                
+ Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...
 
- PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.            
+ PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.
 
 ╭─ Options ────────────────────────────────────────────────────────────────────╮
 │ --version                     Show version and exit.                         │
