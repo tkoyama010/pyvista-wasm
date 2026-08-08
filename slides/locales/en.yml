@@ -234,6 +234,19 @@ demo_stlite:
   conc_bold: when you need an interactive app with widgets, stlite is the natural choice
   demo_label: Live demo
 
+cli:
+  title: The pyvista-wasm CLI enables 3D visualization without writing Python code
+  subtitle: Command-line interface
+  col_command: Command
+  col_description: Description
+  cmd_plot: Plot mesh files in the browser
+  cmd_info: Show version and environment info
+  cmd_capture_preview: Capture a preview GIF of the JupyterLite demo
+  cmd_capture_marimo_preview: Capture a preview GIF of the marimo demo
+  cmd_capture_stlite_preview: Capture a preview GIF of the stlite demo
+  cmd_export_demo: Export a standalone HTML demo page
+  cmd_check_locale_parity: Check JA/EN locale key parity
+
 use_cases:
   title: PyVista on WebAssembly provides a new way to share 3D visualization data without a server
   subtitle: Use case diagram for sharing 3D visualization data
