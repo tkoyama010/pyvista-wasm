@@ -236,16 +236,7 @@ demo_stlite:
 
 cli:
   title: pyvista-wasm CLIでPythonコード不要で3D可視化が可能
-  subtitle: コマンドラインインターフェース
-  col_command: コマンド
-  col_description: 説明
-  cmd_plot: メッシュファイルをブラウザでプロット
-  cmd_info: バージョンと環境情報を表示
-  cmd_capture_preview: JupyterLiteデモのプレビューGIFをキャプチャ
-  cmd_capture_marimo_preview: marimoデモのプレビューGIFをキャプチャ
-  cmd_capture_stlite_preview: stliteデモのプレビューGIFをキャプチャ
-  cmd_export_demo: スタンドアロンHTMLデモページをエクスポート
-  cmd_check_locale_parity: JA/ENロケールキーの構造一致性をチェック
+  subtitle: pyvista-wasm cliの使用方法
 
 use_cases:
   title: PyVista on WebAssemblyは、サーバー不要で3D可視化データを共有するための新しい手段を提供

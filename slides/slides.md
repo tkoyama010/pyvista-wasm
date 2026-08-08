@@ -641,26 +641,14 @@ class: text-left
 <div class="pt-4">
 
 ```sh
-# Plot a mesh and save a screenshot — no Python needed
-pyvista-wasm plot sphere.vtk --screenshot out.png
-
-# Show version and environment info
 pyvista-wasm info
 ```
 
-</div>
-
-<div class="pt-4 problem-table">
-
-| {{ $t("cli.col_command") }} | {{ $t("cli.col_description") }} |
-|---|---|
-| `plot` | {{ $t("cli.cmd_plot") }} |
-| `info` | {{ $t("cli.cmd_info") }} |
-| `capture-preview` | {{ $t("cli.cmd_capture_preview") }} |
-| `capture-marimo-preview` | {{ $t("cli.cmd_capture_marimo_preview") }} |
-| `capture-stlite-preview` | {{ $t("cli.cmd_capture_stlite_preview") }} |
-| `export-demo` | {{ $t("cli.cmd_export_demo") }} |
-| `check-locale-parity` | {{ $t("cli.cmd_check_locale_parity") }} |
+```
+pyvista-wasm : 0.9.0
+Python     : 3.12.12 (main, Jan 14 2026, 19:35:58) [Clang 21.1.4 ]
+Platform   : Linux-7.0.0-29-generic-x86_64-with-glibc2.43
+```
 
 </div>
 
