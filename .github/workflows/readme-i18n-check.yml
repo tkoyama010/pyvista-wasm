@@ -23,10 +23,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
-        with:
-          python-version: '3.12'
-
       - name: Check README i18n drift
-        run: python tools/check_readme_i18n.py --allowlist .github/readme-i18n-allowlist
+        uses: tkoyama010/readme-i18n-check@main
+        with:
+          no-stale-check: ${{ github.event_name == 'pull_request' }}
