@@ -1,0 +1,29 @@
+name: README i18n Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  readme-i18n-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Check README i18n drift
+        uses: tkoyama010/readme-i18n-check@05752ce4dbfe0efab3b94b497db48cce5b7cb251  # v0.1.0
+        with:
+          no-stale-check: ${{ github.event_name == 'pull_request' }}

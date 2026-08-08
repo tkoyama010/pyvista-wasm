@@ -105,6 +105,11 @@ repos:
     hooks:
       - id: standard-readme
 
+  - repo: https://github.com/tkoyama010/readme-i18n-check
+    rev: v0.1.0
+    hooks:
+      - id: check-readme-i18n
+
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.29.0
     hooks:
