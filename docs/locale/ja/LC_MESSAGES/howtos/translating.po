@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 16:09+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../howtos/translating.md:1
+msgid "Translating the documentation"
+msgstr "ドキュメントの翻訳"
+
+#: ../../howtos/translating.md:3
+msgid ""
+"This guide explains how to add or update translations for the pyvista-"
+"wasm documentation."
+msgstr "このガイドでは、pyvista-wasmドキュメントの翻訳を追加・更新する方法を説明します。"
+
+#: ../../howtos/translating.md:5
+msgid ""
+"The project uses Sphinx native gettext + Read the Docs translations, as "
+"decided in [ADR-0008](../decisions/0008-decide-how-to-internationalize-"
+"the-readthedocs-documentation.md)."
+msgstr ""
+"本プロジェクトは[ADR-0008](../decisions/0008-decide-how-to-internationalize-"
+"the-readthedocs-documentation.md)で決定された通り、Sphinxネイティブgettext"
+" + Read the Docs翻訳を使用します。"
+
+#: ../../howtos/translating.md:7
+msgid "Prerequisites"
+msgstr "前提条件"
+
+#: ../../howtos/translating.md:9
+msgid "Install the documentation extras:"
+msgstr "ドキュメントのextrasをインストールします:"
+
+#: ../../howtos/translating.md:15
+msgid ""
+"This installs `sphinx`, `sphinx-intl`, and all other tools needed to "
+"build the documentation."
+msgstr ""
+"これにより`sphinx`、`sphinx-intl`、およびドキュメントビルドに必要な全ツールが"
+"インストールされます。"
+
+#: ../../howtos/translating.md:17
+msgid "Workflow"
+msgstr "ワークフロー"
+
+#: ../../howtos/translating.md:19
+msgid "1. Generate `.pot` templates"
+msgstr "1. `.pot`テンプレートの生成"
+
+#: ../../howtos/translating.md:21
+msgid "Extract translatable strings from the documentation source:"
+msgstr "ドキュメントソースから翻訳可能な文字列を抽出します:"
+
+#: ../../howtos/translating.md:27
+msgid ""
+"This runs `sphinx-build -b gettext` and produces `.pot` files under "
+"`docs/_build/gettext/`."
+msgstr ""
+"これは`sphinx-build -b gettext`を実行し、`docs/_build/gettext/`に"
+"`.pot`ファイルを生成します。"
+
+#: ../../howtos/translating.md:29
+msgid "2. Update `.po` catalogs"
+msgstr "2. `.po`カタログの更新"
+
+#: ../../howtos/translating.md:31
+msgid "Update the `.po` files for a specific language (e.g. `ja`):"
+msgstr "特定の言語（例: `ja`）の`.po`ファイルを更新します:"
+
+#: ../../howtos/translating.md:37
+msgid ""
+"This runs `sphinx-intl update -p docs/_build/gettext -l ja` and updates "
+"`docs/locale/ja/LC_MESSAGES/*.po`."
+msgstr ""
+"これは`sphinx-intl update -p docs/_build/gettext -l ja`を実行し、"
+"`docs/locale/ja/LC_MESSAGES/*.po`を更新します。"
+
+#: ../../howtos/translating.md:39
+msgid ""
+"New `msgid` entries appear with empty `msgstr` fields. Existing "
+"translations are preserved."
+msgstr ""
+"新しい`msgid`エントリは空の`msgstr`フィールドとして表示されます。"
+"既存の翻訳は保持されます。"
+
+#: ../../howtos/translating.md:41
+msgid "3. Translate `.po` files"
+msgstr "3. `.po`ファイルの翻訳"
+
+#: ../../howtos/translating.md:43
+msgid ""
+"Edit the `.po` files under `docs/locale/<lang>/LC_MESSAGES/` with a text "
+"editor or `.po`-aware editor (e.g. Poedit, VS Code with gettext "
+"extensions)."
+msgstr ""
+"`docs/locale/<lang>/LC_MESSAGES/`以下の`.po`ファイルをテキストエディタまたは"
+"`.po`対応エディタ（例: Poedit、gettext拡張機能を入れたVS Code）で編集します。"
+
+#: ../../howtos/translating.md:45
+msgid "Fill in the `msgstr` field for each `msgid` entry:"
+msgstr "各`msgid`エントリの`msgstr`フィールドを埋めます:"
+
+#: ../../howtos/translating.md:52
+msgid ""
+"Preserve reStructuredText/MyST syntax inside `msgstr` entries (links, "
+"roles, directives, etc.)."
+msgstr ""
+"`msgstr`エントリ内のreStructuredText/MyST構文（リンク、ロール、"
+"ディレクティブ等）を保持してください。"
+
+#: ../../howtos/translating.md:54
+msgid "4. Build locally to verify"
+msgstr "4. ローカルビルドで確認"
+
+#: ../../howtos/translating.md:56
+msgid "Build the documentation in the target language:"
+msgstr "対象言語でドキュメントをビルドします:"
+
+#: ../../howtos/translating.md:62
+msgid ""
+"Open `docs/_build/html/ja/index.html` in a browser to verify the "
+"translation."
+msgstr ""
+"ブラウザで`docs/_build/html/ja/index.html`を開いて翻訳を確認します。"
+
+#: ../../howtos/translating.md:64
+msgid "5. Submit a pull request"
+msgstr "5. プルリクエストの送信"
+
+#: ../../howtos/translating.md:66
+msgid ""
+"Commit the updated `.po` files and open a pull request. The translation "
+"will be built on Read the Docs after merge."
+msgstr ""
+"更新した`.po`ファイルをコミットしてプルリクエストを開きます。"
+"マージ後、Read the Docsで翻訳がビルドされます。"
+
+#: ../../howtos/translating.md:68
+msgid "Read the Docs configuration"
+msgstr "Read the Docsの設定"
+
+#: ../../howtos/translating.md:70
+msgid ""
+"Each language is built as a separate Read the Docs translation project, "
+"linked to the parent (English) project via the Read the Docs dashboard. "
+"The flyout-menu language switcher appears automatically once the "
+"translation project is linked."
+msgstr ""
+"各言語は個別のRead the Docs翻訳プロジェクトとしてビルドされ、"
+"Read the Docsダッシュボード経由で親（英語）プロジェクトにリンクされます。"
+"翻訳プロジェクトがリンクされると、フライアウトメニューの言語スイッチャーが"
+"自動的に表示されます。"
+
+#: ../../howtos/translating.md:72
+msgid "To add a new language:"
+msgstr "新しい言語を追加するには:"
+
+#: ../../howtos/translating.md:74
+msgid ""
+"Create a Read the Docs project (e.g. `pyvista-wasm-<lang>`), set its "
+"Language to the target language, and point it at the same repository."
+msgstr ""
+"Read the Docsプロジェクト（例: `pyvista-wasm-<lang>`）を作成し、"
+"Languageを対象言語に設定し、同じリポジトリを指定します。"
+
+#: ../../howtos/translating.md:75
+msgid ""
+"Add it as a \"Translation\" of the parent (English) project via the Read "
+"the Docs dashboard."
+msgstr ""
+"Read the Docsダッシュボードで親（英語）プロジェクトの「Translation」として"
+"追加します。"
+
+#: ../../howtos/translating.md:76
+msgid "Bootstrap the `.po` catalogs: `make -C docs update-po LANG=<lang>`."
+msgstr ".poカタログをブートストラップ: `make -C docs update-po LANG=<lang>`"
+
+#: ../../howtos/translating.md:77
+msgid "Translate the `.po` files and submit a pull request."
+msgstr ".poファイルを翻訳してプルリクエストを送信します。"
+
