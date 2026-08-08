@@ -195,4 +195,3 @@ msgstr ".poカタログをブートストラップ: `make -C docs update-po LANG
 #: ../../howtos/translating.md:77
 msgid "Translate the `.po` files and submit a pull request."
 msgstr ".poファイルを翻訳してプルリクエストを送信します。"
-

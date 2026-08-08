@@ -780,4 +780,3 @@ msgid ""
 msgstr ""
 "関連: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
 "deck.md)（デッキのi18n構造を確立した）"
-

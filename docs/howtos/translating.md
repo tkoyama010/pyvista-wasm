@@ -72,6 +72,6 @@ Each language is built as a separate Read the Docs translation project, linked t
 To add a new language:
 
 1. Create a Read the Docs project (e.g. `pyvista-wasm-<lang>`), set its Language to the target language, and point it at the same repository.
-2. Add it as a "Translation" of the parent (English) project via the Read the Docs dashboard.
-3. Bootstrap the `.po` catalogs: `make -C docs update-po LANG=<lang>`.
-4. Translate the `.po` files and submit a pull request.
+1. Add it as a "Translation" of the parent (English) project via the Read the Docs dashboard.
+1. Bootstrap the `.po` catalogs: `make -C docs update-po LANG=<lang>`.
+1. Translate the `.po` files and submit a pull request.
