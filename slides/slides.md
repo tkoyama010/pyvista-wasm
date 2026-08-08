@@ -638,7 +638,7 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>
 
-<div class="pt-4">
+<div class="pt-4" style="max-height: 70vh; overflow-y: auto;">
 
 ```sh
 pyvista-wasm --help
