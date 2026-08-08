@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Disc.rst:2
 msgid "pyvista\\_wasm.Disc"
-msgstr ""
+msgstr "pyvista\\_wasm.Disc"
 
 #: of pyvista_wasm.mesh.Disc:1
 msgid "Create a disc (annular ring) geometric primitive."
-msgstr ""
+msgstr "ディスク（環状リング）の幾何プリミティブを作成します。"
 
 #: of pyvista_wasm.mesh.Disc:3
 msgid ""
@@ -35,47 +35,51 @@ msgid ""
 "as triangles, so it renders correctly in VTK.wasm without depending on "
 "any specific VTK.wasm source filter."
 msgstr ""
+"これは :func:`pyvista.Disc` API をミラーリングします。ジオメトリは "
+"``c_res`` 個のポイントからなる ``(r_res + 1)`` 個のリングから直接構築され、"
+"三角形として接続されるため、特定の VTK.wasm ソースフィルタに依存せずに "
+"VTK.wasm で正しくレンダリングされます。"
 
 #: ../../api/_autosummary/pyvista_wasm.Disc.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Disc:8
 msgid "Center of the disc (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "ディスクの中心 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Disc:10
 msgid "Inner radius of the disc. Default is 0.25."
-msgstr ""
+msgstr "ディスクの内半径。デフォルトは0.25。"
 
 #: of pyvista_wasm.mesh.Disc:12
 msgid "Outer radius of the disc. Default is 0.5."
-msgstr ""
+msgstr "ディスクの外半径。デフォルトは0.5。"
 
 #: of pyvista_wasm.mesh.Disc:14
 msgid "Normal vector of the disc. Default is (0, 0, 1)."
-msgstr ""
+msgstr "ディスクの法線ベクトル。デフォルトは (0, 0, 1)。"
 
 #: of pyvista_wasm.mesh.Disc:16
 msgid "Number of radial subdivisions. Default is 1."
-msgstr ""
+msgstr "半径方向の細分割数。デフォルトは1。"
 
 #: of pyvista_wasm.mesh.Disc:18
 msgid "Number of circumferential subdivisions. Default is 6."
-msgstr ""
+msgstr "円周方向の細分割数。デフォルトは6。"
 
 #: ../../api/_autosummary/pyvista_wasm.Disc.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Disc:21
 msgid "A disc (annular ring) mesh."
-msgstr ""
+msgstr "ディスク（環状リング）メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Disc.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Disc:25
 msgid "Examples"
-msgstr ""
+msgstr "例"

@@ -22,54 +22,56 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Line.rst:2
 msgid "pyvista\\_wasm.Line"
-msgstr ""
+msgstr "pyvista\\_wasm.Line"
 
 #: of pyvista_wasm.mesh.Line:1
 msgid "Create a line segment between two points."
-msgstr ""
+msgstr "2点間の線分を作成します。"
 
 #: of pyvista_wasm.mesh.Line:3
 msgid ""
 "This mirrors the :func:`pyvista.Line` API, producing a polyline of "
 "``resolution + 1`` evenly spaced points from ``pointa`` to ``pointb``."
 msgstr ""
+"これは :func:`pyvista.Line` API をミラーリングし、``pointa`` から ``pointb`` "
+"まで等間隔に配置された ``resolution + 1`` 個のポイントからなるポリラインを生成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Line.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Line:6
 msgid "Start point of the line (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "線分の開始点 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Line:8
 msgid "End point of the line (x, y, z). Default is (1, 0, 0)."
-msgstr ""
+msgstr "線分の終了点 (x, y, z)。デフォルトは (1, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Line:10
 msgid "Number of line segments (i.e. ``resolution + 1`` points). Default is 1."
-msgstr ""
+msgstr "線分の数（すなわち ``resolution + 1`` 個のポイント）。デフォルトは1。"
 
 #: ../../api/_autosummary/pyvista_wasm.Line.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Line:13
 msgid "A line mesh."
-msgstr ""
+msgstr "線分メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Line.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: ../../api/_autosummary/pyvista_wasm.Line.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.mesh.Line:16
 msgid "If ``resolution`` is less than 1."
-msgstr ""
+msgstr "``resolution`` が1未満の場合。"
 
 #: of pyvista_wasm.mesh.Line:19
 msgid "Examples"
-msgstr ""
+msgstr "例"

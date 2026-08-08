@@ -22,48 +22,48 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Cylinder.rst:2
 msgid "pyvista\\_wasm.Cylinder"
-msgstr ""
+msgstr "pyvista\\_wasm.Cylinder"
 
 #: of pyvista_wasm.mesh.Cylinder:1
 msgid "Create a cylinder mesh."
-msgstr ""
+msgstr "円柱メッシュを作成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Cylinder:3
 msgid "Center of the cylinder (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "円柱の中心 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Cylinder:5
 msgid "Direction vector of the cylinder axis. Default is (1, 0, 0)."
-msgstr ""
+msgstr "円柱の軸の方向ベクトル。デフォルトは (1, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Cylinder:7
 msgid "Radius of the cylinder. Default is 0.5."
-msgstr ""
+msgstr "円柱の半径。デフォルトは0.5。"
 
 #: of pyvista_wasm.mesh.Cylinder:9
 msgid "Height of the cylinder. Default is 1.0."
-msgstr ""
+msgstr "円柱の高さ。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Cylinder:11
 msgid "Number of points around the cylinder. Default is 100."
-msgstr ""
+msgstr "円柱の周囲のポイント数。デフォルトは100。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Cylinder:14
 msgid "A cylinder mesh."
-msgstr ""
+msgstr "円柱メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Cylinder:18
 msgid "Examples"
-msgstr ""
+msgstr "例"

@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst:2
 msgid "pyvista\\_wasm.Texture"
-msgstr ""
+msgstr "pyvista\\_wasm.Texture"
 
 #: of pyvista_wasm.texture.Texture:1
 msgid "Surface texture wrapping an image URL."
-msgstr ""
+msgstr "画像URLをラップするサーフェステクスチャ。"
 
 #: of pyvista_wasm.texture.Texture:3
 msgid ""
@@ -34,28 +34,31 @@ msgid ""
 "rendering via VTK.wasm. A texture is applied to a mesh by passing it to "
 ":meth:`~pyvista_wasm.Plotter.add_mesh` as the ``texture`` argument."
 msgstr ""
+"VTK.wasm を介したブラウザベースのレンダリング用に PyVista の :class:`pyvista.Texture` API "
+"をミラーリングします。テクスチャは ``texture`` 引数として "
+":meth:`~pyvista_wasm.Plotter.add_mesh` に渡すことでメッシュに適用されます。"
 
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.texture.Texture:7
 msgid "URL of the image to use as a texture (PNG, JPEG, etc.)."
-msgstr ""
+msgstr "テクスチャとして使用する画像のURL（PNG, JPEG など）。"
 
 #: of pyvista_wasm.texture.Texture:11
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst:16:<autosummary>:1 of
 #: pyvista_wasm.texture.Texture.__init__:1
 msgid "Initialize a Texture from an image URL."
-msgstr ""
+msgstr "画像URLからTextureを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst:16:<autosummary>:1
 msgid ":py:obj:`__init__ <pyvista_wasm.Texture.__init__>`\\ \\(url\\)"
-msgstr ""
+msgstr ":py:obj:`__init__ <pyvista_wasm.Texture.__init__>`\\ \\(url\\)"

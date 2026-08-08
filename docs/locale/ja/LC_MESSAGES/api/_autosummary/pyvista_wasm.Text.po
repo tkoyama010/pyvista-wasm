@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:2
 msgid "pyvista\\_wasm.Text"
-msgstr ""
+msgstr "pyvista\\_wasm.Text"
 
 #: of pyvista_wasm.text.Text:1
 msgid "A text annotation actor for 3D rendering."
-msgstr ""
+msgstr "3Dレンダリング用のテキスト注釈アクター。"
 
 #: of pyvista_wasm.text.Text:3
 msgid ""
@@ -34,101 +34,113 @@ msgid ""
 "3D scenes. Text is positioned in normalized viewport coordinates (0 to 1 "
 "in both x and y)."
 msgstr ""
+"``vtk.Rendering.Core.vtkTextActor`` をラップして、3Dシーン上に2Dテキストオーバーレイを"
+"表示します。テキストは正規化ビューポート座標（x, y ともに 0 から 1）で位置指定されます。"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.text.Text:6
 msgid ""
 "Text string to be displayed. ``\"\\n\"`` is recognized as a line "
 "separator. Characters must be UTF-8 encoded. Default is ``\"Text\"``."
 msgstr ""
+"表示されるテキスト文字列。``\"\\n\"`` は行区切りとして認識されます。"
+"文字は UTF-8 エンコードである必要があります。デフォルトは ``\"Text\"``。"
 
 #: of pyvista_wasm.text.Text:9
 msgid ""
 "Position coordinate in normalized viewport space (x, y) where (0, 0) is "
 "bottom-left and (1, 1) is top-right. Default is ``(0.5, 0.5)``."
 msgstr ""
+"正規化ビューポート空間の位置座標 (x, y)。(0, 0) が左下、(1, 1) が右上。"
+"デフォルトは ``(0.5, 0.5)``。"
 
 #: of pyvista_wasm.text.Text:12
 msgid ""
 "The property of this text actor controlling appearance. If ``None``, "
 "creates a default TextProperty. Default is ``None``."
 msgstr ""
+"このテキストアクターの外観を制御するプロパティ。``None`` の場合、"
+"デフォルトのTextPropertyが作成されます。デフォルトは ``None``。"
 
 #: of pyvista_wasm.text.Text:15
 msgid ""
 "The name of this actor used when tracking on a plotter. Default is "
 "``None``."
-msgstr ""
+msgstr "プロッタでトラッキングする際に使用されるこのアクターの名前。デフォルトは ``None``。"
 
 #: of pyvista_wasm.Text.input:11 pyvista_wasm.Text.position:13
 #: pyvista_wasm.text.Text:19
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.text.Text:23
 msgid "Create a text overlay:"
-msgstr ""
+msgstr "テキストオーバーレイを作成します:"
 
 #: of pyvista_wasm.text.Text:32
 msgid "Customize text appearance:"
-msgstr ""
+msgstr "テキストの外観をカスタマイズします:"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1 of
 #: pyvista_wasm.text.Text.__init__:1
 msgid "Initialize a Text instance."
-msgstr ""
+msgstr "Textインスタンスを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.Text.__init__>`\\ \\(\\[text\\, "
 "position\\, prop\\, name\\]\\)"
 msgstr ""
+":py:obj:`__init__ <pyvista_wasm.Text.__init__>`\\ \\(\\[text\\, "
+"position\\, prop\\, name\\]\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1
 msgid ""
 ":py:obj:`generate_vtk_js_code <pyvista_wasm.Text.generate_vtk_js_code>`\\"
 " \\(idx\\)"
 msgstr ""
+":py:obj:`generate_vtk_js_code <pyvista_wasm.Text.generate_vtk_js_code>`\\"
+" \\(idx\\)"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1 of
 #: pyvista_wasm.text.Text.generate_vtk_js_code:1
 msgid "Generate JavaScript code for this text actor as an HTML overlay div."
-msgstr ""
+msgstr "このテキストアクターの HTML オーバーレイ div としての JavaScript コードを生成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst:24
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`input <pyvista_wasm.Text.input>`"
-msgstr ""
+msgstr ":py:obj:`input <pyvista_wasm.Text.input>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Text.input:1
 msgid "Get or set the text string to be displayed."
-msgstr ""
+msgstr "表示するテキスト文字列を取得または設定します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`position <pyvista_wasm.Text.position>`"
-msgstr ""
+msgstr ":py:obj:`position <pyvista_wasm.Text.position>`"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.Text.position:1
 msgid "Get or set the text position in normalized viewport coordinates."
-msgstr ""
+msgstr "正規化ビューポート座標でのテキスト位置を取得または設定します。"
 
 #: of pyvista_wasm.text.Text.generate_vtk_js_code:3
 msgid "Unique index used to avoid variable name collisions in JavaScript."
-msgstr ""
+msgstr "JavaScript での変数名の衝突を避けるために使用される一意のインデックス。"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.text.Text.generate_vtk_js_code:6
 msgid ""
@@ -136,31 +148,37 @@ msgid ""
 " absolutely positioned div over the rendering container because "
 "``vtkTextActor`` is not available in the VTK.wasm bundle."
 msgstr ""
+"テキストオーバーレイ div を作成して設定する JavaScript コード。"
+"``vtkTextActor`` が VTK.wasm バンドルで利用できないため、"
+"レンダリングコンテナ上に絶対位置指定の div を使用します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Text.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.Text.input:3
 msgid ""
 "Text string to display. Newline characters (``\"\\n\"``) are recognized "
 "as line separators. Characters must be UTF-8 encoded."
 msgstr ""
+"表示するテキスト文字列。改行文字（``\"\\n\"``）は行区切りとして認識されます。"
+"文字は UTF-8 エンコードである必要があります。"
 
 #: of pyvista_wasm.Text.input:7
 msgid "The current text string."
-msgstr ""
+msgstr "現在のテキスト文字列。"
 
 #: of pyvista_wasm.Text.position:3
 msgid ""
 "Position is specified in normalized viewport coordinates where (0, 0) is "
 "the bottom-left corner and (1, 1) is the top-right corner."
 msgstr ""
+"位置は正規化ビューポート座標で指定されます。(0, 0) が左下隅、(1, 1) が右上隅です。"
 
 #: of pyvista_wasm.Text.position:6
 msgid "Position as (x, y) in normalized viewport coordinates."
-msgstr ""
+msgstr "正規化ビューポート座標での位置 (x, y)。"
 
 #: of pyvista_wasm.Text.position:9
 msgid "Position as (x, y)."
-msgstr ""
+msgstr "位置 (x, y)。"

@@ -22,78 +22,80 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.PointData.rst:2
 msgid "pyvista\\_wasm.PointData"
-msgstr ""
+msgstr "pyvista\\_wasm.PointData"
 
 #: of pyvista_wasm.mesh.PointData:1
 msgid "Dict-like container for point data arrays."
-msgstr ""
+msgstr "ポイントデータ配列の辞書ライクなコンテナ。"
 
 #: of pyvista_wasm.mesh.PointData:3
 msgid ""
 "This class provides a dictionary interface for storing named scalar "
 "arrays associated with mesh points, mimicking PyVista's point_data API."
 msgstr ""
+"このクラスは、メッシュポイントに関連付けられた名前付きスカラー配列を格納するための"
+"辞書インターフェースを提供し、PyVista の point_data API を模倣します。"
 
 #: of pyvista_wasm.mesh.PointData:7
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.mesh.PointData:18
 msgid "Render with scalar coloring:"
-msgstr ""
+msgstr "スカラーカラーリングでレンダリングします:"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.__init__:1
 msgid "Initialize an empty PointData container."
-msgstr ""
+msgstr "空のPointDataコンテナを初期化します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PointData.rst:13
 msgid "Methods"
-msgstr ""
+msgstr "メソッド"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`__init__ <pyvista_wasm.PointData.__init__>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`__init__ <pyvista_wasm.PointData.__init__>`\\ \\(\\)"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`items <pyvista_wasm.PointData.items>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`items <pyvista_wasm.PointData.items>`\\ \\(\\)"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.items:1
 msgid "Return (name, array) pairs."
-msgstr ""
+msgstr "(name, array) のペアを返します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`keys <pyvista_wasm.PointData.keys>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`keys <pyvista_wasm.PointData.keys>`\\ \\(\\)"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.keys:1
 msgid "Return the names of all arrays."
-msgstr ""
+msgstr "すべての配列の名前を返します。"
 
 #: ../../../:1:<autosummary>:1
 msgid ":py:obj:`values <pyvista_wasm.PointData.values>`\\ \\(\\)"
-msgstr ""
+msgstr ":py:obj:`values <pyvista_wasm.PointData.values>`\\ \\(\\)"
 
 #: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.values:1
 msgid "Return all arrays."
-msgstr ""
+msgstr "すべての配列を返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PointData.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.PointData.items:3
 msgid "List of (name, array) tuples."
-msgstr ""
+msgstr "(name, array) タプルのリスト。"
 
 #: ../../api/_autosummary/pyvista_wasm.PointData.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.PointData.keys:3
 msgid "List of array names."
-msgstr ""
+msgstr "配列名のリスト。"
 
 #: of pyvista_wasm.mesh.PointData.values:3
 msgid "List of arrays."
-msgstr ""
+msgstr "配列のリスト。"

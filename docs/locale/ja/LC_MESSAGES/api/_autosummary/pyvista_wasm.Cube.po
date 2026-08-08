@@ -22,44 +22,44 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Cube.rst:2
 msgid "pyvista\\_wasm.Cube"
-msgstr ""
+msgstr "pyvista\\_wasm.Cube"
 
 #: of pyvista_wasm.mesh.Cube:1
 msgid "Create a cube mesh."
-msgstr ""
+msgstr "立方体メッシュを作成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cube.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Cube:3
 msgid "Center of the cube (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "立方体の中心 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Cube:5
 msgid "Length in x direction. Default is 1.0."
-msgstr ""
+msgstr "x方向の長さ。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Cube:7
 msgid "Length in y direction. Default is 1.0."
-msgstr ""
+msgstr "y方向の長さ。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Cube:9
 msgid "Length in z direction. Default is 1.0."
-msgstr ""
+msgstr "z方向の長さ。デフォルトは1.0。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cube.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Cube:12
 msgid "A cube mesh."
-msgstr ""
+msgstr "立方体メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Cube.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Cube:16
 msgid "Examples"
-msgstr ""
+msgstr "例"

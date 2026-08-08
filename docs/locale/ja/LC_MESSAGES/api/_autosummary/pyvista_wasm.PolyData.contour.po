@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst:2
 msgid "pyvista\\_wasm.PolyData.contour"
-msgstr ""
+msgstr "pyvista\\_wasm.PolyData.contour"
 
 #: of pyvista_wasm.mesh.PolyData.contour:1
 msgid "Generate contour lines at constant scalar values."
-msgstr ""
+msgstr "一定のスカラー値で等高線を生成します。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:3
 msgid ""
@@ -37,16 +37,23 @@ msgid ""
 "not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-mode "
 "binary."
 msgstr ""
+"このフィルタは、JavaScriptで実装されたマーチングトライアングルアルゴリズムを使用して、"
+"指定されたスカラー値でメッシュから等値線を抽出します。PyVista の ``contour`` フィルタ API を"
+"ミラーリングします。等高線はレンダリング時に手動実装として計算されます。"
+"これは ``vtkContourFilter`` が VTK.wasm のレンダリングモードバイナリの "
+"``vtkDeserializer`` に登録されていないためです。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.PolyData.contour:10
 msgid ""
 "Number of evenly spaced contours to generate, or a list of explicit "
 "scalar values at which to generate contours. Default is 10."
 msgstr ""
+"生成する等間隔の等高線の数、または等高線を生成する明示的なスカラー値のリスト。"
+"デフォルトは10。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:13
 msgid ""
@@ -54,43 +61,49 @@ msgid ""
 "mesh's existing ``scalars`` attribute. Must have length equal to "
 "``n_points``."
 msgstr ""
+"等高線生成に使用するポイントごとのスカラー値。指定されない場合、メッシュの既存の "
+"``scalars`` 属性を使用します。長さは ``n_points`` と等しい必要があります。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:17
 msgid ""
 "Name for the scalar array in VTK.wasm. If not provided, uses the mesh's "
 "existing ``scalar_name`` attribute or defaults to \"scalars\"."
 msgstr ""
+"VTK.wasm でのスカラー配列の名前。指定されない場合、メッシュの既存の "
+"``scalar_name`` 属性を使用するか、デフォルトの \"scalars\" になります。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.PolyData.contour:21
 msgid "A new mesh containing the contour lines."
-msgstr ""
+msgstr "等高線を含む新しいメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
 msgid "Raises"
-msgstr ""
+msgstr "例外"
 
 #: of pyvista_wasm.mesh.PolyData.contour:24
 msgid ""
 "If no scalars are provided and the mesh has no scalar data, or if     "
 "isosurfaces parameter is invalid."
 msgstr ""
+"スカラーが指定されておらずメッシュにスカラーデータがない場合、または"
+"isosurfaces パラメータが無効な場合。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:27
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.mesh.PolyData.contour:38
 msgid "Generate contours at specific values:"
-msgstr ""
+msgstr "特定の値で等高線を生成します:"
 
 #: of pyvista_wasm.mesh.PolyData.contour:42
 msgid "Render the contours:"
-msgstr ""
+msgstr "等高線をレンダリングします:"

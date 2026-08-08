@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.texture_map_to_plane.rst:2
 msgid "pyvista\\_wasm.PolyData.texture\\_map\\_to\\_plane"
-msgstr ""
+msgstr "pyvista\\_wasm.PolyData.texture\\_map\\_to\\_plane"
 
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:1
 msgid "Generate texture coordinates by projecting points onto the XY plane."
-msgstr ""
+msgstr "ポイントをXY平面に投影してテクスチャ座標を生成します。"
 
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:3
 msgid ""
@@ -34,19 +34,21 @@ msgid ""
 "This mirrors the PyVista :meth:`pyvista.DataSet.texture_map_to_plane` "
 "API."
 msgstr ""
+"メッシュのXおよびY範囲を [0, 1] 範囲のUV座標にマッピングします。"
+"これは PyVista の :meth:`pyvista.DataSet.texture_map_to_plane` API をミラーリングします。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.texture_map_to_plane.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:6
 msgid "A new mesh with texture coordinates (``t_coords``) set."
-msgstr ""
+msgstr "テクスチャ座標（``t_coords``）が設定された新しいメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.texture_map_to_plane.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:10
 msgid "Examples"
-msgstr ""
+msgstr "例"

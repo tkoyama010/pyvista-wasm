@@ -22,78 +22,80 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Arrow.rst:2
 msgid "pyvista\\_wasm.Arrow"
-msgstr ""
+msgstr "pyvista\\_wasm.Arrow"
 
 #: of pyvista_wasm.mesh.Arrow:1
 msgid "Create an arrow mesh."
-msgstr ""
+msgstr "矢印メッシュを作成します。"
 
 #: of pyvista_wasm.mesh.Arrow:3
 msgid ""
 "Returns a :class:`PolyData` representing an arrow starting at ``start`` "
 "and pointing in ``direction``, backed by VTK.wasm ``vtkArrowSource``."
 msgstr ""
+"``start`` から始まり ``direction`` を指す矢印を表す :class:`PolyData` を返します。"
+"VTK.wasm の ``vtkArrowSource`` によってバッキングされています。"
 
 #: ../../api/_autosummary/pyvista_wasm.Arrow.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Arrow:6
 msgid "Starting point of the arrow ``(x, y, z)``. Default is ``(0, 0, 0)``."
-msgstr ""
+msgstr "矢印の開始点 ``(x, y, z)``。デフォルトは ``(0, 0, 0)``。"
 
 #: of pyvista_wasm.mesh.Arrow:8
 msgid "Direction vector of the arrow. Default is ``(1, 0, 0)``."
-msgstr ""
+msgstr "矢印の方向ベクトル。デフォルトは ``(1, 0, 0)``。"
 
 #: of pyvista_wasm.mesh.Arrow:10
 msgid ""
 "Length of the conical tip as a fraction of the total arrow length. "
 "Default is 0.25."
-msgstr ""
+msgstr "矢印の全長に対する円錐チップの長さの割合。デフォルトは0.25。"
 
 #: of pyvista_wasm.mesh.Arrow:13
 msgid "Radius of the base of the tip. Default is 0.1."
-msgstr ""
+msgstr "チップの底面の半径。デフォルトは0.1。"
 
 #: of pyvista_wasm.mesh.Arrow:15
 msgid "Number of faces around the tip cone. Default is 20."
-msgstr ""
+msgstr "チップ円錐の周囲の面数。デフォルトは20。"
 
 #: of pyvista_wasm.mesh.Arrow:17
 msgid "Radius of the cylindrical shaft. Default is 0.05."
-msgstr ""
+msgstr "円柱シャフトの半径。デフォルトは0.05。"
 
 #: of pyvista_wasm.mesh.Arrow:19
 msgid "Number of faces around the shaft cylinder. Default is 20."
-msgstr ""
+msgstr "シャフト円柱の周囲の面数。デフォルトは20。"
 
 #: of pyvista_wasm.mesh.Arrow:21
 msgid ""
 "Scaling factor applied to the entire arrow. When ``None`` the arrow is "
 "not scaled."
-msgstr ""
+msgstr "矢印全体に適用されるスケーリング係数。``None`` の場合、矢印はスケーリングされません。"
 
 #: ../../api/_autosummary/pyvista_wasm.Arrow.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Arrow:25
 msgid "An arrow mesh."
-msgstr ""
+msgstr "矢印メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Arrow.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Arrow:29
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.mesh.Arrow:38
 msgid "Create an arrow with a custom start point and direction:"
-msgstr ""
+msgstr "カスタム開始点と方向で矢印を作成します:"
 
 #: of pyvista_wasm.mesh.Arrow:44
 msgid "Plot the arrow:"
-msgstr ""
+msgstr "矢印をプロットします:"

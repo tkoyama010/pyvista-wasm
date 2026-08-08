@@ -22,19 +22,19 @@ msgstr ""
 
 #: ../../index.md:53
 msgid "Installation"
-msgstr ""
+msgstr "インストール"
 
 #: ../../index.md:53
 msgid "Getting Started"
-msgstr ""
+msgstr "はじめに"
 
 #: ../../index.md:61
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../README.md:2
 msgid "pyvista-wasm"
-msgstr ""
+msgstr "pyvista-wasm"
 
 #: ../../../README.md:4
 #, python-format
@@ -53,22 +53,35 @@ msgid ""
 "PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io"
 "/pyvista-wasm/slides/)"
 msgstr ""
+"[![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https"
+"://pyvista-"
+"wasm.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb) "
+"[![Stlite](https://img.shields.io/badge/stlite-Streamlit%20in%20Browser-"
+"FF4B4B?logo=streamlit)](https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt)"
+" "
+"[![marimo](https://marimo.io/shield.svg)](https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4"
+"-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-"
+"VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-"
+"uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA)"
+" [![Slidev](https://img.shields.io/badge/Slides-"
+"PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io"
+"/pyvista-wasm/slides/)"
 
 #: ../../../README.md:4
 msgid "JupyterLite"
-msgstr ""
+msgstr "JupyterLite"
 
 #: ../../../README.md:4
 msgid "Stlite"
-msgstr ""
+msgstr "Stlite"
 
 #: ../../../README.md:4
 msgid "marimo"
-msgstr ""
+msgstr "marimo"
 
 #: ../../../README.md:4
 msgid "Slidev"
-msgstr ""
+msgstr "Slidev"
 
 #: ../../../README.md:14
 msgid ""
@@ -76,126 +89,137 @@ msgid ""
 "[VTK.wasm](https://kitware.github.io/vtk-wasm/) — bring intuitive 3D "
 "visualization to the browser using WebAssembly."
 msgstr ""
+"[PyVista](https://github.com/pyvista/pyvista)ライクなAPIを[VTK.wasm]"
+"(https://kitware.github.io/vtk-wasm/)に提供し、WebAssemblyを用いて直感的な"
+"3D可視化をブラウザにもたらします。"
 
 #: ../../index.md:1
 msgid "[Try it with JupyterLite]"
-msgstr ""
+msgstr "JupyterLiteで試す"
 
 #: ../../index.md:1
 msgid "[Try it with Stlite]"
-msgstr ""
+msgstr "Stliteで試す"
 
 #: ../../index.md:1
 msgid "[Try it with marimo]"
-msgstr ""
+msgstr "marimoで試す"
 
 #: ../../index.md:1
 msgid "![jupyterlite-preview]"
-msgstr ""
+msgstr "![jupyterlite-preview]"
 
 #: ../../../README.md:18
 msgid "jupyterlite-preview"
-msgstr ""
+msgstr "jupyterlite-preview"
 
 #: ../../index.md:1
 msgid "![stlite-preview]"
-msgstr ""
+msgstr "![stlite-preview]"
 
 #: ../../../README.md:18
 msgid "stlite-preview"
-msgstr ""
+msgstr "stlite-preview"
 
 #: ../../index.md:1
 msgid "![marimo-preview]"
-msgstr ""
+msgstr "![marimo-preview]"
 
 #: ../../../README.md:18
 msgid "marimo-preview"
-msgstr ""
+msgstr "marimo-preview"
 
 #: ../../../README.md:20
 msgid "Table of Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../README.md:22
 msgid "[Table of Contents](#table-of-contents)"
-msgstr ""
+msgstr "[目次](#table-of-contents)"
 
 #: ../../../README.md:23
 msgid "[Install](#install)"
-msgstr ""
+msgstr "[インストール](#install)"
 
 #: ../../../README.md:24
 msgid "[Usage](#usage)"
-msgstr ""
+msgstr "[使い方](#usage)"
 
 #: ../../../README.md:25
 msgid "[Presentation](#presentation)"
-msgstr ""
+msgstr "[プレゼンテーション](#presentation)"
 
 #: ../../../README.md:26
 msgid "[Differences from pyvista-js](#differences-from-pyvista-js)"
-msgstr ""
+msgstr "[pyvista-jsとの違い](#differences-from-pyvista-js)"
 
 #: ../../../README.md:27
 msgid "[Citation](#citation)"
-msgstr ""
+msgstr "[引用](#citation)"
 
 #: ../../../README.md:28
 msgid "[Contributing](#contributing)"
-msgstr ""
+msgstr "[コントリビュート](#contributing)"
 
 #: ../../../README.md:29
 msgid "[License](#license)"
-msgstr ""
+msgstr "[ライセンス](#license)"
 
 #: ../../../README.md:31
 msgid "Install"
-msgstr ""
+msgstr "インストール"
 
 #: ../../../README.md:33
 msgid ""
 "[![PyPI](https://img.shields.io/pypi/v/pyvista-"
 "wasm)](https://pypi.org/project/pyvista-wasm/)"
 msgstr ""
+"[![PyPI](https://img.shields.io/pypi/v/pyvista-"
+"wasm)](https://pypi.org/project/pyvista-wasm/)"
 
 #: ../../../README.md:33
 msgid "PyPI"
-msgstr ""
+msgstr "PyPI"
 
 #: ../../../README.md:39
 msgid "For Pyodide/stlite:"
-msgstr ""
+msgstr "Pyodide/stliteの場合:"
 
 #: ../../../README.md:47
 msgid "Usage"
-msgstr ""
+msgstr "使い方"
 
 #: ../../../README.md:57
 msgid "Presentation"
-msgstr ""
+msgstr "プレゼンテーション"
 
 #: ../../../README.md:59
 msgid ""
 "The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep"
 " dive into the WASM rendering architecture:"
 msgstr ""
+"PyCon JP 2026のトークでは、pyvista-wasmをライブデモとWASMレンダリング"
+"アーキテクチャの詳細解説とともに紹介します:"
 
 #: ../../../README.md:61
 msgid ""
 "[**View the slide deck**](https://tkoyama010.github.io/pyvista-"
 "wasm/slides/)"
 msgstr ""
+"[**スライドを見る**](https://tkoyama010.github.io/pyvista-"
+"wasm/slides/)"
 
 #: ../../../README.md:63
 msgid ""
 "[**Talk details on "
 "pretalx**](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 msgstr ""
+"[**pretalxのトーク詳細**]"
+"(https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 
 #: ../../../README.md:65
 msgid "Differences from pyvista-js"
-msgstr ""
+msgstr "pyvista-jsとの違い"
 
 #: ../../../README.md:67
 msgid ""
@@ -204,16 +228,22 @@ msgid ""
 "/pyvista-js) with [VTK.wasm](https://kitware.github.io/vtk-wasm/) "
 "(`@kitware/vtk-wasm` npm package)."
 msgstr ""
+"このプロジェクトは[pyvista-js](https://github.com/tkoyama010/pyvista-js)"
+"で使用されている[vtk.js](https://github.com/Kitware/vtk-js)レンダリング"
+"バックエンドを[VTK.wasm](https://kitware.github.io/vtk-wasm/)"
+"（`@kitware/vtk-wasm` npmパッケージ）に置き換えます。"
 
 #: ../../../README.md:69
 msgid "Key differences:"
-msgstr ""
+msgstr "主な違い:"
 
 #: ../../../README.md:71
 msgid ""
 "**Rendering backend**: VTK.wasm (WebAssembly port of VTK C++) instead of "
 "vtk.js (pure JavaScript reimplementation)"
 msgstr ""
+"**レンダリングバックエンド**: vtk.js（純粋なJavaScript再実装）の代わりに"
+"VTK.wasm（VTK C++のWebAssemblyポート）を使用"
 
 #: ../../../README.md:72
 msgid ""
@@ -221,22 +251,29 @@ msgid ""
 "namespace object, vs vtk.js's "
 "`vtk.Rendering.Core.vtkRenderer.newInstance()` hierarchy"
 msgstr ""
+"**APIスタイル**: VTK.wasmは名前空間オブジェクト上で`vtk.vtkRenderer()`"
+"ファクトリ関数を使用するのに対し、vtk.jsは"
+"`vtk.Rendering.Core.vtkRenderer.newInstance()`階層を使用"
 
 #: ../../../README.md:73
 msgid ""
 "**Initialization**: VTK.wasm requires async initialization via "
 "`vtkWASM.createNamespace()` to load the WASM binary"
 msgstr ""
+"**初期化**: VTK.wasmはWASMバイナリを読み込むために"
+"`vtkWASM.createNamespace()`による非同期初期化が必要"
 
 #: ../../../README.md:74
 msgid ""
 "**Feature parity**: VTK.wasm provides access to the full VTK C++ API, "
 "enabling features not available in vtk.js"
 msgstr ""
+"**機能の網羅性**: VTK.wasmはVTK C++の完全なAPIへのアクセスを提供し、"
+"vtk.jsでは利用できない機能を実現"
 
 #: ../../../README.md:76
 msgid "Citation"
-msgstr ""
+msgstr "引用"
 
 #: ../../../README.md:78
 msgid ""
@@ -244,71 +281,79 @@ msgid ""
 "[`CITATION.cff`](CITATION.cff) for the full citation metadata, or use the"
 " BibTeX entry below:"
 msgstr ""
+"学術論文やプロジェクトでpyvista-wasmを使用する場合は引用してください。"
+"完全な引用メタデータは[`CITATION.cff`](CITATION.cff)を参照するか、"
+"以下のBibTeXエントリを使用してください:"
 
 #: ../../../README.md:91
 msgid "Contributing"
-msgstr ""
+msgstr "コントリビュート"
 
 #: ../../../README.md:93
 msgid ""
 "Contributions are welcome! Please open an issue or pull request on "
 "[GitHub](https://github.com/tkoyama010/pyvista-wasm/issues)."
 msgstr ""
+"コントリビューションを歓迎します！[GitHub]"
+"(https://github.com/tkoyama010/pyvista-wasm/issues)でイシューまたは"
+"プルリクエストを開いてください。"
 
 #: ../../../README.md:95
 msgid "License"
-msgstr ""
+msgstr "ライセンス"
 
 #: ../../../README.md:97
 msgid "[Apache License 2.0](LICENSE) © Tetsuo Koyama"
-msgstr ""
+msgstr "[Apache License 2.0](LICENSE) © Tetsuo Koyama"
 
 #: ../../index.md:10
 msgid "Tutorials"
-msgstr ""
+msgstr "チュートリアル"
 
 #: ../../index.md:15
 msgid "Topic driven themed lessons."
-msgstr ""
+msgstr "トピック別のテーマレッスン。"
 
 #: ../../index.md:18
 msgid "How-To Guides"
-msgstr ""
+msgstr "ハウツーガイド"
 
 #: ../../index.md:23
 msgid "Focused guides for common tasks."
-msgstr ""
+msgstr "一般的なタスクに焦点を当てたガイド。"
 
 #: ../../index.md:26
 msgid "Explanation"
-msgstr ""
+msgstr "解説"
 
 #: ../../index.md:31
 msgid "Deeper understanding awaits."
-msgstr ""
+msgstr "より深い理解が待っています。"
 
 #: ../../index.md:34
 msgid "Reference"
-msgstr ""
+msgstr "リファレンス"
 
 #: ../../index.md:39
 msgid "No fuss facts."
-msgstr ""
+msgstr "シンプルな事実。"
 
 #: ../../index.md:43
 msgid ""
 "Choose your approach to learning and `pyvista-wasm` knowledge discovery "
 "([Diátaxis](https://diataxis.fr/))."
 msgstr ""
+"学習アプローチと`pyvista-wasm`の知識発見の方法を選択してください"
+"（[Diátaxis](https://diataxis.fr/)）。"
 
 #: ../../index.md:48
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #: ../../index.md:50
 msgid "[GitHub Repository](https://github.com/tkoyama010/pyvista-wasm)"
-msgstr ""
+msgstr "[GitHubリポジトリ](https://github.com/tkoyama010/pyvista-wasm)"
 
 #: ../../index.md:51
 msgid "[Issue Tracker](https://github.com/tkoyama010/pyvista-wasm/issues)"
-msgstr ""
+msgstr "[イシュートラッカー](https://github.com/tkoyama010/pyvista-wasm/issues)"

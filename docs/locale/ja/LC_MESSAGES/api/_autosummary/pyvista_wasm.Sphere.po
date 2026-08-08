@@ -22,44 +22,44 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Sphere.rst:2
 msgid "pyvista\\_wasm.Sphere"
-msgstr ""
+msgstr "pyvista\\_wasm.Sphere"
 
 #: of pyvista_wasm.mesh.Sphere:1
 msgid "Create a sphere mesh."
-msgstr ""
+msgstr "球メッシュを作成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Sphere.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Sphere:3
 msgid "Sphere radius. Default is 1.0."
-msgstr ""
+msgstr "球の半径。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Sphere:5
 msgid "Center of the sphere (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "球の中心 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Sphere:7
 msgid "Number of points in the azimuthal direction. Default is 30."
-msgstr ""
+msgstr "方位方向のポイント数。デフォルトは30。"
 
 #: of pyvista_wasm.mesh.Sphere:9
 msgid "Number of points in the polar direction. Default is 30."
-msgstr ""
+msgstr "極方向のポイント数。デフォルトは30。"
 
 #: ../../api/_autosummary/pyvista_wasm.Sphere.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Sphere:12
 msgid "A sphere mesh."
-msgstr ""
+msgstr "球メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Sphere.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Sphere:16
 msgid "Examples"
-msgstr ""
+msgstr "例"

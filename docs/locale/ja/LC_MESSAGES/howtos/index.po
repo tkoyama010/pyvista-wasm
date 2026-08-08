@@ -22,8 +22,8 @@ msgstr ""
 
 #: ../../howtos/index.md:1
 msgid "How-To Guides"
-msgstr ""
+msgstr "ハウツーガイド"
 
 #: ../../howtos/index.md:3
 msgid "Focused guides for common tasks with pyvista-wasm."
-msgstr ""
+msgstr "pyvista-wasmの一般的なタスクに焦点を当てたガイド。"

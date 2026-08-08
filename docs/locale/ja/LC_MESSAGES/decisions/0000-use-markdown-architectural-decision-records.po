@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:9
 msgid "Use Markdown Architectural Decision Records"
-msgstr ""
+msgstr "Markdownアーキテクチャ決定レコードを使用する"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:11
 msgid "Context and Problem Statement"
-msgstr ""
+msgstr "コンテキストと問題記述"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:13
 msgid ""
@@ -41,10 +41,19 @@ msgid ""
 "consistent, version-controllable way. Which format and structure should "
 "these records follow?"
 msgstr ""
+"pyvista-wasmはアーキテクチャ上重要な決定を蓄積している — 例えば、C++ VTK"
+"バインディングレイヤとしてのvtk-wasmの選択、vtk-wasmバインディングを"
+"Python向けPyVista APIに橋渡しするTypeScriptグルーアーキテクチャ、そして"
+"ブラウザ上でPyVistaを完全に実行するためのWebAssemblyランタイム戦略。"
+"現在これらの決定はイシュースレッドとPRの説明文にしか存在せず、根拠が"
+"後から見つけにくく、失われやすい。本プロジェクトで行われたアーキテクチャ"
+"上の決定 — アーキテクチャ、コード、その他の領域に関するものを問わず — "
+"を一貫したバージョン管理可能な方法で記録したい。これらのレコードは"
+"どのフォーマットと構造に従うべきか？"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:15
 msgid "Decision Drivers"
-msgstr ""
+msgstr "決定ドライバ"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:17
 msgid ""
@@ -53,46 +62,61 @@ msgid ""
 "*what* was decided. See also [\"A rational design process: How and why to"
 " fake it\"](https://doi.org/10.1109/TSE.1986.6312940)."
 msgstr ""
+"**明示的な根拠**: 暗黙の前提を明示的にし、将来のコントリビューターが"
+"決定の*なぜ*を理解できるようにすべきである。決定された*内容*だけでなく。"
+"[\"A rational design process: How and why to fake it\"](https://doi.org/10.1109/TSE.1986.6312940)"
+"も参照。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:18
 msgid ""
 "**Version control friendliness**: Records must be plain text that diffs "
 "and reviews well in Git alongside the code they govern."
 msgstr ""
+"**バージョン管理との親和性**: レコードはプレーンテキストでなければならず、"
+"Gitで管理するコードと並べて差分確認とレビューがしやすいこと。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:19
 msgid ""
 "**Low overhead**: pyvista-wasm is a small project; the format must be "
 "lean enough that writing a record does not feel like a burden."
 msgstr ""
+"**低オーバーヘッド**: pyvista-wasmは小規模プロジェクトである。レコードの"
+"作成が負担にならないよう、フォーマットは十分に軽量でなければならない。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:20
 msgid ""
 "**Comprehensibility**: The structure should be easy to read and scan for "
 "both authors and reviewers."
 msgstr ""
+"**理解しやすさ**: 構造は作成者とレビューアーの両方にとって読みやすく、"
+"スキャンしやすいものであるべきだ。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:21
 msgid ""
 "**Tooling availability**: Prefer a format with active maintenance and "
 "supporting tooling."
 msgstr ""
+"**ツールの可用性**: 活発にメンテナンスされ、サポートツールがある"
+"フォーマットを優先する。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:22
 msgid ""
 "**Generality**: The format should capture any decision — architectural, "
 "design, or tooling — not only a narrow class."
 msgstr ""
+"**汎用性**: フォーマットは任意の決定 — アーキテクチャ、デザイン、"
+"ツール設定 — を記録でき、狭いクラスに限定されないものであるべきだ。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:24
 msgid "Considered Options"
-msgstr ""
+msgstr "検討した選択肢"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:26
 msgid ""
 "[MADR](https://adr.github.io/madr/) 4.0.0 — The Markdown Architectural "
 "Decision Records"
 msgstr ""
+"[MADR](https://adr.github.io/madr/) 4.0.0 — Markdownアーキテクチャ決定レコード"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:27
 msgid ""
@@ -100,27 +124,33 @@ msgid ""
 "/documenting-architecture-decisions) — The first incarnation of the term "
 "\"ADR\""
 msgstr ""
+"[Michael Nygardのテンプレート](http://thinkrelevance.com/blog/2011/11/15"
+"/documenting-architecture-decisions) — \"ADR\"という用語の最初の形"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:28
 msgid ""
 "[Sustainable Architectural Decisions](https://www.infoq.com/articles"
 "/sustainable-architectural-design-decisions) — The Y-Statements"
 msgstr ""
+"[持続可能なアーキテクチャ決定](https://www.infoq.com/articles"
+"/sustainable-architectural-design-decisions) — Y-ステートメント"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:29
 msgid ""
 "Other templates listed at "
 "[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
 msgstr ""
+"[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
+"にリストされたその他のテンプレート"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:30
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:94
 msgid "Formless — No conventions for file format and structure"
-msgstr ""
+msgstr "フォーマットなし — ファイルフォーマットと構造に関する規約なし"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:32
 msgid "Decision Outcome"
-msgstr ""
+msgstr "決定結果"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:34
 msgid ""
@@ -129,22 +159,30 @@ msgid ""
 "decision (not only pure architecture), and is actively maintained with "
 "tooling support."
 msgstr ""
+"選択した選択肢: \"MADR 4.0.0\"。決定ドライバに最も適合するため。"
+"オプションセクションのある軽量なMarkdownテンプレートで、任意の決定"
+"（純粋なアーキテクチャに限らない）を記録でき、ツールサポートとともに"
+"活発にメンテナンスされている。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:36
 msgid "Consequences"
-msgstr ""
+msgstr "結果"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:38
 msgid ""
 "Good, because architectural rationale will live alongside the code in "
 "`docs/decisions/` and travel through the same review/PR flow."
 msgstr ""
+"良い、なぜならアーキテクチャの根拠がコードと並んで `docs/decisions/` "
+"に保存され、同じレビュー/PRフローを経るため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:39
 msgid ""
 "Good, because the consistent `NNNN-title-with-dashes.md` filename "
 "convention makes records discoverable and sortable."
 msgstr ""
+"良い、なぜなら一貫した `NNNN-title-with-dashes.md` ファイル名規約により、"
+"レコードが発見しやすく並べ替え可能になるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:40
 msgid ""
@@ -152,6 +190,9 @@ msgid ""
 "Pros and Cons of the Options, Confirmation, More Information) keep short "
 "decisions short while scaling to complex ones."
 msgstr ""
+"良い、なぜならMADRテンプレートのオプションセクション（決定ドライバ、"
+"選択肢の長所と短所、確認、詳細情報）により、短い決定は短く保ちつつ、"
+"複雑な決定にもスケールするため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:41
 msgid ""
@@ -159,12 +200,17 @@ msgid ""
 "`consulted`, `informed`) gives lightweight metadata for tracking decision"
 " lifecycle."
 msgstr ""
+"良い、なぜならYAMLフロントマター（`status`、`date`、`decision-makers`、"
+"`consulted`、`informed`）により、決定ライフサイクルを追跡するための"
+"軽量なメタデータが得られるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:42
 msgid ""
 "Bad, because contributors must learn the template and remember to open a "
 "record for significant decisions."
 msgstr ""
+"悪い、なぜならコントリビューターがテンプレートを学習し、重要な決定に"
+"対してレコードを開くことを忘れなければならないため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:43
 msgid ""
@@ -172,14 +218,17 @@ msgid ""
 "the template, trading a little flexibility for staying on a maintained "
 "upstream."
 msgstr ""
+"中立、なぜならテンプレートをフォークするのではなくMADRの規約をそのまま"
+"採用し、柔軟性を少し犠牲にしてメンテナンスされたアップストリームに"
+"留まるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:45
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:47
 msgid "Compliance with this decision will be confirmed by:"
-msgstr ""
+msgstr "この決定への準拠は以下によって確認されます:"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:49
 msgid ""
@@ -187,6 +236,9 @@ msgid ""
 "MADR template (`adr-template.md`) copied from the [MADR 4.0.0 "
 "release](https://github.com/adr/madr/tree/4.0.0/template)."
 msgstr ""
+"リポジトリに `docs/decisions/` ディレクトリが存在し、[MADR 4.0.0"
+"リリース](https://github.com/adr/madr/tree/4.0.0/template)からコピーされた"
+"MADRテンプレート（`adr-template.md`）が含まれている。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:50
 msgid ""
@@ -194,6 +246,9 @@ msgid ""
 "architectural-decision-records.md`, mirrors this issue's content and is "
 "merged via PR."
 msgstr ""
+"最初の具体的なレコード `docs/decisions/0000-use-markdown-"
+"architectural-decision-records.md` がこのイシューの内容を反映し、"
+"PR経由でマージされている。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:51
 msgid ""
@@ -201,30 +256,37 @@ msgid ""
 "glue layer design for bridging vtk-wasm bindings to the PyVista API) are "
 "accompanied by a MADR record linked from the issue."
 msgstr ""
+"後続のアーキテクチャ上重要な提案（例: vtk-wasmバインディングをPyVista API"
+"に橋渡しするTypeScriptグルーレイヤの設計）には、イシューからリンクされた"
+"MADRレコードが伴う。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:52
 msgid ""
 "A CI step (e.g. markdownlint with MADR's `.markdownlint` config) lints "
 "records on PRs touching `docs/decisions/`."
 msgstr ""
+"CIステップ（例: MADRの `.markdownlint` 設定を使用したmarkdownlint）が "
+"`docs/decisions/` に触れるPRでレコードをリントする。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:54
 msgid "Pros and Cons of the Options"
-msgstr ""
+msgstr "選択肢の長所と短所"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:56
 msgid "MADR 4.0.0 — The Markdown Architectural Decision Records"
-msgstr ""
+msgstr "MADR 4.0.0 — Markdownアーキテクチャ決定レコード"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:58
 msgid "See [https://adr.github.io/madr/](https://adr.github.io/madr/)"
-msgstr ""
+msgstr "[https://adr.github.io/madr/](https://adr.github.io/madr/)を参照"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:60
 msgid ""
 "Good, because it is plain Markdown, satisfying the version-control-"
 "friendliness and low-overhead drivers."
 msgstr ""
+"良い、なぜならプレーンMarkdownであり、バージョン管理との親和性と"
+"低オーバーヘッドのドライバを満たすため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:61
 msgid ""
@@ -233,34 +295,45 @@ msgid ""
 "Options → More Information) is comprehensible and scales from one-"
 "paragraph to multi-page decisions."
 msgstr ""
+"良い、なぜなら構造（コンテキストと問題記述 → 決定ドライバ → 検討した選択肢"
+" → 決定結果 → 選択肢の長所と短所 → 詳細情報）が理解しやすく、1段落の決定"
+"から複数ページの決定までスケールするため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:62
 msgid ""
 "Good, because the project is vivid: 4.0.0 released 2024-09-17, with "
 "examples, a changelog, and tooling (markdownlint config, init scripts)."
 msgstr ""
+"良い、なぜならプロジェクトが活発であるため: 4.0.0が2024-09-17にリリース"
+"され、例、変更ログ、ツール（markdownlint設定、初期化スクリプト）が"
+"含まれている。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:63
 msgid ""
 "Good, because it captures *any* decision, satisfying the generality "
 "driver."
 msgstr ""
+"良い、なぜなら*任意の*決定を記録でき、汎用性ドライバを満たすため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:64
 msgid ""
 "Neutral, because it ships optional YAML front matter that we will adopt "
 "but is not strictly required."
 msgstr ""
+"中立、なぜなら採用するが必須ではないオプションのYAMLフロントマターが"
+"同梱されているため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:65
 msgid ""
 "Bad, because it introduces a small documentation convention contributors "
 "must learn."
 msgstr ""
+"悪い、なぜならコントリビューターが学習すべき小さなドキュメント規約が"
+"導入されるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:67
 msgid "Michael Nygard's template"
-msgstr ""
+msgstr "Michael Nygardのテンプレート"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:69
 msgid ""
@@ -268,38 +341,49 @@ msgid ""
 "decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-"
 "architecture-decisions)"
 msgstr ""
+"[http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-"
+"decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-"
+"architecture-decisions)を参照"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:71
 msgid "Good, because it is the original ADR template and is widely cited."
-msgstr ""
+msgstr "良い、なぜなら元のADRテンプレートであり、広く引用されているため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:72
 msgid ""
 "Good, because it is minimal: Title, Context, Decision, Status, "
 "Consequences."
 msgstr ""
+"良い、なぜなら最小限であるため: タイトル、コンテキスト、決定、"
+"ステータス、結果。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:73
 msgid ""
 "Neutral, because its brevity is appealing but leaves no room for "
 "comparing options or capturing drivers."
 msgstr ""
+"中立、なぜなら簡潔さは魅力的だが、選択肢の比較やドライバの記録に"
+"余地がないため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:74
 msgid ""
 "Bad, because it lacks a \"Considered Options\" / \"Pros and Cons\" "
 "section, so alternatives and their trade-offs are not recorded."
 msgstr ""
+"悪い、なぜなら「検討した選択肢」/「長所と短所」セクションがなく、"
+"代替案とそのトレードオフが記録されないため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:75
 msgid ""
 "Bad, because there is no maintained tooling or canonical Markdown source;"
 " many variants exist."
 msgstr ""
+"悪い、なぜならメンテナンスされたツールや標準的なMarkdownソースがなく、"
+"多くのバリアントが存在するため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:77
 msgid "Sustainable Architectural Decisions — The Y-Statements"
-msgstr ""
+msgstr "持続可能なアーキテクチャ決定 — Y-ステートメント"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:79
 msgid ""
@@ -307,6 +391,9 @@ msgid ""
 "decisions](https://www.infoq.com/articles/sustainable-architectural-"
 "design-decisions)"
 msgstr ""
+"[https://www.infoq.com/articles/sustainable-architectural-design-"
+"decisions](https://www.infoq.com/articles/sustainable-architectural-"
+"design-decisions)を参照"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:81
 msgid ""
@@ -314,60 +401,78 @@ msgid ""
 "decided `S` to achieve `B`, accepting `D`) is concise and forces explicit"
 " trade-offs."
 msgstr ""
+"良い、なぜならY-ステートメント（`Z` のコンテキストにおいて、`Q` に直面し、"
+"`B` を達成するために `S` を決定し、`D` を受け入れる）が簡潔で、"
+"明示的なトレードオフを強制するため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:82
 msgid ""
 "Neutral, because the format is more of a single-sentence pattern than a "
 "full document template."
 msgstr ""
+"中立、なぜならフォーマットが完全なドキュメントテンプレートというより"
+"単一文パターンに近いため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:83
 msgid ""
 "Bad, because it does not scale to multi-option comparisons with detailed "
 "pros and cons."
 msgstr ""
+"悪い、なぜなら詳細な長所と短所を伴う複数選択肢の比較にスケールしない"
+"ため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:84
 msgid "Bad, because it is less widely adopted and has less tooling than MADR."
-msgstr ""
+msgstr "悪い、なぜならMADRほど広く採用されておらず、ツールが少ないため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:86
 msgid "Other templates listed at joelparkerhenderson/architecture_decision_record"
 msgstr ""
+"joelparkerhenderson/architecture_decision_recordにリストされたその他のテンプレート"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:88
 msgid ""
 "See "
 "[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
 msgstr ""
+"[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
+"を参照"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:90
 msgid ""
 "Good, because the list offers many variants (Planguage, MADR, Nygard, "
 "Y-Statement, etc.) so we could pick a niche fit."
 msgstr ""
+"良い、なぜならリストが多くのバリアント（Planguage、MADR、Nygard、"
+"Y-ステートメントなど）を提供し、ニッチに合うものを選べるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:91
 msgid ""
 "Neutral, because choosing one of the lesser-known templates would mean "
 "self-maintaining it."
 msgstr ""
+"中立、なぜなら知名度の低いテンプレートの一つを選ぶと、"
+"自己メンテナンスが必要になるため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:92
 msgid ""
 "Bad, because the variety itself is a cost: contributors would need to "
 "learn whichever one we pick with less community documentation behind it."
 msgstr ""
+"悪い、なぜなら多様性自体がコストであるため: コントリビューターは選んだ"
+"ものを学ぶ必要があり、コミュニティのドキュメントが少ない。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:96
 msgid "Good, because there is zero upfront cost and no template to learn."
-msgstr ""
+msgstr "良い、なぜなら初期コストがゼロで、学ぶべきテンプレートがないため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:97
 msgid ""
 "Bad, because records drift in style, omit rationale, and become hard to "
 "find — failing the explicit-rationale and comprehensibility drivers."
 msgstr ""
+"悪い、なぜならレコードのスタイルにばらつきが生じ、根拠が省略され、"
+"見つけにくくなるため — 明示的な根拠と理解しやすさのドライバを満たさない。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:98
 msgid ""
@@ -375,20 +480,24 @@ msgid ""
 " decisions stay scattered across issues and PRs, which is the situation "
 "we are trying to escape."
 msgstr ""
+"悪い、なぜなら `docs/decisions/` 規約とファイル名パターンがないと、"
+"決定がイシューとPRに散在したままになり、逃れたい状況が続くため。"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:100
 msgid "More Information"
-msgstr ""
+msgstr "詳細情報"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:102
 msgid "MADR homepage: [https://adr.github.io/madr/](https://adr.github.io/madr/)"
-msgstr ""
+msgstr "MADRホームページ: [https://adr.github.io/madr/](https://adr.github.io/madr/)"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:103
 msgid ""
 "MADR 4.0.0 release: "
 "[https://github.com/adr/madr/releases/tag/4.0.0](https://github.com/adr/madr/releases/tag/4.0.0)"
 msgstr ""
+"MADR 4.0.0リリース: "
+"[https://github.com/adr/madr/releases/tag/4.0.0](https://github.com/adr/madr/releases/tag/4.0.0)"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:104
 msgid ""
@@ -397,12 +506,18 @@ msgid ""
 "template.md](https://github.com/adr/madr/blob/develop/template/adr-"
 "template.md)"
 msgstr ""
+"MADRテンプレート（開発版）: "
+"[https://github.com/adr/madr/blob/develop/template/adr-"
+"template.md](https://github.com/adr/madr/blob/develop/template/adr-"
+"template.md)"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:105
 msgid ""
 "Initialization snippet: `npm install madr && mkdir -p docs/decisions && "
 "cp node_modules/madr/template/* docs/decisions/`"
 msgstr ""
+"初期化スニペット: `npm install madr && mkdir -p docs/decisions && "
+"cp node_modules/madr/template/* docs/decisions/`"
 
 #: ../../decisions/0000-use-markdown-architectural-decision-records.md:106
 msgid ""
@@ -410,3 +525,6 @@ msgid ""
 "markdown-architectural-decision-records.md` mirroring MADR's own "
 "ADR-0000."
 msgstr ""
+"このレコードは、承認されると `docs/decisions/0000-use-markdown-"
+"architectural-decision-records.md` に配置され、MADR自身のADR-0000を"
+"反映する。"

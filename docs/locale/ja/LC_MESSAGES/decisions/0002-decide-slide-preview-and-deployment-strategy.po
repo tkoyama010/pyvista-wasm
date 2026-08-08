@@ -24,11 +24,11 @@ msgstr ""
 msgid ""
 "Decide how to preview slides in pull requests and deploy the deck from "
 "main"
-msgstr ""
+msgstr "プルリクエストでスライドをプレビューし、main からデッキをデプロイする方法を決定する"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:11
 msgid "Context and Problem Statement"
-msgstr ""
+msgstr "コンテキストと問題記述"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:13
 msgid ""
@@ -49,16 +49,35 @@ msgid ""
 "platform and CI workflow strategy should we adopt for both per-PR slide "
 "previews and main-branch deck deployment?"
 msgstr ""
+"[ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) は PyCon JP 2026 "
+"トークデッキに Slidev を選択した。デッキのエントリポイントは "
+"`slides/slides.md` となり、`slidev build` は静的サイトとしてデプロイ可能な"
+"静的 SPA を生成する。2つのデプロイフローが必要である: (1) **PR ごとの"
+"プレビュー**。レビューアーが PR レビュープロセス中にスライドの変更を視覚的に"
+"確認できるようにする（イシュー [#294](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/294)–[#316](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/316)）。(2) **main ブランチデプロイメント**。`main` から"
+"ローカルビルドなしでライブデッキ URL を利用可能にする。リポジトリは既に "
+"[`deploy-redirect.yml`](https://github.com/tkoyama010/pyvista-"
+"wasm/blob/main/.github/workflows/deploy-redirect.yml)（`peaceiris"
+"/actions-gh-pages` を使用）経由で `gh-pages` ブランチにリダイレクトページを"
+"デプロイし、Read the Docs を指している。決定はこの既存のデプロイメントと"
+"互換性があるか、置き換える必要がある。PR ごとのスライドプレビューと "
+"main ブランチデッキデプロイメントの両方にどのホスティングプラットフォームと"
+"CI ワークフロー戦略を採用すべきか？"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:15
 msgid "Decision Drivers"
-msgstr ""
+msgstr "決定ドライバ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:17
 msgid ""
 "**Zero-cost hosting**: The project is an open-source, community-driven "
 "effort; the hosting solution must be free for public repositories."
 msgstr ""
+"**ゼロコストホスティング**: 本プロジェクトはオープンソースのコミュニティ駆動"
+"型であり、ホスティングソリューションは公開リポジトリに対して無料でなければ"
+"ならない。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:18
 msgid ""
@@ -66,6 +85,8 @@ msgid ""
 "automatically when slide source is merged to `main`, with no manual "
 "deploy step."
 msgstr ""
+"**main プッシュ時の自動デプロイ**: スライドソースが `main` にマージされた"
+"際、デッキが自動的に更新され、手動デプロイステップが不要であるべきだ。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:19
 msgid ""
@@ -73,12 +94,17 @@ msgid ""
 "stable preview URL that reflects its own branch state, so reviewers can "
 "compare slides without building locally."
 msgstr ""
+"**PR ごとのプレビューの一意性**: 各プルリクエストは独自のブランチ状態を"
+"反映する一意で安定したプレビュー URL を取得し、レビューアーがローカルで"
+"ビルドせずにスライドを比較できるようにする。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:20
 msgid ""
 "**Ease of setup**: The solution should require minimal external accounts,"
 " API tokens, or configuration beyond what is already in the repository."
 msgstr ""
+"**セットアップのしやすさ**: ソリューションはリポジトリに既に存在するものを"
+"超えて、最小限の外部アカウント、API トークン、設定で済むべきだ。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:21
 msgid ""
@@ -86,6 +112,9 @@ msgid ""
 "maintained dependencies, so the deployment pipeline does not become a "
 "source of toil."
 msgstr ""
+"**メンテナンス負荷**: 可動部品が少なく、よくメンテナンスされた依存関係を"
+"持つソリューションを優先し、デプロイパイプラインが手間の原因にならない"
+"ようにする。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:22
 msgid ""
@@ -95,10 +124,15 @@ msgid ""
 "deployment must coexist with or cleanly replace this workflow without "
 "breaking the Read the Docs redirect."
 msgstr ""
+"**既存の `gh-pages` リダイレクトワークフローとの互換性**: 既存の "
+"`deploy-redirect.yml` はリダイレクト `index.html` を `gh-pages` ブランチに"
+"プッシュする（Pages ソース: 「ブランチからデプロイ」）。スライドデプロイは"
+"このワークフローと共存するか、Read the Docs リダイレクトを壊さずに"
+"きれいに置き換える必要がある。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:24
 msgid "Considered Options"
-msgstr ""
+msgstr "検討した選択肢"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:26
 msgid ""
@@ -109,6 +143,12 @@ msgid ""
 "previews deployed to `gh-pages/pr-preview/pr-N/` via `rossjrw/pr-preview-"
 "action`"
 msgstr ""
+"[GitHub Pages (Deploy from branch)](https://docs.github.com/en/pages"
+"/getting-started-with-github-pages) + [rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action) — メインデッキは "
+"`peaceiris/actions-gh-pages` 経由で `gh-pages` ブランチにデプロイ。"
+"PR プレビューは `rossjrw/pr-preview-action` 経由で "
+"`gh-pages/pr-preview/pr-N/` にデプロイ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:27
 msgid ""
@@ -120,18 +160,29 @@ msgid ""
 " the official Pages artifact pipeline; PR previews as downloadable build "
 "artifacts (no live URL)"
 msgstr ""
+"[GitHub Pages (GitHub Actions source)](https://docs.github.com/en/pages"
+"/getting-started-with-github-pages/using-custom-workflows-with-github-"
+"pages) + [`actions/upload-pages-artifact`](https://github.com/actions"
+"/upload-pages-artifact) / [`actions/deploy-"
+"pages`](https://github.com/actions/deploy-pages) — メインデッキは公式の "
+"Pages アーティファクトパイプライン経由でデプロイ。PR プレビューは"
+"ダウンロード可能なビルドアーティファクトとして（ライブ URL なし）"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:28
 msgid ""
 "[Netlify](https://www.netlify.com/) — Main deck deployed to Netlify on "
 "push to main; PR previews via Netlify's automatic deploy previews"
 msgstr ""
+"[Netlify](https://www.netlify.com/) — main へのプッシュ時にメインデッキを "
+"Netlify にデプロイ。PR プレビューは Netlify の自動デプロイプレビュー経由"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:29
 msgid ""
 "[Vercel](https://vercel.com/) — Main deck deployed to Vercel on push to "
 "main; PR previews via Vercel's automatic preview deployments"
 msgstr ""
+"[Vercel](https://vercel.com/) — main へのプッシュ時にメインデッキを Vercel "
+"にデプロイ。PR プレビューは Vercel の自動プレビューデプロイメント経由"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:30
 msgid ""
@@ -139,6 +190,9 @@ msgid ""
 " Cloudflare Pages on push to main; PR previews via Cloudflare Pages "
 "preview deployments"
 msgstr ""
+"[Cloudflare Pages](https://pages.cloudflare.com/) — main へのプッシュ時に"
+"メインデッキを Cloudflare Pages にデプロイ。PR プレビューは Cloudflare Pages "
+"プレビューデプロイメント経由"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:31
 msgid ""
@@ -146,16 +200,21 @@ msgid ""
 "on PRs and upload as a GitHub Actions artifact that reviewers download "
 "and serve locally"
 msgstr ""
+"GitHub Actions ビルドアーティファクトのみ — ライブデプロイなし。"
+"PR でデッキをビルドし、GitHub Actions アーティファクトとしてアップロード。"
+"レビューアーがダウンロードしてローカルでサーブする"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:32
 msgid ""
 "[Read the Docs](https://readthedocs.org/) subpath — Deploy the slide deck"
 " within the existing Read the Docs documentation site as a subpath"
 msgstr ""
+"[Read the Docs](https://readthedocs.org/) サブパス — 既存の Read the Docs "
+"ドキュメントサイト内にサブパスとしてスライドデッキをデプロイ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:34
 msgid "Decision Outcome"
-msgstr ""
+msgstr "決定結果"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:36
 msgid ""
@@ -167,10 +226,17 @@ msgid ""
 "compatible with the existing `gh-pages` redirect workflow that already "
 "uses `peaceiris/actions-gh-pages` on the `gh-pages` branch."
 msgstr ""
+"選択した選択肢: \"GitHub Pages (Deploy from branch) + rossjrw/pr-preview-"
+"action\"。すべての決定ドライバを同時に満たす唯一の選択肢であるため — "
+"ゼロコストで、完全に GitHub ネイティブ（外部アカウントやトークンなし）であり、"
+"自動クリーンアップ付きの一意な PR ごとのライブプレビュー URL を提供し、"
+"main へのプッシュ時に自動デプロイし、`gh-pages` ブランチで既に "
+"`peaceiris/actions-gh-pages` を使用している既存の `gh-pages` リダイレクト"
+"ワークフローと完全に互換性がある。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:38
 msgid "Consequences"
-msgstr ""
+msgstr "結果"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:40
 msgid ""
@@ -179,6 +245,11 @@ msgid ""
 "PR comment containing the link, so reviewers can visually verify slide "
 "changes without cloning or building locally."
 msgstr ""
+"良い、なぜなら PR ごとのプレビューが "
+"`https://<owner>.github.io/<repo>/pr-preview/pr-<N>/` に一意で安定した"
+"ライブ URL を取得し、リンクを含む自動 PR コメントが投稿されるため、"
+"レビューアーがクローンやローカルビルドなしでスライドの変更を視覚的に"
+"確認できる。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:41
 msgid ""
@@ -186,6 +257,9 @@ msgid ""
 " deployments when a PR is closed, preventing the `gh-pages` branch from "
 "accumulating stale preview directories."
 msgstr ""
+"良い、なぜなら `rossjrw/pr-preview-action` が PR クローズ時にプレビュー"
+"デプロイメントを自動的にクリーンアップし、`gh-pages` ブランチに古い"
+"プレビューディレクトリが蓄積するのを防ぐため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:42
 msgid ""
@@ -193,6 +267,9 @@ msgid ""
 "`https://<owner>.github.io/<repo>/slides/`, giving a shareable live deck "
 "URL with no manual step."
 msgstr ""
+"良い、なぜなら `main` へのプッシュ時にメインデッキが "
+"`https://<owner>.github.io/<repo>/slides/` に自動デプロイされ、"
+"手動ステップなしで共有可能なライブデッキ URL が得られるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:43
 msgid ""
@@ -201,6 +278,10 @@ msgid ""
 " Read the Docs redirect at the root is preserved and the slide deck lives"
 " at a `/slides/` subpath."
 msgstr ""
+"良い、なぜなら両方のワークフローが既存の `deploy-redirect.yml` と同じ "
+"`gh-pages` ブランチで「Deploy from branch」Pages ソースを使用するため、"
+"ルートの Read the Docs リダイレクトが保持され、スライドデッキは "
+"`/slides/` サブパスに配置されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:44
 msgid ""
@@ -208,6 +289,9 @@ msgid ""
 "are required — everything runs through `GITHUB_TOKEN` and GitHub's free "
 "Pages offering for public repositories."
 msgstr ""
+"良い、なぜなら外部サービスアカウント、API トークン、クレジットカードが"
+"不要で — すべてが `GITHUB_TOKEN` と公開リポジトリ向けの GitHub の無料の "
+"Pages 提供を通じて実行されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:45
 msgid ""
@@ -216,6 +300,10 @@ msgid ""
 "`keep_files: false` does not delete PR preview directories and the "
 "`slides/` directory on every redirect deployment."
 msgstr ""
+"悪い、なぜなら `deploy-redirect.yml` ワークフローを `keep_files: true` に"
+"設定（または `clean-exclude: pr-preview/` を追加）するよう更新する必要が"
+"あるため。現在の `keep_files: false` では毎回のリダイレクトデプロイで "
+"PR プレビューディレクトリと `slides/` ディレクトリが削除されてしまう。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:46
 msgid ""
@@ -224,6 +312,10 @@ msgid ""
 " previews) so that asset URLs resolve correctly under the subpath "
 "deployment."
 msgstr ""
+"悪い、なぜなら Slidev を正しい `--base` パス（main は "
+"`/pyvista-wasm/slides/`、プレビューは `/pyvista-wasm/pr-preview/pr-<N>/`）"
+"でビルドする必要があり、サブパスデプロイメントでアセット URL が正しく"
+"解決されるようにするため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:47
 msgid ""
@@ -232,14 +324,19 @@ msgid ""
 "contributors' PRs would not get automatic previews — acceptable for this "
 "project where slide PRs (#294–#316) are expected from the maintainer."
 msgstr ""
+"中立、なぜなら `rossjrw/pr-preview-action` がフォークからの PR をサポート"
+"しない（アクションはこれを v2 ロードマップ項目として記載）ため、外部"
+"コントリビューターの PR は自動プレビューを取得できないため — "
+"スライド PR (#294–#316) はメンテナーから作成されることが想定される本"
+"プロジェクトでは許容可能。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:49
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:51
 msgid "Compliance with this decision will be confirmed by:"
-msgstr ""
+msgstr "この決定への準拠は以下によって確認されます:"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:53
 msgid ""
@@ -249,6 +346,11 @@ msgid ""
 "branch under a `slides/` subdirectory via `peaceiris/actions-gh-pages` "
 "with `keep_files: true`."
 msgstr ""
+"`.github/workflows/` に `deploy-slides.yml` ワークフローが存在し、"
+"`main` へのプッシュ時（`slides/**` の変更時）に `slidev build --base "
+"/pyvista-wasm/slides/` で Slidev デッキをビルドし、"
+"`peaceiris/actions-gh-pages` で `keep_files: true` を指定して `gh-pages` "
+"ブランチの `slides/` サブディレクトリにデプロイする。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:54
 msgid ""
@@ -258,6 +360,11 @@ msgid ""
 "preview-action` to `gh-pages/pr-preview/pr-<N>/`, posting a comment on "
 "the PR with the preview URL."
 msgstr ""
+"`.github/workflows/` に `preview-slides.yml` ワークフローが存在し、"
+"`pull_request` イベント（opened、synchronize、reopened、closed）時に "
+"`slides/**` が変更された場合に Slidev デッキをビルドし、"
+"`rossjrw/pr-preview-action` 経由で `gh-pages/pr-preview/pr-<N>/` に"
+"デプロイし、プレビュー URL を含むコメントを PR に投稿する。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:55
 msgid ""
@@ -265,12 +372,17 @@ msgid ""
 "(or equivalent `clean-exclude`) so it no longer removes the `slides/` and"
 " `pr-preview/` directories."
 msgstr ""
+"既存の `deploy-redirect.yml` が `keep_files: true`（または同等の "
+"`clean-exclude`）を使用するよう更新され、`slides/` と `pr-preview/` "
+"ディレクトリを削除しなくなる。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:56
 msgid ""
 "The main deck is accessible at `https://tkoyama010.github.io/pyvista-"
 "wasm/slides/` after a push to `main`."
 msgstr ""
+"`main` へのプッシュ後、メインデッキが `https://tkoyama010.github.io/pyvista-"
+"wasm/slides/` でアクセス可能である。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:57
 msgid ""
@@ -278,20 +390,25 @@ msgid ""
 "`https://tkoyama010.github.io/pyvista-wasm/pr-preview/pr-<N>/`, and the "
 "preview directory is removed when the PR is closed."
 msgstr ""
+"`slides/` に触れる PR が `https://tkoyama010.github.io/pyvista-wasm/pr-"
+"preview/pr-<N>/` のプレビュー URL を含むコメントを受信し、PR クローズ時に"
+"プレビューディレクトリが削除される。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:59
 msgid "Pros and Cons of the Options"
-msgstr ""
+msgstr "選択肢の長所と短所"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:61
 msgid "GitHub Pages (Deploy from branch) + rossjrw/pr-preview-action"
-msgstr ""
+msgstr "GitHub Pages (Deploy from branch) + rossjrw/pr-preview-action"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:63
 msgid ""
 "See [https://github.com/rossjrw/pr-preview-"
 "action](https://github.com/rossjrw/pr-preview-action)"
 msgstr ""
+"[https://github.com/rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:65
 msgid ""
@@ -299,6 +416,9 @@ msgid ""
 "tokens, or credit cards are needed; everything runs through "
 "`GITHUB_TOKEN` and GitHub's free Pages offering."
 msgstr ""
+"良い、なぜなら完全に GitHub ネイティブであり — 外部アカウント、API トークン、"
+"クレジットカードが不要で、すべてが `GITHUB_TOKEN` と GitHub の無料の Pages "
+"提供を通じて実行されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:66
 msgid ""
@@ -307,6 +427,10 @@ msgid ""
 " comment with the preview URL on the PR, updates the preview on new "
 "commits, and cleans up automatically when the PR is closed."
 msgstr ""
+"良い、なぜなら `rossjrw/pr-preview-action` が各 PR を既存の GitHub Pages "
+"サイトの一意なサブパス（`pr-preview/pr-<N>/`）にデプロイし、PR にプレビュー "
+"URL を含むコメントを投稿し、新しいコミットでプレビューを更新し、"
+"PR クローズ時に自動的にクリーンアップするため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:67
 msgid ""
@@ -315,12 +439,18 @@ msgid ""
 "`gh-pages` branch with \"Deploy from branch\" Pages source — no Pages "
 "source migration is needed."
 msgstr ""
+"良い、なぜなら既存の `deploy-redirect.yml` ワークフローと互換性があり、"
+"既に `peaceiris/actions-gh-pages` を使用して「Deploy from branch」Pages "
+"ソースで `gh-pages` ブランチにプッシュしているため — Pages ソースの"
+"移行が不要なため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:68
 msgid ""
 "Good, because the main deck can be deployed to a `slides/` subpath on the"
 " same `gh-pages` branch, preserving the root redirect to Read the Docs."
 msgstr ""
+"良い、なぜならメインデッキを同じ `gh-pages` ブランチの `slides/` サブパスに"
+"デプロイでき、Read the Docs へのルートリダイレクトを保持できるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:69
 msgid ""
@@ -328,6 +458,9 @@ msgid ""
 "Pages deploy example using `peaceiris/actions-gh-pages`, so this approach"
 " is well-documented and battle-tested."
 msgstr ""
+"良い、なぜなら Slidev の公式ホスティングドキュメントが "
+"`peaceiris/actions-gh-pages` を使用した GitHub Pages デプロイ例を提供し、"
+"このアプローチはよくドキュメント化され実戦テスト済みのため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:70
 msgid ""
@@ -335,6 +468,9 @@ msgid ""
 "Pages source to be \"Deploy from branch\" (not \"GitHub Actions\"), which"
 " is already the case for this repository."
 msgstr ""
+"中立、なぜなら `rossjrw/pr-preview-action` がリポジトリの Pages ソースが "
+"「Deploy from branch」（「GitHub Actions」ではない）であることを要求するが、"
+"本リポジトリでは既にそうなっているため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:71
 msgid ""
@@ -342,18 +478,25 @@ msgid ""
 " which would delete the `pr-preview/` and `slides/` directories — a one-"
 "line change to `keep_files: true` is required."
 msgstr ""
+"悪い、なぜなら既存の `deploy-redirect.yml` が `keep_files: false` を"
+"使用し、`pr-preview/` と `slides/` ディレクトリを削除してしまうため — "
+"`keep_files: true` への1行の変更が必要。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:72
 msgid ""
 "Bad, because PRs from forks do not get automatic previews (a known "
 "limitation of `rossjrw/pr-preview-action`)."
 msgstr ""
+"悪い、なぜならフォークからの PR は自動プレビューを取得できないため "
+"（`rossjrw/pr-preview-action` の既知の制限）。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:74
 msgid ""
 "GitHub Pages (GitHub Actions source) + actions/upload-pages-artifact / "
 "actions/deploy-pages"
 msgstr ""
+"GitHub Pages (GitHub Actions source) + actions/upload-pages-artifact / "
+"actions/deploy-pages"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:76
 msgid ""
@@ -362,6 +505,10 @@ msgid ""
 "pages](https://docs.github.com/en/pages/getting-started-with-github-pages"
 "/using-custom-workflows-with-github-pages)"
 msgstr ""
+"[https://docs.github.com/en/pages/getting-started-with-github-pages"
+"/using-custom-workflows-with-github-"
+"pages](https://docs.github.com/en/pages/getting-started-with-github-pages"
+"/using-custom-workflows-with-github-pages)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:78
 msgid ""
@@ -369,18 +516,27 @@ msgid ""
 "deployment actions (`actions/upload-pages-artifact` and `actions/deploy-"
 "pages`), which are well-documented and actively maintained."
 msgstr ""
+"良い、なぜなら GitHub のファーストパーティの公式メンテナンスされた Pages "
+"デプロイメントアクション（`actions/upload-pages-artifact` と "
+"`actions/deploy-pages`）を使用し、よくドキュメント化され活発にメンテナンス"
+"されているため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:79
 msgid ""
 "Good, because it is zero-cost and GitHub-native, requiring no external "
 "accounts or tokens."
 msgstr ""
+"良い、なぜならゼロコストで GitHub ネイティブであり、外部アカウントや"
+"トークンが不要なため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:80
 msgid ""
 "Good, because Slidev's official hosting documentation includes a sample "
 "workflow using `actions/upload-pages-artifact` + `actions/deploy-pages`."
 msgstr ""
+"良い、なぜなら Slidev の公式ホスティングドキュメントに "
+"`actions/upload-pages-artifact` + `actions/deploy-pages` を使用した"
+"サンプルワークフローが含まれているため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:81
 msgid ""
@@ -390,6 +546,11 @@ msgid ""
 " no longer work and must be replaced by incorporating the redirect page "
 "into the Pages artifact."
 msgstr ""
+"中立、なぜならリポジトリの Pages ソースを「Deploy from branch」から "
+"「GitHub Actions」に切り替える必要があり、既存の `deploy-redirect.yml` "
+"ワークフロー（`peaceiris/actions-gh-pages` を使用）が機能しなくなり、"
+"リダイレクトページを Pages アーティファクトに組み込むよう置き換える"
+"必要があるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:82
 msgid ""
@@ -399,23 +560,32 @@ msgid ""
 "artifacts, which reviewers must download and serve locally, failing the "
 "per-PR-preview-uniqueness driver for a *live* URL."
 msgstr ""
+"悪い、なぜなら `actions/deploy-pages` が `github-pages` 環境のデフォルト"
+"ブランチに制限され、PR ごとのライブプレビュー URL がネイティブにサポート"
+"されないため — PR ビルドはダウンロード可能なアーティファクトとしてのみ"
+"アップロードでき、レビューアーがダウンロードしてローカルでサーブする"
+"必要があり、*ライブ* URL の PR ごとのプレビュー一意性ドライバを満たさない。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:83
 msgid ""
 "Bad, because migrating the Pages source breaks the existing redirect "
 "workflow and adds migration complexity."
 msgstr ""
+"悪い、なぜなら Pages ソースの移行が既存のリダイレクトワークフローを壊し、"
+"移行の複雑さが増すため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:85
 msgid "Netlify"
-msgstr ""
+msgstr "Netlify"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:87
 msgid ""
 "See [https://www.netlify.com/](https://www.netlify.com/) and [Slidev "
 "Netlify hosting](https://sli.dev/guide/hosting.html#netlify)"
 msgstr ""
+"[https://www.netlify.com/](https://www.netlify.com/) と [Slidev "
+"Netlify ホスティング](https://sli.dev/guide/hosting.html#netlify)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:89
 msgid ""
@@ -423,30 +593,41 @@ msgid ""
 "URLs for each PR with no extra workflow configuration, strongly "
 "satisfying the per-PR-preview-uniqueness driver."
 msgstr ""
+"良い、なぜなら Netlify が追加のワークフロー設定なしで各 PR に一意な"
+"プレビューデプロイメント URL を自動的に作成し、PR ごとのプレビュー一意性"
+"ドライバを強く満たすため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:90
 msgid ""
 "Good, because Netlify deploys on push to main automatically and provides "
 "a free tier for public projects."
 msgstr ""
+"良い、なぜなら Netlify が main へのプッシュ時に自動デプロイし、公開プロジェクト"
+"向けに無料枠を提供するため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:91
 msgid ""
 "Good, because Slidev's official hosting documentation provides a "
 "`netlify.toml` template for Netlify deployment."
 msgstr ""
+"良い、なぜなら Slidev の公式ホスティングドキュメントが Netlify デプロイ向け"
+"に `netlify.toml` テンプレートを提供するため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:92
 msgid ""
 "Good, because Netlify handles SPA routing (redirects to `index.html`) out"
 " of the box, which Slidev's SPA build requires."
 msgstr ""
+"良い、なぜなら Netlify が SPA ルーティング（`index.html` へのリダイレクト）を"
+"標準で処理し、Slidev の SPA ビルドに必要なため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:93
 msgid ""
 "Neutral, because the free tier has build-minute and bandwidth limits that"
 " are generous but not unlimited."
 msgstr ""
+"中立、なぜなら無料枠にはビルド時間と帯域幅の制限があり、寛大だが無制限では"
+"ないため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:94
 msgid ""
@@ -454,6 +635,9 @@ msgid ""
 "repository, and storing an API token as a repository secret — adding "
 "external dependency and setup overhead."
 msgstr ""
+"悪い、なぜなら Netlify アカウントの作成、リポジトリのリンク、API トークンの"
+"リポジトリシークレットとしての保存が必要になり — 外部依存とセットアップの"
+"オーバーヘッドが追加されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:95
 msgid ""
@@ -461,41 +645,54 @@ msgid ""
 "workflow; the redirect would need to be migrated or the deck would live "
 "on a separate Netlify domain, splitting the project's web presence."
 msgstr ""
+"悪い、なぜなら既存の `gh-pages` リダイレクトワークフローと互換性がなく、"
+"リダイレクトを移行するかデッキが別の Netlify ドメインに配置され、"
+"プロジェクトのウェブプレゼンスが分割されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:97
 msgid "Vercel"
-msgstr ""
+msgstr "Vercel"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:99
 msgid ""
 "See [https://vercel.com/](https://vercel.com/) and [Slidev Vercel "
 "hosting](https://sli.dev/guide/hosting.html#vercel)"
 msgstr ""
+"[https://vercel.com/](https://vercel.com/) と [Slidev Vercel "
+"ホスティング](https://sli.dev/guide/hosting.html#vercel)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:101
 msgid ""
 "Good, because Vercel automatically creates unique preview deployment URLs"
 " for each PR with no extra workflow configuration."
 msgstr ""
+"良い、なぜなら Vercel が追加のワークフロー設定なしで各 PR に一意な"
+"プレビューデプロイメント URL を自動的に作成するため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:102
 msgid ""
 "Good, because Vercel deploys on push to main automatically and provides a"
 " free tier for hobby projects."
 msgstr ""
+"良い、なぜなら Vercel が main へのプッシュ時に自動デプロイし、ホビー"
+"プロジェクト向けに無料枠を提供するため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:103
 msgid ""
 "Good, because Slidev's official hosting documentation provides a "
 "`vercel.json` template for Vercel deployment."
 msgstr ""
+"良い、なぜなら Slidev の公式ホスティングドキュメントが Vercel デプロイ向け"
+"に `vercel.json` テンプレートを提供するため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:104
 msgid ""
 "Neutral, because the free tier has usage limits and Vercel's commercial "
 "focus may introduce future pricing pressure for open-source projects."
 msgstr ""
+"中立、なぜなら無料枠には使用制限があり、Vercel の商業的な焦点がオープン"
+"ソースプロジェクトに将来の価格プレッシャーをもたらす可能性があるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:105
 msgid ""
@@ -503,33 +700,41 @@ msgid ""
 "repository, and storing an API token — adding external dependency and "
 "setup overhead."
 msgstr ""
+"悪い、なぜなら Vercel アカウントの作成、リポジトリのリンク、API トークンの"
+"保存が必要になり — 外部依存とセットアップのオーバーヘッドが追加されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:106
 msgid ""
 "Bad, because it is not compatible with the existing `gh-pages` redirect "
 "workflow; the deck would live on a separate Vercel domain."
 msgstr ""
+"悪い、なぜなら既存の `gh-pages` リダイレクトワークフローと互換性がなく、"
+"デッキが別の Vercel ドメインに配置されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:108
 msgid "Cloudflare Pages"
-msgstr ""
+msgstr "Cloudflare Pages"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:110
 msgid "See [https://pages.cloudflare.com/](https://pages.cloudflare.com/)"
-msgstr ""
+msgstr "[https://pages.cloudflare.com/](https://pages.cloudflare.com/)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:112
 msgid ""
 "Good, because Cloudflare Pages provides automatic preview deployments for"
 " each PR and deploys on push to main."
 msgstr ""
+"良い、なぜなら Cloudflare Pages が各 PR の自動プレビューデプロイメントを"
+"提供し、main へのプッシュ時にデプロイするため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:113
 msgid ""
 "Good, because the free tier is generous with unlimited bandwidth and "
 "build requests for public projects."
 msgstr ""
+"良い、なぜなら無料枠が寛大で、公開プロジェクト向けに無制限の帯域幅と"
+"ビルドリクエストがあるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:114
 msgid ""
@@ -537,6 +742,8 @@ msgid ""
 " a Cloudflare Pages template, so the configuration must be written from "
 "scratch."
 msgstr ""
+"中立、なぜなら Slidev の公式ホスティングドキュメントに Cloudflare Pages "
+"テンプレートが含まれず、設定をゼロから書く必要があるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:115
 msgid ""
@@ -544,16 +751,20 @@ msgid ""
 "repository, and storing an API token — adding external dependency and "
 "setup overhead."
 msgstr ""
+"悪い、なぜなら Cloudflare アカウントの作成、リポジトリのリンク、API トークン"
+"の保存が必要になり — 外部依存とセットアップのオーバーヘッドが追加されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:116
 msgid ""
 "Bad, because it is not compatible with the existing `gh-pages` redirect "
 "workflow; the deck would live on a separate Cloudflare Pages domain."
 msgstr ""
+"悪い、なぜなら既存の `gh-pages` リダイレクトワークフローと互換性がなく、"
+"デッキが別の Cloudflare Pages ドメインに配置されるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:118
 msgid "GitHub Actions build artifact only"
-msgstr ""
+msgstr "GitHub Actions ビルドアーティファクトのみ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:120
 msgid ""
@@ -561,18 +772,26 @@ msgid ""
 "uploaded as a GitHub Actions artifact on PRs, and reviewers download and "
 "serve it locally with `npx vite preview` or any static server."
 msgstr ""
+"良い、なぜならホスティングプラットフォームが完全に不要であり — ビルドされた"
+"デッキが PR で GitHub Actions アーティファクトとしてアップロードされ、"
+"レビューアーが `npx vite preview` または任意の静的サーバーでダウンロードして"
+"ローカルでサーブするため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:121
 msgid ""
 "Good, because it is zero-cost and fully GitHub-native with no external "
 "accounts."
 msgstr ""
+"良い、なぜならゼロコストで完全に GitHub ネイティブであり、外部アカウントが"
+"不要なため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:122
 msgid ""
 "Neutral, because it is trivial to set up: a single `actions/upload-"
 "artifact` step after `slidev build`."
 msgstr ""
+"中立、なぜならセットアップが簡単で: `slidev build` の後に単一の "
+"`actions/upload-artifact` ステップのみのため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:123
 msgid ""
@@ -580,6 +799,9 @@ msgid ""
 "locally, which is friction-heavy and fails the per-PR-preview-uniqueness "
 "driver for a *live* URL that can be shared with non-technical reviewers."
 msgstr ""
+"悪い、なぜならレビューアーがアーティファクトをローカルにダウンロード、展開、"
+"サーブする必要があり、摩擦が大きく、非技術系レビューアーと共有可能な"
+"*ライブ* URL の PR ごとのプレビュー一意性ドライバを満たさないため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:124
 msgid ""
@@ -587,15 +809,18 @@ msgid ""
 "not accessible at a live URL without manual artifact download, failing "
 "the automatic-deployment driver."
 msgstr ""
+"悪い、なぜなら自動 main ブランチデプロイメントがなく — 手動アーティファクト"
+"ダウンロードなしではデッキがライブ URL でアクセスできず、自動デプロイメント"
+"ドライバを満たさないため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:126
 msgid "Read the Docs subpath"
-msgstr ""
+msgstr "Read the Docs サブパス"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:128
 msgid "See [https://readthedocs.org/](https://readthedocs.org/)"
-msgstr ""
+msgstr "[https://readthedocs.org/](https://readthedocs.org/)を参照"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:130
 msgid ""
@@ -603,12 +828,17 @@ msgid ""
 "(`pyvista-js.readthedocs.io`), so deploying the deck as a subpath would "
 "keep all project web presence in one place."
 msgstr ""
+"良い、なぜならプロジェクトが既にドキュメントに Read the Docs "
+"（`pyvista-js.readthedocs.io`）を使用しており、デッキをサブパスとして"
+"デプロイすればプロジェクトのウェブプレゼンスが1箇所にまとまるため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:131
 msgid ""
 "Good, because Read the Docs is free for open-source projects and deploys "
 "automatically on push to main."
 msgstr ""
+"良い、なぜなら Read the Docs はオープンソースプロジェクトに無料で、"
+"main へのプッシュ時に自動デプロイするため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:132
 msgid ""
@@ -616,6 +846,9 @@ msgid ""
 "documentation, not arbitrary static SPAs — embedding a Slidev SPA would "
 "require a custom build step or iframe embedding within an Sphinx page."
 msgstr ""
+"中立、なぜなら Read the Docs は Sphinx/MkDocs ドキュメント向けに設計されて"
+"おり、任意の静的 SPA 向けではないため — Slidev SPA の埋め込みにはカスタム"
+"ビルドステップまたは Sphinx ページ内の iframe 埋め込みが必要になる。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:133
 msgid ""
@@ -624,82 +857,89 @@ msgid ""
 "workarounds (e.g., committing the built `dist/` to the repo and serving "
 "it as static files within the Sphinx build)."
 msgstr ""
+"悪い、なぜなら Slidev の SPA ビルドはドキュメントサイトではなく、Read the Docs "
+"に統合するのは不自然で回避策が必要になるため（例: ビルドされた `dist/` を"
+"リポジトリにコミットし、Sphinx ビルド内の静的ファイルとしてサーブする）。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:134
 msgid ""
 "Bad, because Read the Docs does not provide per-PR preview deployments "
 "for arbitrary subpaths, failing the per-PR-preview-uniqueness driver."
 msgstr ""
+"悪い、なぜなら Read the Docs が任意のサブパスの PR ごとのプレビュー"
+"デプロイメントを提供せず、PR ごとのプレビュー一意性ドライバを満たさないため。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:136
 msgid "More Information"
-msgstr ""
+msgstr "詳細情報"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:138
 msgid "Comparison matrix"
-msgstr ""
+msgstr "比較マトリクス"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:140
 msgid ""
 "The table below summarises how each option scores against the evaluation "
 "criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
+"以下の表は各選択肢が評価基準に対してどのようにスコアするかを要約する。"
+"✓ = 強い、~ = 部分的、✗ = 弱い。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Criterion"
-msgstr ""
+msgstr "評価基準"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "GH Pages (branch) + pr-preview"
-msgstr ""
+msgstr "GH Pages (branch) + pr-preview"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "GH Pages (Actions) + deploy-pages"
-msgstr ""
+msgstr "GH Pages (Actions) + deploy-pages"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Build artifact only"
-msgstr ""
+msgstr "ビルドアーティファクトのみ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Zero-cost hosting"
-msgstr ""
+msgstr "ゼロコストホスティング"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "✓"
-msgstr ""
+msgstr "✓"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Auto-deploy on push to main"
-msgstr ""
+msgstr "main プッシュ時の自動デプロイ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "✗"
-msgstr ""
+msgstr "✗"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Per-PR live preview URL"
-msgstr ""
+msgstr "PR ごとのライブプレビュー URL"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Ease of setup"
-msgstr ""
+msgstr "セットアップのしやすさ"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "~"
-msgstr ""
+msgstr "~"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Low maintenance burden"
-msgstr ""
+msgstr "低メンテナンス負荷"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
 msgid "Compatibility with existing `gh-pages` redirect"
-msgstr ""
+msgstr "既存の `gh-pages` リダイレクトとの互換性"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:151
 msgid "Concrete CI workflows to implement in a follow-up PR"
-msgstr ""
+msgstr "後続の PR で実装する具体的な CI ワークフロー"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:153
 msgid ""
@@ -710,6 +950,12 @@ msgid ""
 "`peaceiris/actions-gh-pages` with `destination_dir: slides` and "
 "`keep_files: true`."
 msgstr ""
+"**`deploy-slides.yml`** (main へのデプロイ): `main` へのプッシュ時（`slides/**` "
+"の変更時、加えて `workflow_dispatch`）にトリガーされる。ステップ: checkout → "
+"Node.js セットアップ → Slidev 依存関係のインストール → `slidev build --base "
+"/pyvista-wasm/slides/` → `peaceiris/actions-gh-pages` で `destination_dir: "
+"slides` と `keep_files: true` を指定して `gh-pages` ブランチの `slides/` 配下に"
+"デプロイ。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:154
 msgid ""
@@ -720,6 +966,12 @@ msgid ""
 "preview-action` to `gh-pages/pr-preview/pr-<N>/`, which posts a PR "
 "comment with the preview URL and cleans up on PR close."
 msgstr ""
+"**`preview-slides.yml`** (PR プレビュー): `pull_request`（opened、"
+"synchronize、reopened、closed）時に `slides/**` が変更された場合に"
+"トリガーされる。ステップ: checkout → Node.js セットアップ → Slidev 依存関係の"
+"インストール → `slidev build --base /pyvista-wasm/pr-preview/pr-<N>/` → "
+"`rossjrw/pr-preview-action` 経由で `gh-pages/pr-preview/pr-<N>/` にデプロイ。"
+"PR にプレビュー URL を含むコメントを投稿し、PR クローズ時にクリーンアップする。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:155
 msgid ""
@@ -728,64 +980,85 @@ msgid ""
 "`slides/` and `pr-preview/` directories maintained by the other two "
 "workflows."
 msgstr ""
+"**`deploy-redirect.yml` の更新**: `keep_files: false` を `keep_files: true` に"
+"変更し、リダイレクトデプロイが他の2つのワークフローがメンテナンスする "
+"`slides/` と `pr-preview/` ディレクトリを削除しないようにする。"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:157
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:159
 msgid ""
 "Slidev hosting documentation: "
 "[https://sli.dev/guide/hosting.html](https://sli.dev/guide/hosting.html)"
 msgstr ""
+"Slidev ホスティングドキュメント: "
+"[https://sli.dev/guide/hosting.html](https://sli.dev/guide/hosting.html)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:160
 msgid ""
 "rossjrw/pr-preview-action: [https://github.com/rossjrw/pr-preview-"
 "action](https://github.com/rossjrw/pr-preview-action)"
 msgstr ""
+"rossjrw/pr-preview-action: [https://github.com/rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:161
 msgid ""
 "peaceiris/actions-gh-pages: [https://github.com/peaceiris/actions-gh-"
 "pages](https://github.com/peaceiris/actions-gh-pages)"
 msgstr ""
+"peaceiris/actions-gh-pages: [https://github.com/peaceiris/actions-gh-"
+"pages](https://github.com/peaceiris/actions-gh-pages)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:162
 msgid ""
 "actions/upload-pages-artifact: [https://github.com/actions/upload-pages-"
 "artifact](https://github.com/actions/upload-pages-artifact)"
 msgstr ""
+"actions/upload-pages-artifact: [https://github.com/actions/upload-pages-"
+"artifact](https://github.com/actions/upload-pages-artifact)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:163
 msgid ""
 "actions/deploy-pages: [https://github.com/actions/deploy-"
 "pages](https://github.com/actions/deploy-pages)"
 msgstr ""
+"actions/deploy-pages: [https://github.com/actions/deploy-"
+"pages](https://github.com/actions/deploy-pages)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:164
 msgid ""
 "GitHub Pages documentation: "
 "[https://docs.github.com/en/pages](https://docs.github.com/en/pages)"
 msgstr ""
+"GitHub Pages ドキュメント: "
+"[https://docs.github.com/en/pages](https://docs.github.com/en/pages)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:165
 msgid ""
 "Parent issue: [#275](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/275)"
 msgstr ""
+"親イシュー: [#275](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/275)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:166
 msgid ""
 "This decision: [#318](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/318)"
 msgstr ""
+"この決定: [#318](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/318)"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:167
 msgid ""
 "Related: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) "
 "(selected Slidev and bootstrapped the deck under `slides/`)"
 msgstr ""
+"関連: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) "
+"（Slidev を選択し、`slides/` 配下にデッキをブートストラップした）"
 
 #: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:168
 msgid ""
@@ -795,3 +1068,8 @@ msgid ""
 "wasm/issues/294)–[#316](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/316))"
 msgstr ""
+"ブロック解除: [#278](https://github.com/tkoyama010/pyvista-wasm/issues/278) "
+"（スライドデッキ作成） — レビューアーは23のスライド PR "
+"([#294](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/294)–[#316](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/316)) の視覚的プレビューが必要"

@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst:2
 msgid "pyvista\\_wasm.PolyData.tube"
-msgstr ""
+msgstr "pyvista\\_wasm.PolyData.tube"
 
 #: of pyvista_wasm.mesh.PolyData.tube:1
 msgid "Generate a tube around a line polydata."
-msgstr ""
+msgstr "ラインポリデータの周囲にチューブを生成します。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:3
 msgid ""
@@ -35,6 +35,9 @@ msgid ""
 "PyVista ``tube`` filter API and is backed by VTK.wasm's "
 "``vtkTubeFilter``."
 msgstr ""
+"このフィルタは、各ラインに沿ってポリゴン断面をスイープすることにより、"
+"メッシュ内のラインの周囲にチューブ表現を作成します。PyVista の ``tube`` フィルタ API を"
+"ミラーリングし、VTK.wasm の ``vtkTubeFilter`` によってバッキングされています。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:10
 msgid ""
@@ -43,41 +46,45 @@ msgid ""
 "generates a tube by sweeping a circle with ``n_sides`` sides along the "
 "line segments."
 msgstr ""
+"このフィルタはラインベースのポリデータ（例: :class:`Line` の出力）での使用を"
+"意図しています。VTK.wasm の ``vtkTubeFilter`` を使用し、ラインセグメントに沿って "
+"``n_sides`` 辺の円をスイープしてチューブを生成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.PolyData.tube:15
 msgid "The radius of the tube. Default is 0.5."
-msgstr ""
+msgstr "チューブの半径。デフォルトは0.5。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:17
 msgid ""
 "The number of sides for the tube cross-section. Higher values produce "
 "smoother tubes. Default is 20."
 msgstr ""
+"チューブ断面の辺の数。値が大きいほど滑らかなチューブになります。デフォルトは20。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:20
 msgid "Whether to cap the ends of the tube. Default is True."
-msgstr ""
+msgstr "チューブの端をキャップするかどうか。デフォルトはTrue。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.PolyData.tube:23
 msgid "A new mesh representing the tube."
-msgstr ""
+msgstr "チューブを表す新しいメッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.PolyData.tube:27
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.mesh.PolyData.tube:37
 msgid "Render the tube:"
-msgstr ""
+msgstr "チューブをレンダリングします:"

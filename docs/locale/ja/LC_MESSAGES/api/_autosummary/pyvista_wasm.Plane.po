@@ -22,58 +22,60 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.Plane.rst:2
 msgid "pyvista\\_wasm.Plane"
-msgstr ""
+msgstr "pyvista\\_wasm.Plane"
 
 #: of pyvista_wasm.mesh.Plane:1
 msgid "Create a plane mesh."
-msgstr ""
+msgstr "平面メッシュを作成します。"
 
 #: of pyvista_wasm.mesh.Plane:3
 msgid ""
 "This mirrors the :func:`pyvista.Plane` API, producing a flat rectangular "
 "mesh oriented according to the given normal ``direction``."
 msgstr ""
+"これは :func:`pyvista.Plane` API をミラーリングし、指定された法線 ``direction`` "
+"に従って配向された平坦な矩形メッシュを生成します。"
 
 #: ../../api/_autosummary/pyvista_wasm.Plane.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.mesh.Plane:6
 msgid "Center of the plane (x, y, z). Default is (0, 0, 0)."
-msgstr ""
+msgstr "平面の中心 (x, y, z)。デフォルトは (0, 0, 0)。"
 
 #: of pyvista_wasm.mesh.Plane:8
 msgid "Normal direction of the plane (x, y, z). Default is (0, 0, 1)."
-msgstr ""
+msgstr "平面の法線方向 (x, y, z)。デフォルトは (0, 0, 1)。"
 
 #: of pyvista_wasm.mesh.Plane:10
 msgid "Size in the i (first) direction. Default is 1.0."
-msgstr ""
+msgstr "i（第1）方向のサイズ。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Plane:12
 msgid "Size in the j (second) direction. Default is 1.0."
-msgstr ""
+msgstr "j（第2）方向のサイズ。デフォルトは1.0。"
 
 #: of pyvista_wasm.mesh.Plane:14
 msgid "Number of subdivisions in the i direction. Default is 10."
-msgstr ""
+msgstr "i方向の細分割数。デフォルトは10。"
 
 #: of pyvista_wasm.mesh.Plane:16
 msgid "Number of subdivisions in the j direction. Default is 10."
-msgstr ""
+msgstr "j方向の細分割数。デフォルトは10。"
 
 #: ../../api/_autosummary/pyvista_wasm.Plane.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.mesh.Plane:19
 msgid "A plane mesh."
-msgstr ""
+msgstr "平面メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.Plane.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.mesh.Plane:23
 msgid "Examples"
-msgstr ""
+msgstr "例"
