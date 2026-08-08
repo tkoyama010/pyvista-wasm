@@ -1047,6 +1047,20 @@ class TestCheckLocaleParity:
             cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
         assert exc_info.value.code == 1
 
+    def test_failure_message_names_missing_key(self, tmp_path, capsys) -> None:
+        """Failure message identifies the key present in ja.yml but absent from en.yml."""
+        ja = tmp_path / "ja.yml"
+        en = tmp_path / "en.yml"
+        ja.write_text("cover:\n  title: タイトル\n  subtitle: サブタイトル\n", encoding="utf-8")
+        en.write_text("cover:\n  title: Title\n", encoding="utf-8")
+
+        with pytest.raises(SystemExit) as exc_info:
+            cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
+        assert exc_info.value.code == 1
+
+        captured = capsys.readouterr()
+        assert "cover.subtitle" in captured.out
+
     def test_nested_key_drift(self, tmp_path) -> None:
         """``check-locale-parity`` detects drift in nested keys."""
         ja = tmp_path / "ja.yml"
