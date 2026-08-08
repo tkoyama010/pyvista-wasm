@@ -10,7 +10,7 @@ informed: []
 
 ## Context and Problem Statement
 
-The project README (`README.md`, at the repo root) is English-only today. It is a Markdown file distinct from the Sphinx ReadTheDocs documentation ([ADR-0005](https://github.com/tkoyama010/pyvista-wasm/issues/439)) and the Slidev talk deck ([ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442), [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)), so it needs its own internationalization strategy rather than reusing Sphinx gettext or `slidev-addon-i18nb`. Issue [#444](https://github.com/tkoyama010/pyvista-wasm/issues/444) captures the user-facing need to internationalize the README (e.g. JA, zh_CN, es) and keep translations in sync automatically, so non-English-speaking users can understand the project without a language barrier and translations never go stale when the English README changes. GitHub renders localized READMEs via `README.<lang>.md` files at the repo root and shows a language switcher automatically, and [#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) is aligning the README with the [Standard Readme](https://github.com/RichardLitt/standard-readme) specification — so the i18n structure must preserve that layout in every language. The repo already enforces the Standard Readme spec on `README.md` through a [`standard-readme`](https://github.com/tkoyama010/standard-readme-pre-commit) pre-commit hook. Which README i18n + sync strategy should we adopt so that translations are GitHub-native, layout-consistent, and drift is detected automatically?
+The project README (`README.md`, at the repo root) is English-only today. It is a Markdown file distinct from the Sphinx ReadTheDocs documentation ([ADR-0008](https://github.com/tkoyama010/pyvista-wasm/issues/439)) and the Slidev talk deck ([ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442), [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)), so it needs its own internationalization strategy rather than reusing Sphinx gettext or `slidev-addon-i18nb`. Issue [#444](https://github.com/tkoyama010/pyvista-wasm/issues/444) captures the user-facing need to internationalize the README (e.g. JA, zh_CN, es) and keep translations in sync automatically, so non-English-speaking users can understand the project without a language barrier and translations never go stale when the English README changes. GitHub renders localized READMEs via `README.<lang>.md` files at the repo root and shows a language switcher automatically, and [#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) is aligning the README with the [Standard Readme](https://github.com/RichardLitt/standard-readme) specification — so the i18n structure must preserve that layout in every language. The repo already enforces the Standard Readme spec on `README.md` through a [`standard-readme`](https://github.com/tkoyama010/standard-readme-pre-commit) pre-commit hook. Which README i18n + sync strategy should we adopt so that translations are GitHub-native, layout-consistent, and drift is detected automatically?
 
 ## Decision Drivers
 
@@ -22,7 +22,7 @@ The project README (`README.md`, at the repo root) is English-only today. It is 
 - **Automatic vs. manual sync; CI enforcement vs. PR-review-only**: The project favours automated, verifiable enforcement over reliance on reviewer vigilance, consistent with the pre-commit + CI pattern already used throughout the repo.
 - **Zero-cost / GitHub-native tooling**: Per the drivers in [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md) and [ADR-0006](https://github.com/tkoyama010/pyvista-wasm/issues/442), the baseline must not require paid external services, API keys, or accounts beyond what is already in the repository.
 - **Minimal maintenance burden for a single-maintainer open-source project**: The solution must be maintainable by one person; it should not introduce a heavy build pipeline or a tool that demands ongoing babysitting.
-- **Consistency with ADR-0005 ([#439](https://github.com/tkoyama010/pyvista-wasm/issues/439), ReadTheDocs i18n) and ADR-0006 ([#442](https://github.com/tkoyama010/pyvista-wasm/issues/442), slide locale sync)**: The README strategy should reuse the same drift-detection philosophy where sensible, so the project has one coherent i18n-sync story across docs, slides, and README.
+- **Consistency with ADR-0008 ([#439](https://github.com/tkoyama010/pyvista-wasm/issues/439), ReadTheDocs i18n) and ADR-0006 ([#442](https://github.com/tkoyama010/pyvista-wasm/issues/442), slide locale sync)**: The README strategy should reuse the same drift-detection philosophy where sensible, so the project has one coherent i18n-sync story across docs, slides, and README.
 
 ## Considered Options
 
@@ -34,7 +34,7 @@ The project README (`README.md`, at the repo root) is English-only today. It is 
 
 ## Decision Outcome
 
-Chosen option: **"EN-authoritative with CI structural-parity + stale-translation check"**, because it is the only option that satisfies every decision driver simultaneously — it keeps English as the authoritative source, produces real committed `README.<lang>.md` files so GitHub's native language switcher works, enforces the Standard Readme section/heading structure across languages via structural parity, surfaces both structural drift and content (stale-translation) drift automatically, runs as zero-cost GitHub Actions plus a pre-commit hook (no paid services or API keys), imposes minimal burden on a single maintainer, and reuses the same drift-detection philosophy as ADR-0005 and ADR-0006. Translations are authored manually by contributors; CI flags drift rather than generating translations, so human judgement stays in the loop and no external dependency is introduced.
+Chosen option: **"EN-authoritative with CI structural-parity + stale-translation check"**, because it is the only option that satisfies every decision driver simultaneously — it keeps English as the authoritative source, produces real committed `README.<lang>.md` files so GitHub's native language switcher works, enforces the Standard Readme section/heading structure across languages via structural parity, surfaces both structural drift and content (stale-translation) drift automatically, runs as zero-cost GitHub Actions plus a pre-commit hook (no paid services or API keys), imposes minimal burden on a single maintainer, and reuses the same drift-detection philosophy as ADR-0008 and ADR-0006. Translations are authored manually by contributors; CI flags drift rather than generating translations, so human judgement stays in the loop and no external dependency is introduced.
 
 ### Consequences
 
@@ -72,7 +72,7 @@ A zero-dependency script parses the headings/sections of `README.md` and each `R
 - Good, because it preserves the Standard Readme layout across languages — every localized README must mirror the English section structure.
 - Good, because it is zero-cost and GitHub-native: a stdlib-only script in GitHub Actions, no paid services or API keys.
 - Good, because it is low maintenance for a single maintainer — one small script, no build pipeline.
-- Good, because it is consistent with the drift-detection philosophy of ADR-0005 and ADR-0006.
+- Good, because it is consistent with the drift-detection philosophy of ADR-0008 and ADR-0006.
 - Neutral, because it can run as both a pre-commit hook and a CI workflow, giving fast local feedback and PR enforcement.
 - Bad, because it detects only structural drift, not content drift — a translation can be stale (English README updated, translation not) yet structurally identical, so it passes the check silently. This fails the content-drift decision driver.
 
@@ -80,7 +80,7 @@ A zero-dependency script parses the headings/sections of `README.md` and each `R
 
 Builds on the structural-parity check by also comparing git history: if `README.md` was committed after a given `README.<lang>.md`, the translation is flagged as stale and CI fails until it is updated or explicitly allowlisted.
 
-- Good, because it satisfies every decision driver: English authoritative, GitHub-native `README.<lang>.md` rendering, Standard Readme layout preserved, structural drift detected, content drift detected, zero-cost, low maintenance, and consistent with ADR-0005/ADR-0006.
+- Good, because it satisfies every decision driver: English authoritative, GitHub-native `README.<lang>.md` rendering, Standard Readme layout preserved, structural drift detected, content drift detected, zero-cost, low maintenance, and consistent with ADR-0008/ADR-0006.
 - Good, because it catches both kinds of drift — a localized README that diverges in structure or that falls behind the English README is surfaced automatically.
 - Good, because it is zero-cost and GitHub-native: a stdlib-only script using `git log`/commit dates, run in GitHub Actions and pre-commit, with no paid services or API keys.
 - Good, because it keeps human judgement in the loop — translations are manual, so no LLM/API dependency and no generated-PR review load.
@@ -100,7 +100,7 @@ A GitHub Action watches `README.md` changes and uses an LLM or translation API t
 - Bad, because it violates the zero-cost / GitHub-native driver — LLM and translation APIs require paid API keys or accounts beyond what is in the repository.
 - Bad, because every generated PR must be reviewed by a human for accuracy and layout, adding a recurring review load that is not "minimal maintenance" for a single maintainer.
 - Bad, because LLM translations can hallucinate or drop content (e.g. code blocks, badge URLs), so structural-parity is not guaranteed without an additional check — meaning this option needs the structural-parity check on top anyway.
-- Bad, because it is inconsistent with the drift-detection philosophy of ADR-0005/ADR-0006, which favour detection over automatic generation.
+- Bad, because it is inconsistent with the drift-detection philosophy of ADR-0008/ADR-0006, which favour detection over automatic generation.
 
 ### Dual-maintenance with no enforcement — status quo, rely on PR review
 
@@ -112,7 +112,7 @@ Localized READMEs are maintained by hand with no automated checks; keeping them 
 - Neutral, because it is the default state of a repo with localized READMEs and no automation.
 - Bad, because it fails the structural-drift and content-drift drivers — nothing detects a missing section or a stale translation, so drift accumulates silently.
 - Bad, because it fails the CI-enforcement driver — reliance on reviewer vigilance is exactly what the project's pre-commit + CI pattern exists to avoid.
-- Bad, because it is inconsistent with ADR-0005/ADR-0006, which both automate drift detection rather than relying on review.
+- Bad, because it is inconsistent with ADR-0008/ADR-0006, which both automate drift detection rather than relying on review.
 - Bad, because for a single maintainer there often is no other reviewer, so "rely on PR review" reduces to "rely on the same person remembering every language," which does not scale.
 
 ### Single-source-of-truth with build-time locale generation — one README source, build step produces per-language files
@@ -143,7 +143,7 @@ The table below summarises how each option scores against the evaluation criteri
 | Content drift detected | ✗ | ✓ | ✓ | ✗ | ✓ |
 | Zero-cost / GitHub-native | ✓ | ✓ | ✗ | ✓ | ~ |
 | Low maintenance burden | ✓ | ✓ | ~ | ✓ | ✗ |
-| Consistency with ADR-0005/0006 | ✓ | ✓ | ~ | ✗ | ~ |
+| Consistency with ADR-0008/0006 | ✓ | ✓ | ~ | ✗ | ~ |
 
 ### Links
 
@@ -154,5 +154,5 @@ The table below summarises how each option scores against the evaluation criteri
 - Standard Readme alignment: [#293](https://github.com/tkoyama010/pyvista-wasm/issues/293) (Align README with the Standard Readme specification)
 - This decision: [#445](https://github.com/tkoyama010/pyvista-wasm/issues/445)
 - Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md) (i18n decision for the Slidev deck — same zero-cost / GitHub-native philosophy)
-- Related: ADR-0005 [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439) (deciding how to internationalize the ReadTheDocs documentation)
+- Related: ADR-0008 [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439) (deciding how to internationalize the ReadTheDocs documentation)
 - Related: ADR-0006 [#442](https://github.com/tkoyama010/pyvista-wasm/issues/442) (deciding how to keep slide locale files in sync)
