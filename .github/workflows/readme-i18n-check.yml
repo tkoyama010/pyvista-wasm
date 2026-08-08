@@ -24,6 +24,6 @@ jobs:
           fetch-depth: 0
 
       - name: Check README i18n drift
-        uses: tkoyama010/readme-i18n-check@main
+        uses: tkoyama010/readme-i18n-check@05752ce4dbfe0efab3b94b497db48cce5b7cb251  # v0.1.0
         with:
           no-stale-check: ${{ github.event_name == 'pull_request' }}

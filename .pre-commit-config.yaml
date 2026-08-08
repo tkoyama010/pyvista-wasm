@@ -106,7 +106,7 @@ repos:
       - id: standard-readme
 
   - repo: https://github.com/tkoyama010/readme-i18n-check
-    rev: main
+    rev: v0.1.0
     hooks:
       - id: check-readme-i18n
 
