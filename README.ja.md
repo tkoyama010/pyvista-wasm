@@ -5,7 +5,10 @@
 [![marimo](https://marimo.io/shield.svg)](https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA)
 [![Slidev](https://img.shields.io/badge/Slides-PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io/pyvista-wasm/slides/)
 
-> **English**: [README.md](README.md)
+<p align="center">
+  <a href="README.md">English</a> |
+  <a href="README.ja.md">日本語</a>
+</p>
 
 [PyVista](https://github.com/pyvista/pyvista) のような API を [VTK.wasm](https://kitware.github.io/vtk-wasm/) に提供し、WebAssembly を使ってブラウザで直感的な 3D 可視化を実現します。
 
