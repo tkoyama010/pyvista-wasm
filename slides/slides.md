@@ -641,13 +641,33 @@ class: text-left
 <div class="pt-4">
 
 ```sh
-pyvista-wasm info
+pyvista-wasm --help
 ```
 
 ```
-pyvista-wasm : 0.9.0
-Python     : 3.12.12 (main, Jan 14 2026, 19:35:58) [Clang 21.1.4 ]
-Platform   : Linux-7.0.0-29-generic-x86_64-with-glibc2.43
+ Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...                                
+
+ PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.            
+
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --version                     Show version and exit.                         │
+│ --install-completion          Install completion for the current shell.      │
+│ --show-completion             Show completion for the current shell, to copy │
+│                               it or customize the installation.              │
+│ --help                        Show this message and exit.                    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ plot                    Plot one or more mesh files in the browser.          │
+│ info                    Show pyvista-wasm version and environment            │
+│                         information.                                         │
+│ capture-preview         Capture a preview GIF of the JupyterLite demo.       │
+│ capture-marimo-preview  Capture a preview GIF of the marimo demo.            │
+│ capture-stlite-preview  Capture a preview GIF of the stlite demo.            │
+│ export-demo             Export a self-contained VTK.wasm demo page for the   │
+│                         talk slide deck.                                     │
+│ check-locale-parity     Check that JA and EN slide locale files share the    │
+│                         same key structure.                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
 </div>
