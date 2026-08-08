@@ -638,16 +638,16 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>
 
-<div class="pt-4" style="max-height: 70vh; overflow-y: auto;">
+<div class="pt-4 cli-help-scroll">
 
 ```sh
 pyvista-wasm --help
 ```
 
 ```
- Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...
+ Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...                                
 
- PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.
+ PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.            
 
 ╭─ Options ────────────────────────────────────────────────────────────────────╮
 │ --version                     Show version and exit.                         │
@@ -671,6 +671,15 @@ pyvista-wasm --help
 ```
 
 </div>
+
+<style>
+.cli-help-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+</style>
 
 <!-- Single message: the pyvista-wasm CLI lets you plot meshes, capture previews, and export demos from the terminal — no Python code required. -->
 
