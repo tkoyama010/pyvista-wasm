@@ -367,28 +367,24 @@ def plot(  # noqa: PLR0913
         str | None,
         typer.Option(
             help="Mesh colour applied to all files (e.g. ``red``, ``#ff0000``).",
-            metavar="COLOR",
         ),
     ] = None,
     background: Annotated[
         str | None,
         typer.Option(
             help="Background colour (e.g. ``white``, ``black``). Default: renderer default.",
-            metavar="COLOR",
         ),
     ] = None,
     opacity: Annotated[
         float,
         typer.Option(
             help="Mesh opacity in the range [0, 1]. Default: 1.0.",
-            metavar="FLOAT",
         ),
     ] = 1.0,
     pickle: Annotated[
         Path | None,
         typer.Option(
             help="Save the Plotter object to a pickle file for later reuse.",
-            metavar="PATH",
         ),
     ] = None,
     load_pickle: Annotated[
@@ -396,7 +392,6 @@ def plot(  # noqa: PLR0913
         typer.Option(
             help="Load a pickled Plotter object from file instead of creating a new one. "
             "WARNING: Only load pickle files from trusted sources.",
-            metavar="PATH",
         ),
     ] = None,
     screenshot: Annotated[
@@ -404,7 +399,6 @@ def plot(  # noqa: PLR0913
         typer.Option(
             help="Save a screenshot to the specified file (PNG/JPEG). "
             "When provided, the browser window will not open.",
-            metavar="PATH",
         ),
     ] = None,
     screenshot_transparent: Annotated[  # noqa: FBT002
@@ -417,42 +411,36 @@ def plot(  # noqa: PLR0913
         int | None,
         typer.Option(
             help="Scale factor for screenshot resolution (e.g. 2 for double resolution).",
-            metavar="INT",
         ),
     ] = None,
     screenshot_window_size: Annotated[
         str | None,
         typer.Option(
             help="Window size for screenshot as 'width,height' (e.g. '1920,1080').",
-            metavar="SIZE",
         ),
     ] = None,
     azimuth: Annotated[
         float | None,
         typer.Option(
             help="Rotate camera horizontally around the focal point by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
     elevation: Annotated[
         float | None,
         typer.Option(
             help="Rotate camera vertically around the focal point by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
     zoom: Annotated[
         float | None,
         typer.Option(
             help="Zoom factor relative to current distance (>1 zooms in, <1 zooms out).",
-            metavar="FLOAT",
         ),
     ] = None,
     roll: Annotated[
         float | None,
         typer.Option(
             help="Roll camera around its view axis by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
 ) -> None:
@@ -782,21 +770,18 @@ def capture_preview(
         Path,
         typer.Option(
             help="Output path for the GIF. Default: assets/preview.gif.",
-            metavar="PATH",
         ),
     ] = Path("assets/preview.gif"),
     url: Annotated[
         str,
         typer.Option(
             help="URL of the JupyterLite demo.",
-            metavar="URL",
         ),
     ] = "https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html",
     fps: Annotated[
         int,
         typer.Option(
             help="Frames per second for the GIF. Default: 2.",
-            metavar="INT",
         ),
     ] = 2,
     rotate: Annotated[
@@ -1035,21 +1020,18 @@ def capture_marimo_preview(
         Path,
         typer.Option(
             help="Output path for the GIF. Default: assets/marimo-preview.gif.",
-            metavar="PATH",
         ),
     ] = Path("assets/marimo-preview.gif"),
     url: Annotated[
         str,
         typer.Option(
             help="URL of the marimo demo.",
-            metavar="URL",
         ),
     ] = "https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA",
     fps: Annotated[
         int,
         typer.Option(
             help="Frames per second for the GIF. Default: 2.",
-            metavar="INT",
         ),
     ] = 2,
     rotate: Annotated[
@@ -1093,21 +1075,18 @@ def capture_stlite_preview(
         Path,
         typer.Option(
             help="Output path for the GIF. Default: assets/stlite-preview.gif.",
-            metavar="PATH",
         ),
     ] = Path("assets/stlite-preview.gif"),
     url: Annotated[
         str,
         typer.Option(
             help="URL of the stlite demo.",
-            metavar="URL",
         ),
     ] = "https://share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt",
     fps: Annotated[
         int,
         typer.Option(
             help="Frames per second for the GIF. Default: 2.",
-            metavar="INT",
         ),
     ] = 2,
     rotate: Annotated[
@@ -1151,7 +1130,6 @@ def export_demo(
         Path,
         typer.Option(
             help="Output path for the standalone HTML. Default: slides/public/pyvista-demo.html.",
-            metavar="PATH",
         ),
     ] = Path("slides/public/pyvista-demo.html"),
 ) -> None:
@@ -1217,14 +1195,12 @@ def check_locale_parity(
         Path,
         typer.Option(
             help="Path to the authoritative JA locale file.",
-            metavar="PATH",
         ),
     ] = Path("slides/locales/ja.yml"),
     en: Annotated[
         Path,
         typer.Option(
             help="Path to the EN locale file to compare against JA.",
-            metavar="PATH",
         ),
     ] = Path("slides/locales/en.yml"),
 ) -> None:
