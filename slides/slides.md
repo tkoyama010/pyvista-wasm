@@ -634,6 +634,35 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 class: text-left
 ---
 
+# {{ $t("cli.title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>
+
+```sh
+pyvista-wasm --help
+```
+
+```
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ plot                    Plot one or more mesh files in the browser.          │
+│ info                    Show pyvista-wasm version and environment            │
+│                         information.                                         │
+│ capture-preview         Capture a preview GIF of the JupyterLite demo.       │
+│ capture-marimo-preview  Capture a preview GIF of the marimo demo.            │
+│ capture-stlite-preview  Capture a preview GIF of the stlite demo.            │
+│ export-demo             Export a self-contained VTK.wasm demo page for the   │
+│                         talk slide deck.                                     │
+│ check-locale-parity     Check that JA and EN slide locale files share the    │
+│                         same key structure.                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+```
+
+<!-- Single message: the pyvista-wasm CLI lets you plot meshes, capture previews, and export demos from the terminal — no Python code required. -->
+
+---
+class: text-left
+---
+
 # {{ $t("inspiration.subtitle") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("inspiration.title") }}</div>

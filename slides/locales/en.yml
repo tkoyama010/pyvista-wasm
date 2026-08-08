@@ -234,6 +234,10 @@ demo_stlite:
   conc_bold: when you need an interactive app with widgets, stlite is the natural choice
   demo_label: Live demo
 
+cli:
+  title: The pyvista-wasm CLI enables 3D visualization without writing Python code, and makes integration with coding agents easier
+  subtitle: How to use the pyvista-wasm CLI
+
 use_cases:
   title: PyVista on WebAssembly provides a new way to share 3D visualization data without a server
   subtitle: Use case diagram for sharing 3D visualization data
