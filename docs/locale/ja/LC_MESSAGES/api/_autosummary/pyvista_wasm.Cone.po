@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Cone.rst:2
+msgid "pyvista\\_wasm.Cone"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:1
+msgid "Create a cone mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cone.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:3
+msgid "Center of the cone (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:5
+msgid "Direction vector of the cone axis. Default is (1, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:7
+msgid "Height of the cone. Default is 1.0."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:9
+msgid "Base radius of the cone. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:11
+msgid "Number of facets around the cone. Default is 6."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:13
+msgid "Whether to cap the base of the cone. Default is True."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cone.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:16
+msgid "A cone mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cone.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cone:20
+msgid "Examples"
+msgstr ""

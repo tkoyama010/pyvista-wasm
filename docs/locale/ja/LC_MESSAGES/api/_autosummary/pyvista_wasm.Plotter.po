@@ -1,0 +1,823 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:2
+msgid "pyvista\\_wasm.Plotter"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:1
+msgid "Main plotting interface for pyvista-wasm."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:3
+msgid ""
+"This class provides a PyVista-like API for creating 3D visualizations in "
+"the browser using VTK.wasm as the rendering backend."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:6
+msgid ""
+"Lighting mode for the plotter. Options are: - ``\"default\"`` (default): "
+"Creates a default directional light - ``None``: No default lights are "
+"created, giving full control over lighting"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:10 pyvista_wasm.plotter.Plotter.__init__:6
+msgid ""
+"WebAssembly rendering backend. One of ``\"webgl\"`` or ``\"webgpu\"``. "
+"Default is ``\"webgl\"``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:13
+msgid ""
+"Execution mode for VTK.wasm method calls. One of ``\"sync\"`` or "
+"``\"async\"``. ``\"async\"`` requires WebAssembly JavaScript Promise "
+"Integration (JSPI) browser support. ``\"webgpu\"`` rendering always uses "
+"``\"async\"`` regardless of this setting. Default is ``\"sync\"``."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.background_color:11 pyvista_wasm.Plotter.camera:10
+#: pyvista_wasm.Plotter.camera_position:9 pyvista_wasm.plotter.Plotter:20
+#: pyvista_wasm.plotter.Plotter.add_axes:9
+#: pyvista_wasm.plotter.Plotter.add_light:7
+#: pyvista_wasm.plotter.Plotter.add_mesh:49
+#: pyvista_wasm.plotter.Plotter.add_points:20
+#: pyvista_wasm.plotter.Plotter.add_scalar_bar:16
+#: pyvista_wasm.plotter.Plotter.add_text:7 pyvista_wasm.plotter.Plotter.clear:4
+#: pyvista_wasm.plotter.Plotter.disable_parallel_projection:8
+#: pyvista_wasm.plotter.Plotter.enable_parallel_projection:10
+#: pyvista_wasm.plotter.Plotter.generate_standalone_html:7
+#: pyvista_wasm.plotter.Plotter.screenshot:24
+#: pyvista_wasm.plotter.Plotter.set_environment_texture:11
+#: pyvista_wasm.plotter.Plotter.show:23
+#: pyvista_wasm.plotter.Plotter.view_isometric:7
+#: pyvista_wasm.plotter.Plotter.view_vector:9
+#: pyvista_wasm.plotter.Plotter.view_xy:11
+#: pyvista_wasm.plotter.Plotter.view_xz:11
+#: pyvista_wasm.plotter.Plotter.view_yx:11
+#: pyvista_wasm.plotter.Plotter.view_yz:11
+#: pyvista_wasm.plotter.Plotter.view_zx:11
+#: pyvista_wasm.plotter.Plotter.view_zy:11
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:30
+msgid "Create a plotter with no default lights:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter:39
+msgid "Create a plotter using WebGPU rendering:"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.__init__:1
+msgid "Initialize a new Plotter instance."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.__init__:3
+msgid ""
+"Lighting mode. ``\"default\"`` creates a default directional light, "
+"``None`` creates no default lights. Default is ``\"default\"``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.__init__:9
+msgid ""
+"Execution mode for VTK.wasm method calls. One of ``\"sync\"`` or "
+"``\"async\"``. Default is ``\"sync\"``."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.Plotter.__init__>`\\ \\(\\[lighting\\, "
+"wasm\\_rendering\\, wasm\\_mode\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`add_axes <pyvista_wasm.Plotter.add_axes>`\\ \\(\\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_axes:1
+msgid "Add an orientation marker (axes indicator) to the viewport."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`add_light <pyvista_wasm.Plotter.add_light>`\\ \\(light\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_light:1
+msgid "Add a light source to the scene."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`add_mesh <pyvista_wasm.Plotter.add_mesh>`\\ \\(mesh\\[\\, "
+"color\\, opacity\\, pbr\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_mesh:1
+msgid "Add a mesh to the plotter."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`add_points <pyvista_wasm.Plotter.add_points>`\\ \\(points\\[\\, "
+"color\\, opacity\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_points:1
+msgid "Add a point cloud to the plotter."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`add_scalar_bar <pyvista_wasm.Plotter.add_scalar_bar>`\\ "
+"\\(\\[title\\, vertical\\, n\\_labels\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_scalar_bar:1
+msgid "Add a scalar bar to display the color legend."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`add_text <pyvista_wasm.Plotter.add_text>`\\ \\(text\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.add_text:1
+msgid "Add a text annotation to the scene."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`clear <pyvista_wasm.Plotter.clear>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.clear:1
+msgid "Clear all actors from the plotter."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`disable_parallel_projection "
+"<pyvista_wasm.Plotter.disable_parallel_projection>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.disable_parallel_projection:1
+msgid "Disable parallel projection (use perspective projection)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`enable_parallel_projection "
+"<pyvista_wasm.Plotter.enable_parallel_projection>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.enable_parallel_projection:1
+msgid "Enable parallel (orthographic) projection."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`generate_standalone_html "
+"<pyvista_wasm.Plotter.generate_standalone_html>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.generate_standalone_html:1
+msgid "Generate a complete standalone HTML page with the current scene."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`screenshot <pyvista_wasm.Plotter.screenshot>`\\ "
+"\\(\\[filename\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.screenshot:1
+msgid "Take a screenshot of the current scene."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`set_environment_texture "
+"<pyvista_wasm.Plotter.set_environment_texture>`\\ \\(texture\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.set_environment_texture:1
+msgid "Set the environment texture for image-based lighting (IBL)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`show <pyvista_wasm.Plotter.show>`\\ \\(\\[container\\_id\\, "
+"cpos\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.show:1
+msgid "Display the visualization."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_isometric <pyvista_wasm.Plotter.view_isometric>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_isometric:1
+msgid "View the scene from an isometric angle."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ""
+":py:obj:`view_vector <pyvista_wasm.Plotter.view_vector>`\\ "
+"\\(vector\\[\\, viewup\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_vector:1
+msgid "Point the camera in the direction of the given vector."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_xy <pyvista_wasm.Plotter.view_xy>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_xy:1
+msgid "View the XY plane."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_xz <pyvista_wasm.Plotter.view_xz>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_xz:1
+msgid "View the XZ plane."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_yx <pyvista_wasm.Plotter.view_yx>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_yx:1
+msgid "View the YX plane (inverse of XY)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_yz <pyvista_wasm.Plotter.view_yz>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_yz:1
+msgid "View the YZ plane."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_zx <pyvista_wasm.Plotter.view_zx>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_zx:1
+msgid "View the ZX plane (inverse of XZ)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1
+msgid ":py:obj:`view_zy <pyvista_wasm.Plotter.view_zy>`\\ \\(\\[negative\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:42:<autosummary>:1 of
+#: pyvista_wasm.plotter.Plotter.view_zy:1
+msgid "View the ZY plane (inverse of YZ)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst:44
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`actors <pyvista_wasm.Plotter.actors>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Plotter.actors:1
+msgid "Return the list of actors in the plotter."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`background_color <pyvista_wasm.Plotter.background_color>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Plotter.background_color:1
+msgid "Get or set the background color."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`camera <pyvista_wasm.Plotter.camera>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Plotter.camera:1
+msgid "Get or set the camera for the plotter."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`camera_position <pyvista_wasm.Plotter.camera_position>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Plotter.camera_position:1
+msgid "Get the camera position."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_axes:3
+msgid ""
+"Displays XYZ axes in the corner of the viewport to help orient the "
+"viewer. Backed by VTK.wasm ``vtkOrientationMarkerWidget``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_axes:6
+msgid "Reserved for future implementation. Currently accepts no parameters."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_axes:13
+#: pyvista_wasm.plotter.Plotter.show:27
+msgid "Basic usage:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_axes:21
+msgid "With multiple meshes:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_light:3
+msgid "The :class:`~pyvista_wasm.light.Light` to add."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:3
+msgid "The mesh object to add to the scene."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:5
+msgid "Color of the mesh. Can be a color name or RGB tuple."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:7
+msgid "Opacity of the mesh, between 0 (transparent) and 1 (opaque)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:9
+msgid "Enable physically based rendering (PBR). Default is False."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:11
+msgid ""
+"Metallic factor for PBR, between 0 (non-metallic) and 1 (fully metallic)."
+" Only used when ``pbr=True``. Default is 0.0."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:14
+msgid ""
+"Roughness factor for PBR, between 0 (mirror-like) and 1 (fully rough). "
+"Only used when ``pbr=True``. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:17
+msgid ""
+"Enable smooth shading (Gouraud interpolation). When True, the mesh "
+"surface appears smooth by interpolating normals across polygons. When "
+"False, flat shading is used where each polygon face has a uniform color. "
+"Default is True."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:22
+msgid ""
+"Surface texture to apply to the mesh. Create one with "
+":class:`~pyvista_wasm.Texture`. The mesh should have texture coordinates "
+"set (e.g., via :meth:`~pyvista_wasm.PolyData.texture_map_to_plane`) or "
+"use a primitive (Sphere, Cube, Cylinder) that generates them "
+"automatically."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:28
+msgid "Show the edges of the mesh. Default is False."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:30
+msgid ""
+"Color of the edges when ``show_edges=True``. Can be a color name or RGB "
+"tuple. If not specified, defaults to black."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:33
+msgid ""
+"Visualization style of the mesh. One of ``'surface'`` (default), "
+"``'wireframe'``, or ``'points'``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:36
+msgid ""
+"Name of the scalar array to use for coloring. The array must exist in "
+"``mesh.point_data``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:39
+msgid ""
+"Name of the colormap to use when rendering scalars. Default is 'viridis'."
+" Supported colormaps: 'viridis', 'plasma', 'inferno', 'magma', 'jet', "
+"'rainbow', 'turbo', 'coolwarm'."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:43
+#: pyvista_wasm.plotter.Plotter.add_points:14
+msgid "Additional rendering options."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:45
+msgid "The VTK.wasm actor representing the mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plotter.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:58
+msgid "PBR example:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:65
+msgid "Texture example:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:75
+msgid "Show edges:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:83
+msgid "Wireframe rendering:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:91
+msgid "Surface with edges:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:99
+msgid "Scalar coloring:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_mesh:108
+msgid "Compare smooth shading (left) and flat shading (right) side by side:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:3
+msgid "Point coordinates as an (n, 3) numpy array or PolyData object."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:5
+msgid "Color of the points. Can be a color name or RGB tuple."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:7
+msgid "Opacity of the points, between 0 (transparent) and 1 (opaque)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:9
+msgid "Size of the points in pixels. Default is 5.0."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:11
+msgid ""
+"Render points as spheres instead of screen-space squares. Default is "
+"False."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:16
+msgid "The VTK.wasm actor representing the point cloud."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_points:31
+msgid "With spheres:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_scalar_bar:3
+msgid ""
+"This method adds a scalar bar (color legend) that shows the mapping "
+"between scalar values and colors. The scalar bar is linked to the active "
+"scalar colormap from the most recently added mesh."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_scalar_bar:7
+msgid "Title text to display on the scalar bar. Default is an empty string."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_scalar_bar:9
+msgid ""
+"Whether to orient the scalar bar vertically (True) or horizontally "
+"(False). Default is True."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_scalar_bar:12
+msgid "Number of labels to display on the scalar bar. Default is 5."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_scalar_bar:29
+msgid "Horizontal scalar bar:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.add_text:3
+msgid "The :class:`~pyvista_wasm.text.Text` to add."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.background_color:3
+msgid ""
+"Color name (e.g., 'white', 'black', 'red') or RGB tuple with values "
+"between 0 and 1 (e.g., (1.0, 1.0, 1.0) for white)."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.background_color:7
+msgid "RGB color tuple with values between 0 and 1."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.camera:3
+msgid "The camera object to use for rendering."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.camera:6
+msgid "The current camera, or None if not set."
+msgstr ""
+
+#: of pyvista_wasm.Plotter.camera_position:3
+msgid ""
+"If a camera is set, returns a 3-tuple of 3-tuples: (position, "
+"focal_point, view_up). Otherwise returns None."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.disable_parallel_projection:3
+msgid "Switches the camera from parallel projection to perspective projection."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.disable_parallel_projection:5
+msgid "If no camera is set, creates a default camera with perspective projection."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.enable_parallel_projection:3
+msgid ""
+"Switches the camera from perspective projection to parallel projection. "
+"This is useful for viewing 2D datasets, CAD-like orthographic views, and "
+"scientific visualization where perspective distortion is undesirable."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.enable_parallel_projection:7
+msgid ""
+"If no camera is set, creates a default camera with parallel projection "
+"enabled."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.generate_standalone_html:3
+msgid "A full HTML document string containing the visualization."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:3
+msgid ""
+"File path to save the image. If ``None``, no file is written. Supported "
+"formats: PNG, JPEG. Default is ``None``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:6
+msgid ""
+"Whether to make the background transparent. If ``None``, uses the current"
+" background setting. Default is ``None``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:9
+msgid "If ``True``, return a numpy array of the image. Default is ``True``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:11
+msgid ""
+"Temporarily resize the window to ``(width, height)`` before capturing. If"
+" ``None``, uses the current window size. Default is ``None``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:14
+msgid ""
+"Scale factor for the window size to produce a higher-resolution image. "
+"For example, ``scale=2`` will double the resolution. Default is ``None``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:18
+msgid ""
+"If ``return_img`` is ``True``, returns a numpy array with shape "
+"``(height, width, 3)`` for RGB or ``(height, width, 4)`` for RGBA (when "
+"``transparent_background=True``). Otherwise returns ``None``."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:28
+msgid "Save a screenshot to a file:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:36
+msgid "Get image data as numpy array:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:46
+msgid "High-resolution screenshot with scaling:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.screenshot:54
+msgid "Screenshot with transparent background:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.set_environment_texture:3
+msgid "Used with PBR materials to provide realistic reflections and lighting."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.set_environment_texture:5
+msgid ""
+"Either a URL string pointing to an equirectangular image, or a "
+":class:`~pyvista_wasm.examples.CubeMap` returned by "
+":func:`~pyvista_wasm.examples.download_sky_box_cube_map`."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.set_environment_texture:15
+msgid "URL string:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.set_environment_texture:23
+msgid "CubeMap:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:3
+msgid ""
+"In browser environments, this will render the scene using VTK.wasm. In "
+"marimo, returns the Html object for display."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:6
+msgid ""
+"HTML element ID for the visualization container. Defaults to a unique ID "
+"generated per Plotter instance to avoid conflicts when calling show() "
+"multiple times in the same session."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:10
+msgid ""
+"Camera position specification. Can be:  - String shortcut: 'xy', 'xz', "
+"'yz', 'yx', 'zx', 'zy', or 'iso' - Direction vector: 3-element tuple/list"
+" (x, y, z) - Full camera spec: 3-tuple/list of 3-tuples/lists:   "
+"[(position), (focal_point), (view_up)]"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:10
+msgid "Camera position specification. Can be:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:12
+msgid "String shortcut: 'xy', 'xz', 'yz', 'yx', 'zx', 'zy', or 'iso'"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:13
+msgid "Direction vector: 3-element tuple/list (x, y, z)"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:14
+msgid ""
+"Full camera spec: 3-tuple/list of 3-tuples/lists: [(position), "
+"(focal_point), (view_up)]"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:18
+msgid ""
+"In marimo environments, returns the Html widget for display. In other "
+"environments, returns None."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:34
+msgid "With camera position string shortcut:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:40
+msgid "With direction vector:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.show:46
+msgid "With full camera specification:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_isometric:3
+msgid ""
+"The isometric view shows all three axes equally, looking from the (1, 1, "
+"1) direction."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_vector:3
+msgid "Direction to point the camera in, given as (vx, vy, vz)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_vector:5
+msgid "View-up vector. Defaults to (0, 1, 0)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_vector:19
+msgid "View from an isometric angle:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xy:3
+msgid "Look down the Z-axis, with the positive Z-axis pointing toward the camera."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xy:6
+#: pyvista_wasm.plotter.Plotter.view_yx:6
+msgid ""
+"Look in the negative Z direction (down the +Z axis). Default is False "
+"(look down the -Z axis)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xy:21
+msgid "View from the negative Z direction:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xz:3
+msgid "Look down the Y-axis, with the positive Y-axis pointing toward the camera."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xz:6
+#: pyvista_wasm.plotter.Plotter.view_zx:6
+msgid ""
+"Look in the negative Y direction (down the +Y axis). Default is False "
+"(look down the -Y axis)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_xz:21
+msgid "View from the negative Y direction:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_yx:3
+msgid ""
+"Look down the Z-axis from below, with the negative Z-axis pointing toward"
+" the camera."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_yz:3
+msgid "Look down the X-axis, with the positive X-axis pointing toward the camera."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_yz:6
+#: pyvista_wasm.plotter.Plotter.view_zy:6
+msgid ""
+"Look in the negative X direction (down the +X axis). Default is False "
+"(look down the -X axis)."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_yz:21
+msgid "View from the negative X direction:"
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_zx:3
+msgid ""
+"Look down the Y-axis from below, with the negative Y-axis pointing toward"
+" the camera."
+msgstr ""
+
+#: of pyvista_wasm.plotter.Plotter.view_zy:3
+msgid ""
+"Look down the X-axis from the left, with the negative X-axis pointing "
+"toward the camera."
+msgstr ""

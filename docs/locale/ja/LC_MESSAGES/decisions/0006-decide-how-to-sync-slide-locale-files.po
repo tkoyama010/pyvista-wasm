@@ -1,0 +1,673 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:9
+msgid "Decide how to keep slide locale files in sync (JA/EN)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:11
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:13
+msgid ""
+"[ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md) "
+"decided to internationalize the Slidev deck using `slidev-addon-i18nb` "
+"with separate YAML locale files: `slides/locales/ja.yml` (Japanese, "
+"authoritative) and `slides/locales/en.yml` (English). A consequence of "
+"storing translations in separate files is that the two locales can be "
+"maintained independently — and therefore can also drift independently. "
+"Issue [#441](https://github.com/tkoyama010/pyvista-wasm/issues/441) "
+"surfaced that drift has already occurred: `en.yml` carries 3 stale top-"
+"level sections (`caps`, `perf`, `constraints`) for slides that no longer "
+"exist in the authoritative `ja.yml`, shared sections have diverged in "
+"content (JA titles are longer and more descriptive while EN titles are "
+"shorter and less current), and the `speaker_title` / `speaker_subtitle` "
+"key assignments are swapped in the `agenda` section. ADR-0003 decided "
+"*how* to internationalize the deck but did not decide *how to keep the "
+"two locale files in sync* over time. Without a documented policy, drift "
+"will recur every time one language is updated without touching the other."
+" How should we keep the two locale files in sync?"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:15
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:17
+msgid ""
+"**JA is authoritative**: Japanese is the newest, most-refined content — "
+"the deck is authored in JA first and translated to EN. The sync policy "
+"must treat JA as the source of truth for slide structure."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:18
+msgid ""
+"**Structural drift detection**: The policy must detect when one locale "
+"has sections or keys that the other lacks — the exact drift that produced"
+" the 3 stale sections in `en.yml`. This is a knock-out criterion."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:19
+msgid ""
+"**Content drift detection**: The policy should help detect when one "
+"language's content has been updated but the other's has not — e.g., a JA "
+"title rewritten while the EN title stays stale."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:20
+msgid ""
+"**CI enforcement vs. manual review**: Automated enforcement catches drift"
+" without relying on a reviewer remembering to compare two files; manual "
+"review alone has already failed (the drift in "
+"[#441](https://github.com/tkoyama010/pyvista-wasm/issues/441) went "
+"unnoticed)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:21
+msgid ""
+"**Zero-cost / GitHub-native tooling**: Per [ADR-0003](0003-decide-how-to-"
+"internationalize-the-slidev-deck.md) drivers, the solution must not "
+"require paid services, external API keys, or accounts beyond what is "
+"already in the repository."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:22
+msgid ""
+"**Minimal maintenance burden**: This is a single-maintainer open-source "
+"project; the sync policy must be cheap to set up and require near-zero "
+"ongoing effort."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:24
+msgid "Considered Options"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:26
+msgid ""
+"**JA-authoritative with CI key-parity check** — a pre-commit hook or CI "
+"script that recursively compares the key structure of `ja.yml` and "
+"`en.yml` and fails if they differ; JA is the structural source of truth"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:27
+msgid ""
+"**JA-authoritative with CI key-parity + untranslated-value check** — key-"
+"parity check plus a check that flags EN values still matching JA values "
+"(or containing Japanese characters), indicating untranslated content"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:28
+msgid ""
+"**Dual-maintenance with no enforcement** — status quo; rely on PR review "
+"to catch drift"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:29
+msgid ""
+"**Single-source-of-truth with build-time translation** — one locale (JA) "
+"is the source; the EN file is generated from it, either by AI-assisted "
+"translation or a manual template process"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:30
+msgid ""
+"**PR-template co-modification checklist** — add a checkbox to the PR "
+"template requiring the author to confirm both locale files were updated; "
+"process-only, no automation"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:32
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:34
+msgid ""
+"Chosen option: **\"JA-authoritative with CI key-parity check\"**, because"
+" it is the minimal automated guard that catches the structural drift that"
+" already occurred (3 stale sections in `en.yml`), integrates with the "
+"project's existing pre-commit / pre-commit.ci infrastructure (zero-cost, "
+"GitHub-native, no external services), and requires negligible ongoing "
+"maintenance from a single maintainer. Content drift (stale or swapped "
+"translations) is left to manual PR review because automated detection "
+"would either require AI/LLM services — violating the zero-cost driver — "
+"or produce unacceptable false-positive rates from legitimately shared "
+"values (e.g., \"PyVista on WebAssembly\", \"PyCon JP 2026\", code "
+"labels)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:36
+msgid "Consequences"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:38
+msgid ""
+"Good, because structural drift between `ja.yml` and `en.yml` is caught "
+"automatically — a PR that adds a section to `ja.yml` without updating "
+"`en.yml` (or vice versa) fails the key-parity check."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:39
+msgid ""
+"Good, because the check runs through the existing pre-commit "
+"infrastructure (local hook + pre-commit.ci), so no new CI workflow or "
+"external service is needed."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:40
+msgid ""
+"Good, because JA is explicitly designated as the authoritative locale for"
+" structure, making the maintenance direction clear: update JA first, then"
+" mirror the structure in EN."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:41
+msgid ""
+"Good, because the maintenance burden is near-zero — the check is a small "
+"script that compares key sets; it does not need updating when slides are "
+"added or removed (it compares whatever keys exist)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:42
+msgid ""
+"Bad, because the check does not detect content drift — an EN translation "
+"can become stale (outdated wording) without triggering a failure, since "
+"only key structure is compared, not values."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:43
+msgid ""
+"Bad, because the check does not detect swapped key assignments (as "
+"occurred in `agenda`): the keys `speaker_title` and `speaker_subtitle` "
+"exist in both files, so key parity passes even when their values are "
+"semantically swapped."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:44
+msgid ""
+"Neutral, because the check treats JA as structurally authoritative but "
+"does not enforce translation direction; a maintainer could still update "
+"EN first and mirror to JA, though the policy recommends JA-first."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:46
+msgid "Confirmation"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:48
+msgid "Compliance with this decision will be confirmed by:"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:50
+msgid ""
+"A local pre-commit hook (or CI script) exists that recursively compares "
+"the top-level sections and nested keys of `slides/locales/ja.yml` and "
+"`slides/locales/en.yml`, exiting non-zero if the key sets differ."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:51
+msgid ""
+"The hook is registered in `.pre-commit-config.yaml` and runs "
+"automatically in pre-commit.ci on every PR that touches either locale "
+"file."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:52
+msgid ""
+"`slides/locales/ja.yml` is documented (in the ADR and/or a comment in the"
+" locale directory) as the authoritative locale for slide structure."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:53
+msgid ""
+"The 3 stale sections (`caps`, `perf`, `constraints`) identified in "
+"[#441](https://github.com/tkoyama010/pyvista-wasm/issues/441) are removed"
+" from `en.yml` so that the key-parity check passes."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:54
+msgid ""
+"Running the hook against the current locale files succeeds (key "
+"structures match)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:55
+msgid ""
+"A deliberate test (adding a key to `ja.yml` without updating `en.yml`) "
+"causes the hook to fail with a clear message identifying the missing key."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:57
+msgid "Pros and Cons of the Options"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:59
+msgid "JA-authoritative with CI key-parity check"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:61
+msgid ""
+"A script — implemented as a local pre-commit hook — loads both YAML "
+"files, recursively collects every key path (e.g., `cover.title`, "
+"`agenda.i1t`), and compares the two sets. If JA has a key that EN lacks, "
+"or EN has a key that JA lacks, the hook fails and names the offending "
+"keys. JA is the authoritative source of truth for structure."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:63
+msgid ""
+"Good, because it directly satisfies the structural-drift knock-out "
+"criterion: the 3 stale sections in `en.yml` would have been caught "
+"immediately."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:64
+msgid ""
+"Good, because it integrates with the existing pre-commit / pre-commit.ci "
+"infrastructure already configured in `.pre-commit-config.yaml` — no new "
+"CI workflow, no external service, fully zero-cost and GitHub-native."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:65
+msgid ""
+"Good, because it is a small script (~20 lines using `yaml.safe_load` and "
+"a recursive key walker) with no dependencies beyond PyYAML, which is "
+"already in the project."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:66
+msgid ""
+"Good, because it requires negligible ongoing maintenance — the script "
+"compares whatever keys exist, so it never needs updating when slides are "
+"added or removed."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:67
+msgid ""
+"Good, because it runs locally (pre-commit install) and in CI (pre-"
+"commit.ci), so drift is caught before merge."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:68
+msgid ""
+"Neutral, because it catches structural drift but not content drift — a "
+"stale EN translation with the correct key structure passes the check."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:69
+msgid ""
+"Bad, because it does not detect swapped key assignments (as in "
+"`agenda.speaker_title` / `speaker_subtitle`): both keys exist in both "
+"files, so parity passes despite the semantic swap."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:70
+msgid ""
+"Bad, because it does not flag EN values that are still in Japanese (copy-"
+"pasted but never translated) — the value content is not inspected."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:72
+msgid "JA-authoritative with CI key-parity + untranslated-value check"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:74
+msgid ""
+"Everything in the key-parity check, plus an additional check that "
+"inspects EN values. Two interpretations exist: (a) flag EN values that "
+"are byte-identical to the corresponding JA values — catching content that"
+" was copied but never translated; (b) flag EN values that contain "
+"Japanese characters (Hiragana, Katakana, or Kanji) — catching "
+"definitively untranslated text."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:76
+msgid ""
+"Good, because it catches a superset of what the key-parity check alone "
+"catches — including some content drift."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:77
+msgid ""
+"Good, because interpretation (b) — flagging Japanese characters in EN "
+"values — is precise: Japanese text in an EN locale file is always wrong, "
+"so there are zero false positives. The check is a cheap character-range "
+"scan."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:78
+msgid ""
+"Good, because both checks use the same pre-commit infrastructure and "
+"remain zero-cost."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:79
+msgid ""
+"Neutral, because interpretation (a) — flagging byte-identical values — "
+"has many false positives: legitimately shared values like \"PyVista on "
+"WebAssembly\", \"PyCon JP 2026\", `js_label`, `py_label`, and "
+"`code_label` are identical in both locales by design."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:80
+msgid ""
+"Bad, because neither interpretation detects *stale* translations — an EN "
+"value that was once translated but is now outdated (the JA text was "
+"rewritten) is not byte-identical and contains no Japanese characters, so "
+"it passes."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:81
+msgid ""
+"Bad, because interpretation (a)'s false-positive rate would require an "
+"allowlist of legitimately shared values, adding maintenance burden for a "
+"single maintainer."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:82
+msgid ""
+"Bad, because the incremental benefit over key-parity alone is marginal "
+"for this project: the most damaging drift (stale sections referencing "
+"non-existent slides) is already caught by key parity."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:84
+msgid "Dual-maintenance with no enforcement — status quo"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:86
+msgid ""
+"Both locale files are maintained independently. Drift is caught only if a"
+" reviewer manually compares the two files during PR review."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:88
+msgid ""
+"Good, because it requires no tooling, no script, and no CI changes — zero"
+" setup effort."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:89
+msgid ""
+"Good, because it imposes no constraints on how or when each locale is "
+"edited."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:90
+msgid "Neutral, because it is the current state; no migration is needed."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:91
+msgid ""
+"Bad, because it has already failed: the drift documented in "
+"[#441](https://github.com/tkoyama010/pyvista-wasm/issues/441) — 3 stale "
+"sections, diverged content, swapped keys — went unnoticed through "
+"existing PR review."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:92
+msgid ""
+"Bad, because it relies on a reviewer remembering to compare two files "
+"that may be hundreds of lines apart in the diff — this is exactly the "
+"kind of check that humans skip under review pressure."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:93
+msgid ""
+"Bad, because drift accumulates silently: each one-sided edit adds a small"
+" discrepancy, and there is no signal until someone notices a broken slide"
+" or stale text."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:95
+msgid "Single-source-of-truth with build-time translation"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:97
+msgid ""
+"One locale (JA) is the canonical source. The EN file is generated from "
+"it, either by an AI-assisted translation pipeline (e.g., an LLM API) or "
+"by a manual template process where JA is copied and translated into EN "
+"before each build."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:99
+msgid ""
+"Good, because it eliminates structural drift by construction — the EN "
+"file is derived from JA, so it can never have sections that JA lacks."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:100
+msgid ""
+"Good, because it enforces JA-authoritative at the deepest level: there is"
+" only one source of truth."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:101
+msgid ""
+"Neutral, because a manual template process (copy JA, translate each "
+"value) is a disciplined workflow but provides no automation — it is a "
+"convention, not a guard."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:102
+msgid ""
+"Bad, because AI-assisted translation requires an LLM API key (e.g., "
+"Gemini, OpenAI), violating the zero-cost / GitHub-native driver "
+"established in [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
+"deck.md)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:103
+msgid ""
+"Bad, because AI-generated translations require review and correction — "
+"the output is not production-ready without human checking, so the "
+"\"generation\" step saves transcription effort but not review effort."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:104
+msgid ""
+"Bad, because a build-time generation step adds complexity to the CI "
+"pipeline (a translation script, API key management, review of generated "
+"diffs) that is disproportionate for a single-maintainer talk deck."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:105
+msgid ""
+"Bad, because a manual template process is unenforceable — nothing "
+"prevents a maintainer from editing `en.yml` directly, reintroducing the "
+"drift problem."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:107
+msgid ""
+"PR-template co-modification checklist — manual confirmation in the PR "
+"template"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:109
+msgid ""
+"A checkbox is added to `.github/pull_request_template.md` requiring the "
+"author to confirm: \"If this PR touches slide content, both "
+"`slides/locales/ja.yml` and `slides/locales/en.yml` have been updated.\""
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:111
+msgid ""
+"Good, because it is trivially zero-cost and GitHub-native — only a PR "
+"template edit."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:112
+msgid ""
+"Good, because it raises awareness: the author is prompted to think about "
+"both locales before opening the PR."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:113
+msgid ""
+"Good, because it is compatible with any other option (key-parity check, "
+"untranslated-value check, etc.) as a complementary process guard."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:114
+msgid ""
+"Neutral, because it adds a small amount of boilerplate to every PR, even "
+"those that do not touch slides."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:115
+msgid ""
+"Bad, because it is a manual check with no enforcement — an author can "
+"tick the box without actually verifying both files, and nothing fails "
+"automatically."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:116
+msgid ""
+"Bad, because it does not detect drift; it only prompts the author to "
+"self-audit, which is no more reliable than the status-quo PR review that "
+"already failed in [#441](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/441)."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:117
+msgid ""
+"Bad, because it provides no structural or content verification — it is a "
+"reminder, not a guard."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:119
+msgid "More Information"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:121
+msgid "Comparison matrix"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:123
+msgid ""
+"The table below summarises how each option scores against the evaluation "
+"criteria. ✓ = strong, ~ = partial, ✗ = weak."
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Criterion"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Key-parity check"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Key-parity + value check"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "No enforcement (status quo)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Single-source build-time"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "PR-template checklist"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Structural drift detection"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "✓"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "✗"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Content drift detection"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "~"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "CI enforcement (automated)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Zero-cost / GitHub-native"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Minimal maintenance burden"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md
+msgid "Catches swapped key assignments"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:134
+msgid "Links"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:136
+msgid ""
+"Parent issue: [#441](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/441) (Update English slide locale to match newest Japanese "
+"content)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:137
+msgid ""
+"This decision: [#442](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/442)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:138
+msgid ""
+"Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
+"deck.md) (established the i18n structure with separate YAML locale files)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:139
+msgid ""
+"Related: [ADR-0004](0004-adopt-one-slide-one-message-principle.md) "
+"(governs slide content density, which affects when locale keys change)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:140
+msgid ""
+"Related: [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439) "
+"(ADR-0008 — deciding how to internationalize the ReadTheDocs "
+"documentation)"
+msgstr ""
+
+#: ../../decisions/0006-decide-how-to-sync-slide-locale-files.md:141
+msgid ""
+"Existing pre-commit configuration: [`.pre-commit-config.yaml"
+"`](../../.pre-commit-config.yaml)"
+msgstr ""

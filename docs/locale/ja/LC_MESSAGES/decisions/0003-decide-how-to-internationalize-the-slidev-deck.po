@@ -1,0 +1,725 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:9
+msgid "Decide how to internationalize the Slidev deck (JA/EN)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:11
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:13
+msgid ""
+"The PyCon JP 2026 talk deck (`slides/slides.md`, selected in "
+"[ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md)) currently "
+"mixes Japanese and English inline within each slide. For example, the "
+"cover slide shows both \"Server-less 3D Visualization\" and "
+"\"サーバーレス3D可視化の実現\" side by side, and the speaker panel renders both "
+"\"Tetsuo Koyama\" and \"小山 哲央\" together. This couples the two language "
+"versions: editing one language requires touching the same Markdown block "
+"as the other, and there is no clean way to present a single-language view"
+" of the talk. Issue [#361](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/361) captures the user-facing need to internationalize the "
+"deck (JA/EN) with a way to switch between languages, and "
+"[#333](https://github.com/tkoyama010/pyvista-wasm/issues/333) proposes "
+"adopting [`slidev-addon-i18nb`](https://github.com/LarchLiu/slidev-addon-"
+"i18n) as one implementation approach. Which i18n strategy should we adopt"
+" for the Slidev deck?"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:15
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:17
+msgid ""
+"**Single-language rendering**: A viewer must be able to see the entire "
+"deck rendered in one language (JA or EN) at a time, without the other "
+"language cluttering the slide. This is a knock-out criterion."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:18
+msgid ""
+"**Independent maintenance of JA/EN content**: Editing one language's text"
+" must not require touching the other language's content, so the two "
+"versions can be maintained independently and reviewed separately in PRs."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:19
+msgid ""
+"**Compatibility with the existing deployment pipeline**: The i18n "
+"solution must work with the deployment strategy established in "
+"[ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md) — GitHub"
+" Pages (Deploy from branch) with `peaceiris/actions-gh-pages` for main "
+"and `rossjrw/pr-preview-action` for per-PR previews, both building via "
+"`slidev build`."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:20
+msgid ""
+"**Zero-cost / GitHub-native tooling**: The project is an open-source, "
+"community-driven effort; the i18n solution must not require paid "
+"services, external API keys, or accounts beyond what is already in the "
+"repository."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:21
+msgid ""
+"**Authoring ergonomics**: The bilingual content should be authorable "
+"efficiently with hot-reload preview, so iteration is fast before the "
+"talk. Slide structure (layout, components, code blocks) should remain "
+"easy to write."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:22
+msgid ""
+"**Build-time impact**: The i18n solution should not significantly "
+"increase build time or bundle size, since the deck is built in CI on "
+"every PR and on push to main."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:24
+msgid "Considered Options"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:26
+msgid ""
+"[`slidev-addon-i18nb`](https://github.com/LarchLiu/slidev-addon-i18n) — "
+"Slidev addon built on Vue i18n; provides a per-language translation layer"
+" with a runtime language switcher"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:27
+msgid ""
+"Two separate decks (`slides.ja.md` / `slides.en.md`) — full language "
+"separation; each deck is built and deployed independently"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:28
+msgid ""
+"Keep the current inline JA/EN approach — both languages on every slide; "
+"no i18n tooling"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:29
+msgid ""
+"Custom Vue i18n integration — manually integrate [`vue-"
+"i18n`](https://github.com/intlify/vue-i18n) with a custom language-"
+"switcher component, without the Slidev addon"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:30
+msgid ""
+"Build-time locale switching — single `slides.md` with conditional content"
+" blocks, built twice with a locale environment variable, producing two "
+"static deployments"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:32
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:34
+msgid ""
+"Chosen option: \"slidev-addon-i18nb\", because it is the only option that"
+" satisfies every decision driver simultaneously — it provides runtime "
+"single-language rendering with an in-deck language switcher, stores "
+"translations in separate YAML files so JA/EN content is maintained "
+"independently, integrates with the existing `slidev build` pipeline "
+"without deployment changes, requires no paid services or API keys in "
+"manual-translation mode, and keeps the slide structure in a single "
+"`slides.md` file so layout and code blocks are authored once."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:36
+msgid "Consequences"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:38
+msgid ""
+"Good, because a viewer can switch between JA and EN at runtime via a "
+"language-switcher control in the Slidev navigation, seeing the entire "
+"deck in a single language without the other language on screen."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:39
+msgid ""
+"Good, because translations live in separate YAML files (`locales/ja.yml`,"
+" `locales/en.yml`), so editing one language does not require touching the"
+" other or the slide structure file."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:40
+msgid ""
+"Good, because the slide structure (layouts, Vue components, code blocks, "
+"iframes) is authored once in `slides.md` with `{{ $t(\"key\") }}` "
+"placeholders, avoiding the duplication and drift risk of two separate "
+"decks."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:41
+msgid ""
+"Good, because the addon is a standard Slidev addon registered in "
+"headmatter, so `slidev build` and the existing CI workflows in `deploy-"
+"slides.yml` and `preview-slides.yml` continue to work without structural "
+"changes."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:42
+msgid ""
+"Good, because the manual-translation mode requires no API keys or "
+"external services, satisfying the zero-cost / GitHub-native driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:43
+msgid ""
+"Bad, because every text string in the current `slides.md` must be "
+"extracted into translation keys and replaced with `{{ $t(\"key\") }}` "
+"calls, which is a significant one-time migration effort for a 23-slide "
+"deck with complex HTML."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:44
+msgid ""
+"Bad, because the addon has a very small community (2 GitHub stars, v0.2.6"
+" as of 2026-08-01), so there is a risk of the project becoming "
+"unmaintained; we accept this risk because the addon is MIT-licensed and "
+"thin enough to fork or replace if needed."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:45
+msgid ""
+"Bad, because the `{{ $t(\"key\") }}` syntax does not work inside HTML "
+"attributes or `<script setup>` blocks without additional handling, so "
+"some slides with complex inline HTML may need refactoring or custom Vue "
+"components for their translated text."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:46
+msgid ""
+"Neutral, because the addon's AI auto-transform feature (which uses a "
+"Gemini API key) is available but optional; we will use manual translation"
+" to stay zero-cost and GitHub-native."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:48
+msgid "Confirmation"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:50
+msgid "Compliance with this decision will be confirmed by:"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:52
+msgid ""
+"`slidev-addon-i18nb` is listed in the `addons` frontmatter of "
+"`slides/slides.md` and in `slides/package.json` dependencies."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:53
+msgid ""
+"A `locales/` directory exists under `slides/` containing `ja.yml` and "
+"`en.yml` with translation keys for all user-facing text in the deck."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:54
+msgid ""
+"`slides/slides.md` uses `{{ $t(\"key\") }}` placeholders for translatable"
+" text, with no inline JA/EN mixing on any slide."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:55
+msgid ""
+"Running `slidev dev` locally and switching the language via the addon's "
+"language-switcher control renders the entire deck in the selected "
+"language (JA or EN)."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:56
+msgid ""
+"`slidev build --base /pyvista-wasm/slides/` succeeds and the built deck "
+"is deployed to GitHub Pages at `https://tkoyama010.github.io/pyvista-"
+"wasm/slides/` with the language switcher functional."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:57
+msgid ""
+"A per-PR preview built via `preview-slides.yml` renders correctly in both"
+" languages."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:58
+msgid ""
+"All existing slide content (23 slides) is migrated to the i18n structure "
+"without loss of material — verified by comparing the rendered output "
+"against the pre-migration deck."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:60
+msgid "Pros and Cons of the Options"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:62
+msgid ""
+"slidev-addon-i18nb — Slidev addon built on Vue i18n with a runtime "
+"language switcher"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:64
+msgid ""
+"See [https://github.com/LarchLiu/slidev-addon-"
+"i18n](https://github.com/LarchLiu/slidev-addon-i18n)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:66
+msgid ""
+"Good, because it provides a runtime language switcher in the Slidev "
+"navigation bar, so a viewer can toggle between JA and EN without leaving "
+"the deck — fully satisfying the single-language-rendering driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:67
+msgid ""
+"Good, because translations are stored in separate YAML files "
+"(`locales/ja.yml`, `locales/en.yml`), so editing one language does not "
+"require touching the other — fully satisfying the independent-maintenance"
+" driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:68
+msgid ""
+"Good, because the slide structure (layouts, components, code blocks) is "
+"authored once in `slides.md` with `{{ $t(\"key\") }}` placeholders, "
+"avoiding the duplication and drift risk of two separate decks."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:69
+msgid ""
+"Good, because it is a standard Slidev addon registered via headmatter "
+"`addons:` — no build pipeline changes are needed; `slidev build` "
+"continues to produce a single SPA deployment, satisfying compatibility "
+"with ADR-0002."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:70
+msgid ""
+"Good, because the manual-translation mode requires no API keys, external "
+"accounts, or paid services — satisfying the zero-cost / GitHub-native "
+"driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:71
+msgid ""
+"Good, because it is built on [vue-i18n](https://github.com/intlify/vue-"
+"i18n), a widely adopted i18n library for Vue, so the translation "
+"mechanism is well-understood."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:72
+msgid ""
+"Neutral, because the addon's AI auto-transform feature can accelerate the"
+" initial translation extraction, but it requires a Gemini API key and is "
+"therefore optional rather than a core workflow."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:73
+msgid ""
+"Bad, because the addon has a very small community (2 GitHub stars, 0 "
+"forks, v0.2.6 as of 2026-08-01), so there is a maintenance-risk if the "
+"upstream project becomes inactive."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:74
+msgid ""
+"Bad, because migrating the existing 23-slide deck requires extracting "
+"every text string into translation keys and replacing it with `{{ "
+"$t(\"key\") }}` — a significant one-time effort, especially for slides "
+"with complex inline HTML."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:75
+msgid ""
+"Bad, because `{{ $t(\"key\") }}` works in Markdown text and Vue template "
+"interpolations but not in raw HTML attributes or `<script setup>` logic "
+"without additional workarounds, so some slides may need refactoring."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:77
+msgid ""
+"Two separate decks (slides.ja.md / slides.en.md) — full language "
+"separation"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:79
+msgid ""
+"Good, because each deck is a complete, clean single-language file — no "
+"i18n tooling, no translation keys, no `$t()` syntax; authoring stays "
+"plain Markdown."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:80
+msgid ""
+"Good, because it is trivially compatible with the existing deployment "
+"pipeline: build each deck separately with `slidev build` and deploy to "
+"different subpaths (e.g. `/slides/ja/` and `/slides/en/`)."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:81
+msgid ""
+"Good, because it is zero-cost and GitHub-native with no external "
+"dependencies beyond what Slidev already provides."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:82
+msgid ""
+"Good, because each language can be reviewed independently in a PR — a JA "
+"text fix touches only `slides.ja.md`."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:83
+msgid ""
+"Neutral, because the existing `slides/slides.md` can be split into two "
+"files mechanically, though the effort is comparable to the addon "
+"migration."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:84
+msgid ""
+"Bad, because the slide structure (layouts, components, code blocks, "
+"iframes) is duplicated across two files, so structural changes must be "
+"applied twice — doubling the maintenance burden and creating drift risk."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:85
+msgid ""
+"Bad, because there is no in-deck language switcher; a viewer must "
+"navigate to a different URL to switch languages, which is less seamless "
+"than a runtime toggle and may not fully satisfy the \"switch the "
+"presentation language\" acceptance criterion in "
+"[#361](https://github.com/tkoyama010/pyvista-wasm/issues/361)."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:86
+msgid ""
+"Bad, because the CI workflows (`deploy-slides.yml`, `preview-slides.yml`)"
+" must be modified to build and deploy two decks instead of one, adding "
+"build-time and workflow complexity."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:88
+msgid "Keep the current inline JA/EN approach — both languages on every slide"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:90
+msgid ""
+"Good, because it requires zero migration effort — the deck already works "
+"this way."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:91
+msgid ""
+"Good, because it requires no additional tooling, dependencies, or build "
+"pipeline changes."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:92
+msgid ""
+"Good, because a single `slides.md` file and a single build produce the "
+"deployed deck, keeping the pipeline simple."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:93
+msgid ""
+"Neutral, because both languages are always visible to the audience, which"
+" may be acceptable for a bilingual conference like PyCon JP but does not "
+"meet the user story in [#361](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/361)."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:94
+msgid ""
+"Bad, because the two language versions are coupled — editing a JA string "
+"requires touching the same Markdown block as the EN string, failing the "
+"independent-maintenance driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:95
+msgid ""
+"Bad, because there is no single-language view; every slide shows both JA "
+"and EN simultaneously, failing the single-language-rendering knock-out "
+"criterion."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:96
+msgid ""
+"Bad, because slides become visually cluttered with two languages on "
+"screen, reducing readability and presentation quality."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:98
+msgid ""
+"Custom Vue i18n integration — manually integrate vue-i18n without the "
+"Slidev addon"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:100
+msgid ""
+"See [https://github.com/intlify/vue-i18n](https://github.com/intlify/vue-"
+"i18n)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:102
+msgid ""
+"Good, because it uses vue-i18n directly — a mature, widely adopted "
+"library (~3.5k GitHub stars) with extensive documentation and community "
+"support, avoiding the small-community risk of slidev-addon-i18nb."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:103
+msgid ""
+"Good, like the addon, it provides runtime language switching and separate"
+" translation files, satisfying the single-language-rendering and "
+"independent-maintenance drivers."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:104
+msgid ""
+"Good, because it is zero-cost and requires no external API keys or "
+"accounts."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:105
+msgid ""
+"Neutral, because the translation YAML files and `{{ $t(\"key\") }}` "
+"syntax are the same as with the addon, so the migration effort for the "
+"slide content is identical."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:106
+msgid ""
+"Bad, because it requires manually writing the Slidev integration layer — "
+"a custom language-switcher Vue component, a custom nav-controls override,"
+" and the vue-i18n plugin setup — duplicating what slidev-addon-i18nb "
+"already provides."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:107
+msgid ""
+"Bad, because the custom integration is additional code to maintain and "
+"test, increasing the project's surface area for a one-time talk deck."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:108
+msgid ""
+"Bad, because there is no Slidev-specific documentation for manually "
+"integrating vue-i18n, so the setup requires trial-and-error and is harder"
+" to review."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:110
+msgid ""
+"Build-time locale switching — single source, built twice with a locale "
+"environment variable"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:112
+msgid ""
+"Good, because it keeps a single `slides.md` source file, avoiding the "
+"duplication and drift risk of two separate decks."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:113
+msgid ""
+"Good, because it is zero-cost and GitHub-native — no external "
+"dependencies beyond Slidev itself."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:114
+msgid ""
+"Good, because each build produces a clean single-language deck, "
+"satisfying the single-language-rendering driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:115
+msgid ""
+"Neutral, because the conditional content blocks (e.g., `<div "
+"v-if=\"$locale === 'ja'\">...</div>`) are straightforward to write but "
+"interleave both languages in the same file, partially coupling them."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:116
+msgid ""
+"Bad, because there is no runtime language switcher — the viewer must "
+"navigate to a different URL to switch languages, less seamless than a "
+"runtime toggle."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:117
+msgid ""
+"Bad, because the CI workflows must build the deck twice (once per locale)"
+" and deploy to separate subpaths, doubling build time and adding workflow"
+" complexity."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:118
+msgid ""
+"Bad, because interleaving JA and EN content in the same Markdown block "
+"(even with `v-if`) means a text edit in one language touches the same "
+"block as the other, partially failing the independent-maintenance driver."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:120
+msgid "More Information"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:122
+msgid "Comparison matrix"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:124
+msgid ""
+"The table below summarises how each option scores against the evaluation "
+"criteria. ✓ = strong, ~ = partial, ✗ = weak."
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Criterion"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "slidev-addon-i18nb"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Two separate decks"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Inline JA/EN"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Custom vue-i18n"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Build-time locale"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Single-language rendering (runtime switch)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "✓"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "~"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "✗"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Independent JA/EN maintenance"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Compatibility with ADR-0002 deployment"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Zero-cost / GitHub-native"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Authoring ergonomics"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md
+msgid "Low build-time impact"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:135
+msgid "Links"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:137
+msgid ""
+"slidev-addon-i18nb GitHub: [https://github.com/LarchLiu/slidev-addon-"
+"i18n](https://github.com/LarchLiu/slidev-addon-i18n)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:138
+msgid ""
+"slidev-addon-i18nb on npm: [https://www.npmjs.com/package/slidev-addon-"
+"i18nb](https://www.npmjs.com/package/slidev-addon-i18nb)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:139
+msgid ""
+"vue-i18n GitHub: [https://github.com/intlify/vue-"
+"i18n](https://github.com/intlify/vue-i18n)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:140
+msgid "Slidev documentation: [https://sli.dev/guide/](https://sli.dev/guide/)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:141
+msgid ""
+"Slidev addons documentation: "
+"[https://sli.dev/custom/addons.html](https://sli.dev/custom/addons.html)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:142
+msgid ""
+"Parent issue: [#361](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/361) (Internationalize the Slidev slide deck (JA/EN))"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:143
+msgid ""
+"Related feature request: [#333](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/333) (adopt slidev-addon-i18nb for bilingual (JA/EN) slides)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:144
+msgid ""
+"This decision: [#386](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/386)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:145
+msgid ""
+"Related: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) "
+"(selected Slidev and bootstrapped the deck under `slides/`)"
+msgstr ""
+
+#: ../../decisions/0003-decide-how-to-internationalize-the-slidev-deck.md:146
+msgid ""
+"Related: [ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md)"
+" (established the GitHub Pages + pr-preview deployment pipeline)"
+msgstr ""

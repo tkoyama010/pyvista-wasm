@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Disc.rst:2
+msgid "pyvista\\_wasm.Disc"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:1
+msgid "Create a disc (annular ring) geometric primitive."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:3
+msgid ""
+"This mirrors the :func:`pyvista.Disc` API.  The geometry is built "
+"directly from ``(r_res + 1)`` rings of ``c_res`` points each, connected "
+"as triangles, so it renders correctly in VTK.wasm without depending on "
+"any specific VTK.wasm source filter."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Disc.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:8
+msgid "Center of the disc (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:10
+msgid "Inner radius of the disc. Default is 0.25."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:12
+msgid "Outer radius of the disc. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:14
+msgid "Normal vector of the disc. Default is (0, 0, 1)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:16
+msgid "Number of radial subdivisions. Default is 1."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:18
+msgid "Number of circumferential subdivisions. Default is 6."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Disc.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:21
+msgid "A disc (annular ring) mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Disc.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Disc:25
+msgid "Examples"
+msgstr ""

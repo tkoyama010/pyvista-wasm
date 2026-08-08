@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:2
+msgid "pyvista\\_wasm.PLYReader"
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader:1
+msgid "Reader for PLY (Polygon File Format) files (``.ply``)."
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader:3
+msgid ""
+"Reads a PLY ASCII file and produces a :class:`Mesh` that delegates "
+"parsing to VTK.wasm's ``vtkPLYReader`` at render time. Python extracts "
+"only the vertex coordinates so that camera framing and bounding-sphere "
+"queries work before rendering."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader:8
+msgid "Path to the ``.ply`` file."
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader:12
+msgid "Examples"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.PLYReader.__init__:1
+msgid "Initialize the reader with a file path."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.PLYReader.__init__>`\\ \\(path\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1
+msgid ":py:obj:`read <pyvista_wasm.PLYReader.read>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.PLYReader.read:1
+msgid "Read the PLY file and return a Mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst:24
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`path <pyvista_wasm.PLYReader.path>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.PLYReader.path:1
+msgid "Return the file path."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.PLYReader.path:3
+msgid "The path to the PLY file."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader.read:3
+msgid ""
+"Vertex coordinates and face connectivity are extracted on the Python side"
+" so that the mesh can be rendered via the standard geometry pipeline "
+"without requiring a VTK.wasm file reader."
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader.read:7
+msgid "A mesh with extracted points and face connectivity."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PLYReader.rst
+msgid "Raises"
+msgstr ""
+
+#: of pyvista_wasm.readers.PLYReader.read:10
+msgid "If the file format is invalid or unsupported."
+msgstr ""

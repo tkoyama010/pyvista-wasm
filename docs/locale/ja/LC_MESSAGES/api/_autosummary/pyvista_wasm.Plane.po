@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Plane.rst:2
+msgid "pyvista\\_wasm.Plane"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:1
+msgid "Create a plane mesh."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:3
+msgid ""
+"This mirrors the :func:`pyvista.Plane` API, producing a flat rectangular "
+"mesh oriented according to the given normal ``direction``."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plane.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:6
+msgid "Center of the plane (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:8
+msgid "Normal direction of the plane (x, y, z). Default is (0, 0, 1)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:10
+msgid "Size in the i (first) direction. Default is 1.0."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:12
+msgid "Size in the j (second) direction. Default is 1.0."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:14
+msgid "Number of subdivisions in the i direction. Default is 10."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:16
+msgid "Number of subdivisions in the j direction. Default is 10."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plane.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:19
+msgid "A plane mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Plane.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Plane:23
+msgid "Examples"
+msgstr ""

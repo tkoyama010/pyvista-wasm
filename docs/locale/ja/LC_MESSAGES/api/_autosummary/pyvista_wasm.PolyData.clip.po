@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst:2
+msgid "pyvista\\_wasm.PolyData.clip"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:1
+msgid "Clip the mesh with a plane."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:3
+msgid ""
+"This filter clips the mesh with a plane defined by a normal vector and an"
+" origin point using VTK.wasm's built-in ``vtkClipPolyData`` filter with a"
+" ``vtkPlane`` clip function. Points on one side of the plane are removed."
+" It mirrors the PyVista ``clip`` filter API."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:8
+msgid ""
+"The normal vector of the clipping plane. Can be a string specifying a "
+"cardinal direction ('x', 'y', 'z', '-x', '-y', '-z') or a 3-tuple of "
+"floats (nx, ny, nz). Default is 'x'."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:12
+msgid ""
+"The origin point of the clipping plane as (x, y, z). If not provided, "
+"defaults to the center of the mesh's bounding box."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:15
+msgid ""
+"If True, flip the clipping direction to keep the part that would normally"
+" be removed. Default is False."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:19
+msgid "A new mesh with clipped cells removed."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:23
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:33
+msgid "Clip along the negative Y axis:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:39
+msgid "Clip with a custom normal vector:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:45
+msgid "Render the clipped mesh:"
+msgstr ""

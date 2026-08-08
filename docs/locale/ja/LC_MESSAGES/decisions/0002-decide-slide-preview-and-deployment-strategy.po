@@ -1,0 +1,797 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:9
+msgid ""
+"Decide how to preview slides in pull requests and deploy the deck from "
+"main"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:11
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:13
+msgid ""
+"[ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) selected "
+"Slidev for the PyCon JP 2026 talk deck. The deck entry point will be "
+"`slides/slides.md`, and `slidev build` produces a static SPA that can be "
+"deployed as a static site. We need two deployment flows: (1) a **per-PR "
+"preview** so reviewers can visually verify slide changes during the PR "
+"review process (issues [#294](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/294)–[#316](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/316)), and (2) a **main-branch deployment** so a live deck "
+"URL is available from `main` without manual local builds. The repository "
+"already deploys a redirect page to the `gh-pages` branch via [`deploy-"
+"redirect.yml`](https://github.com/tkoyama010/pyvista-"
+"wasm/blob/main/.github/workflows/deploy-redirect.yml) (using `peaceiris"
+"/actions-gh-pages`), pointing to Read the Docs. The decision must be "
+"compatible with or replace this existing deployment. Which hosting "
+"platform and CI workflow strategy should we adopt for both per-PR slide "
+"previews and main-branch deck deployment?"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:15
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:17
+msgid ""
+"**Zero-cost hosting**: The project is an open-source, community-driven "
+"effort; the hosting solution must be free for public repositories."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:18
+msgid ""
+"**Automatic deployment on push to main**: The deck should update "
+"automatically when slide source is merged to `main`, with no manual "
+"deploy step."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:19
+msgid ""
+"**Per-PR preview uniqueness**: Each pull request must get a unique, "
+"stable preview URL that reflects its own branch state, so reviewers can "
+"compare slides without building locally."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:20
+msgid ""
+"**Ease of setup**: The solution should require minimal external accounts,"
+" API tokens, or configuration beyond what is already in the repository."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:21
+msgid ""
+"**Maintenance burden**: Prefer a solution with few moving parts and well-"
+"maintained dependencies, so the deployment pipeline does not become a "
+"source of toil."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:22
+msgid ""
+"**Compatibility with the existing `gh-pages` redirect workflow**: The "
+"existing `deploy-redirect.yml` pushes a redirect `index.html` to the `gh-"
+"pages` branch (Pages source: \"Deploy from branch\"). The slide "
+"deployment must coexist with or cleanly replace this workflow without "
+"breaking the Read the Docs redirect."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:24
+msgid "Considered Options"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:26
+msgid ""
+"[GitHub Pages (Deploy from branch)](https://docs.github.com/en/pages"
+"/getting-started-with-github-pages) + [rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action) — Main deck "
+"deployed to the `gh-pages` branch via `peaceiris/actions-gh-pages`; PR "
+"previews deployed to `gh-pages/pr-preview/pr-N/` via `rossjrw/pr-preview-"
+"action`"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:27
+msgid ""
+"[GitHub Pages (GitHub Actions source)](https://docs.github.com/en/pages"
+"/getting-started-with-github-pages/using-custom-workflows-with-github-"
+"pages) + [`actions/upload-pages-artifact`](https://github.com/actions"
+"/upload-pages-artifact) / [`actions/deploy-"
+"pages`](https://github.com/actions/deploy-pages) — Main deck deployed via"
+" the official Pages artifact pipeline; PR previews as downloadable build "
+"artifacts (no live URL)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:28
+msgid ""
+"[Netlify](https://www.netlify.com/) — Main deck deployed to Netlify on "
+"push to main; PR previews via Netlify's automatic deploy previews"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:29
+msgid ""
+"[Vercel](https://vercel.com/) — Main deck deployed to Vercel on push to "
+"main; PR previews via Vercel's automatic preview deployments"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:30
+msgid ""
+"[Cloudflare Pages](https://pages.cloudflare.com/) — Main deck deployed to"
+" Cloudflare Pages on push to main; PR previews via Cloudflare Pages "
+"preview deployments"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:31
+msgid ""
+"GitHub Actions build artifact only — No live deployment; build the deck "
+"on PRs and upload as a GitHub Actions artifact that reviewers download "
+"and serve locally"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:32
+msgid ""
+"[Read the Docs](https://readthedocs.org/) subpath — Deploy the slide deck"
+" within the existing Read the Docs documentation site as a subpath"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:34
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:36
+msgid ""
+"Chosen option: \"GitHub Pages (Deploy from branch) + rossjrw/pr-preview-"
+"action\", because it is the only option that satisfies every decision "
+"driver simultaneously — it is zero-cost, fully GitHub-native (no external"
+" accounts or tokens), provides unique per-PR live preview URLs with "
+"automatic cleanup, deploys automatically on push to main, and is fully "
+"compatible with the existing `gh-pages` redirect workflow that already "
+"uses `peaceiris/actions-gh-pages` on the `gh-pages` branch."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:38
+msgid "Consequences"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:40
+msgid ""
+"Good, because per-PR previews get unique, stable live URLs at "
+"`https://<owner>.github.io/<repo>/pr-preview/pr-<N>/` with an automatic "
+"PR comment containing the link, so reviewers can visually verify slide "
+"changes without cloning or building locally."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:41
+msgid ""
+"Good, because `rossjrw/pr-preview-action` automatically cleans up preview"
+" deployments when a PR is closed, preventing the `gh-pages` branch from "
+"accumulating stale preview directories."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:42
+msgid ""
+"Good, because the main deck deploys automatically on push to `main` at "
+"`https://<owner>.github.io/<repo>/slides/`, giving a shareable live deck "
+"URL with no manual step."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:43
+msgid ""
+"Good, because both workflows use the same `gh-pages` branch with \"Deploy"
+" from branch\" Pages source as the existing `deploy-redirect.yml`, so the"
+" Read the Docs redirect at the root is preserved and the slide deck lives"
+" at a `/slides/` subpath."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:44
+msgid ""
+"Good, because no external service accounts, API tokens, or credit cards "
+"are required — everything runs through `GITHUB_TOKEN` and GitHub's free "
+"Pages offering for public repositories."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:45
+msgid ""
+"Bad, because the `deploy-redirect.yml` workflow must be updated to set "
+"`keep_files: true` (or add `clean-exclude: pr-preview/`) so its current "
+"`keep_files: false` does not delete PR preview directories and the "
+"`slides/` directory on every redirect deployment."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:46
+msgid ""
+"Bad, because Slidev must be built with the correct `--base` path "
+"(`/pyvista-wasm/slides/` for main, `/pyvista-wasm/pr-preview/pr-<N>/` for"
+" previews) so that asset URLs resolve correctly under the subpath "
+"deployment."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:47
+msgid ""
+"Neutral, because `rossjrw/pr-preview-action` does not support PRs from "
+"forks (the action notes this as a v2 roadmap item), so external "
+"contributors' PRs would not get automatic previews — acceptable for this "
+"project where slide PRs (#294–#316) are expected from the maintainer."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:49
+msgid "Confirmation"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:51
+msgid "Compliance with this decision will be confirmed by:"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:53
+msgid ""
+"A `deploy-slides.yml` workflow exists in `.github/workflows/` that builds"
+" the Slidev deck with `slidev build --base /pyvista-wasm/slides/` on push"
+" to `main` (when `slides/**` changes) and deploys to the `gh-pages` "
+"branch under a `slides/` subdirectory via `peaceiris/actions-gh-pages` "
+"with `keep_files: true`."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:54
+msgid ""
+"A `preview-slides.yml` workflow exists in `.github/workflows/` that "
+"builds the Slidev deck on `pull_request` events (opened, synchronize, "
+"reopened, closed) when `slides/**` changes, and deploys via `rossjrw/pr-"
+"preview-action` to `gh-pages/pr-preview/pr-<N>/`, posting a comment on "
+"the PR with the preview URL."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:55
+msgid ""
+"The existing `deploy-redirect.yml` is updated to use `keep_files: true` "
+"(or equivalent `clean-exclude`) so it no longer removes the `slides/` and"
+" `pr-preview/` directories."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:56
+msgid ""
+"The main deck is accessible at `https://tkoyama010.github.io/pyvista-"
+"wasm/slides/` after a push to `main`."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:57
+msgid ""
+"A PR touching `slides/` receives a comment with a preview URL at "
+"`https://tkoyama010.github.io/pyvista-wasm/pr-preview/pr-<N>/`, and the "
+"preview directory is removed when the PR is closed."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:59
+msgid "Pros and Cons of the Options"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:61
+msgid "GitHub Pages (Deploy from branch) + rossjrw/pr-preview-action"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:63
+msgid ""
+"See [https://github.com/rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:65
+msgid ""
+"Good, because it is fully GitHub-native — no external accounts, API "
+"tokens, or credit cards are needed; everything runs through "
+"`GITHUB_TOKEN` and GitHub's free Pages offering."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:66
+msgid ""
+"Good, because `rossjrw/pr-preview-action` deploys each PR to a unique "
+"subpath (`pr-preview/pr-<N>/`) on the existing GitHub Pages site, posts a"
+" comment with the preview URL on the PR, updates the preview on new "
+"commits, and cleans up automatically when the PR is closed."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:67
+msgid ""
+"Good, because it is compatible with the existing `deploy-redirect.yml` "
+"workflow, which already uses `peaceiris/actions-gh-pages` to push to the "
+"`gh-pages` branch with \"Deploy from branch\" Pages source — no Pages "
+"source migration is needed."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:68
+msgid ""
+"Good, because the main deck can be deployed to a `slides/` subpath on the"
+" same `gh-pages` branch, preserving the root redirect to Read the Docs."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:69
+msgid ""
+"Good, because Slidev's official hosting documentation provides a GitHub "
+"Pages deploy example using `peaceiris/actions-gh-pages`, so this approach"
+" is well-documented and battle-tested."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:70
+msgid ""
+"Neutral, because `rossjrw/pr-preview-action` requires the repository's "
+"Pages source to be \"Deploy from branch\" (not \"GitHub Actions\"), which"
+" is already the case for this repository."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:71
+msgid ""
+"Bad, because the existing `deploy-redirect.yml` uses `keep_files: false`,"
+" which would delete the `pr-preview/` and `slides/` directories — a one-"
+"line change to `keep_files: true` is required."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:72
+msgid ""
+"Bad, because PRs from forks do not get automatic previews (a known "
+"limitation of `rossjrw/pr-preview-action`)."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:74
+msgid ""
+"GitHub Pages (GitHub Actions source) + actions/upload-pages-artifact / "
+"actions/deploy-pages"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:76
+msgid ""
+"See [https://docs.github.com/en/pages/getting-started-with-github-pages"
+"/using-custom-workflows-with-github-"
+"pages](https://docs.github.com/en/pages/getting-started-with-github-pages"
+"/using-custom-workflows-with-github-pages)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:78
+msgid ""
+"Good, because it uses GitHub's first-party, officially maintained Pages "
+"deployment actions (`actions/upload-pages-artifact` and `actions/deploy-"
+"pages`), which are well-documented and actively maintained."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:79
+msgid ""
+"Good, because it is zero-cost and GitHub-native, requiring no external "
+"accounts or tokens."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:80
+msgid ""
+"Good, because Slidev's official hosting documentation includes a sample "
+"workflow using `actions/upload-pages-artifact` + `actions/deploy-pages`."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:81
+msgid ""
+"Neutral, because it requires switching the repository's Pages source from"
+" \"Deploy from branch\" to \"GitHub Actions\", which means the existing "
+"`deploy-redirect.yml` workflow (using `peaceiris/actions-gh-pages`) would"
+" no longer work and must be replaced by incorporating the redirect page "
+"into the Pages artifact."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:82
+msgid ""
+"Bad, because `actions/deploy-pages` is restricted to the default branch "
+"for the `github-pages` environment, so per-PR live preview URLs are not "
+"natively supported — PR builds can only be uploaded as downloadable "
+"artifacts, which reviewers must download and serve locally, failing the "
+"per-PR-preview-uniqueness driver for a *live* URL."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:83
+msgid ""
+"Bad, because migrating the Pages source breaks the existing redirect "
+"workflow and adds migration complexity."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:85
+msgid "Netlify"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:87
+msgid ""
+"See [https://www.netlify.com/](https://www.netlify.com/) and [Slidev "
+"Netlify hosting](https://sli.dev/guide/hosting.html#netlify)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:89
+msgid ""
+"Good, because Netlify automatically creates unique preview deployment "
+"URLs for each PR with no extra workflow configuration, strongly "
+"satisfying the per-PR-preview-uniqueness driver."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:90
+msgid ""
+"Good, because Netlify deploys on push to main automatically and provides "
+"a free tier for public projects."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:91
+msgid ""
+"Good, because Slidev's official hosting documentation provides a "
+"`netlify.toml` template for Netlify deployment."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:92
+msgid ""
+"Good, because Netlify handles SPA routing (redirects to `index.html`) out"
+" of the box, which Slidev's SPA build requires."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:93
+msgid ""
+"Neutral, because the free tier has build-minute and bandwidth limits that"
+" are generous but not unlimited."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:94
+msgid ""
+"Bad, because it requires creating a Netlify account, linking the "
+"repository, and storing an API token as a repository secret — adding "
+"external dependency and setup overhead."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:95
+msgid ""
+"Bad, because it is not compatible with the existing `gh-pages` redirect "
+"workflow; the redirect would need to be migrated or the deck would live "
+"on a separate Netlify domain, splitting the project's web presence."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:97
+msgid "Vercel"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:99
+msgid ""
+"See [https://vercel.com/](https://vercel.com/) and [Slidev Vercel "
+"hosting](https://sli.dev/guide/hosting.html#vercel)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:101
+msgid ""
+"Good, because Vercel automatically creates unique preview deployment URLs"
+" for each PR with no extra workflow configuration."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:102
+msgid ""
+"Good, because Vercel deploys on push to main automatically and provides a"
+" free tier for hobby projects."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:103
+msgid ""
+"Good, because Slidev's official hosting documentation provides a "
+"`vercel.json` template for Vercel deployment."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:104
+msgid ""
+"Neutral, because the free tier has usage limits and Vercel's commercial "
+"focus may introduce future pricing pressure for open-source projects."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:105
+msgid ""
+"Bad, because it requires creating a Vercel account, linking the "
+"repository, and storing an API token — adding external dependency and "
+"setup overhead."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:106
+msgid ""
+"Bad, because it is not compatible with the existing `gh-pages` redirect "
+"workflow; the deck would live on a separate Vercel domain."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:108
+msgid "Cloudflare Pages"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:110
+msgid "See [https://pages.cloudflare.com/](https://pages.cloudflare.com/)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:112
+msgid ""
+"Good, because Cloudflare Pages provides automatic preview deployments for"
+" each PR and deploys on push to main."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:113
+msgid ""
+"Good, because the free tier is generous with unlimited bandwidth and "
+"build requests for public projects."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:114
+msgid ""
+"Neutral, because Slidev's official hosting documentation does not include"
+" a Cloudflare Pages template, so the configuration must be written from "
+"scratch."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:115
+msgid ""
+"Bad, because it requires creating a Cloudflare account, linking the "
+"repository, and storing an API token — adding external dependency and "
+"setup overhead."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:116
+msgid ""
+"Bad, because it is not compatible with the existing `gh-pages` redirect "
+"workflow; the deck would live on a separate Cloudflare Pages domain."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:118
+msgid "GitHub Actions build artifact only"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:120
+msgid ""
+"Good, because it requires no hosting platform at all — the built deck is "
+"uploaded as a GitHub Actions artifact on PRs, and reviewers download and "
+"serve it locally with `npx vite preview` or any static server."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:121
+msgid ""
+"Good, because it is zero-cost and fully GitHub-native with no external "
+"accounts."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:122
+msgid ""
+"Neutral, because it is trivial to set up: a single `actions/upload-"
+"artifact` step after `slidev build`."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:123
+msgid ""
+"Bad, because reviewers must download, extract, and serve the artifact "
+"locally, which is friction-heavy and fails the per-PR-preview-uniqueness "
+"driver for a *live* URL that can be shared with non-technical reviewers."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:124
+msgid ""
+"Bad, because there is no automatic main-branch deployment — the deck is "
+"not accessible at a live URL without manual artifact download, failing "
+"the automatic-deployment driver."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:126
+msgid "Read the Docs subpath"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:128
+msgid "See [https://readthedocs.org/](https://readthedocs.org/)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:130
+msgid ""
+"Good, because the project already uses Read the Docs for documentation "
+"(`pyvista-js.readthedocs.io`), so deploying the deck as a subpath would "
+"keep all project web presence in one place."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:131
+msgid ""
+"Good, because Read the Docs is free for open-source projects and deploys "
+"automatically on push to main."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:132
+msgid ""
+"Neutral, because Read the Docs is designed for Sphinx/MkDocs "
+"documentation, not arbitrary static SPAs — embedding a Slidev SPA would "
+"require a custom build step or iframe embedding within an Sphinx page."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:133
+msgid ""
+"Bad, because Slidev's SPA build is not a documentation site, so "
+"integrating it into Read the Docs would be an awkward fit requiring "
+"workarounds (e.g., committing the built `dist/` to the repo and serving "
+"it as static files within the Sphinx build)."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:134
+msgid ""
+"Bad, because Read the Docs does not provide per-PR preview deployments "
+"for arbitrary subpaths, failing the per-PR-preview-uniqueness driver."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:136
+msgid "More Information"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:138
+msgid "Comparison matrix"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:140
+msgid ""
+"The table below summarises how each option scores against the evaluation "
+"criteria. ✓ = strong, ~ = partial, ✗ = weak."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Criterion"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "GH Pages (branch) + pr-preview"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "GH Pages (Actions) + deploy-pages"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Build artifact only"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Zero-cost hosting"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "✓"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Auto-deploy on push to main"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "✗"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Per-PR live preview URL"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Ease of setup"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "~"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Low maintenance burden"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md
+msgid "Compatibility with existing `gh-pages` redirect"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:151
+msgid "Concrete CI workflows to implement in a follow-up PR"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:153
+msgid ""
+"**`deploy-slides.yml`** (deploy-on-main): Triggered on push to `main` "
+"when `slides/**` changes (plus `workflow_dispatch`). Steps: checkout → "
+"setup Node.js → install Slidev dependencies → `slidev build --base "
+"/pyvista-wasm/slides/` → deploy to `gh-pages` branch under `slides/` via "
+"`peaceiris/actions-gh-pages` with `destination_dir: slides` and "
+"`keep_files: true`."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:154
+msgid ""
+"**`preview-slides.yml`** (preview-on-PR): Triggered on `pull_request` "
+"(opened, synchronize, reopened, closed) when `slides/**` changes. Steps: "
+"checkout → setup Node.js → install Slidev dependencies → `slidev build "
+"--base /pyvista-wasm/pr-preview/pr-<N>/` → deploy via `rossjrw/pr-"
+"preview-action` to `gh-pages/pr-preview/pr-<N>/`, which posts a PR "
+"comment with the preview URL and cleans up on PR close."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:155
+msgid ""
+"**Update `deploy-redirect.yml`**: Change `keep_files: false` to "
+"`keep_files: true` so the redirect deployment does not delete the "
+"`slides/` and `pr-preview/` directories maintained by the other two "
+"workflows."
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:157
+msgid "Links"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:159
+msgid ""
+"Slidev hosting documentation: "
+"[https://sli.dev/guide/hosting.html](https://sli.dev/guide/hosting.html)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:160
+msgid ""
+"rossjrw/pr-preview-action: [https://github.com/rossjrw/pr-preview-"
+"action](https://github.com/rossjrw/pr-preview-action)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:161
+msgid ""
+"peaceiris/actions-gh-pages: [https://github.com/peaceiris/actions-gh-"
+"pages](https://github.com/peaceiris/actions-gh-pages)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:162
+msgid ""
+"actions/upload-pages-artifact: [https://github.com/actions/upload-pages-"
+"artifact](https://github.com/actions/upload-pages-artifact)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:163
+msgid ""
+"actions/deploy-pages: [https://github.com/actions/deploy-"
+"pages](https://github.com/actions/deploy-pages)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:164
+msgid ""
+"GitHub Pages documentation: "
+"[https://docs.github.com/en/pages](https://docs.github.com/en/pages)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:165
+msgid ""
+"Parent issue: [#275](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/275)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:166
+msgid ""
+"This decision: [#318](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/318)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:167
+msgid ""
+"Related: [ADR-0001](0001-use-slidev-for-pycon-jp-2026-talk-slides.md) "
+"(selected Slidev and bootstrapped the deck under `slides/`)"
+msgstr ""
+
+#: ../../decisions/0002-decide-slide-preview-and-deployment-strategy.md:168
+msgid ""
+"Unblocks: [#278](https://github.com/tkoyama010/pyvista-wasm/issues/278) "
+"(slide deck creation) — reviewers need visual previews for the 23 slide "
+"PRs ([#294](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/294)–[#316](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/316))"
+msgstr ""

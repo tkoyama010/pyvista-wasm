@@ -1,0 +1,235 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Light.rst:2
+msgid "pyvista\\_wasm.Light"
+msgstr ""
+
+#: of pyvista_wasm.light.Light:1
+msgid "Light class."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Light.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.light.Light:3
+msgid ""
+"The position of the light. The interpretation of the position depends on "
+"the type of the light and whether the light has a transformation matrix."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:7
+msgid ""
+"The focal point of the light. The interpretation of the focal point "
+"depends on the type of the light and whether the light has a "
+"transformation matrix."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:11
+msgid ""
+"The color of the light. The ambient, diffuse and specular colors will all"
+" be set to this color on creation."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:14
+msgid ""
+"The type of the light. One of ``'Headlight'``, ``'CameraLight'`` or "
+"``'SceneLight'``.      - A headlight is attached to the camera, looking "
+"at its       focal point along the axis of the camera.      - A camera "
+"light also moves with the camera, but it can       occupy a general "
+"position with respect to it.      - A scene light is stationary with "
+"respect to the scene,       as it does not follow the camera. This is the"
+" default."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:14
+msgid ""
+"The type of the light. One of ``'Headlight'``, ``'CameraLight'`` or "
+"``'SceneLight'``."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:17
+msgid ""
+"A headlight is attached to the camera, looking at its focal point along "
+"the axis of the camera."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:20
+msgid ""
+"A camera light also moves with the camera, but it can occupy a general "
+"position with respect to it."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:23
+msgid ""
+"A scene light is stationary with respect to the scene, as it does not "
+"follow the camera. This is the default."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:26
+msgid "The brightness of the light (between 0 and 1)."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:28
+msgid ""
+"Set if the light is positional.  The default is a directional light, i.e."
+" an infinitely distant point source. A positional light with a cone angle"
+" of at least 90 degrees acts like a spherical point source. A positional "
+"light with a cone angle that is less than 90 degrees is known as a "
+"spotlight."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:28
+msgid "Set if the light is positional."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:30
+msgid ""
+"The default is a directional light, i.e. an infinitely distant point "
+"source. A positional light with a cone angle of at least 90 degrees acts "
+"like a spherical point source. A positional light with a cone angle that "
+"is less than 90 degrees is known as a spotlight."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:36
+msgid "Cone angle of a positional light in degrees."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:38
+msgid "The exponent of the cosine used for spotlights."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:40
+msgid ""
+"Quadratic attenuation constants.  The values are a 3-length sequence "
+"which specifies the constant, linear and quadratic constants in this "
+"order. These parameters only have an effect for positional lights."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:40
+msgid "Quadratic attenuation constants."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:42
+msgid ""
+"The values are a 3-length sequence which specifies the constant, linear "
+"and quadratic constants in this order. These parameters only have an "
+"effect for positional lights."
+msgstr ""
+
+#: of pyvista_wasm.light.Light:48
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.light.Light:52
+msgid ""
+"Headlight. For headlights the position and focal point properties are "
+"meaningless. No matter where you move the camera, the light always "
+"emanates from the view point:"
+msgstr ""
+
+#: of pyvista_wasm.light.Light:68
+msgid ""
+"Camera light. Camera lights move together with the camera, but can occupy"
+" any fixed relative position with respect to the camera:"
+msgstr ""
+
+#: of pyvista_wasm.light.Light:78
+msgid ""
+"Scene light. Scene lights are attached to the scene, their position and "
+"focal point are interpreted as global coordinates:"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.light.Light.__init__:1
+msgid "Initialize a Light instance."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Light.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.Light.__init__>`\\ \\(\\[position\\, "
+"focal\\_point\\, color\\, ...\\]\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ""
+":py:obj:`generate_vtk_js_code "
+"<pyvista_wasm.Light.generate_vtk_js_code>`\\ \\(idx\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of
+#: pyvista_wasm.light.Light.generate_vtk_js_code:1
+msgid "Generate VTK.wasm JavaScript code for this light."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ""
+":py:obj:`set_light_type_to_camera_light "
+"<pyvista_wasm.Light.set_light_type_to_camera_light>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of
+#: pyvista_wasm.light.Light.set_light_type_to_camera_light:1
+msgid "Set light type to CameraLight (moves with the camera)."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ""
+":py:obj:`set_light_type_to_headlight "
+"<pyvista_wasm.Light.set_light_type_to_headlight>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of
+#: pyvista_wasm.light.Light.set_light_type_to_headlight:1
+msgid "Set light type to Headlight (at camera position)."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ""
+":py:obj:`set_light_type_to_scene_light "
+"<pyvista_wasm.Light.set_light_type_to_scene_light>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of
+#: pyvista_wasm.light.Light.set_light_type_to_scene_light:1
+msgid "Set light type to SceneLight (fixed in world space)."
+msgstr ""
+
+#: of pyvista_wasm.light.Light.generate_vtk_js_code:3
+msgid "Unique index used to avoid variable name collisions in JavaScript."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Light.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.light.Light.generate_vtk_js_code:6
+msgid "JavaScript code that creates and configures the light."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Light.rst
+msgid "Return type"
+msgstr ""

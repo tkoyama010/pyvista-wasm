@@ -1,0 +1,328 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:2
+msgid "pyvista\\_wasm.Camera"
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:1
+msgid "Represents a virtual camera in a 3D scene."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:3
+msgid ""
+"Provides a PyVista-like API for controlling camera position, orientation,"
+" and projection settings in VTK.wasm scenes."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:6
+msgid "Camera position as (x, y, z). Default is (0, 0, 1)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:8
+msgid "Point the camera looks at as (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:10
+msgid "View-up vector as (x, y, z). Default is (0, 1, 0)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:12
+msgid "Camera view angle (field of view) in degrees. Default is 30.0."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:14
+msgid ""
+"Near and far clipping plane distances as (near, far). Default is (0.01, "
+"1000.01)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:17
+msgid ""
+"Enable parallel (orthographic) projection instead of perspective "
+"projection. Default is False."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera:20
+msgid "Camera elevation angle in degrees. Default is 0.0."
+msgstr ""
+
+#: of pyvista_wasm.Camera.clipping_range:10 pyvista_wasm.Camera.elevation:15
+#: pyvista_wasm.Camera.focal_point:10
+#: pyvista_wasm.Camera.parallel_projection:15 pyvista_wasm.Camera.position:10
+#: pyvista_wasm.Camera.view_angle:10 pyvista_wasm.Camera.view_up:10
+#: pyvista_wasm.camera.Camera:24 pyvista_wasm.camera.Camera.azimuth:8
+#: pyvista_wasm.camera.Camera.disable_parallel_projection:7
+#: pyvista_wasm.camera.Camera.enable_parallel_projection:7
+#: pyvista_wasm.camera.Camera.orbit_elevation:11
+#: pyvista_wasm.camera.Camera.roll:7 pyvista_wasm.camera.Camera.zoom:11
+msgid "Examples"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.__init__:1
+msgid "Initialize a Camera instance."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.Camera.__init__>`\\ \\(\\[position\\, "
+"focal\\_point\\, view\\_up\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ":py:obj:`azimuth <pyvista_wasm.Camera.azimuth>`\\ \\(angle\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.azimuth:1
+msgid "Rotate the camera position horizontally around the focal point."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ""
+":py:obj:`disable_parallel_projection "
+"<pyvista_wasm.Camera.disable_parallel_projection>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.disable_parallel_projection:1
+msgid "Disable parallel projection (use perspective projection)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ""
+":py:obj:`enable_parallel_projection "
+"<pyvista_wasm.Camera.enable_parallel_projection>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.enable_parallel_projection:1
+msgid "Enable parallel (orthographic) projection."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ""
+":py:obj:`orbit_elevation <pyvista_wasm.Camera.orbit_elevation>`\\ "
+"\\(angle\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.orbit_elevation:1
+msgid "Rotate the camera position vertically around the focal point."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ":py:obj:`roll <pyvista_wasm.Camera.roll>`\\ \\(angle\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.roll:1
+msgid "Roll the camera around the view direction axis."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1
+msgid ":py:obj:`zoom <pyvista_wasm.Camera.zoom>`\\ \\(factor\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:27:<autosummary>:1 of
+#: pyvista_wasm.camera.Camera.zoom:1
+msgid "Move the camera closer to or farther from the focal point."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst:29
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`clipping_range <pyvista_wasm.Camera.clipping_range>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.clipping_range:1
+msgid "Get or set the clipping range (near, far)."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`elevation <pyvista_wasm.Camera.elevation>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.elevation:1
+msgid "Get or set the camera elevation angle in degrees."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`focal_point <pyvista_wasm.Camera.focal_point>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.focal_point:1
+msgid "Get or set the camera focal point."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`parallel_projection <pyvista_wasm.Camera.parallel_projection>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.parallel_projection:1
+msgid "Get or set parallel projection mode."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`position <pyvista_wasm.Camera.position>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.position:1
+msgid "Get or set the camera position."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`view_angle <pyvista_wasm.Camera.view_angle>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.view_angle:1
+msgid "Get or set the camera view angle in degrees."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`view_up <pyvista_wasm.Camera.view_up>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Camera.view_up:1
+msgid "Get or set the view-up vector."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.azimuth:3
+msgid ""
+"Rotation angle in degrees.  Positive values rotate counter-clockwise when"
+" viewed from above the up vector."
+msgstr ""
+
+#: of pyvista_wasm.Camera.clipping_range:3
+msgid "Near and far clipping plane distances as (near, far)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.Camera.clipping_range:6
+msgid "Clipping range as (near, far)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.disable_parallel_projection:3
+msgid ""
+"Switches the camera from parallel projection to perspective projection. "
+"This is equivalent to setting ``parallel_projection = False``."
+msgstr ""
+
+#: of pyvista_wasm.Camera.elevation:3
+msgid ""
+"The elevation angle controls the vertical rotation of the camera. It "
+"rotates the camera about the cross product of the negative of the "
+"direction of projection and the view up vector, using the focal point as "
+"the center of rotation."
+msgstr ""
+
+#: of pyvista_wasm.Camera.elevation:8 pyvista_wasm.Camera.elevation:11
+msgid "Elevation angle in degrees."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.enable_parallel_projection:3
+msgid ""
+"Switches the camera from perspective projection to parallel projection. "
+"This is equivalent to setting ``parallel_projection = True``."
+msgstr ""
+
+#: of pyvista_wasm.Camera.focal_point:3 pyvista_wasm.Camera.focal_point:6
+msgid "Focal point as (x, y, z)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.orbit_elevation:3
+msgid ""
+"This method is named ``orbit_elevation`` to avoid conflict with the "
+":attr:`elevation` property, which stores a static angle value."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.orbit_elevation:6
+msgid "Rotation angle in degrees.  Positive values tilt the camera upward."
+msgstr ""
+
+#: of pyvista_wasm.Camera.parallel_projection:3
+msgid ""
+"When True, uses parallel (orthographic) projection instead of perspective"
+" projection. Parallel projection is useful for viewing 2D datasets, CAD-"
+"like orthographic views, and scientific visualization where perspective "
+"distortion is undesirable."
+msgstr ""
+
+#: of pyvista_wasm.Camera.parallel_projection:8
+msgid "Enable (True) or disable (False) parallel projection."
+msgstr ""
+
+#: of pyvista_wasm.Camera.parallel_projection:11
+msgid "Whether parallel projection is enabled."
+msgstr ""
+
+#: of pyvista_wasm.Camera.position:3 pyvista_wasm.Camera.position:6
+msgid "Camera position as (x, y, z)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.roll:3
+msgid "Roll angle in degrees."
+msgstr ""
+
+#: of pyvista_wasm.Camera.view_angle:3
+msgid "View angle in degrees (field of view)."
+msgstr ""
+
+#: of pyvista_wasm.Camera.view_angle:6
+msgid "View angle in degrees."
+msgstr ""
+
+#: of pyvista_wasm.Camera.view_up:3 pyvista_wasm.Camera.view_up:6
+msgid "View-up vector as (x, y, z)."
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.zoom:3
+msgid ""
+"Zoom factor.  Values greater than 1 move the camera closer (zoom in); "
+"values between 0 and 1 move it farther away (zoom out)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Camera.rst
+msgid "Raises"
+msgstr ""
+
+#: of pyvista_wasm.camera.Camera.zoom:8
+msgid "If *factor* is not positive."
+msgstr ""

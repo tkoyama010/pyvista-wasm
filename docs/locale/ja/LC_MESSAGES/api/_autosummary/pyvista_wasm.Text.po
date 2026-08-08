@@ -1,0 +1,166 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:2
+msgid "pyvista\\_wasm.Text"
+msgstr ""
+
+#: of pyvista_wasm.text.Text:1
+msgid "A text annotation actor for 3D rendering."
+msgstr ""
+
+#: of pyvista_wasm.text.Text:3
+msgid ""
+"Wraps ``vtk.Rendering.Core.vtkTextActor`` to display 2D text overlays on "
+"3D scenes. Text is positioned in normalized viewport coordinates (0 to 1 "
+"in both x and y)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.text.Text:6
+msgid ""
+"Text string to be displayed. ``\"\\n\"`` is recognized as a line "
+"separator. Characters must be UTF-8 encoded. Default is ``\"Text\"``."
+msgstr ""
+
+#: of pyvista_wasm.text.Text:9
+msgid ""
+"Position coordinate in normalized viewport space (x, y) where (0, 0) is "
+"bottom-left and (1, 1) is top-right. Default is ``(0.5, 0.5)``."
+msgstr ""
+
+#: of pyvista_wasm.text.Text:12
+msgid ""
+"The property of this text actor controlling appearance. If ``None``, "
+"creates a default TextProperty. Default is ``None``."
+msgstr ""
+
+#: of pyvista_wasm.text.Text:15
+msgid ""
+"The name of this actor used when tracking on a plotter. Default is "
+"``None``."
+msgstr ""
+
+#: of pyvista_wasm.Text.input:11 pyvista_wasm.Text.position:13
+#: pyvista_wasm.text.Text:19
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.text.Text:23
+msgid "Create a text overlay:"
+msgstr ""
+
+#: of pyvista_wasm.text.Text:32
+msgid "Customize text appearance:"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1 of
+#: pyvista_wasm.text.Text.__init__:1
+msgid "Initialize a Text instance."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.Text.__init__>`\\ \\(\\[text\\, "
+"position\\, prop\\, name\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1
+msgid ""
+":py:obj:`generate_vtk_js_code <pyvista_wasm.Text.generate_vtk_js_code>`\\"
+" \\(idx\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:22:<autosummary>:1 of
+#: pyvista_wasm.text.Text.generate_vtk_js_code:1
+msgid "Generate JavaScript code for this text actor as an HTML overlay div."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst:24
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`input <pyvista_wasm.Text.input>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Text.input:1
+msgid "Get or set the text string to be displayed."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`position <pyvista_wasm.Text.position>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.Text.position:1
+msgid "Get or set the text position in normalized viewport coordinates."
+msgstr ""
+
+#: of pyvista_wasm.text.Text.generate_vtk_js_code:3
+msgid "Unique index used to avoid variable name collisions in JavaScript."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.text.Text.generate_vtk_js_code:6
+msgid ""
+"JavaScript code that creates and configures the text overlay div. Uses an"
+" absolutely positioned div over the rendering container because "
+"``vtkTextActor`` is not available in the VTK.wasm bundle."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Text.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.Text.input:3
+msgid ""
+"Text string to display. Newline characters (``\"\\n\"``) are recognized "
+"as line separators. Characters must be UTF-8 encoded."
+msgstr ""
+
+#: of pyvista_wasm.Text.input:7
+msgid "The current text string."
+msgstr ""
+
+#: of pyvista_wasm.Text.position:3
+msgid ""
+"Position is specified in normalized viewport coordinates where (0, 0) is "
+"the bottom-left corner and (1, 1) is the top-right corner."
+msgstr ""
+
+#: of pyvista_wasm.Text.position:6
+msgid "Position as (x, y) in normalized viewport coordinates."
+msgstr ""
+
+#: of pyvista_wasm.Text.position:9
+msgid "Position as (x, y)."
+msgstr ""
