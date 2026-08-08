@@ -638,11 +638,14 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>
 
-<div class="pt-4">
+<div class="pt-4 cli-help-scroll">
 
-<pre class="cli-help"><code>pyvista-wasm --help</code></pre>
+```sh
+pyvista-wasm --help
+```
 
-<pre class="cli-output"><code> Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...                                
+```
+ Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...
 
  PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.
 
@@ -664,34 +667,17 @@ class: text-left
 │                         talk slide deck.                                     │
 │ check-locale-parity     Check that JA and EN slide locale files share the    │
 │                         same key structure.                                  │
-╰──────────────────────────────────────────────────────────────────────────────╯</code></pre>
+╰──────────────────────────────────────────────────────────────────────────────╯
+```
 
 </div>
 
 <style>
-.cli-output {
-  max-height: 55vh;
+.cli-help-scroll {
+  max-height: 60vh;
   overflow-y: auto;
-  overflow-x: hidden;
-  background: var(--slidev-code-background, #1e1e1e);
-  color: var(--slidev-code-color, #e0e0e0);
-  border-radius: 8px;
-  padding: 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  line-height: 1.4;
-  white-space: pre;
-  margin: 0;
-}
-.cli-help {
-  background: var(--slidev-code-background, #1e1e1e);
-  color: var(--slidev-code-color, #e0e0e0);
-  border-radius: 8px;
-  padding: 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  line-height: 1.4;
-  margin: 0 0 0.75rem 0;
+  position: relative;
+  z-index: 1;
 }
 </style>
 
