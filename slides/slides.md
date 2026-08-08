@@ -642,7 +642,7 @@ class: text-left
 
 <pre class="cli-help"><code>pyvista-wasm --help</code></pre>
 
-<pre class="cli-output"><code> Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...                                
+<pre class="cli-output"><code> Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...
 
  PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.
 
