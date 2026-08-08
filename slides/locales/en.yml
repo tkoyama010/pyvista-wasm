@@ -2,26 +2,26 @@
 # Do not add or remove keys here without first updating ja.yml.
 cover:
   title: PyVista on WebAssembly
-  subtitle: Running PyVista entirely in the browser — no server required
+  subtitle: Realizing serverless 3D visualization
   tagline: No server, no install, no data leaving your machine
   event: PyCon JP 2026
   speaker: Tetsuo Koyama
 
 agenda:
-  title: Agenda
-  subtitle: A three-part tour, from the why to the how
+  title: "The Reality of Python×WASM: Walls in Porting Heavyweight Libraries, and the Future of Browser-Complete Scientific Computing"
+  subtitle: Agenda
   i1t: PyVista and WASM overview
   i1d: Why run 3D visualization in the browser
   i2t: Technical stack & implementation
   i2d: vtk-wasm, TypeScript glue, PyVista API
   i3t: Live demo in browser
   i3d: PyVista running with no server
-  speaker_title: Speaker
-  speaker_subtitle: PyVista contributor and pyvista-wasm co-maintainer
+  speaker_title: The speaker leads PyVista's WASM efforts
+  speaker_subtitle: Speaker profile
 
 pyvista:
-  title: What is PyVista?
-  subtitle: "30 years of VTK's 3D power — made Pythonic"
+  title: PyVista is a Python library for scientific 3D visualization
+  subtitle: PyVista homepage
   i1t: Built on VTK
   i1d: "Kitware's C++ visualization toolkit, 30+ years of development since 1993"
   i2t: Pythonic API
@@ -34,48 +34,48 @@ pyvista:
   mesh_caption_bold: drag to rotate it
 
 problem:
-  title: The Problem
-  subtitle: Sharing 3D results on the web still means running a server
+  title: Server provisioning is the bottleneck for sharing 3D scientific computing results on the web
+  subtitle: Issues
   col_issue: Issue
   col_detail: Detail
-  i1t: Three.js is not enough
-  i1d: the go-to browser 3D library has no direct path to render physics and simulation results
+  i1t: Three.js lacks capability
+  i1d: insufficient functionality to render scientific and engineering computation results
   i2t: Time cost
-  i2d: server-side rendering fills the gap, but someone has to build and maintain a dedicated visualization server
+  i2d: need to build and maintain a dedicated visualization server
   i3t: Monetary cost
-  i3d: standing up and operating that infrastructure is an ongoing expense
+  i3d: building and operating infrastructure is an ongoing expense
   i4t: Security risk
-  i4d: "confidential simulation data has to leave the analyst's machine and travel to the server"
-  conc_pre: These barriers make it hard to share analysis results
+  i4d: "confidential simulation data is sent from the analyst's machine to the server"
+  conc_pre: These barriers make sharing analysis results
   conc_bold: quickly and securely
-  conc_post: — what if the browser could do it all?
+  conc_post: "difficult — what if the browser could do it all?"
 
 why_wasm:
-  title: Why WASM?
+  title: Browser-complete solves security and resource issues
   subtitle: Browser-complete sequence diagram
-  i1t: Nothing is sent anywhere
-  i1d: WebAssembly runs the whole visualization pipeline in the browser, so the round trip to a rendering server disappears
+  i1t: Data is not sent anywhere
+  i1d: WebAssembly runs the entire visualization pipeline in the browser, eliminating the round trip to a rendering server
   i2t: Data never leaves the machine
-  i2d: confidential simulation results stay client-side, so there is no transfer to secure in the first place
-  i3t: No infrastructure to stand up
-  i3d: no visualization server to provision, scale, or pay for month after month
+  i2d: confidential simulation results stay client-side, so there is nothing to transfer in the first place
+  i3t: No infrastructure needed
+  i3d: no visualization server to provision, scale, or pay for monthly
   i4t: Where this came from
   i4d_pre: "a physics simulation project asked for one thing:"
   i4d_italic: drop the analyzed mesh into the browser and see it
   i5t: Demos anywhere
-  i5d: show results in the field or at a client site with a browser and nothing else
-  conc_pre: A URL becomes the whole delivery mechanism —
+  i5d: show results in the field or at a client site with just a browser
+  conc_pre: A URL is the whole delivery —
   conc_bold: so how do we get PyVista in there?
 
 arch:
-  title: "Architecture: SSR vs Wasm"
-  subtitle: Sequence diagram — SSR vs Wasm
-  conc_pre: "The round-trip is gone entirely —"
+  title: "While SSR involves server-side processing, Wasm completes processing entirely in the browser"
+  subtitle: "Sequence diagram comparison — SSR vs Wasm"
+  conc_pre: "The round-trip disappears entirely —"
   conc_bold: rendering happens where the data already is
 
 vtk_wasm:
-  title: What is vtk.wasm?
-  subtitle: "30 years of VTK's capability — now running in the browser"
+  title: "VTK, the engine behind PyVista, is the most widely used visualization C++ library in scientific computing worldwide"
+  subtitle: VTK use cases
   i1t: Built by Kitware
   i1d: the C++ Visualization Toolkit, maintained since 1993, 30+ years of accumulated capability
   i2t: Field-proven
@@ -90,45 +90,45 @@ vtk_wasm:
   i6d: all of these capabilities now run without a server, entirely in the browser
   i7t: Demos anywhere
   i7d: particularly significant for field demos and client-site presentations
-  conc_pre: "VTK's full power in a URL —"
-  conc_bold: so how do we glue it to PyVista?
+  conc_pre: "VTK's full power in a single URL —"
+  conc_bold: so how do we connect it to PyVista?
 
 history:
-  title: Wasm Build History & Current Status
-  subtitle: VTK.wasm Sample
+  title: VTK.wasm is being developed toward practical use
+  subtitle: VTK.wasm sample
   y1: "2018"
   y1l: Experimental
-  y1d: Emscripten builds began — early proof-of-concept bringing VTK to the browser
+  y1d: Emscripten builds began — early prototype bringing VTK to the browser
   y2: "2021"
   y2l: Official
   y2d_pre: Integrated into the official build pipeline;
   y2d_bold1: vtk.wasm
-  y2d_mid: published on npm — distinct from
+  y2d_mid: published on npm —
   y2d_bold2: vtk.js
-  y2d_post: "(the JavaScript reimplementation)"
+  y2d_post: "(the JavaScript reimplementation) — a different thing"
   y3: "2023–2024"
   y3l: WebGPU
   y3d: WebGPU backend support progressed — higher rendering performance and GPU compute compared to WebGL
   i1t: Runtime switching
   i1d: current packages can switch between WebGL and WebGPU at runtime
   i2t: Automatic fallback
-  i2d: gracefully degrades based on browser support, a design still progressing
-  conc_pre: From experiment to production-ready —
+  i2d: gracefully degrades based on browser support, a design still in progress
+  conc_pre: From experiment to production —
   conc_bold: the technology is maturing steadily
 
 demos:
-  title: VTK.wasm Demos
-  subtitle: Running in your browser, right now
+  title: 3D CG, image processing, and visualization running in the browser
+  subtitle: Live demos running in your browser right now
 
 build_dist:
-  build_title: How vtk-wasm is Built
-  build_subtitle: VTK's C++ compiled to WebAssembly — consumers just npm install
-  dist_title: Package Distribution Sequence Diagram
+  build_title: Compiling VTK's C++ to WebAssembly takes hours, but users are unaffected
+  build_subtitle: How to build and use vtk-wasm
+  dist_title: Binaries streamed from CDN at runtime are not bundled into the JS package
   dist_subtitle: Sequence diagram — how the package is distributed
 
 pipeline:
-  title: VTK Emscripten Build Pipeline
-  subtitle: C++ compiled to WebAssembly once — consumers just npm install and add two Vite lines
+  title: With Vite config, users can use VTK.wasm
+  subtitle: How to use VTK.wasm with Vite
   i1t: Emscripten
   i1d: "VTK's entire C++ codebase compiled to WebAssembly, bringing 30 years of capability into the browser"
   i2t: Heavy build, light consumption
@@ -144,13 +144,13 @@ pipeline:
   i5d: Vite must not pre-bundle the WASM package; it loads asynchronously at runtime
 
 pyodide:
-  title: Pyodide + PyVista in the Browser
-  subtitle: Sequence diagram — Pyodide + PyVista layered in the browser
+  title: 3D visualization in the browser using Python code as the frontend
+  subtitle: pyvista-wasm sequence diagram
   i1t: Pyodide
   i1d: CPython compiled to WebAssembly, running the real CPython interpreter inside the browser
   i2t: PyVista
   i2d: a Pythonic wrapper over VTK, the same API scientists already use on the desktop
-  i3t: The combination
+  i3t: This combination
   i3d: write Python in the browser, visualize 3D meshes on the same page, zero backend
   i4t: pyvista-wasm
   i4d: bridges the gap with a PyVista-like API built on top of vtk-wasm
@@ -158,40 +158,40 @@ pyodide:
   conc_bold: loading vtk-wasm and bridging C++ VTK bindings to the Python-facing API
   arch_label: Layered architecture
   i5t: Glue layer
-  i5d: TypeScript loads the vtk-wasm module and exposes its VTK classes to Python
+  i5d: TypeScript loads the vtk-wasm module and exposes VTK classes to Python
   i6t: Runtime fallback
   i6d_pre: when
   i6d_post: ", mesh fetches use XMLHttpRequest instead of urllib"
 
 dev_ci:
-  title: Integrating vtk.wasm into pyvista-wasm surfaced real problems — all now solved
-  subtitle: Problems hit during development, and the fix for each
-  col_issue: Issue
+  title: Integrating vtk.wasm into pyvista-wasm surfaced challenges, but all are solved
+  subtitle: Problems encountered during development and their solutions
+  col_issue: Problem
   col_solution: Solution
   p1: createNamespace() returns a Promise
   s1: await every VTK object operation
   p2: threaded filters require SharedArrayBuffer
   s2: inject COOP/COEP headers with vite-plugin-cross-origin-isolation
-  p3: the tarball URL is fetched cross-origin, so it needs CORS
+  p3: tarball URL is fetched cross-origin, so CORS is needed
   s3: use a CDN that sends CORS headers
   p4: "Kitware's GitLab direct URL is slow from Asia"
   s4: "use jsDelivr's multi-CDN edge cache"
 
 sphere:
-  title: pyvista-wasm makes 3D visualization more intuitive
-  subtitle: A code comparison between VTK.wasm and pyvista-wasm
+  title: pyvista-wasm enables more intuitive 3D visualization
+  subtitle: Code comparison between VTK.wasm and pyvista-wasm
   js_label: VTK.wasm (JavaScript)
   py_label: pyvista-wasm (Python / Pyodide)
   output_label: Output
 
 demo_jl:
-  title: "Demo: JupyterLite"
-  subtitle: A browser-only Jupyter environment — write Python, render 3D meshes, share by URL
+  title: Display 3D meshes in JupyterLite with no installation
+  subtitle: "Demo: JupyterLite"
   i1t: JupyterLite
   i1d: a browser-only Jupyter environment; no installation needed, 3D meshes display interactively in notebooks
   i2t: pv.Sphere() and pv.read()
   i2d: pre-prepared notebooks let you start rendering with a single cell
-  i3t: Run a cell, see it render
+  i3t: Run a cell to render
   i3d: running a cell launches the 3D viewer right in the notebook
   i4t: No local setup
   i4d: the ideal entry point to experience vtk.wasm rendering quality without installing anything
@@ -203,8 +203,8 @@ demo_jl:
   demo_label: Live demo
 
 demo_marimo:
-  title: "Demo: marimo"
-  subtitle: A reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed
+  title: marimo also runs entirely in the browser
+  subtitle: "Demo: marimo"
   i1t: Reactive notebook
   i1d: marimo runs entirely in the browser; when a cell value changes, dependent cells auto-rerun
   i2t: Real-time mesh updates
@@ -218,8 +218,8 @@ demo_marimo:
   demo_label: Live demo
 
 demo_stlite:
-  title: "Demo: stlite"
-  subtitle: Streamlit in the browser — sliders, select boxes, and widgets driving 3D mesh rendering, no server needed
+  title: Build server-less 3D visualization apps with stlite
+  subtitle: "Demo: stlite"
   i1t: Streamlit in the browser
   i1d: stlite runs Streamlit entirely client-side; no server, no install, share the app by URL
   i2t: Declarative widgets
@@ -235,14 +235,14 @@ demo_stlite:
   demo_label: Live demo
 
 use_cases:
-  title: Suitable & Unsuitable Use Cases
-  subtitle: Use case diagram — where vtk.wasm shines today and where its edges are
+  title: PyVista on WebAssembly provides a new way to share 3D visualization data without a server
+  subtitle: Use case diagram for sharing 3D visualization data
   conc_pre: PoC confirmed —
   conc_bold: analysis results can be shared without a dedicated server
 
 inspiration:
   title: Inspired by
-  subtitle: This talk builds on a longer write-up — read it for the full picture
+  subtitle: See the Akari Inc. tech blog for the full article
   article_label: Source article
   article_title: "vtk.wasm で実現するブラウザ完結3D可視化"
   article_source: Akari Inc. tech blog, 2026-05-03
@@ -250,8 +250,8 @@ inspiration:
   note: The framing of this deck — the motivation for leaving server-side rendering behind, the vtk.wasm background, the JupyterLite / marimo / stlite demos, and the use-case discussion — follows the structure of the article above.
 
 cta:
-  title: Call to Action & Q&A
-  cta_title: Call to Action
-  qa_title: Q&A
+  title: pyvista-wasm is an actively developed open source project — contributions and discussion are welcome
+  cta_title: pyvista-wasm is an actively developed open source project — contributions are welcome
+  qa_title: Questions and discussion are welcome
   qa_subtitle: https://github.com/tkoyama010/pyvista-wasm/discussions
-  subtitle: pyvista-wasm is an actively developed open source project — contributions and discussion are welcome
+  subtitle: Contributions welcome
