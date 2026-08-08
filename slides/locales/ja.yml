@@ -1,3 +1,5 @@
+# Authoritative locale for slide structure (see ADR-0006).
+# Add, remove, or rename keys here first, then mirror the structure in en.yml.
 cover:
   title: PyVista on WebAssembly
   subtitle: サーバーレス3D可視化の実現
