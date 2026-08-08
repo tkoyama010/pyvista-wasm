@@ -130,6 +130,10 @@ lint.per-file-ignores."tests/*" = [
   "S101",    # assert - normal for pytest
   "SLF001",  # private member access - testing private APIs
 ]
+lint.per-file-ignores."scripts/*" = [
+  "INP001",  # implicit namespace package - standalone scripts
+  "T201",    # print - CLI script output
+]
 lint.flake8-pytest-style.parametrize-names-type = "tuple"
 lint.flake8-pytest-style.parametrize-values-row-type = "tuple"
 lint.flake8-pytest-style.parametrize-values-type = "list"
