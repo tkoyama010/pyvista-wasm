@@ -123,16 +123,16 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
 ]
+lint.per-file-ignores."scripts/*" = [
+  "INP001", # implicit namespace package - standalone scripts
+  "T201",   # print - CLI script output
+]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
   "INP001",  # implicit namespace package
   "PLR2004", # magic values - normal for test data
   "S101",    # assert - normal for pytest
   "SLF001",  # private member access - testing private APIs
-]
-lint.per-file-ignores."scripts/*" = [
-  "INP001",  # implicit namespace package - standalone scripts
-  "T201",    # print - CLI script output
 ]
 lint.flake8-pytest-style.parametrize-names-type = "tuple"
 lint.flake8-pytest-style.parametrize-values-row-type = "tuple"
