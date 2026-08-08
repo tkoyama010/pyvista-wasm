@@ -1185,11 +1185,6 @@ def export_demo(
     logger.info("Demo page written to: %s", output)
 
 
-# ---------------------------------------------------------------------------
-# Locale key-parity check
-# ---------------------------------------------------------------------------
-
-
 def _collect_locale_keys(node: object, prefix: str = "") -> set[str]:
     """Recursively collect every dotted key path from a YAML mapping.
 
