@@ -638,24 +638,11 @@ class: text-left
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>
 
-<div class="pt-4 cli-help-scroll">
-
 ```sh
 pyvista-wasm --help
 ```
 
 ```
- Usage: pyvista-wasm [OPTIONS] COMMAND [ARGS]...
-
- PyVista-like CLI for browser-based 3-D visualization with VTK.wasm.
-
-╭─ Options ────────────────────────────────────────────────────────────────────╮
-│ --version                     Show version and exit.                         │
-│ --install-completion          Install completion for the current shell.      │
-│ --show-completion             Show completion for the current shell, to copy │
-│                               it or customize the installation.              │
-│ --help                        Show this message and exit.                    │
-╰──────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────╮
 │ plot                    Plot one or more mesh files in the browser.          │
 │ info                    Show pyvista-wasm version and environment            │
@@ -669,17 +656,6 @@ pyvista-wasm --help
 │                         same key structure.                                  │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 ```
-
-</div>
-
-<style>
-.cli-help-scroll {
-  max-height: 60vh;
-  overflow-y: auto;
-  position: relative;
-  z-index: 1;
-}
-</style>
 
 <!-- Single message: the pyvista-wasm CLI lets you plot meshes, capture previews, and export demos from the terminal — no Python code required. -->
 
