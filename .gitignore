@@ -71,6 +71,9 @@ assets/*.gif
 # Environment variables
 .envrc
 
+# Claude Code (local settings and agent worktrees)
+.claude/
+
 # Node.js (TypeScript build)
 node_modules/
 src/pyvista_wasm/templates/renderer.js

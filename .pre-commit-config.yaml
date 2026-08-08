@@ -38,12 +38,12 @@ repos:
         args: ["--keep-full-version"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.32
+    rev: 0.12.1
     hooks:
       - id: uv-lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.0
+    rev: v0.16.1
     hooks:
       # Run the linter
       - id: ruff-check
@@ -52,7 +52,7 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/djlint/djLint
-    rev: v1.43.0
+    rev: v1.43.2
     hooks:
       - id: djlint-reformat-jinja
         files: src/pyvista_wasm/templates/.*\.html$
@@ -61,7 +61,7 @@ repos:
         files: src/pyvista_wasm/templates/.*\.html$
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.5
+    rev: v2.5.6
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.0"]
@@ -105,8 +105,13 @@ repos:
     hooks:
       - id: standard-readme
 
+  - repo: https://github.com/tkoyama010/readme-i18n-check
+    rev: v0.1.0
+    hooks:
+      - id: check-readme-i18n
+
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.28.0
+    rev: v1.29.0
     hooks:
       - id: zizmor
 
