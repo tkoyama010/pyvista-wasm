@@ -114,8 +114,9 @@ repos:
     hooks:
       - id: check-locale-parity
         name: Slide locale JA/EN key-parity check
-        entry: python -m pyvista_wasm check-locale-parity
-        language: system
+        entry: env PYTHONPATH=src python -m pyvista_wasm check-locale-parity
+        language: python
+        additional_dependencies: [pyyaml, typer, lazy-loader]
         files: ^slides/locales/(ja|en)\.yml$
         pass_filenames: false
 
@@ -133,5 +134,4 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   autoupdate_schedule: weekly
-  skip: [check-locale-parity]
   submodules: false
