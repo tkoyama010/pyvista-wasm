@@ -14,6 +14,7 @@ from pyvista_wasm._cli import (
     _apply_camera_movement,
     _capture_marimo_screenshots,
     _capture_stlite_screenshots,
+    _collect_locale_keys,
     _create_gif,
     _find_canvas_in_frames,
     _rotate_canvas_with_mouse,
@@ -1010,3 +1011,74 @@ class TestExportDemo:
         cli_main(["export-demo", "--output", str(out)])
 
         assert out.exists()
+
+
+class TestCheckLocaleParity:
+    """Tests for the ``check-locale-parity`` CLI command."""
+
+    def test_passing_files(self, tmp_path) -> None:
+        """``check-locale-parity`` succeeds when key sets match."""
+        ja = tmp_path / "ja.yml"
+        en = tmp_path / "en.yml"
+        ja.write_text("cover:\n  title: タイトル\n  subtitle: サブタイトル\n", encoding="utf-8")
+        en.write_text("cover:\n  title: Title\n  subtitle: Subtitle\n", encoding="utf-8")
+
+        cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
+
+    def test_missing_key_in_en(self, tmp_path) -> None:
+        """``check-locale-parity`` exits 1 when en.yml lacks a key present in ja.yml."""
+        ja = tmp_path / "ja.yml"
+        en = tmp_path / "en.yml"
+        ja.write_text("cover:\n  title: タイトル\n  subtitle: サブタイトル\n", encoding="utf-8")
+        en.write_text("cover:\n  title: Title\n", encoding="utf-8")
+
+        with pytest.raises(SystemExit) as exc_info:
+            cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
+        assert exc_info.value.code == 1
+
+    def test_extra_key_in_en(self, tmp_path) -> None:
+        """``check-locale-parity`` exits 1 when en.yml has a key absent from ja.yml."""
+        ja = tmp_path / "ja.yml"
+        en = tmp_path / "en.yml"
+        ja.write_text("cover:\n  title: タイトル\n", encoding="utf-8")
+        en.write_text("cover:\n  title: Title\n  subtitle: Subtitle\n", encoding="utf-8")
+
+        with pytest.raises(SystemExit) as exc_info:
+            cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
+        assert exc_info.value.code == 1
+
+    def test_nested_key_drift(self, tmp_path) -> None:
+        """``check-locale-parity`` detects drift in nested keys."""
+        ja = tmp_path / "ja.yml"
+        en = tmp_path / "en.yml"
+        ja.write_text("section:\n  item:\n    ja_key: 値\n", encoding="utf-8")
+        en.write_text("section:\n  item:\n    en_key: value\n", encoding="utf-8")
+
+        with pytest.raises(SystemExit) as exc_info:
+            cli_main(["check-locale-parity", "--ja", str(ja), "--en", str(en)])
+        assert exc_info.value.code == 1
+
+
+class TestCollectLocaleKeys:
+    """Tests for the ``_collect_locale_keys`` helper."""
+
+    def test_flat_dict(self) -> None:
+        """Flat dict produces top-level keys only."""
+        result = _collect_locale_keys({"a": 1, "b": 2})
+        assert result == {"a", "b"}
+
+    def test_nested_dict(self) -> None:
+        """Nested dict produces dotted paths."""
+        result = _collect_locale_keys({"section": {"key1": "v1", "key2": "v2"}})
+        assert result == {"section", "section.key1", "section.key2"}
+
+    def test_deeply_nested(self) -> None:
+        """Deeply nested dicts produce full dotted paths."""
+        result = _collect_locale_keys({"a": {"b": {"c": 1}}})
+        assert result == {"a", "a.b", "a.b.c"}
+
+    def test_non_dict_input(self) -> None:
+        """Non-dict input returns an empty set."""
+        assert _collect_locale_keys("not a dict") == set()
+        assert _collect_locale_keys(42) == set()
+        assert _collect_locale_keys(None) == set()

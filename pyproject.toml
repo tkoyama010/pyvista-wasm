@@ -43,6 +43,7 @@ dependencies = [
   "jinja2>=3.1.0,<3.2.0",
   "lazy-loader>=0.4.0,<0.6.0",
   "numpy>=2.0.0,<2.6.0",
+  "pyyaml>=6.0",
   "typer>=0.9.0,<0.27.0",
 ]
 optional-dependencies.dev = [
@@ -121,10 +122,6 @@ lint.per-file-ignores."jupyterlite/content/*" = [
   "F704",    # await outside async - top-level await valid in Pyodide
   "INP001",  # implicit namespace package
   "PLE1142", # await outside async - top-level await valid in Pyodide
-]
-lint.per-file-ignores."slides/locales/check_locale_parity.py" = [
-  "INP001", # implicit namespace package - standalone dev script, not a package
-  "T201",   # print - CLI output is the purpose of this script
 ]
 lint.per-file-ignores."tests/*" = [
   "ANN",     # missing type annotations - not critical for tests
