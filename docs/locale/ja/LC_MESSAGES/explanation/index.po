@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../explanation/index.md:1
+msgid "Explanation"
+msgstr ""
+
+#: ../../explanation/index.md:3
+msgid "Deeper understanding of pyvista-wasm concepts and architecture."
+msgstr ""
+
+#: ../../explanation/index.md:5
+msgid "Overview"
+msgstr ""
+
+#: ../../explanation/index.md:7
+msgid ""
+"pyvista-wasm is a PyVista-like API for VTK.wasm, bringing the intuitive "
+"PyVista interface to WebAssembly-based 3D visualization. It enables 3D "
+"visualization in browser environments including Pyodide, JupyterLite, and"
+" Streamlit applications."
+msgstr ""
+
+#: ../../explanation/index.md:11
+msgid "Architecture"
+msgstr ""
+
+#: ../../explanation/index.md:13
+msgid "pyvista-wasm separates concerns between Python and JavaScript:"
+msgstr ""
+
+#: ../../explanation/index.md:15
+msgid ""
+"**Python side**: Handles geometry preparation, scene configuration, and "
+"API surface."
+msgstr ""
+
+#: ../../explanation/index.md:16
+msgid ""
+"**JavaScript side (VTK.wasm)**: Handles the actual geometry parsing and "
+"WebGL rendering via WebAssembly."
+msgstr ""
+
+#: ../../explanation/index.md:18
+msgid "Features"
+msgstr ""
+
+#: ../../explanation/index.md:20
+msgid "PyVista-like API for familiar usage"
+msgstr ""
+
+#: ../../explanation/index.md:21
+msgid "Integration with VTK.wasm for web-based visualization"
+msgstr ""
+
+#: ../../explanation/index.md:22
+msgid "Support for JupyterLite, marimo, and stlite"
+msgstr ""
+
+#: ../../explanation/index.md:23
+msgid "Physically Based Rendering (PBR) with metallic and roughness controls"
+msgstr ""
+
+#: ../../explanation/index.md:24
+msgid "PLY, OBJ, STL, GLTF, and PolyData file format readers"
+msgstr ""
+

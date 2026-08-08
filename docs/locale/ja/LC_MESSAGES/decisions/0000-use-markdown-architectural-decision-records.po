@@ -1,0 +1,413 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:9
+msgid "Use Markdown Architectural Decision Records"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:11
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:13
+msgid ""
+"pyvista-wasm is accumulating architecturally significant decisions — e.g."
+" the choice of vtk-wasm as the C++ VTK binding layer, the TypeScript glue"
+" architecture that bridges vtk-wasm bindings to the Python-facing PyVista"
+" API, and the WebAssembly runtime strategy for running PyVista entirely "
+"in the browser. Today these decisions live only in issue threads and PR "
+"descriptions, which makes the rationale hard to find later and easy to "
+"lose. We want to record architectural decisions made in this project — "
+"whether they concern the architecture, the code, or other fields — in a "
+"consistent, version-controllable way. Which format and structure should "
+"these records follow?"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:15
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:17
+msgid ""
+"**Explicit rationale**: Implicit assumptions should be made explicit so "
+"future contributors can understand *why* a decision was made, not just "
+"*what* was decided. See also [\"A rational design process: How and why to"
+" fake it\"](https://doi.org/10.1109/TSE.1986.6312940)."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:18
+msgid ""
+"**Version control friendliness**: Records must be plain text that diffs "
+"and reviews well in Git alongside the code they govern."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:19
+msgid ""
+"**Low overhead**: pyvista-wasm is a small project; the format must be "
+"lean enough that writing a record does not feel like a burden."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:20
+msgid ""
+"**Comprehensibility**: The structure should be easy to read and scan for "
+"both authors and reviewers."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:21
+msgid ""
+"**Tooling availability**: Prefer a format with active maintenance and "
+"supporting tooling."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:22
+msgid ""
+"**Generality**: The format should capture any decision — architectural, "
+"design, or tooling — not only a narrow class."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:24
+msgid "Considered Options"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:26
+msgid ""
+"[MADR](https://adr.github.io/madr/) 4.0.0 — The Markdown Architectural "
+"Decision Records"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:27
+msgid ""
+"[Michael Nygard's template](http://thinkrelevance.com/blog/2011/11/15"
+"/documenting-architecture-decisions) — The first incarnation of the term "
+"\"ADR\""
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:28
+msgid ""
+"[Sustainable Architectural Decisions](https://www.infoq.com/articles"
+"/sustainable-architectural-design-decisions) — The Y-Statements"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:29
+msgid ""
+"Other templates listed at "
+"[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:30
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:94
+msgid "Formless — No conventions for file format and structure"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:32
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:34
+msgid ""
+"Chosen option: \"MADR 4.0.0\", because it best fits the decision drivers."
+" It is a lean Markdown template with optional sections, captures any "
+"decision (not only pure architecture), and is actively maintained with "
+"tooling support."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:36
+msgid "Consequences"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:38
+msgid ""
+"Good, because architectural rationale will live alongside the code in "
+"`docs/decisions/` and travel through the same review/PR flow."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:39
+msgid ""
+"Good, because the consistent `NNNN-title-with-dashes.md` filename "
+"convention makes records discoverable and sortable."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:40
+msgid ""
+"Good, because the MADR template's optional sections (Decision Drivers, "
+"Pros and Cons of the Options, Confirmation, More Information) keep short "
+"decisions short while scaling to complex ones."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:41
+msgid ""
+"Good, because YAML front matter (`status`, `date`, `decision-makers`, "
+"`consulted`, `informed`) gives lightweight metadata for tracking decision"
+" lifecycle."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:42
+msgid ""
+"Bad, because contributors must learn the template and remember to open a "
+"record for significant decisions."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:43
+msgid ""
+"Neutral, because we adopt the MADR conventions as-is rather than forking "
+"the template, trading a little flexibility for staying on a maintained "
+"upstream."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:45
+msgid "Confirmation"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:47
+msgid "Compliance with this decision will be confirmed by:"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:49
+msgid ""
+"A `docs/decisions/` directory exists in the repository containing the "
+"MADR template (`adr-template.md`) copied from the [MADR 4.0.0 "
+"release](https://github.com/adr/madr/tree/4.0.0/template)."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:50
+msgid ""
+"The first concrete record, `docs/decisions/0000-use-markdown-"
+"architectural-decision-records.md`, mirrors this issue's content and is "
+"merged via PR."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:51
+msgid ""
+"Subsequent architecturally significant proposals (e.g. the TypeScript "
+"glue layer design for bridging vtk-wasm bindings to the PyVista API) are "
+"accompanied by a MADR record linked from the issue."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:52
+msgid ""
+"A CI step (e.g. markdownlint with MADR's `.markdownlint` config) lints "
+"records on PRs touching `docs/decisions/`."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:54
+msgid "Pros and Cons of the Options"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:56
+msgid "MADR 4.0.0 — The Markdown Architectural Decision Records"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:58
+msgid "See [https://adr.github.io/madr/](https://adr.github.io/madr/)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:60
+msgid ""
+"Good, because it is plain Markdown, satisfying the version-control-"
+"friendliness and low-overhead drivers."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:61
+msgid ""
+"Good, because the structure (Context and Problem Statement → Decision "
+"Drivers → Considered Options → Decision Outcome → Pros and Cons of the "
+"Options → More Information) is comprehensible and scales from one-"
+"paragraph to multi-page decisions."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:62
+msgid ""
+"Good, because the project is vivid: 4.0.0 released 2024-09-17, with "
+"examples, a changelog, and tooling (markdownlint config, init scripts)."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:63
+msgid ""
+"Good, because it captures *any* decision, satisfying the generality "
+"driver."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:64
+msgid ""
+"Neutral, because it ships optional YAML front matter that we will adopt "
+"but is not strictly required."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:65
+msgid ""
+"Bad, because it introduces a small documentation convention contributors "
+"must learn."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:67
+msgid "Michael Nygard's template"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:69
+msgid ""
+"See [http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-"
+"decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-"
+"architecture-decisions)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:71
+msgid "Good, because it is the original ADR template and is widely cited."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:72
+msgid ""
+"Good, because it is minimal: Title, Context, Decision, Status, "
+"Consequences."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:73
+msgid ""
+"Neutral, because its brevity is appealing but leaves no room for "
+"comparing options or capturing drivers."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:74
+msgid ""
+"Bad, because it lacks a \"Considered Options\" / \"Pros and Cons\" "
+"section, so alternatives and their trade-offs are not recorded."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:75
+msgid ""
+"Bad, because there is no maintained tooling or canonical Markdown source;"
+" many variants exist."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:77
+msgid "Sustainable Architectural Decisions — The Y-Statements"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:79
+msgid ""
+"See [https://www.infoq.com/articles/sustainable-architectural-design-"
+"decisions](https://www.infoq.com/articles/sustainable-architectural-"
+"design-decisions)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:81
+msgid ""
+"Good, because the Y-Statement (In the context of `Z`, facing `Q`, we "
+"decided `S` to achieve `B`, accepting `D`) is concise and forces explicit"
+" trade-offs."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:82
+msgid ""
+"Neutral, because the format is more of a single-sentence pattern than a "
+"full document template."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:83
+msgid ""
+"Bad, because it does not scale to multi-option comparisons with detailed "
+"pros and cons."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:84
+msgid "Bad, because it is less widely adopted and has less tooling than MADR."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:86
+msgid "Other templates listed at joelparkerhenderson/architecture_decision_record"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:88
+msgid ""
+"See "
+"[https://github.com/joelparkerhenderson/architecture_decision_record](https://github.com/joelparkerhenderson/architecture_decision_record)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:90
+msgid ""
+"Good, because the list offers many variants (Planguage, MADR, Nygard, "
+"Y-Statement, etc.) so we could pick a niche fit."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:91
+msgid ""
+"Neutral, because choosing one of the lesser-known templates would mean "
+"self-maintaining it."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:92
+msgid ""
+"Bad, because the variety itself is a cost: contributors would need to "
+"learn whichever one we pick with less community documentation behind it."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:96
+msgid "Good, because there is zero upfront cost and no template to learn."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:97
+msgid ""
+"Bad, because records drift in style, omit rationale, and become hard to "
+"find — failing the explicit-rationale and comprehensibility drivers."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:98
+msgid ""
+"Bad, because without a `docs/decisions/` convention and filename pattern,"
+" decisions stay scattered across issues and PRs, which is the situation "
+"we are trying to escape."
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:100
+msgid "More Information"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:102
+msgid "MADR homepage: [https://adr.github.io/madr/](https://adr.github.io/madr/)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:103
+msgid ""
+"MADR 4.0.0 release: "
+"[https://github.com/adr/madr/releases/tag/4.0.0](https://github.com/adr/madr/releases/tag/4.0.0)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:104
+msgid ""
+"MADR template (development): "
+"[https://github.com/adr/madr/blob/develop/template/adr-"
+"template.md](https://github.com/adr/madr/blob/develop/template/adr-"
+"template.md)"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:105
+msgid ""
+"Initialization snippet: `npm install madr && mkdir -p docs/decisions && "
+"cp node_modules/madr/template/* docs/decisions/`"
+msgstr ""
+
+#: ../../decisions/0000-use-markdown-architectural-decision-records.md:106
+msgid ""
+"This record, once accepted, will live at `docs/decisions/0000-use-"
+"markdown-architectural-decision-records.md` mirroring MADR's own "
+"ADR-0000."
+msgstr ""
+

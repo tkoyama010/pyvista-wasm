@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PointData.rst:2
+msgid "pyvista\\_wasm.PointData"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData:1
+msgid "Dict-like container for point data arrays."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData:3
+msgid ""
+"This class provides a dictionary interface for storing named scalar "
+"arrays associated with mesh points, mimicking PyVista's point_data API."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData:7
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData:18
+msgid "Render with scalar coloring:"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.__init__:1
+msgid "Initialize an empty PointData container."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PointData.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.PointData.__init__>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`items <pyvista_wasm.PointData.items>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.items:1
+msgid "Return (name, array) pairs."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`keys <pyvista_wasm.PointData.keys>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.keys:1
+msgid "Return the names of all arrays."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`values <pyvista_wasm.PointData.values>`\\ \\(\\)"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.mesh.PointData.values:1
+msgid "Return all arrays."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PointData.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData.items:3
+msgid "List of (name, array) tuples."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PointData.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData.keys:3
+msgid "List of array names."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PointData.values:3
+msgid "List of arrays."
+msgstr ""
+

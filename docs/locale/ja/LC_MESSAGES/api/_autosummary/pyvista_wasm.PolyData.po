@@ -1,0 +1,435 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:2
+msgid "pyvista\\_wasm.PolyData"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData:1
+msgid "Base polygonal mesh class."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData:3
+msgid "Vertex coordinates as an (n, 3) array."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData:5
+msgid "Cell connectivity information."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.__init__:1
+msgid "Initialize a PolyData mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.PolyData.__init__>`\\ \\(points\\[\\, "
+"faces\\, t\\_coords\\, scalars\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`clip <pyvista_wasm.PolyData.clip>`\\ \\(\\[normal\\, origin\\, "
+"invert\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.clip:1
+msgid "Clip the mesh with a plane."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`contour <pyvista_wasm.PolyData.contour>`\\ \\(\\[isosurfaces\\, "
+"scalars\\, scalar\\_name\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.contour:1
+msgid "Generate contour lines at constant scalar values."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`plot <pyvista_wasm.PolyData.plot>`\\ \\(\\[color\\, opacity\\, "
+"pbr\\, metallic\\, roughness\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.plot:1
+msgid "Plot this mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ":py:obj:`save <pyvista_wasm.PolyData.save>`\\ \\(filename\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.save:1
+msgid "Write this mesh to disk using meshio."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`shrink <pyvista_wasm.PolyData.shrink>`\\ "
+"\\(\\[shrink\\_factor\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.shrink:1
+msgid "Shrink the cells of a mesh towards their centroid."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`texture_map_to_plane "
+"<pyvista_wasm.PolyData.texture_map_to_plane>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.texture_map_to_plane:1
+msgid "Generate texture coordinates by projecting points onto the XY plane."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ":py:obj:`to_scene_data <pyvista_wasm.PolyData.to_scene_data>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.to_scene_data:1
+msgid "Return a JSON-serializable dict describing this mesh source."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+msgid ""
+":py:obj:`tube <pyvista_wasm.PolyData.tube>`\\ \\(\\*\\[\\, radius\\, "
+"n\\_sides\\, capping\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.tube:1
+msgid "Generate a tube around a line polydata."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:31
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`bounding_sphere <pyvista_wasm.PolyData.bounding_sphere>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.PolyData.bounding_sphere:1
+msgid "Compute the radius and center of a bounding sphere."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`n_faces <pyvista_wasm.PolyData.n_faces>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.PolyData.n_faces:1
+msgid "Return the number of faces."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`n_points <pyvista_wasm.PolyData.n_points>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.PolyData.n_points:1
+msgid "Return the number of points."
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`point_data <pyvista_wasm.PolyData.point_data>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.PolyData.point_data:1
+msgid "Access point data arrays."
+msgstr ""
+
+#: of pyvista_wasm.PolyData.bounding_sphere:3
+msgid ""
+"Uses Ritter's algorithm to approximate the minimum bounding sphere. "
+"Returns NaN values if there are no points."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.PolyData.bounding_sphere:6
+msgid "Sphere radius as a float and center as a tuple of floats ``(x, y, z)``."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.PolyData.bounding_sphere:10
+#: pyvista_wasm.PolyData.point_data:7 pyvista_wasm.mesh.PolyData.clip:23
+#: pyvista_wasm.mesh.PolyData.contour:27 pyvista_wasm.mesh.PolyData.plot:18
+#: pyvista_wasm.mesh.PolyData.save:27 pyvista_wasm.mesh.PolyData.shrink:19
+#: pyvista_wasm.mesh.PolyData.texture_map_to_plane:10
+#: pyvista_wasm.mesh.PolyData.tube:27
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:3
+msgid ""
+"This filter clips the mesh with a plane defined by a normal vector and an"
+" origin point using VTK.wasm's built-in ``vtkClipPolyData`` filter with a"
+" ``vtkPlane`` clip function. Points on one side of the plane are removed."
+" It mirrors the PyVista ``clip`` filter API."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:8
+msgid ""
+"The normal vector of the clipping plane. Can be a string specifying a "
+"cardinal direction ('x', 'y', 'z', '-x', '-y', '-z') or a 3-tuple of "
+"floats (nx, ny, nz). Default is 'x'."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:12
+msgid ""
+"The origin point of the clipping plane as (x, y, z). If not provided, "
+"defaults to the center of the mesh's bounding box."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:15
+msgid ""
+"If True, flip the clipping direction to keep the part that would normally"
+" be removed. Default is False."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:19
+msgid "A new mesh with clipped cells removed."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:33
+msgid "Clip along the negative Y axis:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:39
+msgid "Clip with a custom normal vector:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.clip:45
+msgid "Render the clipped mesh:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:3
+msgid ""
+"This filter extracts isolines from the mesh at specified scalar values "
+"using a marching triangles algorithm implemented in JavaScript. It "
+"mirrors the PyVista ``contour`` filter API. The contour is computed at "
+"render time as a manual implementation because ``vtkContourFilter`` is "
+"not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-mode "
+"binary."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:10
+msgid ""
+"Number of evenly spaced contours to generate, or a list of explicit "
+"scalar values at which to generate contours. Default is 10."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:13
+msgid ""
+"Scalar values per point to use for contouring. If not provided, uses the "
+"mesh's existing ``scalars`` attribute. Must have length equal to "
+"``n_points``."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:17
+msgid ""
+"Name for the scalar array in VTK.wasm. If not provided, uses the mesh's "
+"existing ``scalar_name`` attribute or defaults to \"scalars\"."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:21
+msgid "A new mesh containing the contour lines."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst
+msgid "Raises"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:24
+msgid ""
+"If no scalars are provided and the mesh has no scalar data, or if     "
+"isosurfaces parameter is invalid."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:38
+msgid "Generate contours at specific values:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:42
+msgid "Render the contours:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:3
+msgid ""
+"This is a convenience method that creates a "
+":class:`~pyvista_wasm.Plotter`, adds this mesh, and calls "
+":func:`~pyvista_wasm.Plotter.show`."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:6
+msgid "Color of the mesh. Can be a color name or RGB tuple."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:8
+msgid "Opacity of the mesh, between 0 (transparent) and 1 (opaque)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:10
+msgid "Enable physically based rendering (PBR). Default is False."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:12
+msgid "Metallic factor for PBR, between 0 and 1. Default is 0.0."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.plot:14
+msgid "Roughness factor for PBR, between 0 and 1. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.PolyData.point_data:3
+msgid "Dict-like container for point data arrays."
+msgstr ""
+
+#: of pyvista_wasm.PolyData.point_data:18
+msgid "Render with scalar coloring:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.save:3
+msgid ""
+"The file format is inferred from the extension of ``filename``. Any "
+"format supported by `meshio <https://github.com/nschloe/meshio>`_ can be "
+"used (e.g. ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.save:9
+msgid "Requires ``meshio`` to be installed::"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.save:13
+msgid ""
+"In Pyodide / JupyterLite, install it with micropip before calling this "
+"method::"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.save:19
+msgid "Output path. The extension determines the file format."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.save:24
+msgid "If ``meshio`` is not installed."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.shrink:3
+msgid ""
+"This filter shrinks the individual cells of a mesh towards their "
+"centroids, producing visual separation between adjacent cells. It mirrors"
+" the PyVista ``shrink`` filter API. The shrink is computed in JavaScript "
+"at render time as a manual implementation because ``vtkShrinkPolyData`` "
+"is not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-"
+"mode binary."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.shrink:10
+msgid ""
+"The factor to shrink each cell by, between 0 and 1. A value of 1.0 "
+"produces no change; lower values produce more shrinkage. Default is 0.8."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.shrink:15
+msgid "A new mesh with shrunk cells."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.shrink:29
+msgid "Render the shrunk mesh:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:3
+msgid ""
+"Maps the mesh's X and Y extents to UV coordinates in the [0, 1] range. "
+"This mirrors the PyVista :meth:`pyvista.DataSet.texture_map_to_plane` "
+"API."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:6
+msgid "A new mesh with texture coordinates (``t_coords``) set."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.to_scene_data:3
+msgid "Source configuration with ``\"type\"`` key and type-specific parameters."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:3
+msgid ""
+"This filter creates a tube representation around lines in the mesh by "
+"sweeping a polygonal cross-section along each line. It mirrors the "
+"PyVista ``tube`` filter API and is backed by VTK.wasm's "
+"``vtkTubeFilter``."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:10
+msgid ""
+"This filter is intended for use with line-based polydata (such as the "
+"output of :class:`Line`). It uses VTK.wasm's ``vtkTubeFilter``, which "
+"generates a tube by sweeping a circle with ``n_sides`` sides along the "
+"line segments."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:15
+msgid "The radius of the tube. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:17
+msgid ""
+"The number of sides for the tube cross-section. Higher values produce "
+"smoother tubes. Default is 20."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:20
+msgid "Whether to cap the ends of the tube. Default is True."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:23
+msgid "A new mesh representing the tube."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.tube:37
+msgid "Render the tube:"
+msgstr ""
+

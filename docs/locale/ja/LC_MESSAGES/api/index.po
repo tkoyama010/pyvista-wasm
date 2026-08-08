@@ -1,0 +1,368 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/index.md:1
+msgid "API Reference"
+msgstr ""
+
+#: ../../api/index.md:3
+msgid ""
+"This section provides detailed documentation for the pyvista-wasm public "
+"API."
+msgstr ""
+
+#: ../../api/index.md:5
+msgid "Plotting"
+msgstr ""
+
+#: ../../api/index.md:12:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Plotter <pyvista_wasm.Plotter>`"
+msgstr ""
+
+#: ../../api/index.md:12:<autosummary>:1
+msgid "Main plotting interface for pyvista-wasm."
+msgstr ""
+
+#: ../../api/index.md:15
+msgid "Camera"
+msgstr ""
+
+#: ../../api/index.md:22:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Camera <pyvista_wasm.Camera>`"
+msgstr ""
+
+#: ../../api/index.md:22:<autosummary>:1
+msgid "Represents a virtual camera in a 3D scene."
+msgstr ""
+
+#: ../../api/index.md:25
+msgid "Lighting"
+msgstr ""
+
+#: ../../api/index.md:32:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Light <pyvista_wasm.Light>`"
+msgstr ""
+
+#: ../../api/index.md:32:<autosummary>:1
+msgid "Light class."
+msgstr ""
+
+#: ../../api/index.md:35
+msgid "Data"
+msgstr ""
+
+#: ../../api/index.md:42:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PointData <pyvista_wasm.PointData>`"
+msgstr ""
+
+#: ../../api/index.md:42:<autosummary>:1
+msgid "Dict-like container for point data arrays."
+msgstr ""
+
+#: ../../api/index.md:45
+msgid "Mesh"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData <pyvista_wasm.PolyData>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Base polygonal mesh class."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Arrow <pyvista_wasm.Arrow>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create an arrow mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Sphere <pyvista_wasm.Sphere>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a sphere mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cube <pyvista_wasm.Cube>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cube mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cylinder <pyvista_wasm.Cylinder>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cylinder mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Cone <pyvista_wasm.Cone>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a cone mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Plane <pyvista_wasm.Plane>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a plane mesh."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Disc <pyvista_wasm.Disc>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a disc (annular ring) geometric primitive."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Circle <pyvista_wasm.Circle>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a circle defined by a set of points in the XY plane."
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Line <pyvista_wasm.Line>`"
+msgstr ""
+
+#: ../../api/index.md:61:<autosummary>:1
+msgid "Create a line segment between two points."
+msgstr ""
+
+#: ../../api/index.md:64
+msgid "Text"
+msgstr ""
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Text <pyvista_wasm.Text>`"
+msgstr ""
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid "A text annotation actor for 3D rendering."
+msgstr ""
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.TextProperty <pyvista_wasm.TextProperty>`"
+msgstr ""
+
+#: ../../api/index.md:72:<autosummary>:1
+msgid "Properties for text rendering."
+msgstr ""
+
+#: ../../api/index.md:75
+msgid "Texture"
+msgstr ""
+
+#: ../../api/index.md:82:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Texture <pyvista_wasm.Texture>`"
+msgstr ""
+
+#: ../../api/index.md:82:<autosummary>:1
+msgid "Surface texture wrapping an image URL."
+msgstr ""
+
+#: ../../api/index.md:85
+msgid "Filters"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.clip <pyvista_wasm.PolyData.clip>`"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Clip the mesh with a plane."
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate contour lines at constant scalar values."
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.shrink <pyvista_wasm.PolyData.shrink>`"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Shrink the cells of a mesh towards their centroid."
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.PolyData.texture_map_to_plane "
+"<pyvista_wasm.PolyData.texture_map_to_plane>`"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate texture coordinates by projecting points onto the XY plane."
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyData.tube <pyvista_wasm.PolyData.tube>`"
+msgstr ""
+
+#: ../../api/index.md:96:<autosummary>:1
+msgid "Generate a tube around a line polydata."
+msgstr ""
+
+#: ../../api/index.md:99
+msgid "Readers"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.OBJReader <pyvista_wasm.OBJReader>`"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for Wavefront OBJ files (``.obj``)."
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PLYReader <pyvista_wasm.PLYReader>`"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for PLY (Polygon File Format) files (``.ply``)."
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.PolyDataReader <pyvista_wasm.PolyDataReader>`"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for legacy VTK PolyData files (``.vtk``)."
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.STLReader <pyvista_wasm.STLReader>`"
+msgstr ""
+
+#: ../../api/index.md:110:<autosummary>:1
+msgid "Reader for STL (STereoLithography) files (``.stl``)."
+msgstr ""
+
+#: ../../api/index.md:113
+msgid "Examples"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Cubemap texture holding six face image URLs."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_bunny "
+"<pyvista_wasm.examples.download_bunny>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the Stanford Bunny dataset."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_lucy "
+"<pyvista_wasm.examples.download_lucy>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the Lucy Angel dataset."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_cad_model "
+"<pyvista_wasm.examples.download_cad_model>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the CAD model dataset."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_damaged_helmet "
+"<pyvista_wasm.examples.download_damaged_helmet>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the damaged helmet glTF example."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_masonry_texture "
+"<pyvista_wasm.examples.download_masonry_texture>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the masonry texture dataset."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map "
+"<pyvista_wasm.examples.download_sky_box_cube_map>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the skybox cube map dataset."
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_trumpet "
+"<pyvista_wasm.examples.download_trumpet>`"
+msgstr ""
+
+#: ../../api/index.md:127:<autosummary>:1
+msgid "Download the trumpet dataset."
+msgstr ""
+

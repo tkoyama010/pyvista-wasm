@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst:2
+msgid "pyvista\\_wasm.PolyData.contour"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:1
+msgid "Generate contour lines at constant scalar values."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:3
+msgid ""
+"This filter extracts isolines from the mesh at specified scalar values "
+"using a marching triangles algorithm implemented in JavaScript. It "
+"mirrors the PyVista ``contour`` filter API. The contour is computed at "
+"render time as a manual implementation because ``vtkContourFilter`` is "
+"not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-mode "
+"binary."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:10
+msgid ""
+"Number of evenly spaced contours to generate, or a list of explicit "
+"scalar values at which to generate contours. Default is 10."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:13
+msgid ""
+"Scalar values per point to use for contouring. If not provided, uses the "
+"mesh's existing ``scalars`` attribute. Must have length equal to "
+"``n_points``."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:17
+msgid ""
+"Name for the scalar array in VTK.wasm. If not provided, uses the mesh's "
+"existing ``scalar_name`` attribute or defaults to \"scalars\"."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:21
+msgid "A new mesh containing the contour lines."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
+msgid "Return type"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.contour.rst
+msgid "Raises"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:24
+msgid ""
+"If no scalars are provided and the mesh has no scalar data, or if     "
+"isosurfaces parameter is invalid."
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:27
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:38
+msgid "Generate contours at specific values:"
+msgstr ""
+
+#: of pyvista_wasm.mesh.PolyData.contour:42
+msgid "Render the contours:"
+msgstr ""
+

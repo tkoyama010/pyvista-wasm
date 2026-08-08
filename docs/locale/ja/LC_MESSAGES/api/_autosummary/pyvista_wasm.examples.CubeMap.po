@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:2
+msgid "pyvista\\_wasm.examples.CubeMap"
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:1
+msgid "Cubemap texture holding six face image URLs."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:3
+msgid "URL of the positive-X face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:5
+msgid "URL of the negative-X face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:7
+msgid "URL of the positive-Y face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:9
+msgid "URL of the negative-Y face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:11
+msgid "URL of the positive-Z face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:13
+msgid "URL of the negative-Z face image."
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap:17
+#: pyvista_wasm.examples.CubeMap.to_skybox:7
+msgid "Examples"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
+#: of pyvista_wasm.examples.CubeMap.__init__:1
+msgid "Initialize a cubemap with six face URLs."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.examples.CubeMap.__init__>`\\ \\(posx\\, "
+"negx\\, posy\\, negy\\, posz\\, negz\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
+msgid ":py:obj:`to_skybox <pyvista_wasm.examples.CubeMap.to_skybox>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:22:<autosummary>:1
+#: of pyvista_wasm.examples.CubeMap.to_skybox:1
+msgid "Return self for API compatibility with PyVista."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst:24
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`face_urls <pyvista_wasm.examples.CubeMap.face_urls>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.examples.CubeMap.face_urls:1
+msgid "Return face URLs in the order [+X, -X, +Y, -Y, +Z, -Z]."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.examples.CubeMap.to_skybox:3
+msgid "This cubemap instance."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.CubeMap.rst
+msgid "Return type"
+msgstr ""
+

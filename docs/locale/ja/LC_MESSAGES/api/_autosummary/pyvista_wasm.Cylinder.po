@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Cylinder.rst:2
+msgid "pyvista\\_wasm.Cylinder"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:1
+msgid "Create a cylinder mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:3
+msgid "Center of the cylinder (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:5
+msgid "Direction vector of the cylinder axis. Default is (1, 0, 0)."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:7
+msgid "Radius of the cylinder. Default is 0.5."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:9
+msgid "Height of the cylinder. Default is 1.0."
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:11
+msgid "Number of points around the cylinder. Default is 100."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:14
+msgid "A cylinder mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.Cylinder.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.mesh.Cylinder:18
+msgid "Examples"
+msgstr ""
+

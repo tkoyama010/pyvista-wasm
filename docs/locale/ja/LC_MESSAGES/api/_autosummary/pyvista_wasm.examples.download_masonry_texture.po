@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst:2
+msgid "pyvista\\_wasm.examples.download\\_masonry\\_texture"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_masonry_texture:1
+msgid "Download the masonry texture dataset."
+msgstr ""
+
+#: of pyvista_wasm.examples.download_masonry_texture:3
+msgid ""
+"Downloads a brick masonry image from the PyVista data repository and "
+"returns it as a :class:`~pyvista_wasm.texture.Texture` object."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_masonry_texture:6
+msgid "Texture wrapping the masonry image URL."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_masonry_texture.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_masonry_texture:10
+msgid "Examples"
+msgstr ""
+

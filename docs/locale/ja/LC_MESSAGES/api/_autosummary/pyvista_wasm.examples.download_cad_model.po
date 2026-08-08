@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst:2
+msgid "pyvista\\_wasm.examples.download\\_cad\\_model"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_cad_model:1
+msgid "Download the CAD model dataset."
+msgstr ""
+
+#: of pyvista_wasm.examples.download_cad_model:3
+msgid ""
+"Downloads ``42400-IDGH.stl`` from the PyVista vtk-data repository and "
+"returns it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the "
+"``pyvista.examples.download_cad_model`` API."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_cad_model:7
+msgid "The CAD model mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_cad_model.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_cad_model:11
+msgid "Examples"
+msgstr ""
+

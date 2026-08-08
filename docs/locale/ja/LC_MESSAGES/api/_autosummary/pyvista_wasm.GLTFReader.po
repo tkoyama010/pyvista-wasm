@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:2
+msgid "pyvista\\_wasm.GLTFReader"
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:1
+msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:3
+msgid ""
+"Reads a glTF file and produces a :class:`Mesh` that delegates parsing to "
+"VTK.wasm's ``vtkGLTFImporter`` at render time. Python extracts vertex "
+"coordinates from the JSON structure so that camera framing and bounding-"
+"sphere queries work before rendering."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:8
+#: pyvista_wasm.readers.GLTFReader.__init__:3
+msgid "Path to the ``.gltf`` or ``.glb`` file."
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:13
+msgid ":ref:`using-download-damaged-helmet`"
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:14
+msgid "Interactive browser tutorial for glTF rendering."
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader:17
+msgid "Examples"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.GLTFReader.__init__:1
+msgid "Initialize the reader with a file path."
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader.__init__:5
+msgid ""
+"Source URL of the glTF file. When provided, the returned mesh will render"
+" using the URL directly (avoiding large base64 embedding)."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.GLTFReader.__init__>`\\ \\(path\\[\\, "
+"gltf\\_url\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1
+msgid ":py:obj:`read <pyvista_wasm.GLTFReader.read>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:22:<autosummary>:1 of
+#: pyvista_wasm.readers.GLTFReader.read:1
+msgid "Read the glTF file and return a Mesh."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst:24
+msgid "Attributes"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`path <pyvista_wasm.GLTFReader.path>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1 of pyvista_wasm.GLTFReader.path:1
+msgid "Return the file path."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.GLTFReader.path:3
+msgid "The path to the glTF file."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader.read:3
+msgid ""
+"The full file content is base64-encoded and stored so that VTK.wasm can "
+"parse it at render time.  Vertex coordinates are extracted on the Python "
+"side for bounding-sphere and camera-framing calculations."
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader.read:7
+msgid "A mesh backed by the glTF file content."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.GLTFReader.rst
+msgid "Raises"
+msgstr ""
+
+#: of pyvista_wasm.readers.GLTFReader.read:10
+msgid "If the file format is invalid."
+msgstr ""
+
