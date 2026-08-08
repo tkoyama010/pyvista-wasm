@@ -312,6 +312,19 @@ def test_generate_render_js(monkeypatch) -> None:
     assert scene["actors"][0]["source"]["type"] == "sphere"
 
 
+def test_generate_render_js_has_script_onerror(monkeypatch) -> None:
+    """Test that _generate_render_js includes onerror handler for script loading."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+
+    renderer = rendering.VTKWasmRenderer()
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    js = renderer._generate_render_js()
+
+    assert "script.onerror" in js
+    assert "Failed to load VTK.wasm" in js
+
+
 def test_render_with_ipython_calls_display(monkeypatch) -> None:
     """Test that VTKWasmRenderer.render() calls display(Javascript(...)) in IPython mode."""
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
@@ -771,3 +784,41 @@ class TestMarimoRenderer:
         assert "&amp;" in result.content
         # Check that " is escaped to &quot;
         assert "&quot;" in result.content
+
+
+class TestCanvasSizing:
+    """Tests for the canvas sizing fix (issue #374).
+
+    Chromium-based browsers can report 0x0 container dimensions inside
+    a ``loading="lazy"`` iframe before layout settles.  The renderer must
+    wait for non-zero dimensions and keep the canvas in sync via
+    ``ResizeObserver`` so ``renderWindow.render()`` produces visible pixels.
+    """
+
+    def test_standalone_html_contains_wait_for_container_size(
+        self,
+        monkeypatch,
+    ) -> None:
+        """Generated HTML includes the ``waitForContainerSize`` guard."""
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+
+        renderer = rendering.VTKWasmRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+
+        html = renderer.generate_standalone_html()
+
+        assert "waitForContainerSize" in html
+
+    def test_standalone_html_contains_resize_observer(
+        self,
+        monkeypatch,
+    ) -> None:
+        """Generated HTML includes a ``ResizeObserver`` for dynamic resizing."""
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+
+        renderer = rendering.VTKWasmRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+
+        html = renderer.generate_standalone_html()
+
+        assert "ResizeObserver" in html

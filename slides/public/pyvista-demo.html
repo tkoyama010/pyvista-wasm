@@ -141,20 +141,37 @@
     (_d = container.style).minHeight || (_d.minHeight = "400px");
     return { container, sceneData };
   }
+  function waitForContainerSize(container) {
+    const DefaultWidth = 600;
+    const DefaultHeight = 400;
+    const TimeoutMs = 1e4;
+    const start = performance.now();
+    return new Promise((resolve) => {
+      function check() {
+        const rect = container.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          resolve({ width: rect.width, height: rect.height });
+        } else if (performance.now() - start > TimeoutMs) {
+          resolve({ width: DefaultWidth, height: DefaultHeight });
+        } else {
+          requestAnimationFrame(check);
+        }
+      }
+      check();
+    });
+  }
   async function buildScene(vtk, overlay, container, sceneData) {
     try {
       setOverlayMessage(overlay, "Generating 3D Model\u2026");
       const bg = sceneData.background;
       const renderer = vtk.vtkRenderer();
       renderer.setBackground(bg[0], bg[1], bg[2]);
-      const bbox = container.getBoundingClientRect();
+      const { width, height } = await waitForContainerSize(container);
       const canvasId = `${sceneData.containerId}-canvas`;
-      const DefaultCanvasWidth = 600;
-      const DefaultCanvasHeight = 400;
       const canvas = document.createElement("canvas");
       canvas.id = canvasId;
-      canvas.width = bbox.width || DefaultCanvasWidth;
-      canvas.height = bbox.height || DefaultCanvasHeight;
+      canvas.width = Math.round(width);
+      canvas.height = Math.round(height);
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.tabIndex = -1;
@@ -188,6 +205,18 @@
         renderWindow
       });
       await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const w = Math.round(entry.contentRect.width);
+          const h = Math.round(entry.contentRect.height);
+          if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+            canvas.width = w;
+            canvas.height = h;
+            renderWindow.render();
+          }
+        }
+      });
+      resizeObserver.observe(container);
       renderWindow.render();
       await interactor.start();
       dismissOverlay(overlay);
@@ -205,11 +234,24 @@
     "Initializing WASM Environment\u2026"
   );
   if (typeof vtkReady !== "undefined") {
-    void vtkReady.then(
-      (vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)
+    void vtkReady.then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)).catch((err) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm."
+      );
+    });
+  } else if (typeof vtkWASM === "undefined") {
+    showOverlayError(
+      pvOverlay,
+      "VTK.wasm is not loaded. Ensure the vtk-wasm script tag is present."
     );
-  } else if (typeof vtkWASM !== "undefined") {
-    void vtkWASM.createNamespace(void 0, pvSceneData.wasmConfig).then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData));
+  } else {
+    void vtkWASM.createNamespace(void 0, pvSceneData.wasmConfig).then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)).catch((err) => {
+      showOverlayError(
+        pvOverlay,
+        err instanceof Error ? err.message : "Failed to initialize VTK.wasm."
+      );
+    });
   }
   function setupLights(vtk, lightsConfig, ren) {
     var _a;

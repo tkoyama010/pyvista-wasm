@@ -571,3 +571,67 @@ def test_ply_reader_from_file_renders_in_browser(page: Page) -> None:
     canvas = page.query_selector("canvas")
     assert canvas is not None, "Canvas element not found for PLY reader mesh"
     assert len(js_errors) == 0, f"JavaScript errors during PLY rendering: {js_errors}"
+
+
+class TestIframeRendering:
+    """Tests for rendering inside an iframe (issue #374).
+
+    Chromium-based browsers can report 0x0 container dimensions inside a
+    ``loading="lazy"`` iframe before layout settles, producing a blank
+    canvas.  The renderer waits for non-zero dimensions via
+    ``waitForContainerSize`` before creating the WebGL context.
+    """
+
+    @pytest.mark.playwright
+    def test_renders_inside_iframe(self, page: Page) -> None:
+        """Sphere renders with non-zero canvas dimensions inside an iframe."""
+        plotter = Plotter()
+        plotter.add_mesh(Sphere(), color="red")
+
+        html = plotter.generate_standalone_html()
+
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            suffix=".html",
+            delete=False,
+        ) as f:
+            f.write(html)
+            inner_path = Path(f.name)
+
+        wrapper = f"""\
+<!DOCTYPE html>
+<html><body>
+<iframe src="{inner_path.as_uri()}"
+        style="width:400px;height:300px;border:1px solid #333;"
+        loading="lazy"></iframe>
+</body></html>"""
+
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            suffix=".html",
+            delete=False,
+        ) as f:
+            f.write(wrapper)
+            wrapper_path = Path(f.name)
+
+        try:
+            page.goto(wrapper_path.as_uri())
+            page.wait_for_load_state("networkidle")
+            page.wait_for_timeout(3000)
+
+            iframe = page.query_selector("iframe")
+            assert iframe is not None, "iframe element not found"
+
+            frame = iframe.content_frame()
+            assert frame is not None, "iframe content frame not accessible"
+
+            canvas = frame.query_selector("canvas")
+            assert canvas is not None, "Canvas not found inside iframe"
+
+            box = canvas.bounding_box()
+            assert box is not None, "Canvas bounding box not available"
+            assert box["width"] > 0, "Canvas width is zero inside iframe"
+            assert box["height"] > 0, "Canvas height is zero inside iframe"
+        finally:
+            inner_path.unlink(missing_ok=True)
+            wrapper_path.unlink(missing_ok=True)
