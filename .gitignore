@@ -59,8 +59,6 @@ docs/locale/**/*.mo
 .doctrees/
 *.pickle
 *.pkl
-docs/pot/**/*.js
-docs/pot/**/*.css
 
 # JupyterLite - ignore generated notebooks (source is .py)
 jupyterlite/content/*.ipynb
