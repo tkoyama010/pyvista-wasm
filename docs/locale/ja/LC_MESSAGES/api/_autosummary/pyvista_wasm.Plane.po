@@ -77,4 +77,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Plane:23
 msgid "Examples"
 msgstr ""
-

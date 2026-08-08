@@ -56,4 +56,3 @@ msgstr ""
 #: of pyvista_wasm.examples.download_lucy:14
 msgid "Examples"
 msgstr ""
-

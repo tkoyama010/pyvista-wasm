@@ -83,4 +83,3 @@ msgstr ""
 #: ../../explanation/index.md:24
 msgid "PLY, OBJ, STL, GLTF, and PolyData file format readers"
 msgstr ""
-

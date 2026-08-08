@@ -59,4 +59,3 @@ msgstr ""
 #: ../../api/_autosummary/pyvista_wasm.Texture.rst:16:<autosummary>:1
 msgid ":py:obj:`__init__ <pyvista_wasm.Texture.__init__>`\\ \\(url\\)"
 msgstr ""
-

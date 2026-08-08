@@ -58,4 +58,3 @@ msgstr ""
 #: of pyvista_wasm.examples.download_damaged_helmet:16
 msgid "Examples"
 msgstr ""
-

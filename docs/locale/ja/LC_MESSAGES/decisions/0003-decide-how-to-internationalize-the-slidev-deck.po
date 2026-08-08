@@ -723,4 +723,3 @@ msgid ""
 "Related: [ADR-0002](0002-decide-slide-preview-and-deployment-strategy.md)"
 " (established the GitHub Pages + pr-preview deployment pipeline)"
 msgstr ""
-

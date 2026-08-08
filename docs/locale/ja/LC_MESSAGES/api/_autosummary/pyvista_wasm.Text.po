@@ -164,4 +164,3 @@ msgstr ""
 #: of pyvista_wasm.Text.position:9
 msgid "Position as (x, y)."
 msgstr ""
-

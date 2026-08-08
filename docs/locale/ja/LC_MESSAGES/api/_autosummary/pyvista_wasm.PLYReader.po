@@ -112,4 +112,3 @@ msgstr ""
 #: of pyvista_wasm.readers.PLYReader.read:10
 msgid "If the file format is invalid or unsupported."
 msgstr ""
-

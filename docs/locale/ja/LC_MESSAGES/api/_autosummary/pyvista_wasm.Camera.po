@@ -326,4 +326,3 @@ msgstr ""
 #: of pyvista_wasm.camera.Camera.zoom:8
 msgid "If *factor* is not positive."
 msgstr ""
-

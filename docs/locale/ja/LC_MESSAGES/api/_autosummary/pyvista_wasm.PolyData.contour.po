@@ -94,4 +94,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.PolyData.contour:42
 msgid "Render the contours:"
 msgstr ""
-

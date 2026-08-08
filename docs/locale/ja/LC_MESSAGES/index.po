@@ -312,4 +312,3 @@ msgstr ""
 #: ../../index.md:51
 msgid "[Issue Tracker](https://github.com/tkoyama010/pyvista-wasm/issues)"
 msgstr ""
-

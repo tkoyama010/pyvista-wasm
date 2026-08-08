@@ -97,4 +97,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Arrow:44
 msgid "Plot the arrow:"
 msgstr ""
-

@@ -129,4 +129,3 @@ msgstr ""
 #: of pyvista_wasm.readers.GLTFReader.read:10
 msgid "If the file format is invalid."
 msgstr ""
-

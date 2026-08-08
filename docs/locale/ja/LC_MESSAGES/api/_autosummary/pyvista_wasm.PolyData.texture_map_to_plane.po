@@ -50,4 +50,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:10
 msgid "Examples"
 msgstr ""
-

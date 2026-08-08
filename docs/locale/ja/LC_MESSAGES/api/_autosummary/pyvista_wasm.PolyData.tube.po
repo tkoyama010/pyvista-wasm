@@ -81,4 +81,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.PolyData.tube:37
 msgid "Render the tube:"
 msgstr ""
-

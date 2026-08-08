@@ -671,4 +671,3 @@ msgid ""
 "Existing pre-commit configuration: [`.pre-commit-config.yaml"
 "`](../../.pre-commit-config.yaml)"
 msgstr ""
-

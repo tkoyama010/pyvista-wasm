@@ -73,4 +73,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Line:19
 msgid "Examples"
 msgstr ""
-

@@ -61,4 +61,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Circle:15
 msgid "Examples"
 msgstr ""
-

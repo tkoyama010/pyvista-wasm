@@ -677,4 +677,3 @@ msgid ""
 "Talk proposal: [PyVista on WebAssembly: "
 "サーバーレス3D可視化の実現](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 msgstr ""
-

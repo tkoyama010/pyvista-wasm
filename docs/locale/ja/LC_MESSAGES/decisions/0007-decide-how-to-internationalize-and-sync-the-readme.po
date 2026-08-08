@@ -797,4 +797,3 @@ msgid ""
 "Related: ADR-0006 [#442](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/442) (deciding how to keep slide locale files in sync)"
 msgstr ""
-

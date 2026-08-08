@@ -67,4 +67,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.PolyData.shrink:29
 msgid "Render the shrunk mesh:"
 msgstr ""
-

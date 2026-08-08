@@ -233,4 +233,3 @@ msgstr ""
 #: ../../api/_autosummary/pyvista_wasm.Light.rst
 msgid "Return type"
 msgstr ""
-

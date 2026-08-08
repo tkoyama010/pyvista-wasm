@@ -778,4 +778,3 @@ msgid ""
 "deck.md) (i18n decision for the Slidev deck — this ADR covers the "
 "separate Read the Docs docs surface)"
 msgstr ""
-

@@ -365,4 +365,3 @@ msgstr ""
 #: ../../api/index.md:127:<autosummary>:1
 msgid "Download the trumpet dataset."
 msgstr ""
-

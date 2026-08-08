@@ -49,4 +49,3 @@ msgstr ""
 #: of pyvista_wasm.examples.download_masonry_texture:10
 msgid "Examples"
 msgstr ""
-

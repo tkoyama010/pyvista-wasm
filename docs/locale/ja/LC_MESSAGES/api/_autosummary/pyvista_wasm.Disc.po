@@ -79,4 +79,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Disc:25
 msgid "Examples"
 msgstr ""
-

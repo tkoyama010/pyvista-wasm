@@ -821,4 +821,3 @@ msgid ""
 "Look down the X-axis from the left, with the negative X-axis pointing "
 "toward the camera."
 msgstr ""
-

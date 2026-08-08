@@ -76,4 +76,3 @@ msgid ""
 ":py:obj:`__init__ <pyvista_wasm.TextProperty.__init__>`\\ "
 "\\(\\[font\\_size\\, color\\, opacity\\, bold\\, ...\\]\\)"
 msgstr ""
-

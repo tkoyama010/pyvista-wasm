@@ -112,4 +112,3 @@ msgstr ""
 #: of pyvista_wasm.readers.OBJReader.read:10
 msgid "If the file contains no vertex data."
 msgstr ""
-

@@ -27,4 +27,3 @@ msgstr ""
 #: ../../howtos/index.md:3
 msgid "Focused guides for common tasks with pyvista-wasm."
 msgstr ""
-

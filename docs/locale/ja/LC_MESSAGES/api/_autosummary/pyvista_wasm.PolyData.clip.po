@@ -86,4 +86,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.PolyData.clip:45
 msgid "Render the clipped mesh:"
 msgstr ""
-

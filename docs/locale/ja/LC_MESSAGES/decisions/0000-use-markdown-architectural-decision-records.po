@@ -410,4 +410,3 @@ msgid ""
 "markdown-architectural-decision-records.md` mirroring MADR's own "
 "ADR-0000."
 msgstr ""
-

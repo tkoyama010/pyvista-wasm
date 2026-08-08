@@ -47,4 +47,3 @@ msgid ""
 "your-title-with-dashes.md` and fill in the sections. See [ADR-0000](0000"
 "-use-markdown-architectural-decision-records.md) for a worked example."
 msgstr ""
-

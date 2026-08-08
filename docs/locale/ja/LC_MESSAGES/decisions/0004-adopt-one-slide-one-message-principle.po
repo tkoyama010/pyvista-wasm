@@ -695,4 +695,3 @@ msgid ""
 "Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
 "deck.md) (established the i18n structure for the deck)"
 msgstr ""
-

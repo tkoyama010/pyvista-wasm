@@ -112,4 +112,3 @@ msgstr ""
 #: of pyvista_wasm.readers.STLReader.read:10
 msgid "If the file format is invalid or unsupported."
 msgstr ""
-

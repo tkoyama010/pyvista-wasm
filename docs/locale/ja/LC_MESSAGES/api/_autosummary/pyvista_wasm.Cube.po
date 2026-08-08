@@ -63,4 +63,3 @@ msgstr ""
 #: of pyvista_wasm.mesh.Cube:16
 msgid "Examples"
 msgstr ""
-
