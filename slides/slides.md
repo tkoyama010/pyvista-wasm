@@ -161,9 +161,9 @@ me.say_hi()
     photo @pyconjp
   </div>
   <img
-    src="https://skillicons.dev/icons?i=python,ts,js,cpp,c,html,css,java,fortran,rust,docker,vim,ruby,bash,wasm,vue,githubactions&perline=9"
-    alt="Skill icons: Python, TypeScript, JavaScript, C++, C, HTML, CSS, Java, Fortran, Rust, Docker, Vim, Ruby, Bash, WebAssembly, Vue, GitHub Actions"
-    class="w-64"
+    src="https://skillicons.dev/icons?i=python,ts,wasm,vue,githubactions"
+    alt="Skill icons: Python, TypeScript, WebAssembly, Vue, GitHub Actions"
+    class="w-48"
   />
   <a href="https://github.com/tkoyama010" class="text-xs opacity-70 hover:opacity-100">github.com/tkoyama010</a>
 </div>
