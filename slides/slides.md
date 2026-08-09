@@ -635,27 +635,14 @@ class: text-left
 ---
 
 <script setup>
-const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/index.html'
+const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/_autosummary/pyvista_wasm.Light.html#pyvista_wasm.Light'
 </script>
 
 # {{ $t("demo_api_docs.title") }}
 
 <div class="mt-2">
-  <a :href="apiDocsUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">pyvista-wasm.readthedocs.io/en/latest/api/index.html</a>
+  <a :href="apiDocsUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">pyvista-wasm.readthedocs.io/en/latest/api/_autosummary/pyvista_wasm.Light.html#pyvista_wasm.Light</a>
 </div>
-
-<div class="text-xs font-medium opacity-60 mt-2 mb-1">{{ $t("demo_api_docs.preamble_label") }}</div>
-
-```py
-import micropip
-
-await micropip.install("jinja2")
-await micropip.install("lazy-loader")
-import sys
-
-sys.path.insert(0, "/drive/src")
-import pyvista_wasm as pv
-```
 
 <div class="pt-2">
   <iframe
