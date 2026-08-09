@@ -89,7 +89,7 @@ PyCon JP 2026 のトークでは、pyvista-wasm をライブデモと WASM レ�
 
 ## Contributing
 
-貢献を歓迎します！[GitHub](https://github.com/tkoyama010/pyvista-wasm/issues) で issue またはプルリクエストを開いてください。
+貢献を歓迎します！[GitHub](https://github.com/tkoyama010/pyvista-wasm/issues) で issue またはプルリクエストを開いてください。貢献者の一覧は [`CONTRIBUTORS.md`](CONTRIBUTORS.md) を参照してください。
 
 ## License
 

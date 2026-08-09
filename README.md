@@ -89,7 +89,7 @@ If you use pyvista-wasm in academic or project work, please cite it. See [`CITAT
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or pull request on [GitHub](https://github.com/tkoyama010/pyvista-wasm/issues).
+Contributions are welcome! Please open an issue or pull request on [GitHub](https://github.com/tkoyama010/pyvista-wasm/issues). See [`CONTRIBUTORS.md`](CONTRIBUTORS.md) for the list of contributors.
 
 ## License
 
