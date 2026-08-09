@@ -237,7 +237,6 @@ demo_stlite:
 demo_api_docs:
   title: APIドキュメントの「Try it in JupyterLite!」ボタンでExampleを即座に実行
   subtitle: "APIドキュメント"
-  preamble_label: "try_examples_preamble (docs/conf.py)"
   demo_label: APIドキュメント
 
 cli:

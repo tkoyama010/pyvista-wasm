@@ -235,9 +235,8 @@ demo_stlite:
   demo_label: Live demo
 
 demo_api_docs:
-  title: The API docs "Try it in JupyterLite!" button runs docstring examples in the browser, no install needed
-  subtitle: "Demo: API docs Try it"
-  preamble_label: "try_examples_preamble (docs/conf.py)"
+  title: The "Try it in JupyterLite!" button in the API docs runs examples instantly
+  subtitle: "API docs"
   demo_label: API docs
 
 cli:
