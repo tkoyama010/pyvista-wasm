@@ -160,6 +160,11 @@ me.say_hi()
     @scipy-conference chairperson, Technical Steering Committee of @numfocus
     photo @pyconjp
   </div>
+  <img
+    src="https://skillicons.dev/icons?i=python,ts,wasm,vue,githubactions"
+    alt="Skill icons: Python, TypeScript, WebAssembly, Vue, GitHub Actions"
+    class="w-48"
+  />
   <a href="https://github.com/tkoyama010" class="text-xs opacity-70 hover:opacity-100">github.com/tkoyama010</a>
 </div>
 
