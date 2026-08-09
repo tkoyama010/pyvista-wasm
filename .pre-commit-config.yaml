@@ -119,6 +119,13 @@ repos:
         additional_dependencies: [pyyaml, typer, lazy-loader]
         files: ^slides/locales/(ja|en)\.yml$
         pass_filenames: false
+      - id: check-locale-parity-script
+        name: Speaker script JA/EN key-parity check
+        entry: env PYTHONPATH=src python -m pyvista_wasm check-locale-parity --ja slides/locales/script/ja.yml --en slides/locales/script/en.yml
+        language: python
+        additional_dependencies: [pyyaml, typer, lazy-loader]
+        files: ^slides/locales/script/(ja|en)\.yml$
+        pass_filenames: false
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.29.0

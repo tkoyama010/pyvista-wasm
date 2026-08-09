@@ -6,12 +6,16 @@ on:
     paths:
       - 'slides/locales/ja.yml'
       - 'slides/locales/en.yml'
+      - 'slides/locales/script/ja.yml'
+      - 'slides/locales/script/en.yml'
       - 'src/pyvista_wasm/_cli.py'
   pull_request:
     branches: [main]
     paths:
       - 'slides/locales/ja.yml'
       - 'slides/locales/en.yml'
+      - 'slides/locales/script/ja.yml'
+      - 'slides/locales/script/en.yml'
       - 'src/pyvista_wasm/_cli.py'
 
 permissions: {}
@@ -40,3 +44,6 @@ jobs:
 
       - name: Run locale parity check
         run: pyvista-wasm check-locale-parity
+
+      - name: Run speaker script parity check
+        run: pyvista-wasm check-locale-parity --ja slides/locales/script/ja.yml --en slides/locales/script/en.yml
