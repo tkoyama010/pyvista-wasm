@@ -1,0 +1,27 @@
+# English locale for the speaker script — structure mirrors slides/locales/script/ja.yml
+# (authoritative, see ADR-0006). Do not add or remove keys here without first
+# updating ja.yml. Keys are keyed by slide number (s1 = first slide, ...).
+script:
+  s1: this talk is about running PyVista entirely in the browser via WebAssembly — no server required.
+  s2: the talk runs in three parts — click any thumbnail to jump straight to that section.
+  s3: who the speaker is and why they are qualified to give this talk.
+  s4: PyVista is a Pythonic wrapper over VTK's 30-year C++ visualization toolkit — the de facto standard for 3D visualization in Python.
+  s5: sharing 3D results on the web still means running a server — Three.js lacks simulation rendering, SSR needs a server, costs are ongoing, and confidential data must travel to the server.
+  s6: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure.
+  s7: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is.
+  s8: a curated list of VTK projects — how widely VTK is actually used.
+  s9: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page.
+  s10: five live demos running entirely in the browser — CAD assembly, terrain, starfighter, volume rendering, and thousands of actors, all without a server.
+  s11: the Emscripten cross-compile is an hours-long job, but nobody downstream pays for it — consumers just npm install.
+  s12: the WASM binary streams from CDN at runtime via createNamespace(url); jsDelivr's multi-CDN edge cache is faster than GitLab in Asia.
+  s13: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules.
+  s14: every problem hit while integrating vtk.wasm has a known fix — await all VTK calls, inject COOP/COEP, and serve the tarball from a CORS-enabled CDN.
+  s15: "both columns build the same sphere — vtk.wasm needs the full four-object pipeline in JavaScript, pyvista-wasm needs four lines of Python. Additional detail: the right-hand render is a live vtk.wasm scene exported from this very Python snippet, so it can be grabbed and rotated during the talk."
+  s16: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL.
+  s17: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed.
+  s18: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app.
+  s19: every Examples section in the API docs gets a "Try it in JupyterLite!" button — clicking it runs the preamble under pyodide (micropip installs jinja2/lazy-loader, sys.path points at /drive/src, import pyvista_wasm as pv), so visitors render meshes in-browser without any local install.
+  s20: the pyvista-wasm CLI lets you plot meshes, capture previews, and export demos from the terminal — no Python code required.
+  s21: this talk is inspired by the Akari Inc. tech blog article on browser-complete 3D visualization with vtk.wasm — read it for the longer write-up.
+  s22: PyVista is built by this many people — contributions to pyvista-wasm are welcome too.
+  s23: take the discussion to GitHub Discussions — scan the code to open the thread.

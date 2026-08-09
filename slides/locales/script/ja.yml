@@ -1,0 +1,29 @@
+# Authoritative locale for the speaker script (see ADR-0006).
+# Add, remove, or rename keys here first, then mirror the structure in en.yml.
+# Keys are keyed by slide number (s1 = first slide, s2 = second, ...), matching
+# the slide order in slides/slides.md. The script is the spoken elaboration of
+# each slide's <!-- Single message: ... --> takeaway comment (see issue #443).
+script:
+  s1: 本トークはWebAssemblyを用いてPyVistaを完全にブラウザ上で動かす内容です——サーバーは不要です。
+  s2: トークは3つのパートで構成されます——サムネイルをクリックするとそのセクションへジャンプできます。
+  s3: スピーカーの経歴と、本トークを語る資格について。
+  s4: PyVistaはVTKの30年の歴史を持つC++可視化ツールキットをPythonicにラップします——Pythonにおける3D可視化のデファクトスタンダードです。
+  s5: Web上で3D結果を共有するには今でもサーバーが必要です——Three.jsはシミュレーション描画に不向きで、SSRにはサーバーが要り、コストは継続し、機密データがサーバーへ送られます。
+  s6: WebAssemblyが可視化パイプライン全体をブラウザで実行するため、すべての障壁が一度に消えます——データ送信なし、サーバーなし、インフラなし。
+  s7: SSRはループの中にサーバーを置き、毎フレームがネットワーク往復します。Wasmはループをブラウザ内で閉じ、描画はデータが既にある場所で行われます。
+  s8: VTKプロジェクトの厳選リスト——VTKが実際にどれほど広く使われているかを示します。
+  s9: vtk-wasmが完全にブラウザ上で動くライブデモ——サーバー不要、インストール不要、ページを開くだけ。
+  s10: 完全にブラウザ上で動く5つのライブデモ——CADアセンブリ、地形、スターファイター、ボリュームレンダリング、数千のアクター、すべてサーバーなしで。
+  s11: Emscriptenのクロスコンパイルは何時間もかかる作業ですが、下流の誰もそのコストを払いません——利用者はnpm installするだけです。
+  s12: WASMバイナリは実行時にcreateNamespace(url)でCDNからストリーミングされます——jsDelivrのマルチCDNエッジキャッシュはアジアではGitLabより高速です。
+  s13: Pyodide（Wasm上のCPython）とPyVista（PythonicなVTKラッパー）が出会う——ブラウザでPythonを書き、3Dメッシュを描画し、サーバー不要。TypeScriptがグルー層で、sys.modulesに"pyodide"がある場合はXMLHttpRequestへフォールバックします。
+  s14: vtk.wasm統合で遭遇した問題はすべて既知の解決策があります——すべてのVTK呼び出しをawaitし、COOP/COEPを注入し、tarballをCORS対応CDNから配信します。
+  s15: 両列とも同じ球を描きます——vtk.wasmはJavaScriptで4オブジェクトの完全なパイプラインが必要、pyvista-wasmはPython4行で済みます。補足として、右側の描画はこのPythonスニペットからエクスポートしたライブなvtk.wasmシーンで、トーク中に掴んで回転できます。
+  s16: JupyterLiteはブラウザだけで動くJupyter環境——Pythonを書き、3Dメッシュを描画し、URLで共有できます。
+  s17: marimoはリアクティブなPythonノートブック——スライダーを変えるとメッシュが即座に再描画され、再実行ボタンは不要です。
+  s18: stliteはStreamlitを完全にブラウザ上で動かします——色と不透明度のウィジェットを持つStanford Bunnyデモが、サーバーレスなインタラクティブアプリを示します。
+  s19: APIドキュメントのすべてのExamples欄に「Try it in JupyterLite!」ボタンがあります——クリックするとpyodide下でプリアンブルが実行され（micropipがjinja2/lazy-loaderをインストールし、sys.pathは/drive/srcを指し、import pyvista_wasm as pv）、訪問者はローカルインストールなしでブラウザ内にメッシュを描画できます。
+  s20: pyvista-wasm CLIを使うと、ターミナルからメッシュをプロットし、プレビューをキャプチャし、デモをエクスポートできます——Pythonコードは不要です。
+  s21: 本トークはAkari Inc.の技術ブログ記事「vtk.wasmで実現するブラウザ完結3D可視化」にインスピレーションを受けています——詳しくはそちらをお読みください。
+  s22: PyVistaはこれだけ多くの人によって作られています——pyvista-wasmへの貢献も歓迎します。
+  s23: GitHub Discussionsで議論を続けましょう——QRコードをスキャンしてスレッドを開いてください。
