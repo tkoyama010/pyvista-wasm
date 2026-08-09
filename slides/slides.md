@@ -648,10 +648,12 @@ const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/index.html
 
 ```py
 import micropip
-await micropip.install('jinja2')
-await micropip.install('lazy-loader')
+
+await micropip.install("jinja2")
+await micropip.install("lazy-loader")
 import sys
-sys.path.insert(0, '/drive/src')
+
+sys.path.insert(0, "/drive/src")
 import pyvista_wasm as pv
 ```
 
