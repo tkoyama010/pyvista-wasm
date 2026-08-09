@@ -648,7 +648,7 @@ const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/_autosumma
   <iframe
     :src="apiDocsUrl"
     class="w-full rounded-lg shadow-xl"
-    style="height: 250px; border: 1px solid rgba(125,125,125,0.3)"
+    style="height: 400px; border: 1px solid rgba(125,125,125,0.3)"
     loading="lazy"
   ></iframe>
 </div>
