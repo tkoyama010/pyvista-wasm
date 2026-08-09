@@ -634,6 +634,31 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 class: text-left
 ---
 
+<script setup>
+const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/_autosummary/pyvista_wasm.Light.html#pyvista_wasm.Light'
+</script>
+
+# {{ $t("demo_api_docs.title") }}
+
+<div class="mt-2">
+  <a :href="apiDocsUrl" class="text-sm break-all opacity-80 hover:opacity-100" target="_blank">pyvista-wasm.readthedocs.io/en/latest/api/_autosummary/pyvista_wasm.Light.html#pyvista_wasm.Light</a>
+</div>
+
+<div class="pt-2">
+  <iframe
+    :src="apiDocsUrl"
+    class="w-full rounded-lg shadow-xl"
+    style="height: 560px; border: 1px solid rgba(125,125,125,0.3)"
+    loading="lazy"
+  ></iframe>
+</div>
+
+<!-- Single message: every Examples section in the API docs gets a "Try it in JupyterLite!" button — clicking it runs the preamble under pyodide (micropip installs jinja2/lazy-loader, sys.path points at /drive/src, import pyvista_wasm as pv), so visitors render meshes in-browser without any local install. -->
+
+---
+class: text-left
+---
+
 # {{ $t("cli.title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("cli.subtitle") }}</div>

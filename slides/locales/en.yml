@@ -234,6 +234,11 @@ demo_stlite:
   conc_bold: when you need an interactive app with widgets, stlite is the natural choice
   demo_label: Live demo
 
+demo_api_docs:
+  title: The "Try it in JupyterLite!" button in the API docs runs examples instantly
+  subtitle: "API docs"
+  demo_label: API docs
+
 cli:
   title: The pyvista-wasm CLI enables 3D visualization without writing Python code, and makes integration with coding agents easier
   subtitle: How to use the pyvista-wasm CLI

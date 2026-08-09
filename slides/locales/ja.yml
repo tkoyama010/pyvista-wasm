@@ -234,6 +234,11 @@ demo_stlite:
   conc_bold: ウィジェット付きインタラクティブアプリが必要な時、stliteが自然な選択
   demo_label: ライブデモ
 
+demo_api_docs:
+  title: APIドキュメントの「Try it in JupyterLite!」ボタンでExampleを即座に実行
+  subtitle: "APIドキュメント"
+  demo_label: APIドキュメント
+
 cli:
   title: pyvista-wasm CLIでPythonコード不要で3D可視化が可能、コーディングエージェントとの連携も容易になる
   subtitle: pyvista-wasm cliの使用方法
