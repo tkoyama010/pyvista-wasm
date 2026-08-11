@@ -718,4 +718,3 @@ msgid ""
 "Related: [ADR-0005](0005-verify-agents-md-quality-in-ci.md) (scheduled-CI"
 " verification pattern reused for drift detection)"
 msgstr ""
-
