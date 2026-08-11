@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:9
 msgid "Decide how to sync GitHub repository settings with Terraform"
-msgstr ""
+msgstr "GitHubリポジトリ設定をTerraformと同期する方法を決定する"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:11
 msgid "Context and Problem Statement"
-msgstr ""
+msgstr "コンテキストと問題記述"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:13
 msgid ""
@@ -45,10 +45,21 @@ msgid ""
 "recoverable after accidental UI changes. Which sync workflow should we "
 "adopt?"
 msgstr ""
+"親ストーリー [#513](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/513) は `tkoyama010/pyvista-wasm` のGitHubリポジトリ設定"
+"（ブランチ、保護ルール、ラベル、コラボレーター、Actionsシークレットなど）を "
+"`integrations/github` プロバイダを使って宣言するTerraformプロジェクトを提供する。"
+"HCLでリソースを宣言するのは作業の半分にすぎず、もう半分はライブのGitHub設定をその宣言と"
+"同期し続ける*ワークフロー*である。今日の設定はGitHub UIを通じて設定されており"
+"、バージョン管理されずレビューできずドリフトしやすい。`terraform plan` と "
+"`terraform apply` をどこで実行するか、Terraform状態をどこに置くか、GitHubトークンを"
+"どのように供給するか、ドリフトをどう調整するか、誰がapplyを許可されるかを決定する必要がある — "
+"そうすることでリポジトリ設定がバージョン管理され、レビュー可能で再現可能になり"
+"偶発的なUI変更から復旧できる。どの同期ワークフローを採用すべきか？"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:15
 msgid "Decision Drivers"
-msgstr ""
+msgstr "決定ドライバ"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:17
 msgid ""
@@ -56,6 +67,8 @@ msgid ""
 "settings must go through a PR so it is reviewable and bisectable, the "
 "same way code changes do. This is a knock-out criterion."
 msgstr ""
+"**設定変更のレビュー可能性**: リポジトリ設定へのすべての変更はPRを通じて行われ"
+"、コード変更と同じようにレビュー可能でbisect可能である必要がある。これはノックアウト基準である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:18
 msgid ""
@@ -64,6 +77,9 @@ msgid ""
 "short-lived, scoped alternative exists. Least-privilege authentication is"
 " a knock-out criterion."
 msgstr ""
+"**CIに長寿命シークレットを置かない**: 短命でスコープ付きの代替が存在する場合"
+"CIワークフローはリポジトリシークレットとして保存された長寿命の個人アクセストークン（PAT）に"
+"依存してはならない。最小権限認証はノックアウト基準である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:19
 msgid ""
@@ -71,6 +87,9 @@ msgid ""
 "out of the repository, delete branches, or wipe protection rules. The "
 "workflow must make it hard to apply blindly and easy to recover."
 msgstr ""
+"**ブラスト半径の制御**: 悪い `terraform apply` がメンテナをリポジトリから締め出したり"
+"ブランチを削除したり保護ルールを消去したりできる。ワークフローは盲目のapplyを困難にし"
+"復旧を容易にする必要がある。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:20
 msgid ""
@@ -78,6 +97,8 @@ msgid ""
 "detectable so they can be reconciled (reverted or imported) before they "
 "silently diverge from the declared state."
 msgstr ""
+"**ドリフト検出**: GitHub UIを通じて行われた手動変更は、宣言された状態から密かに"
+"乖離する前に調整（元に戻すまたはインポート）できるように検出可能でなければならない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:21
 msgid ""
@@ -86,12 +107,18 @@ msgid ""
 " Terraform Cloud paid tier, an external state backend with hosting costs)"
 " beyond GitHub Actions and the repository itself."
 msgstr ""
+"**ゼロコスト / GitHubネイティブなツール**: プロジェクトはオープンソースで"
+"コミュニティ駆動である — 同期ワークフローはGitHub Actionsとリポジトリ自体以外に"
+"有料サービス（例: Terraform Cloud有料ティア、ホスティングコストのかかる外部状態バックエンド）を"
+"必要としてはならない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:22
 msgid ""
 "**Maintainer ergonomics**: A single maintainer must be able to run the "
 "workflow end-to-end without a platform team or external coordinator."
 msgstr ""
+"**メンテナのエルゴノミクス**: 単一のメンテナがプラットフォームチームや外部の"
+"調整役なしにワークフローをエンドツーエンドで実行できる必要がある。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:23
 msgid ""
@@ -99,42 +126,49 @@ msgid ""
 "runner termination and be restorable after state corruption or accidental"
 " deletion."
 msgstr ""
+"**状態の耐久性と復旧性**: Terraform状態はCIランナーの終了を生き延び"
+"状態の破損や偶発的削除の後に復元可能でなければならない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:25
 msgid "Considered Options"
-msgstr ""
+msgstr "検討した選択肢"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:27
 msgid ""
 "**CI `plan` on PR + local `apply` by maintainer, state in repo (committed"
 " `terraform.tfstate`)**"
 msgstr ""
+"**PR上のCI `plan` + メンテナによるローカル `apply`、リポジトリに状態（コミットされた"
+" `terraform.tfstate`）**"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:28
 msgid ""
 "**CI `plan` on PR + CI `apply` on merge with OIDC, state in GitHub "
 "Actions artifact**"
 msgstr ""
+"**PR上のCI `plan` + OIDC付きマージ時CI `apply`、GitHub Actionsアーティファクトに状態**"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:29
 msgid ""
 "**CI `plan` on PR + CI `apply` on merge with stored PAT, state in a "
 "remote backend (S3/GCS/Terraform Cloud)**"
 msgstr ""
+"**PR上のCI `plan` + 保存PAT付きマージ時CI `apply`、リモートバックエンド"
+"（S3/GCS/Terraform Cloud）に状態**"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:30
 msgid "**Scheduled `plan`-only drift check in CI + local `apply`, state in repo**"
-msgstr ""
+msgstr "**CIのスケジュールされた `plan` のみのドリフトチェック + ローカル `apply`、リポジトリに状態**"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:31
 msgid ""
 "**Terraform Cloud / HCP Terraform managed workspace (plan + apply "
 "hosted)**"
-msgstr ""
+msgstr "**Terraform Cloud / HCP Terraform管理ワークスペース（plan + applyホスト）**"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:33
 msgid "Decision Outcome"
-msgstr ""
+msgstr "決定結果"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:35
 msgid ""
@@ -151,17 +185,26 @@ msgid ""
 "provider reads the token from the `GITHUB_TOKEN` environment variable at "
 "runtime, never writes it into state), so committing it is safe."
 msgstr ""
+"選択した選択肢: 「PR上のCI `plan` + メンテナによるローカル `apply`、リポジトリに状態"
+"（コミットされた `terraform.tfstate`）」。なぜなら、最小の移動部品ですべてのノックアウト"
+"ドライバを満たすからである — `terraform plan` はTerraformプロジェクトに触れるすべてのPRで"
+"実行され変更がレビュー可能である。`terraform apply` はマージ後にメンテナが自身のGitHubアカウントから"
+"発行した短命PATを使ってローカルで実行する（長寿命CIシークレットなし、保守すべきOIDCトラスト設定もなし）。"
+"状態は `terraform.tfstate` としてリポジトリにコミットされ、バージョン管理されbisect可能で"
+"外部バックエンドや有料サービスなしにGit履歴から復旧できる。状態ファイルにシークレットは含まれない"
+"（`integrations/github` プロバイダは実行時に `GITHUB_TOKEN` 環境変数からトークンを読み取り"
+"状態に書き込まない）、したがってコミットは安全である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:37
 msgid "Consequences"
-msgstr ""
+msgstr "結果"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:39
 msgid ""
 "Good, because every settings change is reviewable in a PR — `terraform "
 "plan` output is posted to the PR by CI, so reviewers see the exact diff "
 "before merge."
-msgstr ""
+msgstr "良い、なぜならすべての設定変更がPRでレビュー可能である — `terraform plan` 出力がCIによってPRに投稿され、レビューアーはマージ前に正確なdiffを見られる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:40
 msgid ""
@@ -169,14 +212,14 @@ msgid ""
 "`terraform apply` locally with a PAT issued on the fly from their own "
 "account, scoped to the `repo` and `admin:org` (if applicable) scopes, and"
 " revoked or allowed to expire immediately after."
-msgstr ""
+msgstr "良い、なぜなら長寿命CIシークレットが不要である — メンテナが自身のアカウントからその場で発行したPATを使ってローカルで `terraform apply` を実行し、`repo` と `admin:org`（該当する場合）スコープに限定し、直後に失効または期限切れにさせる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:41
 msgid ""
 "Good, because state committed to the repo is bisectable with the rest of "
 "the configuration — a bad apply can be rolled back by checking out the "
 "previous `terraform.tfstate` and re-running `terraform apply`."
-msgstr ""
+msgstr "良い、なぜならリポジトリにコミットされた状態が残りの設定と共にbisect可能である — 悪いapplyは前の `terraform.tfstate` をチェックアウトして `terraform apply` を再実行することでロールバックできる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:42
 msgid ""
@@ -185,27 +228,27 @@ msgid ""
 "scheduled-CI pattern) posts a failing plan when the live GitHub settings "
 "diverge from the committed state, prompting a maintainer to either import"
 " the manual change or revert it."
-msgstr ""
+msgstr "良い、なぜならドリフト検出が無料である — スケジュールされた `terraform plan` ジョブ（同じスケジュールCIパターンは [ADR-0005](0005-verify-agents-md-quality-in-ci.md) を参照）がライブのGitHub設定がコミットされた状態から乖離した時に失敗するplanを投稿し、メンテナに手動変更のインポートまたは元に戻すことを促す。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:43
 msgid ""
 "Good, because it is zero-cost and GitHub-native: GitHub Actions runs "
 "`plan` for free on public repositories, and state in Git needs no "
 "external backend."
-msgstr ""
+msgstr "良い、なぜならゼロコストでGitHubネイティブである — GitHub Actionsは公開リポジトリで `plan` を無料で実行し、Git内の状態は外部バックエンドを必要としない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:44
 msgid ""
 "Good, because a single maintainer can run the whole workflow without a "
 "platform team."
-msgstr ""
+msgstr "良い、なぜなら単一のメンテナがプラットフォームチームなしでワークフロー全体を実行できる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:45
 msgid ""
 "Bad, because `terraform apply` is not automated — a maintainer must run "
 "it locally after merge, adding a manual step and a small risk that a "
 "merged PR is forgotten and never applied."
-msgstr ""
+msgstr "悪い、なぜなら `terraform apply` が自動化されていない — メンテナがマージ後にローカルで実行する必要があり、手動ステップとマージされたPRが忘れられてapplyされない小さなリスクが追加される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:46
 msgid ""
@@ -213,7 +256,7 @@ msgid ""
 "state grows large or contains frequently-changing resources; for this "
 "repo's small settings surface (branches, labels, protection rules) the "
 "state file stays small and the trade-off is acceptable."
-msgstr ""
+msgstr "悪い、なぜなら `terraform.tfstate` をGitにコミットするのは状態が大きくなるか頻繁に変わるリソースを含む場合にスケールが悪い — このリポジトリの小さな設定面（ブランチ、ラベル、保護ルール）では状態ファイルは小さく保たれトレードオフは許容可能である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:47
 msgid ""
@@ -221,129 +264,129 @@ msgid ""
 "`terraform apply` at once); for a single-maintainer repo this is "
 "negligible, but it would need a state lock (e.g., a remote backend with "
 "DynamoDB locking) if the maintainer team grows."
-msgstr ""
+msgstr "悪い、なぜなら並行applyがコンフリクトする可能性がある（2人のメンテナが同時に `terraform apply` を実行）— 単一メンテナのリポジトリでは無視できるが、メンテナチームが成長した場合は状態ロック（例: DynamoDBロック付きリモートバックエンド）が必要になる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:48
 msgid ""
 "Neutral, because `terraform.tfstate` must be `.gitignore`-excluded for "
 "any *unmanaged* Terraform scratch state but explicitly *tracked* for this"
 " project — a small config discipline."
-msgstr ""
+msgstr "中立、なぜなら `terraform.tfstate` は*管理されていない*Terraformスクラッチ状態については `.gitignore` で除外する必要があるが、このプロジェクトについては明示的に*追跡*する必要がある — 小さな設定の規律である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:50
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:52
 msgid "Compliance with this decision will be confirmed by:"
-msgstr ""
+msgstr "この決定への準拠は以下によって確認されます:"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:54
 msgid ""
 "A `terraform/` project exists in the repository with `main.tf` declaring "
 "the GitHub repository settings via the `integrations/github` provider."
-msgstr ""
+msgstr "`terraform/` プロジェクトがリポジトリに存在し、`main.tf` が `integrations/github` プロバイダを通じてGitHubリポジトリ設定を宣言する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:55
 msgid ""
 "A GitHub Actions workflow runs `terraform fmt -check`, `terraform "
 "validate`, and `terraform plan` on every PR touching `terraform/**`, and "
 "posts the plan output as a PR comment."
-msgstr ""
+msgstr "GitHub Actionsワークフローが `terraform/**` に触れるすべてのPRで `terraform fmt -check`、`terraform validate`、`terraform plan` を実行し、plan出力をPRコメントとして投稿する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:56
 msgid ""
 "`terraform.tfstate` is committed to the repository (not `.gitignore`-d "
 "for the `terraform/` project), and Git history shows it evolving "
 "alongside `main.tf`."
-msgstr ""
+msgstr "`terraform.tfstate` がリポジトリにコミットされ（`terraform/` プロジェクトについて `.gitignore` されていない）、Git履歴が `main.tf` と共に進化する様子を示す。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:57
 msgid ""
 "No PAT or token is stored as a repository secret used by the `apply` step"
 " — `apply` is documented as a local-only maintainer step."
-msgstr ""
+msgstr "PATやトークンは `apply` ステップで使われるリポジトリシークレットとして保存されない — `apply` はローカル専用のメンテナステップとして文書化される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:58
 msgid ""
 "A scheduled (e.g., weekly) GitHub Actions workflow runs `terraform plan "
 "-detailed-exitcode` and opens or updates an issue when exit code "
 "indicates drift (non-zero on diff)."
-msgstr ""
+msgstr "スケジュールされた（例: 週次）GitHub Actionsワークフローが `terraform plan -detailed-exitcode` を実行し、終了コードがドリフトを示す場合（diffで非ゼロ）にissueを開くまたは更新する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:59
 msgid ""
 "The Terraform configuration and workflow are documented in a "
 "`terraform/README.md` explaining the local `apply` workflow, the PAT "
 "scope required, and how to reconcile drift."
-msgstr ""
+msgstr "Terraform設定とワークフローが `terraform/README.md` に文書化され、ローカル `apply` ワークフロー、必要なPATスコープ、ドリフトの調整方法を説明する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:60
 msgid ""
 "The `integrations/github` provider is pinned to a specific version in "
 "`main.tf`, and `terraform.lock.hcl` is committed."
-msgstr ""
+msgstr "`integrations/github` プロバイダが `main.tf` で特定バージョンに固定され、`terraform.lock.hcl` がコミットされる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:62
 msgid "Pros and Cons of the Options"
-msgstr ""
+msgstr "選択肢の長所と短所"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:64
 msgid ""
 "CI `plan` on PR + local `apply` by maintainer, state in repo (committed "
 "`terraform.tfstate`)"
-msgstr ""
+msgstr "PR上のCI `plan` + メンテナによるローカル `apply`、リポジトリに状態（コミットされた `terraform.tfstate`）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:66
 msgid ""
 "Good, because every settings change is reviewable in a PR via CI `plan` "
 "output."
-msgstr ""
+msgstr "良い、なぜならCI `plan` 出力を通じてすべての設定変更がPRでレビュー可能である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:67
 msgid ""
 "Good, because no long-lived CI secret is needed — `apply` runs locally "
 "with a short-lived maintainer PAT, satisfying the no-long-lived-secrets "
 "knock-out criterion."
-msgstr ""
+msgstr "良い、なぜなら長寿命CIシークレットが不要である — `apply` は短命のメンテナPATでローカル実行され、長寿命シークレットなしのノックアウト基準を満たす。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:68
 msgid ""
 "Good, because state in Git is bisectable and recoverable from history "
 "with no external backend, satisfying state durability at zero cost."
-msgstr ""
+msgstr "良い、なぜならGit内の状態が外部バックエンドなしでbisect可能で履歴から復旧でき、ゼロコストで状態耐久性を満たす。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:69
 msgid "Good, because drift detection is a free scheduled `plan` job."
-msgstr ""
+msgstr "良い、なぜならドリフト検出が無料のスケジュールされた `plan` ジョブである。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:70
 msgid "Good, because a single maintainer can run it end-to-end."
-msgstr ""
+msgstr "良い、なぜなら単一のメンテナがエンドツーエンドで実行できる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:71
 msgid ""
 "Neutral, because `terraform.tfstate` must be explicitly tracked for this "
 "project while remaining ignored elsewhere — a small config discipline."
-msgstr ""
+msgstr "中立、なぜなら `terraform.tfstate` はこのプロジェクトについて明示的に追跡する必要があるが他では無視されたままにする — 小さな設定の規律である。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:72
 msgid ""
 "Bad, because `apply` is manual; a merged PR can be forgotten and never "
 "applied."
-msgstr ""
+msgstr "悪い、なぜなら `apply` は手動である — マージされたPRが忘れられてapplyされないことがある。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:73
 msgid ""
 "Bad, because it does not scale to large state or many concurrent "
 "maintainers (no state locking)."
-msgstr ""
+msgstr "悪い、なぜなら大規模な状態や多くの並行メンテナにスケールしない（状態ロックなし）。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:75
 msgid ""
 "CI `plan` on PR + CI `apply` on merge with OIDC, state in GitHub Actions "
 "artifact"
-msgstr ""
+msgstr "PR上のCI `plan` + OIDC付きマージ時CI `apply`、GitHub Actionsアーティファクトに状態"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:77
 msgid ""
@@ -352,32 +395,32 @@ msgid ""
 "/github-actions) and [GitHub Actions: "
 "OIDC](https://docs.github.com/en/actions/deployment/security-hardening-"
 "your-deployments/about-security-hardening-with-openid-connect)."
-msgstr ""
+msgstr "[Terraform Cloud / HCP TerraformのGitHub Actions OIDC](https://developer.hashicorp.com/terraform/tutorials/github/github-actions) と [GitHub Actions: OIDC](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect) を参照。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:79
 msgid ""
 "Good, because `apply` is automated on merge — no manual maintainer step, "
 "no forgotten PRs."
-msgstr ""
+msgstr "良い、なぜなら `apply` がマージ時に自動化される — 手動のメンテナステップも忘れられたPRもない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:80
 msgid ""
 "Good, because OIDC issues short-lived tokens with no long-lived secret, "
 "satisfying least-privilege."
-msgstr ""
+msgstr "良い、なぜならOIDCが長寿命シークレットなしの短命トークンを発行し、最小権限を満たす。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:81
 msgid ""
 "Good, because state is stored as a GitHub Actions artifact, keeping it "
 "out of Git."
-msgstr ""
+msgstr "良い、なぜなら状態がGitHub Actionsアーティファクトとして保存されGit外に置かれる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:82
 msgid ""
 "Neutral, because GitHub Actions artifacts expire (default 90 days); state"
 " must be re-uploaded each run or the artifact retention must be raised, "
 "adding config."
-msgstr ""
+msgstr "中立、なぜならGitHub Actionsアーティファクトは期限切れになる（デフォルト90日）— 状態は毎回再アップロードするかアーティファクト保持期間を延ばす必要があり設定が追加される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:83
 msgid ""
@@ -385,124 +428,124 @@ msgid ""
 "requires a GitHub App or `hashicorp/tf-action-setup` with OIDC trust "
 "configured at the GitHub org/repo level — non-trivial setup for a single-"
 "maintainer open-source repo."
-msgstr ""
+msgstr "悪い、なぜなら `integrations/github` プロバイダのGitHub Actions OIDCはGitHub Appまたは `hashicorp/tf-action-setup` がGitHub org/repoレベルでOIDCトラスト設定を必要とする — 単一メンテナのオープンソースリポジトリには自明でないセットアップである。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:84
 msgid ""
 "Bad, because state in an artifact is not bisectable with the "
 "configuration and is lost if the workflow stops running before re-upload,"
 " failing the state-durability driver for a low-activity repo."
-msgstr ""
+msgstr "悪い、なぜならアーティファクト内の状態は設定と共にbisectできず再アップロード前にワークフローが停止すると失われ、低アクティビティリポジトリの状態耐久性ドライバを満たさない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:85
 msgid ""
 "Bad, because automated `apply` on merge increases blast radius: a merged "
 "PR applies immediately with no human in the loop at apply time."
-msgstr ""
+msgstr "悪い、なぜならマージ時の自動 `apply` はブラスト半径を増大させる — マージされたPRがapply時に人間の関与なしで即座に適用される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:87
 msgid ""
 "CI `plan` on PR + CI `apply` on merge with stored PAT, state in a remote "
 "backend (S3/GCS/Terraform Cloud)"
-msgstr ""
+msgstr "PR上のCI `plan` + 保存PAT付きマージ時CI `apply`、リモートバックエンド（S3/GCS/Terraform Cloud）に状態"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:89
 msgid ""
 "See [Terraform remote "
 "backends](https://developer.hashicorp.com/terraform/language/settings/backends)."
-msgstr ""
+msgstr "[Terraformリモートバックエンド](https://developer.hashicorp.com/terraform/language/settings/backends) を参照。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:91
 msgid ""
 "Good, because a remote backend (S3+DynamoDB, GCS, HCP Terraform) provides"
 " state locking, solving the concurrent-apply problem."
-msgstr ""
+msgstr "良い、なぜならリモートバックエンド（S3+DynamoDB、GCS、HCP Terraform）が状態ロックを提供し並行apply問題を解決する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:92
 msgid "Good, because `apply` is automated on merge."
-msgstr ""
+msgstr "良い、なぜなら `apply` がマージ時に自動化される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:93
 msgid "Good, because state is durable and not lost with CI runner termination."
-msgstr ""
+msgstr "良い、なぜなら状態が耐久性を持ちCIランナー終了で失われない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:94
 msgid ""
 "Bad, because it requires a long-lived PAT stored as a repository secret "
 "for the `apply` step, violating the no-long-lived-secrets knock-out "
 "criterion."
-msgstr ""
+msgstr "悪い、なぜなら `apply` ステップ用にリポジトリシークレットとして保存された長寿命PATを必要とし、長寿命シークレットなしのノックアウト基準に違反する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:95
 msgid ""
 "Bad, because an S3/GCS backend requires a cloud account with hosting "
 "costs, violating the zero-cost driver. HCP Terraform's free tier has "
 "limits that may not cover a public repo with many settings resources."
-msgstr ""
+msgstr "悪い、なぜならS3/GCSバックエンドはホスティングコストのかかるクラウドアカウントを必要としゼロコストドライバに違反する。HCP Terraformの無料ティアには制限があり多くの設定リソースを持つ公開リポジトリをカバーしない場合がある。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:96
 msgid ""
 "Bad, because it introduces external infrastructure (a cloud bucket, an "
 "HCP Terraform workspace) outside the repo, increasing the moving surface "
 "for a single-maintainer open-source project."
-msgstr ""
+msgstr "悪い、なぜならリポジトリ外の外部インフラ（クラウドバケット、HCP Terraformワークスペース）を導入し単一メンテナのオープンソースプロジェクトの移動部品を増やす。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:98
 msgid "Scheduled `plan`-only drift check in CI + local `apply`, state in repo"
-msgstr ""
+msgstr "CIのスケジュールされた `plan` のみのドリフトチェック + ローカル `apply`、リポジトリに状態"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:100
 msgid ""
 "Good, because it is identical to the chosen option for `apply` and state,"
 " and adds only a scheduled `plan` job — which the chosen option already "
 "includes as a drift detector."
-msgstr ""
+msgstr "良い、なぜなら `apply` と状態について選択肢と同じでありスケジュールされた `plan` ジョブのみを追加する — これは選択肢がすでにドリフト検出器として含んでいる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:101
 msgid ""
 "Neutral, because this is a strict subset of the chosen option rather than"
 " a true alternative; it is folded into the decision outcome as the drift-"
 "detection mechanism."
-msgstr ""
+msgstr "中立、なぜならこれは選択肢の厳密なサブセットであり真の代替ではなくドリフト検出メカニズムとして決定結果に折り込まれる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:102
 msgid ""
 "Bad, because considered as a standalone option it leaves PR-time `plan` "
 "unspecified, weakening the reviewability knock-out criterion."
-msgstr ""
+msgstr "悪い、なぜなら単独選択肢として考えるとPR時 `plan` が未指定になりレビュー可能性のノックアウト基準が弱まる。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:104
 msgid "Terraform Cloud / HCP Terraform managed workspace (plan + apply hosted)"
-msgstr ""
+msgstr "Terraform Cloud / HCP Terraform管理ワークスペース（plan + applyホスト）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:106
 msgid "See [HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs)."
-msgstr ""
+msgstr "[HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs) を参照。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:108
 msgid ""
 "Good, because it hosts both `plan` and `apply`, providing a UI for run "
 "history, state, and approvals."
-msgstr ""
+msgstr "良い、なぜなら `plan` と `apply` の両方をホストし実行履歴、状態、承認のUIを提供する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:109
 msgid ""
 "Good, because it supports OIDC and short-lived tokens, satisfying least-"
 "privilege."
-msgstr ""
+msgstr "良い、なぜならOIDCと短命トークンをサポートし最小権限を満たす。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:110
 msgid ""
 "Good, because state is managed by HCP Terraform with locking and version "
 "history."
-msgstr ""
+msgstr "良い、なぜなら状態がHCP Terraformによってロックとバージョン履歴付きで管理される。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:111
 msgid ""
 "Bad, because it introduces an external hosted service with its own access"
 " control, billing, and quota — violating the zero-cost / GitHub-native "
 "driver for a public repo."
-msgstr ""
+msgstr "悪い、なぜなら独自のアクセス制御、課金、クオータを持つ外部ホストサービスを導入し公開リポジトリのゼロコスト / GitHubネイティブドライバに違反する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:112
 msgid ""
@@ -511,139 +554,142 @@ msgid ""
 "code\" property the repo values (see [ADR-0000](0000-use-markdown-"
 "architectural-decision-records.md))."
 msgstr ""
+"悪い、なぜならapply決定をリポジトリのPRフローから外し、リポジトリが重視する"
+"「すべてがコードと同じレビュー/PRフローを通る」特性を低下させる"
+"（[ADR-0000](0000-use-markdown-architectural-decision-records.md) を参照）。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:113
 msgid ""
 "Bad, because the free tier has a limited number of workspaces and runs "
 "per month, which may not cover sustained activity."
-msgstr ""
+msgstr "悪い、なぜなら無料ティアは月あたりのワークスペースと実行数に制限があり持続的なアクティビティをカバーしない場合がある。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:115
 msgid "More Information"
-msgstr ""
+msgstr "詳細情報"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:117
 msgid "Chosen workflow at a glance"
-msgstr ""
+msgstr "選択されたワークフローの概観"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "Step"
-msgstr ""
+msgstr "ステップ"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "Where"
-msgstr ""
+msgstr "場所"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "Who"
-msgstr ""
+msgstr "誰"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "Token"
-msgstr ""
+msgstr "トークン"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "`terraform fmt -check` / `validate`"
-msgstr ""
+msgstr "`terraform fmt -check` / `validate`"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "CI on PR"
-msgstr ""
+msgstr "PR上のCI"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "GitHub Actions"
-msgstr ""
+msgstr "GitHub Actions"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "none (read-only)"
-msgstr ""
+msgstr "なし（読み取り専用）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "`terraform plan`"
-msgstr ""
+msgstr "`terraform plan`"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "read-only PAT or `GITHUB_TOKEN` (provider reads only)"
-msgstr ""
+msgstr "読み取り専用PATまたは `GITHUB_TOKEN`（プロバイダは読み取りのみ）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "`terraform plan` (drift check)"
-msgstr ""
+msgstr "`terraform plan`（ドリフトチェック）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "CI scheduled (weekly)"
-msgstr ""
+msgstr "CIスケジュール（週次）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "read-only PAT"
-msgstr ""
+msgstr "読み取り専用PAT"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "`terraform apply`"
-msgstr ""
+msgstr "`terraform apply`"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "local, after merge"
-msgstr ""
+msgstr "ローカル、マージ後"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "maintainer"
-msgstr ""
+msgstr "メンテナ"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "short-lived PAT, scoped, revoked after"
-msgstr ""
+msgstr "短命PAT、スコープ付き、後に失効"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "State storage"
-msgstr ""
+msgstr "状態ストレージ"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "committed `terraform.tfstate`"
-msgstr ""
+msgstr "コミットされた `terraform.tfstate`"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md
 msgid "n/a"
-msgstr ""
+msgstr "該当なし"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:127
 msgid "Drift reconciliation"
-msgstr ""
+msgstr "ドリフト調整"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:129
 msgid ""
 "When the scheduled `terraform plan -detailed-exitcode` reports a diff "
 "(exit code 2), the workflow opens (or updates) a GitHub issue listing the"
 " drift. A maintainer then either:"
-msgstr ""
+msgstr "スケジュールされた `terraform plan -detailed-exitcode` がdiff（終了コード2）を報告した場合、ワークフローはドリフトを一覧したGitHub issueを開く（または更新する）。メンテナは次のいずれかを行う:"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:131
 msgid ""
 "reverts the manual GitHub UI change so the live state matches the "
 "committed configuration, or"
-msgstr ""
+msgstr "手動のGitHub UI変更を元に戻してライブ状態がコミットされた設定と一致するようにする、または"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:132
 msgid ""
 "imports the manual change into Terraform by editing `main.tf` to declare "
 "the resource/setting and running `terraform apply` locally to commit the "
 "updated state."
-msgstr ""
+msgstr "`main.tf` を編集してリソース/設定を宣言しローカルで `terraform apply` を実行して更新された状態をコミットすることで手動変更をTerraformにインポートする。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:134
 msgid "Token scope and safety"
-msgstr ""
+msgstr "トークンスコープと安全性"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:136
 msgid ""
 "The CI `plan` step uses a read-only PAT (or the default `GITHUB_TOKEN` if"
 " the provider supports it for the resources declared) with the minimum "
 "scope needed to read repository settings."
-msgstr ""
+msgstr "CI `plan` ステップは読み取り専用PAT（または宣言されたリソースについてプロバイダがサポートする場合はデフォルトの `GITHUB_TOKEN`）をリポジトリ設定を読み取るのに必要な最小スコープで使用する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:137
 msgid ""
@@ -651,7 +697,7 @@ msgid ""
 " maintainer's account with `repo` scope (and `admin:org` only if org-"
 "level resources are declared), valid for the shortest lifetime GitHub "
 "allows, and revoked immediately after the apply completes."
-msgstr ""
+msgstr "ローカル `apply` ステップはメンテナのアカウントから発行された `repo` スコープ（orgレベルリソースが宣言された場合のみ `admin:org`）を持つクラシックまたはファイングレインPATを使用しGitHubが許す最短の有効期間でapply完了直後に失効する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:138
 msgid ""
@@ -660,11 +706,11 @@ msgid ""
 "`terraform.tfstate`. The state file is therefore safe to commit, but is "
 "reviewed in PRs like any other change to confirm no sensitive field "
 "leaks."
-msgstr ""
+msgstr "`integrations/github` プロバイダは実行時に `GITHUB_TOKEN` 環境変数からトークンを読み取る — `terraform.tfstate` に書き込まれることはない。したがって状態ファイルはコミットしても安全だが他の変更と同様にPRでレビューされ機密フィールドの漏洩がないことを確認する。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:140
 msgid "Upgrade path"
-msgstr ""
+msgstr "アップグレードパス"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:142
 msgid ""
@@ -674,17 +720,17 @@ msgid ""
 "`terraform.tfstate` can be imported into the remote backend with "
 "`terraform state pull` / `terraform state push`, so the chosen option "
 "does not lock the project out of upgrading."
-msgstr ""
+msgstr "メンテナチームが1人を超えて成長するか状態ロックが必要になった場合、ロック付きリモートバックエンド（例: S3+DynamoDBまたはHCP Terraform）にアップグレードし `apply` をOIDC付きCIに移行する。コミットされた `terraform.tfstate` は `terraform state pull` / `terraform state push` でリモートバックエンドにインポートでき、選択肢はプロジェクトをアップグレードから排除しない。"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:144
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:146
 msgid ""
 "`integrations/github` provider: "
 "[https://registry.terraform.io/providers/integrations/github/latest/docs](https://registry.terraform.io/providers/integrations/github/latest/docs)"
-msgstr ""
+msgstr "`integrations/github` プロバイダ: [https://registry.terraform.io/providers/integrations/github/latest/docs](https://registry.terraform.io/providers/integrations/github/latest/docs)"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:147
 msgid ""
@@ -692,29 +738,30 @@ msgid ""
 "/security-hardening-your-deployments/about-security-hardening-with-"
 "openid-connect](https://docs.github.com/en/actions/deployment/security-"
 "hardening-your-deployments/about-security-hardening-with-openid-connect)"
-msgstr ""
+msgstr "GitHub Actions OIDC: [https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect)"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:148
 msgid ""
 "HCP Terraform: [https://developer.hashicorp.com/terraform/cloud-"
 "docs](https://developer.hashicorp.com/terraform/cloud-docs)"
-msgstr ""
+msgstr "HCP Terraform: [https://developer.hashicorp.com/terraform/cloud-docs](https://developer.hashicorp.com/terraform/cloud-docs)"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:149
 msgid ""
 "Parent story: [#513](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/513) (Manage and sync GitHub repository settings with "
 "Terraform)"
-msgstr ""
+msgstr "親ストーリー: [#513](https://github.com/tkoyama010/pyvista-wasm/issues/513)（TerraformでGitHubリポジトリ設定を管理・同期）"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:150
 msgid ""
 "This decision: [#514](https://github.com/tkoyama010/pyvista-"
 "wasm/issues/514)"
-msgstr ""
+msgstr "この決定: [#514](https://github.com/tkoyama010/pyvista-wasm/issues/514)"
 
 #: ../../decisions/0009-decide-how-to-sync-github-repo-settings-with-terraform.md:151
 msgid ""
 "Related: [ADR-0005](0005-verify-agents-md-quality-in-ci.md) (scheduled-CI"
 " verification pattern reused for drift detection)"
-msgstr ""
+msgstr "関連: [ADR-0005](0005-verify-agents-md-quality-in-ci.md)（ドリフト検出に再利用されたスケジュールCI検証パターン）"
+
