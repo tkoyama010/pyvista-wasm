@@ -1,3 +1,4 @@
+---
 # Authoritative locale for slide structure (see ADR-0006).
 # Add, remove, or rename keys here first, then mirror the structure in en.yml.
 cover:
@@ -6,7 +7,6 @@ cover:
   tagline: サーバー不要、インストール不要、データはマシンから出ない
   event: PyCon JP 2026
   speaker: 小山 哲央
-
 agenda:
   title: Python×WASMのリアル：重量級ライブラリ移植の壁と、ブラウザ完結型・科学技術計算の未来を語る
   subtitle: アジェンダ
@@ -18,7 +18,6 @@ agenda:
   i3d: サーバー不要で動作するPyVista
   speaker_title: スピーカーはPyVistaのWASMを牽引しています
   speaker_subtitle: スピーカープロフィール
-
 pyvista:
   title: PyVistaは科学計算3D可視化のPythonライブラリ
   subtitle: PyVistaのホームページ
@@ -32,7 +31,6 @@ pyvista:
   i4d: ITK、NumPy、SciPy
   mesh_caption_pre: PyVistaでレンダリングされた三角3Dメッシュ —
   mesh_caption_bold: ドラッグで回転
-
 problem:
   title: Web上での科学計算の3D計算結果の共有には、サーバーの用意がネックとなる
   subtitle: 課題一覧
@@ -49,7 +47,6 @@ problem:
   conc_pre: これらの障壁により分析結果の共有が
   conc_bold: 迅速かつ安全に
   conc_post: 行いにくい — ブラウザで全てできれば？
-
 why_wasm:
   title: ブラウザ完結でセキュリティとリソースの問題を解決
   subtitle: ブラウザ完結のシーケンス図
@@ -66,13 +63,11 @@ why_wasm:
   i5d: 現場やクライアント先でブラウザだけで結果を表示
   conc_pre: URLがデリバリーの全て —
   conc_bold: ではPyVistaをどうやってそこに？
-
 arch:
   title: SSRはサーバーでの処理を挟むのに対し、Wasmはブラウザ内で処理を完結できる
   subtitle: "SSR と Wasm のシーケンス図比較"
   conc_pre: 往復が完全に消える —
   conc_bold: レンダリングはデータのある場所で行われる
-
 vtk_wasm:
   title: PyVistaがエンジンとするVTKは世界の科学技術計算において最も広く普及している可視化C++ライブラリ
   subtitle: VTKの活用事例
@@ -92,7 +87,6 @@ vtk_wasm:
   i7d: 現場デモやクライアント先でのプレゼンに特に重要
   conc_pre: VTKの全機能がURL一つ —
   conc_bold: ではPyVistaにどう繋ぐ？
-
 history:
   title: VTK.wasmは実用化に向け開発が進められている
   subtitle: VTK.wasmのサンプル
@@ -115,17 +109,14 @@ history:
   i2d: ブラウザサポートに基づき適切に劣化、まだ進行中の設計
   conc_pre: 実験から本番へ —
   conc_bold: 技術は着実に成熟している
-
 demos:
   title: 3DCG・画像処理・可視化がブラウザで動作する
   subtitle: ブラウザで今すぐ動くライブデモ
-
 build_dist:
   build_title: VTKのC++をWebAssemblyにコンパイルは数時間かかるがユーザーには影響なし
   build_subtitle: vtk-wasmのビルドと使用方法
   dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
   dist_subtitle: パッケージの配布方法シーケンス図
-
 pipeline:
   title: ユーザーはViteの設定で、VTK.wasmが利用可能
   subtitle: ViteにおけるVTK.wasmの利用方法
@@ -142,7 +133,6 @@ pipeline:
   i4d: vtk-wasmは次世代ビルドターゲットが必要なモダンJS機能に依存
   i5t: optimizeDeps.exclude
   i5d: ViteはWASMパッケージを事前バンドルしてはいけない；実行時に非同期ロード
-
 pyodide:
   title: PythonコードをFEとしてブラウザ上に3D可視化
   subtitle: pyvista-wasmのシーケンス図
@@ -162,7 +152,6 @@ pyodide:
   i6t: ランタイムフォールバック
   i6d_pre: の時、
   i6d_post: メッシュ取得はurllibの代わりにXMLHttpRequestを使用
-
 dev_ci:
   title: vtk.wasmをpyvista-wasmに統合した際には課題が発生したが、全て解決済み
   subtitle: 開発時に発生した問題とその解決策
@@ -176,14 +165,12 @@ dev_ci:
   s3: CORSヘッダーを送信するCDNを使う
   p4: KitwareのGitLab直URLはアジアで遅い
   s4: jsDelivrのマルチCDNエッジキャッシュを使う
-
 sphere:
   title: pyvista-wasmはより直感的に3D可視化が可能
   subtitle: VTK.wasmとpyvista-wasmのコード比較
   js_label: VTK.wasm (JavaScript)
   py_label: pyvista-wasm (Python / Pyodide)
   output_label: 出力
-
 demo_jl:
   title: JupyterLiteでインストール不要の3Dメッシュを表示
   subtitle: "デモ:JupyterLite"
@@ -201,7 +188,6 @@ demo_jl:
   conc_bold: ワンクリックで再現可能な分析環境
   code_label: intro.ipynb
   demo_label: ライブデモ
-
 demo_marimo:
   title: marimoでもブラウザ内で完全に動作する
   subtitle: "デモ: marimo"
@@ -216,7 +202,6 @@ demo_marimo:
   conc_pre: URLで共有 —
   conc_bold: ワンクリックでリアクティブ3D探索環境
   demo_label: ライブデモ
-
 demo_stlite:
   title: stliteでサーバー不要の3D可視化アプリを構築
   subtitle: "デモ: stlite"
@@ -233,22 +218,18 @@ demo_stlite:
   conc_pre: 公開に最適 —
   conc_bold: ウィジェット付きインタラクティブアプリが必要な時、stliteが自然な選択
   demo_label: ライブデモ
-
 demo_api_docs:
   title: APIドキュメントの「Try it in JupyterLite!」ボタンでExampleを即座に実行
   subtitle: "APIドキュメント"
   demo_label: APIドキュメント
-
 cli:
   title: pyvista-wasm CLIでPythonコード不要で3D可視化が可能、コーディングエージェントとの連携も容易になる
   subtitle: pyvista-wasm cliの使用方法
-
 use_cases:
   title: PyVista on WebAssemblyは、サーバー不要で3D可視化データを共有するための新しい手段を提供
   subtitle: 3D可視化データ共有のユースケース図
   conc_pre: PoC確認 —
   conc_bold: 専用サーバーなしで分析結果を共有可能
-
 inspiration:
   title: 参考にした記事
   subtitle: 詳しくは燈株式会社のtech blogをご覧ください
@@ -257,7 +238,6 @@ inspiration:
   article_source: Akari Inc. tech blog, 2026-05-03
   article_link_text: tech.akariinc.co.jp/entry/2026/05/03/115708
   note: このデッキの構成 — サーバーサイドレンダリングから脱する動機、vtk.wasmの背景、JupyterLite / marimo / stliteのデモ、ユースケースの議論 — は上記記事の構成に沿っています。
-
 cta:
   title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションと議論を歓迎します
   cta_title: pyvista-wasmは活発に開発中のOSSプロジェクトでありコントリビューションを歓迎します

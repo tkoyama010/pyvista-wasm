@@ -1,5 +1,5 @@
+---
 name: Deploy Slides to GitHub Pages
-
 on:
   push:
     branches:
@@ -7,14 +7,11 @@ on:
     paths:
       - 'slides/**'
   workflow_dispatch:
-
 permissions:
   contents: write
-
 concurrency:
   group: deploy-slides-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   deploy-slides:
     runs-on: ubuntu-latest
@@ -23,22 +20,18 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: slides/package-lock.json
-
       - name: Install Slidev dependencies
         working-directory: slides
         run: npm ci
-
       - name: Build Slidev deck
         working-directory: slides
         run: npx slidev build --base /pyvista-wasm/slides/
-
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453  # v4.1.0
         with:

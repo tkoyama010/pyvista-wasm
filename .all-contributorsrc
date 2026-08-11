@@ -15,7 +15,8 @@
       "contributions": [
         "translation",
         "code",
-        "maintenance"
+        "maintenance",
+        "doc"
       ]
     }
   ],

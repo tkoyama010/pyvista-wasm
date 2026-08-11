@@ -1,11 +1,10 @@
+---
 name: Update Preview GIF
 on:
   workflow_dispatch:
   release:
     types: [published]
-
 permissions: {}
-
 jobs:
   update-preview:
     runs-on: ubuntu-latest
@@ -22,6 +21,7 @@ jobs:
           pip install . playwright "imageio[ffmpeg]" pillow
           playwright install chromium
       - name: Verify JupyterLite site is accessible
+        # yamllint disable rule:line-length
         run: |
           curl -sSf https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html > /dev/null || {
             echo "Error: JupyterLite site is not accessible at https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html"
@@ -29,10 +29,11 @@ jobs:
             exit 1
           }
           echo "JupyterLite site is accessible, proceeding with capture..."
+        # yamllint enable rule:line-length
       - run: python -m pyvista_wasm capture-preview --rotate
       - name: Upload preview GIF to latest release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+        run: |-
           TAG=$(gh release view --json tagName -q .tagName)
           gh release upload "$TAG" assets/preview.gif --clobber

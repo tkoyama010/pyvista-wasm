@@ -1,14 +1,12 @@
+---
 name: Update uv.lock
-
 on:
   pull_request:
     branches:
       - main
     paths:
       - pyproject.toml
-
 permissions: {}
-
 jobs:
   uv-lock:
     if: startsWith(github.head_ref, 'release-please--')
@@ -22,18 +20,17 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           persist-credentials: false
-
       - name: Install uv
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9  # v9.0.0
-
       - name: Update uv.lock
         run: uv lock
-
       - name: Commit uv.lock
-        run: |
+        # yamllint disable rule:line-length
+        run: |-
           git config user.name "pyvista-bot"
           git config user.email "pyvista-bot@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.RELEASE_PLEASE_TOKEN }}@github.com/${{ github.repository }}.git
           git add uv.lock
           git diff --cached --quiet || git commit -m "chore: update uv.lock"
           git push
+        # yamllint enable rule:line-length
