@@ -1166,4 +1166,3 @@ msgstr ""
 
 #~ msgid "n/a"
 #~ msgstr "該当なし"
-
