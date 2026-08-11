@@ -40,3 +40,31 @@ jobs:
             exit 1
           fi
           echo "Generated $pot_count .pot files"
+      - name: Check .pot/.po catalog parity
+        run: |-
+          set -eu
+          missing_po=0
+          while IFS= read -r pot; do
+            rel="${pot#docs/_build/gettext/}"
+            base="${rel%.pot}"
+            po="docs/locale/ja/LC_MESSAGES/${base}.po"
+            if [ ! -f "$po" ]; then
+              echo "::error::Missing .po catalog: ${po}"
+              echo "::error::Run \`sphinx-intl update -p docs/_build/gettext -l ja\` and commit the new catalog"
+              missing_po=$((missing_po + 1))
+            fi
+          done < <(find docs/_build/gettext -name "*.pot")
+          orphan_po=0
+          while IFS= read -r po; do
+            rel="${po#docs/locale/ja/LC_MESSAGES/}"
+            base="${rel%.po}"
+            pot="docs/_build/gettext/${base}.pot"
+            if [ ! -f "$pot" ]; then
+              echo "::error::Orphan .po catalog with no source .pot: ${po} — remove it or restore the English source"
+              orphan_po=$((orphan_po + 1))
+            fi
+          done < <(find docs/locale/ja/LC_MESSAGES -name "*.po")
+          if [ "$missing_po" -gt 0 ] || [ "$orphan_po" -gt 0 ]; then
+            exit 1
+          fi
+          echo "Catalog parity OK: every .pot has a matching .po and vice versa"
