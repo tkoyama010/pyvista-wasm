@@ -1,3 +1,4 @@
+---
 # English locale for the speaker script — structure mirrors slides/locales/script/ja.yml
 # (authoritative, see ADR-0006). Do not add or remove keys here without first
 # updating ja.yml. Keys are keyed by slide number (s1 = first slide, ...).
@@ -6,308 +7,226 @@
 # word count targets ~3,250 words for a 25-minute talk at ~130 words/min.
 script:
   s1: >-
-    Good afternoon, and welcome to PyCon JP 2026. The topic of this talk is
-    running PyVista entirely inside the browser via WebAssembly, with no
-    server required. Everything I will demonstrate — mesh rendering, filter
-    pipelines, interactive rotation and zoom — happens on your own machine,
-    inside a single browser tab. Nothing travels over the network. If you
-    have ever provisioned a visualization server just to share a 3D result
-    with a colleague, you know the friction: infrastructure to maintain,
-    monthly costs, and confidential data leaving your machine. By the end of
-    these twenty-five minutes I hope you will see that a URL can be the
-    entire delivery, and that the server is no longer part of the story.
-    If that sounds too good to be true, I ask you to suspend your disbelief
-    for the next twenty-five minutes and judge by the demos.
+    Good afternoon, and welcome to PyCon JP 2026. The topic of this talk is running PyVista entirely inside
+    the browser via WebAssembly, with no server required. Everything I will demonstrate — mesh rendering,
+    filter pipelines, interactive rotation and zoom — happens on your own machine, inside a single browser
+    tab. Nothing travels over the network. If you have ever provisioned a visualization server just to
+    share a 3D result with a colleague, you know the friction: infrastructure to maintain, monthly costs,
+    and confidential data leaving your machine. By the end of these twenty-five minutes I hope you will
+    see that a URL can be the entire delivery, and that the server is no longer part of the story. If
+    that sounds too good to be true, I ask you to suspend your disbelief for the next twenty-five minutes
+    and judge by the demos.
   s2: >-
-    The talk is organized in three parts, and you can see them on the agenda
-    slide. The first part is an overview of PyVista and WebAssembly — why
-    you would want to run 3D visualization in the browser at all, and what
-    problems it solves. The second part covers the technical stack and
-    implementation: vtk-wasm, the TypeScript glue layer, and how the PyVista
-    API is bridged to Python running in the browser. The third part is a
-    live demo — PyVista running with no server, right here in the slides.
-    During the talk you can click any thumbnail on this slide to jump
-    straight to that section if you want to revisit something later.
+    The talk is organized in three parts, and you can see them on the agenda slide. The first part is
+    an overview of PyVista and WebAssembly — why you would want to run 3D visualization in the browser
+    at all, and what problems it solves. The second part covers the technical stack and implementation:
+    vtk-wasm, the TypeScript glue layer, and how the PyVista API is bridged to Python running in the browser.
+    The third part is a live demo — PyVista running with no server, right here in the slides. During the
+    talk you can click any thumbnail on this slide to jump straight to that section if you want to revisit
+    something later.
   s3: >-
-    A quick word about myself and why I am qualified to give this talk. My
-    name is Tetsuo Koyama. I am an AI engineer at AKARI Inc. here in Japan,
-    and I am a maintainer of the PyVista 3D visualization library. I also
-    serve as chairperson of the SciPy Conference and I am on the Technical
-    Steering Committee of NumFOCUS. My interests span scientific computing,
-    3D visualization, and the finite element method. I contribute to
-    PyVista, the GetFEM finite element library, and pyOpenSci for scientific
-    Python packaging. I speak both Japanese and English. The code block on
-    the left is a bit of fun — my profile as a Python class. The takeaway is
-    that I am deeply involved in the ecosystem I am about to describe, not
-    just observing it from the outside. I use these tools in my daily work,
-    and the friction I will describe is friction I have personally hit.
+    A quick word about myself and why I am qualified to give this talk. My name is Tetsuo Koyama. I am
+    an AI engineer at AKARI Inc. here in Japan, and I am a maintainer of the PyVista 3D visualization
+    library. I also serve as chairperson of the SciPy Conference and I am on the Technical Steering Committee
+    of NumFOCUS. My interests span scientific computing, 3D visualization, and the finite element method.
+    I contribute to PyVista, the GetFEM finite element library, and pyOpenSci for scientific Python packaging.
+    I speak both Japanese and English. The code block on the left is a bit of fun — my profile as a Python
+    class. The takeaway is that I am deeply involved in the ecosystem I am about to describe, not just
+    observing it from the outside. I use these tools in my daily work, and the friction I will describe
+    is friction I have personally hit.
   s4: >-
-    PyVista is a Python library for scientific 3D visualization. It is built
-    on top of VTK, which is Kitware's C++ visualization toolkit with over
-    thirty years of development since 1993. VTK is powerful but verbose —
-    its C++ API requires a lot of boilerplate. PyVista wraps that core in a
-    Pythonic API, turning dozens of lines into a few intuitive ones. It has
-    become the de facto standard for 3D visualization in Python, used across
-    medical imaging, computer-aided engineering, geoscience, and
-    meteorology. It integrates with the broader scientific Python ecosystem
-    — ITK, NumPy, and SciPy. The iframe on this slide shows the PyVista
-    homepage, where you can browse the gallery of examples and see the range
-    of     problems people solve with it every day, from simple meshes to
-    complex volume rendering pipelines. If you are a scientist or engineer
-    who already uses Python for your analysis, PyVista is almost certainly
-    the fastest path from your data to an interactive 3D view.
+    PyVista is a Python library for scientific 3D visualization. It is built on top of VTK, which is Kitware's
+    C++ visualization toolkit with over thirty years of development since 1993. VTK is powerful but verbose
+    — its C++ API requires a lot of boilerplate. PyVista wraps that core in a Pythonic API, turning dozens
+    of lines into a few intuitive ones. It has become the de facto standard for 3D visualization in Python,
+    used across medical imaging, computer-aided engineering, geoscience, and meteorology. It integrates
+    with the broader scientific Python ecosystem — ITK, NumPy, and SciPy. The iframe on this slide shows
+    the PyVista homepage, where you can browse the gallery of examples and see the range of     problems
+    people solve with it every day, from simple meshes to complex volume rendering pipelines. If you are
+    a scientist or engineer who already uses Python for your analysis, PyVista is almost certainly the
+    fastest path from your data to an interactive 3D view.
   s5: >-
-    Now the problem. Sharing 3D scientific computing results on the web
-    still means running a server, and that is the bottleneck. The table on
-    this slide lists four issues. First, Three.js lacks the capability — it
-    is a general-purpose 3D library, insufficient for rendering scientific
-    and engineering computation results with their specific data formats and
-    filter pipelines. Second, time cost — you need to build and maintain a
-    dedicated visualization server. Third, monetary cost — building and
-    operating that infrastructure is an ongoing monthly expense that never
-    goes away. Fourth, security risk — confidential simulation data is sent
-    from the analyst's machine to the server, which may not be acceptable.
-    These barriers make sharing analysis results quickly and securely
-    difficult. The question is: what if the browser could do it all?
+    Now the problem. Sharing 3D scientific computing results on the web still means running a server,
+    and that is the bottleneck. The table on this slide lists four issues. First, Three.js lacks the capability
+    — it is a general-purpose 3D library, insufficient for rendering scientific and engineering computation
+    results with their specific data formats and filter pipelines. Second, time cost — you need to build
+    and maintain a dedicated visualization server. Third, monetary cost — building and operating that
+    infrastructure is an ongoing monthly expense that never goes away. Fourth, security risk — confidential
+    simulation data is sent from the analyst's machine to the server, which may not be acceptable. These
+    barriers make sharing analysis results quickly and securely difficult. The question is: what if the
+    browser could do it all?
   s6: >-
-    This is where WebAssembly comes in. The sequence diagram on this slide
-    shows the browser-complete flow. The user loads a mesh file — VTP, VTU,
-    STL, any format VTK supports — and the entire visualization pipeline
-    runs in the browser. The 3D mesh is displayed with full interactivity:
-    rotate, pan, zoom. The user can then share the URL, and someone else
-    opens it and gets the same experience. Note the key point on the
-    diagram: no data exchange. WebAssembly runs the whole pipeline locally,
-    so every barrier from the previous slide falls away at once. No data is
-    sent anywhere. No server to provision. No infrastructure to pay for.
-    Confidential data never leaves the machine. A URL is the whole
-    delivery. This is the core message of the talk: the browser is now
-    capable enough to run the full visualization pipeline, and once you
-    accept that, every other architectural decision follows.
+    This is where WebAssembly comes in. The sequence diagram on this slide shows the browser-complete
+    flow. The user loads a mesh file — VTP, VTU, STL, any format VTK supports — and the entire visualization
+    pipeline runs in the browser. The 3D mesh is displayed with full interactivity: rotate, pan, zoom.
+    The user can then share the URL, and someone else opens it and gets the same experience. Note the
+    key point on the diagram: no data exchange. WebAssembly runs the whole pipeline locally, so every
+    barrier from the previous slide falls away at once. No data is sent anywhere. No server to provision.
+    No infrastructure to pay for. Confidential data never leaves the machine. A URL is the whole delivery.
+    This is the core message of the talk: the browser is now capable enough to run the full visualization
+    pipeline, and once you accept that, every other architectural decision follows.
   s7: >-
-    Let me make the contrast sharper with a side-by-side comparison. On the
-    left is the server-side rendering approach. The user opens a URL, the
-    browser requests the 3D view, the server renders it with VTK and a GPU,
-    and sends back a rendered image. Every frame, every interaction
-    round-trips over the network. On the right is the WebAssembly approach.
-    The user opens a URL, the browser executes the VTK pipeline locally, and
-    the 3D mesh is displayed interactively. The loop is closed inside the
-    browser. The round-trip disappears entirely — rendering happens where
-    the data already is. This is not a marginal improvement over SSR. It is
-    a fundamentally different architecture that removes the network from the
-    critical path entirely.
+    Let me make the contrast sharper with a side-by-side comparison. On the left is the server-side rendering
+    approach. The user opens a URL, the browser requests the 3D view, the server renders it with VTK and
+    a GPU, and sends back a rendered image. Every frame, every interaction round-trips over the network.
+    On the right is the WebAssembly approach. The user opens a URL, the browser executes the VTK pipeline
+    locally, and the 3D mesh is displayed interactively. The loop is closed inside the browser. The round-trip
+    disappears entirely — rendering happens where the data already is. This is not a marginal improvement
+    over SSR. It is a fundamentally different architecture that removes the network from the critical
+    path entirely.
   s8: >-
-    VTK is the engine behind PyVista, and it is the most widely used
-    visualization C++ library in scientific computing worldwide. The iframe
-    shows a curated list of VTK projects, giving you a sense of how broadly
-    it is actually used. VTK was built by Kitware and has been maintained
-    since 1993 — over thirty years of accumulated capability. It is
-    field-proven: medical imaging, CAE, and geoscience run on VTK every day.
-    It ships hundreds of filters for point clouds, meshes, and volume data
-    out of the box. It has production-grade OpenGL and Vulkan renderers. The
-    ecosystem includes PyVista as the Python wrapper, ITK for medical
-    imaging, and the NumPy and SciPy scientific stack. And now, all of this
-    runs without a server, entirely in the browser. The technology is
-    maturing steadily — what was an experiment in 2018 is now a package you
-    can install from npm and use in production today.
+    VTK is the engine behind PyVista, and it is the most widely used visualization C++ library in scientific
+    computing worldwide. The iframe shows a curated list of VTK projects, giving you a sense of how broadly
+    it is actually used. VTK was built by Kitware and has been maintained since 1993 — over thirty years
+    of accumulated capability. It is field-proven: medical imaging, CAE, and geoscience run on VTK every
+    day. It ships hundreds of filters for point clouds, meshes, and volume data out of the box. It has
+    production-grade OpenGL and Vulkan renderers. The ecosystem includes PyVista as the Python wrapper,
+    ITK for medical imaging, and the NumPy and SciPy scientific stack. And now, all of this runs without
+    a server, entirely in the browser. The technology is maturing steadily — what was an experiment in
+    2018 is now a package you can install from npm and use in production today.
   s9: >-
-    VTK.wasm has been developing toward practical use over several years.
-    The history is roughly this: in 2018, Emscripten builds began as an
-    early experimental prototype bringing VTK to the browser. In 2021, it
-    was integrated into the official build pipeline and vtk.wasm was
-    published on npm — and it is important to distinguish this from vtk.js,
-    which is a separate JavaScript reimplementation of VTK, a different
-    thing entirely. In 2023 and 2024, WebGPU backend support progressed,
-    bringing higher rendering performance and GPU compute compared to
-    WebGL. Current packages can switch between WebGL and WebGPU at runtime,
-    with automatic fallback based on browser support. The iframe on this
-    slide is a live demo of vtk-wasm running entirely in the browser — no
-    server, no install, just open the page and it works.
+    VTK.wasm has been developing toward practical use over several years. The history is roughly this:
+    in 2018, Emscripten builds began as an early experimental prototype bringing VTK to the browser. In
+    2021, it was integrated into the official build pipeline and vtk.wasm was published on npm — and it
+    is important to distinguish this from vtk.js, which is a separate JavaScript reimplementation of VTK,
+    a different thing entirely. In 2023 and 2024, WebGPU backend support progressed, bringing higher rendering
+    performance and GPU compute compared to WebGL. Current packages can switch between WebGL and WebGPU
+    at runtime, with automatic fallback based on browser support. The iframe on this slide is a live demo
+    of vtk-wasm running entirely in the browser — no server, no install, just open the page and it works.
   s10: >-
-    Here are five live demos running entirely in your browser right now.
-    First, a Porsche model — a multi-actor CAD assembly demonstrating
-    picking. Second, procedural terrain — over three hundred and fifty
-    thousand triangles built entirely in the browser. Third, a Starfighter
-    model showing glyphs, a scalar bar, and interactive widgets. Fourth,
-    volume rendering — over five hundred thousand voxels ray cast on the
-    GPU. Fifth, a thousand actors and more, where every object is its own
-    vtkActor. All five run without a server. I want you to notice that these
-    are not toy demos. The CAD assembly, the volume rendering, the thousand
-    actors — these are the kinds of workloads that people currently run on
-    dedicated visualization servers. And they are running here, in a browser
-    tab, with no backend at all. I will give the network a moment to load
-    them so you can see the frame rates for yourself. If you are wondering about performance,
-    these demos render at interactive frame rates on a typical laptop. The
-    GPU acceleration is real — this is not a software rasterizer slowly
-    grinding through triangles.
+    Here are five live demos running entirely in your browser right now. First, a Porsche model — a multi-actor
+    CAD assembly demonstrating picking. Second, procedural terrain — over three hundred and fifty thousand
+    triangles built entirely in the browser. Third, a Starfighter model showing glyphs, a scalar bar,
+    and interactive widgets. Fourth, volume rendering — over five hundred thousand voxels ray cast on
+    the GPU. Fifth, a thousand actors and more, where every object is its own vtkActor. All five run without
+    a server. I want you to notice that these are not toy demos. The CAD assembly, the volume rendering,
+    the thousand actors — these are the kinds of workloads that people currently run on dedicated visualization
+    servers. And they are running here, in a browser tab, with no backend at all. I will give the network
+    a moment to load them so you can see the frame rates for yourself. If you are wondering about performance,
+    these demos render at interactive frame rates on a typical laptop. The GPU acceleration is real —
+    this is not a software rasterizer slowly grinding through triangles.
   s11: >-
-    Now let me address a concern you might have: is building this hard? The
-    slide shows the build process. Step one: install and activate the
-    Emscripten SDK. Step two: cross-compile VTK to WebAssembly using emcmake
-    and cmake. This build takes hours — it is compiling VTK's entire C++
-    codebase to a wasm binary. But here is the key point: nobody downstream
-    pays for this. The cross-compile is an hours-long job, but it is done
-    once, by the people maintaining vtk-wasm. Consumers — you, me, anyone
-    who wants to use it — just run npm install and they are done. The heavy
-    work is amortized across everyone who uses the package. You never need
-    to run any of the build steps on this slide yourself unless you want to
+    Now let me address a concern you might have: is building this hard? The slide shows the build process.
+    Step one: install and activate the Emscripten SDK. Step two: cross-compile VTK to WebAssembly using
+    emcmake and cmake. This build takes hours — it is compiling VTK's entire C++ codebase to a wasm binary.
+    But here is the key point: nobody downstream pays for this. The cross-compile is an hours-long job,
+    but it is done once, by the people maintaining vtk-wasm. Consumers — you, me, anyone who wants to
+    use it — just run npm install and they are done. The heavy work is amortized across everyone who uses
+    the package. You never need to run any of the build steps on this slide yourself unless you want to
     contribute to vtk-wasm itself.
   s12: >-
-    The distribution model is worth understanding because it affects
-    performance. The WASM binary is not bundled into the JavaScript package.
-    Instead, it is streamed from a CDN at runtime via a function called
-    createNamespace, which takes a URL. The sequence diagram shows the flow:
-    the developer compiles VTK to a WASM binary tarball, publishes that
-    tarball to a CDN, and publishes the JavaScript binding to npm. The user
-    runs npm install to get the binding, and at runtime the binary streams
-    from the CDN edge. We use jsDelivr's multi-CDN edge cache because it is
-    significantly faster than Kitware's GitLab direct URL from Asia. The
-    tarball is served with CORS headers so the browser can fetch it
-    cross-origin. This is what keeps the npm package small and the runtime
-    load fast.
+    The distribution model is worth understanding because it affects performance. The WASM binary is not
+    bundled into the JavaScript package. Instead, it is streamed from a CDN at runtime via a function
+    called createNamespace, which takes a URL. The sequence diagram shows the flow: the developer compiles
+    VTK to a WASM binary tarball, publishes that tarball to a CDN, and publishes the JavaScript binding
+    to npm. The user runs npm install to get the binding, and at runtime the binary streams from the CDN
+    edge. We use jsDelivr's multi-CDN edge cache because it is significantly faster than Kitware's GitLab
+    direct URL from Asia. The tarball is served with CORS headers so the browser can fetch it cross-origin.
+    This is what keeps the npm package small and the runtime load fast.
   s13: >-
-    Now the architecture of pyvista-wasm. Pyodide is CPython compiled to
-    WebAssembly — the real CPython interpreter running inside the browser.
-    PyVista is a Pythonic wrapper over VTK. When you combine them, you can
-    write Python in the browser and render 3D meshes on the same page, with
-    zero backend. The sequence diagram shows the flow: the user writes
-    Python code, Pyodide calls the PyVista-like API, which goes through a
-    Python-to-JS bridge into the TypeScript glue layer, which calls
-    createNamespace to load vtk-wasm, executes the filter pipeline, and
-    returns the 3D mesh result. TypeScript is the glue — it loads the
-    vtk-wasm module and bridges the C++ VTK bindings to the Python-facing
-    API. One implementation detail: when running under Pyodide, mesh
-    fetches use XMLHttpRequest instead of urllib as a runtime fallback.
+    Now the architecture of pyvista-wasm. Pyodide is CPython compiled to WebAssembly — the real CPython
+    interpreter running inside the browser. PyVista is a Pythonic wrapper over VTK. When you combine them,
+    you can write Python in the browser and render 3D meshes on the same page, with zero backend. The
+    sequence diagram shows the flow: the user writes Python code, Pyodide calls the PyVista-like API,
+    which goes through a Python-to-JS bridge into the TypeScript glue layer, which calls createNamespace
+    to load vtk-wasm, executes the filter pipeline, and returns the 3D mesh result. TypeScript is the
+    glue — it loads the vtk-wasm module and bridges the C++ VTK bindings to the Python-facing API. One
+    implementation detail: when running under Pyodide, mesh fetches use XMLHttpRequest instead of urllib
+    as a runtime fallback.
   s14: >-
-    Integrating vtk.wasm into pyvista-wasm surfaced real challenges, but
-    every one of them has a known fix. The table lists four problems and
-    their solutions. First, createNamespace returns a Promise, so you must
-    await every VTK object operation — there is no synchronous path. Second,
-    the threaded filters require SharedArrayBuffer, which means the page
-    must be cross-origin isolated; the fix is to inject COOP and COEP
-    headers using a Vite plugin called vite-plugin-cross-origin-isolation.
-    Third, the tarball URL is fetched cross-origin, so the CDN must send
-    CORS headers — use a CDN that does. Fourth, Kitware's GitLab direct URL
-    is slow from Asia, so we use jsDelivr's multi-CDN edge cache instead.
-    None of these are blockers. They are known, documented, and solved.
-    If you run into any of them, the CLI's check-locale-parity command and
-    the project documentation walk you through the fix step by step.
+    Integrating vtk.wasm into pyvista-wasm surfaced real challenges, but every one of them has a known
+    fix. The table lists four problems and their solutions. First, createNamespace returns a Promise,
+    so you must await every VTK object operation — there is no synchronous path. Second, the threaded
+    filters require SharedArrayBuffer, which means the page must be cross-origin isolated; the fix is
+    to inject COOP and COEP headers using a Vite plugin called vite-plugin-cross-origin-isolation. Third,
+    the tarball URL is fetched cross-origin, so the CDN must send CORS headers — use a CDN that does.
+    Fourth, Kitware's GitLab direct URL is slow from Asia, so we use jsDelivr's multi-CDN edge cache instead.
+    None of these are blockers. They are known, documented, and solved. If you run into any of them, the
+    CLI's check-locale-parity command and the project documentation walk you through the fix step by step.
   s15: >-
-    This slide is a code comparison. Both columns build the same sphere, but
-    look at the difference. On the left, vtk.wasm in JavaScript: you create
-    a sphere source, set theta and phi resolution, create a mapper, connect
-    the source to the mapper, create an actor, set the mapper on the actor,
-    set edge visibility, create a renderer, add the actor, and reset the
-    camera. That is the full four-object pipeline — source, mapper, actor,
-    renderer — and it is verbose. On the right, pyvista-wasm in Python: you
-    install the package with micropip, import it, create a sphere with two
-    keyword arguments, make a plotter, add the mesh with show_edges, and
-    call show. Four lines of Python. One more thing: the render on the
-    right is a live vtk.wasm scene exported from this very Python snippet,
-    so I can grab it and rotate it during the talk.
+    This slide is a code comparison. Both columns build the same sphere, but look at the difference. On
+    the left, vtk.wasm in JavaScript: you create a sphere source, set theta and phi resolution, create
+    a mapper, connect the source to the mapper, create an actor, set the mapper on the actor, set edge
+    visibility, create a renderer, add the actor, and reset the camera. That is the full four-object pipeline
+    — source, mapper, actor, renderer — and it is verbose. On the right, pyvista-wasm in Python: you install
+    the package with micropip, import it, create a sphere with two keyword arguments, make a plotter,
+    add the mesh with show_edges, and call show. Four lines of Python. One more thing: the render on the
+    right is a live vtk.wasm scene exported from this very Python snippet, so I can grab it and rotate
+    it during the talk.
   s16: >-
-    JupyterLite is a browser-only Jupyter environment. There is no
-    installation needed — you open a URL and you have a running notebook.
-    The link and iframe on this slide point to a live JupyterLite instance
-    with pyvista-wasm pre-installed. You can write Python, run a cell, and a
-    3D mesh renders interactively right in the notebook. Pre-prepared
-    notebooks let you start rendering from a single cell — pv.Sphere and
-    pv.read are ready to go. Because JupyterLite is static, you can deploy
-    it to GitHub Pages or any static host. No server required. This is the
-    ideal entry point if you want to experience vtk.wasm rendering quality
-    without installing anything on your machine. Share by URL — a
-    reproducible analysis environment in one click. If you have ever lost
-    track of which cells in a notebook depend on which values and ended up
-    with stale results, marimo's reactive model solves that problem for you
-    automatically.
+    JupyterLite is a browser-only Jupyter environment. There is no installation needed — you open a URL
+    and you have a running notebook. The link and iframe on this slide point to a live JupyterLite instance
+    with pyvista-wasm pre-installed. You can write Python, run a cell, and a 3D mesh renders interactively
+    right in the notebook. Pre-prepared notebooks let you start rendering from a single cell — pv.Sphere
+    and pv.read are ready to go. Because JupyterLite is static, you can deploy it to GitHub Pages or any
+    static host. No server required. This is the ideal entry point if you want to experience vtk.wasm
+    rendering quality without installing anything on your machine. Share by URL — a reproducible analysis
+    environment in one click. If you have ever lost track of which cells in a notebook depend on which
+    values and ended up with stale results, marimo's reactive model solves that problem for you automatically.
   s17: >-
-    marimo is a reactive Python notebook, and it also runs entirely in the
-    browser. The difference from Jupyter is the reactivity. In a traditional
-    notebook, when you change a value you have to manually rerun the
-    dependent cells. In marimo, the dependency graph drives execution
-    automatically — when a cell value changes, every dependent cell reruns
-    on its own. For 3D visualization this means you can wire a slider to
-    mesh parameters, drag the slider, and the mesh redraws instantly. No
-    rerun button needed. This is a big improvement in exploratory
-    efficiency — parameter sweeps become effortless, and the pace of
-    exploratory visualization work goes up. The iframe on this slide is a
-    live marimo demo. Share by URL — a reactive 3D exploration environment
-    in one click.
+    marimo is a reactive Python notebook, and it also runs entirely in the browser. The difference from
+    Jupyter is the reactivity. In a traditional notebook, when you change a value you have to manually
+    rerun the dependent cells. In marimo, the dependency graph drives execution automatically — when a
+    cell value changes, every dependent cell reruns on its own. For 3D visualization this means you can
+    wire a slider to mesh parameters, drag the slider, and the mesh redraws instantly. No rerun button
+    needed. This is a big improvement in exploratory efficiency — parameter sweeps become effortless,
+    and the pace of exploratory visualization work goes up. The iframe on this slide is a live marimo
+    demo. Share by URL — a reactive 3D exploration environment in one click.
   s18: >-
-    stlite runs Streamlit entirely in the browser — no server, no install.
-    The demo on this slide is a Stanford Bunny with two widgets: a select
-    box to pick from eight colors, and a slider to tune opacity from zero
-    to one. As you change the widgets, the mesh updates live. This is a
-    full interactive app, built with a few lines of declarative Streamlit
-    code, running entirely client-side. The use case is clear: when you
-    need an interactive app with widgets — not a notebook, but a tool that
-    someone non-technical can use — stlite is the natural choice.
-    JupyterLite and marimo suit exploratory notebook visualization; stlite
-    suits widget-based interactive apps. They are complementary, not
-    competing. Best for publishing — share by URL, no backend required.
-    The right tool depends on your audience: notebooks for exploration,
+    stlite runs Streamlit entirely in the browser — no server, no install. The demo on this slide is a
+    Stanford Bunny with two widgets: a select box to pick from eight colors, and a slider to tune opacity
+    from zero to one. As you change the widgets, the mesh updates live. This is a full interactive app,
+    built with a few lines of declarative Streamlit code, running entirely client-side. The use case is
+    clear: when you need an interactive app with widgets — not a notebook, but a tool that someone non-technical
+    can use — stlite is the natural choice. JupyterLite and marimo suit exploratory notebook visualization;
+    stlite suits widget-based interactive apps. They are complementary, not competing. Best for publishing
+    — share by URL, no backend required. The right tool depends on your audience: notebooks for exploration,
     widgets for delivery.
   s19: >-
-    Every Examples section in the pyvista-wasm API documentation gets a "Try
-    it in JupyterLite!" button. When you click it, the example preamble runs
-    under Pyodide: micropip installs the dependencies like jinja2 and
-    lazy-loader, sys.path is set to point at the source directory, and then
-    you import pyvista_wasm as pv and render. The iframe on this slide
-    shows the API docs for the Light class. The point is that visitors can
-    render meshes in the browser without any local install — they do not
-    need Python, they do not need a virtual environment, they do not need
-    to clone the repo. They click a button and see the result. This lowers
-    the barrier to trying the library to essentially zero. The docs are not
-    just documentation — they are a live environment where every example
-    runs and renders in the same browser tab you are reading in.
+    Every Examples section in the pyvista-wasm API documentation gets a "Try it in JupyterLite!" button.
+    When you click it, the example preamble runs under Pyodide: micropip installs the dependencies like
+    jinja2 and lazy-loader, sys.path is set to point at the source directory, and then you import pyvista_wasm
+    as pv and render. The iframe on this slide shows the API docs for the Light class. The point is that
+    visitors can render meshes in the browser without any local install — they do not need Python, they
+    do not need a virtual environment, they do not need to clone the repo. They click a button and see
+    the result. This lowers the barrier to trying the library to essentially zero. The docs are not just
+    documentation — they are a live environment where every example runs and renders in the same browser
+    tab you are reading in.
   s20: >-
-    pyvista-wasm also ships a CLI so you can work from the terminal without
-    writing Python code. The help output on this slide lists the commands.
-    You can plot one or more mesh files in the browser. You can show version
-    and environment information with info. You can capture a preview GIF of
-    the JupyterLite, marimo, or stlite demos. You can export a
-    self-contained VTK.wasm demo page for a talk slide deck. And you can
-    check that the JA and EN slide locale files share the same key
-    structure with check-locale-parity. The CLI makes integration with
-    coding agents easier too — a tool that can call a command line can
-    drive 3D visualization without constructing Python code. No Python
-    required, just a shell. This also opens the door to coding agents — an
-    AI assistant that can invoke a CLI can produce and share 3D
-    visualizations end to end.
+    pyvista-wasm also ships a CLI so you can work from the terminal without writing Python code. The help
+    output on this slide lists the commands. You can plot one or more mesh files in the browser. You can
+    show version and environment information with info. You can capture a preview GIF of the JupyterLite,
+    marimo, or stlite demos. You can export a self-contained VTK.wasm demo page for a talk slide deck.
+    And you can check that the JA and EN slide locale files share the same key structure with check-locale-parity.
+    The CLI makes integration with coding agents easier too — a tool that can call a command line can
+    drive 3D visualization without constructing Python code. No Python required, just a shell. This also
+    opens the door to coding agents — an AI assistant that can invoke a CLI can produce and share 3D visualizations
+    end to end.
   s21: >-
-    This talk is inspired by a tech blog article from Akari Inc., my
-    employer, titled "Browser-complete 3D visualization with vtk.wasm." The
-    article is linked on this slide. The framing of this entire deck — the
-    motivation for leaving server-side rendering behind, the vtk.wasm
-    background, the JupyterLite, marimo, and stlite demos, and the use-case
-    discussion — follows the structure of that article. If you want the
-    longer write-up with more detail than a twenty-five-minute talk can
-    hold, read the article. It is in Japanese, but the diagrams and code
-    are language-independent. The core argument is the same one I have been
-    making: the browser is now capable enough, and the server is no longer
-    required for sharing 3D scientific visualization. If you read Japanese,
-    I encourage you to start there; if not, the diagrams alone are worth
-    your time.
+    This talk is inspired by a tech blog article from Akari Inc., my employer, titled "Browser-complete
+    3D visualization with vtk.wasm." The article is linked on this slide. The framing of this entire deck
+    — the motivation for leaving server-side rendering behind, the vtk.wasm background, the JupyterLite,
+    marimo, and stlite demos, and the use-case discussion — follows the structure of that article. If
+    you want the longer write-up with more detail than a twenty-five-minute talk can hold, read the article.
+    It is in Japanese, but the diagrams and code are language-independent. The core argument is the same
+    one I have been making: the browser is now capable enough, and the server is no longer required for
+    sharing 3D scientific visualization. If you read Japanese, I encourage you to start there; if not,
+    the diagrams alone are worth your time.
   s22: >-
-    The image on this slide shows the PyVista contributors. PyVista is built
-    by this many people — it is a healthy, active open-source project with a
-    real community behind it. pyvista-wasm is newer, and contributions are
-    welcome. Whether it is bug reports, feature requests, documentation
-    improvements, or code contributions, everything helps. The project is
-    actively developed and the path to running PyVista entirely in the
-    browser is real and working today, not a research prototype. If you use
-    PyVista in your work, if you are interested in WebAssembly, or if you
-    just want to help make 3D scientific visualization more accessible to
-    more people, come contribute. The barrier to entry is low and the
-    community is welcoming. Even a bug report or a documentation fix
-    makes a real difference to a project of this size.
+    The image on this slide shows the PyVista contributors. PyVista is built by this many people — it
+    is a healthy, active open-source project with a real community behind it. pyvista-wasm is newer, and
+    contributions are welcome. Whether it is bug reports, feature requests, documentation improvements,
+    or code contributions, everything helps. The project is actively developed and the path to running
+    PyVista entirely in the browser is real and working today, not a research prototype. If you use PyVista
+    in your work, if you are interested in WebAssembly, or if you just want to help make 3D scientific
+    visualization more accessible to more people, come contribute. The barrier to entry is low and the
+    community is welcoming. Even a bug report or a documentation fix makes a real difference to a project
+    of this size.
   s23: >-
-    That brings us to the end. Questions and discussion are welcome —
-    please scan the QR code on this slide to open the GitHub Discussions
-    page for pyvista-wasm. You can also find me at github.com/tkoyama010.
-    If you want to try any of the demos I showed today, the links are in the
-    slides, which are published online. Thank you for your attention, and
-    thank you to PyCon JP for hosting. I hope I have convinced you that
-    running PyVista entirely in the browser via WebAssembly is not just a
-    prototype — it is practical today, and it removes the server from the
-    story. Let's take the discussion online. I am happy to answer any
-    questions you have.
+    That brings us to the end. Questions and discussion are welcome — please scan the QR code on this
+    slide to open the GitHub Discussions page for pyvista-wasm. You can also find me at github.com/tkoyama010.
+    If you want to try any of the demos I showed today, the links are in the slides, which are published
+    online. Thank you for your attention, and thank you to PyCon JP for hosting. I hope I have convinced
+    you that running PyVista entirely in the browser via WebAssembly is not just a prototype — it is practical
+    today, and it removes the server from the story. Let's take the discussion online. I am happy to answer
+    any questions you have.

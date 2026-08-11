@@ -1,17 +1,14 @@
+---
 name: README i18n Check
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 permissions: {}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   readme-i18n-check:
     runs-on: ubuntu-latest
@@ -22,7 +19,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-
       - name: Check README i18n drift
         uses: tkoyama010/readme-i18n-check@05752ce4dbfe0efab3b94b497db48cce5b7cb251  # v0.1.0
         with:

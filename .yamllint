@@ -1,0 +1,13 @@
+# yamllint configuration
+# See https://yamllint.readthedocs.io/en/stable/configuration.html
+# All rules enabled via the default profile. The only per-rule tweak is
+# truthy.check-keys: GitHub workflow files use `on:` as a map key, which
+# YAML 1.1 parses as a boolean; the rule stays active for values, it just
+# stops flagging the key name (the documented GitHub-Workflow workaround).
+extends: default
+
+rules:
+  truthy:
+    check-keys: false
+  line-length:
+    max: 120
