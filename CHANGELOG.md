@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.11.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.10.0...pyvista-wasm-v0.11.0) (2026-08-11)
+
+
+### Features
+
+* add API docs "Try it in JupyterLite!" slide to PyCon JP 2026 deck ([#493](https://github.com/tkoyama010/pyvista-wasm/issues/493)) ([78cb810](https://github.com/tkoyama010/pyvista-wasm/commit/78cb8109ef8e7959fb3411dfceb74090927ce5db))
+* add localizable speaker notes to PyCon JP 2026 deck ([#496](https://github.com/tkoyama010/pyvista-wasm/issues/496)) ([80a8a71](https://github.com/tkoyama010/pyvista-wasm/commit/80a8a71b92e487b1b6f8479a24999e2d980089fe))
+* add pyvista-wasm CLI slide to PyCon JP 2026 deck ([#488](https://github.com/tkoyama010/pyvista-wasm/issues/488)) ([fbd85b2](https://github.com/tkoyama010/pyvista-wasm/commit/fbd85b29128b2d2f7421facc91652edc755d1c3e))
+* show skill icons on profile slide via skillicons.dev ([#495](https://github.com/tkoyama010/pyvista-wasm/issues/495)) ([761af04](https://github.com/tkoyama010/pyvista-wasm/commit/761af04245e61194b947662765b471da2d03d6d1))
+* write English speaker script for all slides ([#501](https://github.com/tkoyama010/pyvista-wasm/issues/501)) ([5835c28](https://github.com/tkoyama010/pyvista-wasm/commit/5835c28451b986b73f80fe7576a109088a01b405))
+* write Japanese speaker script for all slides ([#497](https://github.com/tkoyama010/pyvista-wasm/issues/497)) ([23d6ccf](https://github.com/tkoyama010/pyvista-wasm/commit/23d6ccf1c1f941ce5b787361c75ceb2c543f6097))
+
+
+### Documentation
+
+* add CLI reference documentation mirroring pyvista-js ([#489](https://github.com/tkoyama010/pyvista-wasm/issues/489)) ([bac6394](https://github.com/tkoyama010/pyvista-wasm/commit/bac63942527b34ce9e7119ba1ff4efda6e321f19))
+* add tkoyama010 as a contributor for code ([#500](https://github.com/tkoyama010/pyvista-wasm/issues/500)) ([672fcef](https://github.com/tkoyama010/pyvista-wasm/commit/672fcef0d3f393b66e79a918f4bc79eb3f43b60e))
+* add tkoyama010 as a contributor for translation ([#491](https://github.com/tkoyama010/pyvista-wasm/issues/491)) ([f555e93](https://github.com/tkoyama010/pyvista-wasm/commit/f555e935adbf0ccbdf628af2c4b4d354b60d66f5))
+
 ## [0.10.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.9.0...pyvista-wasm-v0.10.0) (2026-08-08)
 
 ### Features
