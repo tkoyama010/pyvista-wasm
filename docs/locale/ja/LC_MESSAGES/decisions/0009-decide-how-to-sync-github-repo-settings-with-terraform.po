@@ -764,4 +764,3 @@ msgid ""
 "Related: [ADR-0005](0005-verify-agents-md-quality-in-ci.md) (scheduled-CI"
 " verification pattern reused for drift detection)"
 msgstr "関連: [ADR-0005](0005-verify-agents-md-quality-in-ci.md)（ドリフト検出に再利用されたスケジュールCI検証パターン）"
-
