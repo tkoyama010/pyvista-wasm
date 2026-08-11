@@ -141,13 +141,38 @@ See [HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs).
 
 ### Chosen workflow at a glance
 
-| Step | Where | Who | Token |
-|---|---|---|---|
-| `terraform fmt -check` / `validate` | CI on PR | GitHub Actions | none (read-only) |
-| `terraform plan` | CI on PR | GitHub Actions | `GITHUB_TOKEN` (read-only) or OIDC short-lived |
-| `terraform plan` (drift check) | CI scheduled (weekly) | GitHub Actions | `GITHUB_TOKEN` (read-only) or OIDC short-lived |
-| `terraform apply` | CI on merge, gated by Environment `required_reviewers` | maintainer (approval click) | OIDC short-lived, minted on demand, scoped by trust policy |
-| State storage | committed `terraform.tfstate` (by apply job, on success) | Git | n/a |
+```{mermaid}
+sequenceDiagram
+    autonumber
+    participant M as Maintainer
+    participant PR as Pull Request
+    participant CI as GitHub Actions
+    participant ENV as Environment<br/>required_reviewers
+    participant GH as GitHub API
+    participant GIT as Git (repo)
+
+    M->>PR: Open PR touching terraform/**
+    PR->>CI: Trigger plan workflow
+    CI->>GH: terraform fmt -check / validate
+    CI->>GH: terraform plan (read-only GITHUB_TOKEN)
+    CI->>PR: Post plan output as comment
+    M->>PR: Review plan, merge PR
+    PR->>CI: Trigger apply workflow on merge
+    CI->>ENV: Request apply approval
+    Note over ENV,M: Apply job pauses —<br/>no token minted yet
+    M->>ENV: Click Approve in Actions UI
+    ENV->>CI: Approval recorded (actor, timestamp)
+    CI->>GH: Mint OIDC short-lived token
+    CI->>GH: terraform apply (scoped to main + terraform-apply)
+    GH-->>CI: Apply result
+    CI->>GIT: Commit terraform.tfstate on success
+    CI->>PR: Post apply result
+
+    Note over CI,GH: Weekly scheduled drift check
+    CI->>GH: terraform plan -detailed-exitcode
+    GH-->>CI: Exit code 2 = drift detected
+    CI->>PR: Open or update drift issue
+```
 
 ### Why the Environment approval gate changes the OIDC calculus
 
