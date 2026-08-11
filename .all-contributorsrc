@@ -18,7 +18,8 @@
         "maintenance",
         "doc",
         "security",
-        "test"
+        "test",
+        "tool"
       ]
     }
   ],

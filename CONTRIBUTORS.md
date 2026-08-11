@@ -19,7 +19,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tkoyama010"><img src="https://avatars.githubusercontent.com/u/7513610?v=4?s=100" width="100px;" alt="Tetsuo Koyama"/><br /><sub><b>Tetsuo Koyama</b></sub></a><br /><a href="#translation-tkoyama010" title="Translation">🌍</a> <a href="https://github.com/tkoyama010/pyvista-wasm/commits?author=tkoyama010" title="Code">💻</a> <a href="#maintenance-tkoyama010" title="Maintenance">🚧</a> <a href="https://github.com/tkoyama010/pyvista-wasm/commits?author=tkoyama010" title="Documentation">📖</a> <a href="#security-tkoyama010" title="Security">🛡️</a> <a href="#infra-tkoyama010" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tkoyama010"><img src="https://avatars.githubusercontent.com/u/7513610?v=4?s=100" width="100px;" alt="Tetsuo Koyama"/><br /><sub><b>Tetsuo Koyama</b></sub></a><br /><a href="#translation-tkoyama010" title="Translation">🌍</a> <a href="https://github.com/tkoyama010/pyvista-wasm/commits?author=tkoyama010" title="Code">💻</a> <a href="#maintenance-tkoyama010" title="Maintenance">🚧</a> <a href="https://github.com/tkoyama010/pyvista-wasm/commits?author=tkoyama010" title="Documentation">📖</a> <a href="#security-tkoyama010" title="Security">🛡️</a> <a href="https://github.com/tkoyama010/pyvista-wasm/commits?author=tkoyama010" title="Tests">⚠️</a> <a href="#tool-tkoyama010" title="Tools">🔧</a></td>
     </tr>
   </tbody>
 </table>
