@@ -129,7 +129,7 @@ See [HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs).
 When the scheduled `terraform plan -detailed-exitcode` reports a diff (exit code 2), the workflow opens (or updates) a GitHub issue listing the drift. A maintainer then either:
 
 1. reverts the manual GitHub UI change so the live state matches the committed configuration, or
-2. imports the manual change into Terraform by editing `main.tf` to declare the resource/setting and running `terraform apply` locally to commit the updated state.
+1. imports the manual change into Terraform by editing `main.tf` to declare the resource/setting and running `terraform apply` locally to commit the updated state.
 
 ### Token scope and safety
 
