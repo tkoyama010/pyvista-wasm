@@ -17,7 +17,8 @@
         "code",
         "maintenance",
         "doc",
-        "security"
+        "security",
+        "test"
       ]
     }
   ],
