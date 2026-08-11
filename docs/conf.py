@@ -78,6 +78,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinxcontrib.typer",
     "sphinx_design",
+    "sphinxcontrib.mermaid",
 ]
 
 # -- Options for autodoc -----------------------------------------------------

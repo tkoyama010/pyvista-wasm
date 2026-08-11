@@ -63,6 +63,7 @@ optional-dependencies.docs = [
   "sphinx-book-theme>=1.1.0,<1.5.0; python_version>='3.12'",
   "sphinx-design>=0.6.0,<0.8.0; python_version>='3.12'",
   "sphinx-intl>=2.2.0,<2.4.0; python_version>='3.12'",
+  "sphinxcontrib-mermaid>=2.0.0,<3.0.0; python_version>='3.12'",
   "sphinxcontrib-typer>=0.5.1,<1.0.1; python_version>='3.12'",
 ]
 optional-dependencies.marimo = [
