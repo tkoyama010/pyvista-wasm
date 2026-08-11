@@ -144,23 +144,23 @@ See [HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs).
 ```{mermaid}
 sequenceDiagram
     autonumber
-    participant A as Actor
+    actor M as Maintainer
     participant PR as Pull Request
     participant CI as GitHub Actions
     participant ENV as Environment<br/>required_reviewers
     participant GH as GitHub API
     participant GIT as Git (repo)
 
-    A->>PR: Open PR touching terraform/**
+    M->>PR: Open PR touching terraform/**
     PR->>CI: Trigger plan workflow
     CI->>GH: terraform fmt -check / validate
     CI->>GH: terraform plan (read-only GITHUB_TOKEN)
     CI->>PR: Post plan output as comment
-    A->>PR: Review plan, merge PR
+    M->>PR: Review plan, merge PR
     PR->>CI: Trigger apply workflow on merge
     CI->>ENV: Request apply approval
-    Note over ENV,A: Apply job pauses —<br/>no token minted yet
-    A->>ENV: Click Approve in Actions UI
+    Note over ENV,M: Apply job pauses —<br/>no token minted yet
+    M->>ENV: Click Approve in Actions UI
     ENV->>CI: Approval recorded (actor, timestamp)
     CI->>GH: Mint OIDC short-lived token
     CI->>GH: terraform apply (scoped to main + terraform-apply)
