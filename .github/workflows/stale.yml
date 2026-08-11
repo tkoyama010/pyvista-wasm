@@ -22,15 +22,13 @@ jobs:
           exempt-pr-labels: "help wanted,good first issue,wontfix"
           # yamllint disable rule:line-length
           stale-issue-message: >-
-            This issue has been inactive for 60 days and is now marked stale.
-            It will be closed in 7 days unless there is new activity.
+            This issue has been inactive for 60 days and is now marked stale. It will be closed in 7 days
+            unless there is new activity.
           stale-pr-message: >-
-            This pull request has been inactive for 60 days and is now marked
-            stale. It will be closed in 7 days unless there is new activity.
+            This pull request has been inactive for 60 days and is now marked stale. It will be closed
+            in 7 days unless there is new activity.
           close-issue-message: >-
-            Closing this issue due to inactivity. Reopen if it becomes
-            relevant again.
+            Closing this issue due to inactivity. Reopen if it becomes relevant again.
           close-pr-message: >-
-            Closing this pull request due to inactivity. Reopen if it becomes
-            relevant again.
+            Closing this pull request due to inactivity. Reopen if it becomes relevant again.
           # yamllint enable rule:line-length
