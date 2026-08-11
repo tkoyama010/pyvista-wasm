@@ -159,6 +159,8 @@ git commit -m "feat(plotter): add support for physically based rendering"
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![djlint](https://img.shields.io/badge/html%20templates-djLint-blueviolet.svg)](https://www.djlint.com)
 [![Biome](https://img.shields.io/badge/code_style-Biome-60A5FA.svg)](https://biomejs.dev)
+[![yamllint](https://img.shields.io/badge/yaml-yamllint-ce5b00.svg)](https://github.com/adrienverge/yamllint)
+[![yamlfmt](https://img.shields.io/badge/yaml-yamlfmt-0064bd.svg)](https://github.com/google/yamlfmt)
 
 The project uses pre-commit hooks to ensure code quality.
 
