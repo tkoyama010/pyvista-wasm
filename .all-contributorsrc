@@ -16,7 +16,8 @@
         "translation",
         "code",
         "maintenance",
-        "doc"
+        "doc",
+        "security"
       ]
     }
   ],
