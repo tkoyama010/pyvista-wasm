@@ -1,12 +1,10 @@
+---
 name: Release Please
-
 on:
   push:
     branches:
       - main
-
 permissions: {}
-
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -18,13 +16,12 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7  # v5.0.0
         id: release
         with:
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/.release-please-manifest.json
-
   publish:
     name: Upload release to PyPI
     needs: release-please
@@ -37,31 +34,25 @@ jobs:
       contents: read
       id-token: write
       attestations: write
-
     steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-      with:
-        ref: ${{ needs.release-please.outputs.tag_name }}
-        persist-credentials: false
-
-    - name: Build TypeScript renderer
-      run: npm ci && npm run build
-
-    - name: Set up Python
-      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
-      with:
-        python-version: "3.x"
-
-    - name: Install dependencies
-      run: python -m pip install --upgrade build
-
-    - name: Build package
-      run: python -m build
-
-    # SPEC 8 — Securing the Release Process
-    # Generate and publish build provenance attestations for PyPI artifacts
-    # https://scientific-python.org/specs/spec-0008/
-    - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # release/v1
-      with:
-        attestations: true
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name }}
+          persist-credentials: false
+      - name: Build TypeScript renderer
+        run: npm ci && npm run build
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: python -m pip install --upgrade build
+      - name: Build package
+        run: python -m build
+      # SPEC 8 — Securing the Release Process
+      # Generate and publish build provenance attestations for PyPI artifacts
+      # https://scientific-python.org/specs/spec-0008/
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # release/v1
+        with:
+          attestations: true

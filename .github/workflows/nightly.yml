@@ -1,14 +1,12 @@
+---
 # SPEC 4 — Using and Creating Nightly Wheels
 # https://scientific-python.org/specs/spec-0004/
 name: Nightly Tests
-
 on:
   schedule:
     - cron: "0 0 * * 1"
   workflow_dispatch:
-
 permissions: {}
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,58 +17,54 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.12', '3.13']
-
     steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-      with:
-        persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9  # v9.0.0
+        with:
+          enable-cache: false
+      - name: Install nightly dependencies
+        run: |
+          uv pip install --system --pre \
+            --index-url https://pypi.anaconda.org/scientific-python-nightly-wheels/simple \
+            --extra-index-url https://pypi.org/simple \
+            numpy
+          uv pip install --system ".[dev]"
+      - name: Run tests
+        run: |
+          uv run pytest -m "not playwright" --cov=pyvista_wasm --cov-report=xml -x
+      - name: Create issue on failure
+        if: failure()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9
+        with:
+          # yamllint disable rule:line-length
+          script: |-
+            const title = `Nightly test failure (Python ${{ matrix.python-version }})`;
+            const body = `Nightly tests failed for Python ${{ matrix.python-version }}.\n\nSee: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const labels = ['nightly'];
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install uv
-      uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9  # v9.0.0
-      with:
-        enable-cache: false
-
-    - name: Install nightly dependencies
-      run: |
-        uv pip install --system --pre \
-          --index-url https://pypi.anaconda.org/scientific-python-nightly-wheels/simple \
-          --extra-index-url https://pypi.org/simple \
-          numpy
-        uv pip install --system ".[dev]"
-
-    - name: Run tests
-      run: |
-        uv run pytest -m "not playwright" --cov=pyvista_wasm --cov-report=xml -x
-
-    - name: Create issue on failure
-      if: failure()
-      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9
-      with:
-        script: |
-          const title = `Nightly test failure (Python ${{ matrix.python-version }})`;
-          const body = `Nightly tests failed for Python ${{ matrix.python-version }}.\n\nSee: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-          const labels = ['nightly'];
-
-          // Check for existing open issue to avoid duplicates
-          const issues = await github.rest.issues.listForRepo({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            labels: labels.join(','),
-            state: 'open',
-          });
-
-          const existing = issues.data.find(i => i.title === title);
-          if (!existing) {
-            await github.rest.issues.create({
+            // Check for existing open issue to avoid duplicates
+            const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title,
-              body,
-              labels,
+              labels: labels.join(','),
+              state: 'open',
             });
-          }
+
+            const existing = issues.data.find(i => i.title === title);
+            if (!existing) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels,
+              });
+            }
+          # yamllint enable rule:line-length

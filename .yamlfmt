@@ -1,0 +1,18 @@
+# yamlfmt configuration
+# See https://github.com/google/yamlfmt
+formatter:
+  type: basic
+  indent: 2
+  line_ending: lf
+  # Emit `---` at document start so yamllint's document-start rule passes.
+  include_document_start: true
+  # 2 spaces before line comments to match yamllint's comments rule
+  # (min-spaces-from-content: 2). Default of 1 makes the two hooks fight.
+  pad_line_comments: 2
+  # Wrap to 100 so wrapped lines stay comfortably under yamllint's
+  # line-length max of 120 (best_width overshoots by one word). Single long
+  # tokens (e.g. URLs in shell, no-space prose) are not split and are handled
+  # with inline yamllint directives where they cannot be wrapped.
+  max_line_length: 100
+  trim_trailing_whitespace: true
+  eof_newline: true

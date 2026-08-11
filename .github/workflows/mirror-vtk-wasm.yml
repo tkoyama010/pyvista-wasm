@@ -1,14 +1,12 @@
+---
 name: Mirror VTK.wasm Binary
-
 on:
   push:
     branches: [main]
     paths:
       - "packages/vtk-wasm-binary/package.json"
   workflow_dispatch:
-
 permissions: {}
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -16,16 +14,14 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-
       - name: Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
         with:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
-
       - name: Extract version
         id: version
         working-directory: packages/vtk-wasm-binary
@@ -33,7 +29,6 @@ jobs:
           version=$(node -p "require('./package.json').version")
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "VTK.wasm version: $version"
-
       - name: Check if already published
         id: check
         working-directory: packages/vtk-wasm-binary
@@ -48,12 +43,10 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
             echo "${pkg}@${VTK_VERSION} not found, will publish."
           fi
-
       - name: Download WASM binary from upstream
         if: steps.check.outputs.exists == 'false'
         working-directory: packages/vtk-wasm-binary
         run: node download.mjs
-
       - name: Verify downloaded file
         if: steps.check.outputs.exists == 'false'
         working-directory: packages/vtk-wasm-binary
@@ -69,7 +62,6 @@ jobs:
             echo "::error::File is suspiciously small ($size bytes)"
             exit 1
           fi
-
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
         working-directory: packages/vtk-wasm-binary

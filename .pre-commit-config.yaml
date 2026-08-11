@@ -1,3 +1,4 @@
+---
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
@@ -10,7 +11,16 @@ repos:
       - id: check-added-large-files
       - id: check-toml
       - id: check-merge-conflict
-
+  # Format YAML before linting so the linter sees normalised input.
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.21.0
+    hooks:
+      - id: yamlfmt
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [-c, .yamllint]
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
@@ -19,7 +29,6 @@ repos:
       - id: python-no-log-warn
       - id: python-use-type-annotations
       - id: text-unicode-replacement-char
-
   - repo: https://github.com/hukkin/mdformat
     rev: 1.0.0
     hooks:
@@ -30,18 +39,15 @@ repos:
         # as a setext heading, collapsing the deck into a single slide. mdformat
         # has no per-rule ignore, so scope out just this one file.
         exclude: ^slides/slides\.md$
-
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.27.0"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
-
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.12.3
     hooks:
       - id: uv-lock
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.16.2
     hooks:
@@ -50,7 +56,6 @@ repos:
         args: [--fix, --show-fixes]
       # Run the formatter
       - id: ruff-format
-
   - repo: https://github.com/djlint/djLint
     rev: v1.44.2
     hooks:
@@ -59,23 +64,19 @@ repos:
         args: ["--format-js", "--indent-js", "2"]
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
-
   - repo: https://github.com/biomejs/pre-commit
     rev: v2.5.7
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.0"]
-
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
-
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.13.1-1
     hooks:
       - id: shfmt
-
   - repo: https://github.com/scientific-python/cookie
     rev: 2026.06.18
     hooks:
@@ -88,28 +89,23 @@ repos:
         files: ^src/.*\.py$
         # SPEC 0: Use minimum supported numpy version
         additional_dependencies: [numpy>=2.0]
-
   - repo: https://github.com/adamchainz/blacken-docs
     rev: 1.20.0
     hooks:
       - id: blacken-docs
         additional_dependencies: [black==24.10.0]
-
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.3
     hooks:
       - id: codespell
-
   - repo: https://github.com/tkoyama010/standard-readme-pre-commit
     rev: edcf5d5d60ddb7ad3edb0fbc6c2164fa35e9a8ee
     hooks:
       - id: standard-readme
-
   - repo: https://github.com/tkoyama010/readme-i18n-check
     rev: v0.1.0
     hooks:
       - id: check-readme-i18n
-
   - repo: local
     hooks:
       - id: check-locale-parity
@@ -121,17 +117,16 @@ repos:
         pass_filenames: false
       - id: check-locale-parity-script
         name: Speaker script JA/EN key-parity check
-        entry: env PYTHONPATH=src python -m pyvista_wasm check-locale-parity --ja slides/locales/script/ja.yml --en slides/locales/script/en.yml
+        entry: env PYTHONPATH=src python -m pyvista_wasm check-locale-parity --ja slides/locales/script/ja.yml
+          --en slides/locales/script/en.yml
         language: python
         additional_dependencies: [pyyaml, typer, lazy-loader]
         files: ^slides/locales/script/(ja|en)\.yml$
         pass_filenames: false
-
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.29.0
     hooks:
       - id: zizmor
-
 ci:
   autofix_commit_msg: |
     chore: auto fixes from pre-commit.com hooks
