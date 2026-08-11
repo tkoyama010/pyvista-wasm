@@ -1,6 +1,8 @@
 name: Update stlite Preview GIF
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 permissions: {}
 
