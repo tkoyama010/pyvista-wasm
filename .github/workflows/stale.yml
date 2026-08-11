@@ -1,0 +1,36 @@
+---
+name: Stale
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+permissions: {}
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@4391f3da665fdf50b6810c1a66712fb9ba21aa93  # v11.0.0
+        with:
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-label: stale
+          stale-pr-label: stale
+          exempt-issue-labels: "help wanted,good first issue,wontfix"
+          exempt-pr-labels: "help wanted,good first issue,wontfix"
+          # yamllint disable rule:line-length
+          stale-issue-message: >-
+            This issue has been inactive for 60 days and is now marked stale.
+            It will be closed in 7 days unless there is new activity.
+          stale-pr-message: >-
+            This pull request has been inactive for 60 days and is now marked
+            stale. It will be closed in 7 days unless there is new activity.
+          close-issue-message: >-
+            Closing this issue due to inactivity. Reopen if it becomes
+            relevant again.
+          close-pr-message: >-
+            Closing this pull request due to inactivity. Reopen if it becomes
+            relevant again.
+          # yamllint enable rule:line-length
