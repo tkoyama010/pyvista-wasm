@@ -78,9 +78,9 @@ one-time steps in the GitHub UI / via `gh`:
    `Administration: write`, `Metadata: read`, `Environments: read/write`,
    `Issues: write`, `Pull requests: write`, `Workflows: read`. Install it on
    `tkoyama010/pyvista-wasm`.
-2. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
+1. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
    repository secrets `GH_APP_ID`, `GH_APP_INSTALLATION_ID`, `GH_APP_PEM`.
-3. Create the `terraform-apply` Environment in the repository settings:
+1. Create the `terraform-apply` Environment in the repository settings:
    - `Required reviewers`: `tkoyama010`
    - `Deployment branches`: `Selected branches` -> `main` only
    - `Wait timer`: `60s` (optional cooling-off)
@@ -120,7 +120,7 @@ Reconcile by either:
 
 1. **Revert** the manual GitHub UI change so the live state matches
    `terraform/` again, or
-2. **Import** the manual change into Terraform by editing `terraform/main.tf`
+1. **Import** the manual change into Terraform by editing `terraform/main.tf`
    to declare the resource/setting, then open a PR. The normal plan +
    Environment-gated apply flow commits the updated state.
 

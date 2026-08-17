@@ -198,7 +198,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: terraform
-        run: |
+        run: |-
           # yamllint disable rule:line-length
           {
             printf 'The scheduled `terraform plan -detailed-exitcode` reported a diff between the live GitHub repository settings and the declared state in `terraform/`.\n\n'
