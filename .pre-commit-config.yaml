@@ -123,7 +123,7 @@ repos:
         additional_dependencies: [pyyaml, typer, lazy-loader]
         files: ^slides/locales/script/(ja|en)\.yml$
         pass_filenames: false
-  - repo: https://github.com/woodruffw/zizmor-pre-commit
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.29.0
     hooks:
       - id: zizmor
