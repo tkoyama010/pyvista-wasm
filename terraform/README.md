@@ -75,12 +75,13 @@ one-time steps in the GitHub UI / via `gh`:
 
 1. Create a GitHub App (or reuse an existing one) with the repository
    permissions the provider needs:
-   `Administration: write`, `Metadata: read`, `Environments: read/write`,
-   `Issues: write`, `Pull requests: write`, `Workflows: read`. Install it on
-   `tkoyama010/pyvista-wasm`.
-1. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
+   `Administration: write`, `Contents: write`, `Environments: write`,
+   `Issues: write`, `Metadata: read`. Install it on `tkoyama010/pyvista-wasm`.
+   The workflow further scopes each minted token to exactly these via the
+   `permission-*` inputs on `actions/create-github-app-token` (zizmor-clean).
+2. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
    repository secrets `GH_APP_ID`, `GH_APP_INSTALLATION_ID`, `GH_APP_PEM`.
-1. Create the `terraform-apply` Environment in the repository settings:
+3. Create the `terraform-apply` Environment in the repository settings:
    - `Required reviewers`: `tkoyama010`
    - `Deployment branches`: `Selected branches` -> `main` only
    - `Wait timer`: `60s` (optional cooling-off)

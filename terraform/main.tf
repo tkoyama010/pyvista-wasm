@@ -51,6 +51,12 @@ resource "github_repository" "this" {
   vulnerability_alerts        = true
   web_commit_signoff_required = false
 
+  # The auto GITHUB_TOKEN used by the read-only plan/drift jobs cannot read
+  # the vulnerability-alerts endpoint (403). Skip that read so plan works
+  # with least-privilege tokens; the apply job (App token, Administration:
+  # write) still reconciles this field.
+  ignore_vulnerability_alerts_during_read = true
+
   # Squash commits carry only the PR title, no body list.
   squash_merge_commit_message = "BLANK"
 
