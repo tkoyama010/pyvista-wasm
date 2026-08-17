@@ -211,7 +211,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: terraform
-        run: |
+        run: |-
           {
             cat <<'EOF'
           The scheduled `terraform plan -detailed-exitcode` reported a diff

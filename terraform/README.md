@@ -79,9 +79,9 @@ one-time steps in the GitHub UI / via `gh`:
    `Issues: write`, `Metadata: read`. Install it on `tkoyama010/pyvista-wasm`.
    The workflow further scopes each minted token to exactly these via the
    `permission-*` inputs on `actions/create-github-app-token` (zizmor-clean).
-2. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
+1. Store the App's `app_id`, `installation_id`, and `private_key` (PEM) as
    repository secrets `GH_APP_ID`, `GH_APP_INSTALLATION_ID`, `GH_APP_PEM`.
-3. Create the `terraform-apply` Environment in the repository settings:
+1. Create the `terraform-apply` Environment in the repository settings:
    - `Required reviewers`: `tkoyama010`
    - `Deployment branches`: `Selected branches` -> `main` only
    - `Wait timer`: `60s` (optional cooling-off)
