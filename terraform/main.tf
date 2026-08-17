@@ -77,24 +77,13 @@ resource "github_branch_default" "this" {
   branch     = "main"
 }
 
-# Actions permissions: all actions allowed, workflows enabled, SHA-pinning
-# not enforced at the repo level (it is enforced by the zizmor review hook).
-resource "github_actions_repository_permissions" "this" {
-  repository      = github_repository.this.name
-  allowed_actions = "all"
-  enabled         = true
-  allowed_actions_config {
-    github_owned_allowed = true
-    patterns_allowed     = []
-    verified_allowed     = true
-  }
-}
-
-# ponytail: default_workflow_permissions (read) and
-# can_approve_pull_request_reviews (false) are not yet exposed as a
-# resource in integrations/github v6.6.0. They are set via the GitHub UI and
-# left unmanaged until the provider supports them; add a resource here when it
-# does.
+# ponytail: Actions permissions (allowed actions, workflow permissions) are
+# not managed in Terraform. The GET /actions/permissions endpoint requires
+# Administration scope, which the auto GITHUB_TOKEN used by the read-only plan
+# and drift jobs does not have (403). These settings are left UI-managed,
+# alongside default_workflow_permissions and can_approve_pull_request_reviews
+# which the provider does not yet expose. Revisit when the project switches
+# the plan job to an App-scoped token.
 
 # Labels in use across issues/PRs. Declaring them keeps colour and description
 # stable and prevents accidental removal.
