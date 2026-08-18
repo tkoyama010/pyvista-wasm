@@ -48,6 +48,15 @@ problem:
   conc_pre: These barriers make sharing analysis results
   conc_bold: quickly and securely
   conc_post: "difficult — what if the browser could do it all?"
+ssr_flow:
+  title: Server-side rendering is today's baseline — and its cost is the motivation
+  subtitle: Server-side rendering sequence diagram
+  col_cost: Cost
+  col_detail: Detail
+  i1t: Dedicated visualization server
+  i1d: provisioning, scaling, and a monthly bill — time and money that never stop
+  i2t: Client data sent to the server
+  i2d: confidential simulation results travel over the network to the server, a security risk
 why_wasm:
   title: Browser-complete solves security and resource issues
   subtitle: Browser-complete sequence diagram
