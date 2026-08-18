@@ -210,7 +210,14 @@ jobs:
           jq -S '{rules,conditions,enforcement,target,name}' /tmp/rs.json > /tmp/rs-before.json
           jq --argjson id "${app_id}" \
             'del(.id,.source,.source_type,.node_id,.created_at,.updated_at,.current_user_can_bypass,._links) |
-             .bypass_actors += [{"actor_id":$id,"actor_type":"Integration","bypass_mode":"always"}]' \
+             .bypass_actors += [{"actor_id":$id,"actor_type":"Integration","bypass_mode":"always"}] |
+             .rules |= map(
+               if .type == "required_status_checks" then
+                 .parameters.required_status_checks |= map(
+                   if .integration_id == null then del(.integration_id) else . end
+                 )
+               else . end
+             )' \
             /tmp/rs.json > /tmp/rs-update.json
           gh api --method PUT "repos/${repo}/rulesets/${ruleset_id}" \
             --input /tmp/rs-update.json > /tmp/rs-after.json
