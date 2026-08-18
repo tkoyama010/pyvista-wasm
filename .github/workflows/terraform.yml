@@ -162,6 +162,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
+          gh auth setup-git
           git config user.name "Tetsuo Koyama"
           git config user.email "tkoyama010@users.noreply.github.com"
           git add terraform/terraform.tfstate
