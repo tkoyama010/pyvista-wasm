@@ -16,7 +16,11 @@
         "translation",
         "code",
         "maintenance",
-        "doc"
+        "doc",
+        "security",
+        "test",
+        "tool",
+        "infra"
       ]
     }
   ],

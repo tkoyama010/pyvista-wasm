@@ -80,3 +80,11 @@ src/pyvista_wasm/templates/renderer.js
 slides/dist/
 slides/*.pdf
 slides/*.png
+
+# Terraform — state is committed for the terraform/ project only (ADR-0009);
+# ignored everywhere else so scratch state never leaks into Git. Only the
+# canonical terraform/terraform.tfstate is tracked; .backup files are not.
+*.tfstate
+*.tfstate.*
+!terraform/terraform.tfstate
+.terraform/
