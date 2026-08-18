@@ -248,7 +248,7 @@ jobs:
             echo "terraform.tfstate unchanged; nothing to commit"
             exit 0
           fi
-          git commit -m "chore(terraform): update terraform.tfstate after apply"
+          git commit -m "chore(terraform): update terraform.tfstate after apply [skip ci]"
           git push
   drift:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
