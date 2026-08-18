@@ -129,11 +129,19 @@ resource "github_repository_environment" "terraform_apply" {
   }
 }
 
-resource "github_repository_environment_deployment_policy" "main_only" {
-  repository     = github_repository.this.name
-  environment    = github_repository_environment.terraform_apply.environment
-  branch_pattern = "main"
-}
+# ponytail: the "main" branch deployment policy is bootstrapped in the GitHub
+# UI and left unmanaged here. The github_repository_environment_deployment_policy
+# resource is broken in provider v6.6.0 — import needs a numeric policy ID (not
+# the branch pattern) and the post-create read returns "Root object was present,
+# but now absent" when the policy already exists upstream. Re-add this resource
+# after upgrading the provider to >= v6.11 (PR #3162 fixes import + adds
+# policy_id attribute) and switch the workflow import to look up the numeric ID
+# via gh api .../deployment-branch-policies.
+# resource "github_repository_environment_deployment_policy" "main_only" {
+#   repository     = github_repository.this.name
+#   environment    = github_repository_environment.terraform_apply.environment
+#   branch_pattern = "main"
+# }
 
 # ponytail: the existing environments (codecov, github-pages, pypi,
 # release-please) are owned by the workflows that created them and are left
