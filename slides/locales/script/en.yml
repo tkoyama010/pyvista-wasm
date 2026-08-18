@@ -56,13 +56,13 @@ script:
     barriers make sharing analysis results quickly and securely difficult. The question is: what if the
     browser could do it all?
   s6: >-
-    Before the Wasm solution, let me name the baseline it replaces. Server-side rendering is how 3D
-    visualization is shared on the web today, and the sequence diagram on this slide shows the flow.
-    The user opens a URL, the browser asks a dedicated visualization server for the 3D view, the
-    server renders it with VTK and a GPU, and sends back a rendered image. Every frame round-trips
-    over the network. Two costs come with this. Time and money — someone has to provision, scale,
-    and pay for that server every month. And security — confidential simulation data has to travel
-    from the analyst's machine to the server. This is the baseline the next slide removes.
+    Before the Wasm solution, let me name the baseline it replaces. Server-side rendering is how 3D visualization
+    is shared on the web today, and the sequence diagram on this slide shows the flow. The user opens
+    a URL, the browser asks a dedicated visualization server for the 3D view, the server renders it with
+    VTK and a GPU, and sends back a rendered image. Every frame round-trips over the network. Two costs
+    come with this. Time and money — someone has to provision, scale, and pay for that server every month.
+    And security — confidential simulation data has to travel from the analyst's machine to the server.
+    This is the baseline the next slide removes.
   s7: >-
     This is where WebAssembly comes in. The sequence diagram on this slide shows the browser-complete
     flow. The user loads a mesh file — VTP, VTU, STL, any format VTK supports — and the entire visualization
