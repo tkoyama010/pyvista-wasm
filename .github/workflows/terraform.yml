@@ -186,12 +186,15 @@ jobs:
             echo "Set vars.GH_APP_ID to the App's numeric ID (GitHub App settings page) and re-run."
             exit 1
           fi
-          ruleset_id=$(gh api "repos/${repo}/rulesets" --jq '
-            [.[] | select(
-              .target == "branch" and
-              ((.conditions.ref_name.include // []) | any(. == "~DEFAULT_BRANCH"))
-            )] | .[0].id // empty
-          ')
+          # The rulesets LIST endpoint returns summaries without `conditions`,
+          # so filter by target=branch, then fetch each detail to find the one
+          # whose ref_name.include covers ~DEFAULT_BRANCH.
+          ruleset_id=""
+          for id in $(gh api "repos/${repo}/rulesets" --jq '.[] | select(.target=="branch") | .id'); do
+            incl=$(gh api "repos/${repo}/rulesets/${id}" \
+              --jq '(.conditions.ref_name.include // []) | any(. == "~DEFAULT_BRANCH")')
+            if [ "${incl}" = "true" ]; then ruleset_id="${id}"; break; fi
+          done
           if [ -z "${ruleset_id}" ]; then
             echo "No branch ruleset on the default branch; nothing to grant."
             exit 0
