@@ -1,0 +1,244 @@
+---
+name: Terraform
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
+  schedule:
+    - cron: "17 3 * * 1"  # Weekly Monday 03:17 UTC
+  workflow_dispatch:
+permissions: {}
+# Apply mutates repo state; never cancel an in-flight run mid-apply.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e  # v4.0.1
+        with:
+          terraform_version: 1.15.8
+          terraform_wrapper: false
+      - name: terraform fmt -check
+        working-directory: terraform
+        run: terraform fmt -check -recursive
+      - name: terraform init
+        working-directory: terraform
+        run: terraform init -input=false
+      - name: terraform validate
+        working-directory: terraform
+        run: terraform validate
+      - name: terraform plan
+        id: plan
+        working-directory: terraform
+        env:
+          # Read-only plan. The auto GITHUB_TOKEN is ephemeral, not a stored
+          # PAT; only the apply step is required to be PAT-free.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          terraform plan -input=false -no-color > plan.txt 2>&1
+          ec=$?
+          echo "exitcode=$ec" >> "$GITHUB_OUTPUT"
+          if [ "$ec" -eq 1 ]; then
+            cat plan.txt
+            exit 1
+          fi
+          # 0 (no changes) and 2 (changes) are both valid plan results.
+      - name: Post plan comment
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9
+        env:
+          PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
+        with:
+          script: |
+            const fs = require('fs');
+            let plan = fs.readFileSync('terraform/plan.txt', 'utf8');
+            const MAX = 60000;
+            if (plan.length > MAX) {
+              plan = plan.slice(0, MAX) + '\n…(plan truncated; see run log for full output)\n';
+            }
+            const marker = '<!-- terraform-plan-comment -->';
+            const exitcode = Number(process.env.PLAN_EXITCODE);
+            const summary = exitcode === 0
+              ? 'No changes. Infrastructure is in sync with `terraform/`.'
+              : 'Changes detected. Review the plan below before merge.';
+            const body = `${marker}\n### Terraform Plan\n\n${summary}\n\n\`\`\`hcl\n${plan}\n\`\`\`\n`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+  apply:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Gated by the terraform-apply Environment: required_reviewers =
+    # [tkoyama010] + main-only deployment branch policy. The job pauses here
+    # until a maintainer clicks Approve in the Actions UI.
+    environment: terraform-apply
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      # Mint a short-lived installation token from a GitHub App. No PAT, no
+      # secrets.GITHUB_TOKEN read in this step. See terraform/README.md for
+      # why a pure-OIDC path is not available for the github provider.
+      - name: Mint App installation token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          installation-id: ${{ secrets.GH_APP_INSTALLATION_ID }}
+          private-key: ${{ secrets.GH_APP_PEM }}
+          # Scope the token to least privilege (zizmor: avoid blanket
+          # installation permissions). Only what terraform apply + the
+          # tfstate commit need.
+          permission-administration: write
+          permission-contents: write
+          permission-environments: write
+          permission-issues: write
+          permission-metadata: read
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e  # v4.0.1
+        with:
+          terraform_version: 1.15.8
+          terraform_wrapper: false
+      - name: terraform init
+        working-directory: terraform
+        run: terraform init -input=false
+      # Import the Environment resource on the first run (it is created in
+      # the GitHub UI as a one-time bootstrap; see README). `|| true` makes
+      # subsequent runs a no-op once it is already in state.
+      - name: Import terraform-apply environment if needed
+        working-directory: terraform
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          set +e
+          terraform import github_repository_environment.terraform_apply \
+            pyvista-wasm:terraform-apply || true
+          terraform import github_repository_environment_deployment_policy.main_only \
+            pyvista-wasm:terraform-apply:main || true
+      - name: terraform apply
+        working-directory: terraform
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: terraform apply -input=false -auto-approve -no-color
+      - name: Commit terraform.tfstate
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git config user.name "Tetsuo Koyama"
+          git config user.email "tkoyama010@users.noreply.github.com"
+          git add terraform/terraform.tfstate
+          if git diff --cached --quiet; then
+            echo "terraform.tfstate unchanged; nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(terraform): update terraform.tfstate after apply"
+          git push
+  drift:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e  # v4.0.1
+        with:
+          terraform_version: 1.15.8
+          terraform_wrapper: false
+      - name: terraform init
+        working-directory: terraform
+        run: terraform init -input=false
+      - name: terraform plan -detailed-exitcode
+        id: drift
+        working-directory: terraform
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          terraform plan -input=false -no-color -detailed-exitcode > drift.txt 2>&1
+          ec=$?
+          echo "exitcode=$ec" >> "$GITHUB_OUTPUT"
+          cat drift.txt
+          # 0 = in sync, 2 = drift, anything else = error.
+          if [ "$ec" -eq 1 ] || [ "$ec" -gt 2 ]; then
+            exit 1
+          fi
+          exit 0
+      - name: Open or update drift issue
+        if: steps.drift.outputs.exitcode == '2'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: terraform
+        run: |-
+          {
+            cat <<'EOF'
+          The scheduled `terraform plan -detailed-exitcode` reported a diff
+          between the live GitHub repository settings and the declared state
+          in `terraform/`.
+
+          Reconcile by either:
+          1. reverting the manual GitHub UI change so live state matches
+             `terraform/`, or
+          2. importing the manual change into Terraform by editing
+             `terraform/main.tf` and opening a PR (the normal plan +
+             Environment-gated apply flow will commit the updated state).
+
+          ```hcl
+          EOF
+            cat drift.txt
+            printf '\n```\n'
+          } > drift-issue-body.md
+          existing=$(gh issue list --repo tkoyama010/pyvista-wasm \
+            --search "Terraform drift detected in:title" --state open \
+            --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo tkoyama010/pyvista-wasm \
+              --body-file drift-issue-body.md
+          else
+            gh issue create --repo tkoyama010/pyvista-wasm \
+              --title "Terraform drift detected" \
+              --label "bug,user story" \
+              --body-file drift-issue-body.md
+          fi
