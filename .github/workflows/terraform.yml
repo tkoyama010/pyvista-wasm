@@ -143,6 +143,8 @@ jobs:
       # Import the Environment resource on the first run (it is created in
       # the GitHub UI as a one-time bootstrap; see README). `|| true` makes
       # subsequent runs a no-op once it is already in state.
+      # The "main" branch deployment policy is not imported — the resource is
+      # unmanaged due to a provider v6.6.0 bug; see terraform/main.tf for why.
       - name: Import terraform-apply environment if needed
         working-directory: terraform
         env:
@@ -151,8 +153,6 @@ jobs:
           set +e
           terraform import github_repository_environment.terraform_apply \
             pyvista-wasm:terraform-apply || true
-          terraform import github_repository_environment_deployment_policy.main_only \
-            pyvista-wasm:terraform-apply:main || true
       - name: terraform apply
         working-directory: terraform
         env:
