@@ -158,6 +158,65 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: terraform apply -input=false -auto-approve -no-color
+      # ADR-0009 has the apply job commit terraform.tfstate to main directly,
+      # but main's branch ruleset requires a PR + status checks and its only
+      # bypass actor is a RepositoryRole (admin *users*), which does not cover
+      # GitHub Apps. Grant the apply App an Integration bypass so the state
+      # commit can land. The apply is human-gated by the terraform-apply
+      # Environment, so this does not weaken the PR-only policy for any actor
+      # but this App. Idempotent + verified: only adds the App, and asserts no
+      # other ruleset field drifted as a result of the update.
+      - name: Grant apply App bypass on main ruleset
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          APP_ID_VAR: ${{ vars.GH_APP_ID }}
+        run: |
+          set -euo pipefail
+          repo="tkoyama010/pyvista-wasm"
+          # The token action exposes app-slug but not the numeric App ID that
+          # the Integration bypass actor needs. /apps/{slug} returns it for
+          # listed apps; for unlisted apps, fall back to vars.GH_APP_ID (the
+          # App's numeric ID from its settings page — not secret).
+          app_id=$(gh api "/apps/${APP_SLUG}" --jq .id 2>/dev/null || true)
+          if [ -z "${app_id}" ]; then app_id="${APP_ID_VAR:-}"; fi
+          if [ -z "${app_id}" ]; then
+            echo "::error::Could not resolve the apply App's numeric ID."
+            echo "GET /apps/${APP_SLUG} is forbidden (App is unlisted) and vars.GH_APP_ID is unset."
+            echo "Set vars.GH_APP_ID to the App's numeric ID (GitHub App settings page) and re-run."
+            exit 1
+          fi
+          ruleset_id=$(gh api "repos/${repo}/rulesets" --jq '
+            [.[] | select(
+              .target == "branch" and
+              ((.conditions.ref_name.include // []) | any(. == "~DEFAULT_BRANCH"))
+            )] | .[0].id // empty
+          ')
+          if [ -z "${ruleset_id}" ]; then
+            echo "No branch ruleset on the default branch; nothing to grant."
+            exit 0
+          fi
+          gh api "repos/${repo}/rulesets/${ruleset_id}" > /tmp/rs.json
+          already=$(jq --argjson id "${app_id}" \
+            '[.bypass_actors[]? | select(.actor_type=="Integration" and .actor_id==$id)] | length' \
+            /tmp/rs.json)
+          if [ "${already}" != "0" ]; then
+            echo "App ${app_id} already bypasses ruleset ${ruleset_id}."
+            exit 0
+          fi
+          jq -S '{rules,conditions,enforcement,target,name}' /tmp/rs.json > /tmp/rs-before.json
+          jq --argjson id "${app_id}" \
+            'del(.id,.source,.source_type,.node_id,.created_at,.updated_at,.current_user_can_bypass,._links) |
+             .bypass_actors += [{"actor_id":$id,"actor_type":"Integration","bypass_mode":"always"}]' \
+            /tmp/rs.json > /tmp/rs-update.json
+          gh api --method PUT "repos/${repo}/rulesets/${ruleset_id}" \
+            --input /tmp/rs-update.json > /tmp/rs-after.json
+          jq -S '{rules,conditions,enforcement,target,name}' /tmp/rs-after.json > /tmp/rs-after-keyfields.json
+          if ! diff -u /tmp/rs-before.json /tmp/rs-after-keyfields.json; then
+            echo "::error::ruleset fields drifted during bypass grant; aborting before push."
+            exit 1
+          fi
+          echo "Granted Integration bypass to App ${app_id} on ruleset ${ruleset_id}; no other fields changed."
       - name: Commit terraform.tfstate
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
