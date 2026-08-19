@@ -56,17 +56,7 @@ script:
     barriers make sharing analysis results quickly and securely difficult. The question is: what if the
     browser could do it all?
   s6: >-
-    This is where WebAssembly comes in. The sequence diagram on this slide shows the browser-complete
-    flow. The user loads a mesh file — VTP, VTU, STL, any format VTK supports — and the entire visualization
-    pipeline runs in the browser. The 3D mesh is displayed with full interactivity: rotate, pan, zoom.
-    The user can then share the URL, and someone else opens it and gets the same experience. Note the
-    key point on the diagram: no data exchange. WebAssembly runs the whole pipeline locally, so every
-    barrier from the previous slide falls away at once. No data is sent anywhere. No server to provision.
-    No infrastructure to pay for. Confidential data never leaves the machine. A URL is the whole delivery.
-    This is the core message of the talk: the browser is now capable enough to run the full visualization
-    pipeline, and once you accept that, every other architectural decision follows.
-  s7: >-
-    Let me make the contrast sharper with a side-by-side comparison. On the left is the server-side rendering
+    Let me make the contrast clear with a side-by-side comparison. On the left is the server-side rendering
     approach. The user opens a URL, the browser requests the 3D view, the server renders it with VTK and
     a GPU, and sends back a rendered image. Every frame, every interaction round-trips over the network.
     On the right is the WebAssembly approach. The user opens a URL, the browser executes the VTK pipeline
@@ -74,6 +64,16 @@ script:
     disappears entirely — rendering happens where the data already is. This is not a marginal improvement
     over SSR. It is a fundamentally different architecture that removes the network from the critical
     path entirely.
+  s7: >-
+    Now let me zoom in on the Wasm side. The sequence diagram on this slide shows the browser-complete
+    flow. The user loads a mesh file — VTP, VTU, STL, any format VTK supports — and the entire visualization
+    pipeline runs in the browser. The 3D mesh is displayed with full interactivity: rotate, pan, zoom.
+    The user can then share the URL, and someone else opens it and gets the same experience. Note the
+    key point on the diagram: no data exchange. WebAssembly runs the whole pipeline locally, so every
+    one of those barriers falls away at once. No data is sent anywhere. No server to provision. No infrastructure
+    to pay for. Confidential data never leaves the machine. A URL is the whole delivery. This is the core
+    message of the talk: the browser is now capable enough to run the full visualization pipeline, and
+    once you accept that, every other architectural decision follows.
   s8: >-
     VTK is the engine behind PyVista, and it is the most widely used visualization C++ library in scientific
     computing worldwide. The iframe shows a curated list of VTK projects, giving you a sense of how broadly
