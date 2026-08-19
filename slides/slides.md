@@ -222,42 +222,6 @@ class: text-left
 class: text-left
 ---
 
-# {{ $t("why_wasm.title") }}
-
-<div class="text-lg opacity-80 mt-1">{{ $t("why_wasm.subtitle") }}</div>
-
-<div class="flex justify-center mt-4">
-
-```mermaid {scale: 0.65}
-sequenceDiagram
-    participant B2 as Browser
-    actor U2 as Other User
-    actor U as User
-    participant B as Browser
-    participant S as Server
-
-    B-->>U: 3D viewer ready
-
-    U->>B: Load mesh file (VTP/VTU/STL)
-    B->>B: Execute filter pipeline in-browser
-    B-->>U: 3D mesh displayed (rotate/pan/zoom)
-
-    U->>U2: Share URL
-
-    U2->>B2: Open URL
-
-    Note over B,S: No data exchange
-```
-
-</div>
-
-<!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. -->
-<!-- $t("script.s6") -->
-
----
-class: text-left
----
-
 # {{ $t("arch.title") }}
 
 <div class="text-lg opacity-80 mt-1">{{ $t("arch.subtitle") }}</div>
@@ -299,6 +263,42 @@ sequenceDiagram
 </style>
 
 <!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
+<!-- $t("script.s6") -->
+
+---
+class: text-left
+---
+
+# {{ $t("why_wasm.title") }}
+
+<div class="text-lg opacity-80 mt-1">{{ $t("why_wasm.subtitle") }}</div>
+
+<div class="flex justify-center mt-4">
+
+```mermaid {scale: 0.65}
+sequenceDiagram
+    participant B2 as Browser
+    actor U2 as Other User
+    actor U as User
+    participant B as Browser
+    participant S as Server
+
+    B-->>U: 3D viewer ready
+
+    U->>B: Load mesh file (VTP/VTU/STL)
+    B->>B: Execute filter pipeline in-browser
+    B-->>U: 3D mesh displayed (rotate/pan/zoom)
+
+    U->>U2: Share URL
+
+    U2->>B2: Open URL
+
+    Note over B,S: No data exchange
+```
+
+</div>
+
+<!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. -->
 <!-- $t("script.s7") -->
 
 ---
