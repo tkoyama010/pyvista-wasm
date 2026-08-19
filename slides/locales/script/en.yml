@@ -46,6 +46,15 @@ script:
     a scientist or engineer who already uses Python for your analysis, PyVista is almost certainly the
     fastest path from your data to an interactive 3D view.
   s5: >-
+    VTK is the engine behind PyVista, and it is the most widely used visualization C++ library in scientific
+    computing worldwide. The iframe shows a curated list of VTK projects, giving you a sense of how broadly
+    it is actually used. VTK was built by Kitware and has been maintained since 1993 — over thirty years
+    of accumulated capability. It is field-proven: medical imaging, CAE, and geoscience run on VTK every
+    day. It ships hundreds of filters for point clouds, meshes, and volume data out of the box. It has
+    production-grade OpenGL and Vulkan renderers. The ecosystem includes PyVista as the Python wrapper,
+    ITK for medical imaging, and the NumPy and SciPy scientific stack. So the foundation is proven — but
+    sharing these results on the web still has a problem.
+  s6: >-
     Now the problem. Sharing 3D scientific computing results on the web still means running a server,
     and that is the bottleneck. The table on this slide lists four issues. First, Three.js lacks the capability
     — it is a general-purpose 3D library, insufficient for rendering scientific and engineering computation
@@ -55,7 +64,7 @@ script:
     simulation data is sent from the analyst's machine to the server, which may not be acceptable. These
     barriers make sharing analysis results quickly and securely difficult. The question is: what if the
     browser could do it all?
-  s6: >-
+  s7: >-
     Let me make the contrast clear with a side-by-side comparison. On the left is the server-side rendering
     approach. The user opens a URL, the browser requests the 3D view, the server renders it with VTK and
     a GPU, and sends back a rendered image. Every frame, every interaction round-trips over the network.
@@ -64,7 +73,7 @@ script:
     disappears entirely — rendering happens where the data already is. This is not a marginal improvement
     over SSR. It is a fundamentally different architecture that removes the network from the critical
     path entirely.
-  s7: >-
+  s8: >-
     Now let me zoom in on the Wasm side. The sequence diagram on this slide shows the browser-complete
     flow. The user loads a mesh file — VTP, VTU, STL, any format VTK supports — and the entire visualization
     pipeline runs in the browser. The 3D mesh is displayed with full interactivity: rotate, pan, zoom.
@@ -74,16 +83,6 @@ script:
     to pay for. Confidential data never leaves the machine. A URL is the whole delivery. This is the core
     message of the talk: the browser is now capable enough to run the full visualization pipeline, and
     once you accept that, every other architectural decision follows.
-  s8: >-
-    VTK is the engine behind PyVista, and it is the most widely used visualization C++ library in scientific
-    computing worldwide. The iframe shows a curated list of VTK projects, giving you a sense of how broadly
-    it is actually used. VTK was built by Kitware and has been maintained since 1993 — over thirty years
-    of accumulated capability. It is field-proven: medical imaging, CAE, and geoscience run on VTK every
-    day. It ships hundreds of filters for point clouds, meshes, and volume data out of the box. It has
-    production-grade OpenGL and Vulkan renderers. The ecosystem includes PyVista as the Python wrapper,
-    ITK for medical imaging, and the NumPy and SciPy scientific stack. And now, all of this runs without
-    a server, entirely in the browser. The technology is maturing steadily — what was an experiment in
-    2018 is now a package you can install from npm and use in production today.
   s9: >-
     VTK.wasm has been developing toward practical use over several years. The history is roughly this:
     in 2018, Emscripten builds began as an early experimental prototype bringing VTK to the browser. In
