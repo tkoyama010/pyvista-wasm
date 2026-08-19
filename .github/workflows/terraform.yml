@@ -207,7 +207,16 @@ jobs:
             echo "App ${app_id} already bypasses ruleset ${ruleset_id}."
             exit 0
           fi
-          jq -S '{rules,conditions,enforcement,target,name}' /tmp/rs.json > /tmp/rs-before.json
+          # Normalize the null integration_id strip in BOTH snapshots so the
+          # verify diff only flags drift the PUT introduced beyond that fix.
+          jq -S '
+            .rules |= map(
+              if .type == "required_status_checks" then
+                .parameters.required_status_checks |= map(
+                  if .integration_id == null then del(.integration_id) else . end
+                )
+              else . end
+            ) | {rules,conditions,enforcement,target,name}' /tmp/rs.json > /tmp/rs-before.json
           jq --argjson id "${app_id}" \
             'del(.id,.source,.source_type,.node_id,.created_at,.updated_at,.current_user_can_bypass,._links) |
              .bypass_actors += [{"actor_id":$id,"actor_type":"Integration","bypass_mode":"always"}] |
