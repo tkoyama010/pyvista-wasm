@@ -198,6 +198,20 @@ layout: full
 
 ---
 class: text-left
+layout: full
+---
+
+# {{ $t("vtk_wasm.title") }}
+
+<div class="text-sm opacity-80 mb-2">{{ $t("vtk_wasm.subtitle") }}</div>
+
+<iframe src="https://tkoyama010.github.io/awesome-vtk/" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
+
+<!-- Single message: a curated list of VTK projects — how widely VTK is actually used. -->
+<!-- $t("script.s5") -->
+
+---
+class: text-left
 ---
 
 # {{ $t("problem.title") }}
@@ -216,7 +230,7 @@ class: text-left
 </div>
 
 <!-- Single message: sharing 3D results on the web still means running a server — Three.js lacks simulation rendering, SSR needs a server, costs are ongoing, and confidential data must travel to the server. -->
-<!-- $t("script.s5") -->
+<!-- $t("script.s6") -->
 
 ---
 class: text-left
@@ -263,7 +277,7 @@ sequenceDiagram
 </style>
 
 <!-- Single message: SSR puts a server in the loop — every frame round-trips over the network. Wasm closes the loop inside the browser — rendering happens where the data already is. -->
-<!-- $t("script.s6") -->
+<!-- $t("script.s7") -->
 
 ---
 class: text-left
@@ -299,20 +313,6 @@ sequenceDiagram
 </div>
 
 <!-- Single message: WebAssembly runs the whole visualization pipeline in the browser, so every barrier falls away at once — no data sent, no server, no infrastructure. -->
-<!-- $t("script.s7") -->
-
----
-class: text-left
-layout: full
----
-
-# {{ $t("vtk_wasm.title") }}
-
-<div class="text-sm opacity-80 mb-2">{{ $t("vtk_wasm.subtitle") }}</div>
-
-<iframe src="https://tkoyama010.github.io/awesome-vtk/" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
-
-<!-- Single message: a curated list of VTK projects — how widely VTK is actually used. -->
 <!-- $t("script.s8") -->
 
 ---
