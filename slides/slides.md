@@ -443,7 +443,19 @@ layout: full
 
 <div class="text-sm opacity-80 mb-2">{{ $t("npm_binary.subtitle") }}</div>
 
-<iframe src="https://www.npmjs.com/package/@pyvista-wasm/vtk-wasm-binary" class="w-full rounded-lg" style="height: 500px; border: 0;" allowfullscreen></iframe>
+<div class="pt-6 flex flex-col items-center gap-4">
+
+<a href="https://www.npmjs.com/package/@pyvista-wasm/vtk-wasm-binary" target="_blank" class="block rounded-lg no-underline! w-full max-w-2xl" style="border: 1px solid rgba(125,125,125,0.3); background: rgba(125,125,125,0.1)">
+  <div class="flex items-center gap-4 p-6">
+    <div class="text-3xl font-bold" style="color: #cb3837">npm</div>
+    <div>
+      <div class="text-lg font-medium">@pyvista-wasm/vtk-wasm-binary</div>
+      <div class="text-sm opacity-70">{{ $t("npm_binary.link_desc") }}</div>
+    </div>
+  </div>
+</a>
+
+</div>
 
 <!-- Single message: a self-published NPM binary mirror served via jsDelivr CDN gives Asia-based users a fast edge cache instead of a slow GitLab direct URL. -->
 <!-- $t("script.s13") -->
