@@ -123,6 +123,14 @@ script:
     direct URL from Asia. The tarball is served with CORS headers so the browser can fetch it cross-origin.
     This is what keeps the npm package small and the runtime load fast.
   s13: >-
+    The iframe on this slide shows the npm page for @pyvista-wasm/vtk-wasm-binary, a self-published mirror
+    of the WASM binary tarball. Kitware's GitLab direct URL is slow from Asia, so this mirror is served
+    via jsDelivr's multi-CDN edge cache — the nearest edge node delivers the binary, not a server on the
+    other side of the Pacific. You install it with npm install and point createNamespace at the jsDelivr
+    URL. The binary streams from the closest edge cache at runtime. This is the package that keeps the
+    demos in this talk loading quickly, even from Japan. If you are in Asia and want to try vtk-wasm without
+    waiting for a GitLab download, this is the package to install.
+  s14: >-
     Now the architecture of pyvista-wasm. Pyodide is CPython compiled to WebAssembly — the real CPython
     interpreter running inside the browser. PyVista is a Pythonic wrapper over VTK. When you combine them,
     you can write Python in the browser and render 3D meshes on the same page, with zero backend. The
@@ -132,7 +140,7 @@ script:
     glue — it loads the vtk-wasm module and bridges the C++ VTK bindings to the Python-facing API. One
     implementation detail: when running under Pyodide, mesh fetches use XMLHttpRequest instead of urllib
     as a runtime fallback.
-  s14: >-
+  s15: >-
     Integrating vtk.wasm into pyvista-wasm surfaced real challenges, but every one of them has a known
     fix. The table lists four problems and their solutions. First, createNamespace returns a Promise,
     so you must await every VTK object operation — there is no synchronous path. Second, the threaded
@@ -142,7 +150,7 @@ script:
     Fourth, Kitware's GitLab direct URL is slow from Asia, so we use jsDelivr's multi-CDN edge cache instead.
     None of these are blockers. They are known, documented, and solved. If you run into any of them, the
     CLI's check-locale-parity command and the project documentation walk you through the fix step by step.
-  s15: >-
+  s16: >-
     This slide is a code comparison. Both columns build the same sphere, but look at the difference. On
     the left, vtk.wasm in JavaScript: you create a sphere source, set theta and phi resolution, create
     a mapper, connect the source to the mapper, create an actor, set the mapper on the actor, set edge
@@ -152,7 +160,7 @@ script:
     add the mesh with show_edges, and call show. Four lines of Python. One more thing: the render on the
     right is a live vtk.wasm scene exported from this very Python snippet, so I can grab it and rotate
     it during the talk.
-  s16: >-
+  s17: >-
     JupyterLite is a browser-only Jupyter environment. There is no installation needed — you open a URL
     and you have a running notebook. The link and iframe on this slide point to a live JupyterLite instance
     with pyvista-wasm pre-installed. You can write Python, run a cell, and a 3D mesh renders interactively
@@ -162,7 +170,7 @@ script:
     rendering quality without installing anything on your machine. Share by URL — a reproducible analysis
     environment in one click. If you have ever lost track of which cells in a notebook depend on which
     values and ended up with stale results, marimo's reactive model solves that problem for you automatically.
-  s17: >-
+  s18: >-
     marimo is a reactive Python notebook, and it also runs entirely in the browser. The difference from
     Jupyter is the reactivity. In a traditional notebook, when you change a value you have to manually
     rerun the dependent cells. In marimo, the dependency graph drives execution automatically — when a
@@ -171,7 +179,7 @@ script:
     needed. This is a big improvement in exploratory efficiency — parameter sweeps become effortless,
     and the pace of exploratory visualization work goes up. The iframe on this slide is a live marimo
     demo. Share by URL — a reactive 3D exploration environment in one click.
-  s18: >-
+  s19: >-
     stlite runs Streamlit entirely in the browser — no server, no install. The demo on this slide is a
     Stanford Bunny with two widgets: a select box to pick from eight colors, and a slider to tune opacity
     from zero to one. As you change the widgets, the mesh updates live. This is a full interactive app,
@@ -181,7 +189,7 @@ script:
     stlite suits widget-based interactive apps. They are complementary, not competing. Best for publishing
     — share by URL, no backend required. The right tool depends on your audience: notebooks for exploration,
     widgets for delivery.
-  s19: >-
+  s20: >-
     Every Examples section in the pyvista-wasm API documentation gets a "Try it in JupyterLite!" button.
     When you click it, the example preamble runs under Pyodide: micropip installs the dependencies like
     jinja2 and lazy-loader, sys.path is set to point at the source directory, and then you import pyvista_wasm
@@ -191,7 +199,7 @@ script:
     the result. This lowers the barrier to trying the library to essentially zero. The docs are not just
     documentation — they are a live environment where every example runs and renders in the same browser
     tab you are reading in.
-  s20: >-
+  s21: >-
     pyvista-wasm also ships a CLI so you can work from the terminal without writing Python code. The help
     output on this slide lists the commands. You can plot one or more mesh files in the browser. You can
     show version and environment information with info. You can capture a preview GIF of the JupyterLite,
@@ -201,7 +209,7 @@ script:
     drive 3D visualization without constructing Python code. No Python required, just a shell. This also
     opens the door to coding agents — an AI assistant that can invoke a CLI can produce and share 3D visualizations
     end to end.
-  s21: >-
+  s22: >-
     This talk is inspired by a tech blog article from Akari Inc., my employer, titled "Browser-complete
     3D visualization with vtk.wasm." The article is linked on this slide. The framing of this entire deck
     — the motivation for leaving server-side rendering behind, the vtk.wasm background, the JupyterLite,
@@ -211,7 +219,7 @@ script:
     one I have been making: the browser is now capable enough, and the server is no longer required for
     sharing 3D scientific visualization. If you read Japanese, I encourage you to start there; if not,
     the diagrams alone are worth your time.
-  s22: >-
+  s23: >-
     The image on this slide shows the PyVista contributors. PyVista is built by this many people — it
     is a healthy, active open-source project with a real community behind it. pyvista-wasm is newer, and
     contributions are welcome. Whether it is bug reports, feature requests, documentation improvements,
@@ -221,7 +229,7 @@ script:
     visualization more accessible to more people, come contribute. The barrier to entry is low and the
     community is welcoming. Even a bug report or a documentation fix makes a real difference to a project
     of this size.
-  s23: >-
+  s24: >-
     That brings us to the end. Questions and discussion are welcome — please scan the QR code on this
     slide to open the GitHub Discussions page for pyvista-wasm. You can also find me at github.com/tkoyama010.
     If you want to try any of the demos I showed today, the links are in the slides, which are published
