@@ -123,13 +123,13 @@ script:
     direct URL from Asia. The tarball is served with CORS headers so the browser can fetch it cross-origin.
     This is what keeps the npm package small and the runtime load fast.
   s13: >-
-    The iframe on this slide shows the npm page for @pyvista-wasm/vtk-wasm-binary, a self-published mirror
-    of the WASM binary tarball. Kitware's GitLab direct URL is slow from Asia, so this mirror is served
-    via jsDelivr's multi-CDN edge cache — the nearest edge node delivers the binary, not a server on the
-    other side of the Pacific. You install it with npm install and point createNamespace at the jsDelivr
-    URL. The binary streams from the closest edge cache at runtime. This is the package that keeps the
-    demos in this talk loading quickly, even from Japan. If you are in Asia and want to try vtk-wasm without
-    waiting for a GitLab download, this is the package to install.
+    The iframe on this slide shows the npm page for {'@'}pyvista-wasm/vtk-wasm-binary, a self-published
+    mirror of the WASM binary tarball. Kitware's GitLab direct URL is slow from Asia, so this mirror is
+    served via jsDelivr's multi-CDN edge cache — the nearest edge node delivers the binary, not a server
+    on the other side of the Pacific. You install it with npm install and point createNamespace at the
+    jsDelivr URL. The binary streams from the closest edge cache at runtime. This is the package that
+    keeps the demos in this talk loading quickly, even from Japan. If you are in Asia and want to try
+    vtk-wasm without waiting for a GitLab download, this is the package to install.
   s14: >-
     Now the architecture of pyvista-wasm. Pyodide is CPython compiled to WebAssembly — the real CPython
     interpreter running inside the browser. PyVista is a Pythonic wrapper over VTK. When you combine them,
