@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"POT-Creation-Date: 2026-08-21 18:12+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -381,3 +381,20 @@ msgstr ""
 #: ../../api/index.md:127:<autosummary>:1
 msgid "Download the trumpet dataset."
 msgstr "トランペットデータセットをダウンロードします。"
+
+#: ../../api/index.md:130
+#, fuzzy
+msgid "Rendering"
+msgstr "レンダリング"
+
+#: ../../api/index.md:137:<autosummary>:1
+#, fuzzy
+msgid ""
+":py:obj:`pyvista_wasm.rendering.ColabRenderer "
+"<pyvista_wasm.rendering.ColabRenderer>`"
+msgstr ":py:obj:`pyvista_wasm.rendering.ColabRenderer <pyvista_wasm.rendering.ColabRenderer>`"
+
+#: ../../api/index.md:137:<autosummary>:1
+msgid "Renderer for Google Colaboratory notebooks."
+msgstr "Google Colaboratoryノートブック用レンダラー。"
+
