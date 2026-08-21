@@ -85,7 +85,7 @@ const base = import.meta.env.BASE_URL
 </div>
 </Link>
 
-<Link :to="16">
+<Link :to="17">
 <div class="flex flex-col gap-2">
 <img :src="`${base}agenda/part3.png`" alt="" class="w-full rounded-lg" style="border: 1px solid rgba(125,125,125,0.3)" />
 <div class="flex items-baseline gap-2">
@@ -436,6 +436,32 @@ sequenceDiagram
 
 ---
 class: text-left
+layout: full
+---
+
+<script setup>
+// Assets under public/ must be prefixed with Vite's base — the deck is built
+// with --base /pyvista-wasm/slides/, so a root-absolute src would 404.
+const base = import.meta.env.BASE_URL
+</script>
+
+# {{ $t("npm_binary.title") }}
+
+<div class="text-sm opacity-80 mb-2">{{ $t("npm_binary.subtitle") }}</div>
+
+<div class="pt-4 flex flex-col items-center gap-4">
+
+<a href="https://www.npmjs.com/package/@pyvista-wasm/vtk-wasm-binary" target="_blank" class="block rounded-lg overflow-hidden no-underline! w-full max-w-3xl" style="border: 1px solid rgba(125,125,125,0.3)">
+  <img :src="`${base}npm-binary.png`" alt="{{ $t('npm_binary.link_desc') }}" class="w-full" />
+</a>
+
+</div>
+
+<!-- Single message: a self-published NPM binary mirror served via jsDelivr CDN gives Asia-based users a fast edge cache instead of a slow GitLab direct URL. -->
+<!-- $t("script.s13") -->
+
+---
+class: text-left
 ---
 
 # {{ $t("pyodide.title") }}
@@ -465,7 +491,7 @@ sequenceDiagram
 </div>
 
 <!-- Single message: Pyodide (CPython in Wasm) meets PyVista (Pythonic VTK wrapper) — write Python in the browser, render 3D meshes, no server required. TypeScript is the glue layer; runtime fallback uses XMLHttpRequest when "pyodide" in sys.modules. -->
-<!-- $t("script.s13") -->
+<!-- $t("script.s14") -->
 
 ---
 class: text-left
@@ -487,7 +513,7 @@ class: text-left
 </div>
 
 <!-- Single message: every problem hit while integrating vtk.wasm has a known fix — await all VTK calls, inject COOP/COEP, and serve the tarball from a CORS-enabled CDN. -->
-<!-- $t("script.s14") -->
+<!-- $t("script.s15") -->
 
 
 ---
@@ -573,7 +599,7 @@ plotter.show()
 </style>
 
 <!-- Single message: both columns build the same sphere — vtk.wasm needs the full four-object pipeline in JavaScript, pyvista-wasm needs four lines of Python. Additional detail: the right-hand render is a live vtk.wasm scene exported from this very Python snippet, so it can be grabbed and rotated during the talk. -->
-<!-- $t("script.s15") -->
+<!-- $t("script.s16") -->
 
 ---
 class: text-left
@@ -599,7 +625,7 @@ const jlDemoUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.
 </div>
 
 <!-- Single message: JupyterLite is a browser-only Jupyter environment — write Python, render 3D meshes, share by URL. -->
-<!-- $t("script.s16") -->
+<!-- $t("script.s17") -->
 
 ---
 class: text-left
@@ -625,7 +651,7 @@ const marimoDemoUrl = 'https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOz
 </div>
 
 <!-- Single message: marimo is a reactive Python notebook — change a slider, the mesh redraws instantly, no rerun button needed. -->
-<!-- $t("script.s17") -->
+<!-- $t("script.s18") -->
 
 ---
 class: text-left
@@ -651,7 +677,7 @@ const stliteDemoUrl = 'https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5we
 </div>
 
 <!-- Single message: stlite runs Streamlit entirely in the browser — the Stanford Bunny demo with color and opacity widgets shows a server-less interactive app. -->
-<!-- $t("script.s18") -->
+<!-- $t("script.s19") -->
 
 ---
 class: text-left
@@ -677,7 +703,7 @@ const apiDocsUrl = 'https://pyvista-wasm.readthedocs.io/en/latest/api/_autosumma
 </div>
 
 <!-- Single message: every Examples section in the API docs gets a "Try it in JupyterLite!" button — clicking it runs the preamble under pyodide (micropip installs jinja2/lazy-loader, sys.path points at /drive/src, import pyvista_wasm as pv), so visitors render meshes in-browser without any local install. -->
-<!-- $t("script.s19") -->
+<!-- $t("script.s20") -->
 
 ---
 class: text-left
@@ -696,7 +722,7 @@ class: text-left
 </div>
 
 <!-- Single message: this talk is inspired by the Akari Inc. tech blog article on browser-complete 3D visualization with vtk.wasm — read it for the longer write-up. -->
-<!-- $t("script.s21") -->
+<!-- $t("script.s22") -->
 
 ---
 class: text-left
@@ -715,7 +741,7 @@ class: text-left
 </div>
 
 <!-- Single message: PyVista is built by this many people — contributions to pyvista-wasm are welcome too. -->
-<!-- $t("script.s22") -->
+<!-- $t("script.s23") -->
 
 ---
 class: text-left
@@ -740,7 +766,7 @@ const base = import.meta.env.BASE_URL
 </div>
 
 <!-- Single message: take the discussion to GitHub Discussions — scan the code to open the thread. -->
-<!-- $t("script.s23") -->
+<!-- $t("script.s24") -->
 
 ---
 class: text-left
@@ -770,4 +796,4 @@ pyvista-wasm --help
 ```
 
 <!-- Single message: the pyvista-wasm CLI lets you plot meshes, capture previews, and export demos from the terminal — no Python code required. -->
-<!-- $t("script.s20") -->
+<!-- $t("script.s21") -->
