@@ -397,4 +397,3 @@ msgstr ":py:obj:`pyvista_wasm.rendering.ColabRenderer <pyvista_wasm.rendering.Co
 #: ../../api/index.md:137:<autosummary>:1
 msgid "Renderer for Google Colaboratory notebooks."
 msgstr "Google Colaboratoryノートブック用レンダラー。"
-

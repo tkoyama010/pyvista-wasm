@@ -311,4 +311,3 @@ msgstr "return_imgがTrueの場合はnumpy配列の画像データ、それ以�
 #: of pyvista_wasm.rendering.ColabRenderer.screenshot:21
 msgid "Screenshots are not supported in Colab environments."
 msgstr "Colab環境ではスクリーンショットはサポートされていません。"
-
