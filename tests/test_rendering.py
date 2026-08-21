@@ -771,3 +771,154 @@ class TestMarimoRenderer:
         assert "&amp;" in result.content
         # Check that " is escaped to &quot;
         assert "&quot;" in result.content
+
+
+class TestColabRenderer:
+    """Tests for ColabRenderer class."""
+
+    def test_colab_renderer_requires_colab(self, monkeypatch) -> None:
+        """Test that ColabRenderer raises RuntimeError when Colab is not available."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", False)
+        with pytest.raises(RuntimeError, match="Colaboratory"):
+            rendering.ColabRenderer()
+
+    def test_colab_renderer_creation(self, monkeypatch) -> None:
+        """Test ColabRenderer initialization when Colab is available."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        assert renderer is not None
+        assert renderer._wasm_rendering == "webgl"
+        assert renderer._wasm_mode == "sync"
+
+    def test_colab_renderer_with_wasm_config(self, monkeypatch) -> None:
+        """Test ColabRenderer with custom wasm config."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer(wasm_rendering="webgpu", wasm_mode="async")
+        assert renderer._wasm_rendering == "webgpu"
+        assert renderer._wasm_mode == "async"
+
+    def test_colab_renderer_render_returns_html(self, monkeypatch) -> None:
+        """Test that ColabRenderer.render() returns HTML object."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        captured = []
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+                captured.append(self)
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+        result = renderer.render()
+
+        assert result is not None
+        assert isinstance(result, MockHTML)
+        assert "iframe" in result.content
+        assert 'sandbox="allow-scripts"' in result.content
+
+    def test_colab_renderer_screenshot_raises(self, monkeypatch) -> None:
+        """Test that ColabRenderer.screenshot() raises NotImplementedError."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        with pytest.raises(NotImplementedError):
+            renderer.screenshot()
+
+    def test_colab_renderer_html_escaping(self, monkeypatch) -> None:
+        """Test that HTML content is properly escaped for iframe srcdoc."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        captured = []
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+                captured.append(self)
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red&blue")
+        result = renderer.render()
+
+        # Check that & is escaped to &amp;
+        assert "&amp;" in result.content
+        # Check that " is escaped to &quot;
+        assert "&quot;" in result.content
+
+    def test_get_renderer_returns_colab_when_available(self, monkeypatch) -> None:
+        """Test that get_renderer returns ColabRenderer when Colab is detected."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", True)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.ColabRenderer)
+
+    def test_get_renderer_selects_vtkwasm_for_non_colab_ipython(self, monkeypatch) -> None:
+        """Test that get_renderer still selects VTKWasmRenderer for non-Colab IPython."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", False)
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.VTKWasmRenderer)
+
+
+class TestColabEnvDetection:
+    """Tests for Google Colaboratory environment detection."""
+
+    def test_colab_detection_via_sys_modules(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is True when google.colab is in sys.modules."""
+        monkeypatch.delenv("COLAB_RELEASE_TAG", raising=False)
+
+        class FakeColab:
+            pass
+
+        monkeypatch.setitem(sys.modules, "google.colab", FakeColab())
+        assert rendering._is_colab_available() is True
+
+    def test_colab_detection_via_env_var(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is True when COLAB_RELEASE_TAG is set."""
+        assert "google.colab" not in sys.modules
+        monkeypatch.setenv("COLAB_RELEASE_TAG", "Colab-Release-Tag")
+        assert rendering._is_colab_available() is True
+
+    def test_colab_detection_false_when_absent(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is False when neither signal is present."""
+        monkeypatch.delitem(sys.modules, "google.colab", raising=False)
+        monkeypatch.delenv("COLAB_RELEASE_TAG", raising=False)
+        assert rendering._is_colab_available() is False
