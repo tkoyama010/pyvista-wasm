@@ -118,8 +118,8 @@ build_dist:
   dist_title: バイナリは実行時にCDNからストリーミングすればJSパッケージにはバンドルされない
   dist_subtitle: パッケージの配布方法シーケンス図
 npm_binary:
-  title: jsDelivr CDN経由で配信するアジア向けNPMバイナリミラー
-  subtitle: Kitware GitLab直URLよりアジアから高速
+  title: Kitware GitLab直URLよりアジアから高速
+  subtitle: jsDelivr CDN経由で配信するアジア向けNPMバイナリミラー
   link_desc: jsDelivr CDN経由のVTK.wasmバイナリミラー — npm installするだけ
 pipeline:
   title: ユーザーはViteの設定で、VTK.wasmが利用可能

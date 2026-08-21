@@ -122,8 +122,8 @@ build_dist:
   dist_title: Binaries streamed from CDN at runtime are not bundled into the JS package
   dist_subtitle: Sequence diagram — how the package is distributed
 npm_binary:
-  title: Asia-friendly NPM binary mirror served via jsDelivr CDN
-  subtitle: Faster than Kitware GitLab direct URL from Asia
+  title: Faster than Kitware GitLab direct URL from Asia
+  subtitle: Asia-friendly NPM binary mirror served via jsDelivr CDN
   link_desc: Mirrored VTK.wasm binary served via jsDelivr CDN — npm install and go
 pipeline:
   title: With Vite config, users can use VTK.wasm
