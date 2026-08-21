@@ -110,7 +110,7 @@ history:
   i1t: Runtime switching
   i1d: current packages can switch between WebGL and WebGPU at runtime
   i2t: Automatic fallback
-  i2d: gracefully degrades based on browser support, a design still in progress
+  i2d: no user configuration needed — WebGPU preferred, WebGL fallback based on browser support
   conc_pre: From experiment to production —
   conc_bold: the technology is maturing steadily
 demos:
