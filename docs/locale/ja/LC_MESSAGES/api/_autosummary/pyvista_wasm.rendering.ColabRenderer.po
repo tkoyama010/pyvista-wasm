@@ -36,10 +36,10 @@ msgid ""
 "``<script>`` tags in cell output. This enables automatic inline rendering"
 " when ``plotter.show()`` is called in Colab."
 msgstr ""
-"このレンダラーは可視化を含むiframeを生成し、``IPython.display.HTML``オブジェクトとして返します。"
-"サンドボックス化されたiframeは``srcdoc``経由でスタンドアロンHTMLを埋め込み、"
-"Colabのセル出力におけるインライン``<script>``タグのサニタイズを回避します。"
-"これにより、Colabで``plotter.show()``を呼び出した際に自動的なインラインレンダリングが可能になります。"
+"このレンダラーは可視化を含むiframeを生成し、 ``IPython.display.HTML`` オブジェクトとして返します。"
+"サンドボックス化されたiframeは ``srcdoc`` 経由でスタンドアロンHTMLを埋め込み、"
+"Colabのセル出力におけるインライン ``<script>`` タグのサニタイズを回避します。"
+"これにより、Colabで ``plotter.show()`` を呼び出した際に自動的なインラインレンダリングが可能になります。"
 
 #: of pyvista_wasm.rendering.ColabRenderer:10
 #: pyvista_wasm.rendering.ColabRenderer.render:12
@@ -60,24 +60,24 @@ msgid ""
 "Lighting mode. ``\"default\"`` creates a default directional light, "
 "``None`` creates no default lights. Default is ``\"default\"``."
 msgstr ""
-"ライティングモード。``\"default\"``はデフォルトの方向光を作成し、"
-"``None``はデフォルトのライトを作成しません。デフォルトは``\"default\"``。"
+"ライティングモード。 ``\"default\"`` はデフォルトの方向光を作成し、"
+" ``None`` はデフォルトのライトを作成しません。デフォルトは ``\"default\"`` 。"
 
 #: of pyvista_wasm.rendering.ColabRenderer.__init__:6
 msgid ""
 "WebAssembly rendering backend. One of ``\"webgl\"`` or ``\"webgpu\"``. "
 "Default is ``\"webgl\"``."
 msgstr ""
-"WebAssemblyレンダリングバックエンド。``\"webgl\"``または``\"webgpu\"``のいずれか。"
-"デフォルトは``\"webgl\"``。"
+"WebAssemblyレンダリングバックエンド。 ``\"webgl\"`` または ``\"webgpu\"`` のいずれか。"
+"デフォルトは ``\"webgl\"`` 。"
 
 #: of pyvista_wasm.rendering.ColabRenderer.__init__:9
 msgid ""
 "Execution mode for VTK.wasm method calls. One of ``\"sync\"`` or "
 "``\"async\"``. Default is ``\"sync\"``."
 msgstr ""
-"VTK.wasmメソッド呼び出しの実行モード。``\"sync\"``または``\"async\"``のいずれか。"
-"デフォルトは``\"sync\"``。"
+"VTK.wasmメソッド呼び出しの実行モード。 ``\"sync\"`` または ``\"async\"`` のいずれか。"
+"デフォルトは ``\"sync\"`` 。"
 
 #: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
 msgid "Raises"
@@ -259,7 +259,7 @@ msgid ""
 "``IPython.display.HTML`` object so Colab captures it in the cell output "
 "area."
 msgstr ""
-"可視化を含むiframeを生成し、``IPython.display.HTML``オブジェクトとして返します。"
+"可視化を含むiframeを生成し、 ``IPython.display.HTML`` オブジェクトとして返します。"
 "これによりColabはセル出力領域にキャプチャします。"
 
 #: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
@@ -268,7 +268,7 @@ msgstr "戻り値"
 
 #: of pyvista_wasm.rendering.ColabRenderer.render:7
 msgid "The ``IPython.display.HTML`` object wrapping the sandboxed iframe."
-msgstr "サンドボックス化されたiframeをラップする``IPython.display.HTML``オブジェクト。"
+msgstr "サンドボックス化されたiframeをラップする ``IPython.display.HTML`` オブジェクト。"
 
 #: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
 msgid "Return type"
