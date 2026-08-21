@@ -102,4 +102,3 @@ msgid ""
 msgstr ""
 "他のバックエンド（JupyterLite用の`VTKWasmRenderer`、`MarimoRenderer`、"
 "`BrowserRenderer`、`MockRenderer`）には影響ありません。"
-
