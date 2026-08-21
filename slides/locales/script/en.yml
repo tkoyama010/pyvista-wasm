@@ -236,17 +236,17 @@ script:
     online. Thank you for your attention, and thank you to PyCon JP for hosting. I hope I have convinced
     you that running PyVista entirely in the browser via WebAssembly is not just a prototype — it is practical
     today, and it removes the server from the story. Let's take the discussion online. I am happy to answer
-    any questions you have. Anticipated Q&A 1 (three.js comparison): three.js is the de facto standard for
-    web 3D, but its rendering API churns fast and tracking the latest trends is a prerequisite. PyVista/VTK
+    any questions you have. Anticipated Q&A 1 (three.js comparison): three.js is the de facto standard
+    for web 3D, but its rendering API churns fast and tracking the latest trends is a prerequisite. PyVista/VTK
     fills the scientific visualization gap — filter pipelines, scientific data formats like VTP/VTU, and
     thirty years of accumulated capability that Three.js does not target. They are complementary, not
     competing; for sharing scientific and engineering results, the VTK side is the natural fit. Anticipated
     Q&A 2 (custom CDN security): the {'@'}pyvista-wasm/vtk-wasm-binary mirror is a compromise — it addresses
     Kitware's official GitLab being slow from Asia by serving via the jsDelivr CDN. Mitigation: the binary
-    streams from the CDN edge cache and its content can be verified against the checksum published at npm
-    time. The official tarball remains a valid choice, so users can weigh speed against provenance
+    streams from the CDN edge cache and its content can be verified against the checksum published at
+    npm time. The official tarball remains a valid choice, so users can weigh speed against provenance
     themselves. Anticipated Q&A 3 (time-series data and fluid simulation): time-series animation is feasible
     today — meshes can be updated and redrawn sequentially in the browser. Fluid simulation is also runnable
-    because VTK's filter suite executes on Wasm. However, large-scale iterative computation is bounded by
-    the browser's CPU and memory, so the current sweet spot is visualization and playback of pre-computed
+    because VTK's filter suite executes on Wasm. However, large-scale iterative computation is bounded
+    by the browser's CPU and memory, so the current sweet spot is visualization and playback of pre-computed
     results. Real-time large-scale solves will improve as WebGPU matures.
