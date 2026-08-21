@@ -26,4 +26,5 @@ worked example.
 0007-decide-how-to-internationalize-and-sync-the-readme
 0008-decide-how-to-internationalize-the-readthedocs-documentation
 0009-decide-how-to-sync-github-repo-settings-with-terraform
+0010-track-pyvista-api-coverage-matrix
 ```

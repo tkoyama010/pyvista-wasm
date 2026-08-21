@@ -1,0 +1,829 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-21 17:29+0900\n"
+"PO-Revision-Date: 2026-08-21 17:29+0900\n"
+"Last-Translator: Tetsuo Koyama <contact@tetsuo-koyama.dev>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:9
+msgid "Track PyVista API coverage matrix for pyvista-wasm"
+msgstr "pyvista-wasmのPyVista APIカバレッジマトリクスを追跡する"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:11
+msgid "Context and Problem Statement"
+msgstr "コンテキストと問題記述"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:13
+msgid ""
+"pyvista-wasm exposes a growing subset of the PyVista public API in the "
+"browser via vtk-wasm, but there is no single place where a contributor or"
+" user can see which PyVista classes, functions, and filters are "
+"available, which are partial, and which are still missing. Parent issue "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) captures "
+"the need to track PyVista-to-pyvista-wasm API parity and ships a baseline"
+" snapshot of current coverage (v0.11.0) grouped by category — Plotting, "
+"Camera, Lighting, Mesh/Data, Filters, Readers, Text, Texture, Examples. "
+"The public API surface pyvista-wasm actually implements is declared in "
+"the type stub `src/pyvista_wasm/__init__.pyi`, and the documented surface"
+" is rendered by `docs/api/index.md` via Sphinx `autosummary`. Today these"
+" two surfaces are consistent by convention but nothing records *why* a "
+"coverage matrix is the parity-tracking mechanism, what its source of "
+"truth is, where it is published, how partial coverage is represented, or "
+"how often it is synced — and the parity gaps listed in "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) (datasets, "
+"filters, readers, plotting, theme, utilities) live only in an issue body "
+"that will scroll away and drift from the code. Which parity-tracking "
+"mechanism should pyvista-wasm adopt?"
+msgstr "pyvista-wasmはvtk-wasm経由でブラウザ内にPyVistaパブリックAPIの成長中のサブセットを公開しているが、"
+"コントリビューターやユーザーがどのPyVistaクラス・関数・フィルターが利用可能で、"
+"どれが部分的で、どれがまだ欠けているかを一目で確認できる場所がない。"
+"親issue [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) は"
+"PyVistaからpyvista-wasmへのAPIパリティを追跡する必要性を捉え、"
+"カテゴリー別（プロット・カメラ・ライティング・メッシュ/データ・フィルター・リーダー・テキスト・テクスチャ・サンプル）に"
+"グループ化された現在のカバレッジ（v0.11.0）のベースラインスナップショットを提供する。"
+"pyvista-wasmが実際に実装するパブリックAPIサーフェスは型スタブ `src/pyvista_wasm/__init__.pyi` に宣言されており、"
+"ドキュメント化されたサーフェスは `docs/api/index.md` によりSphinx `autosummary` 経由でレンダリングされる。"
+"今日これら2つのサーフェスは慣例により一致しているが、"
+"なぜカバレッジマトリクスがパリティ追跡メカニズムなのか、その信頼できる情報源は何か、"
+"どこで公開されるか、部分カバレッジがどう表現されるか、どのくらいの頻度で同期されるかを記録するものはない "
+"— そして [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) にリストされたパリティギャップ"
+"（データセット・フィルター・リーダー・プロット・テーマ・ユーティリティ）は"
+"スクロールして消えコードからドリフトするissue本文の中にしか存在しない。"
+"pyvista-wasmはどのパリティ追跡メカニズムを採用すべきか？"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:17
+msgid ""
+"**Single-glance visibility of parity gaps**: A user or contributor must "
+"be able to see the entire PyVista public API surface and its pyvista-wasm"
+" coverage status in one place, without hopping between issues, project "
+"boards, or source files. This is a knock-out criterion."
+msgstr "**パリティギャップの一望可視性**: ユーザーまたはコントリビューターは、"
+"issueやプロジェクトボードやソースファイルの間を飛び移ることなく、"
+"PyVistaパブリックAPIサーフェス全体とそのpyvista-wasmカバレッジステータスを一箇所で確認できなければならない。"
+"これはノックアウト基準である。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:18
+msgid ""
+"**Published where users already look**: The coverage status must live in "
+"the documentation site (where users go to learn the API), not only in a "
+"GitHub tracking issue (where users do not look). Co-locating coverage "
+"with the API reference is a knock-out criterion."
+msgstr "**ユーザーがすでに見ている場所での公開**: カバレッジステータスはドキュメントサイト"
+"（ユーザーがAPIを学ぶために訪れる場所）に存在しなければならず、"
+"GitHubトラッキングissue（ユーザーが見ない場所）のみに存在してはならない。"
+"カバレッジをAPIリファレンスと同じ場所に配置することはノックアウト基準である。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:19
+msgid ""
+"**Single source of truth tied to the code**: The matrix must be derivable"
+" from the actual implemented surface — the type stub "
+"`src/pyvista_wasm/__init__.pyi` — so it cannot silently drift from what "
+"the package exports. A tracking issue body that is hand-edited and "
+"unrelated to the code is a drift risk."
+msgstr "**コードに結びついた単一の信頼できる情報源**: マトリクスは実際に実装されたサーフェス "
+"— 型スタブ `src/pyvista_wasm/__init__.pyi` — から導出できなければならず、"
+"そうでなければパッケージがエクスポートするものから密かにドリフトする可能性がある。"
+"手動で編集されコードと無関係なトラッキングissue本文はドリフトリスクである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:20
+msgid ""
+"**Low maintenance burden**: The project has a single maintainer; the "
+"parity-tracking mechanism must not require per-item GitHub issues, a "
+"project board to groom, or a bespoke dashboard to host."
+msgstr "**低いメンテナンス負担**: プロジェクトは単一のメンテナを持つ "
+"— パリティ追跡メカニズムは項目ごとのGitHub issue、グルーミングが必要なプロジェクトボード、"
+"またはホストするための専用ダッシュボードを要求してはならない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:21
+msgid ""
+"**Representation of partial coverage**: Some surfaces are partially "
+"implemented (e.g., `PolyData` exists but many `PolyDataFilters` methods "
+"do not; `PointData` exists but not all data-array helpers do). The "
+"mechanism must represent *Partial* coverage and list what is missing, not"
+" just a binary implemented/not-implemented."
+msgstr "**部分カバレッジの表現**: 一部のサーフェスは部分的に実装されている"
+"（例: `PolyData` は存在するが多くの `PolyDataFilters` メソッドは存在しない、"
+"`PointData` は存在するがすべてのデータ配列ヘルパーは存在しない）。"
+"メカニズムは *Partial* カバレッジを表現し、何が欠けているかをリストアップしなければならず、"
+"単なる実装済み/未実装の二値であってはならない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:22
+msgid ""
+"**Sync cadence aligned to releases**: The matrix must be refreshed at a "
+"predictable cadence (per release) so it reflects the shipped package, not"
+" an arbitrary snapshot."
+msgstr "**リリースに同期した更新頻度**: マトリクスは予測可能な頻度（リリースごと）で更新されなければならず、"
+"任意のスナップショットではなく出荷されたパッケージを反映する。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:24
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:26
+msgid ""
+"**Coverage matrix published in the docs, sourced from the `.pyi` stub, "
+"synced per release** — a single matrix table in `docs/api/` grouped by "
+"category, marking each PyVista public class/function as *Implemented*, "
+"*Partial*, or *Not implemented*; for *Partial* entries the missing "
+"methods/attributes are listed; the implemented column is "
+"generated/verified against `src/pyvista_wasm/__init__.pyi`; the matrix is"
+" refreshed per release and linked from `docs/api/index.md`."
+msgstr "**`.pyi` スタブをソースとしリリースごとに同期される、ドキュメントに公開されたカバレッジマトリクス** "
+"— `docs/api/` にカテゴリー別にグループ化された単一のマトリクステーブルで、"
+"各PyVistaパブリッククラス/関数を *Implemented*、*Partial*、*Not implemented* としてマークする。"
+"*Partial* エントリには欠けているメソッド/属性がリストされる。"
+"実装カラムは `src/pyvista_wasm/__init__.pyi` に対して生成/検証される。"
+"マトリクスはリリースごとに更新され `docs/api/index.md` からリンクされる。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:27
+msgid ""
+"**Checklist of separate GitHub issues (one issue per PyVista item)** — "
+"one issue per missing class/function/filter, tracked on the Scrum board; "
+"the project board is the parity view."
+msgstr "**個別GitHub issueのチェックリスト（PyVista項目ごとに1つのissue）** "
+"— 欠けているクラス/関数/フィルターごとに1つのissueで、スクラムボードで追跡される。"
+"プロジェクトボードがパリティビューである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:28
+msgid ""
+"**Coverage matrix kept in a tracking issue body** — the matrix from "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) is "
+"maintained by editing the issue body over time; no docs surface."
+msgstr "**トラッキングissue本文に保持されるカバレッジマトリクス** "
+"— [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) のマトリクスが"
+"時間と共にissue本文を編集することでメンテナンスされる。ドキュメントサーフェスはない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:29
+msgid ""
+"**Automated parity report generated in CI** — a script diffs the PyVista "
+"public API against `src/pyvista_wasm/__init__.pyi` and posts a parity "
+"report as a CI artifact / PR comment on every release tag."
+msgstr "**CIで生成される自動パリティレポート** — スクリプトがPyVistaパブリックAPIを "
+"`src/pyvista_wasm/__init__.pyi` とdiffし、"
+"各リリースタグでパリティレポートをCIアーティファクト/PRコメントとして投稿する。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:31
+msgid "Decision Outcome"
+msgstr "決定結果"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:33
+msgid ""
+"Chosen option: \"Coverage matrix published in the docs, sourced from the "
+"`.pyi` stub, synced per release\", because it is the only option that "
+"satisfies every decision driver simultaneously — it gives single-glance "
+"visibility of the whole surface in one table, it publishes the matrix on "
+"the documentation site where users already look (rather than burying it "
+"in a GitHub issue), it anchors the implemented column to the type stub "
+"`src/pyvista_wasm/__init__.pyi` (the same file Sphinx `autosummary` "
+"renders in `docs/api/index.md`), it represents partial coverage with an "
+"explicit *Partial* status plus a list of missing methods/attributes, it "
+"places a per-release sync burden on a single maintainer rather than "
+"grooming a per-item issue backlog, and it makes the matrix part of the "
+"reviewed docs PR flow so the *why* is preserved (see [ADR-0000](0000-use-"
+"markdown-architectural-decision-records.md))."
+msgstr "選択した選択肢: 「`.pyi` スタブをソースとしリリースごとに同期される、ドキュメントに公開されたカバレッジマトリクス」。"
+"なぜなら、すべての決定ドライバを同時に満たす唯一の選択肢だからである — "
+"1つのテーブルでサーフェス全体の一望可視性を与え、"
+"マトリクスをユーザーがすでに見ているドキュメントサイトに公開し（GitHub issueに埋もれさせず）、"
+"実装カラムを型スタブ `src/pyvista_wasm/__init__.pyi`（Sphinx `autosummary` が `docs/api/index.md` でレンダリングする同じファイル）に固定し、"
+"明示的な *Partial* ステータスと欠けているメソッド/属性のリストで部分カバレッジを表現し、"
+"項目ごとのissueバックログをグルーミングするのではなくリリースごとの同期負担を単一メンテナに置き、"
+"マトリクスをレビュー付きドキュメントPRフローの一部にして *なぜ* を保存する"
+"（[ADR-0000](0000-use-markdown-architectural-decision-records.md) を参照）。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:35
+msgid ""
+"**Source of truth**: `src/pyvista_wasm/__init__.pyi` — the type stub that"
+" declares every name the package exports; this is the same file "
+"`docs/api/index.md` renders via `autosummary`, so the matrix and the API "
+"reference can never disagree about what is implemented."
+msgstr "**信頼できる情報源**: `src/pyvista_wasm/__init__.pyi` — "
+"パッケージがエクスポートするすべての名前を宣言する型スタブ。"
+"これは `docs/api/index.md` が `autosummary` 経由でレンダリングする同じファイルであり、"
+"マトリクスとAPIリファレンスが実装内容について決して矛盾しない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:36
+msgid ""
+"**Published location**: `docs/api/index.md` (the existing API reference "
+"page), with the coverage matrix linked from it; the matrix itself lives "
+"in the docs tree so it is built by Sphinx and served on Read the Docs."
+msgstr "**公開場所**: `docs/api/index.md`（既存のAPIリファレンスページ）で、"
+"そこからカバレッジマトリクスがリンクされる。マトリクス自体はドキュメントツリーに存在し、"
+"SphinxによってビルドされRead the Docsで配信される。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:37
+msgid ""
+"**Sync cadence**: per release — the matrix is refreshed as part of the "
+"release PR so it reflects the shipped package version, with the baseline "
+"snapshot captured in [#515](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/515) as the v0.11.0 starting point."
+msgstr "**更新頻度**: リリースごと — マトリクスはリリースPRの一部として更新され、"
+"出荷されたパッケージバージョンを反映する。"
+"ベースラインスナップショットは [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) に"
+"v0.11.0の出発点としてキャプチャされる。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:39
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:41
+msgid ""
+"Good, because a user reading the API reference sees coverage status "
+"inline — no second trip to a GitHub issue or project board to learn what "
+"is and is not available in the browser."
+msgstr "良い、なぜならAPIリファレンスを読むユーザーがカバレッジステータスをインラインで見られる "
+"— ブラウザで何が利用可能で何が利用不可かを知るためにGitHub issueやプロジェクトボードに"
+"もう一度行く必要がない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:42
+msgid ""
+"Good, because the implemented column is anchored to "
+"`src/pyvista_wasm/__init__.pyi`, the same source Sphinx `autosummary` "
+"renders, so the matrix and the API reference stay consistent by "
+"construction."
+msgstr "良い、なぜなら実装カラムが `src/pyvista_wasm/__init__.pyi`、"
+"すなわちSphinx `autosummary` がレンダリングする同じソースに固定されており、"
+"マトリクスとAPIリファレンスが構造的に一貫し続けるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:43
+msgid ""
+"Good, because partial coverage is first-class: a *Partial* row names the "
+"missing methods/attributes (e.g., the `PolyDataFilters` methods not yet "
+"implemented), so a contributor knows exactly where to help without "
+"reading the source."
+msgstr "良い、なぜなら部分カバレッジが第一級である — *Partial* 行が欠けているメソッド/属性を明示し"
+"（例: まだ実装されていない `PolyDataFilters` メソッド）、"
+"コントリビューターがソースを読まずにどこを助ければよいか正確にわかるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:44
+msgid ""
+"Good, because it avoids issue sprawl — the PyVista public API is large "
+"(datasets, filters, readers, plotting, theme, utilities; see the parity "
+"gaps in [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515)), "
+"and one issue per item would produce hundreds of issues that a single "
+"maintainer cannot groom."
+msgstr "良い、なぜならissueの蔓延を避ける — PyVistaパブリックAPIは大きく"
+"（データセット・フィルター・リーダー・プロット・テーマ・ユーティリティ、"
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) のパリティギャップを参照）、"
+"項目ごとに1つのissueにすれば数百のissueが生まれ単一メンテナはグルーミングできないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:45
+msgid ""
+"Good, because the matrix travels through the same PR review flow as the "
+"docs, preserving the rationale alongside the artifact."
+msgstr "良い、なぜならマトリクスがドキュメントと同じPRレビューフローを通り、"
+"根拠がアーティファクトと共に保存されるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:46
+msgid ""
+"Bad, because the matrix is human-maintained at sync time: the implemented"
+" column is *verified* against the `.pyi` stub, but the *Not implemented* "
+"and *Partial* columns (which list PyVista API surface pyvista-wasm does "
+"not yet export) are authored by hand and can drift from upstream PyVista "
+"if the matrix is not refreshed per release."
+msgstr "悪い、なぜならマトリクスは同期時に人手でメンテナンスされるからである "
+"— 実装カラムは `.pyi` スタブに対して *検証* されるが、"
+"*Not implemented* と *Partial* カラム（pyvista-wasmがまだエクスポートしていないPyVista APIサーフェスをリストする）は"
+"手動で作成され、マトリクスがリリースごとに更新されなければ上流のPyVistaからドリフトする可能性がある。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:47
+msgid ""
+"Bad, because a pure docs matrix has no automatic alarm when a new PyVista"
+" release adds API surface that pyvista-wasm has not tracked — the sync is"
+" a release-time discipline, not a CI gate (the automated CI report option"
+" would provide that gate, at the cost of building and maintaining the "
+"diff script)."
+msgstr "悪い、なぜなら純粋なドキュメントマトリクスには、"
+"新しいPyVistaリリースがpyvista-wasmが追跡していないAPIサーフェスを追加した時の自動アラームがない "
+"— 同期はリリース時の規律でありCIゲートではない"
+"（自動CIレポート選択肢はそのゲートを提供するが、diffスクリプトのビルドとメンテナンスのコストがかかる）。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:48
+msgid ""
+"Neutral, because the matrix duplicates a slice of the information already"
+" in [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515)'s "
+"baseline snapshot; the issue snapshot is the point-in-time baseline and "
+"the docs matrix is the living view, so the overlap is intentional."
+msgstr "中立、なぜならマトリクスはすでに [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) の"
+"ベースラインスナップショットにある情報の一部を複製するからである "
+"— issueスナップショットは時点ベースラインでありドキュメントマトリクスは生きたビューなので、"
+"重複は意図的である。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:50
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:52
+msgid "Compliance with this decision will be confirmed by:"
+msgstr "この決定への準拠は以下によって確認されます:"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:54
+msgid ""
+"A coverage matrix is published under `docs/api/` and linked from "
+"`docs/api/index.md`."
+msgstr "`docs/api/` の下にカバレッジマトリクスが公開され、`docs/api/index.md` からリンクされる。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:55
+msgid ""
+"The matrix lists PyVista public classes/functions grouped by category "
+"(Plotting, Camera, Lighting, Mesh/Data, Filters, Readers, Text, Texture, "
+"Examples, Utilities)."
+msgstr "マトリクスがPyVistaパブリッククラス/関数をカテゴリー別"
+"（プロット・カメラ・ライティング・メッシュ/データ・フィルター・リーダー・テキスト・テクスチャ・サンプル・ユーティリティ）にリストする。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:56
+msgid ""
+"Every row carries a status of *Implemented*, *Partial*, or *Not "
+"implemented*."
+msgstr "すべての行が *Implemented*、*Partial*、*Not implemented* のステータスを持つ。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:57
+msgid "For *Partial* rows, the missing methods/attributes are listed."
+msgstr "*Partial* 行について、欠けているメソッド/属性がリストされる。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:58
+msgid ""
+"Every entry marked *Implemented* corresponds to a name present in "
+"`src/pyvista_wasm/__init__.pyi` (i.e., the implemented column is "
+"consistent with the type stub)."
+msgstr "*Implemented* とマークされたすべてのエントリが `src/pyvista_wasm/__init__.pyi` に存在する名前に対応する"
+"（すなわち実装カラムが型スタブと一貫する）。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:59
+msgid ""
+"The matrix is consistent with the `autosummary` entries rendered in "
+"`docs/api/index.md` (no name is documented that the matrix marks *Not "
+"implemented*, and vice versa)."
+msgstr "マトリクスが `docs/api/index.md` でレンダリングされる `autosummary` エントリと一貫する"
+"（マトリクスが *Not implemented* とマークする名前がドキュメント化されず、逆も同様）。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:60
+msgid ""
+"The matrix references parent issue [#515](https://github.com/tkoyama010"
+"/pyvista-wasm/issues/515) and its v0.11.0 baseline snapshot."
+msgstr "マトリクスが親issue [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) と"
+"そのv0.11.0ベースラインスナップショットを参照する。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:61
+msgid "The matrix is refreshed as part of the release PR for each release."
+msgstr "マトリクスが各リリースのリリースPRの一部として更新される。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:63
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の長所と短所"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:65
+msgid ""
+"Coverage matrix published in the docs, sourced from the `.pyi` stub, "
+"synced per release"
+msgstr "`.pyi` スタブをソースとしリリースごとに同期される、ドキュメントに公開されたカバレッジマトリクス"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:67
+msgid ""
+"See the [PyVista API "
+"reference](https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata)"
+" and "
+"[PolyDataFilters](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.html)"
+" for the upstream surface the matrix tracks."
+msgstr "マトリクスが追跡する上流サーフェスについては "
+"[PyVista APIリファレンス](https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata) と "
+"[PolyDataFilters](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.html) を参照。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:69
+msgid ""
+"Good, because single-glance visibility is met: the whole surface and its "
+"status live in one table on the docs site."
+msgstr "良い、なぜなら一望可視性が満たされる — サーフェス全体とそのステータスが"
+"ドキュメントサイトの1つのテーブルに存在する。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:70
+msgid ""
+"Good, because it is published where users already look — the API "
+"reference — so a user never has to visit a GitHub issue to learn what is "
+"available."
+msgstr "良い、なぜならユーザーがすでに見ている場所 — APIリファレンス — に公開されており、"
+"ユーザーが何が利用可能かを知るためにGitHub issueを訪れる必要がない。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:71
+msgid ""
+"Good, because the implemented column is anchored to "
+"`src/pyvista_wasm/__init__.pyi`, the same file `docs/api/index.md` "
+"renders, so the matrix and the API reference cannot disagree about what "
+"is implemented."
+msgstr "良い、なぜなら実装カラムが `src/pyvista_wasm/__init__.pyi`、"
+"すなわち `docs/api/index.md` がレンダリングする同じファイルに固定されており、"
+"マトリクスとAPIリファレンスが実装内容について矛盾できないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:72
+msgid ""
+"Good, because partial coverage is represented explicitly with a *Partial*"
+" status and a list of missing methods/attributes."
+msgstr "良い、なぜなら部分カバレッジが明示的な *Partial* ステータスと"
+"欠けているメソッド/属性のリストで表現されるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:73
+msgid ""
+"Good, because it avoids per-item issue sprawl — one maintained table "
+"replaces a backlog of hundreds of issues."
+msgstr "良い、なぜなら項目ごとのissue蔓延を避ける — "
+"1つのメンテナンスされたテーブルが数百のissueのバックログを置き換える。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:74
+msgid ""
+"Good, because it rides the existing docs PR/review flow and is built by "
+"Sphinx on Read the Docs with no new infrastructure."
+msgstr "良い、なぜなら既存のドキュメントPR/レビューフローに乗り、"
+"新しいインフラなしにSphinxによりRead the Docs上でビルドされるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:75
+msgid ""
+"Good, because the per-release sync cadence keeps the matrix aligned to "
+"the shipped package."
+msgstr "良い、なぜならリリースごとの同期頻度がマトリクスを出荷されたパッケージに整合させ続けるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:76
+msgid ""
+"Bad, because the *Not implemented* / *Partial* columns are hand-authored "
+"against upstream PyVista and can drift if a PyVista release adds surface "
+"between pyvista-wasm releases."
+msgstr "悪い、なぜなら *Not implemented* / *Partial* カラムは上流のPyVistaに対して手動で作成され、"
+"PyVistaリリースがpyvista-wasmリリースの間にサーフェスを追加した場合にドリフトする可能性があるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:77
+msgid ""
+"Bad, because there is no CI alarm for new upstream API surface; staying "
+"current is a release-time discipline."
+msgstr "悪い、なぜなら新しい上流APIサーフェスに対するCIアラームがなく、"
+"最新に保つことがリリース時の規律であるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:79
+msgid "Checklist of separate GitHub issues (one issue per PyVista item)"
+msgstr "個別GitHub issueのチェックリスト（PyVista項目ごとに1つのissue）"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:81
+msgid ""
+"Good, because each gap is individually trackable, assignable, and "
+"closeable on the Scrum board."
+msgstr "良い、なぜなら各ギャップがスクラムボードで個別に追跡・割り当て・クローズ可能だからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:82
+msgid ""
+"Good, because each issue carries its own discussion and acceptance "
+"criteria."
+msgstr "良い、なぜなら各issueが独自の議論と受け入れ基準を持つからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:83
+msgid ""
+"Neutral, because a project board can be filtered by status, giving a "
+"rough parity view."
+msgstr "中立、なぜならプロジェクトボードをステータスでフィルタでき、"
+"大まかなパリティビューが得られるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:84
+msgid ""
+"Bad, because it fails single-glance visibility — the parity view is a "
+"board to navigate, not one table to read."
+msgstr "悪い、なぜなら一望可視性に失敗する — パリティビューはナビゲートするボードであり、"
+"読む1つのテーブルではないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:85
+msgid ""
+"Bad, because it is not published in the docs — a user reading the API "
+"reference sees no coverage status."
+msgstr "悪い、なぜならドキュメントに公開されない — APIリファレンスを読むユーザーは"
+"カバレッジステータスを見られないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:86
+msgid ""
+"Bad, because the PyVista public API is large (datasets, filters, readers,"
+" plotting, theme, utilities); one issue per item produces hundreds of "
+"issues that a single maintainer cannot groom, failing the low-maintenance"
+" driver."
+msgstr "悪い、なぜならPyVistaパブリックAPIは大きく"
+"（データセット・フィルター・リーダー・プロット・テーマ・ユーティリティ）、"
+"項目ごとに1つのissueは単一メンテナがグルーミングできない数百のissueを生み出し、"
+"低メンテナンスドライバに失敗するからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:87
+msgid ""
+"Bad, because the issues are not tied to `src/pyvista_wasm/__init__.pyi`, "
+"so an issue can stay open after its item is implemented (or be closed "
+"before), drifting from the code."
+msgstr "悪い、なぜならissueが `src/pyvista_wasm/__init__.pyi` に結びついておらず、"
+"項目が実装された後にissueが開いたままになり（またはその前にクローズされ）、"
+"コードからドリフトする可能性があるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:89
+msgid "Coverage matrix kept in a tracking issue body"
+msgstr "トラッキングissue本文に保持されるカバレッジマトリクス"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:91
+msgid ""
+"Good, because it reuses the baseline snapshot already captured in "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) — no new "
+"artifact to create."
+msgstr "良い、なぜならすでに [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) に"
+"キャプチャされたベースラインスナップショットを再利用し — 新しいアーティファクトを作成する必要がないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:92
+msgid ""
+"Good, because it is low-effort: editing an issue body is cheaper than "
+"maintaining a docs page."
+msgstr "良い、なぜなら低労力である — issue本文の編集はドキュメントページのメンテナンスより安価だからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:93
+msgid ""
+"Neutral, because GitHub renders Markdown tables in issue bodies, so the "
+"matrix is readable in the issue."
+msgstr "中立、なぜならGitHubがissue本文のMarkdownテーブルをレンダリングし、"
+"マトリクスがissue内で読めるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:94
+msgid ""
+"Bad, because it fails the published-where-users-look knock-out criterion "
+"— users read the docs site, not issue bodies, so coverage status is "
+"invisible to them."
+msgstr "悪い、なぜならユーザーが見る場所での公開というノックアウト基準に失敗する "
+"— ユーザーはドキュメントサイトを読みissue本文は読まないので、"
+"カバレッジステータスが彼らに見えないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:95
+msgid ""
+"Bad, because the issue body is hand-edited and unrelated to "
+"`src/pyvista_wasm/__init__.pyi`, so it drifts from the code with no "
+"anchor."
+msgstr "悪い、なぜならissue本文が手動で編集され `src/pyvista_wasm/__init__.pyi` と無関係であり、"
+"アンカーなしでコードからドリフトするからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:96
+msgid ""
+"Bad, because the issue scrolls away as new issues arrive, and the matrix "
+"is not versioned with the docs or the code."
+msgstr "悪い、なぜなら新しいissueが到着するとissueがスクロールして消え、"
+"マトリクスがドキュメントやコードと共にバージョン管理されないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:98
+msgid "Automated parity report generated in CI"
+msgstr "CIで生成される自動パリティレポート"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:100
+msgid ""
+"See [PyVista `pyvista/__init__.py`](https://github.com/pyvista/pyvista) "
+"for the upstream surface a diff script would parse."
+msgstr "diffスクリプトが解析する上流サーフェスについては "
+"[PyVista `pyvista/__init__.py`](https://github.com/pyvista/pyvista) を参照。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:102
+msgid ""
+"Good, because it provides a CI alarm: every release tag (or PR) generates"
+" a fresh parity report, so new upstream API surface is detected "
+"automatically."
+msgstr "良い、なぜならCIアラームを提供する — 各リリースタグ（またはPR）が新しいパリティレポートを生成し、"
+"新しい上流APIサーフェスが自動的に検出されるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:103
+msgid ""
+"Good, because the report is generated from the code (parsing PyVista's "
+"public API and `src/pyvista_wasm/__init__.pyi`), eliminating hand-"
+"authoring drift."
+msgstr "良い、なぜならレポートがコードから生成され（PyVistaのパブリックAPIと "
+"`src/pyvista_wasm/__init__.pyi` を解析）、手動作成のドリフトを排除するからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:104
+msgid ""
+"Good, because it can be posted as a PR comment or CI artifact, giving "
+"maintainers an always-current view."
+msgstr "良い、なぜならPRコメントやCIアーティファクトとして投稿でき、"
+"メンテナに常に最新のビューを与えるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:105
+msgid ""
+"Neutral, because the report could also be published into the docs, "
+"blending this option with the chosen one."
+msgstr "中立、なぜならレポートをドキュメントに公開することもでき、"
+"この選択肢を選択肢と融合できるからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:106
+msgid ""
+"Bad, because it requires building and maintaining a diff script that "
+"parses the PyVista public API surface — a non-trivial parser that must "
+"track upstream PyVista's module layout as it evolves."
+msgstr "悪い、なぜならPyVistaパブリックAPIサーフェスを解析するdiffスクリプトのビルドとメンテナンスが必要であり、"
+"上流のPyVistaのモジュールレイアウトの進化を追跡しなければならない非自明なパーサーだからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:107
+msgid ""
+"Bad, because a CI artifact or PR comment is not published on the docs "
+"site, failing the published-where-users-look knock-out criterion unless "
+"extra work publishes the report into the docs."
+msgstr "悪い、なぜならCIアーティファクトやPRコメントはドキュメントサイトに公開されず、"
+"レポートをドキュメントに公開する追加作業をしない限りユーザーが見る場所での公開というノックアウト基準に失敗するからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:108
+msgid ""
+"Bad, because an automated report that lists *Not implemented* items "
+"cannot easily represent *Partial* coverage with a list of missing "
+"methods/attributes without a much richer (and more brittle) introspection"
+" of both APIs."
+msgstr "悪い、なぜなら *Not implemented* 項目をリストする自動レポートは、"
+"両方のAPIのより豊富で（より脆弱な）内省なしには"
+"*Partial* カバレッジを欠けているメソッド/属性のリストで容易に表現できないからである。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:110
+msgid "More Information"
+msgstr "追加情報"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:112
+msgid "How partial coverage is represented"
+msgstr "部分カバレッジの表現方法"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:114
+msgid ""
+"A row is marked *Partial* when the class/function exists in "
+"`src/pyvista_wasm/__init__.pyi` (so it is exported and documented) but "
+"does not implement the full upstream method/attribute set. The row then "
+"lists the missing methods/attributes. For example, `PolyData` is "
+"*Partial* because it is exported but many `PolyDataFilters` methods "
+"(`subdivide`, `triangulate`, `smooth`, `fill_holes`, `ray_trace`, "
+"`reconstruct_surface`, `merge`, `intersection`, `boolean_union`, "
+"`boolean_difference`, `project_points_to_plane`, `geodesic`, `decimate`, "
+"`connectivity`, `clean`, `compute_normals`, and more — see the parity "
+"gaps in [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515)) "
+"are not yet implemented; `PointData` is *Partial* because it is exported "
+"but not all data-array helpers are available. A row is *Implemented* only"
+" when the exported surface matches the upstream surface it intends to "
+"cover; it is *Not implemented* when the name does not appear in the stub "
+"at all (e.g., `UnstructuredGrid`, `StructuredGrid`, `ImageData`, "
+"`RectilinearGrid`, `MultiBlock`, `ExplicitStructuredGrid`, "
+"`UniformGrid`)."
+msgstr "クラス/関数が `src/pyvista_wasm/__init__.pyi` に存在し（エクスポートされドキュメント化される）が、"
+"上流のメソッド/属性セット全体を実装していない場合、その行は *Partial* とマークされる。"
+"その行には欠けているメソッド/属性がリストされる。"
+"例えば、`PolyData` は *Partial* である — エクスポートされているが多くの `PolyDataFilters` メソッド"
+"（`subdivide`、`triangulate`、`smooth`、`fill_holes`、`ray_trace`、"
+"`reconstruct_surface`、`merge`、`intersection`、`boolean_union`、"
+"`boolean_difference`、`project_points_to_plane`、`geodesic`、`decimate`、"
+"`connectivity`、`clean`、`compute_normals` など — "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) のパリティギャップを参照）が"
+"まだ実装されていない。`PointData` は *Partial* である — エクスポートされているが"
+"すべてのデータ配列ヘルパーが利用可能ではない。"
+"エクスポートされたサーフェスがカバーしようとする上流サーフェスと一致する場合のみ *Implemented* であり、"
+"名前がスタブにまったく現れない場合（例: `UnstructuredGrid`、`StructuredGrid`、"
+"`ImageData`、`RectilinearGrid`、`MultiBlock`、`ExplicitStructuredGrid`、"
+"`UniformGrid`）は *Not implemented* である。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:116
+msgid "Why a coverage matrix over a checklist of separate issues"
+msgstr "個別issueのチェックリストではなくカバレッジマトリクスを選ぶ理由"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:118
+msgid ""
+"A checklist of one issue per PyVista item optimizes for individual "
+"trackability but fails single-glance visibility and the low-maintenance "
+"driver: the PyVista public API is large, and one issue per item yields "
+"hundreds of issues a single maintainer cannot groom, none of which is "
+"visible to a user reading the docs. A single matrix gives the whole "
+"parity picture in one place, anchors the implemented column to the code, "
+"represents partial coverage, and rides the docs PR flow — at the cost of "
+"hand-authoring the *Not implemented* / *Partial* columns per release."
+msgstr "PyVista項目ごとに1つのissueのチェックリストは個別の追跡可能性に最適化するが、"
+"一望可視性と低メンテナンスドライバに失敗する: "
+"PyVistaパブリックAPIは大きく、項目ごとに1つのissueは単一メンテナがグルーミングできない"
+"数百のissueを生み出し、どれもドキュメントを読むユーザーには見えない。"
+"単一のマトリクスは1箇所でパリティ全体を示し、実装カラムをコードに固定し、"
+"部分カバレッジを表現し、ドキュメントPRフローに乗る — "
+"*Not implemented* / *Partial* カラムをリリースごとに手動作成するコストを除いて。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:120
+msgid "Why publish in the docs rather than keep in a tracking issue"
+msgstr "トラッキングissueに保持するのではなくドキュメントで公開する理由"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:122
+msgid ""
+"A tracking issue body is invisible to users reading the docs site, is not"
+" versioned with the code, and drifts from `src/pyvista_wasm/__init__.pyi`"
+" with no anchor. Publishing the matrix in `docs/api/` co-locates coverage"
+" status with the API reference that Sphinx already renders from the same "
+"stub, so a user sees both *what is available* and *how complete it is* in"
+" one place, and the matrix travels through the same reviewed docs PR flow"
+" as the rest of the documentation."
+msgstr "トラッキングissue本文はドキュメントサイトを読むユーザーには見えず、"
+"コードと共にバージョン管理されず、アンカーなしで `src/pyvista_wasm/__init__.pyi` からドリフトする。"
+"マトリクスを `docs/api/` に公開すると、カバレッジステータスがSphinxが同じスタブから"
+"すでにレンダリングするAPIリファレンスと同じ場所に配置され、"
+"ユーザーは *何が利用可能か* と *どの程度完全か* を1箇所で見られ、"
+"マトリクスは残りのドキュメントと同じレビュー付きドキュメントPRフローを通る。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:124
+msgid "Sync cadence"
+msgstr "更新頻度"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:126
+msgid ""
+"The matrix is refreshed as part of the release PR for each release, so it"
+" reflects the shipped package version. The implemented column is verified"
+" against `src/pyvista_wasm/__init__.pyi` at sync time; the *Not "
+"implemented* / *Partial* columns are reconciled against the current "
+"PyVista release. The baseline snapshot in "
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) is the "
+"v0.11.0 starting point and is not re-edited — the living view lives in "
+"the docs."
+msgstr "マトリクスは各リリースのリリースPRの一部として更新され、"
+"出荷されたパッケージバージョンを反映する。"
+"実装カラムは同期時に `src/pyvista_wasm/__init__.pyi` に対して検証される。"
+"*Not implemented* / *Partial* カラムは現在のPyVistaリリースに対して調整される。"
+"[#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) のベースラインスナップショットは"
+"v0.11.0の出発点であり再編集されない — 生きたビューはドキュメントに存在する。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:128
+msgid "Upgrade path"
+msgstr "アップグレードパス"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:130
+msgid ""
+"If drift between the matrix and upstream PyVista becomes a problem, the "
+"automated CI parity-report option can be layered on top of the chosen "
+"option: a release-time (or PR-time) script diffs the PyVista public API "
+"against `src/pyvista_wasm/__init__.pyi` and posts a report that the "
+"maintainer uses to update the matrix. The chosen option does not preclude"
+" this — the docs matrix remains the user-facing view, and the CI report "
+"becomes the maintainer-facing alarm that feeds it."
+msgstr "マトリクスと上流のPyVistaの間のドリフトが問題になった場合、"
+"自動CIパリティレポート選択肢を選択肢の上に重ねることができる: "
+"リリース時（またはPR時）のスクリプトがPyVistaパブリックAPIを "
+"`src/pyvista_wasm/__init__.pyi` とdiffし、"
+"メンテナがマトリクスを更新するために使用するレポートを投稿する。"
+"選択肢はこれを排除しない — ドキュメントマトリクスはユーザー向けビューのままであり、"
+"CIレポートはそれを供給するメンテナ向けアラームとなる。"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:132
+msgid "Links"
+msgstr "リンク"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:134
+msgid ""
+"PyVista PolyData: "
+"[https://docs.pyvista.org/api/core/\\_autosummary/pyvista.polydata](https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata)"
+msgstr "PyVista PolyData: "
+"[https://docs.pyvista.org/api/core/\\_autosummary/pyvista.polydata](https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:135
+msgid ""
+"PyVista PolyDataFilters: "
+"[https://docs.pyvista.org/api/core/\\_autosummary/pyvista.PolyDataFilters.html](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.html)"
+msgstr "PyVista PolyDataFilters: "
+"[https://docs.pyvista.org/api/core/\\_autosummary/pyvista.PolyDataFilters.html](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.html)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:136
+msgid ""
+"PyVista filters: "
+"[https://docs.pyvista.org/api/core/filters.html](https://docs.pyvista.org/api/core/filters.html)"
+msgstr "PyVista filters: "
+"[https://docs.pyvista.org/api/core/filters.html](https://docs.pyvista.org/api/core/filters.html)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:137
+msgid ""
+"PyVista plotting index: "
+"[https://docs.pyvista.org/api/plotting/index.html](https://docs.pyvista.org/api/plotting/index.html)"
+msgstr "PyVista plotting index: "
+"[https://docs.pyvista.org/api/plotting/index.html](https://docs.pyvista.org/api/plotting/index.html)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:138
+msgid ""
+"Parent issue: [#515](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/515) (Track PyVista API coverage matrix for pyvista-wasm, "
+"with the v0.11.0 baseline snapshot)"
+msgstr "親issue: [#515](https://github.com/tkoyama010/pyvista-wasm/issues/515) "
+"(pyvista-wasmのPyVista APIカバレッジマトリクスを追跡し、v0.11.0ベースラインスナップショットを含む)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:139
+msgid ""
+"This decision: [#516](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/516)"
+msgstr "この決定: [#516](https://github.com/tkoyama010/pyvista-wasm/issues/516)"
+
+#: ../../decisions/0010-track-pyvista-api-coverage-matrix.md:140
+msgid ""
+"Related: [ADR-0000](0000-use-markdown-architectural-decision-records.md) "
+"(records travel through the same review/PR flow as code — the matrix is a"
+" reviewed docs artifact)"
+msgstr "関連: [ADR-0000](0000-use-markdown-architectural-decision-records.md) "
+"（レコードはコードと同じレビュー/PRフローを通る — マトリクスはレビューされたドキュメントアーティファクトである）"
