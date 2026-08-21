@@ -126,3 +126,13 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.download_sky_box_cube_map
    pyvista_wasm.examples.download_trumpet
 ```
+
+## Rendering
+
+```{eval-rst}
+.. autosummary::
+   :toctree: _autosummary
+   :nosignatures:
+
+   pyvista_wasm.rendering.ColabRenderer
+```

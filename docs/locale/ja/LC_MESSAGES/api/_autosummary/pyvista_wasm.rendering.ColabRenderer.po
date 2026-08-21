@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-21 18:12+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:2
+msgid "pyvista\\_wasm.rendering.ColabRenderer"
+msgstr "pyvista\\_wasm.rendering.ColabRenderer"
+
+#: of pyvista_wasm.rendering.ColabRenderer:1
+msgid "Renderer for Google Colaboratory notebooks."
+msgstr "Google Colaboratoryノートブック用レンダラー。"
+
+#: of pyvista_wasm.rendering.ColabRenderer:3
+msgid ""
+"This renderer generates an iframe with the visualization and returns it "
+"as an ``IPython.display.HTML`` object. The sandboxed iframe embeds the "
+"standalone HTML via ``srcdoc``, bypassing Colab's sanitization of inline "
+"``<script>`` tags in cell output. This enables automatic inline rendering"
+" when ``plotter.show()`` is called in Colab."
+msgstr ""
+"このレンダラーは可視化を含むiframeを生成し、 ``IPython.display.HTML`` オブジェクトとして返します。"
+"サンドボックス化されたiframeは ``srcdoc`` 経由でスタンドアロンHTMLを埋め込み、"
+"Colabのセル出力におけるインライン ``<script>`` タグのサニタイズを回避します。"
+"これにより、Colabで ``plotter.show()`` を呼び出した際に自動的なインラインレンダリングが可能になります。"
+
+#: of pyvista_wasm.rendering.ColabRenderer:10
+#: pyvista_wasm.rendering.ColabRenderer.render:12
+msgid "Examples"
+msgstr "例"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+#: of pyvista_wasm.rendering.ColabRenderer.__init__:1
+msgid "Initialize the Colab renderer."
+msgstr "Colabレンダラーを初期化します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.rendering.ColabRenderer.__init__:3
+msgid ""
+"Lighting mode. ``\"default\"`` creates a default directional light, "
+"``None`` creates no default lights. Default is ``\"default\"``."
+msgstr ""
+"ライティングモード。 ``\"default\"`` はデフォルトの方向光を作成し、"
+" ``None`` はデフォルトのライトを作成しません。デフォルトは ``\"default\"`` 。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.__init__:6
+msgid ""
+"WebAssembly rendering backend. One of ``\"webgl\"`` or ``\"webgpu\"``. "
+"Default is ``\"webgl\"``."
+msgstr ""
+"WebAssemblyレンダリングバックエンド。 ``\"webgl\"`` または ``\"webgpu\"`` のいずれか。"
+"デフォルトは ``\"webgl\"`` 。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.__init__:9
+msgid ""
+"Execution mode for VTK.wasm method calls. One of ``\"sync\"`` or "
+"``\"async\"``. Default is ``\"sync\"``."
+msgstr ""
+"VTK.wasmメソッド呼び出しの実行モード。 ``\"sync\"`` または ``\"async\"`` のいずれか。"
+"デフォルトは ``\"sync\"`` 。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
+msgid "Raises"
+msgstr "発生させる例外"
+
+#: of pyvista_wasm.rendering.ColabRenderer.__init__:13
+msgid "If Google Colaboratory is not available."
+msgstr "Google Colaboratoryが利用できない場合。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:13
+msgid "Methods"
+msgstr "メソッド"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <pyvista_wasm.rendering.ColabRenderer.__init__>`\\ "
+"\\(\\[lighting\\, wasm\\_rendering\\, wasm\\_mode\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_axes <pyvista_wasm.rendering.ColabRenderer.add_axes>`\\ "
+"\\(\\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add an orientation marker (axes indicator) to the viewport."
+msgstr "ビューポートに方向マーカー（軸インジケーター）を追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_light <pyvista_wasm.rendering.ColabRenderer.add_light>`\\ "
+"\\(light\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add a light source to the scene."
+msgstr "シーンに光源を追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_mesh_actor "
+"<pyvista_wasm.rendering.ColabRenderer.add_mesh_actor>`\\ \\(mesh\\[\\, "
+"color\\, opacity\\, pbr\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add a mesh to the renderer."
+msgstr "レンダラーにメッシュを追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_points_actor "
+"<pyvista_wasm.rendering.ColabRenderer.add_points_actor>`\\ "
+"\\(points\\[\\, color\\, opacity\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add a point cloud to the renderer."
+msgstr "レンダラーにポイントクラウドを追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_scalar_bar "
+"<pyvista_wasm.rendering.ColabRenderer.add_scalar_bar>`\\ \\(\\[title\\, "
+"vertical\\, n\\_labels\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add a scalar bar to the scene."
+msgstr "シーンにスカラーバーを追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`add_text_actor "
+"<pyvista_wasm.rendering.ColabRenderer.add_text_actor>`\\ \\(text\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Add a text actor to the scene."
+msgstr "シーンにテキストアクターを追加します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ":py:obj:`clear <pyvista_wasm.rendering.ColabRenderer.clear>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Remove all actors, lights, and text actors from the renderer."
+msgstr "レンダラーからすべてのアクター、ライト、テキストアクターを削除します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`create_container "
+"<pyvista_wasm.rendering.ColabRenderer.create_container>`\\ "
+"\\(\\[element\\_id\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Store the container ID for later HTML generation."
+msgstr "後のHTML生成のためにコンテナIDを保存します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`generate_standalone_html "
+"<pyvista_wasm.rendering.ColabRenderer.generate_standalone_html>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Generate a complete standalone HTML page with vtk.js."
+msgstr "vtk.jsを使用して完全なスタンドアロンHTMLページを生成します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ":py:obj:`render <pyvista_wasm.rendering.ColabRenderer.render>`\\ \\(\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+#: of pyvista_wasm.rendering.ColabRenderer.render:1
+msgid "Render the scene in Google Colaboratory."
+msgstr "Google Colaboratoryでシーンをレンダリングします。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`screenshot <pyvista_wasm.rendering.ColabRenderer.screenshot>`\\ "
+"\\(\\[filename\\, ...\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:1
+msgid "Take a screenshot of the rendered scene."
+msgstr "レンダリングされたシーンのスクリーンショットを取得します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`set_background "
+"<pyvista_wasm.rendering.ColabRenderer.set_background>`\\ \\(color\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Set the background color of the renderer."
+msgstr "レンダラーの背景色を設定します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`set_environment_texture "
+"<pyvista_wasm.rendering.ColabRenderer.set_environment_texture>`\\ "
+"\\(texture\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Set the environment texture for image-based lighting."
+msgstr "イメージベースドライティング用の環境テクスチャを設定します。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid ""
+":py:obj:`view_vector "
+"<pyvista_wasm.rendering.ColabRenderer.view_vector>`\\ \\(vector\\[\\, "
+"viewup\\]\\)"
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:35:<autosummary>:1
+msgid "Point the camera in the direction of the given vector."
+msgstr "指定されたベクトルの方向にカメラを向けます。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:37
+msgid "Attributes"
+msgstr "属性"
+
+#: ../../../:1:<autosummary>:1
+msgid ":py:obj:`camera <pyvista_wasm.rendering.ColabRenderer.camera>`"
+msgstr ""
+
+#: ../../../:1:<autosummary>:1
+msgid "Get or set the camera for the renderer."
+msgstr "レンダラーのカメラを取得または設定します。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.render:3
+msgid ""
+"Generates an iframe with the visualization and returns it as an "
+"``IPython.display.HTML`` object so Colab captures it in the cell output "
+"area."
+msgstr ""
+"可視化を含むiframeを生成し、 ``IPython.display.HTML`` オブジェクトとして返します。"
+"これによりColabはセル出力領域にキャプチャします。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.rendering.ColabRenderer.render:7
+msgid "The ``IPython.display.HTML`` object wrapping the sandboxed iframe."
+msgstr "サンドボックス化されたiframeをラップする ``IPython.display.HTML`` オブジェクト。"
+
+#: ../../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:3
+msgid ""
+"This method raises NotImplementedError because Colab does not support "
+"direct screenshot capture. Use BrowserRenderer for screenshots in "
+"standard Python environments."
+msgstr ""
+"このメソッドはColabが直接のスクリーンショット取得をサポートしていないため"
+"NotImplementedErrorを発生させます。標準Python環境でのスクリーンショットには"
+"BrowserRendererを使用してください。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:7
+msgid "File path to save the image."
+msgstr "画像を保存するファイルパス。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:9
+msgid "Whether to make the background transparent."
+msgstr "背景を透明にするかどうか。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:11
+msgid "If True, return a numpy array of the image."
+msgstr "Trueの場合、画像のnumpy配列を返します。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:13
+msgid "Window size as (width, height)."
+msgstr "ウィンドウサイズ (width, height)。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:15
+msgid "Scale factor for higher resolution."
+msgstr "高解像度用のスケールファクター。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:18
+msgid "Image data as numpy array if return_img is True, otherwise None."
+msgstr "return_imgがTrueの場合はnumpy配列の画像データ、それ以外はNone。"
+
+#: of pyvista_wasm.rendering.ColabRenderer.screenshot:21
+msgid "Screenshots are not supported in Colab environments."
+msgstr "Colab環境ではスクリーンショットはサポートされていません。"

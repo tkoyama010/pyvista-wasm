@@ -8,8 +8,10 @@ Architecture
 pyvista-wasm uses a backend abstraction to support multiple environments:
 
 1. **VTKWasmRenderer**: Used in Pyodide/browser with VTK.wasm for WebGL rendering
-2. **BrowserRenderer**: Used in standard Python; opens the plot in the default browser
-3. **MockRenderer**: Used in standard Python for development/testing
+2. **MarimoRenderer**: Used in marimo notebooks; embeds a sandboxed iframe
+3. **ColabRenderer**: Used in Google Colaboratory; embeds a sandboxed iframe
+4. **BrowserRenderer**: Used in standard Python; opens the plot in the default browser
+5. **MockRenderer**: Used in standard Python for development/testing
 
 Environment Detection
 ---------------------
@@ -139,6 +141,26 @@ except ImportError:
 
 # Check if marimo is available
 MARIMO_AVAILABLE = "marimo" in sys.modules
+
+
+def _is_colab_available() -> bool:
+    """Detect whether the runtime is Google Colaboratory.
+
+    Colab injects the ``google.colab`` module into ``sys.modules`` and sets
+    the ``COLAB_RELEASE_TAG`` environment variable. Either signal is
+    sufficient for detection.
+
+    Returns
+    -------
+    bool
+        True if running inside Google Colaboratory.
+
+    """
+    return "google.colab" in sys.modules or bool(os.environ.get("COLAB_RELEASE_TAG"))
+
+
+# Check if Google Colaboratory is available
+COLAB_AVAILABLE = _is_colab_available()
 
 
 class _VTKWasmLoader:
@@ -1258,6 +1280,132 @@ class MarimoRenderer(_BaseHTMLRenderer):
         raise NotImplementedError(msg)
 
 
+class ColabRenderer(_BaseHTMLRenderer):
+    """Renderer for Google Colaboratory notebooks.
+
+    This renderer generates an iframe with the visualization and returns
+    it as an ``IPython.display.HTML`` object. The sandboxed iframe embeds
+    the standalone HTML via ``srcdoc``, bypassing Colab's sanitization of
+    inline ``<script>`` tags in cell output. This enables automatic
+    inline rendering when ``plotter.show()`` is called in Colab.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> plotter = pv.Plotter()  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(pv.Sphere(), color='red')  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
+        """Initialize the Colab renderer.
+
+        Parameters
+        ----------
+        lighting : str or None, optional
+            Lighting mode. ``"default"`` creates a default directional light,
+            ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
+
+        Raises
+        ------
+        RuntimeError
+            If Google Colaboratory is not available.
+
+        """
+        if not COLAB_AVAILABLE:
+            msg = "ColabRenderer requires Google Colaboratory to be available"
+            raise RuntimeError(msg)
+
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+
+    def render(self) -> object:
+        """Render the scene in Google Colaboratory.
+
+        Generates an iframe with the visualization and returns it as an
+        ``IPython.display.HTML`` object so Colab captures it in the cell
+        output area.
+
+        Returns
+        -------
+        object
+            The ``IPython.display.HTML`` object wrapping the sandboxed
+            iframe.
+
+        Examples
+        --------
+        >>> renderer = ColabRenderer()  # doctest: +SKIP
+        >>> renderer.add_mesh_actor(Sphere(), color='red')  # doctest: +SKIP
+        >>> renderer.render()  # doctest: +SKIP
+
+        """
+        html_content = self.generate_standalone_html()
+        escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+        iframe_html = (
+            f'<iframe srcdoc="{escaped}" '
+            'style="width:100%;height:400px;min-height:400px;'
+            'border:2px solid #333;" '
+            'sandbox="allow-scripts"></iframe>'
+        )
+        return HTML(iframe_html)
+
+    def screenshot(
+        self,
+        filename: str | Path | None = None,
+        transparent_background: bool | None = None,  # noqa: FBT001
+        return_img: bool = True,  # noqa: FBT001, FBT002
+        window_size: tuple[int, int] | list[int] | None = None,
+        scale: int | None = None,
+    ) -> np.ndarray | None:
+        """Take a screenshot of the rendered scene.
+
+        This method raises NotImplementedError because Colab does not
+        support direct screenshot capture. Use BrowserRenderer for
+        screenshots in standard Python environments.
+
+        Parameters
+        ----------
+        filename : str, Path, or None, optional
+            File path to save the image.
+        transparent_background : bool or None, optional
+            Whether to make the background transparent.
+        return_img : bool, optional
+            If True, return a numpy array of the image.
+        window_size : tuple or list of int, optional
+            Window size as (width, height).
+        scale : int or None, optional
+            Scale factor for higher resolution.
+
+        Returns
+        -------
+        numpy.ndarray or None
+            Image data as numpy array if return_img is True, otherwise None.
+
+        Raises
+        ------
+        NotImplementedError
+            Screenshots are not supported in Colab environments.
+
+        """
+        msg = "screenshot() is not supported in Colab. Use BrowserRenderer instead."
+        raise NotImplementedError(msg)
+
+
 class BrowserRenderer(_BaseHTMLRenderer):
     """Renderer that opens the visualization in the default web browser.
 
@@ -1858,7 +2006,7 @@ def get_renderer(
     lighting: str | None = "default",
     wasm_rendering: str = "webgl",
     wasm_mode: str = "sync",
-) -> VTKWasmRenderer | MarimoRenderer | BrowserRenderer | MockRenderer:
+) -> VTKWasmRenderer | MarimoRenderer | ColabRenderer | BrowserRenderer | MockRenderer:
     """Get appropriate renderer for current environment.
 
     Automatically detects whether running in Pyodide/browser/marimo and
@@ -1878,8 +2026,9 @@ def get_renderer(
 
     Returns
     -------
-    VTKWasmRenderer or MarimoRenderer or BrowserRenderer or MockRenderer
+    VTKWasmRenderer or MarimoRenderer or ColabRenderer or BrowserRenderer or MockRenderer
         - MarimoRenderer if in marimo environment
+        - ColabRenderer if in Google Colaboratory environment
         - VTKWasmRenderer if in Pyodide or IPython environment
         - BrowserRenderer in standard Python (opens the default browser)
         - MockRenderer if ``PYVISTA_JS_NO_BROWSER=1`` is set (for testing/CI)
@@ -1910,6 +2059,15 @@ def get_renderer(
     # Check for marimo first (highest priority for WASM notebooks)
     if MARIMO_AVAILABLE:
         return MarimoRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+    # Check for Google Colaboratory before IPython (Colab has
+    # IPYTHON_AVAILABLE=True but strips inline <script> tags, so the
+    # sandboxed iframe from ColabRenderer is required).
+    if COLAB_AVAILABLE:
+        return ColabRenderer(
             lighting=lighting,
             wasm_rendering=wasm_rendering,
             wasm_mode=wasm_mode,
