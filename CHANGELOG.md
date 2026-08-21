@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.12.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.11.0...pyvista-wasm-v0.12.0) (2026-08-21)
+
+### Features
+
+- add yamllint and yamlfmt for YAML formatting and linting ([#505](https://github.com/tkoyama010/pyvista-wasm/issues/505)) ([2aaefc9](https://github.com/tkoyama010/pyvista-wasm/commit/2aaefc98af7e373b468ad5a9be497d28708f5e08))
+- **slides:** add Asia-targeted NPM binary mirror slide ([#563](https://github.com/tkoyama010/pyvista-wasm/issues/563)) ([133a8f9](https://github.com/tkoyama010/pyvista-wasm/commit/133a8f9b30e5759607e8eb32c0f03f1b27c344e2))
+- support Google Colaboratory rendering via sandboxed iframe ([#571](https://github.com/tkoyama010/pyvista-wasm/issues/571)) ([aca085d](https://github.com/tkoyama010/pyvista-wasm/commit/aca085dd2cb750f07b8bcb43e69fcd4dfc9fa5b3))
+- **terraform:** sync GitHub repo settings via Terraform per ADR-0009 ([#534](https://github.com/tkoyama010/pyvista-wasm/issues/534)) ([8be8cce](https://github.com/tkoyama010/pyvista-wasm/commit/8be8cce9ebf55bbf07d3395c6288112a42728677))
+
+### Bug Fixes
+
+- **ci:** authenticate git push with gh auth setup-git in terraform apply ([#543](https://github.com/tkoyama010/pyvista-wasm/issues/543)) ([affea12](https://github.com/tkoyama010/pyvista-wasm/commit/affea126983ebca19eeae923b4e2e858b38323a5))
+- **ci:** enforce .pot/.po catalog parity in Docs Gettext Check ([#525](https://github.com/tkoyama010/pyvista-wasm/issues/525)) ([a18f1ed](https://github.com/tkoyama010/pyvista-wasm/commit/a18f1ed29d74e18d130c00bbbbe04d843a4c8e4f))
+- **ci:** fetch ruleset detail to detect default-branch conditions ([#547](https://github.com/tkoyama010/pyvista-wasm/issues/547)) ([1d34171](https://github.com/tkoyama010/pyvista-wasm/commit/1d34171f0424ecbfe9eb94c6273e4bb85111cbdf))
+- **ci:** grant terraform-apply App bypass on main ruleset to commit state ([#546](https://github.com/tkoyama010/pyvista-wasm/issues/546)) ([b7951f4](https://github.com/tkoyama010/pyvista-wasm/commit/b7951f4bce88295c9d3f948344169083fde07b90))
+- **ci:** migrate create-github-app-token to client-id input ([#542](https://github.com/tkoyama010/pyvista-wasm/issues/542)) ([f197e4a](https://github.com/tkoyama010/pyvista-wasm/commit/f197e4ad04c75e8171ded3fe6c8bccf5d1a7f580))
+- **ci:** normalize null integration_id in both ruleset verify snapshots ([#549](https://github.com/tkoyama010/pyvista-wasm/issues/549)) ([e862dcf](https://github.com/tkoyama010/pyvista-wasm/commit/e862dcf0aaa9d90fc0e5c382fdf894098da32657))
+- **ci:** strip null integration_id from ruleset PUT payload ([#548](https://github.com/tkoyama010/pyvista-wasm/issues/548)) ([69c90e7](https://github.com/tkoyama010/pyvista-wasm/commit/69c90e7e38af27be120e596ef76edd4b6df305de))
+- **deps:** bump nanoid from 3.3.17 to 3.3.18 in slides ([#529](https://github.com/tkoyama010/pyvista-wasm/issues/529)) ([6d22cea](https://github.com/tkoyama010/pyvista-wasm/commit/6d22ceaf037f2f900c75fa0d75b4d60a7609e898))
+- **slides:** emphasize automatic fallback on WebGL/WebGPU switching slide ([#566](https://github.com/tkoyama010/pyvista-wasm/issues/566)) ([d2c1e8b](https://github.com/tkoyama010/pyvista-wasm/commit/d2c1e8b23485ff93ec7ffc60ff87e5a9b6cd2959))
+- **terraform:** stop managing terraform-apply deployment branch policy ([#545](https://github.com/tkoyama010/pyvista-wasm/issues/545)) ([efad471](https://github.com/tkoyama010/pyvista-wasm/commit/efad471967345ed3489c1899a5855ff895127bd9))
+
+### Documentation
+
+- add ADR-0009 for syncing GitHub repo settings with Terraform ([#523](https://github.com/tkoyama010/pyvista-wasm/issues/523)) ([c008df8](https://github.com/tkoyama010/pyvista-wasm/commit/c008df8f114ea0e7f89caa907222087e50d57d66))
+- add anticipated Q&A points to talk script ([#565](https://github.com/tkoyama010/pyvista-wasm/issues/565)) ([0005e6c](https://github.com/tkoyama010/pyvista-wasm/commit/0005e6c77215ec7e43c0dafcc8f8a3337aee2264))
+- add tkoyama010 as a contributor for doc ([#503](https://github.com/tkoyama010/pyvista-wasm/issues/503)) ([3acd55b](https://github.com/tkoyama010/pyvista-wasm/commit/3acd55bd919dff41ae8b1fe0fdee05a3db34b0bc))
+- add tkoyama010 as a contributor for infra ([#522](https://github.com/tkoyama010/pyvista-wasm/issues/522)) ([ea483a4](https://github.com/tkoyama010/pyvista-wasm/commit/ea483a44f236f44f93e18be9ac338c9d557de3af))
+- add tkoyama010 as a contributor for security ([#512](https://github.com/tkoyama010/pyvista-wasm/issues/512)) ([a52230b](https://github.com/tkoyama010/pyvista-wasm/commit/a52230b689a2565076242779e6205fd8d346dfc1))
+- add tkoyama010 as a contributor for test ([#517](https://github.com/tkoyama010/pyvista-wasm/issues/517)) ([8ddc402](https://github.com/tkoyama010/pyvista-wasm/commit/8ddc4027fbba1318958c64555ea42d717cc4f840))
+- add tkoyama010 as a contributor for tool ([#520](https://github.com/tkoyama010/pyvista-wasm/issues/520)) ([ce71bb3](https://github.com/tkoyama010/pyvista-wasm/commit/ce71bb31cd02c9c55a0bcb622f9399d3da2199ac))
+- add yamllint and yamlfmt badges to Code Quality Standards ([#511](https://github.com/tkoyama010/pyvista-wasm/issues/511)) ([64ca301](https://github.com/tkoyama010/pyvista-wasm/commit/64ca301cb73109f701a66a80e2409ca8407643df))
+- move pyvista-wasm CLI slide to appendix ([#564](https://github.com/tkoyama010/pyvista-wasm/issues/564)) ([a9111da](https://github.com/tkoyama010/pyvista-wasm/commit/a9111dad0deb2211140c4370f587f2b85192552e))
+- **slides:** move VTK usage examples slide to after PyVista intro ([#552](https://github.com/tkoyama010/pyvista-wasm/issues/552)) ([607f5e6](https://github.com/tkoyama010/pyvista-wasm/commit/607f5e62ddaf13a1e456458db88cddfe566bfef9))
+- **slides:** swap SSR-vs-Wasm comparison before Wasm deep-dive ([#551](https://github.com/tkoyama010/pyvista-wasm/issues/551)) ([df4945a](https://github.com/tkoyama010/pyvista-wasm/commit/df4945a1fa2e84da8f7a9164d6ece01c7ffce2c4))
+
 ## [0.11.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.10.0...pyvista-wasm-v0.11.0) (2026-08-11)
 
 ### Features
