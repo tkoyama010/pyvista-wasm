@@ -324,9 +324,20 @@ layout: full
 
 <div class="text-sm opacity-80">{{ $t("history.subtitle") }}</div>
 
-<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full mt-1 rounded-lg" style="height: 380px" frameborder="0"></iframe>
+<iframe src="https://kitware.github.io/vtk-wasm/demo/plain-javascript.html" class="w-full mt-1 rounded-lg" style="height: 300px" frameborder="0"></iframe>
 
-<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. -->
+<div class="grid grid-cols-2 gap-3 mt-3">
+  <div class="rounded-lg p-3" style="border: 1px solid rgba(125,125,125,0.3)">
+    <div class="font-medium text-sm">{{ $t("history.i1t") }}</div>
+    <div class="text-xs opacity-70 mt-1">{{ $t("history.i1d") }}</div>
+  </div>
+  <div class="rounded-lg p-3" style="border: 1px solid rgba(51,133,230,0.5); background-color: rgba(51,133,230,0.13)">
+    <div class="font-medium text-sm" style="color: rgba(51,133,230,1)">{{ $t("history.i2t") }}</div>
+    <div class="text-xs opacity-80 mt-1">{{ $t("history.i2d") }}</div>
+  </div>
+</div>
+
+<!-- Single message: a live demo of vtk-wasm running entirely in the browser — no server, no install, just open the page. The highlighted card emphasizes automatic fallback: no user configuration needed, WebGPU preferred, WebGL fallback based on browser support. -->
 <!-- $t("script.s9") -->
 
 ---
