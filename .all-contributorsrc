@@ -20,7 +20,8 @@
         "security",
         "test",
         "tool",
-        "infra"
+        "infra",
+        "talk"
       ]
     }
   ],
