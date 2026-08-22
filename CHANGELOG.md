@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.12.0...pyvista-wasm-v0.12.1) (2026-08-22)
+
+### Documentation
+
+- add ADR-0010 to track PyVista API coverage matrix ([#567](https://github.com/tkoyama010/pyvista-wasm/issues/567)) ([a77df00](https://github.com/tkoyama010/pyvista-wasm/commit/a77df003feb0db391a4bda6d0171c2bda06861a6))
+- add Google Colaboratory badge to README ([#573](https://github.com/tkoyama010/pyvista-wasm/issues/573)) ([74b09e3](https://github.com/tkoyama010/pyvista-wasm/commit/74b09e38e45b418424c34b53dc6231b1e77b598a))
+- add tkoyama010 as a contributor for talk ([#577](https://github.com/tkoyama010/pyvista-wasm/issues/577)) ([f2b3121](https://github.com/tkoyama010/pyvista-wasm/commit/f2b3121d1ed3a33668a71d697cdec8aab04a489e))
+
+### Continuous Integration
+
+- add validate-pyproject pre-commit hook ([#576](https://github.com/tkoyama010/pyvista-wasm/issues/576)) ([9784bbd](https://github.com/tkoyama010/pyvista-wasm/commit/9784bbd3d5990f2626f3e59b661dd5fa1964accc))
+
 ## [0.12.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.11.0...pyvista-wasm-v0.12.0) (2026-08-21)
 
 ### Features
