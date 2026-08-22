@@ -44,6 +44,11 @@ repos:
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.25
+    hooks:
+      - id: validate-pyproject
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.12.5
     hooks:
