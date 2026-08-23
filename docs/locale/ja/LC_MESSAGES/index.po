@@ -350,4 +350,3 @@ msgstr "[GitHubリポジトリ](https://github.com/tkoyama010/pyvista-wasm)"
 #: ../../index.md:51
 msgid "[Issue Tracker](https://github.com/tkoyama010/pyvista-wasm/issues)"
 msgstr "[イシュートラッカー](https://github.com/tkoyama010/pyvista-wasm/issues)"
-

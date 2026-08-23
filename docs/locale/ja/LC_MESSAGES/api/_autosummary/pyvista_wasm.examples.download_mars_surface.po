@@ -76,4 +76,3 @@ msgstr ""
 #: of pyvista_wasm.examples.download_mars_surface:29
 msgid "Render a textured Mars planet sphere in the browser."
 msgstr ""
-

@@ -409,4 +409,3 @@ msgstr ""
 #: ../../api/index.md:138:<autosummary>:1
 msgid "Renderer for Google Colaboratory notebooks."
 msgstr "Google Colaboratoryノートブック用レンダラー。"
-
