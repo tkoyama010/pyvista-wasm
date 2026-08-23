@@ -1,4 +1,5 @@
 (howtos-creating-planet)=
+
 # Creating a Planet
 
 Render a textured planet sphere in the browser, mirroring PyVista's
