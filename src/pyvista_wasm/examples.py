@@ -336,6 +336,40 @@ def download_bunny() -> PolyData:
     return PLYReader(path).read()
 
 
+def download_mars_surface() -> Texture:
+    """Download the Mars planet surface texture.
+
+    Returns the Mars surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_mars_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Mars surface image URL.
+
+    See Also
+    --------
+    :ref:`howtos-creating-planet`
+        How-to guide for rendering a textured planet sphere.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_mars_surface()
+    >>> sphere = pv.Sphere(theta_resolution=120, phi_resolution=120)
+    >>> planet = sphere.texture_map_to_plane()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(planet, texture=texture)
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/mars.jpg")
+
+
 def download_lucy() -> PolyData:
     """Download the Lucy Angel dataset.
 
