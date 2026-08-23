@@ -356,10 +356,11 @@ def download_mars_surface() -> Texture:
     Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
     the remote image URL and VTK.wasm samples it in the browser via WebGL.
 
-    To render a textured Mars globe, build a UV-mapped sphere with
-    :meth:`~pyvista_wasm.PolyData.texture_map_to_plane` and pass the texture
-    to :meth:`~pyvista_wasm.Plotter.add_mesh`. This is the wasm counterpart
-    to PyVista's `create-planet
+    To render a textured Mars globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on a :class:`~pyvista_wasm.Sphere`;
+    the browser renderer generates the sphere UVs so the image wraps
+    equirectangularly around the globe. This is the wasm counterpart to
+    PyVista's `create-planet
     <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
 
     Examples
@@ -370,9 +371,8 @@ def download_mars_surface() -> Texture:
     >>> from pyvista_wasm import examples
     >>> texture = examples.download_mars_surface()
     >>> sphere = pv.Sphere(theta_resolution=120, phi_resolution=120)
-    >>> planet = sphere.texture_map_to_plane()
     >>> plotter = pv.Plotter()
-    >>> _ = plotter.add_mesh(planet, texture=texture)
+    >>> _ = plotter.add_mesh(sphere, texture=texture)
     >>> plotter.show()  # doctest: +SKIP
 
     """
