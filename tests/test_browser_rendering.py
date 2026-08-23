@@ -20,11 +20,41 @@ from typing import TYPE_CHECKING
 import pytest
 
 from pyvista_wasm import Line, Plotter, Sphere, Text
-from pyvista_wasm.examples import download_bunny, download_trumpet
+from pyvista_wasm.examples import download_bunny, download_masonry_texture, download_trumpet
 from pyvista_wasm.readers import OBJReader, PLYReader, PolyDataReader, STLReader
 
 if TYPE_CHECKING:
     from playwright.sync_api import Page
+
+
+def _sample_canvas_colors(png_bytes: bytes, step: int = 8) -> set[tuple[int, int, int]]:
+    """Return the set of quantized RGB colors sampled from a PNG screenshot.
+
+    Parameters
+    ----------
+    png_bytes : bytes
+        PNG-encoded screenshot bytes from a Playwright canvas screenshot.
+    step : int
+        Pixel stride when sampling the image grid.
+
+    Returns
+    -------
+    set[tuple[int, int, int]]
+        Distinct (r, g, b) tuples after per-channel quantization to 16 levels.
+
+    """
+    from io import BytesIO  # noqa: PLC0415
+
+    from PIL import Image  # noqa: PLC0415
+
+    img = Image.open(BytesIO(png_bytes)).convert("RGB")
+    colors: set[tuple[int, int, int]] = set()
+    for y in range(0, img.height, step):
+        for x in range(0, img.width, step):
+            r, g, b = img.getpixel((x, y))
+            # Quantize to 16 levels per channel so near-identical pixels collapse.
+            colors.add((r >> 4, g >> 4, b >> 4))
+    return colors
 
 
 def _check_cdn_access(page: Page) -> bool:
@@ -571,3 +601,56 @@ def test_ply_reader_from_file_renders_in_browser(page: Page) -> None:
     canvas = page.query_selector("canvas")
     assert canvas is not None, "Canvas element not found for PLY reader mesh"
     assert len(js_errors) == 0, f"JavaScript errors during PLY rendering: {js_errors}"
+
+
+class TestTextureRendering:
+    """Browser rendering tests for surface textures attached via add_mesh(texture=...)."""
+
+    @pytest.mark.playwright
+    def test_texture_sampled_across_sphere(self, page: Page) -> None:
+        """Assert the texture image is sampled, not a single flat color.
+
+        Reads the rendered canvas pixels and checks that more than one
+        distinct color appears across the sphere surface. Skips when the
+        loaded vtk-wasm binary does not permit ``vtkTexture.SetImage`` /
+        ``vtkActor.AddTexture`` (cross-repo binding limitation, see #581).
+
+        Parameters
+        ----------
+        page : Page
+            Playwright page fixture for browser automation.
+
+        """
+        plotter = Plotter()
+        plotter.add_mesh(
+            Sphere(theta_resolution=120, phi_resolution=120),
+            texture=download_masonry_texture(),
+        )
+
+        js_errors: list[str] = []
+        page.on(
+            "console",
+            lambda msg: js_errors.append(msg.text) if msg.type == "error" else None,
+        )
+
+        _load_plotter_html(page, plotter)
+
+        canvas = page.query_selector("canvas")
+        assert canvas is not None, "Canvas element not found for textured mesh"
+
+        binding_blocked = any(
+            "is not permitted" in err and ("SetImage" in err or "AddTexture" in err)
+            for err in js_errors
+        )
+        if binding_blocked:
+            pytest.skip(
+                "vtk-wasm binary does not expose SetImage/AddTexture yet (see #581)",
+            )
+
+        assert len(js_errors) == 0, f"JavaScript errors during texture rendering: {js_errors}"
+
+        png_bytes = canvas.screenshot()
+        colors = _sample_canvas_colors(png_bytes)
+        assert len(colors) > 1, (
+            f"Texture not sampled: only {len(colors)} distinct color(s) on sphere surface"
+        )
