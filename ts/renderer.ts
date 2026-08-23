@@ -799,6 +799,47 @@ async function applyPbr(
 }
 
 /**
+ * Load an image from a URL for use as a texture.
+ *
+ * CORS is enabled so the decoded pixels can be sampled by WebGL.
+ * @param url
+ */
+function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = (): void => resolve(img);
+    img.onerror = (): void =>
+      reject(new Error(`Failed to load texture image: ${url}`));
+    img.src = url;
+  });
+}
+
+/**
+ * Load the texture image from {@link TextureConfig} and attach it to the actor.
+ *
+ * VTK.wasm exposes `vtkTexture.setImage` and `vtkActor.addTexture` via its
+ * ObjectManager whitelist; if a given binary build does not permit those
+ * calls, the attach is skipped so the rest of the scene still renders.
+ * @param vtk
+ * @param actor
+ * @param texture
+ */
+async function applyTexture(
+  vtk: VtkWasmNamespace,
+  actor: VtkActor,
+  texture: TextureConfig | undefined,
+): Promise<void> {
+  if (!texture) {
+    return;
+  }
+  const img = await loadImage(texture.url);
+  const vtkTexture = vtk.vtkTexture();
+  vtkTexture.setImage(img);
+  actor.addTexture(vtkTexture);
+}
+
+/**
  * Build a complete VTK.wasm actor from an {@link ActorConfig} and add it to the renderer.
  * @param vtk
  * @param cfg
@@ -877,6 +918,8 @@ async function setupActor(
     prop.setPointSize(cfg.pointSize ?? DefaultPointSize);
     prop.setRepresentationToPoints();
   }
+
+  await applyTexture(vtk, actor, cfg.texture);
 
   ren.addActor(actor);
 }
