@@ -32,6 +32,7 @@ type VtkRenderer = {
 /** A renderable entity in the scene that maps data through a mapper. */
 type VtkActor = {
   getProperty(): Promise<VtkProperty>;
+  addTexture(texture: VtkTexture): void;
   delete(): void;
 };
 
