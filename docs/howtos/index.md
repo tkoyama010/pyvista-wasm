@@ -6,5 +6,4 @@ Focused guides for common tasks with pyvista-wasm.
 :maxdepth: 1
 
 translating
-creating-planet
 ```
