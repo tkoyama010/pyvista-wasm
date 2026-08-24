@@ -174,7 +174,9 @@ type SourceResult =
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
     await sourceResult.output.update();
-    return sourceResult.output.getOutputData();
+    // vtk-wasm permits GetOutput (vtkPolyDataAlgorithm) but not
+    // GetOutputData on the source filters used here.
+    return sourceResult.output.getOutput();
   }
 
   return sourceResult.output;
@@ -738,7 +740,40 @@ async function injectTcoords(
   });
   await tcArray.setArray(Float32Array.from(tCoords));
   const pointData = await polydata.getPointData();
-  pointData.setTcoords(tcArray);
+  pointData.setTCoords(tcArray);
+}
+
+/**
+ * Generate equirectangular texture coordinates for a sphere from its points.
+ *
+ * ``vtkSphereSource`` in the mirrored vtk-wasm binary does not expose
+ * ``SetGenerateTCoords``, so UVs are derived from point positions:
+ * ``u = atan2(y, x) / 2π + 0.5`` (longitude), ``v = asin(z/r) / π + 0.5``
+ * (latitude). Poles collapse to ``v`` 0/1, matching the wrap PyVista uses
+ * for planet textures.
+ * @param vtk
+ * @param polydata
+ */
+async function generateSphereTcoords(
+  vtk: VtkWasmNamespace,
+  polydata: VtkPolyData,
+): Promise<void> {
+  const pts = await polydata.getPoints();
+  const n = await pts.getNumberOfPoints();
+  const HalfUnit = 0.5;
+  const uvs: number[] = [];
+  for (let i = 0; i < n; i++) {
+    // eslint-disable-next-line no-await-in-loop -- VTK.wasm getter returns a Promise
+    const p = (await pts.getPoint(i)) as [number, number, number] | number[];
+    const x = Array.isArray(p) ? p[0] : 0;
+    const y = Array.isArray(p) ? p[1] : 0;
+    const z = Array.isArray(p) ? p[2] : 0;
+    const r = Math.hypot(x, y, z) || 1;
+    const u = Math.atan2(y, x) / (2 * Math.PI) + HalfUnit;
+    const v = Math.asin(Math.max(-1, Math.min(1, z / r))) / Math.PI + HalfUnit;
+    uvs.push(u, v);
+  }
+  await injectTcoords(vtk, polydata, uvs);
 }
 
 /**
@@ -818,9 +853,13 @@ function loadImage(url: string): Promise<HTMLImageElement> {
 /**
  * Load the texture image from {@link TextureConfig} and attach it to the actor.
  *
- * VTK.wasm exposes `vtkTexture.setImage` and `vtkActor.addTexture` via its
- * ObjectManager whitelist; if a given binary build does not permit those
- * calls, the attach is skipped so the rest of the scene still renders.
+ * The mirrored vtk-wasm binary does not expose ``vtkTexture.SetImage`` or
+ * ``vtkActor.AddTexture`` (see #581); it does expose
+ * ``vtkImageAlgorithm.SetInputData`` and ``vtkActor.SetTexture``. So the
+ * decoded image pixels are copied into a ``vtkImageData`` (RGBA, unsigned
+ * char) and that image is set as the texture input. The image is flipped
+ * vertically because VTK images are bottom-origin while canvas pixels are
+ * top-origin.
  * @param vtk
  * @param actor
  * @param texture
@@ -834,9 +873,44 @@ async function applyTexture(
     return;
   }
   const img = await loadImage(texture.url);
+  const canvas = document.createElement("canvas");
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+  ctx.drawImage(img, 0, 0);
+  const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  const RgbaComponents = 4;
+  const imageData = vtk.vtkImageData();
+  imageData.setDimensions(canvas.width, canvas.height, 1);
+
+  // VTK image rows are bottom-origin; canvas rows are top-origin. Flip Y by
+  // writing each source row into the mirrored destination row.
+  const rowBytes = canvas.width * RgbaComponents;
+  const flipped = new Uint8Array(data.length);
+  for (let y = 0; y < canvas.height; y++) {
+    const srcStart = y * rowBytes;
+    const dstStart = (canvas.height - 1 - y) * rowBytes;
+    flipped.set(data.subarray(srcStart, srcStart + rowBytes), dstStart);
+  }
+
+  // Build the RGBA scalars as an explicit unsigned-char array.
+  // allocateScalars on vtkImageData leaves getScalars() pointing at a
+  // default Int16 array in this vtk-wasm build, so set the scalars directly
+  // via the point data instead.
+  const scalars = vtk.vtkUnsignedCharArray({
+    numberOfComponents: RgbaComponents,
+  });
+  await scalars.setArray(flipped);
+  const pointData = await imageData.getPointData();
+  pointData.setScalars(scalars);
+
   const vtkTexture = vtk.vtkTexture();
-  vtkTexture.setImage(img);
-  actor.addTexture(vtkTexture);
+  vtkTexture.setInputData(imageData);
+  actor.setTexture(vtkTexture);
 }
 
 /**
@@ -876,10 +950,25 @@ async function setupActor(
 
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
+  // vtkSphereSource does not expose tcoord generation in this vtk-wasm
+  // build, so derive equirectangular UVs when a texture is attached. The
+  // coords are injected into the final pipeline output (after normals) and
+  // the polydata is handed to the mapper directly via setInputData so a
+  // later pipeline re-execution cannot discard them.
+  let sphereTexturePolyData: VtkPolyData | undefined;
+  if (cfg.texture && cfg.source.type === "sphere" && !cfg.source.tCoords) {
+    sphereTexturePolyData = await getPolyData(mapperInput);
+    await generateSphereTcoords(vtk, sphereTexturePolyData);
+  }
+
   const mapper = vtk.vtkPolyDataMapper();
-  await (mapperInput.isFilter
-    ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
-    : mapper.setInputData(mapperInput.output));
+  if (sphereTexturePolyData) {
+    await mapper.setInputData(sphereTexturePolyData);
+  } else {
+    await (mapperInput.isFilter
+      ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
+      : mapper.setInputData(mapperInput.output));
+  }
 
   const actor = vtk.vtkActor({ mapper });
   const prop = await actor.getProperty();
