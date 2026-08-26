@@ -67,7 +67,7 @@ optional-dependencies.docs = [
   "sphinxcontrib-typer>=0.5.1,<1.0.1; python_version>='3.12'",
 ]
 optional-dependencies.marimo = [
-  "marimo>=0.10.0,<0.24.0",
+  "marimo>=0.10.0,<0.25.0",
 ]
 optional-dependencies.streamlit = [
   "streamlit>=1.30.0,<1.62.0",
