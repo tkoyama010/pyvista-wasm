@@ -611,9 +611,7 @@ class TestTextureRendering:
         """Assert the texture image is sampled, not a single flat color.
 
         Reads the rendered canvas pixels and checks that more than one
-        distinct color appears across the sphere surface. Skips when the
-        loaded vtk-wasm binary does not permit ``vtkTexture.SetImage`` /
-        ``vtkActor.AddTexture`` (cross-repo binding limitation, see #581).
+        distinct color appears across the sphere surface.
 
         Parameters
         ----------
@@ -637,15 +635,6 @@ class TestTextureRendering:
 
         canvas = page.query_selector("canvas")
         assert canvas is not None, "Canvas element not found for textured mesh"
-
-        binding_blocked = any(
-            "is not permitted" in err and ("SetImage" in err or "AddTexture" in err)
-            for err in js_errors
-        )
-        if binding_blocked:
-            pytest.skip(
-                "vtk-wasm binary does not expose SetImage/AddTexture yet (see #581)",
-            )
 
         assert len(js_errors) == 0, f"JavaScript errors during texture rendering: {js_errors}"
 
