@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
   "files": {
     "includes": ["ts/**/*.ts", "*.js", "*.json", "*.md"]
   },
@@ -39,6 +39,9 @@
           },
           "correctness": {
             "noUndeclaredVariables": "off"
+          },
+          "nursery": {
+            "noUnsafeTypeAssertion": "off"
           },
           "performance": {
             "noAwaitInLoops": "off"
