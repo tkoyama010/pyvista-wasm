@@ -336,6 +336,49 @@ def download_bunny() -> PolyData:
     return PLYReader(path).read()
 
 
+def download_mars_surface() -> Texture:
+    """Download the Mars planet surface texture.
+
+    Returns the Mars surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_mars_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Mars surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Mars globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on a :class:`~pyvista_wasm.Sphere`;
+    the browser renderer generates the sphere UVs so the image wraps
+    equirectangularly around the globe. This is the wasm counterpart to
+    PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Mars planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_mars_surface()
+    >>> sphere = pv.Sphere(theta_resolution=120, phi_resolution=120)
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(sphere, texture=texture)
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/mars.jpg")
+
+
 def download_lucy() -> PolyData:
     """Download the Lucy Angel dataset.
 
