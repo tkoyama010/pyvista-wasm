@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.13.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.12.0...pyvista-wasm-v0.13.0) (2026-08-26)
+
+
+### Features
+
+* add download_mars_surface planet example helper ([#580](https://github.com/tkoyama010/pyvista-wasm/issues/580)) ([670957e](https://github.com/tkoyama010/pyvista-wasm/commit/670957e3aff3d7a9bf9096dfdcb42944c9167348))
+* attach surface textures in vtk-wasm renderer ([#582](https://github.com/tkoyama010/pyvista-wasm/issues/582)) ([cc9aba9](https://github.com/tkoyama010/pyvista-wasm/commit/cc9aba9aedbe90372e4da29cc910237132888b72))
+
+
+### Bug Fixes
+
+* render surface textures via vtkImageData + SetTexture ([#584](https://github.com/tkoyama010/pyvista-wasm/issues/584)) ([6cf5ee9](https://github.com/tkoyama010/pyvista-wasm/commit/6cf5ee9ad82e1a178463683dfb3037f0f42e397e))
+
+
+### Documentation
+
+* add ADR-0010 to track PyVista API coverage matrix ([#567](https://github.com/tkoyama010/pyvista-wasm/issues/567)) ([a77df00](https://github.com/tkoyama010/pyvista-wasm/commit/a77df003feb0db391a4bda6d0171c2bda06861a6))
+* add Google Colaboratory badge to README ([#573](https://github.com/tkoyama010/pyvista-wasm/issues/573)) ([74b09e3](https://github.com/tkoyama010/pyvista-wasm/commit/74b09e38e45b418424c34b53dc6231b1e77b598a))
+* add tkoyama010 as a contributor for talk ([#577](https://github.com/tkoyama010/pyvista-wasm/issues/577)) ([f2b3121](https://github.com/tkoyama010/pyvista-wasm/commit/f2b3121d1ed3a33668a71d697cdec8aab04a489e))
+
+
+### Continuous Integration
+
+* add validate-pyproject pre-commit hook ([#576](https://github.com/tkoyama010/pyvista-wasm/issues/576)) ([9784bbd](https://github.com/tkoyama010/pyvista-wasm/commit/9784bbd3d5990f2626f3e59b661dd5fa1964accc))
+
 ## [0.12.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.11.0...pyvista-wasm-v0.12.0) (2026-08-21)
 
 ### Features
