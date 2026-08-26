@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-21 18:12+0900\n"
+"POT-Creation-Date: 2026-08-23 12:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -290,15 +290,25 @@ msgstr "STL（STereoLithography）ファイルのリーダー（``.stl``）。"
 msgid "Examples"
 msgstr "例"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
 msgstr ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Cubemap texture holding six face image URLs."
 msgstr "6面の画像URLを保持するキューブマップテクスチャ。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_mars_surface "
+"<pyvista_wasm.examples.download_mars_surface>`"
+msgstr ""
+
+#: ../../api/index.md:128:<autosummary>:1
+msgid "Download the Mars planet surface texture."
+msgstr ""
+
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_bunny "
 "<pyvista_wasm.examples.download_bunny>`"
@@ -306,11 +316,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_bunny "
 "<pyvista_wasm.examples.download_bunny>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the Stanford Bunny dataset."
 msgstr "Stanford Bunnyデータセットをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_lucy "
 "<pyvista_wasm.examples.download_lucy>`"
@@ -318,11 +328,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_lucy "
 "<pyvista_wasm.examples.download_lucy>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the Lucy Angel dataset."
 msgstr "Lucy Angelデータセットをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_cad_model "
 "<pyvista_wasm.examples.download_cad_model>`"
@@ -330,11 +340,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_cad_model "
 "<pyvista_wasm.examples.download_cad_model>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the CAD model dataset."
 msgstr "CADモデルデータセットをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_damaged_helmet "
 "<pyvista_wasm.examples.download_damaged_helmet>`"
@@ -342,11 +352,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_damaged_helmet "
 "<pyvista_wasm.examples.download_damaged_helmet>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the damaged helmet glTF example."
 msgstr "破損したヘルメットのglTFサンプルをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_masonry_texture "
 "<pyvista_wasm.examples.download_masonry_texture>`"
@@ -354,11 +364,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_masonry_texture "
 "<pyvista_wasm.examples.download_masonry_texture>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the masonry texture dataset."
 msgstr "石材テクスチャデータセットをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map "
 "<pyvista_wasm.examples.download_sky_box_cube_map>`"
@@ -366,11 +376,11 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map "
 "<pyvista_wasm.examples.download_sky_box_cube_map>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the skybox cube map dataset."
 msgstr "スカイボックスキューブマップデータセットをダウンロードします。"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid ""
 ":py:obj:`pyvista_wasm.examples.download_trumpet "
 "<pyvista_wasm.examples.download_trumpet>`"
@@ -378,22 +388,24 @@ msgstr ""
 ":py:obj:`pyvista_wasm.examples.download_trumpet "
 "<pyvista_wasm.examples.download_trumpet>`"
 
-#: ../../api/index.md:127:<autosummary>:1
+#: ../../api/index.md:128:<autosummary>:1
 msgid "Download the trumpet dataset."
 msgstr "トランペットデータセットをダウンロードします。"
 
-#: ../../api/index.md:130
+#: ../../api/index.md:131
 #, fuzzy
 msgid "Rendering"
 msgstr "レンダリング"
 
-#: ../../api/index.md:137:<autosummary>:1
+#: ../../api/index.md:138:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`pyvista_wasm.rendering.ColabRenderer "
 "<pyvista_wasm.rendering.ColabRenderer>`"
-msgstr ":py:obj:`pyvista_wasm.rendering.ColabRenderer <pyvista_wasm.rendering.ColabRenderer>`"
+msgstr ""
+":py:obj:`pyvista_wasm.rendering.ColabRenderer "
+"<pyvista_wasm.rendering.ColabRenderer>`"
 
-#: ../../api/index.md:137:<autosummary>:1
+#: ../../api/index.md:138:<autosummary>:1
 msgid "Renderer for Google Colaboratory notebooks."
 msgstr "Google Colaboratoryノートブック用レンダラー。"

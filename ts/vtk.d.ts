@@ -32,7 +32,7 @@ type VtkRenderer = {
 /** A renderable entity in the scene that maps data through a mapper. */
 type VtkActor = {
   getProperty(): Promise<VtkProperty>;
-  addTexture(texture: VtkTexture): void;
+  setTexture(texture: VtkTexture): void;
   delete(): void;
 };
 
@@ -87,6 +87,8 @@ type VtkPoints = {
   setData(data: VtkDataArray): Promise<void>;
   setData(data: Float32Array, numberOfComponents: number): Promise<void>;
   getData(): Promise<Float32Array>;
+  getNumberOfPoints(): Promise<number>;
+  getPoint(i: number): Promise<number[]>;
 };
 
 /** A VTK cell array (polygons, lines, etc.). */
@@ -99,15 +101,17 @@ type VtkCellArray = {
 /** Manages per-point data arrays (scalars, vectors, texture coordinates). */
 type VtkPointData = {
   addArray(array: VtkDataArray): void;
-  setTcoords(array: VtkDataArray): void;
+  setTCoords(array: VtkDataArray): void;
   setActiveScalars(name: string): void;
+  setScalars(array: VtkDataArray): void;
+  getScalars(): Promise<VtkDataArray>;
   getArrayByName(name: string): VtkDataArray | undefined;
 };
 
 /** A VTK data array holding typed numeric values. */
 type VtkDataArray = {
   /** Transfer typed-array values into the C++ VTK array (bypasses JSON serialization). */
-  setArray(data: Float32Array | Int32Array): Promise<void>;
+  setArray(data: Float32Array | Int32Array | Uint8Array): Promise<void>;
   getData(): Promise<Float32Array>;
 };
 
@@ -142,6 +146,7 @@ type VtkLight = {
 type VtkAlgorithm = {
   getOutputPort(): Promise<VtkOutputPort>;
   getOutputData(): Promise<VtkPolyData>;
+  getOutput(): Promise<VtkPolyData>;
   update(): Promise<void>;
   setInputConnection(port: VtkOutputPort): Promise<void>;
   setInputData(data: VtkPolyData): Promise<void>;
@@ -178,7 +183,14 @@ type VtkInteractorStyle = {
 /** An image-based texture applied to actor surfaces. */
 type VtkTexture = {
   setInterpolate(value: number): void;
-  setImage(img: HTMLImageElement): void;
+  setInputData(imageData: VtkImageData): void;
+  delete(): void;
+};
+
+/** A 2D/3D image dataset backing a texture. */
+type VtkImageData = {
+  setDimensions(x: number, y: number, z: number): void;
+  getPointData(): Promise<VtkPointData>;
   delete(): void;
 };
 
@@ -228,6 +240,11 @@ type VtkWasmNamespace = {
   };
   vtkPlane(): VtkPlane;
   vtkTexture(): VtkTexture;
+  vtkImageData(): VtkImageData;
+  vtkUnsignedCharArray: (options?: {
+    numberOfComponents?: number;
+    name?: string;
+  }) => VtkDataArray;
 };
 
 /** Configuration for a single light in the scene. */

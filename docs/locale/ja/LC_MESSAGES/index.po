@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"POT-Creation-Date: 2026-08-23 12:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -37,7 +37,7 @@ msgid "pyvista-wasm"
 msgstr "pyvista-wasm"
 
 #: ../../../README.md:4
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "[![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https"
 "://pyvista-"
@@ -49,7 +49,10 @@ msgid ""
 "-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-"
 "VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-"
 "uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA)"
-" [![Slidev](https://img.shields.io/badge/Slides-"
+" [![Open In Colab](https://colab.research.google.com/assets/colab-"
+"badge.svg)](https://colab.research.google.com/github/tkoyama010/pyvista-"
+"wasm/blob/main/notebooks/intro.ipynb) "
+"[![Slidev](https://img.shields.io/badge/Slides-"
 "PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io"
 "/pyvista-wasm/slides/)"
 msgstr ""
@@ -80,18 +83,21 @@ msgid "marimo"
 msgstr "marimo"
 
 #: ../../../README.md:4
+msgid "Open In Colab"
+msgstr ""
+
+#: ../../../README.md:4
 msgid "Slidev"
 msgstr "Slidev"
 
-#: ../../../README.md:14
+#: ../../../README.md:15
 msgid ""
 "[PyVista](https://github.com/pyvista/pyvista)-like API for "
 "[VTK.wasm](https://kitware.github.io/vtk-wasm/) — bring intuitive 3D "
 "visualization to the browser using WebAssembly."
 msgstr ""
-"[PyVista](https://github.com/pyvista/pyvista)ライクなAPIを[VTK.wasm]"
-"(https://kitware.github.io/vtk-wasm/)に提供し、WebAssemblyを用いて直感的な"
-"3D可視化をブラウザにもたらします。"
+"[PyVista](https://github.com/pyvista/pyvista)ライクなAPIを[VTK.wasm](https://kitware.github.io"
+"/vtk-wasm/)に提供し、WebAssemblyを用いて直感的な3D可視化をブラウザにもたらします。"
 
 #: ../../index.md:1
 msgid "[Try it with JupyterLite]"
@@ -109,7 +115,7 @@ msgstr "marimoで試す"
 msgid "![jupyterlite-preview]"
 msgstr "![jupyterlite-preview]"
 
-#: ../../../README.md:18
+#: ../../../README.md:19
 msgid "jupyterlite-preview"
 msgstr "jupyterlite-preview"
 
@@ -117,7 +123,7 @@ msgstr "jupyterlite-preview"
 msgid "![stlite-preview]"
 msgstr "![stlite-preview]"
 
-#: ../../../README.md:18
+#: ../../../README.md:19
 msgid "stlite-preview"
 msgstr "stlite-preview"
 
@@ -125,51 +131,51 @@ msgstr "stlite-preview"
 msgid "![marimo-preview]"
 msgstr "![marimo-preview]"
 
-#: ../../../README.md:18
+#: ../../../README.md:19
 msgid "marimo-preview"
 msgstr "marimo-preview"
 
-#: ../../../README.md:20
+#: ../../../README.md:21
 msgid "Table of Contents"
 msgstr "目次"
 
-#: ../../../README.md:22
+#: ../../../README.md:23
 msgid "[Table of Contents](#table-of-contents)"
 msgstr "[目次](#table-of-contents)"
 
-#: ../../../README.md:23
+#: ../../../README.md:24
 msgid "[Install](#install)"
 msgstr "[インストール](#install)"
 
-#: ../../../README.md:24
+#: ../../../README.md:25
 msgid "[Usage](#usage)"
 msgstr "[使い方](#usage)"
 
-#: ../../../README.md:25
+#: ../../../README.md:26
 msgid "[Presentation](#presentation)"
 msgstr "[プレゼンテーション](#presentation)"
 
-#: ../../../README.md:26
+#: ../../../README.md:27
 msgid "[Differences from pyvista-js](#differences-from-pyvista-js)"
 msgstr "[pyvista-jsとの違い](#differences-from-pyvista-js)"
 
-#: ../../../README.md:27
+#: ../../../README.md:28
 msgid "[Citation](#citation)"
 msgstr "[引用](#citation)"
 
-#: ../../../README.md:28
+#: ../../../README.md:29
 msgid "[Contributing](#contributing)"
 msgstr "[コントリビュート](#contributing)"
 
-#: ../../../README.md:29
+#: ../../../README.md:30
 msgid "[License](#license)"
 msgstr "[ライセンス](#license)"
 
-#: ../../../README.md:31
+#: ../../../README.md:32
 msgid "Install"
 msgstr "インストール"
 
-#: ../../../README.md:33
+#: ../../../README.md:34
 msgid ""
 "[![PyPI](https://img.shields.io/pypi/v/pyvista-"
 "wasm)](https://pypi.org/project/pyvista-wasm/)"
@@ -177,132 +183,121 @@ msgstr ""
 "[![PyPI](https://img.shields.io/pypi/v/pyvista-"
 "wasm)](https://pypi.org/project/pyvista-wasm/)"
 
-#: ../../../README.md:33
+#: ../../../README.md:34
 msgid "PyPI"
 msgstr "PyPI"
 
-#: ../../../README.md:39
+#: ../../../README.md:40
 msgid "For Pyodide/stlite:"
 msgstr "Pyodide/stliteの場合:"
 
-#: ../../../README.md:47
+#: ../../../README.md:48
 msgid "Usage"
 msgstr "使い方"
 
-#: ../../../README.md:57
+#: ../../../README.md:58
 msgid "Presentation"
 msgstr "プレゼンテーション"
 
-#: ../../../README.md:59
+#: ../../../README.md:60
 msgid ""
 "The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep"
 " dive into the WASM rendering architecture:"
-msgstr ""
-"PyCon JP 2026のトークでは、pyvista-wasmをライブデモとWASMレンダリング"
-"アーキテクチャの詳細解説とともに紹介します:"
+msgstr "PyCon JP 2026のトークでは、pyvista-wasmをライブデモとWASMレンダリングアーキテクチャの詳細解説とともに紹介します:"
 
-#: ../../../README.md:61
+#: ../../../README.md:62
 msgid ""
 "[**View the slide deck**](https://tkoyama010.github.io/pyvista-"
 "wasm/slides/)"
-msgstr ""
-"[**スライドを見る**](https://tkoyama010.github.io/pyvista-"
-"wasm/slides/)"
+msgstr "[**スライドを見る**](https://tkoyama010.github.io/pyvista-wasm/slides/)"
 
-#: ../../../README.md:63
+#: ../../../README.md:64
 msgid ""
 "[**Talk details on "
 "pretalx**](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
-msgstr ""
-"[**pretalxのトーク詳細**]"
-"(https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
+msgstr "[**pretalxのトーク詳細**](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 
-#: ../../../README.md:65
+#: ../../../README.md:66
 msgid "Differences from pyvista-js"
 msgstr "pyvista-jsとの違い"
 
-#: ../../../README.md:67
+#: ../../../README.md:68
 msgid ""
 "This project replaces the [vtk.js](https://github.com/Kitware/vtk-js) "
 "rendering backend used in [pyvista-js](https://github.com/tkoyama010"
 "/pyvista-js) with [VTK.wasm](https://kitware.github.io/vtk-wasm/) "
 "(`@kitware/vtk-wasm` npm package)."
 msgstr ""
-"このプロジェクトは[pyvista-js](https://github.com/tkoyama010/pyvista-js)"
-"で使用されている[vtk.js](https://github.com/Kitware/vtk-js)レンダリング"
-"バックエンドを[VTK.wasm](https://kitware.github.io/vtk-wasm/)"
-"（`@kitware/vtk-wasm` npmパッケージ）に置き換えます。"
+"このプロジェクトは[pyvista-js](https://github.com/tkoyama010/pyvista-"
+"js)で使用されている[vtk.js](https://github.com/Kitware/vtk-"
+"js)レンダリングバックエンドを[VTK.wasm](https://kitware.github.io/vtk-wasm/)（`@kitware"
+"/vtk-wasm` npmパッケージ）に置き換えます。"
 
-#: ../../../README.md:69
+#: ../../../README.md:70
 msgid "Key differences:"
 msgstr "主な違い:"
 
-#: ../../../README.md:71
+#: ../../../README.md:72
 msgid ""
 "**Rendering backend**: VTK.wasm (WebAssembly port of VTK C++) instead of "
 "vtk.js (pure JavaScript reimplementation)"
 msgstr ""
-"**レンダリングバックエンド**: vtk.js（純粋なJavaScript再実装）の代わりに"
-"VTK.wasm（VTK C++のWebAssemblyポート）を使用"
+"**レンダリングバックエンド**: vtk.js（純粋なJavaScript再実装）の代わりにVTK.wasm（VTK "
+"C++のWebAssemblyポート）を使用"
 
-#: ../../../README.md:72
+#: ../../../README.md:73
 msgid ""
 "**API style**: VTK.wasm uses `vtk.vtkRenderer()` factory functions on a "
 "namespace object, vs vtk.js's "
 "`vtk.Rendering.Core.vtkRenderer.newInstance()` hierarchy"
 msgstr ""
-"**APIスタイル**: VTK.wasmは名前空間オブジェクト上で`vtk.vtkRenderer()`"
-"ファクトリ関数を使用するのに対し、vtk.jsは"
-"`vtk.Rendering.Core.vtkRenderer.newInstance()`階層を使用"
-
-#: ../../../README.md:73
-msgid ""
-"**Initialization**: VTK.wasm requires async initialization via "
-"`vtkWASM.createNamespace()` to load the WASM binary"
-msgstr ""
-"**初期化**: VTK.wasmはWASMバイナリを読み込むために"
-"`vtkWASM.createNamespace()`による非同期初期化が必要"
+"**APIスタイル**: "
+"VTK.wasmは名前空間オブジェクト上で`vtk.vtkRenderer()`ファクトリ関数を使用するのに対し、vtk.jsは`vtk.Rendering.Core.vtkRenderer.newInstance()`階層を使用"
 
 #: ../../../README.md:74
 msgid ""
+"**Initialization**: VTK.wasm requires async initialization via "
+"`vtkWASM.createNamespace()` to load the WASM binary"
+msgstr "**初期化**: VTK.wasmはWASMバイナリを読み込むために`vtkWASM.createNamespace()`による非同期初期化が必要"
+
+#: ../../../README.md:75
+msgid ""
 "**Feature parity**: VTK.wasm provides access to the full VTK C++ API, "
 "enabling features not available in vtk.js"
-msgstr ""
-"**機能の網羅性**: VTK.wasmはVTK C++の完全なAPIへのアクセスを提供し、"
-"vtk.jsでは利用できない機能を実現"
+msgstr "**機能の網羅性**: VTK.wasmはVTK C++の完全なAPIへのアクセスを提供し、vtk.jsでは利用できない機能を実現"
 
-#: ../../../README.md:76
+#: ../../../README.md:77
 msgid "Citation"
 msgstr "引用"
 
-#: ../../../README.md:78
+#: ../../../README.md:79
 msgid ""
 "If you use pyvista-wasm in academic or project work, please cite it. See "
 "[`CITATION.cff`](CITATION.cff) for the full citation metadata, or use the"
 " BibTeX entry below:"
 msgstr ""
-"学術論文やプロジェクトでpyvista-wasmを使用する場合は引用してください。"
-"完全な引用メタデータは[`CITATION.cff`](CITATION.cff)を参照するか、"
-"以下のBibTeXエントリを使用してください:"
+"学術論文やプロジェクトでpyvista-"
+"wasmを使用する場合は引用してください。完全な引用メタデータは[`CITATION.cff`](CITATION.cff)を参照するか、以下のBibTeXエントリを使用してください:"
 
-#: ../../../README.md:91
+#: ../../../README.md:92
 msgid "Contributing"
 msgstr "コントリビュート"
 
-#: ../../../README.md:93
+#: ../../../README.md:94
+#, fuzzy
 msgid ""
 "Contributions are welcome! Please open an issue or pull request on "
-"[GitHub](https://github.com/tkoyama010/pyvista-wasm/issues)."
+"[GitHub](https://github.com/tkoyama010/pyvista-wasm/issues). See "
+"[`CONTRIBUTORS.md`](CONTRIBUTORS.md) for the list of contributors."
 msgstr ""
-"コントリビューションを歓迎します！[GitHub]"
-"(https://github.com/tkoyama010/pyvista-wasm/issues)でイシューまたは"
-"プルリクエストを開いてください。"
+"コントリビューションを歓迎します！[GitHub](https://github.com/tkoyama010/pyvista-"
+"wasm/issues)でイシューまたはプルリクエストを開いてください。"
 
-#: ../../../README.md:95
+#: ../../../README.md:96
 msgid "License"
 msgstr "ライセンス"
 
-#: ../../../README.md:97
+#: ../../../README.md:98
 msgid "[Apache License 2.0](LICENSE) © Tetsuo Koyama"
 msgstr "[Apache License 2.0](LICENSE) © Tetsuo Koyama"
 
@@ -342,9 +337,7 @@ msgstr "シンプルな事実。"
 msgid ""
 "Choose your approach to learning and `pyvista-wasm` knowledge discovery "
 "([Diátaxis](https://diataxis.fr/))."
-msgstr ""
-"学習アプローチと`pyvista-wasm`の知識発見の方法を選択してください"
-"（[Diátaxis](https://diataxis.fr/)）。"
+msgstr "学習アプローチと`pyvista-wasm`の知識発見の方法を選択してください（[Diátaxis](https://diataxis.fr/)）。"
 
 #: ../../index.md:48
 msgid "Links"
