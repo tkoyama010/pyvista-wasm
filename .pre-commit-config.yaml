@@ -73,7 +73,7 @@ repos:
     rev: v2.5.10
     hooks:
       - id: biome-check
-        additional_dependencies: ["@biomejs/biome@2.5.0"]
+        additional_dependencies: ["@biomejs/biome@2.5.9"]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1-1
     hooks:
