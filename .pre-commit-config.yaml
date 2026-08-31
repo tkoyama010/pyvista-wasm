@@ -40,7 +40,7 @@ repos:
         # has no per-rule ignore, so scope out just this one file.
         exclude: ^slides/slides\.md$
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.28.1"
+    rev: "v2.29.0"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
@@ -50,11 +50,11 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.5
+    rev: 0.12.7
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.4
+    rev: v0.16.5
     hooks:
       # Run the linter
       - id: ruff-check
@@ -70,7 +70,7 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.10
+    rev: v2.5.11
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.9"]
@@ -129,7 +129,7 @@ repos:
         files: ^slides/locales/script/(ja|en)\.yml$
         pass_filenames: false
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.29.0
+    rev: v1.30.0
     hooks:
       - id: zizmor
 ci:
