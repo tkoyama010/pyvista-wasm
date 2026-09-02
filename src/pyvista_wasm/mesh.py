@@ -995,8 +995,8 @@ def Sphere(  # noqa: N802
     delta_phi = np.pi / (phi_resolution - 1)
     delta_theta = 2.0 * np.pi / theta_resolution
 
-    points = []
-    t_coords_list = [] if texture_coordinates else None
+    points: list[list[float]] = []
+    t_coords_list: list[list[float]] = []
     # North pole (index 0)
     points.append([center[0], center[1], center[2] + radius])
     if texture_coordinates:
@@ -1019,7 +1019,7 @@ def Sphere(  # noqa: N802
                 v = (phi_resolution - 1 - j) / (phi_resolution - 2)
                 t_coords_list.append([u, v])
 
-    t_coords_arr = np.array(t_coords_list) if t_coords_list is not None else None
+    t_coords_arr = np.array(t_coords_list) if t_coords_list else None
 
     return PolyData(
         points=np.array(points),
