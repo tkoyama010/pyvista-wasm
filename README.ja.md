@@ -8,7 +8,8 @@
 
 <p align="center">
   <a href="README.md">English</a> |
-  <a href="README.ja.md">日本語</a>
+  <a href="README.ja.md">日本語</a> |
+  <a href="README.zh-TW.md">繁體中文</a>
 </p>
 
 [PyVista](https://github.com/pyvista/pyvista) のような API を [VTK.wasm](https://kitware.github.io/vtk-wasm/) に提供し、WebAssembly を使ってブラウザで直感的な 3D 可視化を実現します。
