@@ -790,6 +790,46 @@ class PolyData:
             raise ValueError(msg)
         return contour_values
 
+    def rotate_z(self, angle: float) -> PolyData:
+        """Rotate the mesh around the Z axis by the given angle (degrees).
+
+        Parameters
+        ----------
+        angle : float
+            Rotation angle in degrees.
+
+        Returns
+        -------
+        PolyData
+            A new mesh with rotated points.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> sphere = pv.Sphere()
+        >>> rotated = sphere.rotate_z(180)
+        >>> isinstance(rotated, pv.PolyData)
+        True
+
+        """
+        import math  # noqa: PLC0415
+
+        rad = math.radians(angle)
+        cos_a, sin_a = math.cos(rad), math.sin(rad)
+        rot = np.array(
+            [[cos_a, -sin_a, 0.0], [sin_a, cos_a, 0.0], [0.0, 0.0, 1.0]],
+        )
+        new_points = self.points @ rot.T
+
+        return PolyData(
+            points=new_points,
+            faces=self.faces,
+            t_coords=self.t_coords,
+            scalars=self.scalars,
+            scalar_name=self.scalar_name,
+            _scene_data=self._scene_data,
+        )
+
     def texture_map_to_plane(self) -> PolyData:
         """Generate texture coordinates by projecting points onto the XY plane.
 
@@ -909,6 +949,8 @@ def Sphere(  # noqa: N802
     center: tuple[float, float, float] = (0.0, 0.0, 0.0),
     theta_resolution: int = 30,
     phi_resolution: int = 30,
+    *,
+    texture_coordinates: bool = False,
 ) -> PolyData:
     """Create a sphere mesh.
 
@@ -922,6 +964,8 @@ def Sphere(  # noqa: N802
         Number of points in the azimuthal direction. Default is 30.
     phi_resolution : int, optional
         Number of points in the polar direction. Default is 30.
+    texture_coordinates : bool, optional
+        If True, generate UV texture coordinates on the sphere. Default is False.
 
     Returns
     -------
@@ -935,6 +979,12 @@ def Sphere(  # noqa: N802
     >>> sphere.n_points
     842
 
+    Create a sphere with texture coordinates for applying globe textures:
+
+    >>> sphere = pv.Sphere(texture_coordinates=True)
+    >>> sphere.t_coords is not None
+    True
+
     """
     # Generate points matching VTK.wasm vtkSphereSource ordering exactly:
     #   index 0: north pole
@@ -946,10 +996,15 @@ def Sphere(  # noqa: N802
     delta_theta = 2.0 * np.pi / theta_resolution
 
     points = []
+    t_coords_list = [] if texture_coordinates else None
     # North pole (index 0)
     points.append([center[0], center[1], center[2] + radius])
+    if texture_coordinates:
+        t_coords_list.append([0.5, 1.0])
     # South pole (index 1)
     points.append([center[0], center[1], center[2] - radius])
+    if texture_coordinates:
+        t_coords_list.append([0.5, 0.0])
     # Intermediate points: theta outer loop, phi inner loop
     for i in range(theta_resolution):
         theta = i * delta_theta
@@ -959,9 +1014,16 @@ def Sphere(  # noqa: N802
             y = radius * np.sin(phi) * np.sin(theta) + center[1]
             z = radius * np.cos(phi) + center[2]
             points.append([x, y, z])
+            if texture_coordinates:
+                u = i / theta_resolution
+                v = (phi_resolution - 1 - j) / (phi_resolution - 2)
+                t_coords_list.append([u, v])
+
+    t_coords_arr = np.array(t_coords_list) if t_coords_list is not None else None
 
     return PolyData(
         points=np.array(points),
+        t_coords=t_coords_arr,
         _scene_data={
             "type": "sphere",
             "center": list(center),
