@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.14.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.13.0...pyvista-wasm-v0.14.0) (2026-09-04)
+
+### Features
+
+- add load_earth() to match pyvista.examples.planets ([#634](https://github.com/tkoyama010/pyvista-wasm/issues/634)) ([e58f95f](https://github.com/tkoyama010/pyvista-wasm/commit/e58f95fd5b920bca7d67592ee1feb04f330d984c))
+- add Traditional Chinese (Taiwan Mandarin) README and slide locale ([#636](https://github.com/tkoyama010/pyvista-wasm/issues/636)) ([eadddb3](https://github.com/tkoyama010/pyvista-wasm/commit/eadddb3936bf9de744ab34a8abada53ac9910ead))
+
+### Bug Fixes
+
+- add download_earth_surface and wire texture to load_earth example ([#637](https://github.com/tkoyama010/pyvista-wasm/issues/637)) ([cab6bbe](https://github.com/tkoyama010/pyvista-wasm/commit/cab6bbed88a8d5a8639319d39cef1c40df400529))
+- resolve 7 open dependabot security alerts ([#607](https://github.com/tkoyama010/pyvista-wasm/issues/607)) ([a8731f6](https://github.com/tkoyama010/pyvista-wasm/commit/a8731f679084cdb5130e7b9af668b8dcb2190791))
+
+### Documentation
+
+- add load_earth and rotate_z to API reference ([#635](https://github.com/tkoyama010/pyvista-wasm/issues/635)) ([6f38e88](https://github.com/tkoyama010/pyvista-wasm/commit/6f38e887b5ecbd9fdd612d9aa79fd454dea2f3a7))
+
 ## [0.13.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.12.0...pyvista-wasm-v0.13.0) (2026-08-26)
 
 ### Features
