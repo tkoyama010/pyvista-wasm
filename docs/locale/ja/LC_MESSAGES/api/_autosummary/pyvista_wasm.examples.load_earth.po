@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst:2
+msgid "pyvista\\_wasm.examples.load\\_earth"
+msgstr "pyvista\\_wasm.examples.load\\_earth"
+
+#: of pyvista_wasm.examples.load_earth:1
+msgid "Load the planet Earth as a textured sphere."
+msgstr "テクスチャ付き球体として地球をロードします。"
+
+#: of pyvista_wasm.examples.load_earth:3
+msgid ""
+"Creates a sphere mesh with texture coordinates, matching the "
+"``pyvista.examples.planets.load_earth`` API. The sphere is rotated "
+"180° around the Z axis to align the Prime Meridian correctly."
+msgstr ""
+"テクスチャ座標付きの球体メッシュを作成します。"
+"``pyvista.examples.planets.load_earth`` API と一致します。"
+"球体はZ軸を中心に180°回転して本初子午線を正しく整列させます。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.examples.load_earth:8
+msgid "Sphere radius. Default is 1.0."
+msgstr "球体の半径。デフォルトは 1.0。"
+
+#: of pyvista_wasm.examples.load_earth:10
+msgid "Number of points in the latitude direction. Default is 50."
+msgstr "緯度方向のポイント数。デフォルトは 50。"
+
+#: of pyvista_wasm.examples.load_earth:12
+msgid "Number of points in the longitude direction. Default is 100."
+msgstr "経度方向のポイント数。デフォルトは 100。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.examples.load_earth:16
+msgid "Earth sphere mesh with texture coordinates."
+msgstr "テクスチャ座標付き地球球体メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.examples.load_earth:20
+msgid "See Also"
+msgstr "関連項目"
+
+#: of pyvista_wasm.examples.load_earth:21
+msgid "Download the Mars surface texture for comparison."
+msgstr "比較のために火星表面のテクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.load_earth:25
+msgid "Examples"
+msgstr "例"
