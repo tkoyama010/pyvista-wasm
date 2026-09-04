@@ -71,9 +71,13 @@ msgid "See Also"
 msgstr "関連項目"
 
 #: of pyvista_wasm.examples.load_earth:21
+msgid "Download the Earth surface texture."
+msgstr "地球表面のテクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.load_earth:23
 msgid "Download the Mars surface texture for comparison."
 msgstr "比較のために火星表面のテクスチャをダウンロードします。"
 
-#: of pyvista_wasm.examples.load_earth:25
+#: of pyvista_wasm.examples.load_earth:27
 msgid "Examples"
 msgstr "例"

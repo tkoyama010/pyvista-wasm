@@ -400,11 +400,11 @@ def load_earth(
 def download_earth_surface() -> Texture:
     """Download the Earth planet surface texture.
 
-    Returns the Earth surface image from the PyVista ``solar_textures``
-    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    Returns the Earth surface image as a
+    :class:`~pyvista_wasm.texture.Texture`, mirroring the
     ``pyvista.examples.planets.download_earth_surface(texture=True)`` API.
-    Textures are sourced from `Solar Textures
-    <https://www.solarsystemscope.com/textures/>`_.
+    The texture is sourced from the `three-globe
+    <https://github.com/vasturaj/three-globe>`_ sample assets.
 
     Returns
     -------
