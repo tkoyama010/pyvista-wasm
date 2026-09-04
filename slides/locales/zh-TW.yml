@@ -1,5 +1,6 @@
 ---
-# Traditional Chinese (Taiwan Mandarin) locale — mirrors the structure of slides/locales/ja.yml (authoritative, see ADR-0006).
+# Traditional Chinese (Taiwan Mandarin) locale — mirrors slides/locales/ja.yml
+# (authoritative, see ADR-0006).
 # Do not add or remove keys here without first updating ja.yml.
 cover:
   title: PyVista on WebAssembly
