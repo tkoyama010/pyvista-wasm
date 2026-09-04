@@ -428,6 +428,7 @@ def download_earth_surface() -> Texture:
     --------
     Render a textured Earth planet sphere in the browser.
 
+    >>> import pyvista_wasm as pv
     >>> from pyvista_wasm import examples
     >>> texture = examples.download_earth_surface()
     >>> earth = examples.load_earth()
