@@ -364,6 +364,8 @@ def load_earth(
 
     See Also
     --------
+    :func:`~pyvista_wasm.examples.download_earth_surface`
+        Download the Earth surface texture.
     :func:`~pyvista_wasm.examples.download_mars_surface`
         Download the Mars surface texture for comparison.
 
@@ -379,9 +381,11 @@ def load_earth(
 
     Render a textured Earth globe in the browser:
 
+    >>> from pyvista_wasm import examples
     >>> earth = examples.load_earth()
+    >>> texture = examples.download_earth_surface()
     >>> plotter = pv.Plotter()
-    >>> _ = plotter.add_mesh(earth)  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(earth, texture=texture)  # doctest: +SKIP
     >>> plotter.show()  # doctest: +SKIP
 
     """
@@ -391,6 +395,49 @@ def load_earth(
         phi_resolution=lat_resolution,
         texture_coordinates=True,
     ).rotate_z(180)
+
+
+def download_earth_surface() -> Texture:
+    """Download the Earth planet surface texture.
+
+    Returns the Earth surface image as a
+    :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_earth_surface(texture=True)`` API.
+    The texture is sourced from the `three-globe
+    <https://github.com/vasturaj/three-globe>`_ sample assets.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Earth surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Earth globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_earth`; the browser renderer generates
+    the sphere UVs so the image wraps equirectangularly around the globe.
+    This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Earth planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_earth_surface()
+    >>> earth = examples.load_earth()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(earth, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
 
 
 def download_mars_surface() -> Texture:
