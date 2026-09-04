@@ -437,7 +437,7 @@ def download_earth_surface() -> Texture:
     >>> plotter.show()  # doctest: +SKIP
 
     """
-    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/earth.jpg")
+    return Texture("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
 
 
 def download_mars_surface() -> Texture:
