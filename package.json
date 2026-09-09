@@ -9,9 +9,9 @@
     "watch": "esbuild ts/renderer.ts --bundle --format=iife --outfile=src/pyvista_wasm/templates/renderer.js --target=es2017 --watch"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.10",
+    "@biomejs/biome": "^2.5.11",
     "esbuild": "^0.28",
-    "eslint-plugin-jsdoc": "^64.2.1",
+    "eslint-plugin-jsdoc": "^64.3.4",
     "typescript": "^7.0"
   },
   "overrides": {
