@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"POT-Creation-Date: 2026-09-12 11:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -48,11 +48,15 @@ msgstr "方位方向のポイント数。デフォルトは30。"
 msgid "Number of points in the polar direction. Default is 30."
 msgstr "極方向のポイント数。デフォルトは30。"
 
+#: of pyvista_wasm.mesh.Sphere:11
+msgid "If True, generate UV texture coordinates on the sphere. Default is False."
+msgstr "True の場合、球にUVテクスチャ座標を生成します。デフォルトはFalse。"
+
 #: ../../api/_autosummary/pyvista_wasm.Sphere.rst
 msgid "Returns"
 msgstr "戻り値"
 
-#: of pyvista_wasm.mesh.Sphere:12
+#: of pyvista_wasm.mesh.Sphere:14
 msgid "A sphere mesh."
 msgstr "球メッシュ。"
 
@@ -60,6 +64,10 @@ msgstr "球メッシュ。"
 msgid "Return type"
 msgstr "戻り値の型"
 
-#: of pyvista_wasm.mesh.Sphere:16
+#: of pyvista_wasm.mesh.Sphere:18
 msgid "Examples"
 msgstr "例"
+
+#: of pyvista_wasm.mesh.Sphere:27
+msgid "Create a sphere with texture coordinates for applying globe textures:"
+msgstr "グローブテクスチャを適用するためのテクスチャ座標付き球体を作成します:"

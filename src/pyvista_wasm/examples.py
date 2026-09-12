@@ -440,6 +440,65 @@ def download_earth_surface() -> Texture:
     return Texture("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
 
 
+def load_venus(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Venus as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_venus`` API. The sphere is rotated
+    180° around the Z axis to align the Prime Meridian correctly.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Venus sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_mars_surface`
+        Download the Mars surface texture for comparison.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> venus = examples.load_venus()
+    >>> isinstance(venus, pv.PolyData)
+    True
+    >>> venus.t_coords is not None
+    True
+
+    Render a Venus planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> venus = examples.load_venus()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(venus)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
 def download_mars_surface() -> Texture:
     """Download the Mars planet surface texture.
 

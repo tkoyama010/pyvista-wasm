@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 14:29+0900\n"
+"POT-Creation-Date: 2026-09-12 11:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -40,7 +40,7 @@ msgstr "(n, 3) 配列としての頂点座標。"
 msgid "Cell connectivity information."
 msgstr "セルの接続性情報。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.__init__:1
 msgid "Initialize a PolyData mesh."
 msgstr "PolyDataメッシュを初期化します。"
@@ -49,7 +49,7 @@ msgstr "PolyDataメッシュを初期化します。"
 msgid "Methods"
 msgstr "メソッド"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <pyvista_wasm.PolyData.__init__>`\\ \\(points\\[\\, "
 "faces\\, t\\_coords\\, scalars\\, ...\\]\\)"
@@ -57,7 +57,7 @@ msgstr ""
 ":py:obj:`__init__ <pyvista_wasm.PolyData.__init__>`\\ \\(points\\[\\, "
 "faces\\, t\\_coords\\, scalars\\, ...\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`clip <pyvista_wasm.PolyData.clip>`\\ \\(\\[normal\\, origin\\, "
 "invert\\]\\)"
@@ -65,12 +65,12 @@ msgstr ""
 ":py:obj:`clip <pyvista_wasm.PolyData.clip>`\\ \\(\\[normal\\, origin\\, "
 "invert\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.clip:1
 msgid "Clip the mesh with a plane."
 msgstr "平面でメッシュをクリップします。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`contour <pyvista_wasm.PolyData.contour>`\\ \\(\\[isosurfaces\\, "
 "scalars\\, scalar\\_name\\]\\)"
@@ -78,12 +78,12 @@ msgstr ""
 ":py:obj:`contour <pyvista_wasm.PolyData.contour>`\\ \\(\\[isosurfaces\\, "
 "scalars\\, scalar\\_name\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.contour:1
 msgid "Generate contour lines at constant scalar values."
 msgstr "一定のスカラー値で等高線を生成します。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`plot <pyvista_wasm.PolyData.plot>`\\ \\(\\[color\\, opacity\\, "
 "pbr\\, metallic\\, roughness\\]\\)"
@@ -91,21 +91,30 @@ msgstr ""
 ":py:obj:`plot <pyvista_wasm.PolyData.plot>`\\ \\(\\[color\\, opacity\\, "
 "pbr\\, metallic\\, roughness\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.plot:1
 msgid "Plot this mesh."
 msgstr "このメッシュをプロットします。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
+msgid ":py:obj:`rotate_z <pyvista_wasm.PolyData.rotate_z>`\\ \\(angle\\)"
+msgstr ":py:obj:`rotate_z <pyvista_wasm.PolyData.rotate_z>`\\ \\(angle\\)"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
+#: pyvista_wasm.mesh.PolyData.rotate_z:1
+msgid "Rotate the mesh around the Z axis by the given angle (degrees)."
+msgstr "指定した角度（度）でメッシュをZ軸を中心に回転します。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ":py:obj:`save <pyvista_wasm.PolyData.save>`\\ \\(filename\\)"
 msgstr ":py:obj:`save <pyvista_wasm.PolyData.save>`\\ \\(filename\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.save:1
 msgid "Write this mesh to disk using meshio."
 msgstr "meshioを使用してこのメッシュをディスクに書き込みます。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`shrink <pyvista_wasm.PolyData.shrink>`\\ "
 "\\(\\[shrink\\_factor\\]\\)"
@@ -113,12 +122,12 @@ msgstr ""
 ":py:obj:`shrink <pyvista_wasm.PolyData.shrink>`\\ "
 "\\(\\[shrink\\_factor\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.shrink:1
 msgid "Shrink the cells of a mesh towards their centroid."
 msgstr "メッシュのセルを重心に向けて縮小します。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`texture_map_to_plane "
 "<pyvista_wasm.PolyData.texture_map_to_plane>`\\ \\(\\)"
@@ -126,21 +135,21 @@ msgstr ""
 ":py:obj:`texture_map_to_plane "
 "<pyvista_wasm.PolyData.texture_map_to_plane>`\\ \\(\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.texture_map_to_plane:1
 msgid "Generate texture coordinates by projecting points onto the XY plane."
 msgstr "ポイントをXY平面に投影してテクスチャ座標を生成します。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ":py:obj:`to_scene_data <pyvista_wasm.PolyData.to_scene_data>`\\ \\(\\)"
 msgstr ":py:obj:`to_scene_data <pyvista_wasm.PolyData.to_scene_data>`\\ \\(\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.to_scene_data:1
 msgid "Return a JSON-serializable dict describing this mesh source."
 msgstr "このメッシュソースを記述するJSONシリアライズ可能な辞書を返します。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1
 msgid ""
 ":py:obj:`tube <pyvista_wasm.PolyData.tube>`\\ \\(\\*\\[\\, radius\\, "
 "n\\_sides\\, capping\\]\\)"
@@ -148,12 +157,12 @@ msgstr ""
 ":py:obj:`tube <pyvista_wasm.PolyData.tube>`\\ \\(\\*\\[\\, radius\\, "
 "n\\_sides\\, capping\\]\\)"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:29:<autosummary>:1 of
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:30:<autosummary>:1 of
 #: pyvista_wasm.mesh.PolyData.tube:1
 msgid "Generate a tube around a line polydata."
 msgstr "ラインポリデータの周囲にチューブを生成します。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:31
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rst:32
 msgid "Attributes"
 msgstr "属性"
 
@@ -193,9 +202,7 @@ msgstr "ポイントデータ配列にアクセスします。"
 msgid ""
 "Uses Ritter's algorithm to approximate the minimum bounding sphere. "
 "Returns NaN values if there are no points."
-msgstr ""
-"Ritterのアルゴリズムを使用して最小バウンディングスフィアを近似します。"
-"ポイントがない場合はNaN値を返します。"
+msgstr "Ritterのアルゴリズムを使用して最小バウンディングスフィアを近似します。ポイントがない場合はNaN値を返します。"
 
 #: ../../api/_autosummary/pyvista_wasm.PolyData.rst
 msgid "Returns"
@@ -212,7 +219,8 @@ msgstr "戻り値の型"
 #: of pyvista_wasm.PolyData.bounding_sphere:10
 #: pyvista_wasm.PolyData.point_data:7 pyvista_wasm.mesh.PolyData.clip:23
 #: pyvista_wasm.mesh.PolyData.contour:27 pyvista_wasm.mesh.PolyData.plot:18
-#: pyvista_wasm.mesh.PolyData.save:27 pyvista_wasm.mesh.PolyData.shrink:19
+#: pyvista_wasm.mesh.PolyData.rotate_z:10 pyvista_wasm.mesh.PolyData.save:27
+#: pyvista_wasm.mesh.PolyData.shrink:19
 #: pyvista_wasm.mesh.PolyData.texture_map_to_plane:10
 #: pyvista_wasm.mesh.PolyData.tube:27
 msgid "Examples"
@@ -225,9 +233,9 @@ msgid ""
 " ``vtkPlane`` clip function. Points on one side of the plane are removed."
 " It mirrors the PyVista ``clip`` filter API."
 msgstr ""
-"このフィルタは、法線ベクトルと原点で定義される平面を使用してメッシュをクリップします。"
-"VTK.wasm の組み込み ``vtkClipPolyData`` フィルタと ``vtkPlane`` クリップ関数を使用します。"
-"平面の片側のポイントは削除されます。PyVista の ``clip`` フィルタ API をミラーリングします。"
+"このフィルタは、法線ベクトルと原点で定義される平面を使用してメッシュをクリップします。VTK.wasm の組み込み "
+"``vtkClipPolyData`` フィルタと ``vtkPlane`` "
+"クリップ関数を使用します。平面の片側のポイントは削除されます。PyVista の ``clip`` フィルタ API をミラーリングします。"
 
 #: of pyvista_wasm.mesh.PolyData.clip:8
 msgid ""
@@ -235,23 +243,20 @@ msgid ""
 "cardinal direction ('x', 'y', 'z', '-x', '-y', '-z') or a 3-tuple of "
 "floats (nx, ny, nz). Default is 'x'."
 msgstr ""
-"クリップ平面の法線ベクトル。基本方向を指定する文字列（'x', 'y', 'z', '-x', '-y', '-z'）"
-"または float の3タプル (nx, ny, nz)。デフォルトは 'x'。"
+"クリップ平面の法線ベクトル。基本方向を指定する文字列（'x', 'y', 'z', '-x', '-y', '-z'）または float "
+"の3タプル (nx, ny, nz)。デフォルトは 'x'。"
 
 #: of pyvista_wasm.mesh.PolyData.clip:12
 msgid ""
 "The origin point of the clipping plane as (x, y, z). If not provided, "
 "defaults to the center of the mesh's bounding box."
-msgstr ""
-"クリップ平面の原点 (x, y, z)。指定されない場合、メッシュのバウンディングボックスの"
-"中心がデフォルトになります。"
+msgstr "クリップ平面の原点 (x, y, z)。指定されない場合、メッシュのバウンディングボックスの中心がデフォルトになります。"
 
 #: of pyvista_wasm.mesh.PolyData.clip:15
 msgid ""
 "If True, flip the clipping direction to keep the part that would normally"
 " be removed. Default is False."
-msgstr ""
-"True の場合、クリップ方向を反転して通常は削除される部分を保持します。デフォルトはFalse。"
+msgstr "True の場合、クリップ方向を反転して通常は削除される部分を保持します。デフォルトはFalse。"
 
 #: of pyvista_wasm.mesh.PolyData.clip:19
 msgid "A new mesh with clipped cells removed."
@@ -278,19 +283,16 @@ msgid ""
 "not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-mode "
 "binary."
 msgstr ""
-"このフィルタは、JavaScriptで実装されたマーチングトライアングルアルゴリズムを使用して、"
-"指定されたスカラー値でメッシュから等値線を抽出します。PyVista の ``contour`` フィルタ API を"
-"ミラーリングします。等高線はレンダリング時に手動実装として計算されます。"
-"これは ``vtkContourFilter`` が VTK.wasm のレンダリングモードバイナリの "
-"``vtkDeserializer`` に登録されていないためです。"
+"このフィルタは、JavaScriptで実装されたマーチングトライアングルアルゴリズムを使用して、指定されたスカラー値でメッシュから等値線を抽出します。PyVista"
+" の ``contour`` フィルタ API をミラーリングします。等高線はレンダリング時に手動実装として計算されます。これは "
+"``vtkContourFilter`` が VTK.wasm のレンダリングモードバイナリの ``vtkDeserializer`` "
+"に登録されていないためです。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:10
 msgid ""
 "Number of evenly spaced contours to generate, or a list of explicit "
 "scalar values at which to generate contours. Default is 10."
-msgstr ""
-"生成する等間隔の等高線の数、または等高線を生成する明示的なスカラー値のリスト。"
-"デフォルトは10。"
+msgstr "生成する等間隔の等高線の数、または等高線を生成する明示的なスカラー値のリスト。デフォルトは10。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:13
 msgid ""
@@ -298,16 +300,16 @@ msgid ""
 "mesh's existing ``scalars`` attribute. Must have length equal to "
 "``n_points``."
 msgstr ""
-"等高線生成に使用するポイントごとのスカラー値。指定されない場合、メッシュの既存の "
-"``scalars`` 属性を使用します。長さは ``n_points`` と等しい必要があります。"
+"等高線生成に使用するポイントごとのスカラー値。指定されない場合、メッシュの既存の ``scalars`` 属性を使用します。長さは "
+"``n_points`` と等しい必要があります。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:17
 msgid ""
 "Name for the scalar array in VTK.wasm. If not provided, uses the mesh's "
 "existing ``scalar_name`` attribute or defaults to \"scalars\"."
 msgstr ""
-"VTK.wasm でのスカラー配列の名前。指定されない場合、メッシュの既存の "
-"``scalar_name`` 属性を使用するか、デフォルトの \"scalars\" になります。"
+"VTK.wasm でのスカラー配列の名前。指定されない場合、メッシュの既存の ``scalar_name`` 属性を使用するか、デフォルトの "
+"\"scalars\" になります。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:21
 msgid "A new mesh containing the contour lines."
@@ -321,9 +323,7 @@ msgstr "例外"
 msgid ""
 "If no scalars are provided and the mesh has no scalar data, or if     "
 "isosurfaces parameter is invalid."
-msgstr ""
-"スカラーが指定されておらずメッシュにスカラーデータがない場合、または"
-"isosurfaces パラメータが無効な場合。"
+msgstr "スカラーが指定されておらずメッシュにスカラーデータがない場合、またはisosurfaces パラメータが無効な場合。"
 
 #: of pyvista_wasm.mesh.PolyData.contour:38
 msgid "Generate contours at specific values:"
@@ -339,8 +339,8 @@ msgid ""
 ":class:`~pyvista_wasm.Plotter`, adds this mesh, and calls "
 ":func:`~pyvista_wasm.Plotter.show`."
 msgstr ""
-"これは :class:`~pyvista_wasm.Plotter` を作成し、このメッシュを追加して、"
-":func:`~pyvista_wasm.Plotter.show` を呼び出す便利メソッドです。"
+"これは :class:`~pyvista_wasm.Plotter` "
+"を作成し、このメッシュを追加して、:func:`~pyvista_wasm.Plotter.show` を呼び出す便利メソッドです。"
 
 #: of pyvista_wasm.mesh.PolyData.plot:6
 msgid "Color of the mesh. Can be a color name or RGB tuple."
@@ -370,15 +370,23 @@ msgstr "ポイントデータ配列の辞書ライクなコンテナ。"
 msgid "Render with scalar coloring:"
 msgstr "スカラーカラーリングでレンダリングします:"
 
+#: of pyvista_wasm.mesh.PolyData.rotate_z:3
+msgid "Rotation angle in degrees."
+msgstr "回転角度（度）。"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:6
+msgid "A new mesh with rotated points."
+msgstr "回転したポイントを持つ新しいメッシュ。"
+
 #: of pyvista_wasm.mesh.PolyData.save:3
 msgid ""
 "The file format is inferred from the extension of ``filename``. Any "
 "format supported by `meshio <https://github.com/nschloe/meshio>`_ can be "
 "used (e.g. ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``)."
 msgstr ""
-"ファイルフォーマットは ``filename`` の拡張子から推測されます。"
-"`meshio <https://github.com/nschloe/meshio>`_ がサポートする任意の"
-"フォーマットが使用できます（例: ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``）。"
+"ファイルフォーマットは ``filename`` の拡張子から推測されます。`meshio "
+"<https://github.com/nschloe/meshio>`_ がサポートする任意のフォーマットが使用できます（例: "
+"``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``）。"
 
 #: of pyvista_wasm.mesh.PolyData.save:9
 msgid "Requires ``meshio`` to be installed::"
@@ -388,8 +396,7 @@ msgstr "``meshio`` のインストールが必要です::"
 msgid ""
 "In Pyodide / JupyterLite, install it with micropip before calling this "
 "method::"
-msgstr ""
-"Pyodide / JupyterLite では、このメソッドを呼び出す前に micropip でインストールします::"
+msgstr "Pyodide / JupyterLite では、このメソッドを呼び出す前に micropip でインストールします::"
 
 #: of pyvista_wasm.mesh.PolyData.save:19
 msgid "Output path. The extension determines the file format."
@@ -408,19 +415,16 @@ msgid ""
 "is not registered with the ``vtkDeserializer`` in VTK.wasm's rendering-"
 "mode binary."
 msgstr ""
-"このフィルタは、メッシュの個々のセルを重心に向けて縮小し、隣接セル間に視覚的な"
-"分離を生成します。PyVista の ``shrink`` フィルタ API をミラーリングします。"
-"縮小はレンダリング時に JavaScript で手動実装として計算されます。これは "
-"``vtkShrinkPolyData`` が VTK.wasm のレンダリングモードバイナリの "
-"``vtkDeserializer`` に登録されていないためです。"
+"このフィルタは、メッシュの個々のセルを重心に向けて縮小し、隣接セル間に視覚的な分離を生成します。PyVista の ``shrink`` フィルタ"
+" API をミラーリングします。縮小はレンダリング時に JavaScript で手動実装として計算されます。これは "
+"``vtkShrinkPolyData`` が VTK.wasm のレンダリングモードバイナリの ``vtkDeserializer`` "
+"に登録されていないためです。"
 
 #: of pyvista_wasm.mesh.PolyData.shrink:10
 msgid ""
 "The factor to shrink each cell by, between 0 and 1. A value of 1.0 "
 "produces no change; lower values produce more shrinkage. Default is 0.8."
-msgstr ""
-"各セルを縮小する係数。0から1の間。1.0の値は変化を生成しません。値が低いほど"
-"縮小が大きくなります。デフォルトは0.8。"
+msgstr "各セルを縮小する係数。0から1の間。1.0の値は変化を生成しません。値が低いほど縮小が大きくなります。デフォルトは0.8。"
 
 #: of pyvista_wasm.mesh.PolyData.shrink:15
 msgid "A new mesh with shrunk cells."
@@ -436,8 +440,8 @@ msgid ""
 "This mirrors the PyVista :meth:`pyvista.DataSet.texture_map_to_plane` "
 "API."
 msgstr ""
-"メッシュのXおよびY範囲を [0, 1] 範囲のUV座標にマッピングします。"
-"これは PyVista の :meth:`pyvista.DataSet.texture_map_to_plane` API をミラーリングします。"
+"メッシュのXおよびY範囲を [0, 1] 範囲のUV座標にマッピングします。これは PyVista の "
+":meth:`pyvista.DataSet.texture_map_to_plane` API をミラーリングします。"
 
 #: of pyvista_wasm.mesh.PolyData.texture_map_to_plane:6
 msgid "A new mesh with texture coordinates (``t_coords``) set."
@@ -454,9 +458,8 @@ msgid ""
 "PyVista ``tube`` filter API and is backed by VTK.wasm's "
 "``vtkTubeFilter``."
 msgstr ""
-"このフィルタは、各ラインに沿ってポリゴン断面をスイープすることにより、"
-"メッシュ内のラインの周囲にチューブ表現を作成します。PyVista の ``tube`` フィルタ API を"
-"ミラーリングし、VTK.wasm の ``vtkTubeFilter`` によってバッキングされています。"
+"このフィルタは、各ラインに沿ってポリゴン断面をスイープすることにより、メッシュ内のラインの周囲にチューブ表現を作成します。PyVista の "
+"``tube`` フィルタ API をミラーリングし、VTK.wasm の ``vtkTubeFilter`` によってバッキングされています。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:10
 msgid ""
@@ -465,9 +468,8 @@ msgid ""
 "generates a tube by sweeping a circle with ``n_sides`` sides along the "
 "line segments."
 msgstr ""
-"このフィルタはラインベースのポリデータ（例: :class:`Line` の出力）での使用を"
-"意図しています。VTK.wasm の ``vtkTubeFilter`` を使用し、ラインセグメントに沿って "
-"``n_sides`` 辺の円をスイープしてチューブを生成します。"
+"このフィルタはラインベースのポリデータ（例: :class:`Line` の出力）での使用を意図しています。VTK.wasm の "
+"``vtkTubeFilter`` を使用し、ラインセグメントに沿って ``n_sides`` 辺の円をスイープしてチューブを生成します。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:15
 msgid "The radius of the tube. Default is 0.5."
@@ -477,8 +479,7 @@ msgstr "チューブの半径。デフォルトは0.5。"
 msgid ""
 "The number of sides for the tube cross-section. Higher values produce "
 "smoother tubes. Default is 20."
-msgstr ""
-"チューブ断面の辺の数。値が大きいほど滑らかなチューブになります。デフォルトは20。"
+msgstr "チューブ断面の辺の数。値が大きいほど滑らかなチューブになります。デフォルトは20。"
 
 #: of pyvista_wasm.mesh.PolyData.tube:20
 msgid "Whether to cap the ends of the tube. Default is True."
