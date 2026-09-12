@@ -30,6 +30,33 @@ class TestLoadEarth:
         assert abs(radius - 2.0) < 0.01
 
 
+class TestLoadVenus:
+    """Tests for examples.load_venus."""
+
+    def test_returns_polydata(self) -> None:
+        """load_venus returns a PolyData instance."""
+        venus = examples.load_venus()
+        assert isinstance(venus, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        venus = examples.load_venus()
+        assert venus.t_coords is not None
+        assert venus.t_coords.shape == (venus.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        venus = examples.load_venus()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert venus.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        venus = examples.load_venus(radius=2.0)
+        radius, _ = venus.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
 class TestDownloadMarsSurface:
     """Tests for examples.download_mars_surface."""
 
