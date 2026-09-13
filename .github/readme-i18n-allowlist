@@ -1,0 +1,9 @@
+# README i18n stale-translation allowlist
+#
+# One filename per line. Files listed here are exempt from the
+# stale-translation (git commit date) check. Use this when an English
+# README change is cosmetic (e.g. a badge URL) and does not require
+# translation updates.
+#
+# Format: one README.<lang>.md filename per line.
+# Lines starting with # are comments.

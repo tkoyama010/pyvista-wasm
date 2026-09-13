@@ -8,8 +8,10 @@ Architecture
 pyvista-wasm uses a backend abstraction to support multiple environments:
 
 1. **VTKWasmRenderer**: Used in Pyodide/browser with VTK.wasm for WebGL rendering
-2. **BrowserRenderer**: Used in standard Python; opens the plot in the default browser
-3. **MockRenderer**: Used in standard Python for development/testing
+2. **MarimoRenderer**: Used in marimo notebooks; embeds a sandboxed iframe
+3. **ColabRenderer**: Used in Google Colaboratory; embeds a sandboxed iframe
+4. **BrowserRenderer**: Used in standard Python; opens the plot in the default browser
+5. **MockRenderer**: Used in standard Python for development/testing
 
 Environment Detection
 ---------------------
@@ -46,7 +48,7 @@ For manual loading or custom versions:
     <script
       src="https://unpkg.com/@kitware/vtk-wasm/vtk-umd.js"
       id="vtk-wasm"
-      data-url="https://gitlab.kitware.com/api/v4/projects/13/packages/generic/vtk-wasm32-emscripten/9.6.20260228/vtk-9.6.20260228-wasm32-emscripten.tar.gz"
+      data-url="https://cdn.jsdelivr.net/npm/@pyvista-wasm/vtk-wasm-binary@9.6.20260228/vtk-wasm32-emscripten.tar.gz"
     ></script>
 
 Examples
@@ -105,9 +107,10 @@ _jinja_env = Environment(undefined=StrictUndefined, autoescape=False)  # noqa: S
 
 # VTK.wasm CDN URLs used across renderers
 _VTKWASM_UMD = "https://unpkg.com/@kitware/vtk-wasm@1.7.4/vtk-umd.js"
+_VTKWASM_VERSION = "9.6.20260228"
 _VTKWASM_DATA_URL = (
-    "https://gitlab.kitware.com/api/v4/projects/13/packages/generic/"
-    "vtk-wasm32-emscripten/9.6.20260228/vtk-9.6.20260228-wasm32-emscripten.tar.gz"
+    "https://cdn.jsdelivr.net/npm/@pyvista-wasm/vtk-wasm-binary"
+    f"@{_VTKWASM_VERSION}/vtk-wasm32-emscripten.tar.gz"
 )
 
 # Check if running in Pyodide environment
@@ -135,6 +138,29 @@ except ImportError:
     HTML = None  # type: ignore[assignment]
     Javascript = None  # type: ignore[assignment]
     display = None  # type: ignore[assignment]
+
+# Check if marimo is available
+MARIMO_AVAILABLE = "marimo" in sys.modules
+
+
+def _is_colab_available() -> bool:
+    """Detect whether the runtime is Google Colaboratory.
+
+    Colab injects the ``google.colab`` module into ``sys.modules`` and sets
+    the ``COLAB_RELEASE_TAG`` environment variable. Either signal is
+    sufficient for detection.
+
+    Returns
+    -------
+    bool
+        True if running inside Google Colaboratory.
+
+    """
+    return "google.colab" in sys.modules or bool(os.environ.get("COLAB_RELEASE_TAG"))
+
+
+# Check if Google Colaboratory is available
+COLAB_AVAILABLE = _is_colab_available()
 
 
 class _VTKWasmLoader:
@@ -221,7 +247,12 @@ class _BaseHTMLRenderer:
     respective environments (Jupyter notebook, standalone browser, etc.).
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize shared renderer state.
 
         Parameters
@@ -229,8 +260,31 @@ class _BaseHTMLRenderer:
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. ``"async"`` requires WebAssembly JavaScript Promise
+            Integration (JSPI) browser support. ``"webgpu"`` rendering always
+            uses ``"async"`` regardless of this setting. Default is ``"sync"``.
+
+        Raises
+        ------
+        ValueError
+            If ``wasm_rendering`` is not ``"webgl"`` or ``"webgpu"``, or
+            ``wasm_mode`` is not ``"sync"`` or ``"async"``.
 
         """
+        valid_rendering = {"webgl", "webgpu"}
+        if wasm_rendering not in valid_rendering:
+            msg = f"wasm_rendering must be one of {valid_rendering!r}, got {wasm_rendering!r}"
+            raise ValueError(msg)
+        valid_mode = {"sync", "async"}
+        if wasm_mode not in valid_mode:
+            msg = f"wasm_mode must be one of {valid_mode!r}, got {wasm_mode!r}"
+            raise ValueError(msg)
+
         self.actors: list[dict[str, object]] = []
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
@@ -244,6 +298,8 @@ class _BaseHTMLRenderer:
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
         self._scalar_bar: dict[str, object] | None = None
+        self._wasm_rendering: str = wasm_rendering
+        self._wasm_mode: str = wasm_mode
 
     def create_container(self, element_id: str = "pyvista-container") -> object | None:
         """Store the container ID for later HTML generation.
@@ -760,6 +816,10 @@ class _BaseHTMLRenderer:
             "axes": self._axes_enabled,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
+            "wasmConfig": {
+                "rendering": self._wasm_rendering,
+                "mode": self._wasm_mode,
+            },
         }
 
         # Validate JSON serializable
@@ -773,10 +833,14 @@ class _BaseHTMLRenderer:
 
         scene_data = self._build_scene_data()
         scene_json = _json.dumps(scene_data)
+        wasm_config_json = _json.dumps(
+            {"rendering": self._wasm_rendering, "mode": self._wasm_mode},
+        )
 
         return _jinja_env.from_string(_RENDERING_TEMPLATE).render(
             VTKWASM_UMD=_VTKWASM_UMD,
             VTKWASM_DATA_URL=_VTKWASM_DATA_URL,
+            WASM_CONFIG=wasm_config_json,
             CONTAINER_ID=self.container_id,
             SCENE_JSON=scene_json,
             RENDERER_JS=_RENDERER_JS,
@@ -807,6 +871,9 @@ class _BaseHTMLRenderer:
 
         scene_data = self._build_scene_data()
         scene_json = _json.dumps(scene_data)
+        wasm_config_json = _json.dumps(
+            {"rendering": self._wasm_rendering, "mode": self._wasm_mode},
+        )
 
         # For JupyterLite: pass scene data and container via JS variables
         # so renderer.js can use them directly without DOM lookups.
@@ -831,6 +898,7 @@ class _BaseHTMLRenderer:
             f"    script.src = {_json.dumps(_VTKWASM_UMD)};\n"
             "    script.id = 'vtk-wasm';\n"
             f"    script.dataset.url = {_json.dumps(_VTKWASM_DATA_URL)};\n"
+            f"    script.dataset.config = {_json.dumps(wasm_config_json)};\n"
             "    script.onload = doRender;\n"
             "    document.head.appendChild(script);\n"
             "  }\n"
@@ -940,7 +1008,12 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
 
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize the VTK.wasm renderer.
 
         Automatically loads VTK.wasm library if in IPython/Jupyter environment.
@@ -950,6 +1023,12 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
 
         Raises
         ------
@@ -963,7 +1042,11 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
             msg = "VTKWasmRenderer requires either Pyodide environment or IPython"
             raise RuntimeError(msg)
 
-        super().__init__(lighting=lighting)
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
 
         # Automatically load VTK.wasm in IPython/Jupyter (including Pyodide)
         if IPYTHON_AVAILABLE or PYODIDE_ENV:
@@ -1072,6 +1155,257 @@ def _playwright_capture(html_path: str, w: int, h: int, omit_bg: bool) -> bytes:
     return data
 
 
+class MarimoRenderer(_BaseHTMLRenderer):
+    """Renderer for marimo notebooks.
+
+    This renderer generates an iframe with the visualization and appends
+    it to marimo's output using mo.output.append(). This enables
+    automatic inline rendering when plotter.show() is called in marimo.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> plotter = pv.Plotter()  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(pv.Sphere(), color='red')  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
+        """Initialize the marimo renderer.
+
+        Parameters
+        ----------
+        lighting : str or None, optional
+            Lighting mode. ``"default"`` creates a default directional light,
+            ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
+
+        Raises
+        ------
+        RuntimeError
+            If marimo is not available.
+
+        """
+        if not MARIMO_AVAILABLE:
+            msg = "MarimoRenderer requires marimo to be installed and imported"
+            raise RuntimeError(msg)
+
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+
+    def render(self) -> object:
+        """Render the scene in marimo.
+
+        Generates an iframe with the visualization and appends it to
+        marimo's output using mo.output.append().
+
+        Returns
+        -------
+        object
+            The marimo Html object that was appended to output.
+
+        Examples
+        --------
+        >>> renderer = MarimoRenderer()  # doctest: +SKIP
+        >>> renderer.add_mesh_actor(Sphere(), color='red')  # doctest: +SKIP
+        >>> renderer.render()  # doctest: +SKIP
+
+        """
+        import marimo as mo  # noqa: PLC0415
+
+        html_content = self.generate_standalone_html()
+        escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+        html_widget = mo.Html(
+            f'<iframe srcdoc="{escaped}" '
+            'style="width:100%;height:400px;min-height:400px;'
+            'border:2px solid #333;" '
+            'sandbox="allow-scripts"></iframe>',
+        )
+        mo.output.append(html_widget)
+        return html_widget
+
+    def screenshot(
+        self,
+        filename: str | Path | None = None,
+        transparent_background: bool | None = None,  # noqa: FBT001
+        return_img: bool = True,  # noqa: FBT001, FBT002
+        window_size: tuple[int, int] | list[int] | None = None,
+        scale: int | None = None,
+    ) -> np.ndarray | None:
+        """Take a screenshot of the rendered scene.
+
+        This method raises NotImplementedError because marimo does not
+        support direct screenshot capture. Use BrowserRenderer for
+        screenshots in standard Python environments.
+
+        Parameters
+        ----------
+        filename : str, Path, or None, optional
+            File path to save the image.
+        transparent_background : bool or None, optional
+            Whether to make the background transparent.
+        return_img : bool, optional
+            If True, return a numpy array of the image.
+        window_size : tuple or list of int, optional
+            Window size as (width, height).
+        scale : int or None, optional
+            Scale factor for higher resolution.
+
+        Returns
+        -------
+        numpy.ndarray or None
+            Image data as numpy array if return_img is True, otherwise None.
+
+        Raises
+        ------
+        NotImplementedError
+            Screenshots are not supported in marimo environments.
+
+        """
+        msg = "screenshot() is not supported in marimo. Use BrowserRenderer instead."
+        raise NotImplementedError(msg)
+
+
+class ColabRenderer(_BaseHTMLRenderer):
+    """Renderer for Google Colaboratory notebooks.
+
+    This renderer generates an iframe with the visualization and returns
+    it as an ``IPython.display.HTML`` object. The sandboxed iframe embeds
+    the standalone HTML via ``srcdoc``, bypassing Colab's sanitization of
+    inline ``<script>`` tags in cell output. This enables automatic
+    inline rendering when ``plotter.show()`` is called in Colab.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> plotter = pv.Plotter()  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(pv.Sphere(), color='red')  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
+        """Initialize the Colab renderer.
+
+        Parameters
+        ----------
+        lighting : str or None, optional
+            Lighting mode. ``"default"`` creates a default directional light,
+            ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
+
+        Raises
+        ------
+        RuntimeError
+            If Google Colaboratory is not available.
+
+        """
+        if not COLAB_AVAILABLE:
+            msg = "ColabRenderer requires Google Colaboratory to be available"
+            raise RuntimeError(msg)
+
+        super().__init__(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+
+    def render(self) -> object:
+        """Render the scene in Google Colaboratory.
+
+        Generates an iframe with the visualization and returns it as an
+        ``IPython.display.HTML`` object so Colab captures it in the cell
+        output area.
+
+        Returns
+        -------
+        object
+            The ``IPython.display.HTML`` object wrapping the sandboxed
+            iframe.
+
+        Examples
+        --------
+        >>> renderer = ColabRenderer()  # doctest: +SKIP
+        >>> renderer.add_mesh_actor(Sphere(), color='red')  # doctest: +SKIP
+        >>> renderer.render()  # doctest: +SKIP
+
+        """
+        html_content = self.generate_standalone_html()
+        escaped = html_content.replace("&", "&amp;").replace('"', "&quot;")
+        iframe_html = (
+            f'<iframe srcdoc="{escaped}" '
+            'style="width:100%;height:400px;min-height:400px;'
+            'border:2px solid #333;" '
+            'sandbox="allow-scripts"></iframe>'
+        )
+        return HTML(iframe_html)
+
+    def screenshot(
+        self,
+        filename: str | Path | None = None,
+        transparent_background: bool | None = None,  # noqa: FBT001
+        return_img: bool = True,  # noqa: FBT001, FBT002
+        window_size: tuple[int, int] | list[int] | None = None,
+        scale: int | None = None,
+    ) -> np.ndarray | None:
+        """Take a screenshot of the rendered scene.
+
+        This method raises NotImplementedError because Colab does not
+        support direct screenshot capture. Use BrowserRenderer for
+        screenshots in standard Python environments.
+
+        Parameters
+        ----------
+        filename : str, Path, or None, optional
+            File path to save the image.
+        transparent_background : bool or None, optional
+            Whether to make the background transparent.
+        return_img : bool, optional
+            If True, return a numpy array of the image.
+        window_size : tuple or list of int, optional
+            Window size as (width, height).
+        scale : int or None, optional
+            Scale factor for higher resolution.
+
+        Returns
+        -------
+        numpy.ndarray or None
+            Image data as numpy array if return_img is True, otherwise None.
+
+        Raises
+        ------
+        NotImplementedError
+            Screenshots are not supported in Colab environments.
+
+        """
+        msg = "screenshot() is not supported in Colab. Use BrowserRenderer instead."
+        raise NotImplementedError(msg)
+
+
 class BrowserRenderer(_BaseHTMLRenderer):
     """Renderer that opens the visualization in the default web browser.
 
@@ -1110,7 +1444,9 @@ class BrowserRenderer(_BaseHTMLRenderer):
         container_id = self.container_id
         container_rule = (
             f"    #{container_id} "
-            "{ width: 100vw !important; height: 100vh !important; border: none !important; }\n"
+            "{ width: 100vw !important; height: 100vh !important;"
+            " min-width: 0 !important; min-height: 0 !important;"
+            " border: none !important; }\n"
         )
         style = (
             "  <style>\n"
@@ -1269,7 +1605,12 @@ class MockRenderer:
 
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize mock renderer.
 
         Parameters
@@ -1277,6 +1618,10 @@ class MockRenderer:
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend (stored but not used). Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode (stored but not used). Default is ``"sync"``.
 
         """
         self.actors: list[dict[str, object]] = []
@@ -1288,6 +1633,8 @@ class MockRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._scalar_bar: dict[str, object] | None = None
+        self._wasm_rendering: str = wasm_rendering
+        self._wasm_mode: str = wasm_mode
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.
@@ -1657,10 +2004,12 @@ class MockRenderer:
 
 def get_renderer(
     lighting: str | None = "default",
-) -> VTKWasmRenderer | BrowserRenderer | MockRenderer:
+    wasm_rendering: str = "webgl",
+    wasm_mode: str = "sync",
+) -> VTKWasmRenderer | MarimoRenderer | ColabRenderer | BrowserRenderer | MockRenderer:
     """Get appropriate renderer for current environment.
 
-    Automatically detects whether running in Pyodide/browser and
+    Automatically detects whether running in Pyodide/browser/marimo and
     returns the appropriate renderer implementation.
 
     Parameters
@@ -1668,10 +2017,18 @@ def get_renderer(
     lighting : str or None, optional
         Lighting mode. ``"default"`` creates a default directional light,
         ``None`` creates no default lights. Default is ``"default"``.
+    wasm_rendering : str, optional
+        WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+        Default is ``"webgl"``.
+    wasm_mode : str, optional
+        Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+        ``"async"``. Default is ``"sync"``.
 
     Returns
     -------
-    VTKWasmRenderer or BrowserRenderer or MockRenderer
+    VTKWasmRenderer or MarimoRenderer or ColabRenderer or BrowserRenderer or MockRenderer
+        - MarimoRenderer if in marimo environment
+        - ColabRenderer if in Google Colaboratory environment
         - VTKWasmRenderer if in Pyodide or IPython environment
         - BrowserRenderer in standard Python (opens the default browser)
         - MockRenderer if ``PYVISTA_JS_NO_BROWSER=1`` is set (for testing/CI)
@@ -1680,9 +2037,10 @@ def get_renderer(
     --------
     >>> # Automatically gets the right renderer
     >>> renderer = get_renderer()  # doctest: +SKIP
+    >>> # In marimo: returns MarimoRenderer
     >>> # In Pyodide or Jupyter: returns VTKWasmRenderer
     >>> # In standard Python: returns BrowserRenderer (opens browser)
-    >>> # Same code works in both environments
+    >>> # Same code works in all environments
     >>> from pyvista_wasm import Sphere  # doctest: +SKIP
     >>> mesh = Sphere()  # doctest: +SKIP
     >>> renderer.add_mesh_actor(mesh, color='blue')  # doctest: +SKIP
@@ -1698,10 +2056,38 @@ def get_renderer(
     browser opening (useful for CI/CD and automated testing).
 
     """
+    # Check for marimo first (highest priority for WASM notebooks)
+    if MARIMO_AVAILABLE:
+        return MarimoRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+    # Check for Google Colaboratory before IPython (Colab has
+    # IPYTHON_AVAILABLE=True but strips inline <script> tags, so the
+    # sandboxed iframe from ColabRenderer is required).
+    if COLAB_AVAILABLE:
+        return ColabRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
     # Use VTKWasmRenderer if in Pyodide with VTK.wasm OR if IPython is available
     if (PYODIDE_ENV and VTK_AVAILABLE) or IPYTHON_AVAILABLE:
-        return VTKWasmRenderer(lighting=lighting)
+        return VTKWasmRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
     # Respect opt-out env var for CI/testing
     if os.environ.get("PYVISTA_JS_NO_BROWSER"):
-        return MockRenderer(lighting=lighting)
-    return BrowserRenderer(lighting=lighting)
+        return MockRenderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
+    return BrowserRenderer(
+        lighting=lighting,
+        wasm_rendering=wasm_rendering,
+        wasm_mode=wasm_mode,
+    )

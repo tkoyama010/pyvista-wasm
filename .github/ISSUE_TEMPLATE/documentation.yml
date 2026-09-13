@@ -1,3 +1,4 @@
+---
 name: Documentation
 description: Report a documentation issue or suggest an improvement
 labels: ["documentation"]
@@ -41,5 +42,5 @@ body:
     attributes:
       label: Code of Conduct
       options:
-        - label: I agree to follow the [Code of Conduct](https://github.com/tkoyama010/pyvista-wasm/blob/main/CODE_OF_CONDUCT.md)
+        - label: I agree to follow the [Code of Conduct](https://github.com/tkoyama010/pyvista-wasm/blob/main/CODE_OF_CONDUCT.md)  # yamllint disable-line rule:line-length
           required: true

@@ -1,6 +1,7 @@
 """Test vtk.js rendering backend."""
 
 import logging
+import sys
 
 import pytest
 
@@ -8,8 +9,11 @@ from pyvista_wasm import Cube, Cylinder, PolyData, Sphere, rendering
 from pyvista_wasm.rendering import BrowserRenderer, MockRenderer, get_renderer
 
 
-def test_get_renderer_returns_browser() -> None:
-    """Test that get_renderer returns BrowserRenderer in standard Python env."""
+def test_get_renderer_returns_browser(monkeypatch) -> None:
+    """Test that get_renderer returns BrowserRenderer when IPython not available."""
+    monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", False)
+    monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
     renderer = get_renderer()
     assert isinstance(renderer, BrowserRenderer)
 
@@ -531,3 +535,390 @@ def test_smooth_shading_with_actor_index(monkeypatch) -> None:
     # Second actor (Cube with smooth_shading=False): flat shading
     actor1 = scene["actors"][1]
     assert actor1["shading"] == "flat"
+
+
+def test_wasm_config_defaults_in_scene_data(monkeypatch) -> None:
+    """Test that default wasm config is included in scene data."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer()
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer._repr_html_()
+    scene = extract_scene_data(html)
+
+    assert "wasmConfig" in scene
+    assert scene["wasmConfig"]["rendering"] == "webgl"
+    assert scene["wasmConfig"]["mode"] == "sync"
+
+
+def test_wasm_config_webgpu_in_scene_data(monkeypatch) -> None:
+    """Test that webgpu config is included in scene data."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer._repr_html_()
+    scene = extract_scene_data(html)
+
+    assert scene["wasmConfig"]["rendering"] == "webgpu"
+    assert scene["wasmConfig"]["mode"] == "async"
+
+
+def test_wasm_config_in_standalone_html(monkeypatch) -> None:
+    """Test that data-config attribute is present in standalone HTML."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    html = renderer.generate_standalone_html()
+
+    assert "data-config='" in html
+    assert '"rendering": "webgpu"' in html
+
+
+def test_wasm_config_in_render_js(monkeypatch) -> None:
+    """Test that data-config is set on script element in generated JS."""
+    monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+    renderer = rendering.VTKWasmRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    renderer.add_mesh_actor(Sphere(), color="red")
+
+    js = renderer._generate_render_js()
+
+    assert "script.dataset.config" in js
+    assert "webgpu" in js
+
+
+def test_wasm_config_invalid_rendering() -> None:
+    """Test that invalid wasm_rendering raises ValueError."""
+    with pytest.raises(ValueError, match="wasm_rendering"):
+        rendering.BrowserRenderer(wasm_rendering="invalid")
+
+
+def test_wasm_config_invalid_mode() -> None:
+    """Test that invalid wasm_mode raises ValueError."""
+    with pytest.raises(ValueError, match="wasm_mode"):
+        rendering.BrowserRenderer(wasm_mode="invalid")
+
+
+def test_wasm_config_browser_renderer() -> None:
+    """Test that BrowserRenderer stores wasm config."""
+    renderer = rendering.BrowserRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    assert renderer._wasm_rendering == "webgpu"
+    assert renderer._wasm_mode == "async"
+
+
+def test_mock_renderer_stores_wasm_config() -> None:
+    """Test that MockRenderer stores wasm config."""
+    renderer = rendering.MockRenderer(wasm_rendering="webgpu", wasm_mode="async")
+    assert renderer._wasm_rendering == "webgpu"
+    assert renderer._wasm_mode == "async"
+
+
+class TestMarimoRenderer:
+    """Tests for MarimoRenderer class."""
+
+    def test_marimo_renderer_requires_marimo(self, monkeypatch) -> None:
+        """Test that MarimoRenderer raises RuntimeError when marimo is not available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        with pytest.raises(RuntimeError, match="marimo"):
+            rendering.MarimoRenderer()
+
+    def test_marimo_renderer_creation(self, monkeypatch) -> None:
+        """Test MarimoRenderer initialization when marimo is available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        # Mock marimo module
+        class MockMarimo:
+            class output:  # noqa: N801
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        assert renderer is not None
+        assert renderer._wasm_rendering == "webgl"
+        assert renderer._wasm_mode == "sync"
+
+    def test_marimo_renderer_with_wasm_config(self, monkeypatch) -> None:
+        """Test MarimoRenderer with custom wasm config."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:  # noqa: N801
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer(wasm_rendering="webgpu", wasm_mode="async")
+        assert renderer._wasm_rendering == "webgpu"
+        assert renderer._wasm_mode == "async"
+
+    def test_marimo_renderer_render_returns_html(self, monkeypatch) -> None:
+        """Test that MarimoRenderer.render() returns Html object."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        captured = []
+
+        class MockHtml:
+            def __init__(self, content):
+                self.content = content
+                captured.append(self)
+
+        class MockOutput:
+            @staticmethod
+            def append(obj):
+                pass
+
+        class MockMarimo:
+            output = MockOutput()
+            Html = MockHtml
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+        result = renderer.render()
+
+        assert result is not None
+        assert isinstance(result, MockHtml)
+        assert "iframe" in result.content
+
+    def test_marimo_renderer_screenshot_raises(self, monkeypatch) -> None:
+        """Test that MarimoRenderer.screenshot() raises NotImplementedError."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:  # noqa: N801
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        with pytest.raises(NotImplementedError):
+            renderer.screenshot()
+
+    def test_get_renderer_returns_marimo_when_available(self, monkeypatch) -> None:
+        """Test that get_renderer returns MarimoRenderer when marimo is available."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", True)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", True)
+
+        class MockMarimo:
+            class output:  # noqa: N801
+                @staticmethod
+                def append(obj):
+                    pass
+
+            class Html:
+                def __init__(self, content):
+                    self.content = content
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.MarimoRenderer)
+
+    def test_marimo_renderer_html_escaping(self, monkeypatch) -> None:
+        """Test that HTML content is properly escaped for iframe srcdoc."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", True)
+
+        captured = []
+
+        class MockHtml:
+            def __init__(self, content):
+                self.content = content
+                captured.append(self)
+
+        class MockOutput:
+            @staticmethod
+            def append(obj):
+                pass
+
+        class MockMarimo:
+            output = MockOutput()
+            Html = MockHtml
+
+        monkeypatch.setitem(sys.modules, "marimo", MockMarimo())
+
+        renderer = rendering.MarimoRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red&blue")
+        result = renderer.render()
+
+        # Check that & is escaped to &amp;
+        assert "&amp;" in result.content
+        # Check that " is escaped to &quot;
+        assert "&quot;" in result.content
+
+
+class TestColabRenderer:
+    """Tests for ColabRenderer class."""
+
+    def test_colab_renderer_requires_colab(self, monkeypatch) -> None:
+        """Test that ColabRenderer raises RuntimeError when Colab is not available."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", False)
+        with pytest.raises(RuntimeError, match="Colaboratory"):
+            rendering.ColabRenderer()
+
+    def test_colab_renderer_creation(self, monkeypatch) -> None:
+        """Test ColabRenderer initialization when Colab is available."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        assert renderer is not None
+        assert renderer._wasm_rendering == "webgl"
+        assert renderer._wasm_mode == "sync"
+
+    def test_colab_renderer_with_wasm_config(self, monkeypatch) -> None:
+        """Test ColabRenderer with custom wasm config."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer(wasm_rendering="webgpu", wasm_mode="async")
+        assert renderer._wasm_rendering == "webgpu"
+        assert renderer._wasm_mode == "async"
+
+    def test_colab_renderer_render_returns_html(self, monkeypatch) -> None:
+        """Test that ColabRenderer.render() returns HTML object."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        captured = []
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+                captured.append(self)
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red")
+        result = renderer.render()
+
+        assert result is not None
+        assert isinstance(result, MockHTML)
+        assert "iframe" in result.content
+        assert 'sandbox="allow-scripts"' in result.content
+
+    def test_colab_renderer_screenshot_raises(self, monkeypatch) -> None:
+        """Test that ColabRenderer.screenshot() raises NotImplementedError."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        with pytest.raises(NotImplementedError):
+            renderer.screenshot()
+
+    def test_colab_renderer_html_escaping(self, monkeypatch) -> None:
+        """Test that HTML content is properly escaped for iframe srcdoc."""
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+
+        captured = []
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+                captured.append(self)
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = rendering.ColabRenderer()
+        renderer.add_mesh_actor(Sphere(), color="red&blue")
+        result = renderer.render()
+
+        # Check that & is escaped to &amp;
+        assert "&amp;" in result.content
+        # Check that " is escaped to &quot;
+        assert "&quot;" in result.content
+
+    def test_get_renderer_returns_colab_when_available(self, monkeypatch) -> None:
+        """Test that get_renderer returns ColabRenderer when Colab is detected."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", True)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", True)
+
+        class MockHTML:
+            def __init__(self, content: str) -> None:
+                self.content = content
+
+        monkeypatch.setattr(rendering, "HTML", MockHTML)
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.ColabRenderer)
+
+    def test_get_renderer_selects_vtkwasm_for_non_colab_ipython(self, monkeypatch) -> None:
+        """Test that get_renderer still selects VTKWasmRenderer for non-Colab IPython."""
+        monkeypatch.setattr(rendering, "MARIMO_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "COLAB_AVAILABLE", False)
+        monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
+        monkeypatch.setattr(rendering, "PYODIDE_ENV", False)
+        monkeypatch.setattr(rendering, "VTK_AVAILABLE", False)
+
+        renderer = get_renderer()
+        assert isinstance(renderer, rendering.VTKWasmRenderer)
+
+
+class TestColabEnvDetection:
+    """Tests for Google Colaboratory environment detection."""
+
+    def test_colab_detection_via_sys_modules(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is True when google.colab is in sys.modules."""
+        monkeypatch.delenv("COLAB_RELEASE_TAG", raising=False)
+
+        class FakeColab:
+            pass
+
+        monkeypatch.setitem(sys.modules, "google.colab", FakeColab())
+        assert rendering._is_colab_available() is True
+
+    def test_colab_detection_via_env_var(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is True when COLAB_RELEASE_TAG is set."""
+        assert "google.colab" not in sys.modules
+        monkeypatch.setenv("COLAB_RELEASE_TAG", "Colab-Release-Tag")
+        assert rendering._is_colab_available() is True
+
+    def test_colab_detection_false_when_absent(self, monkeypatch) -> None:
+        """Test that _is_colab_available() is False when neither signal is present."""
+        monkeypatch.delitem(sys.modules, "google.colab", raising=False)
+        monkeypatch.delenv("COLAB_RELEASE_TAG", raising=False)
+        assert rendering._is_colab_available() is False

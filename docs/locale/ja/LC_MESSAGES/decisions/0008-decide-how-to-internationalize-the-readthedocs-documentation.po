@@ -1,0 +1,1008 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:9
+msgid "Decide how to internationalize the ReadTheDocs documentation"
+msgstr "ReadTheDocsドキュメントの国際化方法を決定する"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:11
+msgid "Context and Problem Statement"
+msgstr "コンテキストと問題記述"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:13
+msgid ""
+"The pyvista-wasm documentation is built with Sphinx + JupyterLite + "
+"sphinx-book-theme and hosted on Read the Docs (`pyvista-"
+"js.readthedocs.io`). The Sphinx i18n infrastructure is already configured"
+" in `docs/conf.py` (`locale_dirs = [\"locale/\"]` and `gettext_compact = "
+"False` at lines 81–82), but `language = \"en\"` (line 80) is the only "
+"locale and no translation catalogs (`.pot`/`.po`), localized builds, or "
+"Read the Docs translation projects exist. Issue "
+"[#389](https://github.com/tkoyama010/pyvista-wasm/issues/389) captures "
+"the user-facing need to internationalize the documentation (e.g., `ja`, "
+"`zh_CN`, `es`) so non-English-speaking users can learn and use pyvista-"
+"wasm in their native language. However, no architecture decision record "
+"exists yet that evaluates the available Sphinx/Read the Docs i18n "
+"strategies against the project's decision drivers and records the "
+"rationale for the chosen approach. Which i18n strategy should we adopt "
+"for the Read the Docs documentation?"
+msgstr ""
+"pyvista-wasmドキュメントはSphinx + JupyterLite + sphinx-book-themeでビルドされ"
+"Read the Docs（`pyvista-js.readthedocs.io`）でホストされている。Sphinx i18nインフラは"
+"すでに `docs/conf.py` で設定済み（`locale_dirs = [\"locale/\"]` と `gettext_compact = "
+"False` が81–82行目）だが、`language = \"en\"`（80行目）が唯一のロケールであり"
+"翻訳カタログ（`.pot`/`.po`）、ローカライズビルド、Read the Docs翻訳プロジェクトは存在しない。"
+"Issue [#389](https://github.com/tkoyama010/pyvista-wasm/issues/389) はドキュメントを"
+"国際化し（例: `ja`、`zh_CN`、`es`）、英語を話さないユーザーが母国語でpyvista-wasmを"
+"学習・使用できるようにするというユーザー向けのニーズを捉えている。しかし、利用可能な"
+"Sphinx/Read the Docs i18n戦略をプロジェクトの決定ドライバに対して評価し、選択した"
+"アプローチの根拠を記録したアーキテクチャ決定記録はまだ存在しない。Read the Docsドキュメントに"
+"どのi18n戦略を採用すべきか？"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:17
+msgid ""
+"**Single-language rendering per locale on Read the Docs**: A reader must "
+"be able to view the entire documentation rendered in one language at a "
+"time (e.g., Japanese at `/ja/latest/`), without the other language "
+"cluttering the page. Read the Docs must serve each language at its own "
+"URL and provide a language switcher (flyout menu). This is a knock-out "
+"criterion."
+msgstr ""
+"**Read the Docsでのロケールごとの単一言語レンダリング**: 読者は一度に1つの言語で"
+"レンダリングされたドキュメント全体を表示できる必要がある（例: `/ja/latest/` の日本語）"
+"、他の言語がページを雑然とさせないように。Read the Docsは各言語を独自のURLで提供し"
+"言語スイッチャー（フライアウトメニュー）を提供する必要がある。これはノックアウト基準である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:18
+msgid ""
+"**Independent maintenance of each translation**: Editing one language's "
+"translation must not require touching the source `.rst`/`.md` files or "
+"another language's translation, so each version can be maintained and "
+"reviewed independently in PRs."
+msgstr ""
+"**各翻訳の独立保守**: ある言語の翻訳を編集する際にソース `.rst`/`.md` ファイルや"
+"別の言語の翻訳に触れる必要がなく、各バージョンがPRで独立して保守・レビューできるようにする。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:19
+msgid ""
+"**Compatibility with the existing Read the Docs build**: The i18n "
+"solution must work with the current `.readthedocs.yaml` (Sphinx + "
+"JupyterLite, `ubuntu-24.04`, Python 3.13, Node.js 22) and the `sphinx-"
+"book-theme`, without breaking the JupyterLite interactive examples or the"
+" `pre_build`/`post_build` jobs."
+msgstr ""
+"**既存のRead the Docsビルドとの互換性**: i18nソリューションは現在の `.readthedocs.yaml`"
+"（Sphinx + JupyterLite、`ubuntu-24.04`、Python 3.13、Node.js 22）と `sphinx-book-theme`"
+"で機能し、JupyterLiteインタラクティブ例や `pre_build`/`post_build`ジョブを壊さない必要がある。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:20
+msgid ""
+"**Zero-cost / GitHub-native tooling**: The project is an open-source, "
+"community-driven effort; the i18n solution must not require paid "
+"services, external API keys, or accounts beyond what is already in the "
+"repository and Read the Docs."
+msgstr ""
+"**ゼロコスト / GitHubネイティブなツール**: プロジェクトはオープンソースのコミュニティ駆動の"
+"取り組みである — i18nソリューションはリポジトリとRead the Docsにすでにあるもの以外の"
+"有料サービス、外部APIキー、アカウントを必要としない必要がある。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:21
+msgid ""
+"**Contributor ergonomics for translators**: Translators should be able to"
+" contribute translations through a familiar workflow — ideally editing "
+"text files that diff and review well in Git PRs, without requiring "
+"specialised proprietary tooling."
+msgstr ""
+"**翻訳者のコントリビューターエルゴノミクス**: 翻訳者は使い慣れたワークフローで翻訳を"
+"貢献できるべきである — 理想的には専用の独自ツールを必要とせず、Git PRでdiffとレビューが"
+"しやすいテキストファイルを編集する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:22
+msgid ""
+"**Build-time / config-complexity impact**: The i18n solution should not "
+"significantly increase build time or add complex configuration, since the"
+" docs are built on Read the Docs on every push and PR."
+msgstr ""
+"**ビルド時間 / 設定複雑さの影響**: i18nソリューションはビルド時間を大幅に増加させたり"
+"複雑な設定を追加したりすべきではない — ドキュメントはpushとPRのたびにRead the Docsで"
+"ビルドされるため。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:24
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:26
+msgid ""
+"**Sphinx native gettext + Read the Docs translations** — `sphinx-build -b"
+" gettext` produces `.pot` templates, `sphinx-intl` initialises/updates "
+"`.po` catalogs per locale under `locale/<lang>/LC_MESSAGES/`, and Read "
+"the Docs builds each language as a separate translation project "
+"(configured via the Read the Docs dashboard) with the flyout menu "
+"providing the language switcher."
+msgstr ""
+"**Sphinxネイティブgettext + Read the Docs翻訳** — `sphinx-build -b gettext` が"
+"`.pot` テンプレートを生成し、`sphinx-intl` が `locale/<lang>/LC_MESSAGES/` 下に"
+"ロケールごとの `.po` カタログを初期化/更新し、Read the Docsが各言語を個別の翻訳"
+"プロジェクトとしてビルドし（Read the Docsダッシュボードで設定）、フライアウトメニューが"
+"言語スイッチャーを提供する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:27
+msgid ""
+"**Per-language source trees (`docs/ja/`, `docs/en/`)** — full source "
+"duplication; each language's source tree is built as a separate Read the "
+"Docs subproject."
+msgstr ""
+"**言語ごとのソースツリー（`docs/ja/`、`docs/en/`）** — 完全なソース複製。"
+"各言語のソースツリーが個別のRead the Docsサブプロジェクトとしてビルドされる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:28
+msgid ""
+"**External translation management service (e.g., Crowdin / Transifex / "
+"Weblate)** — a hosted platform manages translation memory, glossaries, "
+"and a web-based translation UI; translated `.po` files are synced back to"
+" the repository via automated PRs, and Read the Docs builds each language"
+" from the synced catalogs."
+msgstr ""
+"**外部翻訳管理サービス（例: Crowdin / Transifex / Weblate）** — ホストされた"
+"プラットフォームが翻訳メモリ、用語集、Webベースの翻訳UIを管理し、翻訳された `.po` "
+"ファイルが自動PRを通じてリポジトリに同期され、Read the Docsが各言語を同期された"
+"カタログからビルドする。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:29
+msgid ""
+"**Keep the current English-only approach** — no i18n; documentation stays"
+" English-only."
+msgstr ""
+"**現在の英語のみのアプローチを維持** — i18nなし。ドキュメントは英語のみのまま。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:31
+msgid "Decision Outcome"
+msgstr "決定結果"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:33
+msgid ""
+"Chosen option: \"Sphinx native gettext + Read the Docs translations\", "
+"because it is the only option that satisfies every decision driver "
+"simultaneously — it reuses the Sphinx i18n infrastructure already "
+"configured in `docs/conf.py` (`locale_dirs`, `gettext_compact`), produces"
+" per-locale `.po` catalogs that are maintained independently in Git PRs, "
+"builds each language as a separate Read the Docs project with the flyout-"
+"menu language switcher, requires no paid services or external accounts "
+"beyond Read the Docs itself, and adds no build-time overhead beyond "
+"Sphinx's native gettext compilation step."
+msgstr ""
+"選択した選択肢: 「Sphinxネイティブgettext + Read the Docs翻訳」。なぜなら、すべての"
+"決定ドライバを同時に満たす唯一の選択肢だからである — `docs/conf.py` にすでに設定済みの"
+"Sphinx i18nインフラ（`locale_dirs`、`gettext_compact`）を再利用し、Git PRで独立して"
+"保守されるロケールごとの `.po` カタログを生成し、各言語をフライアウトメニュ言語スイッチャー"
+"付きの個別Read the Docsプロジェクトとしてビルドし、Read the Docs自体以外に有料サービスや"
+"外部アカウントを必要とせず、Sphinxのネイティブgettextコンパイルステップ以外のビルド時間"
+"オーバーヘッドを追加しない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:35
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:37
+msgid ""
+"Good, because each language is served at its own Read the Docs URL (e.g.,"
+" `/ja/latest/`, `/en/latest/`) with a flyout-menu language switcher, "
+"satisfying the single-language-rendering knock-out criterion."
+msgstr ""
+"良い、なぜなら各言語が独自のRead the Docs URL（例: `/ja/latest/`、`/en/latest/`）で"
+"フライアウトメニュ言語スイッチャー付きで提供され、単一言語レンダリングのノックアウト基準を"
+"満たす。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:38
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:69
+msgid ""
+"Good, because translations live in separate `.po` files under "
+"`locale/<lang>/LC_MESSAGES/`, so editing one language does not require "
+"touching the English source or another language's translation — fully "
+"satisfying the independent-maintenance driver."
+msgstr ""
+"良い、なぜなら翻訳が `locale/<lang>/LC_MESSAGES/` 下の別々の `.po` ファイルにあり"
+"、ある言語を編集する際に英語ソースや別の言語の翻訳に触れる必要がない — 独立保守ドライバを"
+"完全に満たす。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:39
+msgid ""
+"Good, because it reuses the i18n infrastructure already present in "
+"`docs/conf.py` (`locale_dirs = [\"locale/\"]`, `gettext_compact = "
+"False`), requiring no new Sphinx configuration beyond setting `language` "
+"per Read the Docs translation project."
+msgstr ""
+"良い、なぜなら `docs/conf.py` にすでに存在するi18nインフラ（`locale_dirs = [\"locale/\"]`"
+"、`gettext_compact = False`）を再利用し、Read the Docs翻訳プロジェクトごとに `language` を"
+"設定する以外の新しいSphinx設定を必要としない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:40
+msgid ""
+"Good, because the gettext workflow is zero-cost and GitHub-native: "
+"`sphinx-intl` is a free PyPI package, `.po` files are plain text that "
+"diffs and reviews in PRs, and Read the Docs' localization feature is free"
+" for open-source projects."
+msgstr ""
+"良い、なぜならgettextワークフローがゼロコストでGitHubネイティブである — "
+"`sphinx-intl` は無料のPyPIパッケージであり、`.po` ファイルはPRでdiffとレビューが"
+"しやすいプレーンテキストであり、Read the Docsのローカライズ機能はオープンソース"
+"プロジェクトに無料である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:41
+msgid ""
+"Good, because it is compatible with the existing Read the Docs build — "
+"Sphinx's gettext compilation runs as part of the normal `sphinx-build` "
+"step, and JupyterLite interactive examples and `sphinx-book-theme` are "
+"unaffected since they are not translated (code and API docs stay "
+"language-neutral)."
+msgstr ""
+"良い、なぜなら既存のRead the Docsビルドと互換性がある — Sphinxのgettextコンパイルが"
+"通常の `sphinx-build` ステップの一部として実行され、JupyterLiteインタラクティブ例と"
+"`sphinx-book-theme` は翻訳されないため（コードとAPIドキュメントは言語中立のまま）"
+"影響を受けない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:42
+msgid ""
+"Good, because contributor ergonomics are strong: translators edit `.po` "
+"files in a text editor or `.po`-aware editor (e.g., Poedit, VS Code with "
+"gettext extensions) and submit changes via standard Git PRs, with no "
+"proprietary tooling required."
+msgstr ""
+"良い、なぜならコントリビューターエルゴノミクスが強力である — 翻訳者はテキストエディタや"
+"`.po` 対応エディタ（例: Poedit、gettext拡張付きVS Code）で `.po` ファイルを編集し"
+"、標準的なGit PRを通じて変更を提出し、独自ツールは不要である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:43
+msgid ""
+"Bad, because every translatable string in the documentation source "
+"(`.rst`/`.md` files, `conf.py` `project`/`copyright`/`author`, theme "
+"strings) must be extracted into `.pot` templates and then into `.po` "
+"catalogs — a one-time bootstrap effort, plus ongoing maintenance when "
+"English source text changes."
+msgstr ""
+"悪い、なぜならドキュメントソース（`.rst`/`.md` ファイル、`conf.py` の `project`/"
+"`copyright`/`author`、テーマ文字列）のすべての翻訳可能な文字列を `.pot` テンプレートに"
+"抽出し、さらに `.po` カタログに抽出する必要がある — 1回限りのブートストラップ労力に加え"
+"、英語ソーステキスト変更時の継続的保守がある。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:44
+msgid ""
+"Bad, because Read the Docs requires a separate project per language, "
+"configured via the Read the Docs dashboard (not via `.readthedocs.yaml`),"
+" adding a small amount of project-management overhead when adding a new "
+"language."
+msgstr ""
+"悪い、なぜならRead the Docsが言語ごとに個別のプロジェクトを必要とし"
+"（`.readthedocs.yaml` ではなくRead the Docsダッシュボードで設定）、新しい言語追加時に"
+"少量のプロジェクト管理オーバーヘッドが追加される。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:45
+msgid ""
+"Bad, because `.po` files can drift from the English source if the `.pot` "
+"regeneration + `sphinx-intl update` workflow is not run after English "
+"text changes, producing stale or missing translations — this requires a "
+"documented contributor workflow and CI discipline."
+msgstr ""
+"悪い、なぜなら `.pot` 再生成 + `sphinx-intl update` ワークフローが英語テキスト変更後に"
+"実行されない場合、`.po` ファイルが英語ソースからドリフトし、古いまたは欠落した翻訳が"
+"生じる — これには文書化されたコントリビューターワークフローとCIの規律が必要である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:46
+msgid ""
+"Neutral, because Sphinx's gettext extraction splits translatable content "
+"at paragraph/block boundaries, which is good for granularity but means "
+"translators must preserve reStructuredText/MyST syntax inside `msgstr` "
+"entries — a standard gettext constraint, not unique to this approach."
+msgstr ""
+"中立、なぜならSphinxのgettext抽出が段落/ブロック境界で翻訳可能コンテンツを分割し"
+"、粒度の面では良いが翻訳者が `msgstr` エントリ内でreStructuredText/MyST構文を"
+"維持する必要があることを意味する — 標準的なgettextの制約であり、このアプローチに"
+"特有のものではない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:48
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:50
+msgid "Compliance with this decision will be confirmed by:"
+msgstr "この決定への準拠は以下によって確認されます:"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:52
+msgid ""
+"Running `sphinx-build -b gettext docs docs/_build/gettext` produces "
+"`.pot` template files under `docs/_build/gettext/`."
+msgstr ""
+"`sphinx-build -b gettext docs docs/_build/gettext` を実行すると `docs/_build/gettext/` "
+"下に `.pot` テンプレートファイルが生成される。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:53
+msgid ""
+"`sphinx-intl update -p docs/_build/gettext -l ja` creates "
+"`docs/locale/ja/LC_MESSAGES/*.po` catalog files for at least Japanese "
+"(`ja`)."
+msgstr ""
+"`sphinx-intl update -p docs/_build/gettext -l ja` が少なくとも日本語（`ja`）の"
+"`docs/locale/ja/LC_MESSAGES/*.po` カタログファイルを作成する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:54
+msgid ""
+"At least one `.po` file under `docs/locale/ja/LC_MESSAGES/` contains "
+"translated `msgstr` entries (not just placeholder `FILL HERE` text)."
+msgstr ""
+"`docs/locale/ja/LC_MESSAGES/` 下の少なくとも1つの `.po` ファイルに翻訳された "
+"`msgstr` エントリが含まれる（プレースホルダーの `FILL HERE` テキストだけでなく）。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:55
+msgid ""
+"A Read the Docs translation project for `ja` is created and linked as a "
+"translation of the parent (English) project via the Read the Docs "
+"dashboard."
+msgstr ""
+"`ja` のRead the Docs翻訳プロジェクトが作成され、Read the Docsダッシュボードを通じて"
+"親（英語）プロジェクトの翻訳としてリンクされる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:56
+msgid ""
+"The Japanese documentation build succeeds on Read the Docs and is "
+"accessible at a `/ja/latest/` URL."
+msgstr ""
+"日本語ドキュメントビルドがRead the Docsで成功し、`/ja/latest/` URLでアクセス可能である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:57
+msgid ""
+"The Read the Docs flyout-menu language switcher is visible in the built "
+"documentation, allowing the reader to switch between `en` and `ja`."
+msgstr ""
+"Read the Docsフライアウトメニュ言語スイッチャーがビルドされたドキュメントに表示され"
+"、読者が `en` と `ja` を切り替えられる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:58
+msgid ""
+"The existing English documentation build and JupyterLite interactive "
+"examples continue to work unchanged on Read the Docs."
+msgstr ""
+"既存の英語ドキュメントビルドとJupyterLiteインタラクティブ例がRead the Docsで変更なく"
+"引き続き機能する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:59
+msgid ""
+"A contributor guide documenting the `.pot` regeneration + `sphinx-intl "
+"update` + `.po` translation workflow is added to `docs/`."
+msgstr ""
+"`.pot` 再生成 + `sphinx-intl update` + `.po` 翻訳ワークフローを文書化した"
+"コントリビューターガイドが `docs/` に追加される。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:61
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の長所と短所"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:63
+msgid ""
+"Sphinx native gettext + Read the Docs translations — `sphinx-build -b "
+"gettext`, `sphinx-intl`, Read the Docs localization"
+msgstr ""
+"Sphinxネイティブgettext + Read the Docs翻訳 — `sphinx-build -b gettext`、"
+"`sphinx-intl`、Read the Docsローカライズ"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:65
+msgid ""
+"See [Sphinx i18n docs](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html) and [Read the Docs "
+"localization](https://docs.readthedocs.com/platform/stable/localization.html)."
+msgstr ""
+"[Sphinx i18nドキュメント](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html) と [Read the Docs "
+"ローカライズ](https://docs.readthedocs.com/platform/stable/localization.html) を参照。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:67
+msgid ""
+"Good, because it reuses the Sphinx i18n infrastructure already configured"
+" in `docs/conf.py` (`locale_dirs = [\"locale/\"]`, `gettext_compact = "
+"False`), requiring no new Sphinx configuration."
+msgstr ""
+"良い、なぜなら `docs/conf.py` にすでに設定済みのSphinx i18nインフラ"
+"（`locale_dirs = [\"locale/\"]`、`gettext_compact = False`）を再利用し"
+"、新しいSphinx設定を必要としない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:68
+msgid ""
+"Good, because each language is served at its own Read the Docs URL (e.g.,"
+" `/ja/latest/`) with the flyout-menu language switcher, fully satisfying "
+"the single-language-rendering knock-out criterion."
+msgstr ""
+"良い、なぜなら各言語が独自のRead the Docs URL（例: `/ja/latest/`）でフライアウトメニュ"
+"言語スイッチャー付きで提供され、単一言語レンダリングのノックアウト基準を完全に満たす。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:70
+msgid ""
+"Good, because it is zero-cost and GitHub-native: `sphinx-intl` is a free "
+"PyPI package, `.po` files are plain text that diffs and reviews in PRs, "
+"and Read the Docs' localization feature is free for open-source projects."
+msgstr ""
+"良い、なぜならゼロコストでGitHubネイティブである — `sphinx-intl` は無料のPyPIパッケージ"
+"であり、`.po` ファイルはPRでdiffとレビューがしやすいプレーンテキストであり"
+"、Read the Docsのローカライズ機能はオープンソースプロジェクトに無料である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:71
+msgid ""
+"Good, because it is compatible with the existing Read the Docs build — "
+"Sphinx's gettext compilation runs as part of the normal `sphinx-build` "
+"step, and JupyterLite interactive examples and `sphinx-book-theme` are "
+"unaffected."
+msgstr ""
+"良い、なぜなら既存のRead the Docsビルドと互換性がある — Sphinxのgettextコンパイルが"
+"通常の `sphinx-build` ステップの一部として実行され、JupyterLiteインタラクティブ例と"
+"`sphinx-book-theme` は影響を受けない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:72
+msgid ""
+"Good, because contributor ergonomics are strong: translators edit `.po` "
+"files in a text editor or `.po`-aware editor and submit changes via "
+"standard Git PRs, with no proprietary tooling required."
+msgstr ""
+"良い、なぜならコントリビューターエルゴノミクスが強力である — 翻訳者はテキストエディタや"
+"`.po` 対応エディタで `.po` ファイルを編集し、標準的なGit PRを通じて変更を提出し"
+"、独自ツールは不要である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:73
+msgid ""
+"Good, because it is the workflow recommended by both the [Sphinx i18n "
+"documentation](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html#translating-with-sphinx-intl) "
+"and the [Read the Docs manage-translations "
+"guide](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html)."
+msgstr ""
+"良い、なぜなら[Sphinx i18nドキュメント](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html#translating-with-sphinx-intl) と"
+"[Read the Docs manage-translationsガイド](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html) の両方で推奨されるワークフローである。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:74
+msgid ""
+"Neutral, because Read the Docs requires a separate project per language, "
+"configured via the dashboard rather than `.readthedocs.yaml`, adding a "
+"small amount of project-management overhead when adding a new language."
+msgstr ""
+"中立、なぜならRead the Docsが言語ごとに個別のプロジェクトを必要とし"
+"（`.readthedocs.yaml` ではなくダッシュボードで設定）、新しい言語追加時に少量の"
+"プロジェクト管理オーバーヘッドが追加される。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:75
+msgid ""
+"Bad, because every translatable string must be extracted into `.pot` "
+"templates and `.po` catalogs — a one-time bootstrap effort, plus ongoing "
+"maintenance when English source text changes."
+msgstr ""
+"悪い、なぜならすべての翻訳可能な文字列を `.pot` テンプレートと `.po` カタログに抽出する"
+"必要がある — 1回限りのブートストラップ労力に加え、英語ソーステキスト変更時の継続的保守がある。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:76
+msgid ""
+"Bad, because `.po` files can drift from the English source if the `.pot` "
+"regeneration + `sphinx-intl update` workflow is not run after English "
+"text changes, requiring a documented contributor workflow and CI "
+"discipline."
+msgstr ""
+"悪い、なぜなら `.pot` 再生成 + `sphinx-intl update` ワークフローが英語テキスト変更後に"
+"実行されない場合、`.po` ファイルが英語ソースからドリフトし、文書化されたコントリビューター"
+"ワークフローとCIの規律が必要になる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:78
+msgid ""
+"Per-language source trees (docs/ja/, docs/en/) — full source duplication,"
+" each built as a separate Read the Docs subproject"
+msgstr ""
+"言語ごとのソースツリー（docs/ja/、docs/en/）— 完全なソース複製、各が個別のRead the Docs"
+"サブプロジェクトとしてビルドされる"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:80
+msgid ""
+"Good, because each language's documentation is a complete, clean single-"
+"language source tree — no gettext tooling, no `.po` files, no `sphinx-"
+"intl`; authoring stays plain reStructuredText/MyST."
+msgstr ""
+"良い、なぜなら各言語のドキュメントが完全でクリーンな単一言語ソースツリーである — "
+"gettextツールも `.po` ファイルも `sphinx-intl` もなく、作成はプレーンな"
+"reStructuredText/MySTのままである。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:81
+msgid ""
+"Good, because each language can be reviewed independently in a PR — a JA "
+"text fix touches only `docs/ja/`."
+msgstr ""
+"良い、なぜなら各言語がPRで独立してレビューできる — JAテキスト修正は `docs/ja/` のみに触れる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:82
+msgid ""
+"Good, because it is zero-cost and GitHub-native with no external "
+"dependencies beyond Sphinx and Read the Docs."
+msgstr ""
+"良い、なぜならゼロコストでGitHubネイティブであり、SphinxとRead the Docs以外の外部"
+"依存関係がない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:83
+msgid ""
+"Good, because each language gets its own Read the Docs URL and the "
+"flyout-menu language switcher, satisfying the single-language-rendering "
+"driver."
+msgstr ""
+"良い、なぜなら各言語が独自のRead the Docs URLとフライアウトメニュ言語スイッチャーを持ち"
+"、単一言語レンダリングドライバを満たす。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:84
+msgid ""
+"Neutral, because the existing `docs/` source can be copied into "
+"`docs/en/` mechanically, though the effort is comparable to the gettext "
+"bootstrap."
+msgstr ""
+"中立、なぜなら既存の `docs/` ソースを機械的に `docs/en/` にコピーできるが"
+"、労力はgettextブートストラップと同等である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:85
+msgid ""
+"Bad, because the entire documentation source (`.rst`/`.md` files, "
+"`conf.py` settings, JupyterLite content, `index.md` toctree) is "
+"duplicated per language, so structural changes must be applied to every "
+"language's source tree — multiplying the maintenance burden and creating "
+"drift risk."
+msgstr ""
+"悪い、なぜならドキュメントソース全体（`.rst`/`.md` ファイル、`conf.py` 設定"
+"、JupyterLiteコンテンツ、`index.md` toctree）が言語ごとに複製され、構造変更をすべての"
+"言語のソースツリーに適用する必要がある — 保守負担が倍増しドリフトリスクが生じる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:86
+msgid ""
+"Bad, because JupyterLite content (`docs/content/`) and the `conf.py` "
+"JupyterLite configuration would need to be duplicated or symlinked per "
+"language, adding complexity to the build configuration."
+msgstr ""
+"悪い、なぜならJupyterLiteコンテンツ（`docs/content/`）と `conf.py` のJupyterLite設定を"
+"言語ごとに複製またはシンボリックリンクする必要があり、ビルド設定の複雑さが増す。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:87
+msgid ""
+"Bad, because the `.readthedocs.yaml` `pre_build` and `post_build` jobs "
+"(jupytext conversion, JupyterLite build) would need to run per language, "
+"increasing build time and config complexity."
+msgstr ""
+"悪い、なぜなら `.readthedocs.yaml` の `pre_build` と `post_build` ジョブ"
+"（jupytext変換、JupyterLiteビルド）を言語ごとに実行する必要があり"
+"、ビルド時間と設定複雑さが増大する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:88
+msgid ""
+"Bad, because API documentation generated by "
+"`sphinx.ext.autodoc`/`autosummary` from the Python source would be "
+"duplicated per language with no translation benefit (API signatures and "
+"docstrings are language-neutral), wasting build resources."
+msgstr ""
+"悪い、なぜならPythonソースから `sphinx.ext.autodoc`/`autosummary` で生成されたAPI"
+"ドキュメントが言語ごとに複製され、翻証の利益がない（APIシグネチャとdocstringは言語中立）"
+"、ビルドリソースが無駄になる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:90
+msgid ""
+"External translation management service (e.g., Crowdin / Transifex / "
+"Weblate) — managed translation memory + PR sync, hosted off-repo"
+msgstr ""
+"外部翻訳管理サービス（例: Crowdin / Transifex / Weblate）— 管理された翻訳メモリ + "
+"PR同期、リポジトリ外でホスト"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:92
+msgid ""
+"See [Crowdin](https://crowdin.com/), "
+"[Transifex](https://www.transifex.com/), [Weblate](https://weblate.org/)."
+msgstr ""
+"[Crowdin](https://crowdin.com/)、"
+"[Transifex](https://www.transifex.com/)、[Weblate](https://weblate.org/) を参照。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:94
+msgid ""
+"Good, because it provides a web-based translation UI with translation "
+"memory, glossaries, and quality checks, improving translator productivity"
+" for large documentation sets."
+msgstr ""
+"良い、なぜなら翻訳メモリ、用語集、品質チェック付きのWebベース翻訳UIを提供し"
+"、大規模ドキュメントセットの翻訳者生産性を向上させる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:95
+msgid ""
+"Good, because it can manage multiple languages and translators with role-"
+"based access (translator, reviewer, editor), which is useful for "
+"community translation at scale."
+msgstr ""
+"良い、なぜならロールベースアクセス（翻訳者、レビューアー、エディター）で複数言語と"
+"翻訳者を管理でき、大規模なコミュニティ翻訳に有用である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:96
+msgid ""
+"Good, because translated `.po` files are synced back to the repository "
+"via automated PRs, so the Read the Docs build still uses Sphinx gettext —"
+" compatible with the existing build."
+msgstr ""
+"良い、なぜなら翻訳された `.po` ファイルが自動PRを通じてリポジトリに同期され"
+"、Read the Docsビルドは引き続きSphinx gettextを使用する — 既存ビルドと互換性がある。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:97
+msgid ""
+"Good, because each language still gets its own Read the Docs URL and "
+"flyout-menu language switcher, satisfying the single-language-rendering "
+"driver."
+msgstr ""
+"良い、なぜなら各言語が引き続き独自のRead the Docs URLとフライアウトメニュ言語スイッチャーを持ち"
+"、単一言語レンダリングドライバを満たす。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:98
+msgid ""
+"Neutral, because Weblate offers a free hosted tier for open-source "
+"projects, and self-hosted Weblate is also free, so the zero-cost driver "
+"can be partially met."
+msgstr ""
+"中立、なぜならWeblateはオープンソースプロジェクトに無料のホストティアを提供し"
+"、セルフホストWeblateも無料であるため、ゼロコストドライバを部分的に満たせる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:99
+msgid ""
+"Bad, because it requires creating an account on an external service, "
+"linking the repository, and storing an API token — adding external "
+"dependency and setup overhead that violates the zero-cost / GitHub-native"
+" driver."
+msgstr ""
+"悪い、なぜなら外部サービスにアカウントを作成し、リポジトリをリンクし、APIトークンを保存する"
+"必要がある — ゼロコスト / GitHubネイティブドライバに違反する外部依存関係とセットアップ"
+"オーバーヘッドを追加する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:100
+msgid ""
+"Bad, because Crowdin and Transifex free tiers have limits on string count"
+" and languages, and paid tiers are required for larger projects — "
+"introducing potential future cost."
+msgstr ""
+"悪い、なぜならCrowdinとTransifexの無料ティアには文字列数と言語数の制限があり"
+"、より大きなプロジェクトには有料ティアが必要である — 将来のコストの可能性を導入する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:101
+msgid ""
+"Bad, because the translation workflow is split between the external "
+"service and Git PRs, adding a sync step that can cause conflicts if `.po`"
+" files are edited both in the service and directly in PRs."
+msgstr ""
+"悪い、なぜなら翻訳ワークフローが外部サービスとGit PRの間で分割され"
+"`.po` ファイルがサービスとPRの両方で直接編集された場合にコンフリクトを引き起こす可能性のある"
+"同期ステップを追加する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:102
+msgid ""
+"Bad, because it adds config complexity (`.tx/config` or equivalent) and a"
+" CI step to push `.pot` files and pull `.po` files, increasing build-time"
+" and workflow complexity for a small project."
+msgstr ""
+"悪い、なぜなら設定の複雑さ（`.tx/config` または同等のもの）と `.pot` ファイルをプッシュし"
+"`.po` ファイルをプルするCIステップを追加し、小さなプロジェクトのビルド時間とワークフロー"
+"複雑さを増大させる。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:104
+msgid ""
+"Keep the current English-only approach — no i18n; documentation stays "
+"English-only"
+msgstr ""
+"現在の英語のみのアプローチを維持 — i18nなし。ドキュメントは英語のみのまま"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:106
+msgid ""
+"Good, because it requires zero migration effort — the documentation "
+"already works this way."
+msgstr ""
+"良い、なぜなら移行労力がゼロである — ドキュメントはすでにこの方法で機能している。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:107
+msgid ""
+"Good, because it requires no additional tooling, dependencies, or build "
+"pipeline changes."
+msgstr ""
+"良い、なぜなら追加のツール、依存関係、ビルドパイプラインの変更が不要である。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:108
+msgid ""
+"Good, because a single `docs/` source tree and a single Read the Docs "
+"project keep the pipeline simple."
+msgstr ""
+"良い、なぜなら単一の `docs/` ソースツリーと単一のRead the Docsプロジェクトが"
+"パイプラインをシンプルに保つ。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:109
+msgid ""
+"Neutral, because the Sphinx i18n config in `docs/conf.py` (`locale_dirs`,"
+" `gettext_compact`) remains unused but harmless."
+msgstr ""
+"中立、なぜなら `docs/conf.py` のSphinx i18n設定（`locale_dirs`、`gettext_compact`）が"
+"未使用だが無害なままである。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:110
+msgid ""
+"Bad, because non-English-speaking users cannot fully benefit from the "
+"documentation, failing the user story in "
+"[#389](https://github.com/tkoyama010/pyvista-wasm/issues/389)."
+msgstr ""
+"悪い、なぜなら英語を話さないユーザーがドキュメントから十分に恩恵を受けられず"
+"、[#389](https://github.com/tkoyama010/pyvista-wasm/issues/389) のユーザーストーリーを"
+"満たさない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:111
+msgid ""
+"Bad, because it fails the single-language-rendering driver — there is no "
+"localized build at all."
+msgstr ""
+"悪い、なぜなら単一言語レンダリングドライバを満たさない — ローカライズビルドがまったくない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:112
+msgid ""
+"Bad, because it fails the independent-maintenance driver — there are no "
+"translations to maintain, because there is no i18n."
+msgstr ""
+"悪い、なぜなら独立保守ドライバを満たさない — i18nがないため保守すべき翻訳がない。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:114
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
+msgid "Comparison matrix"
+msgstr "比較マトリクス"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:118
+msgid ""
+"The table below summarises how each option scores against the evaluation "
+"criteria. ✓ = strong, ~ = partial, ✗ = weak."
+msgstr ""
+"以下の表は各選択肢が評価基準に対してどのようにスコアするかを要約する。"
+"✓ = 強い、~ = 部分的、✗ = 弱い。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Criterion"
+msgstr "評価基準"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Sphinx gettext + RTD translations"
+msgstr "Sphinx gettext + RTD翻訳"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Per-language source trees"
+msgstr "言語ごとのソースツリー"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "External service (Crowdin/Transifex/Weblate)"
+msgstr "外部サービス（Crowdin/Transifex/Weblate）"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Keep English-only"
+msgstr "英語のみ維持"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Single-language rendering per locale (RTD URL + switcher)"
+msgstr "ロケールごとの単一言語レンダリング（RTD URL + スイッチャー）"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "✓"
+msgstr "✓"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "✗"
+msgstr "✗"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Independent maintenance of each translation"
+msgstr "各翻訳の独立保守"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Compatibility with existing RTD build (Sphinx + JupyterLite)"
+msgstr "既存RTDビルドとの互換性（Sphinx + JupyterLite）"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "~"
+msgstr "~"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Zero-cost / GitHub-native"
+msgstr "ゼロコスト / GitHubネイティブ"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Contributor ergonomics (PR-based, no proprietary tooling)"
+msgstr "コントリビューターエルゴノミクス（PRベース、独自ツールなし）"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Low build-time / config complexity"
+msgstr "低ビルド時間 / 設定複雑さ"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md
+msgid "Reuses existing `docs/conf.py` i18n config"
+msgstr "既存の `docs/conf.py` i18n設定を再利用"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:130
+msgid "Concrete implementation steps for a follow-up PR"
+msgstr "フォローアップPRの具体的な実装ステップ"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:132
+msgid ""
+"**Generate `.pot` templates**: Run `sphinx-build -b gettext docs "
+"docs/_build/gettext` to extract translatable strings from the "
+"documentation source."
+msgstr ""
+"**`.pot` テンプレートの生成**: `sphinx-build -b gettext docs "
+"docs/_build/gettext` を実行してドキュメントソースから翻訳可能な文字列を抽出する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:133
+msgid ""
+"**Bootstrap Japanese catalogs**: Run `sphinx-intl update -p "
+"docs/_build/gettext -l ja` to create `docs/locale/ja/LC_MESSAGES/*.po` "
+"files."
+msgstr ""
+"**日本語カタログのブートストラップ**: `sphinx-intl update -p "
+"docs/_build/gettext -l ja` を実行して `docs/locale/ja/LC_MESSAGES/*.po` "
+"ファイルを作成する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:134
+msgid ""
+"**Translate `.po` files**: Edit the `.po` files under "
+"`docs/locale/ja/LC_MESSAGES/` with translated `msgstr` entries, "
+"preserving reStructuredText/MyST syntax."
+msgstr ""
+"**`.po` ファイルの翻訳**: `docs/locale/ja/LC_MESSAGES/` 下の `.po` ファイルを"
+"翻訳された `msgstr` エントリで編集し、reStructuredText/MyST構文を維持する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:135
+msgid ""
+"**Configure Read the Docs translation project**: Create a Read the Docs "
+"project for `ja` (e.g., `pyvista-wasm-ja`), set its Language to Japanese,"
+" point it at the same repository, and add it as a translation of the "
+"parent (English) project via the Read the Docs dashboard."
+msgstr ""
+"**Read the Docs翻訳プロジェクトの設定**: `ja` のRead the Docsプロジェクトを作成し"
+"（例: `pyvista-wasm-ja`）、Languageを日本語に設定し、同じリポジトリを指定し"
+"、Read the Docsダッシュボードを通じて親（英語）プロジェクトの翻訳として追加する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:136
+msgid ""
+"**Verify the localized build**: Confirm the Japanese documentation builds"
+" on Read the Docs at `/ja/latest/` and the flyout-menu language switcher "
+"is visible."
+msgstr ""
+"**ローカライズビルドの検証**: 日本語ドキュメントがRead the Docsの `/ja/latest/` で"
+"ビルドされ、フライアウトメニュ言語スイッチャーが表示されることを確認する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:137
+msgid ""
+"**Document the translation workflow**: Add a contributor guide to `docs/`"
+" explaining how to regenerate `.pot` files, update `.po` catalogs with "
+"`sphinx-intl update`, and submit translations via PRs."
+msgstr ""
+"**翻訳ワークフローの文書化**: `docs/` にコントリビューターガイドを追加し"
+"`.pot` ファイルの再生成方法、`sphinx-intl update` による `.po` カタログの更新方法"
+"、PRを通じた翻訳の提出方法を説明する。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:139
+msgid "Read the Docs localization mechanism"
+msgstr "Read the Docsローカライズメカニズム"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:141
+msgid ""
+"Read the Docs localization is configured via the Read the Docs dashboard,"
+" not via a `translations` key in `.readthedocs.yaml`. Each language "
+"requires its own Read the Docs project, linked as a \"Translation\" of "
+"the parent (English) project. Read the Docs then serves each language at "
+"its own URL (e.g., `/ja/latest/`) and provides a flyout-menu language "
+"switcher automatically. See the [Read the Docs localization "
+"guide](https://docs.readthedocs.com/platform/stable/localization.html) "
+"and the [manage-translations for Sphinx "
+"guide](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html) for details."
+msgstr ""
+"Read the DocsローカライズはRead the Docsダッシュボードで設定され、`.readthedocs.yaml` の"
+"`translations` キーでは設定されない。各言語は独自のRead the Docsプロジェクトを必要とし"
+"親（英語）プロジェクトの「Translation」としてリンクされる。Read the Docsは各言語を独自の"
+"URL（例: `/ja/latest/`）で提供し、フライアウトメニュ言語スイッチャーを自動的に提供する。"
+"詳細は[Read the Docsローカライズガイド](https://docs.readthedocs.com/platform/stable/localization.html)"
+"と[manage-translations for Sphinxガイド](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html) を参照。"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:143
+msgid "Links"
+msgstr "リンク"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:145
+msgid ""
+"Sphinx i18n: [https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html)"
+msgstr ""
+"Sphinx i18n: [https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html](https://www.sphinx-"
+"doc.org/en/master/usage/advanced/intl.html)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:146
+msgid ""
+"sphinx-intl: [https://pypi.org/project/sphinx-"
+"intl/](https://pypi.org/project/sphinx-intl/)"
+msgstr ""
+"sphinx-intl: [https://pypi.org/project/sphinx-"
+"intl/](https://pypi.org/project/sphinx-intl/)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:147
+msgid ""
+"Read the Docs localization: "
+"[https://docs.readthedocs.com/platform/stable/localization.html](https://docs.readthedocs.com/platform/stable/localization.html)"
+msgstr ""
+"Read the Docsローカライズ: "
+"[https://docs.readthedocs.com/platform/stable/localization.html](https://docs.readthedocs.com/platform/stable/localization.html)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:148
+msgid ""
+"Read the Docs manage-translations for Sphinx: "
+"[https://docs.readthedocs.com/platform/stable/guides/manage-translations-"
+"sphinx.html](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html)"
+msgstr ""
+"Read the Docs manage-translations for Sphinx: "
+"[https://docs.readthedocs.com/platform/stable/guides/manage-translations-"
+"sphinx.html](https://docs.readthedocs.com/platform/stable/guides/manage-"
+"translations-sphinx.html)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:149
+msgid "Crowdin: [https://crowdin.com/](https://crowdin.com/)"
+msgstr "Crowdin: [https://crowdin.com/](https://crowdin.com/)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:150
+msgid "Transifex: [https://www.transifex.com/](https://www.transifex.com/)"
+msgstr "Transifex: [https://www.transifex.com/](https://www.transifex.com/)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:151
+msgid "Weblate: [https://weblate.org/](https://weblate.org/)"
+msgstr "Weblate: [https://weblate.org/](https://weblate.org/)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:152
+msgid ""
+"Parent issue: [#389](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/389) (i18n ReadTheDocs documentation)"
+msgstr ""
+"親issue: [#389](https://github.com/tkoyama010/pyvista-wasm/issues/389)"
+"（ReadTheDocsドキュメントのi18n）"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:153
+msgid ""
+"This decision: [#439](https://github.com/tkoyama010/pyvista-"
+"wasm/issues/439)"
+msgstr ""
+"この決定: [#439](https://github.com/tkoyama010/pyvista-wasm/issues/439)"
+
+#: ../../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:154
+msgid ""
+"Related: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-"
+"deck.md) (i18n decision for the Slidev deck — this ADR covers the "
+"separate Read the Docs docs surface)"
+msgstr ""
+"関連: [ADR-0003](0003-decide-how-to-internationalize-the-slidev-deck.md)"
+"（Slidevデッキのi18n決定 — このADRは個別のRead the Docsドキュメント面をカバーする)"

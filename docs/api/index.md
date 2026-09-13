@@ -91,6 +91,7 @@ This section provides detailed documentation for the pyvista-wasm public API.
 
    pyvista_wasm.PolyData.clip
    pyvista_wasm.PolyData.contour
+   pyvista_wasm.PolyData.rotate_z
    pyvista_wasm.PolyData.shrink
    pyvista_wasm.PolyData.texture_map_to_plane
    pyvista_wasm.PolyData.tube
@@ -118,6 +119,11 @@ This section provides detailed documentation for the pyvista-wasm public API.
    :nosignatures:
 
    pyvista_wasm.examples.CubeMap
+   pyvista_wasm.examples.load_earth
+   pyvista_wasm.examples.load_venus
+   pyvista_wasm.examples.download_earth_surface
+   pyvista_wasm.examples.download_mars_surface
+   pyvista_wasm.examples.download_venus_surface
    pyvista_wasm.examples.download_bunny
    pyvista_wasm.examples.download_lucy
    pyvista_wasm.examples.download_cad_model
@@ -125,4 +131,14 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.download_masonry_texture
    pyvista_wasm.examples.download_sky_box_cube_map
    pyvista_wasm.examples.download_trumpet
+```
+
+## Rendering
+
+```{eval-rst}
+.. autosummary::
+   :toctree: _autosummary
+   :nosignatures:
+
+   pyvista_wasm.rendering.ColabRenderer
 ```

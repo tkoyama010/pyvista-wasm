@@ -1,0 +1,89 @@
+/* Deck-wide overrides. Slidev loads this file automatically. */
+
+/*
+ * Slide titles carry a full one-sentence message (see the title/subtitle
+ * guideline), so the theme's default h1 size wraps them to three or four
+ * lines and squeezes out the slide body. One size for every content slide
+ * keeps the deck consistent; the cover keeps its larger display title.
+ */
+.slidev-layout:not(.cover) h1 {
+  font-size: 1.5rem !important;
+  line-height: 1.3 !important;
+}
+
+/*
+ * Agenda cards are each wrapped in <Link> so clicking one jumps to that
+ * section. Strip the theme's dashed link underline, which would otherwise
+ * draw a stray rule under every caption. Scoped to the agenda grid so real
+ * links elsewhere in the deck still look like links.
+ */
+.agenda-cards a {
+  border-bottom: none !important;
+  color: inherit;
+  text-decoration: none !important;
+}
+
+/*
+ * Material-style data table, shared by every table slide. No rules: the
+ * header is set off by type weight and reduced emphasis, and rows are
+ * separated by a tinted surface instead of lines. The neutral grey tint
+ * reads the same in the deck's light and dark themes.
+ */
+.problem-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.problem-table th,
+.problem-table td {
+  border: none;
+  padding: 14px 20px;
+  text-align: left;
+}
+
+/*
+ * The header gets its own filled surface too — a deeper PyVista blue, so it
+ * reads as the table's head rather than dissolving into the slide.
+ */
+.problem-table th {
+  padding: 12px 20px;
+  background-color: rgba(51, 133, 230, 0.26);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.problem-table th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.problem-table th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+/*
+ * Every row gets a filled surface — an untinted row would fall back to the
+ * page background and read as a gap rather than a row. Alternating the
+ * neutral grey with a soft PyVista blue keeps both tints legible in the
+ * light and dark themes.
+ */
+.problem-table tbody tr:nth-child(odd) {
+  background-color: rgba(125, 125, 125, 0.11);
+}
+
+.problem-table tbody tr:nth-child(even) {
+  background-color: rgba(51, 133, 230, 0.13);
+}
+
+.problem-table tbody td:first-child {
+  border-radius: 8px 0 0 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.problem-table tbody td:last-child {
+  border-radius: 0 8px 8px 0;
+}

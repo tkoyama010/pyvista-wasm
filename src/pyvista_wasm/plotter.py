@@ -36,6 +36,14 @@ class Plotter:
         Lighting mode for the plotter. Options are:
         - ``"default"`` (default): Creates a default directional light
         - ``None``: No default lights are created, giving full control over lighting
+    wasm_rendering : str, optional
+        WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+        Default is ``"webgl"``.
+    wasm_mode : str, optional
+        Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+        ``"async"``. ``"async"`` requires WebAssembly JavaScript Promise
+        Integration (JSPI) browser support. ``"webgpu"`` rendering always
+        uses ``"async"`` regardless of this setting. Default is ``"sync"``.
 
     Examples
     --------
@@ -54,9 +62,18 @@ class Plotter:
     >>> _ = plotter.add_mesh(mesh, color='white')
     >>> plotter.show()  # doctest: +SKIP
 
+    Create a plotter using WebGPU rendering:
+
+    >>> plotter = pv.Plotter(wasm_rendering='webgpu')  # doctest: +SKIP
+
     """
 
-    def __init__(self, lighting: str | None = "default") -> None:
+    def __init__(
+        self,
+        lighting: str | None = "default",
+        wasm_rendering: str = "webgl",
+        wasm_mode: str = "sync",
+    ) -> None:
         """Initialize a new Plotter instance.
 
         Parameters
@@ -64,10 +81,20 @@ class Plotter:
         lighting : str or None, optional
             Lighting mode. ``"default"`` creates a default directional light,
             ``None`` creates no default lights. Default is ``"default"``.
+        wasm_rendering : str, optional
+            WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
+            Default is ``"webgl"``.
+        wasm_mode : str, optional
+            Execution mode for VTK.wasm method calls. One of ``"sync"`` or
+            ``"async"``. Default is ``"sync"``.
 
         """
         self._actors: list[dict[str, object]] = []
-        self._renderer = get_renderer(lighting=lighting)
+        self._renderer = get_renderer(
+            lighting=lighting,
+            wasm_rendering=wasm_rendering,
+            wasm_mode=wasm_mode,
+        )
         self._background_color = (1.0, 1.0, 1.0)  # Default background color
         self._container_id = f"pyvista-container-{uuid.uuid4().hex[:8]}"
         self._camera: Camera | None = None
@@ -341,10 +368,11 @@ class Plotter:
         | list[tuple[float, float, float]]
         | list[list[float]]
         | None = None,
-    ) -> None:
+    ) -> object | None:
         """Display the visualization.
 
         In browser environments, this will render the scene using VTK.wasm.
+        In marimo, returns the Html object for display.
 
         Parameters
         ----------
@@ -359,6 +387,12 @@ class Plotter:
             - Direction vector: 3-element tuple/list (x, y, z)
             - Full camera spec: 3-tuple/list of 3-tuples/lists:
               [(position), (focal_point), (view_up)]
+
+        Returns
+        -------
+        object or None
+            In marimo environments, returns the Html widget for display.
+            In other environments, returns None.
 
         Examples
         --------
@@ -395,8 +429,8 @@ class Plotter:
         # Create container if needed
         self._renderer.create_container(container_id or self._container_id)
 
-        # Render the scene
-        self._renderer.render()
+        # Render the scene and return the result (for marimo Html)
+        return self._renderer.render()
 
     def generate_standalone_html(self) -> str:
         """Generate a complete standalone HTML page with the current scene.

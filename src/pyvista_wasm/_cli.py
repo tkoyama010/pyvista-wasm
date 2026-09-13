@@ -367,28 +367,24 @@ def plot(  # noqa: PLR0913
         str | None,
         typer.Option(
             help="Mesh colour applied to all files (e.g. ``red``, ``#ff0000``).",
-            metavar="COLOR",
         ),
     ] = None,
     background: Annotated[
         str | None,
         typer.Option(
             help="Background colour (e.g. ``white``, ``black``). Default: renderer default.",
-            metavar="COLOR",
         ),
     ] = None,
     opacity: Annotated[
         float,
         typer.Option(
             help="Mesh opacity in the range [0, 1]. Default: 1.0.",
-            metavar="FLOAT",
         ),
     ] = 1.0,
     pickle: Annotated[
         Path | None,
         typer.Option(
             help="Save the Plotter object to a pickle file for later reuse.",
-            metavar="PATH",
         ),
     ] = None,
     load_pickle: Annotated[
@@ -396,7 +392,6 @@ def plot(  # noqa: PLR0913
         typer.Option(
             help="Load a pickled Plotter object from file instead of creating a new one. "
             "WARNING: Only load pickle files from trusted sources.",
-            metavar="PATH",
         ),
     ] = None,
     screenshot: Annotated[
@@ -404,7 +399,6 @@ def plot(  # noqa: PLR0913
         typer.Option(
             help="Save a screenshot to the specified file (PNG/JPEG). "
             "When provided, the browser window will not open.",
-            metavar="PATH",
         ),
     ] = None,
     screenshot_transparent: Annotated[  # noqa: FBT002
@@ -417,42 +411,36 @@ def plot(  # noqa: PLR0913
         int | None,
         typer.Option(
             help="Scale factor for screenshot resolution (e.g. 2 for double resolution).",
-            metavar="INT",
         ),
     ] = None,
     screenshot_window_size: Annotated[
         str | None,
         typer.Option(
             help="Window size for screenshot as 'width,height' (e.g. '1920,1080').",
-            metavar="SIZE",
         ),
     ] = None,
     azimuth: Annotated[
         float | None,
         typer.Option(
             help="Rotate camera horizontally around the focal point by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
     elevation: Annotated[
         float | None,
         typer.Option(
             help="Rotate camera vertically around the focal point by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
     zoom: Annotated[
         float | None,
         typer.Option(
             help="Zoom factor relative to current distance (>1 zooms in, <1 zooms out).",
-            metavar="FLOAT",
         ),
     ] = None,
     roll: Annotated[
         float | None,
         typer.Option(
             help="Roll camera around its view axis by this many degrees.",
-            metavar="DEGREES",
         ),
     ] = None,
 ) -> None:
@@ -578,7 +566,7 @@ def _find_canvas_in_frames(page) -> tuple:  # noqa: ANN001
             canvas = frame.query_selector("canvas")
             if canvas is not None:
                 return frame, canvas
-        except Exception:  # noqa: BLE001
+        except Exception:
             logger.debug("Failed to query canvas in frame", exc_info=True)
             continue
     return None, None
@@ -616,7 +604,7 @@ def _rotate_canvas_with_mouse(page) -> None:  # noqa: ANN001
         page.mouse.up()
 
         logger.info("Performed mouse drag rotation on canvas")
-    except Exception:  # noqa: BLE001
+    except Exception:
         logger.warning("Failed to perform mouse drag rotation", exc_info=True)
 
 
@@ -732,8 +720,34 @@ def _create_gif(screenshots_dir: Path, output_path: Path, fps: int = 2) -> bool:
         logger.error("No screenshots found!")
         return False
 
+    import numpy as np  # noqa: PLC0415
+    from PIL import Image  # noqa: PLC0415
+
     logger.info("Found %d screenshots", len(screenshot_files))
-    images = [iio.imread(f) for f in screenshot_files]
+    raw_images = [iio.imread(f) for f in screenshot_files]
+
+    target_size = (raw_images[0].shape[1], raw_images[0].shape[0])  # (width, height)
+    images = []
+    for img in raw_images:
+        pil_img = Image.fromarray(img).convert("RGB")
+        if pil_img.size != target_size:
+            pil_img = pil_img.resize(target_size, Image.LANCZOS)
+        images.append(np.array(pil_img))
+
+    target_shape = images[0].shape[:2]
+    if any(img.shape[:2] != target_shape for img in images):
+        import numpy as np  # noqa: PLC0415
+        from PIL import Image  # noqa: PLC0415
+
+        resized = []
+        for img in images:
+            pil_img = Image.fromarray(img)
+            pil_img = pil_img.resize(
+                (target_shape[1], target_shape[0]),
+                Image.LANCZOS,
+            )
+            resized.append(np.array(pil_img))
+        images = resized
 
     duration_ms = int(1000 / fps)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -756,21 +770,18 @@ def capture_preview(
         Path,
         typer.Option(
             help="Output path for the GIF. Default: assets/preview.gif.",
-            metavar="PATH",
         ),
     ] = Path("assets/preview.gif"),
     url: Annotated[
         str,
         typer.Option(
             help="URL of the JupyterLite demo.",
-            metavar="URL",
         ),
     ] = "https://pyvista-js.readthedocs.io/en/latest/lite/lab/index.html",
     fps: Annotated[
         int,
         typer.Option(
             help="Frames per second for the GIF. Default: 2.",
-            metavar="INT",
         ),
     ] = 2,
     rotate: Annotated[
@@ -929,27 +940,153 @@ def _capture_stlite_screenshots(output_dir: Path, demo_url: str, *, rotate: bool
     return screenshots_dir
 
 
+def _capture_marimo_screenshots(output_dir: Path, demo_url: str, *, rotate: bool = True) -> Path:
+    """Capture screenshots from the marimo demo using Playwright.
+
+    Parameters
+    ----------
+    output_dir : Path
+        Directory to save temporary screenshots.
+    demo_url : str
+        URL of the marimo demo.
+    rotate : bool
+        If ``True``, rotate the 3D model by mouse drag between
+        screenshots. Default: ``True``.
+
+    Returns
+    -------
+    Path
+        Path to the directory containing screenshots.
+
+    """
+    import contextlib  # noqa: PLC0415
+
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    screenshots_dir = output_dir / "screenshots"
+    screenshots_dir.mkdir(parents=True, exist_ok=True)
+
+    logger.info("Capturing marimo demo from: %s", demo_url)
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(viewport={"width": 1200, "height": 800})
+        page = context.new_page()
+
+        try:
+            logger.info("Navigating to marimo demo...")
+            page.goto(demo_url, wait_until="networkidle", timeout=120000)
+
+            logger.info("Waiting for marimo to load and install dependencies...")
+            page.wait_for_timeout(60000)
+
+            logger.info("Waiting for 3D rendering to appear in iframes...")
+            _wait_for_canvas_in_frames(page)
+
+            page.wait_for_timeout(5000)
+
+            if rotate:
+                logger.info("Capturing rendering screenshots with rotation...")
+                page.screenshot(path=str(screenshots_dir / "screenshot_01.png"))
+                page.wait_for_timeout(300)
+
+                for i in range(2, 15):
+                    _rotate_canvas_with_mouse(page)
+                    page.wait_for_timeout(300)
+                    page.screenshot(path=str(screenshots_dir / f"screenshot_{i:02d}.png"))
+                    page.wait_for_timeout(300)
+            else:
+                logger.info("Capturing rendering screenshots...")
+                for i in range(1, 15):
+                    page.screenshot(path=str(screenshots_dir / f"screenshot_{i:02d}.png"))
+                    page.wait_for_timeout(500)
+
+            logger.info("Captured 14 screenshots successfully")
+
+        except Exception:
+            logger.exception("Error during marimo demo capture")
+            with contextlib.suppress(Exception):
+                page.screenshot(path=str(screenshots_dir / "error_screenshot.png"))
+        finally:
+            context.close()
+            browser.close()
+
+    return screenshots_dir
+
+
+@app.command(name="capture-marimo-preview")
+def capture_marimo_preview(
+    output: Annotated[
+        Path,
+        typer.Option(
+            help="Output path for the GIF. Default: assets/marimo-preview.gif.",
+        ),
+    ] = Path("assets/marimo-preview.gif"),
+    url: Annotated[
+        str,
+        typer.Option(
+            help="URL of the marimo demo.",
+        ),
+    ] = "https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA",
+    fps: Annotated[
+        int,
+        typer.Option(
+            help="Frames per second for the GIF. Default: 2.",
+        ),
+    ] = 2,
+    rotate: Annotated[
+        bool | None,
+        typer.Option(
+            help="Rotate the 3D model by mouse drag while capturing screenshots. Default: True.",
+        ),
+    ] = None,
+) -> None:
+    """Capture a preview GIF of the marimo demo.
+
+    Automate capturing a preview GIF showing pyvista-wasm rendering in marimo.
+    Requires: playwright, imageio[ffmpeg], pillow.
+    """
+    import tempfile  # noqa: PLC0415
+
+    if rotate is None:
+        rotate = True
+
+    output_path = output
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_dir = Path(tmp)
+        screenshots_dir = _capture_marimo_screenshots(tmp_dir, url, rotate=rotate)
+
+        screenshot_files = list(screenshots_dir.glob("screenshot_*.png"))
+        if not screenshot_files:
+            logger.error("No screenshots were captured")
+            sys.exit(1)
+
+        if not _create_gif(screenshots_dir, output_path, fps=fps):
+            logger.error("Failed to create GIF")
+            sys.exit(1)
+
+    logger.info("marimo preview GIF saved to: %s", output_path)
+
+
 @app.command(name="capture-stlite-preview")
 def capture_stlite_preview(
     output: Annotated[
         Path,
         typer.Option(
             help="Output path for the GIF. Default: assets/stlite-preview.gif.",
-            metavar="PATH",
         ),
     ] = Path("assets/stlite-preview.gif"),
     url: Annotated[
         str,
         typer.Option(
             help="URL of the stlite demo.",
-            metavar="URL",
         ),
     ] = "https://share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt",
     fps: Annotated[
         int,
         typer.Option(
             help="Frames per second for the GIF. Default: 2.",
-            metavar="INT",
         ),
     ] = 2,
     rotate: Annotated[
@@ -985,6 +1122,121 @@ def capture_stlite_preview(
             sys.exit(1)
 
     logger.info("stlite preview GIF saved to: %s", output_path)
+
+
+@app.command(name="export-demo")
+def export_demo(
+    output: Annotated[
+        Path,
+        typer.Option(
+            help="Output path for the standalone HTML. Default: slides/public/pyvista-demo.html.",
+        ),
+    ] = Path("slides/public/pyvista-demo.html"),
+) -> None:
+    """Export a self-contained VTK.wasm demo page for the talk slide deck.
+
+    Generate a standalone HTML file that renders a triangulated sphere mesh
+    entirely in the browser via VTK.wasm. The surface edges are drawn so the
+    audience can see it is a genuine 3-D mesh, not an image. The page is
+    embedded as a live ``<iframe>`` in the PyCon JP 2026 slide deck so the
+    audience can grab and rotate a real PyVista scene during the talk.
+    """
+    import pyvista_wasm as pv  # noqa: PLC0415
+    from pyvista_wasm.rendering import BrowserRenderer  # noqa: PLC0415
+
+    # Use BrowserRenderer explicitly so the page is full-viewport and
+    # self-contained, independent of whether IPython happens to be importable.
+    renderer = BrowserRenderer()
+
+    sphere = pv.Sphere(theta_resolution=24, phi_resolution=24)
+    renderer.add_mesh_actor(
+        sphere,
+        color=(0.20, 0.55, 0.90),
+        smooth_shading=True,
+        show_edges=True,
+        edge_color=(1.0, 1.0, 1.0),
+    )
+    renderer.add_axes()
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(renderer.generate_standalone_html(), encoding="utf-8")
+    logger.info("Demo page written to: %s", output)
+
+
+def _collect_locale_keys(node: object, prefix: str = "") -> set[str]:
+    """Recursively collect every dotted key path from a YAML mapping.
+
+    Parameters
+    ----------
+    node : object
+        Parsed YAML content (expected to be a dict at the top level).
+    prefix : str
+        Accumulated key path for recursive calls.
+
+    Returns
+    -------
+    set of str
+        Every key path in the mapping, e.g. ``{"cover", "cover.title"}``.
+
+    """
+    keys: set[str] = set()
+    if not isinstance(node, dict):
+        return keys
+    for key, value in node.items():
+        path = f"{prefix}.{key}" if prefix else str(key)
+        keys.add(path)
+        keys |= _collect_locale_keys(value, path)
+    return keys
+
+
+@app.command(name="check-locale-parity")
+def check_locale_parity(
+    ja: Annotated[
+        Path,
+        typer.Option(
+            help="Path to the authoritative JA locale file.",
+        ),
+    ] = Path("slides/locales/ja.yml"),
+    en: Annotated[
+        Path,
+        typer.Option(
+            help="Path to the EN locale file to compare against JA.",
+        ),
+    ] = Path("slides/locales/en.yml"),
+) -> None:
+    """Check that JA and EN slide locale files share the same key structure.
+
+    ja.yml is the authoritative locale for slide structure.  This command
+    recursively compares the key sets of the two YAML files and exits
+    non-zero if they differ, naming the offending keys.
+
+    See ADR-0006 for the decision this command enforces.
+    """
+    import yaml  # noqa: PLC0415
+
+    ja_keys = _collect_locale_keys(yaml.safe_load(ja.read_text(encoding="utf-8")))
+    en_keys = _collect_locale_keys(yaml.safe_load(en.read_text(encoding="utf-8")))
+
+    only_ja = ja_keys - en_keys
+    only_en = en_keys - ja_keys
+
+    if not only_ja and not only_en:
+        logger.info("Locale key parity check passed — ja.yml and en.yml match.")
+        return
+
+    if only_ja:
+        typer.echo("Keys in ja.yml but missing from en.yml:")
+        for key in sorted(only_ja):
+            typer.echo(f"  {key}")
+    if only_en:
+        typer.echo("Keys in en.yml but missing from ja.yml:")
+        for key in sorted(only_en):
+            typer.echo(f"  {key}")
+    typer.echo(
+        "\nja.yml is the authoritative locale for slide structure. "
+        "Update en.yml (or ja.yml) so both files share the same key set.",
+    )
+    sys.exit(1)
 
 
 # ---------------------------------------------------------------------------

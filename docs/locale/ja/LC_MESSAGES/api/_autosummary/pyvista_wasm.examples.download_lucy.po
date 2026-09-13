@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_lucy.rst:2
+msgid "pyvista\\_wasm.examples.download\\_lucy"
+msgstr "pyvista\\_wasm.examples.download\\_lucy"
+
+#: of pyvista_wasm.examples.download_lucy:1
+msgid "Download the Lucy Angel dataset."
+msgstr "Lucy Angelデータセットをダウンロードします。"
+
+#: of pyvista_wasm.examples.download_lucy:3
+msgid ""
+"Downloads ``lucy.ply`` from the PyVista vtk-data repository and returns "
+"it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the "
+"``pyvista.examples.download_lucy`` API."
+msgstr ""
+"PyVista vtk-data リポジトリから ``lucy.ply`` をダウンロードし、"
+":class:`~pyvista_wasm.PolyData` メッシュとして返します。"
+"``pyvista.examples.download_lucy`` API をミラーリングします。"
+
+#: of pyvista_wasm.examples.download_lucy:7
+msgid ""
+"The Lucy Angel is a statue from The Stanford 3D Scanning Repository, "
+"decimated to approximately 100k triangles."
+msgstr ""
+"Lucy Angel は The Stanford 3D Scanning Repository 由来の像で、"
+"約100k三角形にデシメートトされています。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_lucy.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.examples.download_lucy:10
+msgid "The Lucy Angel mesh."
+msgstr "Lucy Angelメッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_lucy.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.examples.download_lucy:14
+msgid "Examples"
+msgstr "例"

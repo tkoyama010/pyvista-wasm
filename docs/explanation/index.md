@@ -19,6 +19,6 @@ pyvista-wasm separates concerns between Python and JavaScript:
 
 - PyVista-like API for familiar usage
 - Integration with VTK.wasm for web-based visualization
-- Support for JupyterLite and Streamlit
+- Support for JupyterLite, marimo, and stlite
 - Physically Based Rendering (PBR) with metallic and roughness controls
 - PLY, OBJ, STL, GLTF, and PolyData file format readers

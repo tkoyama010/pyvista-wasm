@@ -19,6 +19,137 @@ const PointStride = 3;
 const Xoffset = 0;
 const Yoffset = 1;
 const Zoffset = 2;
+const FadeOutMs = 500;
+
+/**
+ * Inject scoped CSS for the loading overlay into the document head.
+ *
+ * The rules are scoped by the `.pv-loading-overlay` class prefix so they
+ * do not interfere with the host page. The stylesheet is inserted at most
+ * once thanks to the `data-pv-overlay-styles` sentinel attribute.
+ */
+function injectOverlayStyles(): void {
+  if (document.querySelector("style[data-pv-overlay-styles]")) {
+    return;
+  }
+  const style = document.createElement("style");
+  style.setAttribute("data-pv-overlay-styles", "");
+  style.textContent = [
+    ".pv-loading-overlay {",
+    "  position: absolute; inset: 0;",
+    "  display: flex; align-items: center; justify-content: center;",
+    "  background: rgba(24, 26, 31, 0.88); z-index: 100;",
+    "  transition: opacity 0.5s ease;",
+    "}",
+    ".pv-loading-overlay .pv-spinner {",
+    "  width: 48px; height: 48px;",
+    "  border: 4px solid rgba(255,255,255,0.15);",
+    "  border-top-color: #58a6ff; border-radius: 50%;",
+    "  animation: pv-spin 0.8s linear infinite;",
+    "}",
+    "@keyframes pv-spin { to { transform: rotate(360deg); } }",
+    ".pv-loading-overlay .pv-msg {",
+    "  margin: 12px 0 0; color: #c9d1d9;",
+    "  font: 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',",
+    "    Helvetica,Arial,sans-serif;",
+    "  text-align: center; max-width: 360px;",
+    "}",
+    ".pv-loading-overlay .pv-error-icon {",
+    "  font-size: 36px; color: #f85149;",
+    "}",
+    ".pv-loading-overlay .pv-error-msg {",
+    "  margin: 12px 0 0; color: #f85149;",
+    "  font: 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',",
+    "    Helvetica,Arial,sans-serif;",
+    "  text-align: center; max-width: 360px;",
+    "}",
+  ].join("\n");
+  document.head.append(style);
+}
+
+/**
+ * Create a loading overlay element and append it to the given container.
+ *
+ * The overlay shows a CSS spinner and a status message while the
+ * VTK.wasm scene is being initialised and built.
+ * @param container - The DOM element to overlay.
+ * @param message - Initial status text shown below the spinner.
+ * @returns The overlay element for later manipulation.
+ */
+function createLoadingOverlay(
+  container: HTMLElement,
+  message: string,
+): HTMLDivElement {
+  injectOverlayStyles();
+
+  const overlay = document.createElement("div");
+  overlay.className = "pv-loading-overlay";
+
+  const spinner = document.createElement("div");
+  spinner.className = "pv-spinner";
+
+  const msg = document.createElement("p");
+  msg.className = "pv-msg";
+  msg.textContent = message;
+
+  const wrap = document.createElement("div");
+  wrap.style.display = "flex";
+  wrap.style.flexDirection = "column";
+  wrap.style.alignItems = "center";
+  wrap.append(spinner, msg);
+
+  overlay.append(wrap);
+  container.append(overlay);
+  return overlay;
+}
+
+/**
+ * Update the status text displayed on a loading overlay.
+ * @param overlay - The overlay element returned by {@link createLoadingOverlay}.
+ * @param text - The new status message.
+ */
+function setOverlayMessage(overlay: HTMLDivElement, text: string): void {
+  const msg = overlay.querySelector<HTMLElement>(".pv-msg");
+  if (msg) {
+    msg.textContent = text;
+  }
+}
+
+/**
+ * Fade the overlay out and remove it from the DOM once the transition ends.
+ * @param overlay - The overlay element to dismiss.
+ */
+function dismissOverlay(overlay: HTMLDivElement): void {
+  overlay.style.opacity = "0";
+  setTimeout(() => {
+    overlay.remove();
+  }, FadeOutMs);
+}
+
+/**
+ * Replace the spinner with an error icon and message, keeping the
+ * overlay visible so the user can read the problem description.
+ * @param overlay - The overlay element to update.
+ * @param errorMessage - A user-friendly description of the failure.
+ */
+function showOverlayError(overlay: HTMLDivElement, errorMessage: string): void {
+  const wrap = overlay.firstElementChild;
+  if (!wrap) {
+    return;
+  }
+  wrap.innerHTML = "";
+
+  const icon = document.createElement("span");
+  icon.className = "pv-error-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = "\u26A0";
+
+  const msg = document.createElement("p");
+  msg.className = "pv-error-msg";
+  msg.textContent = errorMessage;
+
+  wrap.append(icon, msg);
+}
 
 /**
  * Access a typed array element, returning 0 for out-of-bounds.
@@ -43,7 +174,9 @@ type SourceResult =
 async function getPolyData(sourceResult: SourceResult): Promise<VtkPolyData> {
   if (sourceResult.isFilter) {
     await sourceResult.output.update();
-    return sourceResult.output.getOutputData();
+    // vtk-wasm permits GetOutput (vtkPolyDataAlgorithm) but not
+    // GetOutputData on the source filters used here.
+    return sourceResult.output.getOutput();
   }
 
   return sourceResult.output;
@@ -64,10 +197,17 @@ async function connectInput(
 }
 
 /**
- * Main entry point — initialise VTK.wasm and build the scene.
- * @param vtk
+ * Resolve the container element that will hold the VTK canvas.
+ *
+ * In JupyterLite the container is provided via `__pvwasmContainer`.
+ * In standalone HTML it is looked up by the `containerId` from the
+ * scene data embedded in a `<script id="scene-data">` element.
+ * @returns The container element and the parsed scene data.
  */
-async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
+function resolveContainerAndScene(): {
+  container: HTMLElement;
+  sceneData: SceneData;
+} {
   const rawSceneJson =
     document.querySelector("#scene-data")?.textContent ?? "{}";
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -82,71 +222,122 @@ async function buildScene(vtk: VtkWasmNamespace): Promise<void> {
           `#${CSS.escape(sceneData.containerId)}`,
         ) ?? document.createElement("div"))
       : __pvwasmContainer;
-  const bg = sceneData.background;
 
-  const renderer = vtk.vtkRenderer();
-  renderer.setBackground(bg[0], bg[1], bg[2]);
-
-  // Ensure the container has a usable size.  In JupyterLite the parent
-  // output area may have no intrinsic height, so we guarantee a minimum.
   container.style.minHeight ||= "400px";
 
-  const bbox = container.getBoundingClientRect();
-  const canvasId = `${sceneData.containerId}-canvas`;
-  const DefaultCanvasWidth = 600;
-  const DefaultCanvasHeight = 400;
-  const canvas = document.createElement("canvas");
-  canvas.id = canvasId;
-  canvas.width = bbox.width || DefaultCanvasWidth;
-  canvas.height = bbox.height || DefaultCanvasHeight;
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.tabIndex = -1;
-  canvas.addEventListener("click", () => {
-    canvas.focus();
-  });
-  container.append(canvas);
-
-  const canvasSelector = `#${CSS.escape(canvasId)}`;
-  const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
-  renderWindow.addRenderer(renderer);
-
-  if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
-    renderer.removeAllLights();
-    renderer.setAutomaticLightCreation(0);
-  } else {
-    setupLights(vtk, sceneData.lights, renderer);
-  }
-
-  for (const [index, actorConfig] of sceneData.actors.entries()) {
-    await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
-  }
-
-  if (sceneData.textActors) {
-    for (const textConfig of sceneData.textActors) {
-      setupTextActor(textConfig, container);
-    }
-  }
-
-  renderer.resetCamera();
-  if (sceneData.camera) {
-    await setupCamera(renderer, sceneData.camera);
-  }
-
-  const interactor = vtk.vtkRenderWindowInteractor({
-    canvasSelector,
-    renderWindow,
-  });
-  await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
-
-  renderWindow.render();
-  await interactor.start();
+  return { container, sceneData };
 }
 
+/**
+ * Main entry point — initialise VTK.wasm and build the scene.
+ *
+ * Receives a pre-created loading overlay so that the user sees
+ * feedback even while the WASM binary is still being downloaded.
+ * The overlay message is updated as the scene progresses through
+ * initialisation → actor setup → rendering.  On success it fades
+ * out; on failure it shows an error message.
+ * @param vtk - The initialised VTK.wasm namespace.
+ * @param overlay - The loading overlay element to update / dismiss.
+ * @param container - The DOM element that holds the canvas.
+ * @param sceneData - The parsed scene configuration.
+ */
+async function buildScene(
+  vtk: VtkWasmNamespace,
+  overlay: HTMLDivElement,
+  container: HTMLElement,
+  sceneData: SceneData,
+): Promise<void> {
+  try {
+    setOverlayMessage(overlay, "Generating 3D Model\u2026");
+
+    const bg = sceneData.background;
+
+    const renderer = vtk.vtkRenderer();
+    renderer.setBackground(bg[0], bg[1], bg[2]);
+
+    const bbox = container.getBoundingClientRect();
+    const canvasId = `${sceneData.containerId}-canvas`;
+    const DefaultCanvasWidth = 600;
+    const DefaultCanvasHeight = 400;
+    const canvas = document.createElement("canvas");
+    canvas.id = canvasId;
+    canvas.width = bbox.width || DefaultCanvasWidth;
+    canvas.height = bbox.height || DefaultCanvasHeight;
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.tabIndex = -1;
+    canvas.addEventListener("click", () => {
+      canvas.focus();
+    });
+    container.append(canvas);
+
+    const canvasSelector = `#${CSS.escape(canvasId)}`;
+    const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
+    renderWindow.addRenderer(renderer);
+
+    if (sceneData.lightingMode === null && sceneData.lights.length === 0) {
+      renderer.removeAllLights();
+      renderer.setAutomaticLightCreation(0);
+    } else {
+      setupLights(vtk, sceneData.lights, renderer);
+    }
+
+    for (const [index, actorConfig] of sceneData.actors.entries()) {
+      await setupActor(vtk, actorConfig, index, renderer); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+    }
+
+    if (sceneData.textActors) {
+      for (const textConfig of sceneData.textActors) {
+        setupTextActor(textConfig, container);
+      }
+    }
+
+    renderer.resetCamera();
+    if (sceneData.camera) {
+      await setupCamera(renderer, sceneData.camera);
+    }
+
+    const interactor = vtk.vtkRenderWindowInteractor({
+      canvasSelector,
+      renderWindow,
+    });
+    await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+
+    renderWindow.render();
+    await interactor.start();
+
+    dismissOverlay(overlay);
+  } catch (error: unknown) {
+    const msg =
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred while rendering the scene.";
+    showOverlayError(overlay, msg);
+  }
+}
+
+/**
+ * Bootstrap the renderer: show the overlay immediately, then wait
+ * for VTK.wasm to become available before building the scene.
+ */
+const {
+  container: pvContainer,
+  sceneData: pvSceneData,
+}: { container: HTMLElement; sceneData: SceneData } =
+  resolveContainerAndScene();
+const pvOverlay: HTMLDivElement = createLoadingOverlay(
+  pvContainer,
+  "Initializing WASM Environment\u2026",
+);
+
 if (typeof vtkReady !== "undefined") {
-  void vtkReady.then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkReady.then((vtk) =>
+    buildScene(vtk, pvOverlay, pvContainer, pvSceneData),
+  ); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
-  void vtkWASM.createNamespace().then(buildScene); // eslint-disable-line unicorn/prefer-top-level-await
+  void vtkWASM
+    .createNamespace(undefined, pvSceneData.wasmConfig)
+    .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
 /**
@@ -549,7 +740,40 @@ async function injectTcoords(
   });
   await tcArray.setArray(Float32Array.from(tCoords));
   const pointData = await polydata.getPointData();
-  pointData.setTcoords(tcArray);
+  pointData.setTCoords(tcArray);
+}
+
+/**
+ * Generate equirectangular texture coordinates for a sphere from its points.
+ *
+ * ``vtkSphereSource`` in the mirrored vtk-wasm binary does not expose
+ * ``SetGenerateTCoords``, so UVs are derived from point positions:
+ * ``u = atan2(y, x) / 2π + 0.5`` (longitude), ``v = asin(z/r) / π + 0.5``
+ * (latitude). Poles collapse to ``v`` 0/1, matching the wrap PyVista uses
+ * for planet textures.
+ * @param vtk
+ * @param polydata
+ */
+async function generateSphereTcoords(
+  vtk: VtkWasmNamespace,
+  polydata: VtkPolyData,
+): Promise<void> {
+  const pts = await polydata.getPoints();
+  const n = await pts.getNumberOfPoints();
+  const HalfUnit = 0.5;
+  const uvs: number[] = [];
+  for (let i = 0; i < n; i++) {
+    // eslint-disable-next-line no-await-in-loop -- VTK.wasm getter returns a Promise
+    const p = (await pts.getPoint(i)) as [number, number, number] | number[];
+    const x = Array.isArray(p) ? p[0] : 0;
+    const y = Array.isArray(p) ? p[1] : 0;
+    const z = Array.isArray(p) ? p[2] : 0;
+    const r = Math.hypot(x, y, z) || 1;
+    const u = Math.atan2(y, x) / (2 * Math.PI) + HalfUnit;
+    const v = Math.asin(Math.max(-1, Math.min(1, z / r))) / Math.PI + HalfUnit;
+    uvs.push(u, v);
+  }
+  await injectTcoords(vtk, polydata, uvs);
 }
 
 /**
@@ -610,6 +834,86 @@ async function applyPbr(
 }
 
 /**
+ * Load an image from a URL for use as a texture.
+ *
+ * CORS is enabled so the decoded pixels can be sampled by WebGL.
+ * @param url
+ */
+function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = (): void => resolve(img);
+    img.onerror = (): void =>
+      reject(new Error(`Failed to load texture image: ${url}`));
+    img.src = url;
+  });
+}
+
+/**
+ * Load the texture image from {@link TextureConfig} and attach it to the actor.
+ *
+ * The mirrored vtk-wasm binary does not expose ``vtkTexture.SetImage`` or
+ * ``vtkActor.AddTexture`` (see #581); it does expose
+ * ``vtkImageAlgorithm.SetInputData`` and ``vtkActor.SetTexture``. So the
+ * decoded image pixels are copied into a ``vtkImageData`` (RGBA, unsigned
+ * char) and that image is set as the texture input. The image is flipped
+ * vertically because VTK images are bottom-origin while canvas pixels are
+ * top-origin.
+ * @param vtk
+ * @param actor
+ * @param texture
+ */
+async function applyTexture(
+  vtk: VtkWasmNamespace,
+  actor: VtkActor,
+  texture: TextureConfig | undefined,
+): Promise<void> {
+  if (!texture) {
+    return;
+  }
+  const img = await loadImage(texture.url);
+  const canvas = document.createElement("canvas");
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+  ctx.drawImage(img, 0, 0);
+  const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  const RgbaComponents = 4;
+  const imageData = vtk.vtkImageData();
+  imageData.setDimensions(canvas.width, canvas.height, 1);
+
+  // VTK image rows are bottom-origin; canvas rows are top-origin. Flip Y by
+  // writing each source row into the mirrored destination row.
+  const rowBytes = canvas.width * RgbaComponents;
+  const flipped = new Uint8Array(data.length);
+  for (let y = 0; y < canvas.height; y++) {
+    const srcStart = y * rowBytes;
+    const dstStart = (canvas.height - 1 - y) * rowBytes;
+    flipped.set(data.subarray(srcStart, srcStart + rowBytes), dstStart);
+  }
+
+  // Build the RGBA scalars as an explicit unsigned-char array.
+  // allocateScalars on vtkImageData leaves getScalars() pointing at a
+  // default Int16 array in this vtk-wasm build, so set the scalars directly
+  // via the point data instead.
+  const scalars = vtk.vtkUnsignedCharArray({
+    numberOfComponents: RgbaComponents,
+  });
+  await scalars.setArray(flipped);
+  const pointData = await imageData.getPointData();
+  pointData.setScalars(scalars);
+
+  const vtkTexture = vtk.vtkTexture();
+  vtkTexture.setInputData(imageData);
+  actor.setTexture(vtkTexture);
+}
+
+/**
  * Build a complete VTK.wasm actor from an {@link ActorConfig} and add it to the renderer.
  * @param vtk
  * @param cfg
@@ -646,10 +950,25 @@ async function setupActor(
 
   const mapperInput = await setupNormals(vtk, currentResult, cfg.normals);
 
+  // vtkSphereSource does not expose tcoord generation in this vtk-wasm
+  // build, so derive equirectangular UVs when a texture is attached. The
+  // coords are injected into the final pipeline output (after normals) and
+  // the polydata is handed to the mapper directly via setInputData so a
+  // later pipeline re-execution cannot discard them.
+  let sphereTexturePolyData: VtkPolyData | undefined;
+  if (cfg.texture && cfg.source.type === "sphere" && !cfg.source.tCoords) {
+    sphereTexturePolyData = await getPolyData(mapperInput);
+    await generateSphereTcoords(vtk, sphereTexturePolyData);
+  }
+
   const mapper = vtk.vtkPolyDataMapper();
-  await (mapperInput.isFilter
-    ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
-    : mapper.setInputData(mapperInput.output));
+  if (sphereTexturePolyData) {
+    await mapper.setInputData(sphereTexturePolyData);
+  } else {
+    await (mapperInput.isFilter
+      ? mapper.setInputConnection(await mapperInput.output.getOutputPort())
+      : mapper.setInputData(mapperInput.output));
+  }
 
   const actor = vtk.vtkActor({ mapper });
   const prop = await actor.getProperty();
@@ -688,6 +1007,8 @@ async function setupActor(
     prop.setPointSize(cfg.pointSize ?? DefaultPointSize);
     prop.setRepresentationToPoints();
   }
+
+  await applyTexture(vtk, actor, cfg.texture);
 
   ren.addActor(actor);
 }

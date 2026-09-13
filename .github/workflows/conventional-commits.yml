@@ -1,16 +1,13 @@
+---
 name: Conventional Commits
-
 on:
   pull_request:
-    branches: [ main ]
-    types: [ opened, edited, synchronize, reopened ]
-
+    branches: [main]
+    types: [opened, edited, synchronize, reopened]
 permissions: {}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   check-pr-title:
     runs-on: ubuntu-latest

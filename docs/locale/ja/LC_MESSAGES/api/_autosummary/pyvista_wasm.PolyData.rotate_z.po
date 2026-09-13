@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rotate_z.rst:2
+msgid "pyvista\\_wasm.PolyData.rotate\\_z"
+msgstr "pyvista\\_wasm.PolyData.rotate\\_z"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:1
+msgid "Rotate the mesh around the Z axis by the given angle (degrees)."
+msgstr "メッシュをZ軸を中心に指定された角度（度）で回転させます。"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:3
+msgid ""
+"Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:4
+msgid "Rotation angle in degrees."
+msgstr "回転角度（度）。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rotate_z.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:7
+msgid "A new mesh with rotated points."
+msgstr "回転されたポイントを持つ新しいメッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.rotate_z.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.PolyData.rotate_z:11
+msgid "Examples"
+msgstr "例"

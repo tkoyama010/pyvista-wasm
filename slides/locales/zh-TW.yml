@@ -1,0 +1,251 @@
+---
+# Traditional Chinese (Taiwan Mandarin) locale — mirrors slides/locales/ja.yml
+# (authoritative, see ADR-0006).
+# Do not add or remove keys here without first updating ja.yml.
+cover:
+  title: PyVista on WebAssembly
+  subtitle: 實現伺服器無須的 3D 視覺化
+  tagline: 免伺服器、免安裝、資料不離機
+  event: PyCon JP 2026
+  speaker: 小山 哲央
+agenda:
+  title: Python×WASM 的現實：移植重量級程式庫的挑戰，以及瀏覽器完結型科學計算的未來
+  subtitle: 議程
+  i1t: PyVista 與 WASM 概觀
+  i1d: 為什麼要在瀏覽器中執行 3D 視覺化
+  i2t: 技術堆疊與實作
+  i2d: vtk-wasm、TypeScript 黏合層、PyVista API
+  i3t: 瀏覽器中的即時示範
+  i3d: 免伺服器運作的 PyVista
+  speaker_title: 講者推動 PyVista 的 WASM 計畫
+  speaker_subtitle: 講者簡介
+pyvista:
+  title: PyVista 是科學計算 3D 視覺化的 Python 程式庫
+  subtitle: PyVista 首頁
+  i1t: 基於 VTK
+  i1d: Kitware 的 C++ 視覺化工具包，自 1993 年起逾 30 年開發歷史
+  i2t: Pythonic API
+  i2d: 以直覺的幾行程式碼包裝 VTK 強大但冗長的 C++ 核心
+  i3t: 實質標準
+  i3d: 醫學影像、CAE、地球科學、氣象學
+  i4t: 豐富的生態系
+  i4d: ITK、NumPy、SciPy
+  mesh_caption_pre: PyVista 渲染的三角 3D 網格 —
+  mesh_caption_bold: 拖曳旋轉
+problem:
+  title: 在網頁上共享科學計算的 3D 結果時，伺服器準備成為瓶頸
+  subtitle: 問題一覽
+  col_issue: 問題
+  col_detail: 詳細
+  i1t: Three.js 功能不足
+  i1d: 渲染科學計算結果的功能不足
+  i2t: 時間成本
+  i2d: 需建置與維護專屬的視覺化伺服器
+  i3t: 金錢成本
+  i3d: 基礎架構的建置與營運是持續性支出
+  i4t: 安全性風險
+  i4d: 機密的模擬資料從分析師的電腦傳送至伺服器
+  conc_pre: 這些障礙使得分析結果的共享
+  conc_bold: 難以迅速且安全地
+  conc_post: 達成 — 如果瀏覽器就能處理一切？
+why_wasm:
+  title: 瀏覽器完結解決安全性與資源問題
+  subtitle: 瀏覽器完結的序列圖
+  i1t: 資料不會傳送到任何地方
+  i1d: WebAssembly 在瀏覽器內執行完整的視覺化管線，消除至渲染伺服器的往返
+  i2t: 資料不離機
+  i2d: 機密的模擬結果保留在客戶端，根本無需傳輸
+  i3t: 免基礎架構
+  i3d: 無需配置、擴展或按月付費的視覺化伺服器
+  i4t: 起源
+  i4d_pre: "一個物理模擬專案只提出一個需求："
+  i4d_italic: 將解析後的網格放入瀏覽器中檢視
+  i5t: 到處示範
+  i5d: 在現場或客戶端僅用瀏覽器即可展示結果
+  conc_pre: URL 就是完整的交付 —
+  conc_bold: 那如何將 PyVista 帶入其中？
+arch:
+  title: SSR 需仰賴伺服器端處理，而 Wasm 可在瀏覽器內完成全部處理
+  subtitle: "SSR 與 Wasm 的序列圖比較"
+  conc_pre: 往返通訊完全消失 —
+  conc_bold: 渲染在資料所在處進行
+vtk_wasm:
+  title: VTK 是 PyVista 的引擎，也是全球科學計算領域最廣泛使用的視覺化 C++ 程式庫
+  subtitle: VTK 的應用案例
+  i1t: 由 Kitware 打造
+  i1d: C++ 視覺化工具包，自 1993 年維護至今，累積逾 30 年的功能
+  i2t: 實績豐碩
+  i2d: 醫學影像、CAE、地球科學每天倚賴 VTK 運作
+  i3t: 數百種過濾器
+  i3d: 點雲、網格、體積資料開箱即用
+  i4t: OpenGL/Vulkan 渲染器
+  i4d: 生產等級的 GPU 管線
+  i5t: 豐富的生態系
+  i5d: PyVista（Python 包裝）、ITK（醫學影像）、NumPy/SciPy 科學堆疊
+  i6t: Wasm 移植版
+  i6d: 所有功能現可免伺服器，在瀏覽器中完整執行
+  i7t: 到處示範
+  i7d: 對現場示範和客戶端簡報特別重要
+  conc_pre: VTK 的全部功能濃縮成一個 URL —
+  conc_bold: 那如何將它接上 PyVista？
+history:
+  title: VTK.wasm 正朝向實用化持續開發
+  subtitle: VTK.wasm 範例
+  y1: "2018"
+  y1l: 實驗階段
+  y1d: Emscripten 編譯啟動 — 將 VTK 帶入瀏覽器的早期原型
+  y2: "2021"
+  y2l: 官方
+  y2d_pre: 整合至官方編譯管線；
+  y2d_bold1: vtk.wasm
+  y2d_mid: 在 npm 上發佈 —
+  y2d_bold2: vtk.js
+  y2d_post: （JavaScript 重寫版本）為不同產物
+  y3: "2023–2024"
+  y3l: WebGPU
+  y3d: WebGPU 後端支援持續推進 — 比 WebGL 更高的渲染效能與 GPU 運算
+  i1t: 執行時期切換
+  i1d: 目前套件可在執行時期切換 WebGL 與 WebGPU
+  i2t: 自動後援
+  i2d: 無需使用者設定 — 優先使用 WebGPU，依瀏覽器支援度回退至 WebGL
+  conc_pre: 從實驗走向生產 —
+  conc_bold: 技術持續成熟
+demos:
+  title: 3DCG、影像處理、視覺化在瀏覽器中運行
+  subtitle: 你的瀏覽器此刻就能跑的即時示範
+build_dist:
+  build_title: 將 VTK 的 C++ 編譯為 WebAssembly 需數小時，但不影響使用者
+  build_subtitle: 如何編譯與使用 vtk-wasm
+  dist_title: 二進位檔於執行時期自 CDN 串流，不打包進 JS 套件
+  dist_subtitle: 套件分發方式序列圖
+npm_binary:
+  title: 比 Kitware GitLab 直連 URL 在亞洲更快
+  subtitle: 透過 jsDelivr CDN 分發的亞洲友善 NPM 二進位檔鏡像
+  link_desc: 經 jsDelivr CDN 鏡像的 VTK.wasm 二進位檔 — npm install 即可使用
+pipeline:
+  title: 使用者只需 Vite 設定即可使用 VTK.wasm
+  subtitle: 在 Vite 中使用 VTK.wasm 的方法
+  i1t: Emscripten
+  i1d: VTK 完整 C++ 程式碼編譯為 WebAssembly，將 30 年功能帶入瀏覽器
+  i2t: 編譯厚重、使用輕量
+  i2d: 編譯本身需數小時，但使用者只需
+  i3t: 執行時期的 tarball
+  i3d: WASM 二進位檔以 tarball 形式自 CDN 串流，不打包進 JS 套件
+  conc_pre: 一個 Vite 設定解鎖一切 —
+  conc_bold: 距離瀏覽器原生 VTK 僅兩行
+  config_label: vite.config.js
+  i4t: "build.target: 'esnext'"
+  i4d: vtk-wasm 依賴需要次世代編譯目標的現代 JS 功能
+  i5t: optimizeDeps.exclude
+  i5d: Vite 不得預先打包 WASM 套件；它於執行時期非同步載入
+pyodide:
+  title: 以 Python 程式碼為前端，在瀏覽器上實現 3D 視覺化
+  subtitle: pyvista-wasm 的序列圖
+  i1t: Pyodide
+  i1d: CPython 編譯為 WebAssembly，在瀏覽器內執行真正的 CPython 直譯器
+  i2t: PyVista
+  i2d: VTK 的 Pythonic 包裝層，與科學家在桌面環境使用的相同 API
+  i3t: 這項組合
+  i3d: 在瀏覽器中撰寫 Python，在同一頁面視覺化 3D 網格，零後端
+  i4t: pyvista-wasm
+  i4d: 以建構於 vtk-wasm 之上的 PyVista 風格 API 銜接差距
+  conc_pre: TypeScript 是黏合層 —
+  conc_bold: 載入 vtk-wasm，並將 C++ VTK 綁定橋接至 Python 端 API
+  arch_label: 分層架構
+  i5t: 黏合層
+  i5d: TypeScript 載入 vtk-wasm 模組，並將 VTK 類別公開給 Python
+  i6t: 執行時期後援
+  i6d_pre: 當使用
+  i6d_post: "時，網格取得改用 XMLHttpRequest 而非 urllib"
+dev_ci:
+  title: 將 vtk.wasm 整合至 pyvista-wasm 時遇到挑戰，但已全部解決
+  subtitle: 開發期間遭遇的問題與解決方案
+  col_issue: 問題
+  col_solution: 解決方案
+  p1: createNamespace() 回傳 Promise
+  s1: 所有 VTK 物件操作皆需 await
+  p2: 平行處理過濾器需要 SharedArrayBuffer
+  s2: 使用 vite-plugin-cross-origin-isolation 注入 COOP/COEP 標頭
+  p3: tarball URL 以跨來源方式取得，因此需要 CORS
+  s3: 使用會傳送 CORS 標頭的 CDN
+  p4: Kitware 的 GitLab 直連 URL 在亞洲速度慢
+  s4: 使用 jsDelivr 的 Multi-CDN 邊緣快取
+sphere:
+  title: pyvista-wasm 實現更直覺式的 3D 視覺化
+  subtitle: VTK.wasm 與 pyvista-wasm 的程式碼比較
+  js_label: VTK.wasm (JavaScript)
+  py_label: pyvista-wasm (Python / Pyodide)
+  output_label: 輸出
+demo_jl:
+  title: 在 JupyterLite 中免安裝顯示 3D 網格
+  subtitle: "示範：JupyterLite"
+  i1t: JupyterLite
+  i1d: 僅需瀏覽器的 Jupyter 環境；免安裝，筆記本中即可互動式顯示 3D 網格
+  i2t: pv.Sphere() 與 pv.read()
+  i2d: 使用預先準備的筆記本，一個儲存格即可開始渲染
+  i3t: 執行儲存格進行渲染
+  i3d: 執行儲存格後，3D 檢視器直接在筆記本內啟動
+  i4t: 免本機設定
+  i4d: 無需安裝即可體驗 vtk.wasm 渲染品質的最佳入口
+  i5t: 靜態託管
+  i5d: 可部署至 GitHub Pages 或任意靜態主機，免伺服器
+  conc_pre: 用 URL 共享 —
+  conc_bold: 一鍵取得可重複現的分析環境
+  code_label: intro.ipynb
+  demo_label: 即時示範
+demo_marimo:
+  title: marimo 同樣在瀏覽器內完整運作
+  subtitle: "示範：marimo"
+  i1t: 反應式筆記本
+  i1d: marimo 在瀏覽器內完整運作；當儲存格的值改變時，相依儲存格會自動重新執行
+  i2t: 即時網格更新
+  i2d: 滑桿數值變更即觸發即時重繪；互動式更改網格顏色與視角
+  i3t: 免重新執行按鈕
+  i3d: 與 Jupyter 不同，無需手動重新執行；相依圖自動驅動執行
+  i4t: 探索效率
+  i4d: 參數掃描變得更輕鬆，提升探索性視覺化工作的節奏
+  conc_pre: 用 URL 共享 —
+  conc_bold: 一鍵取得反應式 3D 探索環境
+  demo_label: 即時示範
+demo_stlite:
+  title: 用 stlite 建構免伺服器的 3D 視覺化應用程式
+  subtitle: "示範：stlite"
+  i1t: 瀏覽器中的 Streamlit
+  i1d: stlite 讓 Streamlit 完全在客戶端運作；免伺服器、免安裝、用 URL 共享應用程式
+  i2t: 宣告式小工具
+  i2d: 幾行滑桿和下拉選單程式碼即可建構完整的互動式 3D 網格視覺化 UI
+  i3t: Stanford Bunny 示範
+  i3d: 從下拉選單選取 8 種顏色，用滑桿調整透明度 0–1，即時觀察網格更新
+  i4t: 為非工程師打造
+  i4d: Streamlit 的宣告式 UI 搭配 pyvista-wasm 渲染，任何人都能使用的免伺服器工具
+  i5t: 互補而非競爭
+  i5d: JupyterLite 和 marimo 適合探索性筆記本視覺化；stlite 適合基於小工具的互動式應用程式
+  conc_pre: 最適合發佈 —
+  conc_bold: 需要附小工具的互動式應用程式時，stlite 是自然的選擇
+  demo_label: 即時示範
+demo_api_docs:
+  title: API 文件中的「Try it in JupyterLite!」按鈕可立即執行範例
+  subtitle: "API 文件"
+  demo_label: API 文件
+cli:
+  title: pyvista-wasm CLI 讓免寫 Python 程式碼的 3D 視覺化成為可能，也更容易與程式碼 AI 代理程式整合
+  subtitle: pyvista-wasm cli 的使用方法
+use_cases:
+  title: PyVista on WebAssembly 提供免伺服器共享 3D 視覺化資料的新方式
+  subtitle: 3D 視覺化資料共享的 use case 圖
+  conc_pre: PoC 已確認 —
+  conc_bold: 免專屬伺服器即可共享分析結果
+inspiration:
+  title: 靈感來源
+  subtitle: 完整文章請參閱燈股份有限公司的 tech blog
+  article_label: 參考文章
+  article_title: "vtk.wasm で実現するブラウザ完結3D可視化"
+  article_source: Akari Inc. tech blog, 2026-05-03
+  article_link_text: tech.akariinc.co.jp/entry/2026/05/03/115708
+  note: 本簡報的架構 — 擺脫伺服器端渲染的動機、vtk.wasm 的背景、JupyterLite / marimo / stlite 示範、use case 討論 — 皆遵循上述文章的結構。
+cta:
+  title: pyvista-wasm 是積極開發中的開源專案，歡迎貢獻與討論
+  cta_title: pyvista-wasm 是積極開發中的開源專案，歡迎貢獻
+  qa_title: 歡迎提問與討論
+  qa_subtitle: https://github.com/tkoyama010/pyvista-wasm/discussions
+  subtitle: 歡迎貢獻

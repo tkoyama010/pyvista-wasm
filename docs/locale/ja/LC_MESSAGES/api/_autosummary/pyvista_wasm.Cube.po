@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Cube.rst:2
+msgid "pyvista\\_wasm.Cube"
+msgstr "pyvista\\_wasm.Cube"
+
+#: of pyvista_wasm.mesh.Cube:1
+msgid "Create a cube mesh."
+msgstr "立方体メッシュを作成します。"
+
+#: ../../api/_autosummary/pyvista_wasm.Cube.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.Cube:3
+msgid "Center of the cube (x, y, z). Default is (0, 0, 0)."
+msgstr "立方体の中心 (x, y, z)。デフォルトは (0, 0, 0)。"
+
+#: of pyvista_wasm.mesh.Cube:5
+msgid "Length in x direction. Default is 1.0."
+msgstr "x方向の長さ。デフォルトは1.0。"
+
+#: of pyvista_wasm.mesh.Cube:7
+msgid "Length in y direction. Default is 1.0."
+msgstr "y方向の長さ。デフォルトは1.0。"
+
+#: of pyvista_wasm.mesh.Cube:9
+msgid "Length in z direction. Default is 1.0."
+msgstr "z方向の長さ。デフォルトは1.0。"
+
+#: ../../api/_autosummary/pyvista_wasm.Cube.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.mesh.Cube:12
+msgid "A cube mesh."
+msgstr "立方体メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.Cube.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.Cube:16
+msgid "Examples"
+msgstr "例"

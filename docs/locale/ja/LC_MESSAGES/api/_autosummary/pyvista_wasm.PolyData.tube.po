@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-08 14:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst:2
+msgid "pyvista\\_wasm.PolyData.tube"
+msgstr "pyvista\\_wasm.PolyData.tube"
+
+#: of pyvista_wasm.mesh.PolyData.tube:1
+msgid "Generate a tube around a line polydata."
+msgstr "ラインポリデータの周囲にチューブを生成します。"
+
+#: of pyvista_wasm.mesh.PolyData.tube:3
+msgid ""
+"This filter creates a tube representation around lines in the mesh by "
+"sweeping a polygonal cross-section along each line. It mirrors the "
+"PyVista ``tube`` filter API and is backed by VTK.wasm's "
+"``vtkTubeFilter``."
+msgstr ""
+"このフィルタは、各ラインに沿ってポリゴン断面をスイープすることにより、"
+"メッシュ内のラインの周囲にチューブ表現を作成します。PyVista の ``tube`` フィルタ API を"
+"ミラーリングし、VTK.wasm の ``vtkTubeFilter`` によってバッキングされています。"
+
+#: of pyvista_wasm.mesh.PolyData.tube:10
+msgid ""
+"This filter is intended for use with line-based polydata (such as the "
+"output of :class:`Line`). It uses VTK.wasm's ``vtkTubeFilter``, which "
+"generates a tube by sweeping a circle with ``n_sides`` sides along the "
+"line segments."
+msgstr ""
+"このフィルタはラインベースのポリデータ（例: :class:`Line` の出力）での使用を"
+"意図しています。VTK.wasm の ``vtkTubeFilter`` を使用し、ラインセグメントに沿って "
+"``n_sides`` 辺の円をスイープしてチューブを生成します。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.PolyData.tube:15
+msgid "The radius of the tube. Default is 0.5."
+msgstr "チューブの半径。デフォルトは0.5。"
+
+#: of pyvista_wasm.mesh.PolyData.tube:17
+msgid ""
+"The number of sides for the tube cross-section. Higher values produce "
+"smoother tubes. Default is 20."
+msgstr ""
+"チューブ断面の辺の数。値が大きいほど滑らかなチューブになります。デフォルトは20。"
+
+#: of pyvista_wasm.mesh.PolyData.tube:20
+msgid "Whether to cap the ends of the tube. Default is True."
+msgstr "チューブの端をキャップするかどうか。デフォルトはTrue。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.mesh.PolyData.tube:23
+msgid "A new mesh representing the tube."
+msgstr "チューブを表す新しいメッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.PolyData.tube.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.PolyData.tube:27
+msgid "Examples"
+msgstr "例"
+
+#: of pyvista_wasm.mesh.PolyData.tube:37
+msgid "Render the tube:"
+msgstr "チューブをレンダリングします:"

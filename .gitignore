@@ -59,8 +59,6 @@ docs/locale/**/*.mo
 .doctrees/
 *.pickle
 *.pkl
-docs/pot/**/*.js
-docs/pot/**/*.css
 
 # JupyterLite - ignore generated notebooks (source is .py)
 jupyterlite/content/*.ipynb
@@ -68,6 +66,25 @@ jupyterlite/content/*.ipynb
 # Preview GIFs (stored in GitHub Releases, not in the repo)
 assets/*.gif
 
+# Environment variables
+.envrc
+
+# Claude Code (local settings and agent worktrees)
+.claude/
+
 # Node.js (TypeScript build)
 node_modules/
 src/pyvista_wasm/templates/renderer.js
+
+# Slidev (PyCon JP 2026 talk deck)
+slides/dist/
+slides/*.pdf
+slides/*.png
+
+# Terraform — state is committed for the terraform/ project only (ADR-0009);
+# ignored everywhere else so scratch state never leaks into Git. Only the
+# canonical terraform/terraform.tfstate is tracked; .backup files are not.
+*.tfstate
+*.tfstate.*
+!terraform/terraform.tfstate
+.terraform/

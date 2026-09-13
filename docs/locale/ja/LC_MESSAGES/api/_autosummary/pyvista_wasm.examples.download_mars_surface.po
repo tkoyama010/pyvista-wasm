@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-23 13:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_mars_surface.rst:2
+msgid "pyvista\\_wasm.examples.download\\_mars\\_surface"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:1
+msgid "Download the Mars planet surface texture."
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:3
+msgid ""
+"Returns the Mars surface image from the PyVista ``solar_textures`` "
+"dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the "
+"``pyvista.examples.planets.download_mars_surface(texture=True)`` API. "
+"Textures are sourced from `Solar Textures "
+"<https://www.solarsystemscope.com/textures/>`_."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_mars_surface.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:9
+msgid "Texture wrapping the Mars surface image URL."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_mars_surface.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:13
+msgid "Notes"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:14
+msgid ""
+"pyvista-wasm textures are URL-based, so no file is downloaded on the "
+"Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps "
+"the remote image URL and VTK.wasm samples it in the browser via WebGL."
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:18
+msgid ""
+"To render a textured Mars globe, pass the texture directly to "
+":meth:`~pyvista_wasm.Plotter.add_mesh` on a "
+":class:`~pyvista_wasm.Sphere`; the browser renderer generates the sphere "
+"UVs so the image wraps equirectangularly around the globe. This is the "
+"wasm counterpart to PyVista's `create-planet "
+"<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example."
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:26
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.examples.download_mars_surface:30
+msgid "Render a textured Mars planet sphere in the browser."
+msgstr ""
+
+#~ msgid ""
+#~ "To render a textured Mars globe, "
+#~ "build a UV-mapped sphere with "
+#~ ":meth:`~pyvista_wasm.PolyData.texture_map_to_plane` and "
+#~ "pass the texture to "
+#~ ":meth:`~pyvista_wasm.Plotter.add_mesh`. This is the"
+#~ " wasm counterpart to PyVista's `create-"
+#~ "planet "
+#~ "<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ "
+#~ "example."
+#~ msgstr ""
