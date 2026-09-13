@@ -20,74 +20,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst:2
-msgid "pyvista\\_wasm.examples.load\\_earth"
-msgstr "pyvista\\_wasm.examples.load\\_earth"
+#: ../../api/_autosummary/pyvista_wasm.examples.load_venus.rst:2
+msgid "pyvista\\_wasm.examples.load\\_venus"
+msgstr "pyvista\\_wasm.examples.load\\_venus"
 
-#: of pyvista_wasm.examples.load_earth:1
-msgid "Load the planet Earth as a textured sphere."
-msgstr "テクスチャ付き球体として地球をロードします。"
+#: of pyvista_wasm.examples.load_venus:1
+msgid "Load the planet Venus as a textured sphere."
+msgstr "テクスチャ付き球体として金星をロードします。"
 
-#: of pyvista_wasm.examples.load_earth:3
+#: of pyvista_wasm.examples.load_venus:3
 msgid ""
 "Creates a sphere mesh with texture coordinates, matching the "
-"``pyvista.examples.planets.load_earth`` API. The sphere is rotated 180° "
+"``pyvista.examples.planets.load_venus`` API. The sphere is rotated 180° "
 "around the Z axis to align the Prime Meridian correctly."
 msgstr ""
-"テクスチャ座標付きの球体メッシュを作成します。``pyvista.examples.planets.load_earth`` API "
+"テクスチャ座標付きの球体メッシュを作成します。``pyvista.examples.planets.load_venus`` API "
 "と一致します。球体はZ軸を中心に180°回転して本初子午線を正しく整列させます。"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+#: ../../api/_autosummary/pyvista_wasm.examples.load_venus.rst
 msgid "Parameters"
 msgstr "パラメータ"
 
-#: of pyvista_wasm.examples.load_earth:7
+#: of pyvista_wasm.examples.load_venus:7
 msgid "Sphere radius. Default is 1.0."
 msgstr "球体の半径。デフォルトは 1.0。"
 
-#: of pyvista_wasm.examples.load_earth:9
+#: of pyvista_wasm.examples.load_venus:9
 msgid "Number of points in the latitude direction. Default is 50."
 msgstr "緯度方向のポイント数。デフォルトは 50。"
 
-#: of pyvista_wasm.examples.load_earth:11
+#: of pyvista_wasm.examples.load_venus:11
 msgid "Number of points in the longitude direction. Default is 100."
 msgstr "経度方向のポイント数。デフォルトは 100。"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+#: ../../api/_autosummary/pyvista_wasm.examples.load_venus.rst
 msgid "Returns"
 msgstr "戻り値"
 
-#: of pyvista_wasm.examples.load_earth:14
-msgid "Earth sphere mesh with texture coordinates."
-msgstr "テクスチャ座標付き地球球体メッシュ。"
+#: of pyvista_wasm.examples.load_venus:14
+msgid "Venus sphere mesh with texture coordinates."
+msgstr "テクスチャ座標付き金星球体メッシュ。"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.load_earth.rst
+#: ../../api/_autosummary/pyvista_wasm.examples.load_venus.rst
 msgid "Return type"
 msgstr "戻り値の型"
 
-#: of pyvista_wasm.examples.load_earth:19
-msgid ":func:`~pyvista_wasm.examples.download_earth_surface`"
-msgstr ":func:`~pyvista_wasm.examples.download_earth_surface`"
+#: of pyvista_wasm.examples.load_venus:19
+msgid ":func:`~pyvista_wasm.examples.load_earth`"
+msgstr ":func:`~pyvista_wasm.examples.load_earth`"
 
-#: of pyvista_wasm.examples.load_earth:20
-msgid "Download the Earth surface texture."
-msgstr "地球表面のテクスチャをダウンロードします。"
+#: of pyvista_wasm.examples.load_venus:20
+msgid "Load the planet Earth for comparison."
+msgstr "比較のために地球をロードします。"
 
-#: of pyvista_wasm.examples.load_earth:22
+#: of pyvista_wasm.examples.load_venus:22
 msgid ":func:`~pyvista_wasm.examples.download_mars_surface`"
 msgstr ":func:`~pyvista_wasm.examples.download_mars_surface`"
 
-#: of pyvista_wasm.examples.load_earth:23
+#: of pyvista_wasm.examples.load_venus:23
 msgid "Download the Mars surface texture for comparison."
 msgstr "比較のために火星表面のテクスチャをダウンロードします。"
 
-#: of pyvista_wasm.examples.load_earth:26
+#: of pyvista_wasm.examples.load_venus:26
 msgid "Examples"
 msgstr "例"
 
-#: of pyvista_wasm.examples.load_earth:38
-msgid "Render a textured Earth globe in the browser:"
-msgstr "ブラウザでテクスチャ付き地球グローブをレンダリングします:"
+#: of pyvista_wasm.examples.load_venus:38
+msgid "Render a Venus planet sphere in the browser:"
+msgstr "ブラウザで金星球体をレンダリングします:"
 
 #~ msgid "See Also"
 #~ msgstr "関連項目"
