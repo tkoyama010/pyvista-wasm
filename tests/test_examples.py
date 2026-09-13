@@ -76,3 +76,24 @@ class TestDownloadMarsSurface:
         """The Texture repr references the Mars image."""
         texture = examples.download_mars_surface()
         assert "mars.jpg" in repr(texture)
+
+
+class TestDownloadVenusSurface:
+    """Tests for examples.download_venus_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_venus_surface returns a Texture instance."""
+        texture = examples.download_venus_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_venus_solar_texture(self) -> None:
+        """The texture URL points at the Venus solar_textures image."""
+        texture = examples.download_venus_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/venus_surface.jpg"
+        )
+
+    def test_repr_mentions_venus(self) -> None:
+        """The Texture repr references the Venus image."""
+        texture = examples.download_venus_surface()
+        assert "venus_surface.jpg" in repr(texture)
