@@ -27,4 +27,5 @@ worked example.
 0008-decide-how-to-internationalize-the-readthedocs-documentation
 0009-decide-how-to-sync-github-repo-settings-with-terraform
 0010-track-pyvista-api-coverage-matrix
+0011-decide-whether-to-replace-biome-with-xo
 ```
