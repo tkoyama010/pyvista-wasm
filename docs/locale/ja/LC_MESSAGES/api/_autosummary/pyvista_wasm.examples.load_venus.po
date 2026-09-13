@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 11:14+0900\n"
+"POT-Creation-Date: 2026-09-13 21:51+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -74,18 +74,26 @@ msgid "Load the planet Earth for comparison."
 msgstr "比較のために地球をロードします。"
 
 #: of pyvista_wasm.examples.load_venus:22
+msgid ":func:`~pyvista_wasm.examples.download_venus_surface`"
+msgstr ":func:`~pyvista_wasm.examples.download_venus_surface`"
+
+#: of pyvista_wasm.examples.load_venus:23
+msgid "Download the Venus surface texture."
+msgstr "金星表面のテクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.load_venus:25
 msgid ":func:`~pyvista_wasm.examples.download_mars_surface`"
 msgstr ":func:`~pyvista_wasm.examples.download_mars_surface`"
 
-#: of pyvista_wasm.examples.load_venus:23
+#: of pyvista_wasm.examples.load_venus:26
 msgid "Download the Mars surface texture for comparison."
 msgstr "比較のために火星表面のテクスチャをダウンロードします。"
 
-#: of pyvista_wasm.examples.load_venus:26
+#: of pyvista_wasm.examples.load_venus:29
 msgid "Examples"
 msgstr "例"
 
-#: of pyvista_wasm.examples.load_venus:38
+#: of pyvista_wasm.examples.load_venus:41
 msgid "Render a Venus planet sphere in the browser:"
 msgstr "ブラウザで金星球体をレンダリングします:"
 
