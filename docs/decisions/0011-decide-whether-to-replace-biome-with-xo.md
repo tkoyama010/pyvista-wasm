@@ -60,7 +60,7 @@ Compliance is verified by the existing CI: `npm run lint` / `npm run format` (Bi
 
 ### Option B: Migrate to xo
 
-[xo](https://github.com/xojs/xo) — opionated ESLint wrapper with Prettier formatting.
+[xo](https://github.com/xojs/xo) — opinionated ESLint wrapper with Prettier formatting.
 
 - Good, because it exposes the full ESLint plugin ecosystem (including `eslint-plugin-jsdoc` natively).
 - Good, because its presets are well known in the JS community and it supports `--fix` autofix workflows.

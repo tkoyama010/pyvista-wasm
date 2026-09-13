@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-13 17:25+0900\n"
+"PO-Revision-Date: 2026-09-13 17:30+0900\n"
+"Last-Translator: \n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:9
+msgid "Decide whether to replace Biome with xo"
+msgstr "Biomeをxoに置き換えるかどうかを決める"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:11
+msgid "Context and Problem Statement"
+msgstr "背景と問題提起"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:13
+msgid ""
+"The repository currently uses [Biome](https://biomejs.dev/) "
+"(`biome.json`, `@biomejs/biome` in `package.json`) to lint and format all"
+" TypeScript, JavaScript, JSON, and Markdown files. Biome is a single Rust"
+" binary invoked through `npm run lint` / `npm run format` and wired into "
+"pre-commit.ci. A community discussion raised "
+"[xo](https://github.com/xojs/xo) — an ESLint-based zero-config linter "
+"with the Prettier-backed `xo --fix` formatter — as a possible "
+"alternative. Should we migrate the JavaScript/TypeScript toolchain from "
+"Biome to xo, or stay on Biome?"
+msgstr ""
+"このリポジトリでは現在、TypeScript・JavaScript・JSON・Markdownのすべてのファイルに対して、"
+"[Biome](https://biomejs.dev/)（`package.json`の`biome.json`と`@biomejs/biome`）を使ってリントとフォーマットを行っています。"
+"Biomeは単一のRustバイナリで、`npm run lint` / `npm run format`経由で呼び出され、pre-commit.ciにも組み込まれています。"
+"コミュニティの議論で、Prettierベースの`xo --fix`フォーマッタを持つESLint製のゼロコンフィグリンタである"
+"[xo](https://github.com/xojs/xo)が代替候補として挙がりました。"
+"JavaScript/TypeScriptツールチェーンをBiomeからxoへ移行すべきか、それともBiomeのままにすべきか？"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:17
+msgid ""
+"**Zero-config experience**: Both tools advertise themselves as "
+"configuration-free. Any migration must not increase the amount of lint "
+"configuration the project maintains."
+msgstr ""
+"**ゼロコンフィグ体験**：両ツールとも設定不要を謳っています。移行によってプロジェクトが保守するリント設定の量が増えてはなりません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:18
+msgid ""
+"**TypeScript support**: The hand-written glue layer lives in `ts/` "
+"(including a large ambient declaration file, `ts/vtk.d.ts`). The tool "
+"must lint modern TypeScript well, including ambient declarations."
+msgstr ""
+"**TypeScriptサポート**：手書きのグルーレイヤーは`ts/`にあります（大きなアンビエント宣言ファイル`ts/vtk.d.ts`を含む）。"
+"ツールはアンビエント宣言を含む最新のTypeScriptを正しくリントできなければなりません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:19
+msgid ""
+"**Speed**: CI runs the full test suite on every PR; lint steps should "
+"stay fast."
+msgstr ""
+"**速度**：CIはすべてのPRでテストスイート全体を実行します。リントのステップは高速なまま保たれるべきです。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:20
+msgid ""
+"**Ecosystem and rule coverage**: The project relies on the linter to "
+"catch correctness issues (unused variables, unsafe assertions, a11y for "
+"renderer code) rather than to enforce opinionated style."
+msgstr ""
+"**エコシステムとルールカバレッジ**：このプロジェクトでは、リンタは主観的なスタイルの強制ではなく、"
+"正しくないコード（未使用変数、安全でないアサーション、レンダラーコードのa11y）の検出に使われています。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:21
+msgid ""
+"**Maintenance overhead**: pyvista-wasm is a small project. Additional "
+"dependencies, plugins, or config drift are a real cost."
+msgstr ""
+"**保守コスト**：pyvista-wasmは小規模プロジェクトです。依存関係やプラグインの追加、設定のドリフトは現実のコストになります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:23
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:25
+msgid "**Option A: Stay on Biome (status quo)**"
+msgstr "**選択肢A：Biomeのままにする（現状維持）**"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:26
+msgid "**Option B: Migrate to xo**"
+msgstr "**選択肢B：xoへ移行する**"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:28
+msgid "Decision Outcome"
+msgstr "決定の結果"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:30
+msgid ""
+"Chosen option: \"**Option A: Stay on Biome (status quo)**\", because "
+"Biome already satisfies every decision driver while xo regresses on "
+"TypeScript depth, speed, and configuration effort for this repository."
+msgstr ""
+"選択したオプション：「**選択肢A：Biomeのままにする（現状維持）**」。"
+"Biomeはすべての決定ドライバをすでに満たしている一方で、xoはこのリポジトリにおいてTypeScript対応の深さ・速度・設定の手間で劣るためです。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:32
+msgid ""
+"TypeScript support: Biome's first-class TS parser handles `ts/vtk.d.ts` "
+"natively. xo is ESLint underneath; deep TS checking requires "
+"`@typescript-eslint` with type-aware rules, which adds setup and is slow."
+msgstr ""
+"TypeScriptサポート：BiomeのファーストクラスのTSパーサーは`ts/vtk.d.ts`をネイティブに扱えます。"
+"xoの実体はESLintであり、深いTSチェックには型認識ルールを持つ`@typescript-eslint`が必要で、セットアップが増え、低速になります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:33
+msgid ""
+"Speed: Biome is a single Rust binary and finishes in well under a second "
+"on this repo. xo/Prettier runs the Node-based ESLint pipeline, measurably"
+" slower in CI on every PR."
+msgstr ""
+"速度：Biomeは単一のRustバイナリで、このリポジトリでは1秒未満で完了します。"
+"xo/PrettierはNodeベースのESLintパイプラインを実行するため、すべてのPRのCIで体感的に遅くなります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:34
+msgid ""
+"Configuration: The project already carries `biome.json` with per-file "
+"overrides for `ts/renderer.ts` and `ts/vtk.d.ts`. Migrating means re-"
+"expressing those overrides as ESLint configuration plus a Prettier config"
+" to match the current formatting (2-space indent, width 80, semicolons) —"
+" net more configuration, not less."
+msgstr ""
+"設定：このプロジェクトには`ts/renderer.ts`と`ts/vtk.d.ts`に対するファイル単位のオーバーライドを含む`biome.json`がすでにあります。"
+"移行すると、これらのオーバーライドをESLint設定として書き直し、さらに現在のフォーマット（2スペースインデント、幅80、セミコロンあり）に合わせるPrettier設定も必要になります。"
+"設定は減るどころか増えます。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:35
+msgid ""
+"Dependencies: Biome replaces ESLint + Prettier in one package. xo bundles"
+" ESLint, plugins, and Prettier, but the project would keep `eslint-"
+"plugin-jsdoc` as a separate dev dependency to preserve JSDoc linting, and"
+" would add Prettier's ecosystem on top."
+msgstr ""
+"依存関係：BiomeはESLintとPrettierを1つのパッケージにまとめた代替です。"
+"xoはESLint・プラグイン・Prettierをバンドルしますが、JSDocリントを維持するために`eslint-plugin-jsdoc`は別の開発依存として残し、"
+"さらにPrettierのエコシステムを上から追加することになります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:36
+msgid ""
+"Formatting parity: Biome both lints and formats with one tool and one "
+"config. xo delegates formatting to Prettier, splitting the pipeline in "
+"two for no gain here."
+msgstr ""
+"フォーマットの一致：Biomeは1つのツール・1つの設定でリントとフォーマットの両方を行います。"
+"xoはフォーマットをPrettierに委譲するため、ここでは得るものなしにパイプラインが二つに分かれます。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:38
+msgid ""
+"xo remains a good default for greenfield JavaScript-only projects that "
+"want the ESLint plugin ecosystem. This repository is not that: it is "
+"TypeScript-heavy, already formatted by Biome, and does not need ESLint-"
+"only plugins."
+msgstr ""
+"xoは、ESLintプラグインエコシステムを活用したいゼロから始まるJavaScript専用プロジェクトには良いデフォルトであり続けます。"
+"しかしこのリポジトリはそうではありません。TypeScript中心で、すでにBiomeでフォーマットされており、ESLint専用プラグインを必要としていません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:40
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:42
+msgid ""
+"Good, because no migration work is needed and CI keeps its current fast "
+"lint step."
+msgstr ""
+"良い点：移行作業が不要で、CIの現在の高速なリントステップがそのまま維持されます。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:43
+msgid ""
+"Good, because formatting stays stable — no repo-wide reformat diff that "
+"would pollute `git blame`."
+msgstr ""
+"良い点：フォーマットが安定したままです。`git blame`を汚すリポジトリ全体の再フォーマット差分が発生しません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:44
+msgid ""
+"Bad, because Biome's rule catalogue is smaller than ESLint's; if a future"
+" need requires an ESLint-only plugin, this decision should be revisited."
+msgstr ""
+"悪い点：BiomeのルールカタログはESLintより小さいです。将来ESLint専用プラグインが必要になった場合は、この決定を見直すべきです。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:46
+msgid "Confirmation"
+msgstr "確認方法"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:48
+msgid ""
+"Compliance is verified by the existing CI: `npm run lint` / `npm run "
+"format` (Biome) run through pre-commit.ci and GitHub Actions on every PR."
+" If `biome.json` or `@biomejs/biome` is removed from the repository "
+"without a superseding ADR, this decision is violated."
+msgstr ""
+"遵守は既存のCIで検証されます。すべてのPRでpre-commit.ciとGitHub Actionsを通じて`npm run lint` / `npm run format`（Biome）が実行されます。"
+"後継のADRなしに`biome.json`または`@biomejs/biome`がリポジトリから削除された場合、この決定に違反しています。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:50
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の良い点と悪い点"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:52
+msgid "Option A: Stay on Biome (status quo)"
+msgstr "選択肢A：Biomeのままにする（現状維持）"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:54
+msgid ""
+"[Biome](https://biomejs.dev/) — single Rust toolchain for linting and "
+"formatting."
+msgstr ""
+"[Biome](https://biomejs.dev/) — リントとフォーマットのための単一のRustツールチェーン。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:56
+msgid "Good, because it is already installed, configured, and passing in CI."
+msgstr ""
+"良い点：すでにインストール・設定済みで、CIを通過しています。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:57
+msgid ""
+"Good, because first-class TypeScript parsing covers `ts/*.ts` and ambient"
+" declarations without extra plugins."
+msgstr ""
+"良い点：ファーストクラスのTypeScriptパースにより、追加プラグインなしで`ts/*.ts`とアンビエント宣言をカバーします。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:58
+msgid "Good, because lint + format come from one binary and one config file."
+msgstr ""
+"良い点：リントとフォーマットが1つのバイナリ・1つの設定ファイルで提供されます。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:59
+msgid ""
+"Bad, because the plugin ecosystem is smaller than ESLint's; niche rules "
+"may not exist."
+msgstr ""
+"悪い点：プラグインエコシステムはESLintより小さく、ニッチなルールは存在しない場合があります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:61
+msgid "Option B: Migrate to xo"
+msgstr "選択肢B：xoへ移行する"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:63
+msgid ""
+"[xo](https://github.com/xojs/xo) — opinionated ESLint wrapper with Prettier"
+" formatting."
+msgstr ""
+"[xo](https://github.com/xojs/xo) — Prettierフォーマットを備えた主観的な設定のESLintラッパー。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:65
+msgid ""
+"Good, because it exposes the full ESLint plugin ecosystem (including "
+"`eslint-plugin-jsdoc` natively)."
+msgstr ""
+"良い点：ESLintプラグインエコシステム全体（`eslint-plugin-jsdoc`をネイティブに含む）を利用できます。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:66
+msgid ""
+"Good, because its presets are well known in the JS community and it "
+"supports `--fix` autofix workflows."
+msgstr ""
+"良い点：プリセットはJSコミュニティで広く知られており、`--fix`による自動修正ワークフローをサポートしています。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:67
+msgid ""
+"Neutral, because the project does not currently use any ESLint-only "
+"plugin beyond JSDoc, which is already installed alongside Biome."
+msgstr ""
+"中立的な点：このプロジェクトは現在、Biomeと併せてすでにインストールされているJSDoc以外に、ESLint専用プラグインを使っていません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:68
+msgid ""
+"Bad, because TypeScript type-aware linting requires extra `@typescript-"
+"eslint` setup and is slow."
+msgstr ""
+"悪い点：TypeScriptの型認識リントには追加の`@typescript-eslint`のセットアップが必要で、低速です。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:69
+msgid ""
+"Bad, because formatting moves to Prettier, adding a second tool and "
+"config to keep style identical to today's Biome output."
+msgstr ""
+"悪い点：フォーマットがPrettierに移るため、今日のBiomeの出力と同じスタイルを保つために2つ目のツールと設定が必要になります。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:70
+msgid ""
+"Bad, because migration cost (config rewrite, repo-wide reformat, CI "
+"churn) buys no capability the project needs today."
+msgstr ""
+"悪い点：移行コスト（設定の書き直し、リポジトリ全体の再フォーマット、CIの混乱）に見合う、今日必要な機能は何も得られません。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:72
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:74
+msgid "Current Biome configuration: [`biome.json`](../../biome.json)"
+msgstr "現在のBiome設定：[`biome.json`](../../biome.json)"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:75
+msgid ""
+"Lint/format entry points: `lint` and `format` scripts in "
+"[`package.json`](../../package.json)"
+msgstr ""
+"リント/フォーマットのエントリーポイント：[`package.json`](../../package.json)の`lint`と`format`スクリプト"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:76
+msgid ""
+"Biome is referenced as the code-style badge in "
+"[`CONTRIBUTING.md`](../../CONTRIBUTING.md); if this decision is ever "
+"revisited, that badge and the pre-commit configuration must change "
+"together."
+msgstr ""
+"Biomeは[`CONTRIBUTING.md`](../../CONTRIBUTING.md)でコードスタイルのバッジとして参照されています。"
+"この決定を見直す場合は、そのバッジとpre-commitの設定を必ず一緒に変更してください。"
+
+#: ../../decisions/0011-decide-whether-to-replace-biome-with-xo.md:77
+msgid ""
+"Revisit triggers: a need for an ESLint-only rule or plugin, or a Biome "
+"breaking change that removes a rule the project relies on."
+msgstr ""
+"見直しのきっかけ：ESLint専用のルールやプラグインが必要になった場合、またはプロジェクトが依存するルールを削除するBiomeの破壊的変更があった場合。"
