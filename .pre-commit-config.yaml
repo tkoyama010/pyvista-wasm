@@ -42,7 +42,7 @@ repos:
         # the MADR "* Status:" bullet style that mdformat normalises to "- ".
         exclude: ^(slides/slides\.md|docs/decisions/.*\.md)$
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.29.3"
+    rev: "v2.29.4"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
@@ -52,11 +52,11 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.10
+    rev: 0.12.13
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.6
+    rev: v0.16.7
     hooks:
       # Run the linter
       - id: ruff-check
@@ -64,7 +64,7 @@ repos:
       # Run the formatter
       - id: ruff-format
   - repo: https://github.com/djlint/djLint
-    rev: v1.46.0
+    rev: v1.46.1
     hooks:
       - id: djlint-reformat-jinja
         files: src/pyvista_wasm/templates/.*\.html$
@@ -72,7 +72,7 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.12
+    rev: v2.5.13
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.9"]
@@ -81,7 +81,7 @@ repos:
     hooks:
       - id: shellcheck
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.13.1-1
+    rev: v3.14.1-1
     hooks:
       - id: shfmt
   - repo: https://github.com/scientific-python/cookie
@@ -139,7 +139,7 @@ repos:
       - id: check-adr
         language_version: python3.11
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.30.0
+    rev: v1.30.1
     hooks:
       - id: zizmor
 ci:
