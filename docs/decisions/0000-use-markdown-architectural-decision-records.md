@@ -1,12 +1,8 @@
----
-status: accepted
-date: 2026-07-16
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
-
 # Use Markdown Architectural Decision Records
+
+* Status: accepted
+* Date: 2026-07-16
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

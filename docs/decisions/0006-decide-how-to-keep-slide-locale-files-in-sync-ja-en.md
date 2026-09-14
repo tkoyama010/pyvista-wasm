@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-08-07
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Decide how to keep slide locale files in sync (JA/EN)
+
+* Status: accepted
+* Date: 2026-08-07
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

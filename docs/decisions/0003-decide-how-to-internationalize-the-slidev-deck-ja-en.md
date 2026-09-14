@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-08-01
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Decide how to internationalize the Slidev deck (JA/EN)
+
+* Status: accepted
+* Date: 2026-08-01
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

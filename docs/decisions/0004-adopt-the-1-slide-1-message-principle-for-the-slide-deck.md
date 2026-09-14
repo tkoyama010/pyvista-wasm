@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-08-01
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Adopt the "1 slide, 1 message" principle for the slide deck
+
+* Status: accepted
+* Date: 2026-08-01
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-08-11
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Decide how to sync GitHub repository settings with Terraform
+
+* Status: accepted
+* Date: 2026-08-11
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

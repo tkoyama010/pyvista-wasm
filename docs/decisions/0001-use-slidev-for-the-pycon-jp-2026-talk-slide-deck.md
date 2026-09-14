@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-07-16
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Use Slidev for the PyCon JP 2026 talk slide deck
+
+* Status: accepted
+* Date: 2026-07-16
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 
