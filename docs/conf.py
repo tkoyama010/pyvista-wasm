@@ -90,7 +90,7 @@ autodoc_default_options = {
 autosummary_generate = True
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "decisions/adr-template.md"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "decisions/template.md"]
 
 # -- Options for internationalization ----------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-internationalization

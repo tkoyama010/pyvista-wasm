@@ -1,12 +1,8 @@
----
-status: accepted
-date: 2026-08-07
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
-
 # Decide how to internationalize and sync the README
+
+* Status: accepted
+* Date: 2026-08-07
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

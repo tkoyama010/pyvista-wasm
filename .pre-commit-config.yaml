@@ -38,7 +38,9 @@ repos:
         # every thematic break to underscores and reads mid-document frontmatter
         # as a setext heading, collapsing the deck into a single slide. mdformat
         # has no per-rule ignore, so scope out just this one file.
-        exclude: ^slides/slides\.md$
+        # docs/decisions/ is generated/checked by the pyadr hooks, which require
+        # the MADR "* Status:" bullet style that mdformat normalises to "- ".
+        exclude: ^(slides/slides\.md|docs/decisions/.*\.md)$
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.29.4"
     hooks:
@@ -128,6 +130,14 @@ repos:
         additional_dependencies: [pyyaml, typer, lazy-loader]
         files: ^slides/locales/script/(ja|en)\.yml$
         pass_filenames: false
+  - repo: https://github.com/opinionated-digital-center/pyadr
+    rev: v0.20.0
+    hooks:
+      # pyadr caps python_version at <3.12 (pyproject.toml).
+      - id: generate-toc
+        language_version: python3.11
+      - id: check-adr
+        language_version: python3.11
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.30.1
     hooks:

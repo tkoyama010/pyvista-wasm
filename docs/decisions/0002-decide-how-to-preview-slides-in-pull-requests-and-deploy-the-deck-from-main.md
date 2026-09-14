@@ -1,12 +1,9 @@
----
-status: accepted
-date: 2026-07-17
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
 
 # Decide how to preview slides in pull requests and deploy the deck from main
+
+* Status: accepted
+* Date: 2026-07-17
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 

@@ -1,12 +1,8 @@
----
-status: proposed
-date: 2026-08-21
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
-
 # Track PyVista API coverage matrix for pyvista-wasm
+
+* Status: proposed
+* Date: 2026-08-21
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 
