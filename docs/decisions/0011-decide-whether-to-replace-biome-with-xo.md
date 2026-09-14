@@ -1,12 +1,8 @@
----
-status: proposed
-date: 2026-09-13
-decision-makers: [tkoyama010]
-consulted: []
-informed: []
----
-
 # Decide whether to replace Biome with xo
+
+* Status: proposed
+* Date: 2026-09-13
+* Decision-makers: tkoyama010
 
 ## Context and Problem Statement
 
