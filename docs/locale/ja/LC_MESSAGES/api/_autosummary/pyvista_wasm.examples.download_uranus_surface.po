@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-15 06:39+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_uranus_surface.rst:2
+msgid "pyvista\\_wasm.examples.download\\_uranus\\_surface"
+msgstr "pyvista\\_wasm.examples.download\\_uranus\\_surface"
+
+#: of pyvista_wasm.examples.download_uranus_surface:1
+msgid "Download the Uranus planet surface texture."
+msgstr "天王星の惑星表面テクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.download_uranus_surface:3
+msgid ""
+"Returns the Uranus surface image from the PyVista ``solar_textures`` "
+"dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the "
+"``pyvista.examples.planets.download_uranus_surface(texture=True)`` API. "
+"Textures are sourced from `Solar Textures "
+"<https://www.solarsystemscope.com/textures/>`_."
+msgstr ""
+"PyVista の ``solar_textures`` データセットから天王星表面画像を "
+":class:`~pyvista_wasm.texture.Texture` として返します。"
+"``pyvista.examples.planets.download_uranus_surface(texture=True)`` API "
+"と一致します。テクスチャは `Solar Textures "
+"<https://www.solarsystemscope.com/textures/>`_ から提供されています。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_uranus_surface.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.examples.download_uranus_surface:9
+msgid "Texture wrapping the Uranus surface image URL."
+msgstr "天王星表面画像のURLをラップするテクスチャ。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.download_uranus_surface.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.examples.download_uranus_surface:13
+msgid "Notes"
+msgstr "注釈"
+
+#: of pyvista_wasm.examples.download_uranus_surface:14
+msgid ""
+"pyvista-wasm textures are URL-based, so no file is downloaded on the "
+"Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps "
+"the remote image URL and VTK.wasm samples it in the browser via WebGL."
+msgstr ""
+"pyvista-wasm のテクスチャはURLベースのため、Python 側ではファイルをダウンロードしません。"
+"返される :class:`~pyvista_wasm.texture.Texture` はリモート画像のURLをラップし、"
+"VTK.wasm がブラウザ上で WebGL 経由でサンプリングします。"
+
+#: of pyvista_wasm.examples.download_uranus_surface:18
+msgid ""
+"To render a textured Uranus globe, pass the texture directly to "
+":meth:`~pyvista_wasm.Plotter.add_mesh` on the result of "
+":func:`~pyvista_wasm.examples.load_uranus`; the browser renderer "
+"generates the sphere UVs so the image wraps equirectangularly around the "
+"globe. This is the wasm counterpart to PyVista's `create-planet "
+"<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example."
+msgstr ""
+"テクスチャ付きの天王星をレンダリングするには、"
+":func:`~pyvista_wasm.examples.load_uranus` "
+"の結果に対して :meth:`~pyvista_wasm.Plotter.add_mesh` にテクスチャを直接渡します。"
+"ブラウザレンダラーが球体のUVを生成するため、画像は正距円筒図法として球体に包み込まれます。"
+"これは PyVista の `create-planet "
+"<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ "
+"サンプルの wasm 版に相当します。"
+
+#: of pyvista_wasm.examples.download_uranus_surface:26
+msgid "Examples"
+msgstr "例"
+
+#: of pyvista_wasm.examples.download_uranus_surface:30
+msgid "Render a textured Uranus planet sphere in the browser."
+msgstr "ブラウザでテクスチャ付きの天王星球体をレンダリングします。"
