@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-15 06:39+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_uranus.rst:2
+msgid "pyvista\\_wasm.examples.load\\_uranus"
+msgstr "pyvista\\_wasm.examples.load\\_uranus"
+
+#: of pyvista_wasm.examples.load_uranus:1
+msgid "Load the planet Uranus as a textured sphere."
+msgstr "テクスチャ付き球体として天王星をロードします。"
+
+#: of pyvista_wasm.examples.load_uranus:3
+msgid ""
+"Creates a sphere mesh with texture coordinates, matching the "
+"``pyvista.examples.planets.load_uranus`` API."
+msgstr ""
+"テクスチャ座標付きの球体メッシュを作成します。"
+"``pyvista.examples.planets.load_uranus`` API と一致します。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_uranus.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.examples.load_uranus:6
+msgid "Sphere radius. Default is 1.0."
+msgstr "球体の半径。デフォルトは 1.0。"
+
+#: of pyvista_wasm.examples.load_uranus:8
+msgid "Number of points in the latitude direction. Default is 50."
+msgstr "緯度方向のポイント数。デフォルトは 50。"
+
+#: of pyvista_wasm.examples.load_uranus:10
+msgid "Number of points in the longitude direction. Default is 100."
+msgstr "経度方向のポイント数。デフォルトは 100。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_uranus.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.examples.load_uranus:13
+msgid "Uranus sphere mesh with texture coordinates."
+msgstr "テクスチャ座標付き天王星球体メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_uranus.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.examples.load_uranus:18
+msgid ":func:`~pyvista_wasm.examples.load_earth`"
+msgstr ":func:`~pyvista_wasm.examples.load_earth`"
+
+#: of pyvista_wasm.examples.load_uranus:19
+msgid "Load the planet Earth for comparison."
+msgstr "比較のために地球をロードします。"
+
+#: of pyvista_wasm.examples.load_uranus:21
+msgid ":func:`~pyvista_wasm.examples.download_uranus_surface`"
+msgstr ":func:`~pyvista_wasm.examples.download_uranus_surface`"
+
+#: of pyvista_wasm.examples.load_uranus:22
+msgid "Download the Uranus surface texture."
+msgstr "天王星表面のテクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.load_uranus:25
+msgid "Examples"
+msgstr "例"
+
+#: of pyvista_wasm.examples.load_uranus:37
+msgid "Render a Uranus planet sphere in the browser:"
+msgstr "ブラウザで天王星球体をレンダリングします:"
+
