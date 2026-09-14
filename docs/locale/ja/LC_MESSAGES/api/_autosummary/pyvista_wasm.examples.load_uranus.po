@@ -87,4 +87,3 @@ msgstr "例"
 #: of pyvista_wasm.examples.load_uranus:37
 msgid "Render a Uranus planet sphere in the browser:"
 msgstr "ブラウザで天王星球体をレンダリングします:"
-
