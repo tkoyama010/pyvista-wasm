@@ -97,3 +97,51 @@ class TestDownloadVenusSurface:
         """The Texture repr references the Venus image."""
         texture = examples.download_venus_surface()
         assert "venus_surface.jpg" in repr(texture)
+
+
+class TestLoadUranus:
+    """Tests for examples.load_uranus."""
+
+    def test_returns_polydata(self) -> None:
+        """load_uranus returns a PolyData instance."""
+        uranus = examples.load_uranus()
+        assert isinstance(uranus, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        uranus = examples.load_uranus()
+        assert uranus.t_coords is not None
+        assert uranus.t_coords.shape == (uranus.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        uranus = examples.load_uranus()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert uranus.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        uranus = examples.load_uranus(radius=2.0)
+        radius, _ = uranus.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadUranusSurface:
+    """Tests for examples.download_uranus_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_uranus_surface returns a Texture instance."""
+        texture = examples.download_uranus_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_uranus_solar_texture(self) -> None:
+        """The texture URL points at the Uranus solar_textures image."""
+        texture = examples.download_uranus_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/uranus.jpg"
+        )
+
+    def test_repr_mentions_uranus(self) -> None:
+        """The Texture repr references the Uranus image."""
+        texture = examples.download_uranus_surface()
+        assert "uranus.jpg" in repr(texture)
