@@ -32,3 +32,4 @@
 
 * [0010 - Track PyVista API coverage matrix for pyvista-wasm](0010-track-pyvista-api-coverage-matrix-for-pyvista-wasm.md)
 * [0011 - Decide whether to replace Biome with xo](0011-decide-whether-to-replace-biome-with-xo.md)
+* [0012 - Decide whether to adopt C4 model diagrams in ADRs](0012-decide-whether-to-adopt-c4-model-diagrams-in-adrs.md)
