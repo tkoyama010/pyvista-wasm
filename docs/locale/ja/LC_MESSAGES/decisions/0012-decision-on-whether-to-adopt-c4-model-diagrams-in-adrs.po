@@ -1,0 +1,872 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-19 14:11+0900\n"
+"PO-Revision-Date: 2026-09-19 14:30+0900\n"
+"Last-Translator: \n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:1
+msgid "Decide whether to adopt C4 model diagrams in ADRs"
+msgstr "ADRにC4モデル図を採用するかどうかを決める"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:3
+msgid "Status: proposed"
+msgstr "ステータス：提案中"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:4
+msgid "Date: 2026-09-19"
+msgstr "日付：2026-09-19"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:5
+msgid "Decision-makers: tkoyama010"
+msgstr "決定者：tkoyama010"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:7
+msgid "Context and Problem Statement"
+msgstr "背景と問題提起"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:9
+msgid ""
+"ADRs record *why* a decision was made ([ADR-0000](0000-use-markdown-"
+"architectural-decision-records.md)), but describe structure almost entirely "
+"in prose. Diagrams appear ad hoc: a Mermaid `sequenceDiagram` in "
+"[ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-"
+"terraform.md), more in `slides/slides.md`. Nothing says what a diagram should"
+" show, at which level, or with which vocabulary, so two records can both draw"
+" \"the architecture\" and disagree about what counts as a box."
+msgstr ""
+"ADRは決定の*理由*を記録しますが（[ADR-0000](0000-use-markdown-architectural-decision-"
+"records.md)）、その構造はほぼすべて文章で記述されています。図は場当たり的に現れます。[ADR-0009](0009-decide-how-"
+"to-sync-github-repository-settings-with-"
+"terraform.md)にはMermaidの`sequenceDiagram`があり、`slides/slides.md`にはさらに多くの図があります。図に何を示すべきか、どのレベルで、どの語彙で描くべきかを定めたものは何もないため、二つのレコードがどちらも「アーキテクチャ」を描きながら、箱の数え方について食い違うことがありえます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:11
+msgid ""
+"The [C4 model](https://c4model.com/) supplies that vocabulary: four zoom "
+"levels — System Context, Container, Component, Code — and a small element set"
+" that keeps boxes comparable. pyvista-wasm has the layered shape C4's Context"
+" and Container levels exist to draw: a Python-facing PyVista API "
+"(`src/pyvista_wasm/`), a TypeScript glue layer (`ts/renderer.ts`), the vtk-"
+"wasm module it drives, and the in-browser Python runtime hosting them."
+msgstr ""
+"[C4モデル](https://c4model.com/)はその語彙を提供します。System "
+"Context・Container・Component・Codeという四つのズームレベルと、箱を比較可能に保つ小さな要素集合です。pyvista-"
+"wasmには、C4のContextとContainerレベルが描くために存在する階層構造があります。Python向けのPyVista "
+"API（`src/pyvista_wasm/`）、TypeScriptのグルーレイヤー（`ts/renderer.ts`）、それが駆動するvtk-"
+"wasmモジュール、そしてそれらをホストするブラウザ内Pythonランタイムです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:13
+msgid ""
+"Should pyvista-wasm adopt C4 for architecture diagrams in ADRs, and with "
+"which toolchain?"
+msgstr "pyvista-wasmはADRのアーキテクチャ図にC4を採用すべきか、採用するならどのツールチェーンにすべきか？"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:15
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:17
+msgid ""
+"**Shared vocabulary across records**: the same element types and levels "
+"everywhere, so readers need not re-learn the notation per record."
+msgstr ""
+"**レコード間で共有される語彙**：どのレコードでも同じ要素タイプと同じレベルを使うため、読者はレコードごとに記法を学び直す必要がありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:18
+msgid ""
+"**Plain text under version control**: diagrams must be diffable Markdown "
+"reviewed in the same PR flow as the record ([ADR-0000](0000-use-markdown-"
+"architectural-decision-records.md)); binary images and external editors break"
+" that."
+msgstr ""
+"**バージョン管理下のプレーンテキスト**：図は、レコードと同じPRフローでレビューされるdiff可能なMarkdownでなければなりません（[ADR-0000](0000-use-"
+"markdown-architectural-decision-records.md)）。バイナリ画像や外部エディタはこれを壊します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:19
+msgid ""
+"**No new toolchain in CI**: Sphinx builds the docs on Read the Docs for every"
+" PR, so requiring a JVM, Docker, or Graphviz is disproportionate here."
+msgstr ""
+"**CIに新しいツールチェーンを追加しない**：SphinxはすべてのPRでRead the "
+"Docs上でドキュメントをビルドします。JVM・Docker・Graphvizを要求するのはここでは過剰です。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:20
+msgid ""
+"**Rendering in the published docs**: a diagram that renders on GitHub but not"
+" on Read the Docs, or the reverse, is half a diagram."
+msgstr ""
+"**公開ドキュメントでの描画**：GitHubでは描けるがRead the Docsでは描けない（あるいはその逆の）図は、半分しか機能しない図です。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:21
+msgid ""
+"**Low authoring overhead**: if drawing costs more than writing the decision, "
+"contributors skip it and the notation never sticks."
+msgstr "**低い作成コスト**：図を描くコストが決定を書くコストより高いと、コントリビューターは図を描かなくなり、記法は定着しません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:22
+msgid ""
+"**Right level of abstraction**: Context and Container are the useful levels; "
+"class diagrams duplicate the code and rot."
+msgstr "**適切な抽象度**：ContextとContainerが有用なレベルです。クラス図はコードを複製し、陳腐化します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:24
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:26
+msgid "**Option A: Status quo — ad-hoc Mermaid diagrams, no C4 notation**"
+msgstr "**選択肢A：現状維持 — 場当たり的なMermaid図、C4記法なし**"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:27
+msgid "**Option B: Adopt C4 notation using the existing Mermaid toolchain**"
+msgstr "**選択肢B：既存のMermaidツールチェーンでC4記法を採用する**"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:28
+msgid ""
+"**Option C: Adopt C4 with Structurizr DSL as the model source, with ADRs "
+"linked into the model**"
+msgstr "**選択肢C：モデルソースにStructurizr DSLを使い、ADRをモデルにリンクしてC4を採用する**"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:29
+msgid ""
+"**Option D: Adopt C4 with PlantUML and the C4-PlantUML standard library**"
+msgstr "**選択肢D：PlantUMLとC4-PlantUML標準ライブラリでC4を採用する**"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:31
+msgid "Decision Outcome"
+msgstr "決定の結果"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:33
+msgid ""
+"Chosen option: \"**Option B: Adopt C4 notation using the existing Mermaid "
+"toolchain**\", because it alone gives ADRs a shared architectural vocabulary "
+"without adding anything to the documentation build."
+msgstr ""
+"選択したオプション：「**選択肢B：既存のMermaidツールチェーンでC4記法を採用する**」。ドキュメントビルドに何も追加せずに、ADRに共有されたアーキテクチャ語彙を与えるのはこの選択肢だけだからです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:35
+#, python-brace-format
+msgid ""
+"The toolchain is in place and proven for ADRs: `sphinxcontrib.mermaid` is "
+"enabled in `docs/conf.py`, pinned in `pyproject.toml` (`sphinxcontrib-"
+"mermaid>=2.0.0,<3.0.0`, resolved to 2.1.1 in `uv.lock`), and "
+"[ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-"
+"terraform.md) already renders a `{mermaid}` block through it. The extension "
+"defaults `mermaid_version` to 11.12.1 and `docs/conf.py` does not override "
+"it, so the published docs load a Mermaid release shipping the "
+"`C4Context`/`C4Container`/`C4Component` types. Slidev loads its own Mermaid "
+"(`^11.16.1` in `slides/package.json`), so the same source works in the deck."
+msgstr ""
+"ツールチェーンはすでに整備され、ADRでも実証済みです。`sphinxcontrib.mermaid`は`docs/conf.py`で有効化され、`pyproject.toml`でピン留め（`sphinxcontrib-"
+"mermaid>=2.0.0,<3.0.0`、`uv.lock`では2.1.1に解決）されており、[ADR-0009](0009-decide-how-"
+"to-sync-github-repository-settings-with-"
+"terraform.md)はすでに`{mermaid}`ブロックをこれを通して描画しています。この拡張の`mermaid_version`のデフォルトは11.12.1で、`docs/conf.py`は上書きしていないため、公開ドキュメントは`C4Context`/`C4Container`/`C4Component`タイプを含むMermaidリリースを読み込みます。Slidevは独自のMermaid（`slides/package.json`の`^11.16.1`）を読み込むため、同じソースがスライドでも機能します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:37
+msgid ""
+"Options C and D each add a runtime the project does not otherwise need — a "
+"JVM plus Structurizr Lite, or Java plus Graphviz plus `sphinxcontrib-"
+"plantuml` — for model-level features a repository with a dozen ADRs does not "
+"yet need. Option A is today's practice, which prompted the question."
+msgstr ""
+"選択肢CとDはどちらも、このプロジェクトが他に必要としないランタイム（JVMとStructurizr "
+"Lite、またはJavaとGraphvizと`sphinxcontrib-"
+"plantuml`）を、十数個のADRしかないリポジトリにはまだ必要のないモデルレベルの機能のために追加します。選択肢Aは今日の慣行であり、それがこの問いの発端です。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:39
+msgid "Adopting C4 means:"
+msgstr "C4の採用は次のことを意味します："
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:41
+msgid ""
+"Architecture diagrams in ADRs use C4 notation at **System Context** or "
+"**Container** level; Component level only when the decision is about internal"
+" structure."
+msgstr ""
+"ADRのアーキテクチャ図は**System "
+"Context**または**Container**レベルのC4記法を使います。Componentレベルは、決定が内部構造に関する場合のみ使います。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:42
+msgid ""
+"**Code level is never drawn.** `src/pyvista_wasm/__init__.pyi` and the "
+"`autosummary` API reference cover it and stay correct automatically."
+msgstr ""
+"**Codeレベルは決して描きません。**`src/pyvista_wasm/__init__.pyi`と`autosummary`のAPIリファレンスがそのレベルをカバーし、自動的に正しい状態を保ちます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:43
+#, python-brace-format
+msgid ""
+"Diagrams live in the ADR that needs them, in a `{mermaid}` block. No central "
+"model to sync."
+msgstr "図はそれを必要とするADRの中に、`{mermaid}`ブロックで置きます。同期すべき中央モデルはありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:44
+msgid ""
+"ADRs without an architectural component need no diagram. C4 is a notation for"
+" when you draw, not an obligation to draw."
+msgstr "アーキテクチャ要素を含まないADRに図は不要です。C4は描くときに使う記法であって、描く義務ではありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:46
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:48
+msgid ""
+"Good, because diagrams become comparable across records instead of taking "
+"whatever shape each one invented."
+msgstr "良い点：図が各レコードが発明した任意の形ではなく、レコード間で比較可能になります。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:49
+msgid ""
+"Good, because nothing is added to the docs build, so Read the Docs previews "
+"keep working unchanged."
+msgstr "良い点：ドキュメントビルドに何も追加されないため、Read the Docsのプレビューは変更なしで動き続けます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:50
+msgid ""
+"Good, because the source is Markdown inside the record, reviewed in the same "
+"diff and unable to drift into a separate artifact."
+msgstr "良い点：ソースはレコード内のMarkdownであり、同じdiffでレビューされ、別成果物にドリフトすることがありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:51
+msgid ""
+"Good, because the same source can be reused in `slides/slides.md`, which "
+"already renders Mermaid."
+msgstr "良い点：同じソースを、すでにMermaidを描画している`slides/slides.md`で再利用できます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:52
+msgid ""
+"Bad, because Mermaid's C4 support is flagged experimental upstream: the "
+"syntax may change between releases, and `mermaid_version` is unpinned, so a "
+"default bump could break rendering. Mitigation is cheap — pin it."
+msgstr ""
+"悪い点：MermaidのC4サポートは上流で実験的と位置づけられています。リリース間で構文が変わる可能性があり、`mermaid_version`はピン留めされていないため、デフォルトの更新で描画が壊れえます。対策は安価です"
+" — ピン留めしてください。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:53
+msgid ""
+"Bad, because Mermaid gives little layout control for C4, so large diagrams "
+"look worse. That pushes records toward few, small diagrams, the intended "
+"outcome anyway."
+msgstr ""
+"悪い点：MermaidはC4のレイアウト制御がほとんどなく、大きな図は見栄えが悪くなります。これはレコードを少数の小さな図へ導きますが、それ自体が意図した結果です。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:54
+msgid ""
+"Bad, because with no central model, an element in two ADRs can be described "
+"inconsistently. Accepted: records are decisions fixed in time, not a live "
+"model, and Option C stays available."
+msgstr ""
+"悪い点：中央モデルがないため、二つのADRに現れる要素が一貫しない記述になりえます。受容します。レコードは時間で固定された決定であってライブモデルではなく、選択肢Cは利用可能なままです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:55
+msgid ""
+"Neutral, because existing non-C4 diagrams are not retrofitted. C4 governs "
+"*architecture* diagrams; sequence and flow diagrams still show a workflow "
+"over time."
+msgstr ""
+"中立的な点：既存の非C4図は改修されません。C4が統括するのは*アーキテクチャ*図です。シーケンス図やフロー図は依然として時間経過に沿ったワークフローを示します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:57
+msgid "Confirmation"
+msgstr "確認方法"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:59
+msgid ""
+"The documentation build confirms this, not inspection: the diagram below is a"
+" C4 System Context diagram of pyvista-wasm, and the Read the Docs preview for"
+" the introducing pull request must render it. If it does not, Mermaid's "
+"experimental C4 support is unusable here and this record should be rejected "
+"rather than merged with a broken diagram."
+msgstr ""
+"この確認はドキュメントビルドによって行われ、目視検証ではありません。下の図はpyvista-wasmのC4 System "
+"Context図であり、このレコードを導入するプルリクエストのRead the "
+"Docsプレビューがそれを描画しなければなりません。描画しない場合、Mermaidの実験的C4サポートはここでは使えず、このレコードは壊れた図のままマージされるのではなく拒否されるべきです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:81
+msgid ""
+"Thereafter compliance is a review concern: a PR adding an architecture "
+"diagram in another notation, or drawing Code level, contradicts this record."
+msgstr "以後の遵守はレビューの関心事項です。別の記法でアーキテクチャ図を追加するPRや、Codeレベルを描くPRは、このレコードに反します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:83
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の良い点と悪い点"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:85
+msgid "Option A: Status quo — ad-hoc Mermaid diagrams, no C4 notation"
+msgstr "選択肢A：現状維持 — 場当たり的なMermaid図、C4記法なし"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:87
+msgid ""
+"Today's practice: a `sequenceDiagram` in [ADR-0009](0009-decide-how-to-sync-"
+"github-repository-settings-with-terraform.md), diagrams in "
+"`slides/slides.md`, no rule for architecture diagrams."
+msgstr ""
+"現在の慣行：[ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-"
+"terraform.md)の`sequenceDiagram`、`slides/slides.md`の図、アーキテクチャ図についての規則はなし。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:89
+msgid "Good, because it costs nothing to adopt, learn, or configure."
+msgstr "良い点：採用・学習・設定に何のコストもかかりません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:90
+msgid ""
+"Good, because Mermaid's non-C4 types are stable and render reliably in both "
+"Sphinx and Slidev."
+msgstr "良い点：Mermaidの非C4タイプは安定しており、SphinxとSlidevの両方で確実に描画されます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:91
+msgid ""
+"Neutral, because it is not *wrong* — a small project can carry architecture "
+"in prose for a long time."
+msgstr "中立的な点：*間違ってはいません* — 小規模プロジェクトはアーキテクチャを長い間文章で持ち続けられます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:92
+msgid ""
+"Bad, because abstraction level is chosen per diagram, so records cannot be "
+"compared."
+msgstr "悪い点：抽象度が図ごとに選ばれるため、レコードを比較できません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:93
+msgid ""
+"Bad, because nothing distinguishes \"a system\", \"a deployable unit\", and "
+"\"a module\" in a project whose whole story is the boundary between Python, "
+"TypeScript, and WebAssembly."
+msgstr ""
+"悪い点：Python・TypeScript・WebAssemblyの境界こそが全体の物語であるプロジェクトにおいて、「システム」「デプロイ可能な単位」「モジュール」を区別するものが何もありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:95
+msgid "Option B: Adopt C4 notation using the existing Mermaid toolchain"
+msgstr "選択肢B：既存のMermaidツールチェーンでC4記法を採用する"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:97
+msgid ""
+"C4 vocabulary in Mermaid `C4Context` / `C4Container` blocks, rendered by the "
+"already-enabled `sphinxcontrib.mermaid`."
+msgstr ""
+"すでに有効化されている`sphinxcontrib.mermaid`が描画する、Mermaidの`C4Context`/`C4Container`ブロックによるC4語彙。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:99
+msgid ""
+"Good, because the toolchain exists and an ADR already uses it, so adoption "
+"costs one paragraph here and nothing in CI."
+msgstr "良い点：ツールチェーンが存在し、ADRがすでに使っているため、採用コストはこのレコードの一段落で、CIにはゼロです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:100
+msgid ""
+"Good, because C4's four levels answer \"how far should I zoom\", which the "
+"status quo leaves open."
+msgstr "良い点：C4の四つのレベルが「どこまでズームすべきか」に明示的な答えを与えます。現状維持ではこれが未解決のままです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:101
+msgid ""
+"Good, because the notation is small: four element types, not a diagramming "
+"language."
+msgstr "良い点：記法が小さいです。四つの要素タイプであって、図式言語ではありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:102
+msgid ""
+"Neutral, because it gives notation only — nothing validates that two diagrams"
+" describe the system consistently."
+msgstr "中立的な点：記法を与えるだけで、二つの図がシステムを一貫して記述していることを検証するものはありません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:103
+msgid ""
+"Bad, because Mermaid's C4 support is experimental upstream and its layout "
+"engine is weak beyond a modest diagram."
+msgstr "悪い点：MermaidのC4サポートは上流で実験的であり、レイアウトエンジンは中規模の図を超えると弱いです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:105
+msgid ""
+"Option C: Adopt C4 with Structurizr DSL as the model source, with ADRs linked"
+" into the model"
+msgstr "選択肢C：モデルソースにStructurizr DSLを使い、ADRをモデルにリンクしてC4を採用する"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:107
+msgid ""
+"[Structurizr](https://structurizr.com/) DSL describes the system once and "
+"generates views from it; Structurizr Lite can also ingest `docs/decisions/` "
+"via `!adrs`, rendering ADRs beside the diagrams and scoped to the element "
+"they concern."
+msgstr ""
+"[Structurizr](https://structurizr.com/) "
+"DSLはシステムを一度記述し、そこからビューを生成します。Structurizr "
+"Liteは`!adrs`経由で`docs/decisions/`も取り込め、図の横に、対象の要素に紐づく形でADRを描画します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:109
+msgid ""
+"Good, because one model generates every view, so Context and Container "
+"diagrams cannot contradict each other."
+msgstr "良い点：一つのモデルがすべてのビューを生成するため、Context図とContainer図が矛盾できません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:110
+msgid ""
+"Good, because `!adrs` directly answers \"integrate C4 and ADRs\": decisions "
+"become navigable from the element they are about."
+msgstr "良い点：`!adrs`は「C4とADRの統合」への直接的な答えです。決定が、その対象の要素から辿れるようになります。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:111
+msgid "Good, because layout and export are far better than Mermaid's."
+msgstr "良い点：レイアウトとエクスポートはMermaidよりはるかに優れています。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:112
+msgid "Neutral, because the DSL is still plain text under version control."
+msgstr "中立的な点：DSLは依然としてバージョン管理下のプレーンテキストです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:113
+msgid ""
+"Bad, because seeing or publishing anything means running Structurizr Lite, a "
+"JVM application normally run via Docker — a new toolchain for the docs build "
+"and every contributor."
+msgstr ""
+"悪い点：何かを見たり公開したりするにはStructurizr "
+"Lite（通常Docker経由で動かすJVMアプリケーション）の実行が必要です。ドキュメントビルドとすべてのコントリビューターにとって新しいツールチェーンです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:114
+msgid ""
+"Bad, because rendering into Read the Docs means exporting images in CI or "
+"hosting a second site; either way the diagram stops being reviewable as a "
+"diff."
+msgstr ""
+"悪い点：Read the "
+"Docsへの描画は、CIでの画像エクスポートか第二サイトのホスティングを意味します。いずれにせよ図はdiffとしてレビューできなくなります。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:115
+msgid ""
+"Bad, because a central model pays off only at a scale this project has not "
+"reached."
+msgstr "悪い点：中央モデルは、このプロジェクトがまだ達していない規模でのみ見返りを返します。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:117
+msgid "Option D: Adopt C4 with PlantUML and the C4-PlantUML standard library"
+msgstr "選択肢D：PlantUMLとC4-PlantUML標準ライブラリでC4を採用する"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:119
+msgid ""
+"[C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML) provides C4 "
+"macros for PlantUML, rendered in Sphinx through `sphinxcontrib-plantuml`."
+msgstr ""
+"[C4-PlantUML](https://github.com/plantuml-"
+"stdlib/C4-PlantUML)はPlantUML用のC4マクロを提供し、Sphinxでは`sphinxcontrib-"
+"plantuml`を通して描画されます。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:121
+msgid ""
+"Good, because it is the most mature C4 implementation: stable syntax, full "
+"element set, good layout control."
+msgstr "良い点：最も成熟したC4実装です。安定した構文、完全な要素集合、優れたレイアウト制御。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:122
+msgid "Good, because the source stays plain text in the record, like Option B."
+msgstr "良い点：選択肢Bと同様に、ソースはレコード内のプレーンテキストのままです。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:123
+msgid ""
+"Neutral, because it would sit alongside Mermaid rather than replace it, since"
+" the deck and existing sequence diagrams stay on Mermaid."
+msgstr "中立的な点：スライドと既存のシーケンス図はMermaidに留まるため、Mermaidを置き換えるのではなく併存することになります。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:124
+msgid ""
+"Bad, because it adds `sphinxcontrib-plantuml` plus Java and Graphviz to the "
+"docs build, which Read the Docs must install on every PR."
+msgstr ""
+"悪い点：ドキュメントビルドに`sphinxcontrib-plantuml`とJavaとGraphvizが追加され、Read the "
+"DocsがすべてのPRでそれらをインストールしなければなりません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:125
+msgid ""
+"Bad, because the project would carry two toolchains for one notation, and "
+"contributors would have to know which block goes where."
+msgstr "悪い点：プロジェクトは一つの記法のために二つのツールチェーンを抱え、コントリビューターはどのブロックをどこで使うかを知らなければなりません。"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:127
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:129
+msgid "C4 model: [https://c4model.com/](https://c4model.com/)"
+msgstr "C4モデル：[https://c4model.com/](https://c4model.com/)"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:130
+msgid ""
+"Mermaid C4 syntax (flagged experimental): "
+"[https://mermaid.js.org/syntax/c4.html](https://mermaid.js.org/syntax/c4.html)"
+msgstr ""
+"Mermaid "
+"C4構文（実験的と位置づけ）：[https://mermaid.js.org/syntax/c4.html](https://mermaid.js.org/syntax/c4.html)"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:131
+msgid ""
+"Structurizr DSL, including `!adrs`: "
+"[https://docs.structurizr.com/dsl](https://docs.structurizr.com/dsl)"
+msgstr ""
+"Structurizr "
+"DSL（`!adrs`を含む）：[https://docs.structurizr.com/dsl](https://docs.structurizr.com/dsl)"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:132
+msgid ""
+"C4-PlantUML: [https://github.com/plantuml-"
+"stdlib/C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML)"
+msgstr ""
+"C4-PlantUML：[https://github.com/plantuml-"
+"stdlib/C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML)"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:133
+msgid ""
+"What makes Option B free: `extensions` in [`docs/conf.py`](../conf.py); "
+"`sphinxcontrib-mermaid` in the `docs` dependency group of "
+"[`pyproject.toml`](../../pyproject.toml)"
+msgstr ""
+"選択肢Bが無料である理由：[`docs/conf.py`](../conf.py)の`extensions`。[`pyproject.toml`](../../pyproject.toml)の`docs`依存グループの`sphinxcontrib-"
+"mermaid`"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:134
+#, python-brace-format
+msgid ""
+"Prior art here: the `{mermaid}` block in [ADR-0009](0009-decide-how-to-sync-"
+"github-repository-settings-with-terraform.md)"
+msgstr ""
+"このリポジトリでの先例：[ADR-0009](0009-decide-how-to-sync-github-repository-settings-"
+"with-terraform.md)の`{mermaid}`ブロック"
+
+#: ../../decisions/0012-decision-on-whether-to-adopt-c4-model-diagrams-in-adrs.md:135
+msgid ""
+"Revisit triggers: Mermaid changing or dropping C4 syntax; a need for one "
+"model rendered into many synchronized views; or diagrams outgrowing Mermaid's"
+" layout — any of which argues for Option C."
+msgstr ""
+"見直しのきっかけ：MermaidのC4構文の変更または削除。一つのモデルを多数の同期ビューに描画する必要性。または図がMermaidのレイアウトを超えて成長すること"
+" — いずれも選択肢Cを支持します。"
+
+#~ msgid ""
+#~ "ADRs in `docs/decisions/` record *why* a decision was made "
+#~ "([ADR-0000](0000-use-markdown-architectural-decision-records.md)), but the "
+#~ "structure they decide about is described almost entirely in prose. Where a "
+#~ "diagram has helped, it was drawn ad hoc: [ADR-0009](0009-decide-how-to-sync-"
+#~ "github-repository-settings-with-terraform.md) embeds a Mermaid "
+#~ "`sequenceDiagram`, and `slides/slides.md` carries several more. Nothing says "
+#~ "what a diagram in an ADR is supposed to show, at which level of abstraction, "
+#~ "or with which vocabulary, so two records that both draw \"the architecture\" "
+#~ "can disagree about what counts as a box."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The [C4 model](https://c4model.com/) is a candidate vocabulary: it fixes four"
+#~ " zoom levels — System Context, Container, Component, Code — and a small "
+#~ "element set (person, software system, container, component) that keeps every "
+#~ "diagram's boxes comparable. pyvista-wasm has a genuinely layered architecture"
+#~ " to describe — a Python-facing PyVista API (`src/pyvista_wasm/`), a "
+#~ "TypeScript glue layer (`ts/renderer.ts`), the vtk-wasm module it drives, and "
+#~ "the in-browser Python runtime that hosts them — which is exactly the shape "
+#~ "C4's Context and Container levels exist to draw."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Should pyvista-wasm adopt C4 as the notation for architecture diagrams in "
+#~ "ADRs, and if so, with which toolchain?"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Shared vocabulary across records**: Diagrams drawn by different "
+#~ "contributors in different ADRs should use the same element types and the same"
+#~ " levels, so a reader can compare them without re-learning the notation each "
+#~ "time."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Plain text under version control**: Diagrams must be diffable Markdown that"
+#~ " travels through the same PR review flow as the record itself "
+#~ "([ADR-0000](0000-use-markdown-architectural-decision-records.md)). Binary "
+#~ "images or an external editor would break that."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**No new toolchain in CI**: Documentation is built by Sphinx on Read the Docs"
+#~ " for every PR. A notation that requires a JVM, Docker, or Graphviz in the "
+#~ "docs build is a disproportionate cost for a small project."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Rendering in the published docs**: ADRs are published alongside the rest of"
+#~ " `docs/`. A diagram that renders on GitHub but not on Read the Docs (or the "
+#~ "reverse) is only half a diagram."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Low authoring overhead**: Records must stay cheap to write. If drawing the "
+#~ "diagram costs more than writing the decision, contributors will skip it and "
+#~ "the notation will not stick."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Right level of abstraction**: The useful levels here are Context (who uses "
+#~ "pyvista-wasm and what it depends on) and Container (Python API, TypeScript "
+#~ "glue, vtk-wasm, browser runtime). Diagrams of individual classes duplicate "
+#~ "the code and rot."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Chosen option: \"**Option B: Adopt C4 notation using the existing Mermaid "
+#~ "toolchain**\", because it is the only option that gives ADRs a shared "
+#~ "architectural vocabulary without adding anything to the documentation build."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The toolchain is already in place and already proven for ADRs: "
+#~ "`sphinxcontrib.mermaid` is enabled in `docs/conf.py`, pinned as a docs "
+#~ "dependency in `pyproject.toml` (`sphinxcontrib-mermaid>=2.0.0,<3.0.0`, "
+#~ "resolved to 2.1.1 in `uv.lock`), and [ADR-0009](0009-decide-how-to-sync-"
+#~ "github-repository-settings-with-terraform.md) already renders a `{mermaid}` "
+#~ "block through it. The extension defaults `mermaid_version` to 11.12.1 and "
+#~ "`docs/conf.py` does not override it, so the Mermaid release loaded in the "
+#~ "published docs is one that ships the `C4Context`/`C4Container`/`C4Component` "
+#~ "diagram types. Slidev loads its own Mermaid (`mermaid` `^11.16.1` in "
+#~ "`slides/package.json`), so the same C4 source can be pasted into the deck "
+#~ "without a second notation."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Options C and D both add a runtime the project does not otherwise need — a "
+#~ "JVM plus Structurizr Lite, or Java plus Graphviz plus `sphinxcontrib-"
+#~ "plantuml` — to buy model-level features (a single model rendered into many "
+#~ "views, Structurizr's `!adrs` integration) that a repository with a dozen ADRs"
+#~ " does not yet need. Option A is what the project does today and is what "
+#~ "prompted the question."
+#~ msgstr ""
+
+#~ msgid "Adopting C4 means, concretely:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "When an ADR needs an architecture diagram, it is drawn in C4 notation at "
+#~ "**System Context** or **Container** level. Component level is used only when "
+#~ "the decision is genuinely about internal structure."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Code level is never drawn.** The type stub `src/pyvista_wasm/__init__.pyi` "
+#~ "and the API reference built by `autosummary` already describe that level and "
+#~ "stay correct automatically."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Diagrams stay inside the ADR that needs them, in a `{mermaid}` block. There "
+#~ "is no central model file to keep in sync."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "ADRs without an architectural component (tooling, process, documentation "
+#~ "decisions) still need no diagram. C4 is a notation to use when drawing, not "
+#~ "an obligation to draw."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because architecture diagrams across ADRs become comparable: the same "
+#~ "element types at the same two levels, instead of whatever shape each record "
+#~ "invented."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because nothing is added to the docs build — no new dependency, no JVM,"
+#~ " no Graphviz — so Read the Docs previews keep working unchanged on every PR."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because the diagram source is Markdown inside the record, so it is "
+#~ "reviewed in the same diff as the decision it illustrates and cannot drift "
+#~ "into a separate artifact."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because the same C4 source can be reused in `slides/slides.md`, which "
+#~ "already renders Mermaid."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because Mermaid's C4 diagram support is flagged experimental upstream: "
+#~ "its syntax may change between Mermaid releases, and `mermaid_version` is "
+#~ "unpinned in `docs/conf.py`, so a future default bump could alter or break "
+#~ "rendering. The mitigation is cheap — pin `mermaid_version` if that ever "
+#~ "happens."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because Mermaid offers little layout control for C4 diagrams compared "
+#~ "with Structurizr or PlantUML, so large diagrams look worse. This pushes "
+#~ "records toward few, small diagrams, which is the intended outcome anyway."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because with no central model, an element that appears in two ADRs can "
+#~ "be described inconsistently. Accepted: records are immutable decisions in "
+#~ "time, not a live model, and Option C remains available if a live model is "
+#~ "ever wanted."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Neutral, because existing non-C4 diagrams (the `sequenceDiagram` in "
+#~ "[ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-"
+#~ "terraform.md), the deck's diagrams) are not retrofitted. C4 governs "
+#~ "*architecture* diagrams; sequence and flow diagrams remain the right tool for"
+#~ " showing a workflow over time."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This decision is confirmed by the documentation build, not by inspection: the"
+#~ " diagram below is a C4 System Context diagram of pyvista-wasm, and the Read "
+#~ "the Docs preview built for the pull request that introduces this record must "
+#~ "render it. If it does not render, Mermaid's experimental C4 support is not "
+#~ "usable here and this record should be rejected rather than merged with a "
+#~ "broken diagram."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Thereafter, compliance is a review concern: a PR that adds an architecture "
+#~ "diagram to an ADR in notation other than C4, or that draws Code-level "
+#~ "structure, contradicts this record."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "What the project does today: a `sequenceDiagram` in [ADR-0009](0009-decide-"
+#~ "how-to-sync-github-repository-settings-with-terraform.md), flow and sequence "
+#~ "diagrams in `slides/slides.md`, no rule about architecture diagrams."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because it has zero cost: nothing to adopt, nothing to learn, nothing "
+#~ "to configure."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because Mermaid's non-C4 diagram types are stable and render reliably "
+#~ "in both Sphinx and Slidev."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because the level of abstraction is decided per diagram, so records "
+#~ "cannot be compared and readers must re-orient in each one."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "C4 vocabulary expressed in Mermaid `C4Context` / `C4Container` blocks, "
+#~ "rendered by the already-enabled `sphinxcontrib.mermaid`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because the toolchain already exists and is already used by an ADR, so "
+#~ "adoption costs one paragraph in this record and nothing in CI."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because C4's four levels give an explicit answer to \"how far should I "
+#~ "zoom\", which is the question the status quo leaves open."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because the notation is small: contributors need four element types, "
+#~ "not a diagramming language."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Neutral, because it provides notation only, not a model — there is no "
+#~ "validation that two diagrams describe the same system consistently."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because Mermaid's C4 support is experimental upstream and its layout "
+#~ "engine is weak for anything beyond a modest diagram."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "[Structurizr](https://structurizr.com/) DSL describes the system once as a "
+#~ "model; views are generated from it. Structurizr Lite can also ingest "
+#~ "`docs/decisions/` via `!adrs` and render ADRs beside the diagrams, scoped to "
+#~ "the software system or container they concern."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because `!adrs` is the direct answer to \"integrate C4 and ADRs\": "
+#~ "decisions become navigable from the element they are about."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Good, because Structurizr's layout and export options are far better than "
+#~ "Mermaid's."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Neutral, because the DSL is still plain text under version control, "
+#~ "satisfying that driver."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because it requires running Structurizr Lite (a JVM application, "
+#~ "normally via Docker) to see or publish anything, which is a new toolchain for"
+#~ " the docs build and for every contributor."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because rendering into Read the Docs means exporting diagrams as images "
+#~ "in CI or hosting a second site — either way the diagram stops being "
+#~ "reviewable as a diff."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because a central model is maintenance that only pays off at a scale "
+#~ "this project has not reached."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Neutral, because it would sit alongside Mermaid rather than replace it, since"
+#~ " the deck and the existing sequence diagrams stay on Mermaid."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because it adds `sphinxcontrib-plantuml` plus a Java runtime and "
+#~ "Graphviz to the documentation build, which Read the Docs must then install on"
+#~ " every PR."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bad, because the project would carry two diagram toolchains for one notation,"
+#~ " and contributors would have to know which block type to use where."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Mermaid C4 diagram syntax (flagged experimental): "
+#~ "[https://mermaid.js.org/syntax/c4.html](https://mermaid.js.org/syntax/c4.html)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Sphinx configuration that makes Option B free: `extensions` in "
+#~ "[`docs/conf.py`](../conf.py); `sphinxcontrib-mermaid` in the `docs` "
+#~ "dependency group of [`pyproject.toml`](../../pyproject.toml)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Prior art in this repository: the `{mermaid}` block in "
+#~ "[ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-"
+#~ "terraform.md)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Revisit triggers: Mermaid changing or dropping its C4 syntax; a need for a "
+#~ "single model rendered into many synchronized views; or diagrams growing past "
+#~ "what Mermaid's layout can present legibly — any of which argues for Option C."
+#~ msgstr ""
