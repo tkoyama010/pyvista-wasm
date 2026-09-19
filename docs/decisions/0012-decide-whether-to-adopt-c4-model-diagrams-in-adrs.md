@@ -6,20 +6,20 @@
 
 ## Context and Problem Statement
 
-ADRs in `docs/decisions/` record *why* a decision was made ([ADR-0000](0000-use-markdown-architectural-decision-records.md)), but the structure they decide about is described almost entirely in prose. Where a diagram has helped, it was drawn ad hoc: [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md) embeds a Mermaid `sequenceDiagram`, and `slides/slides.md` carries several more. Nothing says what a diagram in an ADR is supposed to show, at which level of abstraction, or with which vocabulary, so two records that both draw "the architecture" can disagree about what counts as a box.
+ADRs record *why* a decision was made ([ADR-0000](0000-use-markdown-architectural-decision-records.md)), but describe structure almost entirely in prose. Diagrams appear ad hoc: a Mermaid `sequenceDiagram` in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md), more in `slides/slides.md`. Nothing says what a diagram should show, at which level, or with which vocabulary, so two records can both draw "the architecture" and disagree about what counts as a box.
 
-The [C4 model](https://c4model.com/) is a candidate vocabulary: it fixes four zoom levels — System Context, Container, Component, Code — and a small element set (person, software system, container, component) that keeps every diagram's boxes comparable. pyvista-wasm has a genuinely layered architecture to describe — a Python-facing PyVista API (`src/pyvista_wasm/`), a TypeScript glue layer (`ts/renderer.ts`), the vtk-wasm module it drives, and the in-browser Python runtime that hosts them — which is exactly the shape C4's Context and Container levels exist to draw.
+The [C4 model](https://c4model.com/) supplies that vocabulary: four zoom levels — System Context, Container, Component, Code — and a small element set that keeps boxes comparable. pyvista-wasm has the layered shape C4's Context and Container levels exist to draw: a Python-facing PyVista API (`src/pyvista_wasm/`), a TypeScript glue layer (`ts/renderer.ts`), the vtk-wasm module it drives, and the in-browser Python runtime hosting them.
 
-Should pyvista-wasm adopt C4 as the notation for architecture diagrams in ADRs, and if so, with which toolchain?
+Should pyvista-wasm adopt C4 for architecture diagrams in ADRs, and with which toolchain?
 
 ## Decision Drivers
 
-- **Shared vocabulary across records**: Diagrams drawn by different contributors in different ADRs should use the same element types and the same levels, so a reader can compare them without re-learning the notation each time.
-- **Plain text under version control**: Diagrams must be diffable Markdown that travels through the same PR review flow as the record itself ([ADR-0000](0000-use-markdown-architectural-decision-records.md)). Binary images or an external editor would break that.
-- **No new toolchain in CI**: Documentation is built by Sphinx on Read the Docs for every PR. A notation that requires a JVM, Docker, or Graphviz in the docs build is a disproportionate cost for a small project.
-- **Rendering in the published docs**: ADRs are published alongside the rest of `docs/`. A diagram that renders on GitHub but not on Read the Docs (or the reverse) is only half a diagram.
-- **Low authoring overhead**: Records must stay cheap to write. If drawing the diagram costs more than writing the decision, contributors will skip it and the notation will not stick.
-- **Right level of abstraction**: The useful levels here are Context (who uses pyvista-wasm and what it depends on) and Container (Python API, TypeScript glue, vtk-wasm, browser runtime). Diagrams of individual classes duplicate the code and rot.
+- **Shared vocabulary across records**: the same element types and levels everywhere, so readers need not re-learn the notation per record.
+- **Plain text under version control**: diagrams must be diffable Markdown reviewed in the same PR flow as the record ([ADR-0000](0000-use-markdown-architectural-decision-records.md)); binary images and external editors break that.
+- **No new toolchain in CI**: Sphinx builds the docs on Read the Docs for every PR, so requiring a JVM, Docker, or Graphviz is disproportionate here.
+- **Rendering in the published docs**: a diagram that renders on GitHub but not on Read the Docs, or the reverse, is half a diagram.
+- **Low authoring overhead**: if drawing costs more than writing the decision, contributors skip it and the notation never sticks.
+- **Right level of abstraction**: Context and Container are the useful levels; class diagrams duplicate the code and rot.
 
 ## Considered Options
 
@@ -30,33 +30,33 @@ Should pyvista-wasm adopt C4 as the notation for architecture diagrams in ADRs, 
 
 ## Decision Outcome
 
-Chosen option: "**Option B: Adopt C4 notation using the existing Mermaid toolchain**", because it is the only option that gives ADRs a shared architectural vocabulary without adding anything to the documentation build.
+Chosen option: "**Option B: Adopt C4 notation using the existing Mermaid toolchain**", because it alone gives ADRs a shared architectural vocabulary without adding anything to the documentation build.
 
-The toolchain is already in place and already proven for ADRs: `sphinxcontrib.mermaid` is enabled in `docs/conf.py`, pinned as a docs dependency in `pyproject.toml` (`sphinxcontrib-mermaid>=2.0.0,<3.0.0`, resolved to 2.1.1 in `uv.lock`), and [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md) already renders a `{mermaid}` block through it. The extension defaults `mermaid_version` to 11.12.1 and `docs/conf.py` does not override it, so the Mermaid release loaded in the published docs is one that ships the `C4Context`/`C4Container`/`C4Component` diagram types. Slidev loads its own Mermaid (`mermaid` `^11.16.1` in `slides/package.json`), so the same C4 source can be pasted into the deck without a second notation.
+The toolchain is in place and proven for ADRs: `sphinxcontrib.mermaid` is enabled in `docs/conf.py`, pinned in `pyproject.toml` (`sphinxcontrib-mermaid>=2.0.0,<3.0.0`, resolved to 2.1.1 in `uv.lock`), and [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md) already renders a `{mermaid}` block through it. The extension defaults `mermaid_version` to 11.12.1 and `docs/conf.py` does not override it, so the published docs load a Mermaid release shipping the `C4Context`/`C4Container`/`C4Component` types. Slidev loads its own Mermaid (`^11.16.1` in `slides/package.json`), so the same source works in the deck.
 
-Options C and D both add a runtime the project does not otherwise need — a JVM plus Structurizr Lite, or Java plus Graphviz plus `sphinxcontrib-plantuml` — to buy model-level features (a single model rendered into many views, Structurizr's `!adrs` integration) that a repository with a dozen ADRs does not yet need. Option A is what the project does today and is what prompted the question.
+Options C and D each add a runtime the project does not otherwise need — a JVM plus Structurizr Lite, or Java plus Graphviz plus `sphinxcontrib-plantuml` — for model-level features a repository with a dozen ADRs does not yet need. Option A is today's practice, which prompted the question.
 
-Adopting C4 means, concretely:
+Adopting C4 means:
 
-- When an ADR needs an architecture diagram, it is drawn in C4 notation at **System Context** or **Container** level. Component level is used only when the decision is genuinely about internal structure.
-- **Code level is never drawn.** The type stub `src/pyvista_wasm/__init__.pyi` and the API reference built by `autosummary` already describe that level and stay correct automatically.
-- Diagrams stay inside the ADR that needs them, in a `{mermaid}` block. There is no central model file to keep in sync.
-- ADRs without an architectural component (tooling, process, documentation decisions) still need no diagram. C4 is a notation to use when drawing, not an obligation to draw.
+- Architecture diagrams in ADRs use C4 notation at **System Context** or **Container** level; Component level only when the decision is about internal structure.
+- **Code level is never drawn.** `src/pyvista_wasm/__init__.pyi` and the `autosummary` API reference cover it and stay correct automatically.
+- Diagrams live in the ADR that needs them, in a `{mermaid}` block. No central model to sync.
+- ADRs without an architectural component need no diagram. C4 is a notation for when you draw, not an obligation to draw.
 
 ### Consequences
 
-- Good, because architecture diagrams across ADRs become comparable: the same element types at the same two levels, instead of whatever shape each record invented.
-- Good, because nothing is added to the docs build — no new dependency, no JVM, no Graphviz — so Read the Docs previews keep working unchanged on every PR.
-- Good, because the diagram source is Markdown inside the record, so it is reviewed in the same diff as the decision it illustrates and cannot drift into a separate artifact.
-- Good, because the same C4 source can be reused in `slides/slides.md`, which already renders Mermaid.
-- Bad, because Mermaid's C4 diagram support is flagged experimental upstream: its syntax may change between Mermaid releases, and `mermaid_version` is unpinned in `docs/conf.py`, so a future default bump could alter or break rendering. The mitigation is cheap — pin `mermaid_version` if that ever happens.
-- Bad, because Mermaid offers little layout control for C4 diagrams compared with Structurizr or PlantUML, so large diagrams look worse. This pushes records toward few, small diagrams, which is the intended outcome anyway.
-- Bad, because with no central model, an element that appears in two ADRs can be described inconsistently. Accepted: records are immutable decisions in time, not a live model, and Option C remains available if a live model is ever wanted.
-- Neutral, because existing non-C4 diagrams (the `sequenceDiagram` in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md), the deck's diagrams) are not retrofitted. C4 governs *architecture* diagrams; sequence and flow diagrams remain the right tool for showing a workflow over time.
+- Good, because diagrams become comparable across records instead of taking whatever shape each one invented.
+- Good, because nothing is added to the docs build, so Read the Docs previews keep working unchanged.
+- Good, because the source is Markdown inside the record, reviewed in the same diff and unable to drift into a separate artifact.
+- Good, because the same source can be reused in `slides/slides.md`, which already renders Mermaid.
+- Bad, because Mermaid's C4 support is flagged experimental upstream: the syntax may change between releases, and `mermaid_version` is unpinned, so a default bump could break rendering. Mitigation is cheap — pin it.
+- Bad, because Mermaid gives little layout control for C4, so large diagrams look worse. That pushes records toward few, small diagrams, the intended outcome anyway.
+- Bad, because with no central model, an element in two ADRs can be described inconsistently. Accepted: records are decisions fixed in time, not a live model, and Option C stays available.
+- Neutral, because existing non-C4 diagrams are not retrofitted. C4 governs *architecture* diagrams; sequence and flow diagrams still show a workflow over time.
 
 ### Confirmation
 
-This decision is confirmed by the documentation build, not by inspection: the diagram below is a C4 System Context diagram of pyvista-wasm, and the Read the Docs preview built for the pull request that introduces this record must render it. If it does not render, Mermaid's experimental C4 support is not usable here and this record should be rejected rather than merged with a broken diagram.
+The documentation build confirms this, not inspection: the diagram below is a C4 System Context diagram of pyvista-wasm, and the Read the Docs preview for the introducing pull request must render it. If it does not, Mermaid's experimental C4 support is unusable here and this record should be rejected rather than merged with a broken diagram.
 
 ```{mermaid}
 C4Context
@@ -78,41 +78,41 @@ C4Context
     Rel(pvwasm, pyvista, "Mirrors the public API of")
 ```
 
-Thereafter, compliance is a review concern: a PR that adds an architecture diagram to an ADR in notation other than C4, or that draws Code-level structure, contradicts this record.
+Thereafter compliance is a review concern: a PR adding an architecture diagram in another notation, or drawing Code level, contradicts this record.
 
 ## Pros and Cons of the Options
 
 ### Option A: Status quo — ad-hoc Mermaid diagrams, no C4 notation
 
-What the project does today: a `sequenceDiagram` in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md), flow and sequence diagrams in `slides/slides.md`, no rule about architecture diagrams.
+Today's practice: a `sequenceDiagram` in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md), diagrams in `slides/slides.md`, no rule for architecture diagrams.
 
-- Good, because it has zero cost: nothing to adopt, nothing to learn, nothing to configure.
-- Good, because Mermaid's non-C4 diagram types are stable and render reliably in both Sphinx and Slidev.
+- Good, because it costs nothing to adopt, learn, or configure.
+- Good, because Mermaid's non-C4 types are stable and render reliably in both Sphinx and Slidev.
 - Neutral, because it is not *wrong* — a small project can carry architecture in prose for a long time.
-- Bad, because the level of abstraction is decided per diagram, so records cannot be compared and readers must re-orient in each one.
+- Bad, because abstraction level is chosen per diagram, so records cannot be compared.
 - Bad, because nothing distinguishes "a system", "a deployable unit", and "a module" in a project whose whole story is the boundary between Python, TypeScript, and WebAssembly.
 
 ### Option B: Adopt C4 notation using the existing Mermaid toolchain
 
-C4 vocabulary expressed in Mermaid `C4Context` / `C4Container` blocks, rendered by the already-enabled `sphinxcontrib.mermaid`.
+C4 vocabulary in Mermaid `C4Context` / `C4Container` blocks, rendered by the already-enabled `sphinxcontrib.mermaid`.
 
-- Good, because the toolchain already exists and is already used by an ADR, so adoption costs one paragraph in this record and nothing in CI.
-- Good, because C4's four levels give an explicit answer to "how far should I zoom", which is the question the status quo leaves open.
-- Good, because the notation is small: contributors need four element types, not a diagramming language.
-- Neutral, because it provides notation only, not a model — there is no validation that two diagrams describe the same system consistently.
-- Bad, because Mermaid's C4 support is experimental upstream and its layout engine is weak for anything beyond a modest diagram.
+- Good, because the toolchain exists and an ADR already uses it, so adoption costs one paragraph here and nothing in CI.
+- Good, because C4's four levels answer "how far should I zoom", which the status quo leaves open.
+- Good, because the notation is small: four element types, not a diagramming language.
+- Neutral, because it gives notation only — nothing validates that two diagrams describe the system consistently.
+- Bad, because Mermaid's C4 support is experimental upstream and its layout engine is weak beyond a modest diagram.
 
 ### Option C: Adopt C4 with Structurizr DSL as the model source, with ADRs linked into the model
 
-[Structurizr](https://structurizr.com/) DSL describes the system once as a model; views are generated from it. Structurizr Lite can also ingest `docs/decisions/` via `!adrs` and render ADRs beside the diagrams, scoped to the software system or container they concern.
+[Structurizr](https://structurizr.com/) DSL describes the system once and generates views from it; Structurizr Lite can also ingest `docs/decisions/` via `!adrs`, rendering ADRs beside the diagrams and scoped to the element they concern.
 
 - Good, because one model generates every view, so Context and Container diagrams cannot contradict each other.
-- Good, because `!adrs` is the direct answer to "integrate C4 and ADRs": decisions become navigable from the element they are about.
-- Good, because Structurizr's layout and export options are far better than Mermaid's.
-- Neutral, because the DSL is still plain text under version control, satisfying that driver.
-- Bad, because it requires running Structurizr Lite (a JVM application, normally via Docker) to see or publish anything, which is a new toolchain for the docs build and for every contributor.
-- Bad, because rendering into Read the Docs means exporting diagrams as images in CI or hosting a second site — either way the diagram stops being reviewable as a diff.
-- Bad, because a central model is maintenance that only pays off at a scale this project has not reached.
+- Good, because `!adrs` directly answers "integrate C4 and ADRs": decisions become navigable from the element they are about.
+- Good, because layout and export are far better than Mermaid's.
+- Neutral, because the DSL is still plain text under version control.
+- Bad, because seeing or publishing anything means running Structurizr Lite, a JVM application normally run via Docker — a new toolchain for the docs build and every contributor.
+- Bad, because rendering into Read the Docs means exporting images in CI or hosting a second site; either way the diagram stops being reviewable as a diff.
+- Bad, because a central model pays off only at a scale this project has not reached.
 
 ### Option D: Adopt C4 with PlantUML and the C4-PlantUML standard library
 
@@ -120,16 +120,16 @@ C4 vocabulary expressed in Mermaid `C4Context` / `C4Container` blocks, rendered 
 
 - Good, because it is the most mature C4 implementation: stable syntax, full element set, good layout control.
 - Good, because the source stays plain text in the record, like Option B.
-- Neutral, because it would sit alongside Mermaid rather than replace it, since the deck and the existing sequence diagrams stay on Mermaid.
-- Bad, because it adds `sphinxcontrib-plantuml` plus a Java runtime and Graphviz to the documentation build, which Read the Docs must then install on every PR.
-- Bad, because the project would carry two diagram toolchains for one notation, and contributors would have to know which block type to use where.
+- Neutral, because it would sit alongside Mermaid rather than replace it, since the deck and existing sequence diagrams stay on Mermaid.
+- Bad, because it adds `sphinxcontrib-plantuml` plus Java and Graphviz to the docs build, which Read the Docs must install on every PR.
+- Bad, because the project would carry two toolchains for one notation, and contributors would have to know which block goes where.
 
 ## More Information
 
 - C4 model: [https://c4model.com/](https://c4model.com/)
-- Mermaid C4 diagram syntax (flagged experimental): [https://mermaid.js.org/syntax/c4.html](https://mermaid.js.org/syntax/c4.html)
+- Mermaid C4 syntax (flagged experimental): [https://mermaid.js.org/syntax/c4.html](https://mermaid.js.org/syntax/c4.html)
 - Structurizr DSL, including `!adrs`: [https://docs.structurizr.com/dsl](https://docs.structurizr.com/dsl)
 - C4-PlantUML: [https://github.com/plantuml-stdlib/C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML)
-- Sphinx configuration that makes Option B free: `extensions` in [`docs/conf.py`](../conf.py); `sphinxcontrib-mermaid` in the `docs` dependency group of [`pyproject.toml`](../../pyproject.toml)
-- Prior art in this repository: the `{mermaid}` block in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md)
-- Revisit triggers: Mermaid changing or dropping its C4 syntax; a need for a single model rendered into many synchronized views; or diagrams growing past what Mermaid's layout can present legibly — any of which argues for Option C.
+- What makes Option B free: `extensions` in [`docs/conf.py`](../conf.py); `sphinxcontrib-mermaid` in the `docs` dependency group of [`pyproject.toml`](../../pyproject.toml)
+- Prior art here: the `{mermaid}` block in [ADR-0009](0009-decide-how-to-sync-github-repository-settings-with-terraform.md)
+- Revisit triggers: Mermaid changing or dropping C4 syntax; a need for one model rendered into many synchronized views; or diagrams outgrowing Mermaid's layout — any of which argues for Option C.
