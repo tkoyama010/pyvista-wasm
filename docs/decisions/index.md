@@ -32,3 +32,5 @@
 
 * [0010 - Track PyVista API coverage matrix for pyvista-wasm](0010-track-pyvista-api-coverage-matrix-for-pyvista-wasm.md)
 * [0011 - Decide whether to replace Biome with xo](0011-decide-whether-to-replace-biome-with-xo.md)
+* [0013 - Decision to add a pi coding agent development environment to GitHub Codespaces](0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md)
+* [0014 - Decision not to use Nix in the Codespace environment](0014-decision-not-to-use-nix-in-the-codespace-environment.md)
