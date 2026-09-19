@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.14.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.13.0...pyvista-wasm-v0.14.0) (2026-09-19)
+
+
+### Features
+
+* add download_venus_surface() to match pyvista.examples.planets ([#653](https://github.com/tkoyama010/pyvista-wasm/issues/653)) ([70dc4c3](https://github.com/tkoyama010/pyvista-wasm/commit/70dc4c3ada72603d6044a967375bac8e08f02d1c))
+* add load_earth() to match pyvista.examples.planets ([#634](https://github.com/tkoyama010/pyvista-wasm/issues/634)) ([e58f95f](https://github.com/tkoyama010/pyvista-wasm/commit/e58f95fd5b920bca7d67592ee1feb04f330d984c))
+* add load_uranus() and download_uranus_surface() to match pyvista.examples.planets ([#658](https://github.com/tkoyama010/pyvista-wasm/issues/658)) ([53cb348](https://github.com/tkoyama010/pyvista-wasm/commit/53cb348b52394077a471012f9df7c15756df4f00))
+* add load_venus() to match pyvista.examples.planets ([#649](https://github.com/tkoyama010/pyvista-wasm/issues/649)) ([d08423e](https://github.com/tkoyama010/pyvista-wasm/commit/d08423e3aa44d16b62606603cff81e5fee3e3613))
+* add Traditional Chinese (Taiwan Mandarin) README and slide locale ([#636](https://github.com/tkoyama010/pyvista-wasm/issues/636)) ([eadddb3](https://github.com/tkoyama010/pyvista-wasm/commit/eadddb3936bf9de744ab34a8abada53ac9910ead))
+* run pyadr pre-commit hooks on ADR files ([#656](https://github.com/tkoyama010/pyvista-wasm/issues/656)) ([c19e53d](https://github.com/tkoyama010/pyvista-wasm/commit/c19e53d273021908815dbab6095c1ec205b09640))
+
+
+### Bug Fixes
+
+* add download_earth_surface and wire texture to load_earth example ([#637](https://github.com/tkoyama010/pyvista-wasm/issues/637)) ([cab6bbe](https://github.com/tkoyama010/pyvista-wasm/commit/cab6bbed88a8d5a8639319d39cef1c40df400529))
+* patch Dependabot security alerts for js-yaml and hono ([#647](https://github.com/tkoyama010/pyvista-wasm/issues/647)) ([6aac093](https://github.com/tkoyama010/pyvista-wasm/commit/6aac093a8d6587ad1c07b7f006c5950f8c1991dd))
+* resolve 7 open dependabot security alerts ([#607](https://github.com/tkoyama010/pyvista-wasm/issues/607)) ([a8731f6](https://github.com/tkoyama010/pyvista-wasm/commit/a8731f679084cdb5130e7b9af668b8dcb2190791))
+
+
+### Documentation
+
+* add ADR on keeping Biome over xo as the JS/TS linter ([#652](https://github.com/tkoyama010/pyvista-wasm/issues/652)) ([90a8bce](https://github.com/tkoyama010/pyvista-wasm/commit/90a8bce6920ab789577c18ce4366ab9081a86d6c))
+* add load_earth and rotate_z to API reference ([#635](https://github.com/tkoyama010/pyvista-wasm/issues/635)) ([6f38e88](https://github.com/tkoyama010/pyvista-wasm/commit/6f38e887b5ecbd9fdd612d9aa79fd454dea2f3a7))
+
 ## [0.13.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.12.0...pyvista-wasm-v0.13.0) (2026-08-26)
 
 ### Features
