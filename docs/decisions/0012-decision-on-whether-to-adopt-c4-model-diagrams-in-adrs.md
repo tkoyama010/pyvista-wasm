@@ -1,4 +1,4 @@
-# Decide whether to adopt C4 model diagrams in ADRs
+# Decision on whether to adopt C4 model diagrams in ADRs
 
 * Status: proposed
 * Date: 2026-09-19
