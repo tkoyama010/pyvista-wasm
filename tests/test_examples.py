@@ -145,3 +145,51 @@ class TestDownloadUranusSurface:
         """The Texture repr references the Uranus image."""
         texture = examples.download_uranus_surface()
         assert "uranus.jpg" in repr(texture)
+
+
+class TestLoadSun:
+    """Tests for examples.load_sun."""
+
+    def test_returns_polydata(self) -> None:
+        """load_sun returns a PolyData instance."""
+        sun = examples.load_sun()
+        assert isinstance(sun, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        sun = examples.load_sun()
+        assert sun.t_coords is not None
+        assert sun.t_coords.shape == (sun.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        sun = examples.load_sun()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert sun.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        sun = examples.load_sun(radius=2.0)
+        radius, _ = sun.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadSunSurface:
+    """Tests for examples.download_sun_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_sun_surface returns a Texture instance."""
+        texture = examples.download_sun_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_sun_solar_texture(self) -> None:
+        """The texture URL points at the Sun solar_textures image."""
+        texture = examples.download_sun_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/sun.jpg"
+        )
+
+    def test_repr_mentions_sun(self) -> None:
+        """The Texture repr references the Sun image."""
+        texture = examples.download_sun_surface()
+        assert "sun.jpg" in repr(texture)
