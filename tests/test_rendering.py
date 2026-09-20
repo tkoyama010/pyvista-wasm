@@ -909,8 +909,8 @@ class TestWebGL2CapabilityGate:
         visible error. The gate replaces that with an actionable message.
         Refs #651.
         """
-        assert "webgl2" in rendering._RENDERER_JS
-        assert "isWebGL2Available" in rendering._RENDERER_JS
+        assert 'getContext("webgl2")' in rendering._RENDERER_JS
+        assert "WebGL2 is not available" in rendering._RENDERER_JS
 
 
 class TestColabEnvDetection:
