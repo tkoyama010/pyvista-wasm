@@ -145,3 +145,51 @@ class TestDownloadUranusSurface:
         """The Texture repr references the Uranus image."""
         texture = examples.download_uranus_surface()
         assert "uranus.jpg" in repr(texture)
+
+
+class TestLoadNeptune:
+    """Tests for examples.load_neptune."""
+
+    def test_returns_polydata(self) -> None:
+        """load_neptune returns a PolyData instance."""
+        neptune = examples.load_neptune()
+        assert isinstance(neptune, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        neptune = examples.load_neptune()
+        assert neptune.t_coords is not None
+        assert neptune.t_coords.shape == (neptune.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        neptune = examples.load_neptune()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert neptune.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        neptune = examples.load_neptune(radius=2.0)
+        radius, _ = neptune.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadNeptuneSurface:
+    """Tests for examples.download_neptune_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_neptune_surface returns a Texture instance."""
+        texture = examples.download_neptune_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_neptune_solar_texture(self) -> None:
+        """The texture URL points at the Neptune solar_textures image."""
+        texture = examples.download_neptune_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/neptune.jpg"
+        )
+
+    def test_repr_mentions_neptune(self) -> None:
+        """The Texture repr references the Neptune image."""
+        texture = examples.download_neptune_surface()
+        assert "neptune.jpg" in repr(texture)
