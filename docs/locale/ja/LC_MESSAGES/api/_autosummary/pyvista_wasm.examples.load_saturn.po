@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-20 11:51+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst:2
+msgid "pyvista\\_wasm.examples.load\\_saturn"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:1
+msgid "Load the planet Saturn as a textured sphere."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:3
+msgid ""
+"Creates a sphere mesh with texture coordinates, matching the "
+"``pyvista.examples.planets.load_saturn`` API. The sphere is rotated 180° "
+"around the Z axis to align the Prime Meridian correctly."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
+msgid "Parameters"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:7
+msgid "Sphere radius. Default is 1.0."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:9
+msgid "Number of points in the latitude direction. Default is 50."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:11
+msgid "Number of points in the longitude direction. Default is 100."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
+msgid "Returns"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:14
+msgid "Saturn sphere mesh with texture coordinates."
+msgstr ""
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
+msgid "Return type"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:19
+msgid ":func:`~pyvista_wasm.examples.load_saturn_rings`"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:20
+msgid "Load the planet Saturn's rings."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:22
+msgid ":func:`~pyvista_wasm.examples.download_saturn_surface`"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:23
+msgid "Download the Saturn surface texture."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:25
+msgid ":func:`~pyvista_wasm.examples.load_earth`"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:26
+msgid "Load the planet Earth for comparison."
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:29
+msgid "Examples"
+msgstr ""
+
+#: of pyvista_wasm.examples.load_saturn:41
+msgid "Render a Saturn planet sphere in the browser:"
+msgstr ""
+
