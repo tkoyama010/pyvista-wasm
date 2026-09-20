@@ -87,4 +87,3 @@ msgstr ""
 #: of pyvista_wasm.examples.load_saturn_rings:39
 msgid "Render Saturn with its rings in the browser:"
 msgstr ""
-

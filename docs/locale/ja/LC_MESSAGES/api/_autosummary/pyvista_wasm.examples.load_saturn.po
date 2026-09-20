@@ -94,4 +94,3 @@ msgstr ""
 #: of pyvista_wasm.examples.load_saturn:41
 msgid "Render a Saturn planet sphere in the browser:"
 msgstr ""
-
