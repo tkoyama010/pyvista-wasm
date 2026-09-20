@@ -129,6 +129,7 @@ try_examples_preamble = (
     "import micropip\n"
     "await micropip.install('jinja2')\n"
     "await micropip.install('lazy-loader')\n"
+    "await micropip.install('numpy')\n"
     "import sys\n"
     "sys.path.insert(0, '/drive/src')\n"
     "import pyvista_wasm as pv\n"
