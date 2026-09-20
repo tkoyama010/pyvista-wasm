@@ -92,4 +92,3 @@ msgstr "例"
 #: of pyvista_wasm.examples.download_sun_surface:30
 msgid "Render a textured Sun sphere in the browser."
 msgstr "ブラウザでテクスチャ付きの太陽球体をレンダリングします。"
-
