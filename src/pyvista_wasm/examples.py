@@ -688,6 +688,92 @@ def download_uranus_surface() -> Texture:
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/uranus.jpg")
 
 
+def download_stars_sky_background() -> Texture:
+    """Download the night sky stars texture.
+
+    Returns the night sky stars image as a
+    :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_stars_sky_background(texture=True)``
+    API. Textures obtained from `tamaskis/planet3D-MATLAB
+    <https://github.com/tamaskis/planet3D-MATLAB>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the night sky stars image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a night sky background, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_earth`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a night sky stars texture in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_stars_sky_background()
+    >>> earth = examples.load_earth()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(earth, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/planet3d-matlab/stars.jpg")
+
+
+def download_milkyway_sky_background() -> Texture:
+    """Download the sky texture of the Milky Way galaxy.
+
+    Returns the Milky Way sky image as a
+    :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_milkyway_sky_background(texture=True)``
+    API. Textures obtained from `tamaskis/planet3D-MATLAB
+    <https://github.com/tamaskis/planet3D-MATLAB>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Milky Way sky image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a Milky Way sky background, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_earth`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a Milky Way sky texture in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_milkyway_sky_background()
+    >>> earth = examples.load_earth()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(earth, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/planet3d-matlab/milkyway.jpg")
+
+
 def download_lucy() -> PolyData:
     """Download the Lucy Angel dataset.
 

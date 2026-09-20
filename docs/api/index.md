@@ -126,6 +126,8 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.download_mars_surface
    pyvista_wasm.examples.download_venus_surface
    pyvista_wasm.examples.download_uranus_surface
+   pyvista_wasm.examples.download_stars_sky_background
+   pyvista_wasm.examples.download_milkyway_sky_background
    pyvista_wasm.examples.download_bunny
    pyvista_wasm.examples.download_lucy
    pyvista_wasm.examples.download_cad_model
