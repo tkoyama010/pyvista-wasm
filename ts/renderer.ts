@@ -339,12 +339,12 @@ const pvOverlay: HTMLDivElement = createLoadingOverlay(
  * Detecting this up front lets us show an actionable message instead.
  * @returns True if a WebGL2 context can be created.
  */
-function isWebGL2Available(): boolean {
+function isWebGl2Available(): boolean {
   const probe = document.createElement("canvas");
   return probe.getContext("webgl2") !== null;
 }
 
-if (!isWebGL2Available()) {
+if (!isWebGl2Available()) {
   showOverlayError(
     pvOverlay,
     "WebGL2 is not available in this browser, so 3D rendering cannot start. " +
