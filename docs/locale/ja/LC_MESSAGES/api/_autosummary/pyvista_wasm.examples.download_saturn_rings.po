@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_rings.rst:2
 msgid "pyvista\\_wasm.examples.download\\_saturn\\_rings"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.download\\_saturn\\_rings"
 
 #: of pyvista_wasm.examples.download_saturn_rings:1
 msgid "Download the Saturn's rings texture."
-msgstr ""
+msgstr "土星の環のテクスチャをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_saturn_rings:3
 msgid ""
@@ -36,22 +36,27 @@ msgid ""
 "Textures are sourced from `Solar Textures "
 "<https://www.solarsystemscope.com/textures/>`_."
 msgstr ""
+"PyVista の ``solar_textures`` データセットから土星の環の画像を "
+":class:`~pyvista_wasm.texture.Texture` として返します。"
+"``pyvista.examples.planets.download_saturn_rings(texture=True)`` API "
+"と一致します。テクスチャは `Solar Textures "
+"<https://www.solarsystemscope.com/textures/>`_ から提供されています。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_rings.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.download_saturn_rings:9
 msgid "Texture wrapping the Saturn's rings image URL."
-msgstr ""
+msgstr "土星の環の画像URLをラップするテクスチャ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_rings.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.download_saturn_rings:13
 msgid "Notes"
-msgstr ""
+msgstr "注釈"
 
 #: of pyvista_wasm.examples.download_saturn_rings:14
 msgid ""
@@ -59,6 +64,9 @@ msgid ""
 "Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps "
 "the remote image URL and VTK.wasm samples it in the browser via WebGL."
 msgstr ""
+"pyvista-wasm のテクスチャはURLベースのため、Python 側ではファイルをダウンロードしません。"
+"返される :class:`~pyvista_wasm.texture.Texture` はリモート画像のURLをラップし、"
+"VTK.wasm がブラウザ上で WebGL 経由でサンプリングします。"
 
 #: of pyvista_wasm.examples.download_saturn_rings:18
 msgid ""
@@ -69,12 +77,18 @@ msgid ""
 "This is the wasm counterpart to PyVista's `create-planet "
 "<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example."
 msgstr ""
+"土星の環をレンダリングするには、"
+":func:`~pyvista_wasm.examples.load_saturn_rings` "
+"の結果に対して :meth:`~pyvista_wasm.Plotter.add_mesh` にテクスチャを直接渡します。"
+"ディスクのテクスチャ座標が画像を内側半径から外側半径へ放射状にマッピングします。"
+"これは PyVista の `create-planet "
+"<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ "
+"サンプルの wasm 版に相当します。"
 
 #: of pyvista_wasm.examples.download_saturn_rings:26
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.examples.download_saturn_rings:30
 msgid "Render Saturn's rings in the browser."
-msgstr ""
-
+msgstr "ブラウザで土星の環をレンダリングします。"
