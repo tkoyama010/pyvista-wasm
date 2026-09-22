@@ -462,13 +462,20 @@ def test_base_html_renderer_color_name_to_rgb() -> None:
 
 
 def test_smooth_shading_default(monkeypatch) -> None:
-    """Test smooth shading is enabled by default."""
+    """Test flat shading is used by default."""
+    from tests.conftest import extract_scene_data  # noqa: PLC0415
+
     monkeypatch.setattr(rendering, "IPYTHON_AVAILABLE", True)
     renderer = rendering.VTKWasmRenderer()
     renderer.add_mesh_actor(Sphere())
 
     html = renderer._repr_html_()
-    assert "setInterpolationToGouraud" in html
+    scene = extract_scene_data(html)
+
+    actor = scene["actors"][0]
+    assert actor["shading"] == "flat"
+    assert actor["normals"]["computeCellNormals"] is True
+    assert actor["normals"]["computePointNormals"] is False
 
 
 def test_smooth_shading_enabled(monkeypatch) -> None:

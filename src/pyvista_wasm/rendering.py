@@ -258,7 +258,8 @@ class _BaseHTMLRenderer:
         Parameters
         ----------
         lighting : str or None, optional
-            Lighting mode. ``"default"`` creates a default directional light,
+            Lighting mode. ``"default"`` creates a default LightKit-like
+            multi-light setup (key, fill, back, and head lights),
             ``None`` creates no default lights. Default is ``"default"``.
         wasm_rendering : str, optional
             WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
@@ -289,7 +290,7 @@ class _BaseHTMLRenderer:
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
         self.text_actors: list[Text] = []
-        self.background: tuple[float, float, float] = (1.0, 1.0, 1.0)
+        self.background: tuple[float, float, float] = (0.3, 0.3, 0.3)
         self.container_id: str = "pyvista-container"
         self._environment_texture_url: str | None = None
         self._environment_texture_cubemap: CubeMap | None = None
@@ -326,7 +327,7 @@ class _BaseHTMLRenderer:
         pbr: bool = False,  # noqa: FBT001 FBT002
         metallic: float = 0.0,
         roughness: float = 0.5,
-        smooth_shading: bool = True,  # noqa: FBT001 FBT002
+        smooth_shading: bool = False,  # noqa: FBT001 FBT002
         texture: Texture | None = None,
         show_edges: bool = False,  # noqa: FBT001 FBT002
         edge_color: str | tuple[float, float, float] | None = None,
@@ -350,7 +351,7 @@ class _BaseHTMLRenderer:
             Metallic factor for PBR.
         roughness : float, default=0.5
             Roughness factor for PBR.
-        smooth_shading : bool, default=True
+        smooth_shading : bool, default=False
             Enable smooth shading (Gouraud interpolation). When True, normals
             are interpolated across polygons for a smooth appearance. When
             False, flat shading is used.
@@ -638,6 +639,39 @@ class _BaseHTMLRenderer:
                     "type": "scene",
                     "positional": False,
                     "intensity": 1.0,
+                    "position": [0.5, 0.5, 1.0],
+                    "focalPoint": [0, 0, 0],
+                    "color": [1, 1, 1],
+                    "coneAngle": 30,
+                    "coneFalloff": 0,
+                    "attenuationValues": [1, 0, 0],
+                },
+                {
+                    "type": "scene",
+                    "positional": False,
+                    "intensity": 0.45,
+                    "position": [-0.5, -0.2, 0.3],
+                    "focalPoint": [0, 0, 0],
+                    "color": [1, 1, 1],
+                    "coneAngle": 30,
+                    "coneFalloff": 0,
+                    "attenuationValues": [1, 0, 0],
+                },
+                {
+                    "type": "scene",
+                    "positional": False,
+                    "intensity": 0.4,
+                    "position": [-0.3, -0.3, -0.8],
+                    "focalPoint": [0, 0, 0],
+                    "color": [1, 1, 1],
+                    "coneAngle": 30,
+                    "coneFalloff": 0,
+                    "attenuationValues": [1, 0, 0],
+                },
+                {
+                    "type": "head",
+                    "positional": False,
+                    "intensity": 0.3,
                     "position": [1, 1, 1],
                     "focalPoint": [0, 0, 0],
                     "color": [1, 1, 1],
@@ -667,9 +701,9 @@ class _BaseHTMLRenderer:
     def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:
         """Build JSON-serializable actor configuration."""
         mesh = actor_info["mesh"]
-        color: tuple[float, ...] = actor_info.get("color") or (0.5, 0.5, 0.5)  # type: ignore[assignment]
+        color: tuple[float, ...] = actor_info.get("color") or (1.0, 1.0, 1.0)  # type: ignore[assignment]
         opacity = float(actor_info.get("opacity", 1.0))  # type: ignore[arg-type]
-        smooth_shading = bool(actor_info.get("smooth_shading", True))
+        smooth_shading = bool(actor_info.get("smooth_shading", False))
         style = str(actor_info.get("style", "surface"))
 
         source_data = mesh.to_scene_data()  # type: ignore[attr-defined]
@@ -1021,7 +1055,8 @@ class VTKWasmRenderer(_BaseHTMLRenderer):
         Parameters
         ----------
         lighting : str or None, optional
-            Lighting mode. ``"default"`` creates a default directional light,
+            Lighting mode. ``"default"`` creates a default LightKit-like
+            multi-light setup (key, fill, back, and head lights),
             ``None`` creates no default lights. Default is ``"default"``.
         wasm_rendering : str, optional
             WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
@@ -1182,7 +1217,8 @@ class MarimoRenderer(_BaseHTMLRenderer):
         Parameters
         ----------
         lighting : str or None, optional
-            Lighting mode. ``"default"`` creates a default directional light,
+            Lighting mode. ``"default"`` creates a default LightKit-like
+            multi-light setup (key, fill, back, and head lights),
             ``None`` creates no default lights. Default is ``"default"``.
         wasm_rendering : str, optional
             WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
@@ -1616,7 +1652,8 @@ class MockRenderer:
         Parameters
         ----------
         lighting : str or None, optional
-            Lighting mode. ``"default"`` creates a default directional light,
+            Lighting mode. ``"default"`` creates a default LightKit-like
+            multi-light setup (key, fill, back, and head lights),
             ``None`` creates no default lights. Default is ``"default"``.
         wasm_rendering : str, optional
             WebAssembly rendering backend (stored but not used). Default is ``"webgl"``.
@@ -1628,7 +1665,7 @@ class MockRenderer:
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
         self.text_actors: list[Text] = []
-        self.background = (1.0, 1.0, 1.0)  # Default background color
+        self.background = (0.3, 0.3, 0.3)  # Default background color
         self._view_vector: tuple[float, float, float] | None = None
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
@@ -2015,7 +2052,8 @@ def get_renderer(
     Parameters
     ----------
     lighting : str or None, optional
-        Lighting mode. ``"default"`` creates a default directional light,
+        Lighting mode. ``"default"`` creates a default LightKit-like
+        multi-light setup (key, fill, back, and head lights),
         ``None`` creates no default lights. Default is ``"default"``.
     wasm_rendering : str, optional
         WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
