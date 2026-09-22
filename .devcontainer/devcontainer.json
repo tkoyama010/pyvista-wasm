@@ -1,0 +1,20 @@
+{
+  "name": "pyvista-wasm",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && uv pip install --system tox tox-uv pre-commit && npm ci && npm install -g @earendil-works/pi-coding-agent",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "biomejs.biome",
+        "tamasfe.even-better-toml"
+      ]
+    }
+  }
+}
