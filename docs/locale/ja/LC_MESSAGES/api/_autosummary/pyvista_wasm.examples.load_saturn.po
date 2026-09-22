@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst:2
 msgid "pyvista\\_wasm.examples.load\\_saturn"
-msgstr "pyvista\\_wasm.examples.load\\_saturn"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:1
 msgid "Load the planet Saturn as a textured sphere."
-msgstr "テクスチャ付き球体として土星をロードします。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:3
 msgid ""
@@ -34,66 +34,63 @@ msgid ""
 "``pyvista.examples.planets.load_saturn`` API. The sphere is rotated 180° "
 "around the Z axis to align the Prime Meridian correctly."
 msgstr ""
-"テクスチャ座標付きの球体メッシュを作成します。"
-"``pyvista.examples.planets.load_saturn`` API と一致します。"
-"球体は Z 軸周りに 180° 回転され、本初子午線が正しく一致します。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
 msgid "Parameters"
-msgstr "パラメータ"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:7
 msgid "Sphere radius. Default is 1.0."
-msgstr "球体の半径。デフォルトは 1.0。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:9
 msgid "Number of points in the latitude direction. Default is 50."
-msgstr "緯度方向のポイント数。デフォルトは 50。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:11
 msgid "Number of points in the longitude direction. Default is 100."
-msgstr "経度方向のポイント数。デフォルトは 100。"
+msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
 msgid "Returns"
-msgstr "戻り値"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:14
 msgid "Saturn sphere mesh with texture coordinates."
-msgstr "テクスチャ座標付き土星球体メッシュ。"
+msgstr ""
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn.rst
 msgid "Return type"
-msgstr "戻り値の型"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:19
 msgid ":func:`~pyvista_wasm.examples.load_saturn_rings`"
-msgstr ":func:`~pyvista_wasm.examples.load_saturn_rings`"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:20
 msgid "Load the planet Saturn's rings."
-msgstr "土星の環をロードします。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:22
 msgid ":func:`~pyvista_wasm.examples.download_saturn_surface`"
-msgstr ":func:`~pyvista_wasm.examples.download_saturn_surface`"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:23
 msgid "Download the Saturn surface texture."
-msgstr "土星表面のテクスチャをダウンロードします。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:25
 msgid ":func:`~pyvista_wasm.examples.load_earth`"
-msgstr ":func:`~pyvista_wasm.examples.load_earth`"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:26
 msgid "Load the planet Earth for comparison."
-msgstr "比較のために地球をロードします。"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:29
 msgid "Examples"
-msgstr "例"
+msgstr ""
 
 #: of pyvista_wasm.examples.load_saturn:41
 msgid "Render a Saturn planet sphere in the browser:"
-msgstr "ブラウザで土星球体をレンダリングします:"
+msgstr ""
