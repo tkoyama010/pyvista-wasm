@@ -689,6 +689,7 @@ def download_uranus_surface() -> Texture:
 
 
 def load_pluto(
+def load_mercury(
     radius: float = 1.0,
     lat_resolution: int = 50,
     lon_resolution: int = 100,
@@ -697,6 +698,10 @@ def load_pluto(
 
     Creates a sphere mesh with texture coordinates, matching the
     ``pyvista.examples.planets.load_pluto`` API.
+    """Load the planet Mercury as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_mercury`` API.
 
     Parameters
     ----------
@@ -711,6 +716,7 @@ def load_pluto(
     -------
     PolyData
         Pluto sphere mesh with texture coordinates.
+        Mercury sphere mesh with texture coordinates.
 
     See Also
     --------
@@ -718,6 +724,8 @@ def load_pluto(
         Load the planet Earth for comparison.
     :func:`~pyvista_wasm.examples.download_pluto_surface`
         Download the Pluto surface texture.
+    :func:`~pyvista_wasm.examples.download_mercury_surface`
+        Download the Mercury surface texture.
 
     Examples
     --------
@@ -735,6 +743,18 @@ def load_pluto(
     >>> pluto = examples.load_pluto()
     >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(pluto)  # doctest: +SKIP
+    >>> mercury = examples.load_mercury()
+    >>> isinstance(mercury, pv.PolyData)
+    True
+    >>> mercury.t_coords is not None
+    True
+
+    Render a Mercury planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> mercury = examples.load_mercury()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mercury)  # doctest: +SKIP
     >>> plotter.show()  # doctest: +SKIP
 
     """
@@ -752,6 +772,12 @@ def download_pluto_surface() -> Texture:
     Returns the Pluto surface image from the PyVista ``solar_textures``
     dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
     ``pyvista.examples.planets.download_pluto_surface(texture=True)`` API.
+def download_mercury_surface() -> Texture:
+    """Download the Mercury planet surface texture.
+
+    Returns the Mercury surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_mercury_surface(texture=True)`` API.
     Textures are sourced from `Solar Textures
     <https://www.solarsystemscope.com/textures/>`_.
 
@@ -759,6 +785,7 @@ def download_pluto_surface() -> Texture:
     -------
     Texture
         Texture wrapping the Pluto surface image URL.
+        Texture wrapping the Mercury surface image URL.
 
     Notes
     -----
@@ -769,6 +796,9 @@ def download_pluto_surface() -> Texture:
     To render a textured Pluto globe, pass the texture directly to
     :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
     :func:`~pyvista_wasm.examples.load_pluto`; the browser renderer
+    To render a textured Mercury globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_mercury`; the browser renderer
     generates the sphere UVs so the image wraps equirectangularly around
     the globe. This is the wasm counterpart to PyVista's `create-planet
     <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
@@ -787,6 +817,18 @@ def download_pluto_surface() -> Texture:
 
     """
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/pluto.jpg")
+    Render a textured Mercury planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_mercury_surface()
+    >>> mercury = examples.load_mercury()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mercury, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/mercury.jpg")
 
 
 def download_lucy() -> PolyData:
