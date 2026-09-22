@@ -11,7 +11,9 @@ import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from pyvista_wasm.mesh import Sphere
+import numpy as np
+
+from pyvista_wasm.mesh import Disc, Sphere
 from pyvista_wasm.texture import Texture
 
 if TYPE_CHECKING:
@@ -686,6 +688,414 @@ def download_uranus_surface() -> Texture:
 
     """
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/uranus.jpg")
+
+
+def load_saturn(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Saturn as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_saturn`` API. The sphere is rotated
+    180° around the Z axis to align the Prime Meridian correctly.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Saturn sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_saturn_rings`
+        Load the planet Saturn's rings.
+    :func:`~pyvista_wasm.examples.download_saturn_surface`
+        Download the Saturn surface texture.
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> saturn = examples.load_saturn()
+    >>> isinstance(saturn, pv.PolyData)
+    True
+    >>> saturn.t_coords is not None
+    True
+
+    Render a Saturn planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> saturn = examples.load_saturn()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(saturn)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
+def load_saturn_rings(inner: float = 0.25, outer: float = 0.5, c_res: int = 6) -> PolyData:
+    """Load the planet Saturn's rings.
+
+    Arguments are passed on to :class:`~pyvista_wasm.Disc`, matching the
+    ``pyvista.examples.planets.load_saturn_rings`` API. Texture coordinates
+    are set so the ring texture maps radially from the inner to the outer
+    radius.
+
+    Parameters
+    ----------
+    inner : float, optional
+        The inner radius. Default is 0.25.
+    outer : float, optional
+        The outer radius. Default is 0.5.
+    c_res : int, optional
+        The number of points in the circumferential direction. Default is 6.
+
+    Returns
+    -------
+    PolyData
+        Disc mesh with texture coordinates for Saturn's rings.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_saturn`
+        Load the planet Saturn.
+    :func:`~pyvista_wasm.examples.download_saturn_rings`
+        Download the Saturn rings texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> rings = examples.load_saturn_rings()
+    >>> isinstance(rings, pv.PolyData)
+    True
+    >>> rings.t_coords is not None
+    True
+
+    Render Saturn with its rings in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> saturn = examples.load_saturn()
+    >>> rings = examples.load_saturn_rings()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(saturn)  # doctest: +SKIP
+    >>> _ = plotter.add_mesh(rings)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    disc = Disc(inner=inner, outer=outer, c_res=c_res)
+    disc.t_coords = np.zeros((disc.n_points, 2))
+    radius = np.sqrt(disc.points[:, 0] ** 2 + disc.points[:, 1] ** 2)
+    disc.t_coords[:, 0] = radius / np.max(radius)
+    disc.t_coords[:, 1] = 0.0
+    return disc
+
+
+def download_saturn_surface() -> Texture:
+    """Download the Saturn planet surface texture.
+
+    Returns the Saturn surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_saturn_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Saturn surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Saturn globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_saturn`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Saturn planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_saturn_surface()
+    >>> saturn = examples.load_saturn()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(saturn, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/saturn.jpg")
+
+
+def download_saturn_rings() -> Texture:
+    """Download the Saturn's rings texture.
+
+    Returns the Saturn's rings image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_saturn_rings(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Saturn's rings image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render Saturn's rings, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_saturn_rings`; the disc's texture
+    coordinates map the image radially from the inner to the outer radius.
+    This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render Saturn's rings in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_saturn_rings()
+    >>> rings = examples.load_saturn_rings()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(rings, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/saturn_ring_alpha.png")
+
+
+def load_mercury(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Mercury as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_mercury`` API.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Mercury sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_mercury_surface`
+        Download the Mercury surface texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> mercury = examples.load_mercury()
+    >>> isinstance(mercury, pv.PolyData)
+    True
+    >>> mercury.t_coords is not None
+    True
+
+    Render a Mercury planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> mercury = examples.load_mercury()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mercury)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
+def download_mercury_surface() -> Texture:
+    """Download the Mercury planet surface texture.
+
+    Returns the Mercury surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_mercury_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Mercury surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Mercury globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_mercury`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Mercury planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_mercury_surface()
+    >>> mercury = examples.load_mercury()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mercury, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/mercury.jpg")
+
+
+def load_sun(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the Sun as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_sun`` API. The sphere is rotated
+    180° around the Z axis to align the Prime Meridian correctly.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Sun sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_sun_surface`
+        Download the Sun surface texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> sun = examples.load_sun()
+    >>> isinstance(sun, pv.PolyData)
+    True
+    >>> sun.t_coords is not None
+    True
+
+    Render the Sun in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> sun = examples.load_sun()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(sun)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
+def download_sun_surface() -> Texture:
+    """Download the Sun surface texture.
+
+    Returns the Sun surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_sun_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Sun surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Sun globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_sun`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Sun sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_sun_surface()
+    >>> sun = examples.load_sun()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(sun, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/sun.jpg")
 
 
 def download_lucy() -> PolyData:
