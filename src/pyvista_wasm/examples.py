@@ -890,6 +890,7 @@ def download_sun_surface() -> Texture:
     """
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/sun.jpg")
 
+
 def download_lucy() -> PolyData:
     """Download the Lucy Angel dataset.
 
