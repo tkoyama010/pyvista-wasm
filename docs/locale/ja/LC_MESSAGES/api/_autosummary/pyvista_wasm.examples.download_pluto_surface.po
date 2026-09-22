@@ -91,4 +91,3 @@ msgstr "例"
 #: of pyvista_wasm.examples.download_pluto_surface:30
 msgid "Render a textured Pluto planet sphere in the browser."
 msgstr "ブラウザでテクスチャ付きの冥王星球体をレンダリングします。"
-
