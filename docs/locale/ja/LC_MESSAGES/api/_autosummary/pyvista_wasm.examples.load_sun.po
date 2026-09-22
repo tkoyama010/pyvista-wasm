@@ -89,4 +89,3 @@ msgstr "例"
 #: of pyvista_wasm.examples.load_sun:38
 msgid "Render the Sun in the browser:"
 msgstr "ブラウザで太陽をレンダリングします:"
-
