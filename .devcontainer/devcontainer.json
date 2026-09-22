@@ -9,7 +9,7 @@
       "version": "latest"
     }
   },
-  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && sudo -H env \"PATH=$PATH\" uv pip install --system tox tox-uv pre-commit && uv python install 3.11 --default && npm ci && npm install -g @earendil-works/pi-coding-agent",
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && sudo -H env \"PATH=$PATH\" uv pip install --system tox tox-uv pre-commit && uv python install 3.11 --default && npm ci && npm install -g @earendil-works/pi-coding-agent && python3 -c 'import json,pathlib; f=pathlib.Path.home()/\".codespaces-user-secrets.env\"; d=json.load(open(\"/workspaces/.codespaces/shared/user-secrets-envs.json\")); f.write_text(\"\".join(f\"export {k}={json.dumps(v)}\\n\" for k,v in d.items())); f.chmod(0o600)' && for f in ~/.bashrc ~/.zshenv ~/.zprofile; do grep -qs codespaces-user-secrets.env $f || printf '\n[ -f ~/.codespaces-user-secrets.env ] && . ~/.codespaces-user-secrets.env\n' >> $f; done",
   "customizations": {
     "vscode": {
       "extensions": [
