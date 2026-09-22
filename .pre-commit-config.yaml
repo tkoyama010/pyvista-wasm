@@ -52,11 +52,11 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.13
+    rev: 0.12.17
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.7
+    rev: v0.16.8
     hooks:
       # Run the linter
       - id: ruff-check
@@ -64,7 +64,7 @@ repos:
       # Run the formatter
       - id: ruff-format
   - repo: https://github.com/djlint/djLint
-    rev: v1.46.1
+    rev: v1.46.2
     hooks:
       - id: djlint-reformat-jinja
         files: src/pyvista_wasm/templates/.*\.html$
@@ -72,7 +72,7 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.13
+    rev: v2.5.14
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.9"]
