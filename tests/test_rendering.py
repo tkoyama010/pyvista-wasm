@@ -898,6 +898,21 @@ class TestColabRenderer:
         assert isinstance(renderer, rendering.VTKWasmRenderer)
 
 
+class TestWebGL2CapabilityGate:
+    """Tests for the WebGL2 capability gate in the generated renderer JS."""
+
+    def test_bundled_renderer_checks_webgl2(self) -> None:
+        """The bundled renderer must detect missing WebGL2 up front.
+
+        Chromium on some Linux systems (GPU driver/GBM problems) creates the
+        canvas but never a WebGL2 context, leaving a blank canvas with no
+        visible error. The gate replaces that with an actionable message.
+        Refs #651.
+        """
+        assert 'getContext("webgl2")' in rendering._RENDERER_JS
+        assert "WebGL2 is not available" in rendering._RENDERER_JS
+
+
 class TestColabEnvDetection:
     """Tests for Google Colaboratory environment detection."""
 
