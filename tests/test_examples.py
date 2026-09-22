@@ -193,6 +193,8 @@ class TestDownloadMercurySurface:
         """The Texture repr references the Mercury image."""
         texture = examples.download_mercury_surface()
         assert "mercury.jpg" in repr(texture)
+
+
 class TestLoadNeptune:
     """Tests for examples.load_neptune."""
 
