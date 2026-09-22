@@ -245,3 +245,51 @@ class TestDownloadUranusSurface:
         """The Texture repr references the Uranus image."""
         texture = examples.download_uranus_surface()
         assert "uranus.jpg" in repr(texture)
+
+
+class TestLoadMercury:
+    """Tests for examples.load_mercury."""
+
+    def test_returns_polydata(self) -> None:
+        """load_mercury returns a PolyData instance."""
+        mercury = examples.load_mercury()
+        assert isinstance(mercury, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        mercury = examples.load_mercury()
+        assert mercury.t_coords is not None
+        assert mercury.t_coords.shape == (mercury.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        mercury = examples.load_mercury()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert mercury.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        mercury = examples.load_mercury(radius=2.0)
+        radius, _ = mercury.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadMercurySurface:
+    """Tests for examples.download_mercury_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_mercury_surface returns a Texture instance."""
+        texture = examples.download_mercury_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_mercury_solar_texture(self) -> None:
+        """The texture URL points at the Mercury solar_textures image."""
+        texture = examples.download_mercury_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/mercury.jpg"
+        )
+
+    def test_repr_mentions_mercury(self) -> None:
+        """The Texture repr references the Mercury image."""
+        texture = examples.download_mercury_surface()
+        assert "mercury.jpg" in repr(texture)
