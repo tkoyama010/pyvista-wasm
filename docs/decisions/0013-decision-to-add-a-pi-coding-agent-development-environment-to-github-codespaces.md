@@ -1,6 +1,6 @@
 # Decision to add a pi coding agent development environment to GitHub Codespaces
 
-* Status: proposed
+* Status: accepted
 * Date: 2026-09-19
 * Decision-makers: tkoyama010
 

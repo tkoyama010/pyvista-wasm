@@ -1,6 +1,6 @@
 # Decision not to use Nix in the Codespace environment
 
-* Status: proposed
+* Status: accepted
 * Date: 2026-09-19
 * Decision-makers: tkoyama010
 

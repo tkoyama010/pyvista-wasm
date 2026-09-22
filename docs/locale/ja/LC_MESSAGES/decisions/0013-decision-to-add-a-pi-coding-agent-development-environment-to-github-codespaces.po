@@ -26,8 +26,8 @@ msgid ""
 msgstr "piコーディングエージェント開発環境をGitHub Codespacesに追加する決定"
 
 #: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:3
-msgid "Status: proposed"
-msgstr "ステータス: proposed"
+msgid "Status: accepted"
+msgstr "ステータス: 承認済"
 
 #: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:4
 msgid "Date: 2026-09-19"

@@ -24,8 +24,8 @@ msgid "Decision not to use Nix in the Codespace environment"
 msgstr "Codespace環境でNixを使用しない決定"
 
 #: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:3
-msgid "Status: proposed"
-msgstr "ステータス: proposed"
+msgid "Status: accepted"
+msgstr "ステータス: 承認済"
 
 #: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:4
 msgid "Date: 2026-09-19"
