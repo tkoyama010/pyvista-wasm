@@ -8,6 +8,8 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        # conda recipe uses Jinja templating, which is not valid plain YAML
+        exclude: ^recipe/
       - id: pretty-format-json
         # Root-level *.json files are owned by biome (biome.json includes
         # "*.json"), which collapses multi-element arrays; pretty-format-json
@@ -22,11 +24,15 @@ repos:
     rev: v0.21.0
     hooks:
       - id: yamlfmt
+        # conda recipe uses Jinja templating, which is not valid plain YAML
+        exclude: ^recipe/
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.38.0
     hooks:
       - id: yamllint
         args: [-c, .yamllint]
+        # conda recipe uses Jinja templating, which is not valid plain YAML
+        exclude: ^recipe/
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
