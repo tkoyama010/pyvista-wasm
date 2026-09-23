@@ -32,9 +32,16 @@
 ## Install
 
 [![PyPI](https://img.shields.io/pypi/v/pyvista-wasm)](https://pypi.org/project/pyvista-wasm/)
+[![Conda](https://img.shields.io/conda/vn/conda-forge/pyvista-wasm)](https://anaconda.org/conda-forge/pyvista-wasm)
 
 ```bash
 pip install pyvista-wasm
+```
+
+または conda の場合:
+
+```bash
+conda install -c conda-forge pyvista-wasm
 ```
 
 Pyodid/stlite の場合:
