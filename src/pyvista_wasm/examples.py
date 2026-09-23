@@ -690,6 +690,64 @@ def download_uranus_surface() -> Texture:
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/uranus.jpg")
 
 
+def load_jupiter(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Jupiter as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_jupiter`` API.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Jupiter sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_jupiter_surface`
+        Download the Jupiter surface texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> jupiter = examples.load_jupiter()
+    >>> isinstance(jupiter, pv.PolyData)
+    True
+    >>> jupiter.t_coords is not None
+    True
+
+    Render a Jupiter planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> jupiter = examples.load_jupiter()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(jupiter)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
 def load_pluto(
     radius: float = 1.0,
     lat_resolution: int = 50,
@@ -1052,6 +1110,49 @@ def load_mercury(
         phi_resolution=lat_resolution,
         texture_coordinates=True,
     ).rotate_z(180)
+
+
+def download_jupiter_surface() -> Texture:
+    """Download the Jupiter planet surface texture.
+
+    Returns the Jupiter surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_jupiter_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Jupiter surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Jupiter globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_jupiter`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Jupiter planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_jupiter_surface()
+    >>> jupiter = examples.load_jupiter()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(jupiter, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/jupiter.jpg")
 
 
 def download_mercury_surface() -> Texture:

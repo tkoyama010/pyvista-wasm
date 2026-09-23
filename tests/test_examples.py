@@ -247,6 +247,54 @@ class TestDownloadUranusSurface:
         assert "uranus.jpg" in repr(texture)
 
 
+class TestLoadJupiter:
+    """Tests for examples.load_jupiter."""
+
+    def test_returns_polydata(self) -> None:
+        """load_jupiter returns a PolyData instance."""
+        jupiter = examples.load_jupiter()
+        assert isinstance(jupiter, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        jupiter = examples.load_jupiter()
+        assert jupiter.t_coords is not None
+        assert jupiter.t_coords.shape == (jupiter.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        jupiter = examples.load_jupiter()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert jupiter.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        jupiter = examples.load_jupiter(radius=2.0)
+        radius, _ = jupiter.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadJupiterSurface:
+    """Tests for examples.download_jupiter_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_jupiter_surface returns a Texture instance."""
+        texture = examples.download_jupiter_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_jupiter_solar_texture(self) -> None:
+        """The texture URL points at the Jupiter solar_textures image."""
+        texture = examples.download_jupiter_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/jupiter.jpg"
+        )
+
+    def test_repr_mentions_jupiter(self) -> None:
+        """The Texture repr references the Jupiter image."""
+        texture = examples.download_jupiter_surface()
+        assert "jupiter.jpg" in repr(texture)
+
+
 class TestLoadPluto:
     """Tests for examples.load_pluto."""
 
