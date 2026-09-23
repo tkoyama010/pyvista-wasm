@@ -698,7 +698,8 @@ def load_moon(
     """Load the Moon as a textured sphere.
 
     Creates a sphere mesh with texture coordinates, matching the
-    ``pyvista.examples.planets.load_moon`` API.
+    ``pyvista.examples.planets.load_moon`` API. The sphere is rotated
+    180° around the Z axis to align the Prime Meridian correctly.
 
     Parameters
     ----------
@@ -731,7 +732,7 @@ def load_moon(
     >>> moon.t_coords is not None
     True
 
-    Render a Moon sphere in the browser:
+    Render the Moon in the browser:
 
     >>> from pyvista_wasm import examples
     >>> moon = examples.load_moon()

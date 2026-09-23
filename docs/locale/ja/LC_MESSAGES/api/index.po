@@ -488,7 +488,7 @@ msgstr ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examp
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Download the Moon surface texture."
-msgstr "月の表面テクスチャをダウンロードします。"
+msgstr "月表面のテクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy

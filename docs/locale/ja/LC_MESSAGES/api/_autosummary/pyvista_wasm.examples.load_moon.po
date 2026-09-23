@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-16 03:39+0900\n"
+"POT-Creation-Date: 2026-09-20 11:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -31,24 +31,26 @@ msgstr "テクスチャ付き球体として月をロードします。"
 #: of pyvista_wasm.examples.load_moon:3
 msgid ""
 "Creates a sphere mesh with texture coordinates, matching the "
-"``pyvista.examples.planets.load_moon`` API."
+"``pyvista.examples.planets.load_moon`` API. The sphere is rotated 180° "
+"around the Z axis to align the Prime Meridian correctly."
 msgstr ""
 "テクスチャ座標付きの球体メッシュを作成します。"
 "``pyvista.examples.planets.load_moon`` API と一致します。"
+"球体は Z 軸周りに 180° 回転され、本初子午線が正しく整列されます。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_moon.rst
 msgid "Parameters"
 msgstr "パラメータ"
 
-#: of pyvista_wasm.examples.load_moon:6
+#: of pyvista_wasm.examples.load_moon:7
 msgid "Sphere radius. Default is 1.0."
 msgstr "球体の半径。デフォルトは 1.0。"
 
-#: of pyvista_wasm.examples.load_moon:8
+#: of pyvista_wasm.examples.load_moon:9
 msgid "Number of points in the latitude direction. Default is 50."
 msgstr "緯度方向のポイント数。デフォルトは 50。"
 
-#: of pyvista_wasm.examples.load_moon:10
+#: of pyvista_wasm.examples.load_moon:11
 msgid "Number of points in the longitude direction. Default is 100."
 msgstr "経度方向のポイント数。デフォルトは 100。"
 
@@ -56,34 +58,34 @@ msgstr "経度方向のポイント数。デフォルトは 100。"
 msgid "Returns"
 msgstr "戻り値"
 
-#: of pyvista_wasm.examples.load_moon:13
+#: of pyvista_wasm.examples.load_moon:14
 msgid "Moon sphere mesh with texture coordinates."
-msgstr "テクスチャ座標付きの月球体メッシュ。"
+msgstr "テクスチャ座標付き月球体メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_moon.rst
 msgid "Return type"
 msgstr "戻り値の型"
 
-#: of pyvista_wasm.examples.load_moon:18
+#: of pyvista_wasm.examples.load_moon:19
 msgid ":func:`~pyvista_wasm.examples.load_earth`"
 msgstr ":func:`~pyvista_wasm.examples.load_earth`"
 
-#: of pyvista_wasm.examples.load_moon:19
+#: of pyvista_wasm.examples.load_moon:20
 msgid "Load the planet Earth for comparison."
 msgstr "比較のために地球をロードします。"
 
-#: of pyvista_wasm.examples.load_moon:21
+#: of pyvista_wasm.examples.load_moon:22
 msgid ":func:`~pyvista_wasm.examples.download_moon_surface`"
 msgstr ":func:`~pyvista_wasm.examples.download_moon_surface`"
 
-#: of pyvista_wasm.examples.load_moon:22
+#: of pyvista_wasm.examples.load_moon:23
 msgid "Download the Moon surface texture."
 msgstr "月表面のテクスチャをダウンロードします。"
 
-#: of pyvista_wasm.examples.load_moon:25
+#: of pyvista_wasm.examples.load_moon:26
 msgid "Examples"
 msgstr "例"
 
-#: of pyvista_wasm.examples.load_moon:37
-msgid "Render a Moon sphere in the browser:"
-msgstr "ブラウザで月球体をレンダリングします:"
+#: of pyvista_wasm.examples.load_moon:38
+msgid "Render the Moon in the browser:"
+msgstr "ブラウザで月をレンダリングします:"

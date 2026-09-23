@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-16 03:39+0900\n"
+"POT-Creation-Date: 2026-09-20 11:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -26,7 +26,7 @@ msgstr "pyvista\\_wasm.examples.download\\_moon\\_surface"
 
 #: of pyvista_wasm.examples.download_moon_surface:1
 msgid "Download the Moon surface texture."
-msgstr "月の表面テクスチャをダウンロードします。"
+msgstr "月表面のテクスチャをダウンロードします。"
 
 #: of pyvista_wasm.examples.download_moon_surface:3
 msgid ""
