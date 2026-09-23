@@ -1,0 +1,335 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-19 17:07+0900\n"
+"PO-Revision-Date: 2026-09-19 17:15+0900\n"
+"Last-Translator: \n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:1
+msgid ""
+"Decision to add a pi coding agent development environment to GitHub "
+"Codespaces"
+msgstr "piコーディングエージェント開発環境をGitHub Codespacesに追加する決定"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:3
+msgid "Status: accepted"
+msgstr "ステータス: 承認済"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:4
+msgid "Date: 2026-09-19"
+msgstr "日付: 2026-09-19"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:5
+msgid "Decision-makers: tkoyama010"
+msgstr "決定者: tkoyama010"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:7
+msgid "Context and Problem Statement"
+msgstr "背景と問題提起"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:9
+msgid ""
+"Contributors currently set up the development environment locally: the "
+"project uses [uv](https://docs.astral.sh/uv/) for Python dependencies, "
+"npm for the TypeScript glue layer, and [pre-commit](https://pre-"
+"commit.com/) hooks (including the `pyadr` hooks that generate and check "
+"[`docs/decisions/`](./index.md)). [`AGENTS.md`](../../AGENTS.md) states "
+"that \"no local setup is required\" because CI verifies the environment "
+"on every PR, but a contributor or an AI coding agent still needs a "
+"working toolchain before the first commit. [pi](https://github.com"
+"/earendil-works/pi-coding-agent) is the coding agent harness used to "
+"develop this repository, and [GitHub "
+"Codespaces](https://github.com/features/codespaces) can provision a "
+"ready-to-use browser or VS Code environment from a `devcontainer.json` "
+"file. Should we add a Codespaces development environment configured for "
+"the pi coding agent?"
+msgstr ""
+"現在、コントリビューターは開発環境をローカルに構築しています。このプロジェクトはPythonの依存関係に[uv](https://docs.astral.sh/uv/)、TypeScriptのグルーレイヤーにnpm、そして（[`docs/decisions/`](./index.md)を生成・検証する`pyadr`フックを含む"
+"）[pre-commit](https://pre-"
+"commit.com/)フックを使用しています。[`AGENTS.md`](../../AGENTS.md)には「ローカルセットアップは不要」と記載されています。これはCIがすべてのPRで環境を検証するためですが、それでも最初のコミット前にはコントリビューターやAIコーディングエージェントには動作するツールチェーンが必要です。[pi](https://github.com"
+"/earendil-works/pi-coding-"
+"agent)はこのリポジトリの開発に使われているコーディングエージェントハーネスであり、[GitHub "
+"Codespaces](https://github.com/features/codespaces)は`devcontainer.json`ファイルからすぐに使えるブラウザやVS"
+" Code環境をプロビジョニングできます。piコーディングエージェント用に設定されたCodespaces開発環境を追加すべきか？"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:11
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:13
+msgid ""
+"**Low-friction onboarding**: a contributor should be able to start "
+"hacking (or run the pi agent) with one click, without installing uv, "
+"Node, or pre-commit locally."
+msgstr ""
+"**低摩擦なオンボーディング**：コントリビューターはuv・Node・pre-"
+"commitをローカルにインストールすることなく、ワンクリックで開発（またはpiエージェントの実行）を開始できるべきです。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:14
+msgid ""
+"**Agent parity**: the pi agent works best when the environment it edits "
+"in matches CI exactly, so agent-made PRs pass on the first run."
+msgstr "**エージェントの一致**：piエージェントは、編集対象の環境がCIと完全に一致しているときに最もよく機能し、エージェントが作ったPRが初回で通るようになります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:15
+msgid ""
+"**Single source of truth**: the environment definition must live in the "
+"repository and be versioned with the code, like every other tool decision"
+" here."
+msgstr "**単一の信頼できる情報源**：環境定義は、ここでの他のツール決定と同じく、リポジトリに置かれコードと共にバージョン管理されなければなりません。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:16
+msgid ""
+"**Maintenance cost**: pyvista-wasm is a small project; a second "
+"environment definition that drifts from the local/CI one is a real "
+"liability."
+msgstr "**保守コスト**：pyvista-wasmは小さなプロジェクトです。ローカル/CIの環境定義から乖離する第2の環境定義は現実の負債になります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:17
+msgid ""
+"**No local setup required**: [`AGENTS.md`](../../AGENTS.md) promises CI "
+"verifies the environment; a Codespace must not become a requirement to "
+"contribute."
+msgstr "**ローカルセットアップ不要**：[`AGENTS.md`](../../AGENTS.md)はCIが環境を検証することを約束しています。Codespaceがコントリビューションの必須条件になってはなりません。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:19
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:21
+msgid ""
+"**Option A: Add a Codespaces devcontainer configured for the pi coding "
+"agent**"
+msgstr "**選択肢A：piコーディングエージェント用に設定したCodespaces devcontainerを追加する**"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:22
+msgid "**Option B: Keep local setup only (status quo)**"
+msgstr "**選択肢B：ローカルセットアップのみのままにする（現状維持）**"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:24
+msgid "Decision Outcome"
+msgstr "決定の結果"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:26
+msgid ""
+"Chosen option: \"**Option A: Add a Codespaces devcontainer configured for"
+" the pi coding agent**\", because it is the only option that makes the "
+"environment reproducible for both human contributors and the pi agent at "
+"zero marginal CI cost."
+msgstr ""
+"選択した option: \"**選択肢A：piコーディングエージェント用に設定したCodespaces "
+"devcontainerを追加する**\"。人間のコントリビューターとpiエージェントの両方にとって環境を再現可能にしつつ、CIの追加コストをゼロにできるのはこの選択肢だけだからです。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:28
+msgid ""
+"The devcontainer installs the same toolchain CI uses: Python via uv, "
+"Node.js via npm, and pre-commit with all hooks from [`.pre-commit-"
+"config.yaml`](../../.pre-commit-config.yaml)."
+msgstr ""
+"devcontainerはCIと同じツールチェーンをインストールします。すなわちuv経由のPython、npm経由のNode.js、そして"
+"[`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)のすべてのフックを含むpre-"
+"commitです。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:29
+msgid ""
+"The pi CLI is installed in the image, so an agent session starts with the"
+" repository, [`AGENTS.md`](../../AGENTS.md), and the lint/test commands "
+"already available."
+msgstr ""
+"pi "
+"CLIはイメージにインストールされているため、エージェントセッションはリポジトリ・[`AGENTS.md`](../../AGENTS.md)・リント/テストコマンドがすべて揃った状態で開始できます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:30
+msgid ""
+"The environment definition is one `devcontainer.json` (plus a small "
+"Dockerfile if needed) under `.devcontainer/`, versioned in the "
+"repository."
+msgstr "環境定義は`.devcontainer/`配下の1つの`devcontainer.json`（必要なら小さなDockerfileを追加）であり、リポジトリでバージョン管理されます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:31
+msgid ""
+"CI remains the source of truth for \"does the environment work\": the "
+"Codespace reuses the same install steps, so drift is visible in PRs."
+msgstr "「環境が動作するか」の信頼できる情報源はCIのままです。Codespaceは同じインストール手順を再利用するため、乖離はPRで可視化されます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:33
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:35
+msgid ""
+"Good, because contributors and the pi agent get a working, CI-equivalent "
+"environment in minutes with no local installation."
+msgstr "良い点：コントリビューターとpiエージェントが、ローカルインストールなしで数分でCI相当の動作する環境を得られます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:36
+msgid ""
+"Good, because agent-driven changes (the primary development workflow for "
+"this repository) start from the same tool versions CI enforces."
+msgstr "良い点：エージェント主導の変更（このリポジトリの主な開発ワークフロー）が、CIが強制するのと同じツールバージョンから始まります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:37
+msgid ""
+"Good, because the Codespace definition documents the environment as code;"
+" setup steps stop living in people's heads."
+msgstr "良い点：Codespaceの定義が環境をコードとして文書化し、セットアップ手順が個人の頭の中だけに存在しなくなります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:38
+msgid ""
+"Bad, because a second environment surface can drift from CI; any "
+"toolchain change must update CI and the devcontainer together."
+msgstr "悪い点：第2の環境面がCIから乖離する可能性があります。ツールチェーンの変更は必ずCIとdevcontainerを同時に更新する必要があります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:39
+msgid ""
+"Bad, because Codespaces consumption is billed per core-hour; occasional "
+"contributors may prefer local setup."
+msgstr "悪い点：Codespacesの利用はコア時間単位で課金されます。偶発的なコントリビューターはローカルセットアップを好むかもしれません。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:41
+msgid "Confirmation"
+msgstr "確認方法"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:43
+msgid ""
+"Compliance is confirmed by the presence of `.devcontainer/` in the "
+"repository and by launching a Codespace from a PR preview: `uv run "
+"pytest`, `npm run lint`, and `pre-commit run --all-files` must succeed "
+"inside it without manual installation steps. If `.devcontainer/` is "
+"removed, or if it no longer reproduces the CI toolchain, this decision is"
+" violated."
+msgstr ""
+"コンプライアンスは、リポジトリに`.devcontainer/`が存在すること、およびPRプレビューからCodespaceを起動して確認します。その中で`uv"
+" run pytest`・`npm run lint`・`pre-commit run --all-"
+"files`が手動のインストール手順なしで成功しなければなりません。`.devcontainer/`が削除された場合、またはCIのツールチェーンを再現しなくなった場合、この決定に違反しています。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:45
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の良い点と悪い点"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:47
+msgid "Option A: Add a Codespaces devcontainer configured for the pi coding agent"
+msgstr "選択肢A：piコーディングエージェント用に設定したCodespaces devcontainerを追加する"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:49
+msgid ""
+"A `devcontainer.json` under `.devcontainer/` that installs uv, Node.js, "
+"pre-commit, and the pi CLI."
+msgstr ""
+"`.devcontainer/`配下の`devcontainer.json`。uv・Node.js・pre-commit・pi "
+"CLIをインストールします。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:51
+msgid ""
+"Good, because onboarding becomes one click for humans and one `gh "
+"codespace create` for agents."
+msgstr "良い点：オンボーディングが人間にはワンクリック、エージェントには`gh codespace create`一発になります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:52
+msgid ""
+"Good, because the pi agent can be pointed at a fresh Codespace per task, "
+"keeping sessions isolated and reproducible."
+msgstr "良い点：piエージェントをタスクごとに新しいCodespaceへ向けることで、セッションの分離と再現性が保たれます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:53
+msgid "Good, because the definition is versioned and reviewed like code."
+msgstr "良い点：定義がコードと同じくバージョン管理されレビューされます。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:54
+msgid ""
+"Neutral, because the devcontainer reuses the same commands CI already "
+"runs; it adds no new tool to maintain."
+msgstr "中立的な点：devcontainerはCIがすでに実行しているのと同じコマンドを再利用するため、新たに保守すべきツールは増えません。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:55
+msgid ""
+"Bad, because Codespaces usage costs money and requires a GitHub account "
+"with the feature enabled."
+msgstr "悪い点：Codespacesの利用には費用がかかり、機能が有効なGitHubアカウントが必要です。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:56
+msgid ""
+"Bad, because image build time must be kept in check or Codespace startup "
+"becomes slow."
+msgstr "悪い点：イメージビルド時間を抑えないと、Codespaceの起動が遅くなります。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:58
+msgid "Option B: Keep local setup only (status quo)"
+msgstr "選択肢B：ローカルセットアップのみのままにする（現状維持）"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:60
+msgid ""
+"Contributors and agents run against local machines; CI verifies the "
+"result on every PR."
+msgstr "コントリビューターとエージェントはローカルマシン上で作業し、CIがすべてのPRで結果を検証します。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:62
+msgid "Good, because no new files or image builds are maintained."
+msgstr "良い点：新しいファイルやイメージビルドを保守する必要がありません。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:63
+msgid ""
+"Good, because [`AGENTS.md`](../../AGENTS.md) already promises CI covers "
+"environment verification."
+msgstr "良い点：[`AGENTS.md`](../../AGENTS.md)はすでにCIが環境検証をカバーすることを約束しています。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:64
+msgid ""
+"Bad, because every contributor and every fresh agent session repeats "
+"setup manually, with version drift between machines."
+msgstr "悪い点：すべてのコントリビューターと新しいエージェントセッションがセットアップを手動で繰り返し、マシン間でバージョンが乖離します。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:65
+msgid ""
+"Bad, because the pi agent cannot reliably start from a clean, known-good "
+"state; agent PR quality depends on the host machine it happens to run on."
+msgstr "悪い点：piエージェントはクリーンで既知の正常な状態から確実に開始できず、エージェントPRの品質はたまたま実行されているホストマシンに依存します。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:67
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:69
+msgid ""
+"Toolchain sources of truth: [`pyproject.toml`](../../pyproject.toml) / "
+"`uv.lock`, [`package.json`](../../package.json) / `package-lock.json`, "
+"[`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)."
+msgstr ""
+"ツールチェーンの信頼できる情報源：[`pyproject.toml`](../../pyproject.toml) / "
+"`uv.lock`、[`package.json`](../../package.json) / `package-lock.json"
+"`、[`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:70
+msgid ""
+"Environment promises in [`AGENTS.md`](../../AGENTS.md) must be kept in "
+"sync if this decision is revisited."
+msgstr "この決定を見直す場合は、[`AGENTS.md`](../../AGENTS.md)の環境に関する記述も必ず同期させてください。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:71
+msgid ""
+"Revisit triggers: Codespace costs become a problem, or the devcontainer "
+"drifts from CI and the drift cannot be closed cheaply."
+msgstr "見直しのきっかけ：Codespaceのコストが問題になった場合、またはdevcontainerがCIから乖離し、その乖離を安価に解消できない場合。"
+
+#: ../../decisions/0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md:72
+msgid ""
+"Follow-up decision: [ADR-0014 — Decision not to use Nix in the Codespace "
+"environment](0014-decision-not-to-use-nix-in-the-codespace-"
+"environment.md)."
+msgstr ""
+"後続の決定：[ADR-0014 — Codespace環境でNixを使用しない決定]"
+"(0014-decision-not-to-use-nix-in-the-codespace-environment.md)"
