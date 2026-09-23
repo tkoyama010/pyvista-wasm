@@ -1213,6 +1213,49 @@ def load_mercury(
     ).rotate_z(180)
 
 
+def download_jupiter_surface() -> Texture:
+    """Download the Jupiter planet surface texture.
+
+    Returns the Jupiter surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_jupiter_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Jupiter surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Jupiter globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_jupiter`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Jupiter planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_jupiter_surface()
+    >>> jupiter = examples.load_jupiter()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(jupiter, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/jupiter.jpg")
+
+
 def download_mercury_surface() -> Texture:
     """Download the Mercury planet surface texture.
 
