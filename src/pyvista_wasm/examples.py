@@ -1199,6 +1199,108 @@ def download_sun_surface() -> Texture:
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/sun.jpg")
 
 
+def load_neptune(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Neptune as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_neptune`` API. The sphere is rotated
+    180° around the Z axis to align the Prime Meridian correctly.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Neptune sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_neptune_surface`
+        Download the Neptune surface texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> neptune = examples.load_neptune()
+    >>> isinstance(neptune, pv.PolyData)
+    True
+    >>> neptune.t_coords is not None
+    True
+
+    Render a Neptune planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> neptune = examples.load_neptune()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(neptune)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
+def download_neptune_surface() -> Texture:
+    """Download the Neptune planet surface texture.
+
+    Returns the Neptune surface image from the PyVista ``solar_textures``
+    dataset as a :class:`~pyvista_wasm.texture.Texture`, mirroring the
+    ``pyvista.examples.planets.download_neptune_surface(texture=True)`` API.
+    Textures are sourced from `Solar Textures
+    <https://www.solarsystemscope.com/textures/>`_.
+
+    Returns
+    -------
+    Texture
+        Texture wrapping the Neptune surface image URL.
+
+    Notes
+    -----
+    pyvista-wasm textures are URL-based, so no file is downloaded on the
+    Python side — the returned :class:`~pyvista_wasm.texture.Texture` wraps
+    the remote image URL and VTK.wasm samples it in the browser via WebGL.
+
+    To render a textured Neptune globe, pass the texture directly to
+    :meth:`~pyvista_wasm.Plotter.add_mesh` on the result of
+    :func:`~pyvista_wasm.examples.load_neptune`; the browser renderer
+    generates the sphere UVs so the image wraps equirectangularly around
+    the globe. This is the wasm counterpart to PyVista's `create-planet
+    <https://docs.pyvista.org/examples/99-advanced/planets.html>`_ example.
+
+    Examples
+    --------
+    Render a textured Neptune planet sphere in the browser.
+
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> texture = examples.download_neptune_surface()
+    >>> neptune = examples.load_neptune()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(neptune, texture=texture)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/neptune.jpg")
+
+
 def download_lucy() -> PolyData:
     """Download the Lucy Angel dataset.
 
