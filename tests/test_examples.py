@@ -295,8 +295,6 @@ class TestDownloadSunSurface:
         assert "sun.jpg" in repr(texture)
 
 
-
-
 class TestDownloadStarsSkyBackground:
     """Tests for examples.download_stars_sky_background."""
 
