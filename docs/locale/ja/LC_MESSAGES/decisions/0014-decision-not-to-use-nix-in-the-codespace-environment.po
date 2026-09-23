@@ -1,0 +1,317 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-19 17:07+0900\n"
+"PO-Revision-Date: 2026-09-19 17:15+0900\n"
+"Last-Translator: \n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:1
+msgid "Decision not to use Nix in the Codespace environment"
+msgstr "Codespace環境でNixを使用しない決定"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:3
+msgid "Status: accepted"
+msgstr "ステータス: 承認済"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:4
+msgid "Date: 2026-09-19"
+msgstr "日付: 2026-09-19"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:5
+msgid "Decision-makers: tkoyama010"
+msgstr "決定者: tkoyama010"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:7
+msgid "Context and Problem Statement"
+msgstr "背景と問題提起"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:9
+msgid ""
+"[ADR-0013](0013-decision-to-add-a-pi-coding-agent-development-"
+"environment-to-github-codespaces.md) adopts a GitHub Codespaces "
+"devcontainer for developing pyvista-wasm with the pi coding agent. That "
+"devcontainer must install Python (via uv), Node.js (via npm), and pre-"
+"commit with all hooks. [Nix](https://nixos.org/) (including "
+"[devenv](https://devenv.sh/) and [devbox](https://www.jetify.com/devbox))"
+" can define the whole toolchain declaratively and reproducibly, and Nix-"
+"based devcontainer features exist for Codespaces. Should the Codespace "
+"environment be built with Nix instead of the plain devcontainer features "
+"CI already uses?"
+msgstr ""
+"[ADR-0013](0013-decision-to-add-a-pi-coding-agent-development-"
+"environment-to-github-codespaces.md)は、piコーディングエージェントでpyvista-wasmを開発するためのGitHub Codespaces "
+"devcontainerを採用しています。そのdevcontainerは、Python（uv経由）・Node.js（npm経由"
+"）・すべてのフックを含むpre-"
+"commitをインストールする必要があります。[Nix](https://nixos.org/)（[devenv](https://devenv.sh/)や[devbox](https://www.jetify.com/devbox)を含む）はツールチェーン全体を宣言的かつ再現可能に定義でき、Codespaces向けのNixベースのdevcontainer"
+" featureも存在します。CIがすでに使っているプレーンなdevcontainer "
+"featuresの代わりに、Codespace環境をNixで構築すべきか？"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:11
+msgid "Decision Drivers"
+msgstr "決定ドライバ"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:13
+msgid ""
+"**Reproducibility**: the pi agent should always see the exact tool "
+"versions CI sees."
+msgstr "**再現性**：piエージェントは常にCIとまったく同じツールバージョンを目にするべきです。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:14
+msgid ""
+"**Single source of truth**: the repository already pins its toolchain in "
+"`uv.lock` and `package-lock.json`; a second, parallel pin format invites "
+"drift."
+msgstr ""
+"**単一の信頼できる情報源**：リポジトリはすでに`uv.lock`と`package-"
+"lock.json`でツールチェーンを固定しています。第2の並行したピン形式は乖離を招きます。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:15
+msgid ""
+"**Maintenance cost**: pyvista-wasm is a small project; every extra tool "
+"in the environment definition is a real ongoing cost."
+msgstr "**保守コスト**：pyvista-wasmは小さなプロジェクトです。環境定義に追加するツールはすべて、現実の継続コストになります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:16
+msgid ""
+"**Onboarding friction**: contributors and the pi agent must be able to "
+"start without learning a new package manager."
+msgstr "**オンボーディングの摩擦**：コントリビューターとpiエージェントは、新しいパッケージマネージャーを学ばずに開始できなければなりません。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:17
+msgid ""
+"**CI parity**: [`AGENTS.md`](../../AGENTS.md) promises CI verifies the "
+"environment on every PR; the Codespace should reuse the CI install steps,"
+" not fork them."
+msgstr "**CIとの一致**：[`AGENTS.md`](../../AGENTS.md)はCIがすべてのPRで環境を検証することを約束しています。CodespaceはCIのインストール手順をフォークするのではなく再利用すべきです。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:19
+msgid "Considered Options"
+msgstr "検討した選択肢"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:21
+msgid "**Option A: Use Nix (devenv/devbox) to define the Codespace environment**"
+msgstr "**選択肢A：Codespace環境の定義にNix（devenv/devbox）を使う**"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:22
+msgid "**Option B: Use plain devcontainer features with uv and npm (status quo)**"
+msgstr "**選択肢B：uvとnpmによるプレーンなdevcontainer featuresを使う（現状維持）**"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:24
+msgid "Decision Outcome"
+msgstr "決定の結果"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:26
+msgid ""
+"Chosen option: \"**Option B: Use plain devcontainer features with uv and "
+"npm (status quo)**\", because the lockfiles CI already enforces give the "
+"reproducibility Nix would provide, without adding a second package "
+"manager to maintain."
+msgstr ""
+"選択した option: \"**選択肢B：uvとnpmによるプレーンなdevcontainer "
+"featuresを使う（現状維持）**\"。CIがすでに強制しているロックファイルが、Nixが提供する再現性を、保守すべき第2のパッケージマネージャーを追加せずに実現するからです。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:28
+msgid ""
+"Reproducibility is already covered: `uv.lock`, `package-lock.json`, and "
+"pinned pre-commit hook revisions pin every tool version. Nix would pin "
+"them a second time in a second format."
+msgstr ""
+"再現性はすでに確保されています。`uv.lock`・`package-lock.json`・ピン留めされたpre-"
+"commitフックのリビジョンが、すべてのツールバージョンを固定しています。Nixは同じものを第2の形式でもう一度固定することになるだけです。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:29
+msgid ""
+"CI runs `uv`, `npm`, and `pre-commit` directly. A Nix-based environment "
+"replaces those entry points with Nix wrappers, so the Codespace and CI "
+"would diverge in *how* they run the same tools — the exact drift "
+"ADR-0013's confirmation step is meant to catch."
+msgstr ""
+"CIは`uv`・`npm`・`pre-"
+"commit`を直接実行します。Nixベースの環境はこれらのエントリーポイントをNixのラッパーに置き換えるため、CodespaceとCIは同じツールの*実行方法*が乖離します。これはまさにADR-0013の確認ステップが捕捉しようとしている乖離です。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:30
+msgid ""
+"Nix adds a learning curve for every contributor who debugs the "
+"environment, and Nix builds inside Codespaces need care (the store lives "
+"outside the container filesystem, caches are non-trivial)."
+msgstr "Nixは環境をデバッグするすべてのコントリビューターに学習コストを課します。またCodespaces内でのNixビルドには注意が必要です（ストアはコンテナファイルシステムの外に存在し、キャッシュも自明ではありません）。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:31
+msgid ""
+"The project has no packages to distribute and no need for hermetic builds"
+" beyond what the lockfiles and CI already provide."
+msgstr "このプロジェクトには配布するパッケージがなく、ロックファイルとCIがすでに提供する範囲を超えた閉じたビルドの必要性もありません。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:33
+msgid "Consequences"
+msgstr "結果"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:35
+msgid ""
+"Good, because the Codespace reuses the CI install steps verbatim; one "
+"source of truth per toolchain."
+msgstr "良い点：CodespaceがCIのインストール手順をそのまま再利用し、ツールチェーンごとに信頼できる情報源が1つになります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:36
+msgid "Good, because no contributor needs to learn Nix to fix the environment."
+msgstr "良い点：環境を修正するためにNixを学ぶコントリビューターは谁もいなくて済みます。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:37
+msgid "Good, because Codespace image builds stay simple and fast."
+msgstr "良い点：Codespaceのイメージビルドがシンプルかつ高速なまま保たれます。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:38
+msgid ""
+"Bad, because byte-identical environments across machines are not "
+"guaranteed the way a Nix store would guarantee them; platform differences"
+" (glibc, shell) can still leak in."
+msgstr "悪い点：マシン間でバイト単位で同一の環境は保証されず、Nixストアが保証する再現性には届きません。プラットフォームの差異（glibc、シェル）が漏れ込む可能性は残ります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:39
+msgid ""
+"Bad, because if the project later needs hermetic, multi-language pinning "
+"beyond lockfiles (e.g. system-level native dependencies for VTK/WASM "
+"builds), this decision should be revisited."
+msgstr "悪い点：プロジェクトが今後、ロックファイルを超えた多言語の閉じたピン留め（例：VTK/WASMビルドのためのシステムレベルのネイティブ依存関係）を必要とした場合は、この決定を見直すべきです。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:41
+msgid "Confirmation"
+msgstr "確認方法"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:43
+msgid ""
+"Compliance is confirmed by the absence of Nix files (`flake.nix`, "
+"`devenv.nix`, `devbox.json`, `default.nix`) and by the devcontainer "
+"installing its toolchain through uv/npm features or the same steps CI "
+"runs. If a Nix definition appears under `.devcontainer/` or the "
+"repository root without a superseding ADR, this decision is violated."
+msgstr "コンプライアンスは、Nixファイル（`flake.nix`・`devenv.nix`・`devbox.json`・`default.nix`）が存在しないこと、およびdevcontainerがuv/npmのfeaturesまたはCIと同じ手順でツールチェーンをインストールすることで確認します。これを置き換えるADRなしに`.devcontainer/`配下やリポジトリのルートにNix定義が現れた場合、この決定に違反しています。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:45
+msgid "Pros and Cons of the Options"
+msgstr "選択肢の良い点と悪い点"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:47
+msgid "Option A: Use Nix (devenv/devbox) to define the Codespace environment"
+msgstr "選択肢A：Codespace環境の定義にNix（devenv/devbox）を使う"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:49
+msgid ""
+"Nix (possibly via devenv or devbox) defines Python, Node.js, and pre-"
+"commit in one declarative, content-addressed environment."
+msgstr ""
+"Nix（devenvまたはdevbox経由の可能性あり）は、Python・Node.js・pre-"
+"commitを1つの宣言的でコンテンツアドレス化された環境で定義します。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:51
+msgid ""
+"Good, because environments become byte-for-byte reproducible across "
+"machines and over time."
+msgstr "良い点：環境がマシン間でも時間が経ってもバイト単位で再現可能になります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:52
+msgid ""
+"Good, because one declarative file could replace per-manager lockfiles as"
+" the single pin."
+msgstr "良い点：1つの宣言的ファイルがマネージャーごとのロックファイルを置き換え、単一のピンにできる可能性があります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:53
+msgid ""
+"Bad, because it duplicates pinning: `uv.lock` and `package-lock.json` "
+"would still exist for CI and local use."
+msgstr "悪い点：ピン留めが二重化されます。CIとローカル利用のために`uv.lock`と`package-lock.json`は依然として存在し続けます。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:54
+msgid ""
+"Bad, because Nix adds a package manager, a language, and a cache layer "
+"that every maintainer must understand."
+msgstr "悪い点：Nixは、すべてのメンテナーが理解しなければならないパッケージマネージャー・言語・キャッシュ層を追加します。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:55
+msgid ""
+"Bad, because CI does not run Nix today; adopting it in the Codespace "
+"forks the environment definition from CI."
+msgstr "悪い点：CIは今日Nixを実行していません。Codespaceで採用すると、環境定義がCIからフォークされます。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:57
+msgid "Option B: Use plain devcontainer features with uv and npm (status quo)"
+msgstr "選択肢B：uvとnpmによるプレーンなdevcontainer featuresを使う（現状維持）"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:59
+msgid ""
+"The devcontainer installs the toolchain with the same commands CI uses, "
+"backed by the existing lockfiles."
+msgstr "devcontainerは、既存のロックファイルに支えられ、CIが使うのと同じコマンドでツールチェーンをインストールします。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:61
+msgid ""
+"Good, because lockfiles and pinned hook revisions already pin tool "
+"versions; reproducibility is adequate."
+msgstr "良い点：ロックファイルとピン留めされたフックのリビジョンがすでにツールバージョンを固定しており、再現性は十分です。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:62
+msgid ""
+"Good, because Codespace, local, and CI environments run identical "
+"commands."
+msgstr "良い点：Codespace・ローカル・CIの環境がまったく同じコマンドを実行します。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:63
+msgid ""
+"Good, because nothing new to learn or maintain beyond the devcontainer "
+"file itself."
+msgstr "良い点：devcontainerファイル自体を超えて、学習・保守すべき新しいものがありません。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:64
+msgid ""
+"Neutral, because system-level dependencies beyond uv/npm's reach would "
+"need ad-hoc Dockerfile lines if they ever appear."
+msgstr "中立的な点：uv/npmの範囲を超えるシステムレベルの依存関係が現れた場合は、その場しのぎのDockerfileの行が必要になる可能性があります。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:65
+msgid ""
+"Bad, because cross-platform reproducibility is not bit-exact the way Nix "
+"provides."
+msgstr "悪い点：クロスプラットフォームの再現性が、Nixが提供するようなビット単位の正確さではありません。"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:67
+msgid "More Information"
+msgstr "詳細情報"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:69
+msgid ""
+"Prerequisite decision: [ADR-0013 — Decision to add a pi coding agent "
+"development environment to GitHub Codespaces](0013-decision-to-add-a-pi-"
+"coding-agent-development-environment-to-github-codespaces.md)."
+msgstr ""
+"前提となる決定：[ADR-0013 — piコーディングエージェント開発環境をGitHub "
+"Codespacesに追加する決定](0013-decision-to-add-a-pi-coding-agent-"
+"development-environment-to-github-codespaces.md)"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:70
+msgid ""
+"Toolchain pins: `uv.lock`, `package-lock.json`, and the pinned revisions "
+"in [`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)."
+msgstr ""
+"ツールチェーンのピン留め：`uv.lock`・`package-lock.json`・[`.pre-commit-config.yaml"
+"`](../../.pre-commit-config.yaml)のピン留めされたリビジョン"
+
+#: ../../decisions/0014-decision-not-to-use-nix-in-the-codespace-environment.md:71
+msgid ""
+"Revisit triggers: a need for hermetic system-level dependencies (e.g. "
+"native toolchains for the VTK/WASM build) that uv and npm cannot pin, or "
+"repeated environment drift between Codespace and CI."
+msgstr "見直しのきっかけ：uvとnpmでは固定できない閉じたシステムレベルの依存関係（例：VTK/WASMビルド用のネイティブツールチェーン）の必要性、またはCodespaceとCIの間で環境の乖離が繰り返される場合。"
