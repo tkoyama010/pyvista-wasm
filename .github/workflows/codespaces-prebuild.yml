@@ -1,0 +1,59 @@
+---
+name: Codespaces prebuild
+# Pre-build the Codespaces dev container image and publish it to GHCR so that
+# Codespaces created from main start from a ready-made image instead of
+# installing the Node/SSH features on every create. GitHub's native prebuilds
+# cannot be configured through the REST API, so a prebuilt container image
+# referenced by .devcontainer/devcontainer.json is the code-managed
+# equivalent. The build definition lives in
+# .devcontainer/prebuild/devcontainer.json (base image + features baked into
+# the published image). After the first publish, set the package visibility
+# to public so Codespaces for collaborators can pull it without extra auth.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/codespaces-prebuild.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/codespaces-prebuild.yml"
+  # Rebuild weekly so image-level feature updates (Node LTS, sshd) are
+  # picked up even when the devcontainer files are unchanged.
+  schedule:
+    - cron: "23 4 * * 3"  # Weekly Wednesday 04:23 UTC
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Log in to GHCR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: ${{ github.actor }}
+        run: |-
+          echo "${GITHUB_TOKEN}" | docker login ghcr.io --username "${GH_USER}" --password-stdin
+      # `push: filter` + refFilterForPush publishes the image for main-only
+      # events (push, schedule, workflow_dispatch). Pull request builds
+      # validate the image without publishing anything.
+      - name: Build and publish prebuilt dev container image
+        uses: devcontainers/ci@513af61f4de4f75d37e4438f184ba4358f0fc1ca  # v0.3.1900000450
+        with:
+          configFile: .devcontainer/prebuild/devcontainer.json
+          imageName: ghcr.io/${{ github.repository }}-codespace
+          imageTag: latest,${{ github.sha }}
+          cacheFrom: ghcr.io/${{ github.repository }}-codespace
+          push: filter
+          refFilterForPush: refs/heads/main

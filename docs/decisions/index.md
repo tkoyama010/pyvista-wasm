@@ -13,6 +13,8 @@
 * [0007 - Decide how to internationalize and sync the README](0007-decide-how-to-internationalize-and-sync-the-readme.md)
 * [0008 - Decide how to internationalize the ReadTheDocs documentation](0008-decide-how-to-internationalize-the-readthedocs-documentation.md)
 * [0009 - Decide how to sync GitHub repository settings with Terraform](0009-decide-how-to-sync-github-repository-settings-with-terraform.md)
+* [0013 - Decision to add a pi coding agent development environment to GitHub Codespaces](0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md)
+* [0014 - Decision not to use Nix in the Codespace environment](0014-decision-not-to-use-nix-in-the-codespace-environment.md)
 
 ## Rejected Records
 
