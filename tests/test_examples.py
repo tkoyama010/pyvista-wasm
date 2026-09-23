@@ -247,6 +247,54 @@ class TestDownloadUranusSurface:
         assert "uranus.jpg" in repr(texture)
 
 
+class TestLoadPluto:
+    """Tests for examples.load_pluto."""
+
+    def test_returns_polydata(self) -> None:
+        """load_pluto returns a PolyData instance."""
+        pluto = examples.load_pluto()
+        assert isinstance(pluto, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        pluto = examples.load_pluto()
+        assert pluto.t_coords is not None
+        assert pluto.t_coords.shape == (pluto.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        pluto = examples.load_pluto()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert pluto.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        pluto = examples.load_pluto(radius=2.0)
+        radius, _ = pluto.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadPlutoSurface:
+    """Tests for examples.download_pluto_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_pluto_surface returns a Texture instance."""
+        texture = examples.download_pluto_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_pluto_solar_texture(self) -> None:
+        """The texture URL points at the Pluto solar_textures image."""
+        texture = examples.download_pluto_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/pluto.jpg"
+        )
+
+    def test_repr_mentions_pluto(self) -> None:
+        """The Texture repr references the Pluto image."""
+        texture = examples.download_pluto_surface()
+        assert "pluto.jpg" in repr(texture)
+
+
 class TestLoadSun:
     """Tests for examples.load_sun."""
 
