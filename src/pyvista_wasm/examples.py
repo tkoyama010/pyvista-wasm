@@ -791,6 +791,64 @@ def download_moon_surface() -> Texture:
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/moon.jpg")
 
 
+def load_jupiter(
+    radius: float = 1.0,
+    lat_resolution: int = 50,
+    lon_resolution: int = 100,
+) -> PolyData:
+    """Load the planet Jupiter as a textured sphere.
+
+    Creates a sphere mesh with texture coordinates, matching the
+    ``pyvista.examples.planets.load_jupiter`` API.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Sphere radius. Default is 1.0.
+    lat_resolution : int, optional
+        Number of points in the latitude direction. Default is 50.
+    lon_resolution : int, optional
+        Number of points in the longitude direction. Default is 100.
+
+    Returns
+    -------
+    PolyData
+        Jupiter sphere mesh with texture coordinates.
+
+    See Also
+    --------
+    :func:`~pyvista_wasm.examples.load_earth`
+        Load the planet Earth for comparison.
+    :func:`~pyvista_wasm.examples.download_jupiter_surface`
+        Download the Jupiter surface texture.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> jupiter = examples.load_jupiter()
+    >>> isinstance(jupiter, pv.PolyData)
+    True
+    >>> jupiter.t_coords is not None
+    True
+
+    Render a Jupiter planet sphere in the browser:
+
+    >>> from pyvista_wasm import examples
+    >>> jupiter = examples.load_jupiter()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(jupiter)  # doctest: +SKIP
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    return Sphere(
+        radius=radius,
+        theta_resolution=lon_resolution,
+        phi_resolution=lat_resolution,
+        texture_coordinates=True,
+    ).rotate_z(180)
+
+
 def load_pluto(
     radius: float = 1.0,
     lat_resolution: int = 50,

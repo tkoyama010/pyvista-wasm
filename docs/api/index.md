@@ -124,6 +124,7 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.load_neptune
    pyvista_wasm.examples.load_uranus
    pyvista_wasm.examples.load_moon
+   pyvista_wasm.examples.load_jupiter
    pyvista_wasm.examples.load_pluto
    pyvista_wasm.examples.load_sun
    pyvista_wasm.examples.load_mercury
@@ -135,6 +136,7 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.download_neptune_surface
    pyvista_wasm.examples.download_uranus_surface
    pyvista_wasm.examples.download_moon_surface
+   pyvista_wasm.examples.download_jupiter_surface
    pyvista_wasm.examples.download_pluto_surface
    pyvista_wasm.examples.download_sun_surface
    pyvista_wasm.examples.download_mercury_surface
