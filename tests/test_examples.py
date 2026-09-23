@@ -295,6 +295,48 @@ class TestDownloadSunSurface:
         assert "sun.jpg" in repr(texture)
 
 
+class TestDownloadStarsSkyBackground:
+    """Tests for examples.download_stars_sky_background."""
+
+    def test_returns_texture(self) -> None:
+        """download_stars_sky_background returns a Texture instance."""
+        texture = examples.download_stars_sky_background()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_stars_sky_texture(self) -> None:
+        """The texture URL points at the stars planet3d-matlab image."""
+        texture = examples.download_stars_sky_background()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/planet3d-matlab/stars.jpg"
+        )
+
+    def test_repr_mentions_stars(self) -> None:
+        """The Texture repr references the stars image."""
+        texture = examples.download_stars_sky_background()
+        assert "stars.jpg" in repr(texture)
+
+
+class TestDownloadMilkywaySkyBackground:
+    """Tests for examples.download_milkyway_sky_background."""
+
+    def test_returns_texture(self) -> None:
+        """download_milkyway_sky_background returns a Texture instance."""
+        texture = examples.download_milkyway_sky_background()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_milkyway_sky_texture(self) -> None:
+        """The texture URL points at the milkyway planet3d-matlab image."""
+        texture = examples.download_milkyway_sky_background()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/planet3d-matlab/milkyway.jpg"
+        )
+
+    def test_repr_mentions_milkyway(self) -> None:
+        """The Texture repr references the milkyway image."""
+        texture = examples.download_milkyway_sky_background()
+        assert "milkyway.jpg" in repr(texture)
+
+
 class TestLoadMercury:
     """Tests for examples.load_mercury."""
 
