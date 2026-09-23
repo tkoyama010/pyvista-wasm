@@ -68,4 +68,5 @@ explanation/index
 api/index
 cli/index
 decisions/index
+project/index
 ```

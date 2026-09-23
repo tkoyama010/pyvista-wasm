@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-23 12:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../../CONTRIBUTORS.md:2 ../../project/contributors.md:1
+msgid "Contributors"
+msgstr "コントリビューター"
+
+#: ../../../CONTRIBUTORS.md:6
+msgid ""
+"[![All "
+"Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-"
+"square)](#contributors-)"
+msgstr ""
+"[![All "
+"Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-"
+"square)](#contributors-)"
+
+#: ../../../CONTRIBUTORS.md:10
+msgid "Contributors ✨"
+msgstr "コントリビューター ✨"
+
+#: ../../../CONTRIBUTORS.md:12
+msgid ""
+"Thanks goes to these wonderful people ([emoji "
+"key](https://allcontributors.org/docs/en/emoji-key)):"
+msgstr ""
+"素晴らしい皆さんに感謝します（[絵文字キー](https://allcontributors.org/docs/en/emoji-key)）:"
+
+#: ../../../CONTRIBUTORS.md:34
+msgid ""
+"This project follows the [all-contributors](https://github.com/all-"
+"contributors/all-contributors) specification. Contributions of any kind "
+"welcome!"
+msgstr ""
+"このプロジェクトは [all-contributors](https://github.com/all-contributors/all-"
+"contributors) 仕様に従います。どんな種類の貢献でも歓迎します！"
