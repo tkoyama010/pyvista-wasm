@@ -247,6 +247,54 @@ class TestDownloadUranusSurface:
         assert "uranus.jpg" in repr(texture)
 
 
+class TestLoadMoon:
+    """Tests for examples.load_moon."""
+
+    def test_returns_polydata(self) -> None:
+        """load_moon returns a PolyData instance."""
+        moon = examples.load_moon()
+        assert isinstance(moon, PolyData)
+
+    def test_has_texture_coordinates(self) -> None:
+        """The returned mesh has texture coordinates."""
+        moon = examples.load_moon()
+        assert moon.t_coords is not None
+        assert moon.t_coords.shape == (moon.n_points, 2)
+
+    def test_default_resolution(self) -> None:
+        """Default lat/lon resolution produces expected point count."""
+        moon = examples.load_moon()
+        # lat_resolution=50, lon_resolution=100 → 2 + 100*(50-2) = 4802
+        assert moon.n_points == 4802
+
+    def test_custom_radius(self) -> None:
+        """Custom radius affects bounding sphere."""
+        moon = examples.load_moon(radius=2.0)
+        radius, _ = moon.bounding_sphere
+        assert abs(radius - 2.0) < 0.01
+
+
+class TestDownloadMoonSurface:
+    """Tests for examples.download_moon_surface."""
+
+    def test_returns_texture(self) -> None:
+        """download_moon_surface returns a Texture instance."""
+        texture = examples.download_moon_surface()
+        assert isinstance(texture, Texture)
+
+    def test_url_points_at_moon_solar_texture(self) -> None:
+        """The texture URL points at the Moon solar_textures image."""
+        texture = examples.download_moon_surface()
+        assert texture.url == (
+            "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/solar_textures/moon.jpg"
+        )
+
+    def test_repr_mentions_moon(self) -> None:
+        """The Texture repr references the Moon image."""
+        texture = examples.download_moon_surface()
+        assert "moon.jpg" in repr(texture)
+
+
 class TestLoadJupiter:
     """Tests for examples.load_jupiter."""
 
