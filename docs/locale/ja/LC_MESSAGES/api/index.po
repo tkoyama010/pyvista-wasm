@@ -358,12 +358,8 @@ msgid "Load the planet Uranus as a textured sphere."
 msgstr "テクスチャ付き球体として天王星をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
-msgid ""
-":py:obj:`pyvista_wasm.examples.load_moon "
-"<pyvista_wasm.examples.load_moon>`"
-msgstr ""
-":py:obj:`pyvista_wasm.examples.load_moon "
-"<pyvista_wasm.examples.load_moon>`"
+msgid ":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
+msgstr ":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Load the Moon as a textured sphere."
@@ -487,12 +483,8 @@ msgid "Download the Uranus planet surface texture."
 msgstr "天王星の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
-msgid ""
-":py:obj:`pyvista_wasm.examples.download_moon_surface "
-"<pyvista_wasm.examples.download_moon_surface>`"
-msgstr ""
-":py:obj:`pyvista_wasm.examples.download_moon_surface "
-"<pyvista_wasm.examples.download_moon_surface>`"
+msgid ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examples.download_moon_surface>`"
+msgstr ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examples.download_moon_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Download the Moon surface texture."
