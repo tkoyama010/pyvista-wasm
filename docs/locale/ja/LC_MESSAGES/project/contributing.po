@@ -1,0 +1,1018 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-23 12:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../project/contributing.md:1
+msgid "Contributing"
+msgstr "コントリビューティング"
+
+#: ../../../CONTRIBUTING.md:2
+msgid "Contributing to pyvista-wasm"
+msgstr "pyvista-wasmへのコントリビュート"
+
+#: ../../../CONTRIBUTING.md:4
+msgid ""
+"Thank you for your interest in contributing to pyvista-wasm! This document "
+"provides guidelines and instructions for contributing to the project."
+msgstr ""
+"pyvista-"
+"wasmへの貢献に興味をお持ちいただきありがとうございます！このドキュメントでは、プロジェクトへの貢献に関するガイドラインと手順を説明します。"
+
+#: ../../../CONTRIBUTING.md:6
+msgid "Table of Contents"
+msgstr "目次"
+
+#: ../../../CONTRIBUTING.md:10
+msgid "[Table of Contents](#table-of-contents)"
+msgstr "[目次](#table-of-contents)"
+
+#: ../../../CONTRIBUTING.md:11
+msgid "[Code of Conduct](#code-of-conduct)"
+msgstr "[行動規範](#code-of-conduct)"
+
+#: ../../../CONTRIBUTING.md:12
+msgid "[Getting Started](#getting-started)"
+msgstr "[はじめに](#getting-started)"
+
+#: ../../../CONTRIBUTING.md:13
+msgid "[Development Setup](#development-setup)"
+msgstr "[開発環境のセットアップ](#development-setup)"
+
+#: ../../../CONTRIBUTING.md:14
+msgid "[Prerequisites](#prerequisites)"
+msgstr "[前提条件](#prerequisites)"
+
+#: ../../../CONTRIBUTING.md:15
+msgid "[GitHub Codespaces](#github-codespaces)"
+msgstr "[GitHub Codespaces](#github-codespaces)"
+
+#: ../../../CONTRIBUTING.md:16
+msgid "[Initial Setup](#initial-setup)"
+msgstr "[初期セットアップ](#initial-setup)"
+
+#: ../../../CONTRIBUTING.md:17
+msgid "[Development Workflow](#development-workflow)"
+msgstr "[開発ワークフロー](#development-workflow)"
+
+#: ../../../CONTRIBUTING.md:18
+msgid "[Creating a Branch](#creating-a-branch)"
+msgstr "[ブランチの作成](#creating-a-branch)"
+
+#: ../../../CONTRIBUTING.md:19
+msgid "[Making Changes](#making-changes)"
+msgstr "[変更の実施](#making-changes)"
+
+#: ../../../CONTRIBUTING.md:20
+msgid "[Committing Changes](#committing-changes)"
+msgstr "[変更のコミット](#committing-changes)"
+
+#: ../../../CONTRIBUTING.md:21
+msgid "[Code Quality Standards](#code-quality-standards)"
+msgstr "[コード品質基準](#code-quality-standards)"
+
+#: ../../../CONTRIBUTING.md:22
+msgid "[README Internationalization](#readme-internationalization)"
+msgstr "[READMEの国際化](#readme-internationalization)"
+
+#: ../../../CONTRIBUTING.md:23
+msgid "[Adding a New Language](#adding-a-new-language)"
+msgstr "[新しい言語の追加](#adding-a-new-language)"
+
+#: ../../../CONTRIBUTING.md:24
+msgid ""
+"[Resolving a Stale-Translation Failure](#resolving-a-stale-translation-"
+"failure)"
+msgstr "[古い翻訳による失敗の解消](#resolving-a-stale-translation-failure)"
+
+#: ../../../CONTRIBUTING.md:25
+msgid "[TypeScript Development](#typescript-development)"
+msgstr "[TypeScript開発](#typescript-development)"
+
+#: ../../../CONTRIBUTING.md:26
+msgid "[Setup](#setup)"
+msgstr "[セットアップ](#setup)"
+
+#: ../../../CONTRIBUTING.md:27
+msgid "[Building](#building)"
+msgstr "[ビルド](#building)"
+
+#: ../../../CONTRIBUTING.md:28
+msgid "[Testing](#testing)"
+msgstr "[テスト](#testing)"
+
+#: ../../../CONTRIBUTING.md:29
+msgid "[Running Tests](#running-tests)"
+msgstr "[テストの実行](#running-tests)"
+
+#: ../../../CONTRIBUTING.md:30
+msgid "[Writing Tests](#writing-tests)"
+msgstr "[テストの作成](#writing-tests)"
+
+#: ../../../CONTRIBUTING.md:31
+msgid "[Test Requirements](#test-requirements)"
+msgstr "[テスト要件](#test-requirements)"
+
+#: ../../../CONTRIBUTING.md:32
+msgid "[Pull Request Process](#pull-request-process)"
+msgstr "[プルリクエストプロセス](#pull-request-process)"
+
+#: ../../../CONTRIBUTING.md:33
+msgid "[Before Submitting](#before-submitting)"
+msgstr "[提出前の確認](#before-submitting)"
+
+#: ../../../CONTRIBUTING.md:34
+msgid "[Submitting a Pull Request](#submitting-a-pull-request)"
+msgstr "[プルリクエストの提出](#submitting-a-pull-request)"
+
+#: ../../../CONTRIBUTING.md:35
+msgid "[PR Requirements](#pr-requirements)"
+msgstr "[PR要件](#pr-requirements)"
+
+#: ../../../CONTRIBUTING.md:36
+msgid "[Continuous Integration](#continuous-integration)"
+msgstr "[継続的インテグレーション](#continuous-integration)"
+
+#: ../../../CONTRIBUTING.md:37
+msgid "[Types of Contributions](#types-of-contributions)"
+msgstr "[貢献の種類](#types-of-contributions)"
+
+#: ../../../CONTRIBUTING.md:38
+msgid "[Code Contributions](#code-contributions)"
+msgstr "[コードへの貢献](#code-contributions)"
+
+#: ../../../CONTRIBUTING.md:39
+msgid "[Documentation](#documentation)"
+msgstr "[ドキュメント](#documentation)"
+
+#: ../../../CONTRIBUTING.md:40
+msgid "[Community](#community)"
+msgstr "[コミュニティ](#community)"
+
+#: ../../../CONTRIBUTING.md:41
+msgid "[Recognition](#recognition)"
+msgstr "[貢献の認識](#recognition)"
+
+#: ../../../CONTRIBUTING.md:42
+msgid "[Scientific Python Standards](#scientific-python-standards)"
+msgstr "[Scientific Python標準](#scientific-python-standards)"
+
+#: ../../../CONTRIBUTING.md:43
+msgid "[Community Resources](#community-resources)"
+msgstr "[コミュニティリソース](#community-resources)"
+
+#: ../../../CONTRIBUTING.md:44
+msgid "[Questions?](#questions)"
+msgstr "[質問はありますか？](#questions)"
+
+#: ../../../CONTRIBUTING.md:48
+msgid "Code of Conduct"
+msgstr "行動規範"
+
+#: ../../../CONTRIBUTING.md:50
+msgid ""
+"This project adheres to the [Contributor Covenant 3.0](CODE_OF_CONDUCT.md). "
+"By participating, you are expected to uphold this code. Please report "
+"unacceptable behavior to [@tkoyama010](https://github.com/tkoyama010)."
+msgstr ""
+"このプロジェクトは [Contributor Covenant 3.0](CODE_OF_CONDUCT.md) "
+"に準拠します。参加することで、この規範を遵守することが期待されます。許容できない行動は "
+"[@tkoyama010](https://github.com/tkoyama010) まで報告してください。"
+
+#: ../../../CONTRIBUTING.md:52
+msgid "Getting Started"
+msgstr "はじめに"
+
+#: ../../../CONTRIBUTING.md:54
+msgid ""
+"pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D "
+"visualization to the browser using WebAssembly. Before contributing:"
+msgstr ""
+"pyvista-"
+"wasmはVTK.wasm向けのPyVistaライクなAPIで、WebAssemblyを使ってブラウザに直感的な3D可視化をもたらします。貢献する前に:"
+
+#: ../../../CONTRIBUTING.md:56
+msgid ""
+"Check the [issue tracker](https://github.com/tkoyama010/pyvista-wasm/issues)"
+" for existing issues or create a new one"
+msgstr ""
+"[issueトラッカー](https://github.com/tkoyama010/pyvista-"
+"wasm/issues)で既存のissueを確認するか、新しいissueを作成してください"
+
+#: ../../../CONTRIBUTING.md:57
+msgid ""
+"Read through the [README](https://github.com/tkoyama010/pyvista-wasm#readme)"
+msgstr "[README](https://github.com/tkoyama010/pyvista-wasm#readme)を読んでください"
+
+#: ../../../CONTRIBUTING.md:59
+msgid "Development Setup"
+msgstr "開発環境のセットアップ"
+
+#: ../../../CONTRIBUTING.md:61
+msgid ""
+"[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-"
+"sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)"
+msgstr ""
+"[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-"
+"sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)"
+
+#: ../../../CONTRIBUTING.md:61
+msgid "uv"
+msgstr "uv"
+
+#: ../../../CONTRIBUTING.md:63
+msgid "Prerequisites"
+msgstr "前提条件"
+
+#: ../../../CONTRIBUTING.md:65
+msgid "Python 3.12 or higher (3.12, 3.13, or 3.14 recommended for testing)"
+msgstr "Python 3.12以上（テストには3.12、3.13、3.14を推奨）"
+
+#: ../../../CONTRIBUTING.md:66
+msgid ""
+"[uv](https://github.com/astral-sh/uv) - Ultra-fast Python package installer"
+msgstr "[uv](https://github.com/astral-sh/uv) - 超高速なPythonパッケージインストーラー"
+
+#: ../../../CONTRIBUTING.md:67
+msgid "Git"
+msgstr "Git"
+
+#: ../../../CONTRIBUTING.md:69
+msgid "GitHub Codespaces"
+msgstr "GitHub Codespaces"
+
+#: ../../../CONTRIBUTING.md:71
+msgid ""
+"No local setup is required if you use [GitHub "
+"Codespaces](https://github.com/features/codespaces). A devcontainer "
+"(`.devcontainer/devcontainer.json`) provisions a CI-equivalent environment "
+"with uv, npm dependencies, pre-commit, tox, Playwright-ready Python, and the"
+" [pi coding agent CLI](https://github.com/earendil-works/pi-coding-agent) "
+"preinstalled."
+msgstr ""
+"[GitHub "
+"Codespaces](https://github.com/features/codespaces)を使用する場合、ローカルセットアップは不要です。devcontainer（`.devcontainer/devcontainer.json`）が、uv、npm依存関係、pre-"
+"commit、tox、Playwright対応Python、[piコーディングエージェントCLI](https://github.com/earendil-"
+"works/pi-coding-agent)がプリインストールされたCI相当の環境をプロビジョニングします。"
+
+#: ../../../CONTRIBUTING.md:73
+msgid ""
+"Open the repository (or any pull request) on GitHub, click the **Code** "
+"button, and select **Codespaces**, or create one from the CLI:"
+msgstr ""
+"GitHubでリポジトリ（または任意のプルリクエスト）を開き、**Code**ボタンをクリックして**Codespaces**を選択するか、CLIから作成してください:"
+
+#: ../../../CONTRIBUTING.md:79
+msgid ""
+"The container build and toolchain installation run automatically on first "
+"start. Once the Codespace is available, all standard commands work out of "
+"the box:"
+msgstr ""
+"初回起動時にコンテナビルドとツールチェーンのインストールが自動的に実行されます。Codespaceが利用可能になると、すべての標準コマンドがそのまま使えます:"
+
+#: ../../../CONTRIBUTING.md:87
+msgid ""
+"(Optional) If you use an API key for AI coding agents such as [opencode "
+"zen](https://opencode.ai/zen), register it as a personal [Codespaces "
+"secret](https://github.com/settings/codespaces) (for example, "
+"`OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically, and "
+"`postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so "
+"that `gh codespace ssh` shells and the pi CLI can use it. The file is "
+"regenerated each time the Codespace is created, so recreate the Codespace "
+"after rotating the key."
+msgstr ""
+"（任意）[opencode zen](https://opencode.ai/zen) "
+"などのAIコーディングエージェント用のAPIキーを使用する場合は、個人の "
+"[Codespacesシークレット](https://github.com/settings/codespaces)（例: "
+"`OPENCODE_API_KEY`）として登録してください。キーは自動的にVS "
+"Codeターミナルに公開され、`postCreateCommand`によって`~/.codespaces-user-"
+"secrets.env`にもコピーされるため、`gh codespace ssh`シェルやpi "
+"CLIから利用できます。このファイルはCodespace作成のたびに再生成されるため、キーをローテーションした後はCodespaceを再作成してください。"
+
+#: ../../../CONTRIBUTING.md:89
+msgid ""
+"The devcontainer mirrors the GitHub Actions test workflow (Python 3.12, tox,"
+" `npm ci`), so CI failures are unlikely to be environment-related."
+msgstr ""
+"devcontainerはGitHub Actionsのテストワークフロー（Python 3.12、tox、`npm "
+"ci`）と同じ構成のため、CIの失敗が環境起因となる可能性は低くなります。"
+
+#: ../../../CONTRIBUTING.md:91
+msgid "Initial Setup"
+msgstr "初期セットアップ"
+
+#: ../../../CONTRIBUTING.md:93
+msgid "Fork the repository on GitHub"
+msgstr "GitHubでリポジトリをフォークする"
+
+#: ../../../CONTRIBUTING.md:95
+msgid "Clone your fork:"
+msgstr "フォークをクローンする:"
+
+#: ../../../CONTRIBUTING.md:102
+msgid "Install uv if you haven't already:"
+msgstr "まだの場合はuvをインストールする:"
+
+#: ../../../CONTRIBUTING.md:112
+msgid "Install development dependencies:"
+msgstr "開発用依存関係をインストールする:"
+
+#: ../../../CONTRIBUTING.md:118
+msgid "Install pre-commit hooks:"
+msgstr "pre-commitフックをインストールする:"
+
+#: ../../../CONTRIBUTING.md:124
+msgid "Install Playwright browsers (required for browser tests):"
+msgstr "Playwrightブラウザをインストールする（ブラウザテストに必要）:"
+
+#: ../../../CONTRIBUTING.md:130
+msgid "Development Workflow"
+msgstr "開発ワークフロー"
+
+#: ../../../CONTRIBUTING.md:132
+#, python-format
+msgid ""
+"[![Conventional "
+"Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)"
+msgstr ""
+"[![Conventional "
+"Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)"
+
+#: ../../../CONTRIBUTING.md:132
+msgid "Conventional Commits"
+msgstr "Conventional Commits"
+
+#: ../../../CONTRIBUTING.md:134
+msgid "Creating a Branch"
+msgstr "ブランチの作成"
+
+#: ../../../CONTRIBUTING.md:136
+msgid "Create a descriptive branch name:"
+msgstr "わかりやすいブランチ名を作成する:"
+
+#: ../../../CONTRIBUTING.md:144
+msgid "Making Changes"
+msgstr "変更の実施"
+
+#: ../../../CONTRIBUTING.md:146
+msgid "Make your changes in the appropriate files"
+msgstr "適切なファイルに変更を加える"
+
+#: ../../../CONTRIBUTING.md:147
+msgid "Write or update tests as needed"
+msgstr "必要に応じてテストを作成・更新する"
+
+#: ../../../CONTRIBUTING.md:148
+msgid "Update documentation if necessary"
+msgstr "必要に応じてドキュメントを更新する"
+
+#: ../../../CONTRIBUTING.md:149
+msgid ""
+"Run pre-commit checks (happens automatically on commit, or manually with `uv"
+" run pre-commit run --all-files`)"
+msgstr ""
+"pre-commitチェックを実行する（コミット時に自動実行、または`uv run pre-commit run --all-files`で手動実行）"
+
+#: ../../../CONTRIBUTING.md:151
+msgid "Committing Changes"
+msgstr "変更のコミット"
+
+#: ../../../CONTRIBUTING.md:153
+msgid ""
+"This project uses [Conventional "
+"Commits](https://www.conventionalcommits.org/). Your commit messages should "
+"follow this format:"
+msgstr ""
+"このプロジェクトは [Conventional Commits](https://www.conventionalcommits.org/) "
+"を使用します。コミットメッセージは以下の形式に従ってください:"
+
+#: ../../../CONTRIBUTING.md:163
+msgid "Common types:"
+msgstr "一般的なタイプ:"
+
+#: ../../../CONTRIBUTING.md:165
+msgid "`feat`: A new feature"
+msgstr "`feat`: 新機能"
+
+#: ../../../CONTRIBUTING.md:166
+msgid "`fix`: A bug fix"
+msgstr "`fix`: バグ修正"
+
+#: ../../../CONTRIBUTING.md:167
+msgid "`docs`: Documentation only changes"
+msgstr "`docs`: ドキュメントのみの変更"
+
+#: ../../../CONTRIBUTING.md:168
+msgid "`style`: Changes that do not affect the meaning of the code"
+msgstr "`style`: コードの意味に影響しない変更"
+
+#: ../../../CONTRIBUTING.md:169
+msgid "`refactor`: A code change that neither fixes a bug nor adds a feature"
+msgstr "`refactor`: バグ修正でも機能追加でもないコード変更"
+
+#: ../../../CONTRIBUTING.md:170
+msgid "`perf`: A code change that improves performance"
+msgstr "`perf`: パフォーマンスを改善するコード変更"
+
+#: ../../../CONTRIBUTING.md:171
+msgid "`test`: Adding missing tests or correcting existing tests"
+msgstr "`test`: 不足しているテストの追加または既存テストの修正"
+
+#: ../../../CONTRIBUTING.md:172
+msgid "`chore`: Changes to the build process or auxiliary tools"
+msgstr "`chore`: ビルドプロセスや補助ツールへの変更"
+
+#: ../../../CONTRIBUTING.md:174
+msgid "Example:"
+msgstr "例:"
+
+#: ../../../CONTRIBUTING.md:180
+msgid "Code Quality Standards"
+msgstr "コード品質基準"
+
+#: ../../../CONTRIBUTING.md:182
+msgid ""
+"[![pre-commit.ci status](https://results.pre-"
+"commit.ci/badge/github/tkoyama010/pyvista-"
+"wasm/main.svg)](https://results.pre-"
+"commit.ci/latest/github/tkoyama010/pyvista-wasm/main) "
+"[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-"
+"sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) "
+"[![djlint](https://img.shields.io/badge/html%20templates-djLint-"
+"blueviolet.svg)](https://www.djlint.com) "
+"[![Biome](https://img.shields.io/badge/code_style-"
+"Biome-60A5FA.svg)](https://biomejs.dev) "
+"[![yamllint](https://img.shields.io/badge/yaml-yamllint-"
+"ce5b00.svg)](https://github.com/adrienverge/yamllint) "
+"[![yamlfmt](https://img.shields.io/badge/yaml-"
+"yamlfmt-0064bd.svg)](https://github.com/google/yamlfmt)"
+msgstr ""
+"[![pre-commit.ci status](https://results.pre-"
+"commit.ci/badge/github/tkoyama010/pyvista-"
+"wasm/main.svg)](https://results.pre-"
+"commit.ci/latest/github/tkoyama010/pyvista-wasm/main) "
+"[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-"
+"sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) "
+"[![djlint](https://img.shields.io/badge/html%20templates-djLint-"
+"blueviolet.svg)](https://www.djlint.com) "
+"[![Biome](https://img.shields.io/badge/code_style-"
+"Biome-60A5FA.svg)](https://biomejs.dev) "
+"[![yamllint](https://img.shields.io/badge/yaml-yamllint-"
+"ce5b00.svg)](https://github.com/adrienverge/yamllint) "
+"[![yamlfmt](https://img.shields.io/badge/yaml-"
+"yamlfmt-0064bd.svg)](https://github.com/google/yamlfmt)"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "pre-commit.ci status"
+msgstr "pre-commit.ci ステータス"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "Ruff"
+msgstr "Ruff"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "djlint"
+msgstr "djlint"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "Biome"
+msgstr "Biome"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "yamllint"
+msgstr "yamllint"
+
+#: ../../../CONTRIBUTING.md:182
+msgid "yamlfmt"
+msgstr "yamlfmt"
+
+#: ../../../CONTRIBUTING.md:189
+msgid "The project uses pre-commit hooks to ensure code quality."
+msgstr "このプロジェクトはコード品質を確保するためにpre-commitフックを使用します。"
+
+#: ../../../CONTRIBUTING.md:191
+msgid "README Internationalization"
+msgstr "READMEの国際化"
+
+#: ../../../CONTRIBUTING.md:193
+msgid ""
+"The English `README.md` is the authoritative source of truth. Localized "
+"`README.<lang>.md` files (e.g. `README.ja.md`) are derived from it and must "
+"preserve the same heading/section structure. GitHub renders these files "
+"automatically and shows a language switcher on the repository page."
+msgstr ""
+"英語の`README.md`が権威ある情報源です。ローカライズされた`README.<lang>.md`ファイル（例: "
+"`README.ja.md`）はそこから派生し、同じ見出し/セクション構造を維持しなければなりません。GitHubはこれらのファイルを自動的にレンダリングし、リポジトリページに言語スイッチャーを表示します。"
+
+#: ../../../CONTRIBUTING.md:195
+msgid ""
+"A zero-dependency drift-detection tool "
+"([readme-i18n-check](https://github.com/tkoyama010/readme-i18n-check), "
+"Python stdlib only) enforces two checks:"
+msgstr ""
+"依存関係ゼロのドリフト検出ツール（[readme-i18n-check](https://github.com/tkoyama010/readme-i18n-check)、Python標準ライブラリのみ）が2つのチェックを強制します:"
+
+#: ../../../CONTRIBUTING.md:197
+msgid ""
+"**Structural parity** — heading levels (H1-H6) must match between "
+"`README.md` and each `README.<lang>.md`. This catches missing, extra, or "
+"restructured sections."
+msgstr ""
+"**構造パリティ** — "
+"見出しレベル（H1〜H6）が`README.md`と各`README.<lang>.md`の間で一致していなければなりません。欠落、余分、再構成されたセクションを検出します。"
+
+#: ../../../CONTRIBUTING.md:198
+msgid ""
+"**Stale translation** — if a `README.<lang>.md` was last committed before "
+"the latest `README.md` change, CI flags it as stale."
+msgstr ""
+"**古い翻訳** — "
+"`README.<lang>.md`の最終コミットが最新の`README.md`変更より前の場合、CIが古いとしてフラグを立てます。"
+
+#: ../../../CONTRIBUTING.md:200
+msgid ""
+"Both checks run in CI (`.github/workflows/readme-i18n-check.yml`) and the "
+"structural-parity check runs as a pre-commit hook (`check-readme-i18n`)."
+msgstr ""
+"両チェックはCI（`.github/workflows/readme-i18n-check.yml`）で実行され、構造パリティチェックはpre-"
+"commitフック（`check-readme-i18n`）としても実行されます。"
+
+#: ../../../CONTRIBUTING.md:202
+msgid "Adding a New Language"
+msgstr "新しい言語の追加"
+
+#: ../../../CONTRIBUTING.md:204
+msgid "Copy `README.md` to `README.<lang>.md` (e.g. `README.zh_CN.md`)."
+msgstr "`README.md`を`README.<lang>.md`（例: `README.zh_CN.md`）にコピーします。"
+
+#: ../../../CONTRIBUTING.md:205
+msgid ""
+"Translate the prose while preserving the exact heading structure (same "
+"heading levels in the same order)."
+msgstr "見出し構造（同じ見出しレベル、同じ順序）を正確に保ちながら本文を翻訳します。"
+
+#: ../../../CONTRIBUTING.md:206
+msgid "The `standard-readme` pre-commit hook must pass on the new file."
+msgstr "新しいファイルで`standard-readme` pre-commitフックが合格しなければなりません。"
+
+#: ../../../CONTRIBUTING.md:207
+msgid ""
+"Run `python -m check_readme_i18n --no-stale-check` to verify structural "
+"parity."
+msgstr "`python -m check_readme_i18n --no-stale-check`を実行して構造パリティを検証します。"
+
+#: ../../../CONTRIBUTING.md:208
+msgid ""
+"Commit the new file. The stale-translation check will compare its commit "
+"date against `README.md` going forward."
+msgstr "新しいファイルをコミットします。以後、古い翻訳チェックがそのコミット日を`README.md`と比較します。"
+
+#: ../../../CONTRIBUTING.md:210
+msgid "Resolving a Stale-Translation Failure"
+msgstr "古い翻訳による失敗の解消"
+
+#: ../../../CONTRIBUTING.md:212
+msgid "When CI reports a stale translation:"
+msgstr "CIが古い翻訳を報告した場合:"
+
+#: ../../../CONTRIBUTING.md:214
+msgid "Review the changes to `README.md` since the last translation update."
+msgstr "前回の翻訳更新以降の`README.md`の変更を確認します。"
+
+#: ../../../CONTRIBUTING.md:215
+msgid ""
+"Update `README.<lang>.md` to reflect the English changes and commit it."
+msgstr "`README.<lang>.md`を英語の変更を反映するよう更新し、コミットします。"
+
+#: ../../../CONTRIBUTING.md:216
+msgid ""
+"If the English change is cosmetic (e.g. a badge URL) and does not require "
+"translation, add the filename to `.github/readme-i18n-allowlist` (one "
+"filename per line) and commit that change."
+msgstr ""
+"英語の変更が装飾的（例: "
+"バッジURL）で翻訳を必要としない場合は、ファイル名を`.github/readme-i18n-allowlist`（1行に1ファイル名）に追加し、その変更をコミットします。"
+
+#: ../../../CONTRIBUTING.md:218
+msgid "TypeScript Development"
+msgstr "TypeScript開発"
+
+#: ../../../CONTRIBUTING.md:220
+msgid ""
+"The JavaScript renderer (`src/pyvista_wasm/templates/renderer.js`) is "
+"generated from TypeScript source at `ts/renderer.ts`. Node.js is only "
+"required when editing TypeScript files."
+msgstr ""
+"JavaScriptレンダラー（`src/pyvista_wasm/templates/renderer.js`）は`ts/renderer.ts`のTypeScriptソースから生成されます。Node.jsはTypeScriptファイルを編集する場合にのみ必要です。"
+
+#: ../../../CONTRIBUTING.md:222
+msgid "Setup"
+msgstr "セットアップ"
+
+#: ../../../CONTRIBUTING.md:228
+msgid "Building"
+msgstr "ビルド"
+
+#: ../../../CONTRIBUTING.md:241
+msgid ""
+"The built `renderer.js` is not committed to git. It is generated "
+"automatically during `python -m build` via `hatch-build-scripts`. For local "
+"development, run `npm run build` after editing TypeScript files."
+msgstr ""
+"ビルドされた`renderer.js`はgitにコミットされません。`python -m build`の際に`hatch-build-"
+"scripts`経由で自動生成されます。ローカル開発では、TypeScriptファイル編集後に`npm run build`を実行してください。"
+
+#: ../../../CONTRIBUTING.md:243
+msgid "Testing"
+msgstr "テスト"
+
+#: ../../../CONTRIBUTING.md:245
+msgid ""
+"[![codecov](https://codecov.io/gh/tkoyama010/pyvista-"
+"wasm/branch/main/graph/badge.svg)](https://codecov.io/gh/tkoyama010/pyvista-"
+"wasm)"
+msgstr ""
+"[![codecov](https://codecov.io/gh/tkoyama010/pyvista-"
+"wasm/branch/main/graph/badge.svg)](https://codecov.io/gh/tkoyama010/pyvista-"
+"wasm)"
+
+#: ../../../CONTRIBUTING.md:245
+msgid "codecov"
+msgstr "codecov"
+
+#: ../../../CONTRIBUTING.md:247
+msgid "Running Tests"
+msgstr "テストの実行"
+
+#: ../../../CONTRIBUTING.md:265
+msgid "Writing Tests"
+msgstr "テストの作成"
+
+#: ../../../CONTRIBUTING.md:267
+msgid "Place tests in the `tests/` directory"
+msgstr "テストを`tests/`ディレクトリに配置する"
+
+#: ../../../CONTRIBUTING.md:268
+msgid "Use `pytest` for test framework"
+msgstr "テストフレームワークには`pytest`を使用する"
+
+#: ../../../CONTRIBUTING.md:269
+msgid "Follow existing test patterns"
+msgstr "既存のテストパターンに従う"
+
+#: ../../../CONTRIBUTING.md:270
+msgid "Include tests for new features and bug fixes"
+msgstr "新機能とバグ修正にはテストを含める"
+
+#: ../../../CONTRIBUTING.md:271
+msgid ""
+"Browser-based tests use `playwright` and should be marked with "
+"`@pytest.mark.playwright`"
+msgstr "ブラウザベースのテストは`playwright`を使用し、`@pytest.mark.playwright`でマークする"
+
+#: ../../../CONTRIBUTING.md:273
+msgid "Test Requirements"
+msgstr "テスト要件"
+
+#: ../../../CONTRIBUTING.md:275
+msgid "All new features should include tests"
+msgstr "すべての新機能にはテストを含める"
+
+#: ../../../CONTRIBUTING.md:276
+msgid "Bug fixes should include regression tests"
+msgstr "バグ修正にはリグレッションテストを含める"
+
+#: ../../../CONTRIBUTING.md:277
+msgid "Maintain or improve code coverage"
+msgstr "コードカバレッジを維持または向上させる"
+
+#: ../../../CONTRIBUTING.md:278
+msgid "Tests should pass on Python 3.12, 3.13, and 3.14"
+msgstr "テストはPython 3.12、3.13、3.14で合格すべきである"
+
+#: ../../../CONTRIBUTING.md:280
+msgid "Pull Request Process"
+msgstr "プルリクエストプロセス"
+
+#: ../../../CONTRIBUTING.md:282
+msgid "Before Submitting"
+msgstr "提出前の確認"
+
+#: ../../../CONTRIBUTING.md:284
+msgid "Ensure all tests pass locally"
+msgstr "すべてのテストがローカルで合格することを確認する"
+
+#: ../../../CONTRIBUTING.md:285
+msgid "Run pre-commit hooks: `uv run pre-commit run --all-files`"
+msgstr "pre-commitフックを実行する: `uv run pre-commit run --all-files`"
+
+#: ../../../CONTRIBUTING.md:286
+msgid "Update documentation if needed"
+msgstr "必要に応じてドキュメントを更新する"
+
+#: ../../../CONTRIBUTING.md:287
+msgid ""
+"Add yourself to the contributors list (maintainers will help with this)"
+msgstr "コントリビューターリストに自分を追加する（メンテナーがサポートします）"
+
+#: ../../../CONTRIBUTING.md:289
+msgid "Submitting a Pull Request"
+msgstr "プルリクエストの提出"
+
+#: ../../../CONTRIBUTING.md:291
+msgid "Push your changes to your fork"
+msgstr "変更をフォークにプッシュする"
+
+#: ../../../CONTRIBUTING.md:292
+msgid "Create a pull request against the `main` branch"
+msgstr "`main`ブランチに対してプルリクエストを作成する"
+
+#: ../../../CONTRIBUTING.md:293
+msgid ""
+"Use a descriptive PR title following [Conventional "
+"Commits](https://www.conventionalcommits.org/) format:"
+msgstr ""
+"[Conventional "
+"Commits](https://www.conventionalcommits.org/)形式に従ったわかりやすいPRタイトルを使用する:"
+
+#: ../../../CONTRIBUTING.md:294
+msgid "`feat: add new visualization feature`"
+msgstr "`feat: add new visualization feature`"
+
+#: ../../../CONTRIBUTING.md:295
+msgid "`fix: resolve rendering issue in Safari`"
+msgstr "`fix: resolve rendering issue in Safari`"
+
+#: ../../../CONTRIBUTING.md:296
+msgid "`docs: update installation instructions`"
+msgstr "`docs: update installation instructions`"
+
+#: ../../../CONTRIBUTING.md:297
+msgid "Fill out the pull request template"
+msgstr "プルリクエストテンプレートに記入する"
+
+#: ../../../CONTRIBUTING.md:298
+msgid "Link any related issues (e.g., \"Closes #123\")"
+msgstr "関連するissueをリンクする（例: \"Closes #123\"）"
+
+#: ../../../CONTRIBUTING.md:299
+msgid "Wait for review and address any feedback"
+msgstr "レビューを待ち、フィードバックに対応する"
+
+#: ../../../CONTRIBUTING.md:301
+msgid "PR Requirements"
+msgstr "PR要件"
+
+#: ../../../CONTRIBUTING.md:303
+msgid ""
+"**Conventional Commits**: PR title must follow conventional commits format"
+msgstr "**Conventional Commits**: PRタイトルはconventional commits形式に従う必要があります"
+
+#: ../../../CONTRIBUTING.md:304
+msgid "**Tests**: All tests must pass (checked by CI)"
+msgstr "**テスト**: すべてのテストに合格する必要があります（CIで確認）"
+
+#: ../../../CONTRIBUTING.md:305
+msgid ""
+"**Pre-commit**: All pre-commit checks must pass (pre-commit.ci will auto-fix"
+" some issues)"
+msgstr ""
+"**Pre-commit**: すべてのpre-commitチェックに合格する必要があります（pre-commit.ciが一部の問題を自動修正します）"
+
+#: ../../../CONTRIBUTING.md:306
+msgid "**Coverage**: Code coverage should not decrease"
+msgstr "**カバレッジ**: コードカバレッジは低下してはなりません"
+
+#: ../../../CONTRIBUTING.md:307
+msgid "**Documentation**: Update documentation for new features"
+msgstr "**ドキュメント**: 新機能のドキュメントを更新する"
+
+#: ../../../CONTRIBUTING.md:309
+msgid "Continuous Integration"
+msgstr "継続的インテグレーション"
+
+#: ../../../CONTRIBUTING.md:311
+msgid "Pull requests are automatically tested using GitHub Actions:"
+msgstr "プルリクエストはGitHub Actionsを使用して自動的にテストされます:"
+
+#: ../../../CONTRIBUTING.md:313
+msgid "Linting and formatting checks"
+msgstr "リントおよびフォーマットチェック"
+
+#: ../../../CONTRIBUTING.md:314
+msgid "Tests on Python 3.12, 3.13, and 3.14"
+msgstr "Python 3.12、3.13、3.14でのテスト"
+
+#: ../../../CONTRIBUTING.md:315
+msgid "Tests on Linux, Windows, and macOS"
+msgstr "Linux、Windows、macOSでのテスト"
+
+#: ../../../CONTRIBUTING.md:316
+msgid "Code coverage reporting to Codecov"
+msgstr "Codecovへのコードカバレッジレポート"
+
+#: ../../../CONTRIBUTING.md:317
+msgid "Conventional commit PR title validation"
+msgstr "Conventional commit PRタイトル検証"
+
+#: ../../../CONTRIBUTING.md:319
+msgid "Types of Contributions"
+msgstr "貢献の種類"
+
+#: ../../../CONTRIBUTING.md:321
+msgid "We welcome various types of contributions:"
+msgstr "さまざまな種類の貢献を歓迎します:"
+
+#: ../../../CONTRIBUTING.md:323
+msgid "Code Contributions"
+msgstr "コードへの貢献"
+
+#: ../../../CONTRIBUTING.md:325
+msgid "New features"
+msgstr "新機能"
+
+#: ../../../CONTRIBUTING.md:326
+msgid "Bug fixes"
+msgstr "バグ修正"
+
+#: ../../../CONTRIBUTING.md:327
+msgid "Performance improvements"
+msgstr "パフォーマンスの改善"
+
+#: ../../../CONTRIBUTING.md:328
+msgid "Code refactoring"
+msgstr "コードのリファクタリング"
+
+#: ../../../CONTRIBUTING.md:330 ../../../CONTRIBUTING.md:348
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: ../../../CONTRIBUTING.md:332
+msgid "Improving existing documentation"
+msgstr "既存ドキュメントの改善"
+
+#: ../../../CONTRIBUTING.md:333
+msgid "Adding examples and tutorials"
+msgstr "サンプルとチュートリアルの追加"
+
+#: ../../../CONTRIBUTING.md:334
+msgid "Fixing typos and clarifications"
+msgstr "誤字の修正と明確化"
+
+#: ../../../CONTRIBUTING.md:336
+msgid "Community"
+msgstr "コミュニティ"
+
+#: ../../../CONTRIBUTING.md:338
+msgid "Reporting bugs"
+msgstr "バグの報告"
+
+#: ../../../CONTRIBUTING.md:339
+msgid "Suggesting new features"
+msgstr "新機能の提案"
+
+#: ../../../CONTRIBUTING.md:340
+msgid "Reviewing pull requests"
+msgstr "プルリクエストのレビュー"
+
+#: ../../../CONTRIBUTING.md:341
+msgid "Creating demos and examples"
+msgstr "デモとサンプルの作成"
+
+#: ../../../CONTRIBUTING.md:343
+msgid "Recognition"
+msgstr "貢献の認識"
+
+#: ../../../CONTRIBUTING.md:345
+msgid ""
+"All contributions are recognized using [all-"
+"contributors](https://allcontributors.org/). Contributions include:"
+msgstr ""
+"すべての貢献は [all-contributors](https://allcontributors.org/) "
+"を使用して認識されます。貢献には以下が含まれます:"
+
+#: ../../../CONTRIBUTING.md:347
+msgid "Code"
+msgstr "コード"
+
+#: ../../../CONTRIBUTING.md:349
+msgid "Ideas and planning"
+msgstr "アイデアと計画"
+
+#: ../../../CONTRIBUTING.md:350
+msgid "Bug reports"
+msgstr "バグ報告"
+
+#: ../../../CONTRIBUTING.md:351
+msgid "Tests"
+msgstr "テスト"
+
+#: ../../../CONTRIBUTING.md:352
+msgid "Review"
+msgstr "レビュー"
+
+#: ../../../CONTRIBUTING.md:353
+msgid "Packaging"
+msgstr "パッケージング"
+
+#: ../../../CONTRIBUTING.md:355
+msgid "Scientific Python Standards"
+msgstr "Scientific Python標準"
+
+#: ../../../CONTRIBUTING.md:357
+msgid ""
+"[![SPEC 0 — Minimum Supported "
+"Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0000/) [![SPEC 1 — Lazy Loading of Submodules and "
+"Functions](https://img.shields.io/badge/SPEC-1-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0001/) [![SPEC 4 — Nightly "
+"Tests](https://img.shields.io/badge/SPEC-4-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0004/) [![SPEC 8 — Securing the Release "
+"Process](https://img.shields.io/badge/SPEC-8-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0008/)"
+msgstr ""
+"[![SPEC 0 — Minimum Supported "
+"Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0000/) [![SPEC 1 — Lazy Loading of Submodules and "
+"Functions](https://img.shields.io/badge/SPEC-1-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0001/) [![SPEC 4 — Nightly "
+"Tests](https://img.shields.io/badge/SPEC-4-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0004/) [![SPEC 8 — Securing the Release "
+"Process](https://img.shields.io/badge/SPEC-8-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0008/)"
+
+#: ../../../CONTRIBUTING.md:357
+msgid "SPEC 0 — Minimum Supported Dependencies"
+msgstr "SPEC 0 — 最小サポート依存関係"
+
+#: ../../../CONTRIBUTING.md:357
+msgid "SPEC 1 — Lazy Loading of Submodules and Functions"
+msgstr "SPEC 1 — サブモジュールと関数の遅延読み込み"
+
+#: ../../../CONTRIBUTING.md:357
+msgid "SPEC 4 — Nightly Tests"
+msgstr "SPEC 4 — ナイトリーテスト"
+
+#: ../../../CONTRIBUTING.md:357
+msgid "SPEC 8 — Securing the Release Process"
+msgstr "SPEC 8 — リリースプロセスの保護"
+
+#: ../../../CONTRIBUTING.md:362
+msgid ""
+"This project follows several [Scientific Python SPECs](https://scientific-"
+"python.org/specs/)."
+msgstr ""
+"このプロジェクトは複数の [Scientific Python SPECs](https://scientific-python.org/specs/)"
+" に従います。"
+
+#: ../../../CONTRIBUTING.md:364
+msgid "Community Resources"
+msgstr "コミュニティリソース"
+
+#: ../../../CONTRIBUTING.md:366
+msgid ""
+"**Issues**: [GitHub Issues](https://github.com/tkoyama010/pyvista-"
+"wasm/issues)"
+msgstr ""
+"**Issues**: [GitHub Issues](https://github.com/tkoyama010/pyvista-"
+"wasm/issues)"
+
+#: ../../../CONTRIBUTING.md:368
+msgid "Questions?"
+msgstr "質問はありますか？"
+
+#: ../../../CONTRIBUTING.md:370
+msgid "If you have questions about contributing, feel free to:"
+msgstr "貢献について質問がある場合は、以下を参考にしてください:"
+
+#: ../../../CONTRIBUTING.md:372
+msgid ""
+"Check existing [issues](https://github.com/tkoyama010/pyvista-wasm/issues)"
+msgstr "既存の [issue](https://github.com/tkoyama010/pyvista-wasm/issues) を確認する"
+
+#: ../../../CONTRIBUTING.md:373
+msgid ""
+"Open a new [issue](https://github.com/tkoyama010/pyvista-wasm/issues/new)"
+msgstr ""
+"新しい [issue](https://github.com/tkoyama010/pyvista-wasm/issues/new) を作成する"
+
+#: ../../../CONTRIBUTING.md:375
+msgid "Thank you for contributing to pyvista-wasm!"
+msgstr "pyvista-wasmへの貢献ありがとうございます！"

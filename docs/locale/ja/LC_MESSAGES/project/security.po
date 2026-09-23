@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-23 12:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../../SECURITY.md:2 ../../project/security.md:1
+msgid "Security Policy"
+msgstr "セキュリティポリシー"
+
+#: ../../../SECURITY.md:4
+#, python-format
+msgid ""
+"[![SPEC 8 — Securing the Release "
+"Process](https://img.shields.io/badge/SPEC-8-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0008/) "
+"[![zizmor](https://img.shields.io/badge/%F0%9F%8C%88-zizmor-"
+"white?labelColor=white)](https://zizmor.sh/)"
+msgstr ""
+"[![SPEC 8 — Securing the Release "
+"Process](https://img.shields.io/badge/SPEC-8-green?labelColor=%23004811&color=%235CA038)](https://scientific-"
+"python.org/specs/spec-0008/) "
+"[![zizmor](https://img.shields.io/badge/%F0%9F%8C%88-zizmor-"
+"white?labelColor=white)](https://zizmor.sh/)"
+
+#: ../../../SECURITY.md:4 ../../../SECURITY.md:13
+msgid "SPEC 8 — Securing the Release Process"
+msgstr "SPEC 8 — リリースプロセスの保護"
+
+#: ../../../SECURITY.md:4
+msgid "zizmor"
+msgstr "zizmor"
+
+#: ../../../SECURITY.md:7
+msgid "Supported Versions"
+msgstr "サポート対象バージョン"
+
+#: ../../project/security.md:3
+msgid "Version"
+msgstr "バージョン"
+
+#: ../../project/security.md:3
+msgid "Supported"
+msgstr "サポート"
+
+#: ../../project/security.md:3
+msgid "latest"
+msgstr "最新"
+
+#: ../../project/security.md:3
+msgid ":white_check_mark:"
+msgstr ":white_check_mark:"
+
+#: ../../../SECURITY.md:15
+msgid ""
+"This project follows [SPEC 8](https://scientific-"
+"python.org/specs/spec-0008/) for securing the release process:"
+msgstr ""
+"このプロジェクトはリリースプロセスの保護のため [SPEC 8](https://scientific-"
+"python.org/specs/spec-0008/) に従います:"
+
+#: ../../../SECURITY.md:18
+msgid ""
+"**Trusted Publishing**: Releases are published to PyPI using OpenID Connect "
+"(OIDC) trusted publishing, eliminating the need for long-lived API tokens"
+msgstr ""
+"**Trusted Publishing**: リリースはOpenID Connect (OIDC) のtrusted "
+"publishingを使用してPyPIに公開され、長寿命のAPIトークンが不要になります"
+
+#: ../../../SECURITY.md:20
+msgid ""
+"**Build Provenance Attestations**: All PyPI releases include "
+"cryptographically signed build provenance attestations generated using "
+"Sigstore"
+msgstr ""
+"**Build Provenance Attestations**: "
+"すべてのPyPIリリースに、Sigstoreを使用して生成された暗号署名付きのビルドプロベナンスアテステーションが含まれます"
+
+#: ../../../SECURITY.md:22
+msgid ""
+"**Pinned Actions**: All GitHub Actions are pinned to specific commit SHAs to"
+" prevent supply chain attacks"
+msgstr ""
+"**Pinned Actions**: サプライチェーン攻撃を防ぐため、すべてのGitHub Actionsは特定のコミットSHAに固定されています"
+
+#: ../../../SECURITY.md:24
+msgid ""
+"**Secure Build Environment**: Builds run in ephemeral GitHub Actions runners"
+" with minimal permissions"
+msgstr "**Secure Build Environment**: ビルドは最小権限の一時的なGitHub Actionsランナーで実行されます"
+
+#: ../../../SECURITY.md:27
+msgid ""
+"You can verify the attestations for any release by downloading the artifacts"
+" from PyPI and using the [PyPI attestation verification "
+"tools](https://docs.pypi.org/attestations/)."
+msgstr ""
+"PyPIからアーティファクトをダウンロードし [PyPI attestation verification "
+"tools](https://docs.pypi.org/attestations/) "
+"を使用することで、どのリリースのアテステーションでも検証できます。"
+
+#: ../../../SECURITY.md:30
+msgid "Reporting a Vulnerability"
+msgstr "脆弱性の報告"
+
+#: ../../../SECURITY.md:32
+msgid ""
+"If you discover a security vulnerability in pyvista-wasm, please report it "
+"responsibly."
+msgstr "pyvista-wasmにセキュリティ脆弱性を発見した場合は、責任ある形で報告してください。"
+
+#: ../../../SECURITY.md:35
+msgid ""
+"**Please do not report security vulnerabilities through public GitHub "
+"issues.**"
+msgstr "**セキュリティ脆弱性を公開のGitHub issueで報告しないでください。**"
+
+#: ../../../SECURITY.md:37
+msgid ""
+"Instead, please report them via [GitHub's private vulnerability "
+"reporting](https://github.com/tkoyama010/pyvista-"
+"wasm/security/advisories/new)."
+msgstr ""
+"代わりに [GitHubの非公開脆弱性報告](https://github.com/tkoyama010/pyvista-"
+"wasm/security/advisories/new) 経由で報告してください。"
+
+#: ../../../SECURITY.md:40
+msgid "Include as much of the following information as possible:"
+msgstr "可能な限り以下の情報を含めてください:"
+
+#: ../../../SECURITY.md:42
+msgid "Type of issue (e.g., code injection, cross-site scripting, etc.)"
+msgstr "問題の種類（例: コードインジェクション、クロスサイトスクリプティングなど）"
+
+#: ../../../SECURITY.md:43
+msgid "Full paths of source file(s) related to the issue"
+msgstr "問題に関連するソースファイルの完全なパス"
+
+#: ../../../SECURITY.md:44
+msgid "Steps to reproduce the issue"
+msgstr "問題を再現する手順"
+
+#: ../../../SECURITY.md:45
+msgid "Proof-of-concept or exploit code (if possible)"
+msgstr "コンセプト実証コードまたはエクスプロイトコード（可能であれば）"
+
+#: ../../../SECURITY.md:46
+msgid "Impact of the issue"
+msgstr "問題の影響"
+
+#: ../../../SECURITY.md:48
+msgid ""
+"We will acknowledge receipt of your report and work with you to understand "
+"and address the issue."
+msgstr "ご報告の受領を確認したうえで、問題の理解と対応のために協力してまいります。"
