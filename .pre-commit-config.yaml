@@ -8,6 +8,12 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: pretty-format-json
+        # Root-level *.json files are owned by biome (biome.json includes
+        # "*.json"), which collapses multi-element arrays; pretty-format-json
+        # expands them. Scope this hook to JSON outside biome's reach.
+        exclude: ^[^/]*\.json$
+        args: [--autofix, --indent, "2", --no-sort-keys]
       - id: check-added-large-files
       - id: check-toml
       - id: check-merge-conflict
