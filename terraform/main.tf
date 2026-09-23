@@ -60,6 +60,33 @@ resource "github_repository" "this" {
   # Squash commits carry only the PR title, no body list.
   squash_merge_commit_message = "BLANK"
 
+  # ponytail: the merge-method settings above are admin-only fields on
+  # GET /repos/{owner}/{repo}. The least-privilege GITHUB_TOKEN used by the
+  # read-only plan and drift jobs receives a response without them, so the
+  # provider's refresh reads them back as false/absent even though the live
+  # values match this declaration (the admin-scoped apply App reads true and
+  # wrote them into terraform.tfstate). Every plan therefore showed a
+  # permanent phantom diff (~ allow_auto_merge = false -> true,
+  # + merge_commit_message = "PR_TITLE", …) and the scheduled drift job
+  # re-opened issue #667 every week. Ignore these attributes during
+  # plan/refresh so the least-privilege jobs see no diff; the trade-off is
+  # that drift on these fields is no longer detectable by the scheduled job —
+  # same trade-off as ignore_vulnerability_alerts_during_read above and the
+  # UI-managed Actions permissions below. Revisit if the plan/drift jobs ever
+  # switch to an Administration-scoped token.
+  lifecycle {
+    ignore_changes = [
+      allow_auto_merge,
+      allow_squash_merge,
+      allow_update_branch,
+      delete_branch_on_merge,
+      merge_commit_message,
+      merge_commit_title,
+      squash_merge_commit_message,
+      squash_merge_commit_title,
+    ]
+  }
+
   # ponytail: auto_init false — repo already exists. GitHub Pages is served
   # from gh-pages; the provider manages the source here so it does not drift.
   auto_init = false

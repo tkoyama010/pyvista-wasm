@@ -330,7 +330,31 @@ const pvOverlay: HTMLDivElement = createLoadingOverlay(
   "Initializing WASM Environment\u2026",
 );
 
-if (typeof vtkReady !== "undefined") {
+/**
+ * Probe WebGL2 support on a scratch canvas.
+ *
+ * vtk-wasm requires a WebGL2 context. On some systems (notably
+ * Chromium on Linux with GPU driver/GBM problems) context creation
+ * fails and the canvas would stay blank with no visible error.
+ * Detecting this up front lets us show an actionable message instead.
+ * @returns True if a WebGL2 context can be created.
+ */
+function isWebGl2Available(): boolean {
+  const probe = document.createElement("canvas");
+  return probe.getContext("webgl2") !== null;
+}
+
+if (!isWebGl2Available()) {
+  showOverlayError(
+    pvOverlay,
+    "WebGL2 is not available in this browser, so 3D rendering cannot start. " +
+      "In Chromium on Linux, enable hardware acceleration " +
+      "(Settings > System > Use hardware acceleration when available), " +
+      "check chrome://gpu for WebGL2 status, and update your GPU drivers. " +
+      "As a fallback, launch Chromium with --use-gl=angle " +
+      "--use-angle=swiftshader for software rendering.",
+  );
+} else if (typeof vtkReady !== "undefined") {
   void vtkReady.then((vtk) =>
     buildScene(vtk, pvOverlay, pvContainer, pvSceneData),
   ); // eslint-disable-line unicorn/prefer-top-level-await
