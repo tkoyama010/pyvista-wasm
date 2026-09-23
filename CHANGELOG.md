@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.14.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.13.0...pyvista-wasm-v0.14.0) (2026-09-23)
+
+### Features
+
+- add download_venus_surface() to match pyvista.examples.planets ([#653](https://github.com/tkoyama010/pyvista-wasm/issues/653)) ([70dc4c3](https://github.com/tkoyama010/pyvista-wasm/commit/70dc4c3ada72603d6044a967375bac8e08f02d1c))
+- add GitHub Codespaces devcontainer for pi coding agent ([#684](https://github.com/tkoyama010/pyvista-wasm/issues/684)) ([d579385](https://github.com/tkoyama010/pyvista-wasm/commit/d579385c3c12413cd02012127b9b24cfdb3d06b6))
+- add load_earth() to match pyvista.examples.planets ([#634](https://github.com/tkoyama010/pyvista-wasm/issues/634)) ([e58f95f](https://github.com/tkoyama010/pyvista-wasm/commit/e58f95fd5b920bca7d67592ee1feb04f330d984c))
+- add load_jupiter() and download_jupiter_surface() to match pyvista.examples.planets ([#673](https://github.com/tkoyama010/pyvista-wasm/issues/673)) ([d80fc53](https://github.com/tkoyama010/pyvista-wasm/commit/d80fc533afab96f7633e2283492f7a6aedd9bdaf))
+- add load_mercury() and download_mercury_surface() to match pyvista.examples.planets ([#674](https://github.com/tkoyama010/pyvista-wasm/issues/674)) ([a76a4a6](https://github.com/tkoyama010/pyvista-wasm/commit/a76a4a6a3e7743ceffad4a0cf331e25f99a5c1e1))
+- add load_moon() and download_moon_surface() to match pyvista.examples.planets ([#659](https://github.com/tkoyama010/pyvista-wasm/issues/659)) ([2a378c3](https://github.com/tkoyama010/pyvista-wasm/commit/2a378c3f7f78c816a9bddfa28145d6ccca762176))
+- add load_moon() and download_moon_surface() to match pyvista.examples.planets ([#672](https://github.com/tkoyama010/pyvista-wasm/issues/672)) ([defd9c7](https://github.com/tkoyama010/pyvista-wasm/commit/defd9c7c3934f142d1934091f6178c0de7d5dbb5))
+- add load_neptune() and download_neptune_surface() to match pyvista.examples.planets ([#675](https://github.com/tkoyama010/pyvista-wasm/issues/675)) ([e29afec](https://github.com/tkoyama010/pyvista-wasm/commit/e29afec5e79aa037eceb08e0c311c7465c63d29b))
+- add load_pluto() and download_pluto_surface() to match pyvista.examples.planets ([#671](https://github.com/tkoyama010/pyvista-wasm/issues/671)) ([cd86c16](https://github.com/tkoyama010/pyvista-wasm/commit/cd86c16eb8749261a1f91d50804072cc70899889))
+- add load_saturn() and download_saturn_surface() to match pyvista.examples.planets ([#678](https://github.com/tkoyama010/pyvista-wasm/issues/678)) ([688b866](https://github.com/tkoyama010/pyvista-wasm/commit/688b866522656a66182f9e14e1c83920bc0795c2))
+- add load_sun() and download_sun_surface() to match pyvista.examples.planets ([#677](https://github.com/tkoyama010/pyvista-wasm/issues/677)) ([580ffed](https://github.com/tkoyama010/pyvista-wasm/commit/580ffed8272af2c64df46ada421d79c9bf78194d))
+- add load_uranus() and download_uranus_surface() to match pyvista.examples.planets ([#658](https://github.com/tkoyama010/pyvista-wasm/issues/658)) ([53cb348](https://github.com/tkoyama010/pyvista-wasm/commit/53cb348b52394077a471012f9df7c15756df4f00))
+- add load_venus() to match pyvista.examples.planets ([#649](https://github.com/tkoyama010/pyvista-wasm/issues/649)) ([d08423e](https://github.com/tkoyama010/pyvista-wasm/commit/d08423e3aa44d16b62606603cff81e5fee3e3613))
+- add pretty-format-json hook to pre-commit ([#685](https://github.com/tkoyama010/pyvista-wasm/issues/685)) ([8320457](https://github.com/tkoyama010/pyvista-wasm/commit/8320457c8357046419f0729c2f201b24850bc52f))
+- add Traditional Chinese (Taiwan Mandarin) README and slide locale ([#636](https://github.com/tkoyama010/pyvista-wasm/issues/636)) ([eadddb3](https://github.com/tkoyama010/pyvista-wasm/commit/eadddb3936bf9de744ab34a8abada53ac9910ead))
+- default the Codespace pi agent to opencode glm-5.3-flash ([#689](https://github.com/tkoyama010/pyvista-wasm/issues/689)) ([bcd1d64](https://github.com/tkoyama010/pyvista-wasm/commit/bcd1d64954f838ec5877f67f0ac34a3c03274c19))
+- install herdr in Codespaces so agent terminals survive reconnects ([#690](https://github.com/tkoyama010/pyvista-wasm/issues/690)) ([4417859](https://github.com/tkoyama010/pyvista-wasm/commit/4417859793e30c76cc601ce7e066cf3bc090dea8))
+- prebuild Codespaces dev container image on main ([#687](https://github.com/tkoyama010/pyvista-wasm/issues/687)) ([b1d0514](https://github.com/tkoyama010/pyvista-wasm/commit/b1d0514911e3a8aed38ceb122077b94196662ff9))
+- run pyadr pre-commit hooks on ADR files ([#656](https://github.com/tkoyama010/pyvista-wasm/issues/656)) ([c19e53d](https://github.com/tkoyama010/pyvista-wasm/commit/c19e53d273021908815dbab6095c1ec205b09640))
+
+### Bug Fixes
+
+- add download_earth_surface and wire texture to load_earth example ([#637](https://github.com/tkoyama010/pyvista-wasm/issues/637)) ([cab6bbe](https://github.com/tkoyama010/pyvista-wasm/commit/cab6bbed88a8d5a8639319d39cef1c40df400529))
+- patch Dependabot security alerts for js-yaml and hono ([#647](https://github.com/tkoyama010/pyvista-wasm/issues/647)) ([6aac093](https://github.com/tkoyama010/pyvista-wasm/commit/6aac093a8d6587ad1c07b7f006c5950f8c1991dd))
+- resolve 7 open dependabot security alerts ([#607](https://github.com/tkoyama010/pyvista-wasm/issues/607)) ([a8731f6](https://github.com/tkoyama010/pyvista-wasm/commit/a8731f679084cdb5130e7b9af668b8dcb2190791))
+- show actionable error when WebGL2 is unavailable instead of blank canvas ([#680](https://github.com/tkoyama010/pyvista-wasm/issues/680)) ([f44a267](https://github.com/tkoyama010/pyvista-wasm/commit/f44a267dbd42423dd80493f2218a8849d9e8b760))
+- **terraform:** ignore unreadable merge settings in least-privilege plan ([#688](https://github.com/tkoyama010/pyvista-wasm/issues/688)) ([2e0062c](https://github.com/tkoyama010/pyvista-wasm/commit/2e0062c90b72987c5e591df90cfd401790a33c18))
+
+### Documentation
+
+- add ADR on keeping Biome over xo as the JS/TS linter ([#652](https://github.com/tkoyama010/pyvista-wasm/issues/652)) ([90a8bce](https://github.com/tkoyama010/pyvista-wasm/commit/90a8bce6920ab789577c18ce4366ab9081a86d6c))
+- add ADRs on the pi coding agent Codespace environment and Nix ([#670](https://github.com/tkoyama010/pyvista-wasm/issues/670)) ([5e68132](https://github.com/tkoyama010/pyvista-wasm/commit/5e681324c31bc93ed07034c31b73dcedd142eb8d))
+- add load_earth and rotate_z to API reference ([#635](https://github.com/tkoyama010/pyvista-wasm/issues/635)) ([6f38e88](https://github.com/tkoyama010/pyvista-wasm/commit/6f38e887b5ecbd9fdd612d9aa79fd454dea2f3a7))
+
 ## [0.13.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.12.0...pyvista-wasm-v0.13.0) (2026-08-26)
 
 ### Features
