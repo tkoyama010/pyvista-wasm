@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-20 12:01+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_sun.rst:2
+msgid "pyvista\\_wasm.examples.load\\_sun"
+msgstr "pyvista\\_wasm.examples.load\\_sun"
+
+#: of pyvista_wasm.examples.load_sun:1
+msgid "Load the Sun as a textured sphere."
+msgstr "テクスチャ付き球体として太陽をロードします。"
+
+#: of pyvista_wasm.examples.load_sun:3
+msgid ""
+"Creates a sphere mesh with texture coordinates, matching the "
+"``pyvista.examples.planets.load_sun`` API. The sphere is rotated 180° "
+"around the Z axis to align the Prime Meridian correctly."
+msgstr ""
+"テクスチャ座標付きの球体メッシュを作成します。"
+"``pyvista.examples.planets.load_sun`` API と一致します。"
+"球体は Z 軸周りに 180° 回転され、本初子午線が正しく整列されます。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_sun.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.examples.load_sun:7
+msgid "Sphere radius. Default is 1.0."
+msgstr "球体の半径。デフォルトは 1.0。"
+
+#: of pyvista_wasm.examples.load_sun:9
+msgid "Number of points in the latitude direction. Default is 50."
+msgstr "緯度方向のポイント数。デフォルトは 50。"
+
+#: of pyvista_wasm.examples.load_sun:11
+msgid "Number of points in the longitude direction. Default is 100."
+msgstr "経度方向のポイント数。デフォルトは 100。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_sun.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: of pyvista_wasm.examples.load_sun:14
+msgid "Sun sphere mesh with texture coordinates."
+msgstr "テクスチャ座標付き太陽球体メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.examples.load_sun.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.examples.load_sun:19
+msgid ":func:`~pyvista_wasm.examples.load_earth`"
+msgstr ":func:`~pyvista_wasm.examples.load_earth`"
+
+#: of pyvista_wasm.examples.load_sun:20
+msgid "Load the planet Earth for comparison."
+msgstr "比較のために地球をロードします。"
+
+#: of pyvista_wasm.examples.load_sun:22
+msgid ":func:`~pyvista_wasm.examples.download_sun_surface`"
+msgstr ":func:`~pyvista_wasm.examples.download_sun_surface`"
+
+#: of pyvista_wasm.examples.load_sun:23
+msgid "Download the Sun surface texture."
+msgstr "太陽表面のテクスチャをダウンロードします。"
+
+#: of pyvista_wasm.examples.load_sun:26
+msgid "Examples"
+msgstr "例"
+
+#: of pyvista_wasm.examples.load_sun:38
+msgid "Render the Sun in the browser:"
+msgstr "ブラウザで太陽をレンダリングします:"

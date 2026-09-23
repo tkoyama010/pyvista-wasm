@@ -11,6 +11,7 @@ Thank you for your interest in contributing to pyvista-wasm! This document provi
 - [Getting Started](#getting-started)
 - [Development Setup](#development-setup)
   - [Prerequisites](#prerequisites)
+  - [GitHub Codespaces](#github-codespaces)
   - [Initial Setup](#initial-setup)
 - [Development Workflow](#development-workflow)
   - [Creating a Branch](#creating-a-branch)
@@ -63,6 +64,28 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
 - Python 3.12 or higher (3.12, 3.13, or 3.14 recommended for testing)
 - [uv](https://github.com/astral-sh/uv) - Ultra-fast Python package installer
 - Git
+
+### GitHub Codespaces
+
+No local setup is required if you use [GitHub Codespaces](https://github.com/features/codespaces). A devcontainer (`.devcontainer/devcontainer.json`) provisions a CI-equivalent environment with uv, npm dependencies, pre-commit, tox, Playwright-ready Python, and the [pi coding agent CLI](https://github.com/earendil-works/pi-coding-agent) preinstalled.
+
+1. Open the repository (or any pull request) on GitHub, click the **Code** button, and select **Codespaces**, or create one from the CLI:
+
+   ```bash
+   gh codespace create -R tkoyama010/pyvista-wasm -b main
+   ```
+
+1. The container build and toolchain installation run automatically on first start. Once the Codespace is available, all standard commands work out of the box:
+
+   ```bash
+   uv run pytest -m "not playwright"   # Python tests
+   npm run lint                        # TypeScript/JSON linting
+   pre-commit run --all-files          # All pre-commit hooks
+   ```
+
+1. (Optional) If you use an API key for AI coding agents such as [opencode zen](https://opencode.ai/zen), register it as a personal [Codespaces secret](https://github.com/settings/codespaces) (for example, `OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically, and `postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so that `gh codespace ssh` shells and the pi CLI can use it. The file is regenerated each time the Codespace is created, so recreate the Codespace after rotating the key.
+
+The devcontainer mirrors the GitHub Actions test workflow (Python 3.12, tox, `npm ci`), so CI failures are unlikely to be environment-related.
 
 ### Initial Setup
 
