@@ -1098,8 +1098,6 @@ def download_sun_surface() -> Texture:
     return Texture(f"{_PYVISTA_DATA_BASE}/solar_textures/sun.jpg")
 
 
-
-
 def load_neptune(
     radius: float = 1.0,
     lat_resolution: int = 50,
