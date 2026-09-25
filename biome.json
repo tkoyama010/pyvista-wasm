@@ -41,7 +41,8 @@
             "noUndeclaredVariables": "off"
           },
           "nursery": {
-            "noUnsafeTypeAssertion": "off"
+            "noUnsafeTypeAssertion": "off",
+            "useConsistentFunctionStyle": "off"
           },
           "performance": {
             "noAwaitInLoops": "off"
