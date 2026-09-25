@@ -12,6 +12,7 @@ Thank you for your interest in contributing to pyvista-wasm! This document provi
 - [Development Setup](#development-setup)
   - [Prerequisites](#prerequisites)
   - [GitHub Codespaces](#github-codespaces)
+    - [Using the devcontainer locally](#using-the-devcontainer-locally)
   - [Initial Setup](#initial-setup)
 - [Development Workflow](#development-workflow)
   - [Creating a Branch](#creating-a-branch)
@@ -86,6 +87,27 @@ No local setup is required if you use [GitHub Codespaces](https://github.com/fea
 1. (Optional) If you use an API key for AI coding agents such as [opencode zen](https://opencode.ai/zen), register it as a personal [Codespaces secret](https://github.com/settings/codespaces) (for example, `OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically and forwarded to everything attached to the container (`build`, `setup`, tasks) via the `remoteEnv` mapping in `.devcontainer/devcontainer.json`, and `postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so that `gh codespace ssh` shells and the pi CLI can use it. The file is regenerated each time the Codespace is created, so recreate the Codespace after rotating the key.
 
 The devcontainer mirrors the GitHub Actions test workflow (Python 3.12, tox, `npm ci`), so CI failures are unlikely to be environment-related.
+
+#### Using the devcontainer locally
+
+The same environment runs on your own machine without Codespaces:
+
+1. Install [Docker](https://docs.docker.com/get-docker/) and [VS Code](https://code.visualstudio.com/) with the **Dev Containers** extension (or the [`devcontainer` CLI](https://github.com/devcontainers/cli)).
+
+1. Clone the repository, open it in VS Code, and run **Dev Containers: Reopen in Container** from the command palette. VS Code builds the container from `.devcontainer/devcontainer.json`, runs `postCreateCommand`, and attaches the workspace. From the CLI instead:
+
+   ```bash
+   devcontainer up --workspace-folder .
+   devcontainer exec --workspace-folder . bash
+   ```
+
+1. Secrets such as `OPENCODE_API_KEY` are a Codespaces feature and are not injected locally. Export them in your shell before attaching, and the `remoteEnv` mapping forwards them into the container:
+
+   ```bash
+   export OPENCODE_API_KEY=your-key
+   ```
+
+1. Once attached, the same commands as in Codespaces work out of the box (`uv run pytest`, `npm run lint`, `pre-commit run --all-files`).
 
 ### Initial Setup
 
