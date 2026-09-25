@@ -1,6 +1,9 @@
 {
   "name": "pyvista-wasm",
   "image": "ghcr.io/tkoyama010/pyvista-wasm-codespace:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "remoteEnv": {
     "OPENCODE_API": "${localEnv:OPENCODE_API}",
     "OPENCODE_API_KEY": "${localEnv:OPENCODE_API_KEY}"
