@@ -83,7 +83,7 @@ No local setup is required if you use [GitHub Codespaces](https://github.com/fea
    pre-commit run --all-files          # All pre-commit hooks
    ```
 
-1. (Optional) If you use an API key for AI coding agents such as [opencode zen](https://opencode.ai/zen), register it as a personal [Codespaces secret](https://github.com/settings/codespaces) (for example, `OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically, and `postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so that `gh codespace ssh` shells and the pi CLI can use it. The file is regenerated each time the Codespace is created, so recreate the Codespace after rotating the key.
+1. (Optional) If you use an API key for AI coding agents such as [opencode zen](https://opencode.ai/zen), register it as a personal [Codespaces secret](https://github.com/settings/codespaces) (for example, `OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically and forwarded to everything attached to the container (`build`, `setup`, tasks) via the `remoteEnv` mapping in `.devcontainer/devcontainer.json`, and `postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so that `gh codespace ssh` shells and the pi CLI can use it. The file is regenerated each time the Codespace is created, so recreate the Codespace after rotating the key.
 
 The devcontainer mirrors the GitHub Actions test workflow (Python 3.12, tox, `npm ci`), so CI failures are unlikely to be environment-related.
 
