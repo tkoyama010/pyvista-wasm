@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.15.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.14.0...pyvista-wasm-v0.15.0) (2026-09-26)
+
+
+### Features
+
+* add GitHub CLI to devcontainer ([#706](https://github.com/tkoyama010/pyvista-wasm/issues/706)) ([60e0abd](https://github.com/tkoyama010/pyvista-wasm/commit/60e0abdc7099b24eec191192d86f412e2abd294e))
+* forward OPENCODE_API env vars into devcontainer setup ([#704](https://github.com/tkoyama010/pyvista-wasm/issues/704)) ([42e72f0](https://github.com/tkoyama010/pyvista-wasm/commit/42e72f05b9e9d0ce1d798791d8a2042d13dc3140))
+
+
+### Bug Fixes
+
+* **deps:** bump image-size to fix Dependabot alerts [#132](https://github.com/tkoyama010/pyvista-wasm/issues/132) and [#133](https://github.com/tkoyama010/pyvista-wasm/issues/133) ([#707](https://github.com/tkoyama010/pyvista-wasm/issues/707)) ([e2d12c3](https://github.com/tkoyama010/pyvista-wasm/commit/e2d12c32851d27f41518bc89d322bc3bee8d9e70))
+
 ## [0.14.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.13.0...pyvista-wasm-v0.14.0) (2026-09-23)
 
 ### Features
