@@ -15,7 +15,7 @@ The architecture calls vtk-wasm from TypeScript: TypeScript acts as the glue lay
 
 ## Stack
 
-- Python ≥ 3.12 (per [SPEC 0](https://scientific-python.org/specs/spec-0000/), minimums drop on a schedule)
+- Python ≥ 3.13 (per [SPEC 0](https://scientific-python.org/specs/spec-0000/), minimums drop on a schedule)
 - NumPy ≥ 2.0
 - vtk-wasm (mirrored in `packages/vtk-wasm-binary/` and served via jsDelivr CDN)
 - Node.js with esbuild for the TypeScript bundle; Biome for JS/TS lint and format; TypeScript 7 for type checks

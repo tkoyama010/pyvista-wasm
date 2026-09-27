@@ -19,21 +19,20 @@ authors = [
 # - Core dependencies: Drop support 24 months after initial release
 #
 # As of 2026-03-25:
-# - Minimum Python: 3.12 (released 2023-10-02)
+# - Minimum Python: 3.13 (released 2024-10-07)
 # - Minimum NumPy: 2.0 (released 2024-06-16)
 #
 # SPEC 1 — Lazy Loading of Submodules and Functions
 # https://scientific-python.org/specs/spec-0001/
 #
 # This project follows SPEC 1 for lazy loading of submodules and functions
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: 3.15",
@@ -56,16 +55,16 @@ optional-dependencies.dev = [
   "tox>=4.0.0,<4.62.0",
 ]
 optional-dependencies.docs = [
-  "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.12' and python_version<'3.14'",
-  "jupyterlite-sphinx==0.22.1; python_version>='3.12' and python_version<'3.14'",
-  "jupytext>=1.16.0,<1.20.0; python_version>='3.12'",
-  "myst-parser>=4.0.0,<6.0.0; python_version>='3.12'",
-  "sphinx>=8.0.0,<10.0.0; python_version>='3.12'",
-  "sphinx-book-theme>=1.1.0,<1.5.0; python_version>='3.12'",
-  "sphinx-design>=0.6.0,<0.8.0; python_version>='3.12'",
-  "sphinx-intl>=2.2.0,<2.5.0; python_version>='3.12'",
-  "sphinxcontrib-mermaid>=2.0.0,<3.0.0; python_version>='3.12'",
-  "sphinxcontrib-typer>=0.5.1,<1.0.1; python_version>='3.12'",
+  "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.13' and python_version<'3.14'",
+  "jupyterlite-sphinx==0.22.1; python_version>='3.13' and python_version<'3.14'",
+  "jupytext>=1.16.0,<1.20.0; python_version>='3.13'",
+  "myst-parser>=4.0.0,<6.0.0; python_version>='3.13'",
+  "sphinx>=8.0.0,<10.0.0; python_version>='3.13'",
+  "sphinx-book-theme>=1.1.0,<1.5.0; python_version>='3.13'",
+  "sphinx-design>=0.6.0,<0.8.0; python_version>='3.13'",
+  "sphinx-intl>=2.2.0,<2.5.0; python_version>='3.13'",
+  "sphinxcontrib-mermaid>=2.0.0,<3.0.0; python_version>='3.13'",
+  "sphinxcontrib-typer>=0.5.1,<1.0.1; python_version>='3.13'",
 ]
 optional-dependencies.marimo = [
   "marimo>=0.10.0,<0.25.0",
@@ -144,7 +143,7 @@ lint.flake8-pytest-style.parametrize-values-type = "list"
 [tool.mypy]
 exclude = [ "src/pyvista_wasm/__init__\\.pyi" ]
 ignore_missing_imports = true
-python_version = "3.12"
+python_version = "3.13"
 disallow_any_generics = false
 disallow_untyped_defs = false
 disallow_incomplete_defs = false

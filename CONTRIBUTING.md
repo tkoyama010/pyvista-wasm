@@ -62,7 +62,7 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
 
 ### Prerequisites
 
-- Python 3.12 or higher (3.12, 3.13, or 3.14 recommended for testing)
+- Python 3.13 or higher (3.13, or 3.14 recommended for testing)
 - [uv](https://github.com/astral-sh/uv) - Ultra-fast Python package installer
 - Git
 
@@ -86,7 +86,7 @@ No local setup is required if you use [GitHub Codespaces](https://github.com/fea
 
 1. (Optional) If you use an API key for AI coding agents such as [opencode zen](https://opencode.ai/zen), register it as a personal [Codespaces secret](https://github.com/settings/codespaces) (for example, `OPENCODE_API_KEY`). It is exposed to VS Code terminals automatically and forwarded to everything attached to the container (`build`, `setup`, tasks) via the `remoteEnv` mapping in `.devcontainer/devcontainer.json`, and `postCreateCommand` also copies it to `~/.codespaces-user-secrets.env` so that `gh codespace ssh` shells and the pi CLI can use it. The file is regenerated each time the Codespace is created, so recreate the Codespace after rotating the key.
 
-The devcontainer mirrors the GitHub Actions test workflow (Python 3.12, tox, `npm ci`), so CI failures are unlikely to be environment-related.
+The devcontainer mirrors the GitHub Actions test workflow (Python 3.13, tox, `npm ci`), so CI failures are unlikely to be environment-related.
 
 #### Using the devcontainer locally
 
@@ -296,7 +296,7 @@ uv run pytest --cov=pyvista_wasm --cov-report=html
 - All new features should include tests
 - Bug fixes should include regression tests
 - Maintain or improve code coverage
-- Tests should pass on Python 3.12, 3.13, and 3.14
+- Tests should pass on Python 3.13, and 3.14
 
 ## Pull Request Process
 
@@ -332,7 +332,7 @@ uv run pytest --cov=pyvista_wasm --cov-report=html
 Pull requests are automatically tested using GitHub Actions:
 
 - Linting and formatting checks
-- Tests on Python 3.12, 3.13, and 3.14
+- Tests on Python 3.13 and 3.14
 - Tests on Linux, Windows, and macOS
 - Code coverage reporting to Codecov
 - Conventional commit PR title validation
