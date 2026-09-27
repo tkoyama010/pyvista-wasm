@@ -59,6 +59,7 @@ Conventions:
           cam = _cam()
           cam.azimuth(90)
   ```
+
 - Do not use comment banners (e.g. `# ---`) to separate test sections; use classes instead.
 
 CI runs the full test suite on every PR, [pre-commit.ci](https://pre-commit.ci) runs linting and formatting checks, and [Read the Docs](https://readthedocs.org) builds a documentation preview for every PR. After creating a PR, monitor CI continuously, keep fixing and pushing until all checks pass.
