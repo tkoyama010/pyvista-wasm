@@ -126,7 +126,7 @@ def browser_context_args() -> dict[str, dict[str, int]]:
 def playwright_browser(
     playwright: Playwright,
     browser_type_launch_args: dict,
-) -> Generator[Browser, None, None]:
+) -> Generator[Browser]:
     """Provide a Playwright browser instance for testing.
 
     This fixture creates a Chromium browser instance in headless mode
@@ -154,7 +154,7 @@ def playwright_browser(
 def browser_context(
     playwright_browser: Browser,
     browser_context_args: dict,
-) -> Generator[BrowserContext, None, None]:
+) -> Generator[BrowserContext]:
     """Provide a Playwright browser context for testing.
 
     Parameters
@@ -176,7 +176,7 @@ def browser_context(
 
 
 @pytest.fixture
-def page(browser_context: BrowserContext) -> Generator[Page, None, None]:
+def page(browser_context: BrowserContext) -> Generator[Page]:
     """Provide a Playwright page for testing.
 
     This fixture creates a new page in the browser context and automatically
