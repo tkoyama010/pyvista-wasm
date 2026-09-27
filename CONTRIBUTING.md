@@ -272,7 +272,6 @@ The built `renderer.js` is not committed to git. It is generated automatically d
 uv run pytest
 
 # Run tests for specific Python version using tox
-uv run tox -e py312
 uv run tox -e py313
 uv run tox -e py314
 

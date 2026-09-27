@@ -18,8 +18,10 @@ authors = [
 # - Python: Drop support 36 months after initial release
 # - Core dependencies: Drop support 24 months after initial release
 #
-# As of 2026-03-25:
+# As of 2026-09-27:
 # - Minimum Python: 3.13 (released 2024-10-07)
+#   (3.12 support intentionally dropped on 2026-09-27, slightly ahead of its
+#    2026-10-02 36-month cutoff)
 # - Minimum NumPy: 2.0 (released 2024-06-16)
 #
 # SPEC 1 — Lazy Loading of Submodules and Functions

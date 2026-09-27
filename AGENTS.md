@@ -28,7 +28,7 @@ No local setup is required for review; CI verifies the dev environment on every 
 
 ```bash
 # Run the test suite (Playwright tests excluded until VTK.wasm API work lands, see issue #2)
-tox -e py312
+tox -e py313
 
 # Lint and type-check Python
 tox -e lint
