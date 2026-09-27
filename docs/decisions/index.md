@@ -34,3 +34,4 @@
 
 * [0010 - Track PyVista API coverage matrix for pyvista-wasm](0010-track-pyvista-api-coverage-matrix-for-pyvista-wasm.md)
 * [0011 - Decide whether to replace Biome with xo](0011-decide-whether-to-replace-biome-with-xo.md)
+* [0015 - Decide to use pytest-bdd for behavior-driven tests](0015-decide-to-use-pytest-bdd-for-behavior-driven-tests.md)
