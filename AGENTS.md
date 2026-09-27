@@ -51,7 +51,14 @@ pytest tests/ src/ -m "not playwright" --cov=pyvista_wasm
 
 Conventions:
 
-- Group related tests into a class named after the function or command under test (e.g. `TestCameraAzimuth`, `TestTextureRendering`).
+- Group related tests into a class named after the function or command under test (e.g. `TestCameraAzimuth`, `TestTextureRendering`):
+
+  ```python
+  class TestCameraAzimuth:
+      def test_azimuth_90(self) -> None:
+          cam = _cam()
+          cam.azimuth(90)
+  ```
 - Do not use comment banners (e.g. `# ---`) to separate test sections; use classes instead.
 
 CI runs the full test suite on every PR, [pre-commit.ci](https://pre-commit.ci) runs linting and formatting checks, and [Read the Docs](https://readthedocs.org) builds a documentation preview for every PR. After creating a PR, monitor CI continuously, keep fixing and pushing until all checks pass.
