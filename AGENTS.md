@@ -72,7 +72,7 @@ CI runs the full test suite on every PR, [pre-commit.ci](https://pre-commit.ci) 
 
 Never do the following:
 
-- Never commit or modify anything under `.github/` workflows, CI configuration, or `.pre-commit-config.yaml` — generated/maintained infrastructure is out of scope for agent edits.
+- Never commit or modify anything under `.github/workflows/` or other CI configuration, or `.pre-commit-config.yaml` — generated/maintained infrastructure is out of scope for agent edits.
 - Never commit secrets, API keys, or credentials. Never modify files that hold them.
 - Never commit generated artifacts: `src/pyvista_wasm/templates/renderer.js` is built via `npm run build`, and vtk-wasm binaries live in `packages/vtk-wasm-binary/`.
 - Never edit generated files by hand.
