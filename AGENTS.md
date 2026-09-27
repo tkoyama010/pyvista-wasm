@@ -67,6 +67,7 @@ CI runs the full test suite on every PR, [pre-commit.ci](https://pre-commit.ci) 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc.
 - When creating a PR, follow the template in `.github/pull_request_template.md`.
 - Write commit messages and PR descriptions to explain **why**; the diff shows what changed and CI shows test results.
+- Remove AI coding agent co-author lines (e.g. `Co-Authored-By: Claude`) from commit messages and PR descriptions.
 
 ## Boundaries
 
