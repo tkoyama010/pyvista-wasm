@@ -1933,6 +1933,7 @@ dev = [
     { name = "tox" },
 ]
 docs = [
+    { name = "jupyterlite-core", marker = "python_full_version < '3.14'" },
     { name = "jupyterlite-pyodide-kernel", marker = "python_full_version < '3.14'" },
     { name = "jupyterlite-sphinx", marker = "python_full_version < '3.14'" },
     { name = "jupytext" },
@@ -1977,6 +1978,7 @@ test = [
 requires-dist = [
     { name = "gitpython", specifier = ">=3.1.58" },
     { name = "jinja2", specifier = ">=3.1.0,<3.2.0" },
+    { name = "jupyterlite-core", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.8.4" },
     { name = "jupyterlite-pyodide-kernel", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.8.6" },
     { name = "jupyterlite-sphinx", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.9.3" },
     { name = "jupytext", marker = "python_full_version >= '3.13' and extra == 'docs'", specifier = ">=1.16.0,<1.20.0" },
