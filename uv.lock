@@ -11,6 +11,7 @@ resolution-markers = [
 constraints = [
     { name = "bleach", specifier = ">=6.4.0" },
     { name = "jupyter-server", specifier = ">=2.20.0" },
+    { name = "jupyterlite-core", specifier = ">=0.8.4" },
     { name = "starlette", specifier = ">=1.3.1" },
     { name = "tornado", specifier = ">=6.5.7" },
 ]
@@ -851,47 +852,46 @@ wheels = [
 
 [[package]]
 name = "jupyterlite-core"
-version = "0.7.4"
+version = "0.8.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "doit" },
     { name = "jupyter-core" },
     { name = "pycparser", marker = "platform_python_implementation == 'PyPy'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e3/a9/db34fc372bf37daba4ecd8ae10f97d102483b27130e60a9f7c0075febfc9/jupyterlite_core-0.7.4.tar.gz", hash = "sha256:c8a74b4ca9792f611b657465f63a79543b381063ebebdc2b5b3b695704e14278", size = 16311836, upload-time = "2026-03-12T09:29:47.465Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e9/0d/76609e89f8e891fdea1203c383cce3a888da72a771c0d51ff45bd95a653d/jupyterlite_core-0.8.5.tar.gz", hash = "sha256:7ee0d20ea5591700d9b87b8f27be01f4f05404cabdf0346d3eff3ec935094f24", size = 15802385, upload-time = "2026-09-28T13:51:15.934Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/fc/0518d2de703fbdb328eed8e791fddd8628880719b4f0bf1e82ce3f829020/jupyterlite_core-0.7.4-py3-none-any.whl", hash = "sha256:354785c7575a87a55c06f385d6c22e25ebbe7801d9d2dcdc4b41158d5bd3aa8c", size = 16323931, upload-time = "2026-03-12T09:29:44.634Z" },
+    { url = "https://files.pythonhosted.org/packages/29/8c/0a4a982d2fc79755ce2844ab96aaec90fd7d132503182fd43424e932568b/jupyterlite_core-0.8.5-py3-none-any.whl", hash = "sha256:296767f7f8a99b493a83b8a75439e8969fe38b6d3d1816925d374755ccc78871", size = 15816221, upload-time = "2026-09-28T13:51:12.869Z" },
 ]
 
 [[package]]
 name = "jupyterlite-pyodide-kernel"
-version = "0.7.1"
+version = "0.8.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jupyterlite-core" },
     { name = "pkginfo" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/86/fe/5f9e535f1e15852cb5e5745aeb9d4e9b4eb67282c3e7402d2ca823c76c1f/jupyterlite_pyodide_kernel-0.7.1.tar.gz", hash = "sha256:5e52c57190057d816e8551db1b2541f9c0398f71ea54ca47004886db6931cd6c", size = 545914, upload-time = "2026-03-03T07:17:05.245Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e5/d8/ee2e0ce2dbe1a3d4efe4af38aee3f3a7fcef832d9b064c786c7e9acec7aa/jupyterlite_pyodide_kernel-0.8.6.tar.gz", hash = "sha256:ef53c638b1034473d72549642feb2fb9b8bfded970c7d5908551896c2b9b1268", size = 209172, upload-time = "2026-09-10T14:02:14.396Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/03/65978831184bf53ebe3d3d07b83a540c9fa253bbf244d2ae92a6f0c758dc/jupyterlite_pyodide_kernel-0.7.1-py3-none-any.whl", hash = "sha256:3176bea5b471ca412514e87746c4804945ada8b4329754a4a0e027fdc92edfa3", size = 560227, upload-time = "2026-03-03T07:17:03.108Z" },
+    { url = "https://files.pythonhosted.org/packages/3c/59/95d3f962ea620eea8e0ad8fbcde3e66745be6afc0f864c5534c9c53979e7/jupyterlite_pyodide_kernel-0.8.6-py3-none-any.whl", hash = "sha256:c9e698420e7f95f156c09c1474898ee6727b35b1740b369cb5f5aaa59ea73d3f", size = 222455, upload-time = "2026-09-10T14:02:12.218Z" },
 ]
 
 [[package]]
 name = "jupyterlite-sphinx"
-version = "0.22.1"
+version = "0.23.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "docutils" },
     { name = "jupyter-server" },
     { name = "jupyterlab-server" },
     { name = "jupyterlite-core" },
-    { name = "jupytext" },
     { name = "nbformat" },
     { name = "sphinx" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7b/a7/d19333c46caf0abc5ce8a46eccbbada615b54ceef8d220569444cf115e6f/jupyterlite_sphinx-0.22.1.tar.gz", hash = "sha256:e13682884deaecdb88dc81917df8a7275291f17575c3d1707b791e4a876a8556", size = 19628, upload-time = "2026-02-16T17:29:31.844Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/83/126ee5976104fe5d61306a53206c8f3cc36a6dd71947ed8308273c61e294/jupyterlite_sphinx-0.23.0.tar.gz", hash = "sha256:ac7d4af5bda5b72ad728b74e343e4210e3517c8ba45c639e67185e5ab27079af", size = 20728, upload-time = "2026-08-11T08:38:49.274Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/13/42/54c91e905bd484566dd8249cc9bb69c5e97dded21169490abde535ea0f59/jupyterlite_sphinx-0.22.1-py3-none-any.whl", hash = "sha256:eb00be3a39cecd08307cae86f605705af1af5f95e678b8a2be55eccd66de284b", size = 22178, upload-time = "2026-02-16T17:29:29.482Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/3f/7a8adf65a70048ceed48053b53703a5ee4ec718d27e51326803dac5adcb4/jupyterlite_sphinx-0.23.0-py3-none-any.whl", hash = "sha256:da3095eacadd31042864799b737cfef3cb025679a79c8f0355abe12837f616cf", size = 23230, upload-time = "2026-08-11T08:38:47.742Z" },
 ]
 
 [[package]]
@@ -1977,8 +1977,8 @@ test = [
 requires-dist = [
     { name = "gitpython", specifier = ">=3.1.58" },
     { name = "jinja2", specifier = ">=3.1.0,<3.2.0" },
-    { name = "jupyterlite-pyodide-kernel", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = "==0.7.1" },
-    { name = "jupyterlite-sphinx", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = "==0.22.1" },
+    { name = "jupyterlite-pyodide-kernel", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.8.6" },
+    { name = "jupyterlite-sphinx", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.9.3" },
     { name = "jupytext", marker = "python_full_version >= '3.13' and extra == 'docs'", specifier = ">=1.16.0,<1.20.0" },
     { name = "lazy-loader", specifier = ">=0.4.0,<0.7.0" },
     { name = "marimo", marker = "extra == 'marimo'", specifier = ">=0.10.0,<0.25.0" },
