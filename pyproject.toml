@@ -54,7 +54,7 @@ optional-dependencies.dev = [
   "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
   "ruff>=0.1.0,<0.17.0",
-  "tox>=4.0.0,<4.62.0",
+  "tox>=4.0.0,<4.65.0",
 ]
 optional-dependencies.docs = [
   "jupyterlite-pyodide-kernel==0.7.1; python_version>='3.13' and python_version<'3.14'",
@@ -85,7 +85,7 @@ dev = [
   "mypy>=1.0.0,<2.4.0",
   "pre-commit>=3.0.0,<5.0.0",
   "ruff>=0.1.0,<0.17.0",
-  "tox>=4.0.0,<4.62.0",
+  "tox>=4.0.0,<4.65.0",
   { include-group = "test" },
 ]
 test = [
