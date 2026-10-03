@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.15.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.0...pyvista-wasm-v0.15.1) (2026-10-03)
+
+
+### Bug Fixes
+
+* bump jupyterlite-core to 0.8.5 for Dependabot alerts ([#724](https://github.com/tkoyama010/pyvista-wasm/issues/724)) ([2b5af04](https://github.com/tkoyama010/pyvista-wasm/commit/2b5af04e0db8dbb7a1fb5329c6f0512a101785dc))
+
+
+### Reverts
+
+* "chore: update VTK.wasm binary to 9.7.20260927" ([#725](https://github.com/tkoyama010/pyvista-wasm/issues/725)) ([6fb2438](https://github.com/tkoyama010/pyvista-wasm/commit/6fb2438b27e8a94880a6da5cb3288c59db98d136))
+
+
+### Documentation
+
+* improve AGENTS.md following GitHub's lessons from 2,500+ repositories ([#710](https://github.com/tkoyama010/pyvista-wasm/issues/710)) ([5e10410](https://github.com/tkoyama010/pyvista-wasm/commit/5e10410ea205b2fdb5f38459a11ca0e49129099e))
+
 ## [0.15.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.14.0...pyvista-wasm-v0.15.0) (2026-09-26)
 
 ### Features
