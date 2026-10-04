@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.2](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.1...pyvista-wasm-v0.15.2) (2026-10-04)
+
+
+### Bug Fixes
+
+* bump greenlet to 3.5.6 for Python 3.14 ([#726](https://github.com/tkoyama010/pyvista-wasm/issues/726)) ([67b21db](https://github.com/tkoyama010/pyvista-wasm/commit/67b21dbafd0733aeff0a28b4e788056cdb5073c0))
+
 ## [0.15.1](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.0...pyvista-wasm-v0.15.1) (2026-10-03)
 
 ### Bug Fixes
