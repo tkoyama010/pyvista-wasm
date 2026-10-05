@@ -48,7 +48,7 @@ repos:
         # the MADR "* Status:" bullet style that mdformat normalises to "- ".
         exclude: ^(slides/slides\.md|docs/decisions/.*\.md)$
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.29.4"
+    rev: "v2.30.1"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
@@ -58,11 +58,11 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.19
+    rev: 0.12.23
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.9
+    rev: v0.16.10
     hooks:
       # Run the linter
       - id: ruff-check
@@ -70,7 +70,7 @@ repos:
       # Run the formatter
       - id: ruff-format
   - repo: https://github.com/djlint/djLint
-    rev: v1.46.2
+    rev: v1.46.4
     hooks:
       - id: djlint-reformat-jinja
         files: src/pyvista_wasm/templates/.*\.html$
@@ -78,7 +78,7 @@ repos:
       - id: djlint-jinja
         files: src/pyvista_wasm/templates/.*\.html$
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.14
+    rev: v2.5.15
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@2.5.14"]
@@ -96,7 +96,7 @@ repos:
       - id: sp-repo-review
         additional_dependencies: ["repo-review[cli]"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.3.1
+    rev: v2.4.0
     hooks:
       - id: mypy
         files: ^src/.*\.py$
