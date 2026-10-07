@@ -1,0 +1,1 @@
+import{H as e,x as t,z as n}from"../modules/shiki-DLQ9I9cv.js";import{t as r}from"../_plugin-vue_export-helper-BDNMzG2s.js";var i={},a={class:`slidev-layout default`};function o(r,i){return n(),t(`div`,a,[e(r.$slots,`default`)])}var s=r(i,[[`render`,o]]);export{s as t};
