@@ -7,83 +7,85 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: pyvista-wasm \n"
+"Project-Id-Version: pyvista-wasm\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-20 11:51+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn_rings.rst:2
 msgid "pyvista\\_wasm.examples.load\\_saturn\\_rings"
-msgstr ""
+msgstr "pyvista\\_wasm.examples.load\\_saturn\\_rings"
 
 #: of pyvista_wasm.examples.load_saturn_rings:1
 msgid "Load the planet Saturn's rings."
-msgstr ""
+msgstr "土星の環を読み込みます。"
 
 #: of pyvista_wasm.examples.load_saturn_rings:3
 msgid ""
 "Arguments are passed on to :class:`~pyvista_wasm.Disc`, matching the "
-"``pyvista.examples.planets.load_saturn_rings`` API. Texture coordinates "
-"are set so the ring texture maps radially from the inner to the outer "
-"radius."
+"``pyvista.examples.planets.load_saturn_rings`` API. Texture coordinates are "
+"set so the ring texture maps radially from the inner to the outer radius."
 msgstr ""
+"引数は ``pyvista.examples.planets.load_saturn_rings`` API と一致する "
+":class:`~pyvista_wasm.Disc` "
+"に渡されます。テクスチャ座標は、環のテクスチャが内縁から外縁へ放射状にマッピングされるように設定されます。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn_rings.rst
 msgid "Parameters"
-msgstr ""
+msgstr "パラメータ"
 
 #: of pyvista_wasm.examples.load_saturn_rings:8
 msgid "The inner radius. Default is 0.25."
-msgstr ""
+msgstr "内半径。デフォルトは0.25です。"
 
 #: of pyvista_wasm.examples.load_saturn_rings:10
 msgid "The outer radius. Default is 0.5."
-msgstr ""
+msgstr "外半径。デフォルトは0.5です。"
 
 #: of pyvista_wasm.examples.load_saturn_rings:12
 msgid "The number of points in the circumferential direction. Default is 6."
-msgstr ""
+msgstr "円周方向の点の数。デフォルトは6です。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn_rings.rst
 msgid "Returns"
-msgstr ""
+msgstr "戻り値"
 
 #: of pyvista_wasm.examples.load_saturn_rings:15
 msgid "Disc mesh with texture coordinates for Saturn's rings."
-msgstr ""
+msgstr "土星の環用のテクスチャ座標を持つ円盤メッシュ。"
 
 #: ../../api/_autosummary/pyvista_wasm.examples.load_saturn_rings.rst
 msgid "Return type"
-msgstr ""
+msgstr "戻り値の型"
 
 #: of pyvista_wasm.examples.load_saturn_rings:20
 msgid ":func:`~pyvista_wasm.examples.load_saturn`"
-msgstr ""
+msgstr ":func:`~pyvista_wasm.examples.load_saturn`"
 
 #: of pyvista_wasm.examples.load_saturn_rings:21
 msgid "Load the planet Saturn."
-msgstr ""
+msgstr "土星を読み込みます。"
 
 #: of pyvista_wasm.examples.load_saturn_rings:23
 msgid ":func:`~pyvista_wasm.examples.download_saturn_rings`"
-msgstr ""
+msgstr ":func:`~pyvista_wasm.examples.download_saturn_rings`"
 
 #: of pyvista_wasm.examples.load_saturn_rings:24
 msgid "Download the Saturn rings texture."
-msgstr ""
+msgstr "土星の環のテクスチャをダウンロードします。"
 
 #: of pyvista_wasm.examples.load_saturn_rings:27
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
 #: of pyvista_wasm.examples.load_saturn_rings:39
 msgid "Render Saturn with its rings in the browser:"
-msgstr ""
+msgstr "ブラウザで環付きの土星をレンダリングします:"

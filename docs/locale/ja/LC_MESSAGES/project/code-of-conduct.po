@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-23 12:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../project/code-of-conduct.md:1
+msgid "Code of Conduct"
+msgstr "行動規範"
+
+#: ../../../CODE_OF_CONDUCT.md:2
+msgid "Contributor Covenant 3.0 Code of Conduct"
+msgstr "Contributor Covenant 3.0 行動規範"
+
+#: ../../../CODE_OF_CONDUCT.md:4
+msgid ""
+"[![Contributor "
+"Covenant](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](CODE_OF_CONDUCT.md)"
+msgstr ""
+"[![Contributor "
+"Covenant](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](CODE_OF_CONDUCT.md)"
+
+#: ../../../CODE_OF_CONDUCT.md:6
+msgid "Our Pledge"
+msgstr "私たちの誓い"
+
+#: ../../../CODE_OF_CONDUCT.md:8
+msgid ""
+"We pledge to make our community welcoming, safe, and equitable for all."
+msgstr "私たちは、コミュニティをすべての人にとって歓迎的で安全かつ公平なものにすることを誓います。"
+
+#: ../../../CODE_OF_CONDUCT.md:10
+msgid ""
+"We are committed to fostering an environment that respects and promotes the "
+"dignity, rights, and contributions of all individuals, regardless of "
+"characteristics including race, ethnicity, caste, color, age, physical "
+"characteristics, neurodiversity, disability, sex or gender, gender identity "
+"or expression, sexual orientation, language, philosophy or religion, "
+"national or social origin, socio-economic position, level of education, or "
+"other status. The same privileges of participation are extended to everyone "
+"who participates in good faith and in accordance with this Covenant."
+msgstr ""
+"人種、民族、カースト、肌の色、年齢、身体的特徴、神経多様性、障害、性別、性自認または性表現、性的指向、言語、哲学または宗教、国籍または社会的出身、社会経済的地位、学歴、その他の属性を問わず、すべての個人の尊厳、権利、貢献を尊重し促進する環境を育むことに努めます。誠意をもってこの規範に従って参加するすべての人に、同じ参加の特権を提供します。"
+
+#: ../../../CODE_OF_CONDUCT.md:12
+msgid "Encouraged Behaviors"
+msgstr "推奨される行動"
+
+#: ../../../CODE_OF_CONDUCT.md:14
+msgid ""
+"While acknowledging differences in social norms, we all strive to meet our "
+"community's expectations for positive behavior. We also understand that our "
+"words and actions may be interpreted differently than we intend based on "
+"culture, background, or native language."
+msgstr ""
+"社会的規範の違いを認めつつ、私たちは皆、ポジティブな行動に対するコミュニティの期待を満たすよう努めます。また、私たちの言葉や行動は、文化、背景、母語によって意図と異なる解釈をされうることも理解します。"
+
+#: ../../../CODE_OF_CONDUCT.md:16
+msgid ""
+"With these considerations in mind, we agree to behave mindfully toward each "
+"other and act in ways that center our shared values, including:"
+msgstr "これらの考慮事項を踏まえ、互いに思いやりをもって接し、以下のような共通の価値観を中心とした行動をとることに同意します:"
+
+#: ../../../CODE_OF_CONDUCT.md:18
+msgid ""
+"Respecting the **purpose of our community**, our activities, and our ways of"
+" gathering."
+msgstr "コミュニティの**目的**、活動、集まりの方法を尊重すること。"
+
+#: ../../../CODE_OF_CONDUCT.md:19
+msgid "Engaging **kindly and honestly** with others."
+msgstr "他者と**親切かつ誠実に**関わること。"
+
+#: ../../../CODE_OF_CONDUCT.md:20
+msgid "Respecting **different viewpoints** and experiences."
+msgstr "**異なる視点**や経験を尊重すること。"
+
+#: ../../../CODE_OF_CONDUCT.md:21
+msgid "**Taking responsibility** for our actions and contributions."
+msgstr "自分の行動と貢献に**責任を持つ**こと。"
+
+#: ../../../CODE_OF_CONDUCT.md:22
+msgid "Gracefully giving and accepting **constructive feedback**."
+msgstr "**建設的なフィードバック**を丁寧に与え、受け入れること。"
+
+#: ../../../CODE_OF_CONDUCT.md:23
+msgid "Committing to **repairing harm** when it occurs."
+msgstr "被害が生じた際に**修復に努める**こと。"
+
+#: ../../../CODE_OF_CONDUCT.md:24
+msgid ""
+"Behaving in other ways that promote and sustain the **well-being of our "
+"community**."
+msgstr "コミュニティの**幸福**を促進し維持する他の行動をとること。"
+
+#: ../../../CODE_OF_CONDUCT.md:26
+msgid "Restricted Behaviors"
+msgstr "制限される行動"
+
+#: ../../../CODE_OF_CONDUCT.md:28
+msgid ""
+"We agree to restrict the following behaviors in our community. Instances, "
+"threats, and promotion of these behaviors are violations of this Code of "
+"Conduct."
+msgstr "私たちは、コミュニティ内で以下の行動を制限することに同意します。これらの行動の実際、脅し、助長はこの行動規範の違反となります。"
+
+#: ../../../CODE_OF_CONDUCT.md:30
+msgid ""
+"**Harassment.** Violating explicitly expressed boundaries or engaging in "
+"unnecessary personal attention after any clear request to stop."
+msgstr "**ハラスメント。** 明示的に示された境界を侵すこと、または明確な中止の要請後も不要な個人的注意を続けること。"
+
+#: ../../../CODE_OF_CONDUCT.md:31
+msgid ""
+"**Character attacks.** Making insulting, demeaning, or pejorative comments "
+"directed at a community member or group of people."
+msgstr "**人格攻撃。** コミュニティメンバーまたは集団に向けた侮辱的、蔑視的、中傷的なコメントをすること。"
+
+#: ../../../CODE_OF_CONDUCT.md:32
+msgid ""
+"**Stereotyping or discrimination.** Characterizing anyone's personality or "
+"behavior on the basis of immutable identities or traits."
+msgstr "**ステレオタイプ化または差別。** 変えられない属性や特徴に基づいて人の人格や行動を決めつけること。"
+
+#: ../../../CODE_OF_CONDUCT.md:33
+msgid ""
+"**Sexualization.** Behaving in a way that would generally be considered "
+"inappropriately intimate in the context or purpose of the community."
+msgstr "**性的表現。** コミュニティの文脈や目的において一般に不適切に親密とみなされる振る舞いをすること。"
+
+#: ../../../CODE_OF_CONDUCT.md:34
+msgid ""
+"**Violating confidentiality**. Sharing or acting on someone's personal or "
+"private information without their permission."
+msgstr "**守秘義務の侵害。** 許可なく人の個人的・私的情報を共有したり、それに基づいて行動すること。"
+
+#: ../../../CODE_OF_CONDUCT.md:35
+msgid ""
+"**Endangerment.** Causing, encouraging, or threatening violence or other "
+"harm toward any person or group."
+msgstr "**危険な行為。** 人や集団に対する暴力またはその他の危害を引き起こす、助長する、脅すこと。"
+
+#: ../../../CODE_OF_CONDUCT.md:36
+msgid ""
+"Behaving in other ways that **threaten the well-being** of our community."
+msgstr "コミュニティの**幸福を脅かす**その他の行動をとること。"
+
+#: ../../../CODE_OF_CONDUCT.md:38
+msgid "Other Restrictions"
+msgstr "その他の制限"
+
+#: ../../../CODE_OF_CONDUCT.md:40
+msgid ""
+"**Misleading identity.** Impersonating someone else for any reason, or "
+"pretending to be someone else to evade enforcement actions."
+msgstr "**偽装。** 何らかの理由で他人になりすますこと、または執行措置を逃れるために他人のふりをすること。"
+
+#: ../../../CODE_OF_CONDUCT.md:41
+msgid ""
+"**Failing to credit sources.** Not properly crediting the sources of content"
+" you contribute."
+msgstr "**出典の未明記。** 貢献したコンテンツの出典を適切に明記しないこと。"
+
+#: ../../../CODE_OF_CONDUCT.md:42
+msgid ""
+"**Promotional materials**. Sharing marketing or other commercial content in "
+"a way that is outside the norms of the community."
+msgstr "**宣伝資料。** コミュニティの規範から外れた方法でマーケティングなどの商業的コンテンツを共有すること。"
+
+#: ../../../CODE_OF_CONDUCT.md:43
+msgid ""
+"**Irresponsible communication.** Failing to responsibly present content "
+"which includes, links or describes any other restricted behaviors."
+msgstr "**無責任なコミュニケーション。** 他の制限される行動を含む、リンクする、または記述するコンテンツを責任を持って提示しないこと。"
+
+#: ../../../CODE_OF_CONDUCT.md:45
+msgid "Reporting an Issue"
+msgstr "問題の報告"
+
+#: ../../../CODE_OF_CONDUCT.md:47
+msgid ""
+"Tensions can occur between community members even when they are trying their"
+" best to collaborate. Not every conflict represents a code of conduct "
+"violation, and this Code of Conduct reinforces encouraged behaviors and "
+"norms that can help avoid conflicts and minimize harm."
+msgstr ""
+"最善を尽くして協力していても、コミュニティメンバー間に摩擦は生じ得ます。すべての対立が行動規範の違反を意味するわけではなく、この行動規範は対立の回避と被害の最小化に役立つ推奨行動と規範を強化します。"
+
+#: ../../../CODE_OF_CONDUCT.md:49
+msgid ""
+"When an incident does occur, it is important to report it promptly. To "
+"report a possible violation, please contact "
+"[@tkoyama010](https://github.com/tkoyama010) via GitHub."
+msgstr ""
+"インシデントが発生した場合は、速やかに報告することが重要です。違反の可能性を報告するには、GitHub経由で "
+"[@tkoyama010](https://github.com/tkoyama010) に連絡してください。"
+
+#: ../../../CODE_OF_CONDUCT.md:51
+msgid ""
+"Community Moderators take reports of violations seriously and will make "
+"every effort to respond in a timely manner. They will investigate all "
+"reports of code of conduct violations, reviewing messages, logs, and "
+"recordings, or interviewing witnesses and other participants. Community "
+"Moderators will keep investigation and enforcement actions as transparent as"
+" possible while prioritizing safety and confidentiality. In order to honor "
+"these values, enforcement actions are carried out in private with the "
+"involved parties, but communicating to the whole community may be part of a "
+"mutually agreed upon resolution."
+msgstr ""
+"コミュニティモデレーターは違反の報告を真剣に受け止め、迅速に対応できるようあらゆる努力をします。メッセージ、ログ、録画を確認したり、目撃者や他の参加者に話を聞いたりして、行動規範違反の報告をすべて調査します。モデレーターは安全と守秘を優先しつつ、調査と執行措置を可能な限り透明に保ちます。これらの価値を尊重するため、執行措置は関係者との間で非公開に行われますが、コミュニティ全体への伝達が相互に合意された解決の一部となる場合があります。"
+
+#: ../../../CODE_OF_CONDUCT.md:53
+msgid "Addressing and Repairing Harm"
+msgstr "被害への対処と修復"
+
+#: ../../../CODE_OF_CONDUCT.md:55
+msgid ""
+"If an investigation by the Community Moderators finds that this Code of "
+"Conduct has been violated, the following enforcement ladder may be used to "
+"determine how best to repair harm, based on the incident's impact on the "
+"individuals involved and the community as a whole. Depending on the severity"
+" of a violation, lower rungs on the ladder may be skipped."
+msgstr ""
+"コミュニティモデレーターによる調査でこの行動規範の違反が確認された場合、関係する個人とコミュニティ全体への影響に基づき、被害を最もよく修復する方法を決定するために以下の段階的措置が用いられることがあります。違反の重大性に応じて、下位の段階は省略されることがあります。"
+
+#: ../../../CODE_OF_CONDUCT.md:57
+msgid "Warning"
+msgstr "警告"
+
+#: ../../../CODE_OF_CONDUCT.md:58
+msgid "Event: A violation involving a single incident or series of incidents."
+msgstr "事象: 単一のインシデントまたは一連のインシデントに関する違反。"
+
+#: ../../../CODE_OF_CONDUCT.md:59
+msgid "Consequence: A private, written warning from the Community Moderators."
+msgstr "結果: コミュニティモデレーターによる非公開の書面による警告。"
+
+#: ../../../CODE_OF_CONDUCT.md:60
+msgid ""
+"Repair: Examples of repair include a private written apology, "
+"acknowledgement of responsibility, and seeking clarification on "
+"expectations."
+msgstr "修復: 修復の例には、非公開の書面による謝罪、責任の認識、期待事項の明確化の要望などが含まれます。"
+
+#: ../../../CODE_OF_CONDUCT.md:61
+msgid "Temporarily Limited Activities"
+msgstr "一時的な活動制限"
+
+#: ../../../CODE_OF_CONDUCT.md:62
+msgid ""
+"Event: A repeated incidence of a violation that previously resulted in a "
+"warning, or the first incidence of a more serious violation."
+msgstr "事象: 以前に警告をもたらした違反の反復、またはより重大な違反の初回発生。"
+
+#: ../../../CODE_OF_CONDUCT.md:63
+msgid ""
+"Consequence: A private, written warning with a time-limited cooldown period "
+"designed to underscore the seriousness of the situation and give the "
+"community members involved time to process the incident. The cooldown period"
+" may be limited to particular communication channels or interactions with "
+"particular community members."
+msgstr ""
+"結果: "
+"状況の重大性を示し、関係するコミュニティメンバーがインシデントを消化する時間を与えるために設計された、期間限定のクールダウン期間を伴う非公開の書面による警告。クールダウン期間は、特定のコミュニケーションチャンネルや特定のコミュニティメンバーとの交流に限定される場合があります。"
+
+#: ../../../CODE_OF_CONDUCT.md:64
+msgid ""
+"Repair: Examples of repair may include making an apology, using the cooldown"
+" period to reflect on actions and impact, and being thoughtful about re-"
+"entering community spaces after the period is over."
+msgstr ""
+"修復: 修復の例には、謝罪、クールダウン期間を使った行動と影響の省察、期間終了後のコミュニティスペースへの復帰に際しての配慮などが含まれます。"
+
+#: ../../../CODE_OF_CONDUCT.md:65
+msgid "Temporary Suspension"
+msgstr "一時的な停止"
+
+#: ../../../CODE_OF_CONDUCT.md:66
+msgid ""
+"Event: A pattern of repeated violation which the Community Moderators have "
+"tried to address with warnings, or a single serious violation."
+msgstr "事象: モデレーターが警告で対処を試みた違反の反復パターン、または単一の重大な違反。"
+
+#: ../../../CODE_OF_CONDUCT.md:67
+msgid ""
+"Consequence: A private written warning with conditions for return from "
+"suspension. In general, temporary suspensions give the person being "
+"suspended time to reflect upon their behavior and possible corrective "
+"actions."
+msgstr ""
+"結果: 停止からの復帰条件を伴う非公開の書面による警告。一般に、一時的な停止は停止された人が自分の行動と取りうる是正措置を省察する時間を与えます。"
+
+#: ../../../CODE_OF_CONDUCT.md:68
+msgid ""
+"Repair: Examples of repair include respecting the spirit of the suspension, "
+"meeting the specified conditions for return, and being thoughtful about how "
+"to reintegrate with the community when the suspension is lifted."
+msgstr ""
+"修復: "
+"修復の例には、停止の趣旨を尊重すること、指定された復帰条件を満たすこと、停止解除後にコミュニティへ再統合する方法について配慮することが含まれます。"
+
+#: ../../../CODE_OF_CONDUCT.md:69
+msgid "Permanent Ban"
+msgstr "永久追放"
+
+#: ../../../CODE_OF_CONDUCT.md:70
+msgid ""
+"Event: A pattern of repeated code of conduct violations that other steps on "
+"the ladder have failed to resolve, or a violation so serious that the "
+"Community Moderators determine there is no way to keep the community safe "
+"with this person as a member."
+msgstr ""
+"事象: "
+"段階的措置の他の段階では解決できなかった行動規範違反の反復パターン、またはモデレーターが当該人物をメンバーとして受け入れてはコミュニティの安全を保てないと判断するほど重大な違反。"
+
+#: ../../../CODE_OF_CONDUCT.md:71
+msgid ""
+"Consequence: Access to all community spaces, tools, and communication "
+"channels is removed. In general, permanent bans should be rarely used, "
+"should have strong reasoning behind them, and should only be resorted to if "
+"working through other remedies has failed to change the behavior."
+msgstr ""
+"結果: "
+"すべてのコミュニティスペース、ツール、コミュニケーションチャンネルへのアクセスを剥奪します。一般に、永久追放はめったに使用されるべきではなく、強固な根拠を伴い、他の救済手段による行動の変更が失敗した場合に限って用いられるべきです。"
+
+#: ../../../CODE_OF_CONDUCT.md:72
+msgid "Repair: There is no possible repair in cases of this severity."
+msgstr "修復: この重大性の場合、修復の可能性はありません。"
+
+#: ../../../CODE_OF_CONDUCT.md:74
+msgid ""
+"This enforcement ladder is intended as a guideline. It does not limit the "
+"ability of Community Managers to use their discretion and judgment, in "
+"keeping with the best interests of our community."
+msgstr ""
+"この段階的措置はガイドラインを意図したものです。コミュニティの最善の利益に沿う形で、コミュニティマネージャーが裁量と判断を用いる能力を制限するものではありません。"
+
+#: ../../../CODE_OF_CONDUCT.md:76
+msgid "Scope"
+msgstr "適用範囲"
+
+#: ../../../CODE_OF_CONDUCT.md:78
+msgid ""
+"This Code of Conduct applies within all community spaces, and also applies "
+"when an individual is officially representing the community in public or "
+"other spaces. Examples of representing our community include using an "
+"official email address, posting via an official social media account, or "
+"acting as an appointed representative at an online or offline event."
+msgstr ""
+"この行動規範は、すべてのコミュニティスペース内に適用されるほか、個人が公的または他のスペースでコミュニティを公式に代表する際にも適用されます。コミュニティの代表には、公式メールアドレスの使用、公式ソーシャルメディアアカウント経由の投稿、オンラインまたはオフラインイベントでの指名代表者の務めなどが含まれます。"
+
+#: ../../../CODE_OF_CONDUCT.md:80
+msgid "Attribution"
+msgstr "帰属"
+
+#: ../../../CODE_OF_CONDUCT.md:82
+msgid ""
+"This Code of Conduct is adapted from the Contributor Covenant, version 3.0, "
+"permanently available at [https://www.contributor-"
+"covenant.org/version/3/0/](https://www.contributor-"
+"covenant.org/version/3/0/)."
+msgstr ""
+"この行動規範は、[https://www.contributor-"
+"covenant.org/version/3/0/](https://www.contributor-"
+"covenant.org/version/3/0/) で永続的に公開されているContributor "
+"Covenantバージョン3.0を改変したものです。"
+
+#: ../../../CODE_OF_CONDUCT.md:84
+msgid ""
+"Contributor Covenant is stewarded by the Organization for Ethical Source and"
+" licensed under CC BY-SA 4.0. To view a copy of this license, visit "
+"[https://creativecommons.org/licenses/by-"
+"sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)"
+msgstr ""
+"Contributor CovenantはOrganization for Ethical Sourceが管理し、CC BY-SA "
+"4.0の下でライセンスされています。このライセンスのコピーは [https://creativecommons.org/licenses/by-"
+"sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/) で閲覧できます"
+
+#: ../../../CODE_OF_CONDUCT.md:86
+msgid ""
+"For answers to common questions about Contributor Covenant, see the FAQ at "
+"[https://www.contributor-covenant.org/faq](https://www.contributor-"
+"covenant.org/faq). Translations are provided at [https://www.contributor-"
+"covenant.org/translations](https://www.contributor-"
+"covenant.org/translations). Additional enforcement and community guideline "
+"resources can be found at [https://www.contributor-"
+"covenant.org/resources](https://www.contributor-covenant.org/resources). The"
+" enforcement ladder was inspired by the work of [Mozilla's code of conduct "
+"team](https://github.com/mozilla/inclusion)."
+msgstr ""
+"Contributor Covenantに関するよくある質問への回答は [https://www.contributor-"
+"covenant.org/faq](https://www.contributor-covenant.org/faq) "
+"のFAQを参照してください。翻訳は [https://www.contributor-"
+"covenant.org/translations](https://www.contributor-"
+"covenant.org/translations) で提供されています。追加の執行およびコミュニティガイドラインのリソースは "
+"[https://www.contributor-covenant.org/resources](https://www.contributor-"
+"covenant.org/resources) で確認できます。段階的措置は "
+"[Mozillaの行動規範チーム](https://github.com/mozilla/inclusion) の仕事に着想を得ています。"

@@ -1,0 +1,31 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-23 12:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../project/index.md:1
+msgid "Project"
+msgstr "プロジェクト"
+
+#: ../../project/index.md:3
+msgid ""
+"Project-level documentation: changelog, contribution guidelines, code of "
+"conduct, and security policy."
+msgstr "プロジェクトレベルのドキュメント: 変更履歴、コントリビューションガイドライン、行動規範、セキュリティポリシー。"
