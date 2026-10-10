@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.15.3](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.2...pyvista-wasm-v0.15.3) (2026-10-10)
+
+
+### Bug Fixes
+
+* **deps:** override katex to ^0.18.2 to fix GHSA-238p-pmpm-9mq7 ([#741](https://github.com/tkoyama010/pyvista-wasm/issues/741)) ([1798db3](https://github.com/tkoyama010/pyvista-wasm/commit/1798db3fde8138bc53c6bd294c297b89b8d144c2))
+* remove vulnerable sprintf-js from slides dependencies ([#740](https://github.com/tkoyama010/pyvista-wasm/issues/740)) ([b5f0ac4](https://github.com/tkoyama010/pyvista-wasm/commit/b5f0ac430495e086094c0b1f66b6fc1fa00405d6))
+
 ## [0.15.2](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.1...pyvista-wasm-v0.15.2) (2026-10-04)
 
 ### Bug Fixes
