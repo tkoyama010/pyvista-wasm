@@ -32,9 +32,16 @@
 ## Install
 
 [![PyPI](https://img.shields.io/pypi/v/pyvista-wasm)](https://pypi.org/project/pyvista-wasm/)
+[![Conda](https://img.shields.io/conda/vn/conda-forge/pyvista-wasm)](https://anaconda.org/conda-forge/pyvista-wasm)
 
 ```bash
 pip install pyvista-wasm
+```
+
+或使用 conda:
+
+```bash
+conda install -c conda-forge pyvista-wasm
 ```
 
 Pyodide/stlite 環境:
