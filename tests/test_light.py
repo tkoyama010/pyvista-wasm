@@ -131,8 +131,13 @@ def test_plotter_lighting_default() -> None:
     plotter = pv.Plotter()
     assert plotter._renderer.lighting == "default"
     lights = plotter._renderer._build_lights_data()
-    assert len(lights) > 0
-    assert lights[0]["position"] == [1, 1, 1]
+    assert len(lights) == 4
+    assert lights[0]["position"] == [0.5, 0.5, 1.0]
+    assert lights[0]["intensity"] == 1.0
+    assert lights[1]["intensity"] == 0.45
+    assert lights[2]["intensity"] == 0.4
+    assert lights[3]["type"] == "head"
+    assert lights[3]["intensity"] == 0.3
 
 
 def test_plotter_lighting_explicit_default() -> None:
