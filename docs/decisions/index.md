@@ -34,3 +34,4 @@
 
 * [0010 - Track PyVista API coverage matrix for pyvista-wasm](0010-track-pyvista-api-coverage-matrix-for-pyvista-wasm.md)
 * [0011 - Decide whether to replace Biome with xo](0011-decide-whether-to-replace-biome-with-xo.md)
+* [0016 - Decide whether to use QA Orchestra for QA review of pull requests](0016-decide-whether-to-use-qa-orchestra-for-qa-review-of-pull-requests.md)
