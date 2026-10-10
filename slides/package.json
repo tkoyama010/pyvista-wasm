@@ -8,11 +8,12 @@
     "export": "slidev export"
   },
   "dependencies": {
-    "@slidev/cli": "^52.18.0",
+    "@slidev/cli": "^52.20.1",
     "@slidev/theme-default": "^0.25.0",
     "slidev-addon-i18nb": "^0.2.6"
   },
   "overrides": {
+    "magic-string@^1": "1.4.2",
     "dompurify": "^3.4.16",
     "@hono/node-server": "^2.0.5",
     "fast-uri": "^3.1.6",
