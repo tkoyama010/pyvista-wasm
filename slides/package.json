@@ -13,6 +13,7 @@
     "slidev-addon-i18nb": "^0.2.6"
   },
   "overrides": {
+    "katex": "^0.18.2",
     "magic-string@^1": "1.4.2",
     "dompurify": "^3.4.16",
     "@hono/node-server": "^2.0.5",
