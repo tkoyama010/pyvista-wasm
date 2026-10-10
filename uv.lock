@@ -516,14 +516,14 @@ wheels = [
 
 [[package]]
 name = "gitpython"
-version = "3.1.62"
+version = "3.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "gitdb" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e0/db/3ca813cbacb23ab6fe46ff38a9b5ef8e73e970c8051f2ce903aacafe0446/gitpython-3.1.62.tar.gz", hash = "sha256:1791de66309bc0c7cfca40bf8d2e3de7ca091cbf94e6051be1ad0722c61062af", size = 231728, upload-time = "2026-09-07T02:57:21.155Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6e/2d/6f6e649818da44d4499604802c89329b8d9799687a124e3a5e467a643336/gitpython-3.2.0.tar.gz", hash = "sha256:fb92310af6844d96adc95ca066ed2e617c00e1dbd146a326626c81e72e18cc2e", size = 238091, upload-time = "2026-09-30T09:10:32.65Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/0b/29d7965215f8ef830a7ca1f42997fe13e5693d85e9edb18f938d063ef5f2/gitpython-3.1.62-py3-none-any.whl", hash = "sha256:7002251225e10e29d2e1f49e6532613fe5d5d9f0b6f1f02997a52b38fe56899e", size = 222753, upload-time = "2026-09-07T02:57:19.762Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/48/f36d233ce749d1bb880cb5e6f8bb171dc2effabc7435c31da604d831b3ec/gitpython-3.2.0-py3-none-any.whl", hash = "sha256:bd70c5ec05cd2b797423e7eb312147d2458d3cca92085888fba2213f85905537", size = 228537, upload-time = "2026-09-30T09:10:31.159Z" },
 ]
 
 [[package]]
@@ -1067,7 +1067,7 @@ wheels = [
 
 [[package]]
 name = "marimo"
-version = "0.24.2"
+version = "0.25.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click", marker = "sys_platform != 'emscripten'" },
@@ -1090,9 +1090,9 @@ dependencies = [
     { name = "uvicorn", marker = "sys_platform != 'emscripten'" },
     { name = "websockets", marker = "sys_platform != 'emscripten'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/90/a7/321efa5a41218b1d1efab5110484d264377428ee858969d3678e573e3379/marimo-0.24.2.tar.gz", hash = "sha256:b0e1bf55f605f1a522cc3428a38d44242469fd24aa24199a86715aefbf746812", size = 38784284, upload-time = "2026-09-11T16:58:30.789Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/7b/29895b0d747758da46a051f57c594634ab02f3993d5eab2f2e49ce4f144f/marimo-0.25.1.tar.gz", hash = "sha256:934db2ceb6c2b8c9ae3514a7a22e6b22ecf54fabea0b6138aed1980f8f1536ff", size = 50186739, upload-time = "2026-10-01T21:01:28.262Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/c9/48e338c36e7153da76fd6cc87afb86d0c8b4aedd5a8f969c106e05b9b61d/marimo-0.24.2-py3-none-any.whl", hash = "sha256:a6c46e8f49e3b30a5d59ae3af06f6ecd0b0a3b69434be8a022692229dd538ad4", size = 39251372, upload-time = "2026-09-11T16:58:27.615Z" },
+    { url = "https://files.pythonhosted.org/packages/85/e6/695f462fd473981325146edde01c12390413ebaa33c1f0b49191d6b55f86/marimo-0.25.1-py3-none-any.whl", hash = "sha256:dec4a87bc5db16b85181ba4880e67bb55485912b7ef26748a0bbf052c59203fd", size = 50850300, upload-time = "2026-10-01T21:01:24.577Z" },
 ]
 
 [[package]]
@@ -2016,7 +2016,7 @@ requires-dist = [
     { name = "jupyterlite-sphinx", marker = "python_full_version == '3.13.*' and extra == 'docs'", specifier = ">=0.9.3" },
     { name = "jupytext", marker = "python_full_version >= '3.13' and extra == 'docs'", specifier = ">=1.16.0,<1.20.0" },
     { name = "lazy-loader", specifier = ">=0.4.0,<0.7.0" },
-    { name = "marimo", marker = "extra == 'marimo'", specifier = ">=0.10.0,<0.25.0" },
+    { name = "marimo", marker = "extra == 'marimo'", specifier = ">=0.10.0,<0.26.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0,<2.4.0" },
     { name = "myst-parser", marker = "python_full_version >= '3.13' and extra == 'docs'", specifier = ">=4.0.0,<6.0.0" },
     { name = "numpy", specifier = ">=2.0.0,<2.6.0" },
