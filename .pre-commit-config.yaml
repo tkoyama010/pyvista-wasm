@@ -48,7 +48,7 @@ repos:
         # the MADR "* Status:" bullet style that mdformat normalises to "- ".
         exclude: ^(slides/slides\.md|docs/decisions/.*\.md)$
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.30.1"
+    rev: "v2.30.3"
     hooks:
       - id: pyproject-fmt
         args: ["--keep-full-version"]
@@ -58,11 +58,11 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.23
+    rev: 0.13.0
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.10
+    rev: v0.17.0
     hooks:
       # Run the linter
       - id: ruff-check
