@@ -2,12 +2,11 @@
 
 ## [0.15.3](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.2...pyvista-wasm-v0.15.3) (2026-10-22)
 
-
 ### Bug Fixes
 
-* **deps:** override katex to ^0.18.2 to fix GHSA-238p-pmpm-9mq7 ([#741](https://github.com/tkoyama010/pyvista-wasm/issues/741)) ([1798db3](https://github.com/tkoyama010/pyvista-wasm/commit/1798db3fde8138bc53c6bd294c297b89b8d144c2))
-* remove vulnerable sprintf-js from slides dependencies ([#740](https://github.com/tkoyama010/pyvista-wasm/issues/740)) ([b5f0ac4](https://github.com/tkoyama010/pyvista-wasm/commit/b5f0ac430495e086094c0b1f66b6fc1fa00405d6))
-* resolve Dependabot security alerts for Pillow, GitPython, nbconvert ([#764](https://github.com/tkoyama010/pyvista-wasm/issues/764)) ([409d77f](https://github.com/tkoyama010/pyvista-wasm/commit/409d77f435a0ab734e9194c36109c95b24cb0087))
+- **deps:** override katex to ^0.18.2 to fix GHSA-238p-pmpm-9mq7 ([#741](https://github.com/tkoyama010/pyvista-wasm/issues/741)) ([1798db3](https://github.com/tkoyama010/pyvista-wasm/commit/1798db3fde8138bc53c6bd294c297b89b8d144c2))
+- remove vulnerable sprintf-js from slides dependencies ([#740](https://github.com/tkoyama010/pyvista-wasm/issues/740)) ([b5f0ac4](https://github.com/tkoyama010/pyvista-wasm/commit/b5f0ac430495e086094c0b1f66b6fc1fa00405d6))
+- resolve Dependabot security alerts for Pillow, GitPython, nbconvert ([#764](https://github.com/tkoyama010/pyvista-wasm/issues/764)) ([409d77f](https://github.com/tkoyama010/pyvista-wasm/commit/409d77f435a0ab734e9194c36109c95b24cb0087))
 
 ## [0.15.2](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.1...pyvista-wasm-v0.15.2) (2026-10-04)
 
