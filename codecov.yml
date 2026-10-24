@@ -34,3 +34,12 @@ flags:
   py3.14-macos-latest:
     paths:
       - src/
+  py3.15-ubuntu-latest:
+    paths:
+      - src/
+  py3.15-windows-latest:
+    paths:
+      - src/
+  py3.15-macos-latest:
+    paths:
+      - src/
