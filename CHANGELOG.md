@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.15.4](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.3...pyvista-wasm-v0.15.4) (2026-10-23)
+
+### Bug Fixes
+
+- bump dompurify to ^3.4.17 in slides overrides ([#766](https://github.com/tkoyama010/pyvista-wasm/issues/766)) ([1d6d808](https://github.com/tkoyama010/pyvista-wasm/commit/1d6d80815bb63849c6c501a43ee0016d8005fcce))
+
 ## [0.15.3](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.2...pyvista-wasm-v0.15.3) (2026-10-22)
 
 ### Bug Fixes
