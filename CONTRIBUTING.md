@@ -62,7 +62,7 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
 
 ### Prerequisites
 
-- Python 3.13 or higher (3.13, or 3.14 recommended for testing)
+- Python 3.13 or higher (3.13, or 3.14/3.15 recommended for testing)
 - [uv](https://github.com/astral-sh/uv) - Ultra-fast Python package installer
 - Git
 
@@ -295,7 +295,7 @@ uv run pytest --cov=pyvista_wasm --cov-report=html
 - All new features should include tests
 - Bug fixes should include regression tests
 - Maintain or improve code coverage
-- Tests should pass on Python 3.13, and 3.14
+- Tests should pass on Python 3.13, 3.14, and 3.15
 
 ## Pull Request Process
 
@@ -331,7 +331,7 @@ uv run pytest --cov=pyvista_wasm --cov-report=html
 Pull requests are automatically tested using GitHub Actions:
 
 - Linting and formatting checks
-- Tests on Python 3.13 and 3.14
+- Tests on Python 3.13, 3.14, and 3.15
 - Tests on Linux, Windows, and macOS
 - Code coverage reporting to Codecov
 - Conventional commit PR title validation
