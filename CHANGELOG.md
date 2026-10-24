@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.16.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.4...pyvista-wasm-v0.16.0) (2026-10-24)
+
+
+### Features
+
+* test against Python 3.15 ([#772](https://github.com/tkoyama010/pyvista-wasm/issues/772)) ([99092d7](https://github.com/tkoyama010/pyvista-wasm/commit/99092d76a76421dbdc766837323ff3bc07de5585))
+
+
+### Bug Fixes
+
+* bump virtualenv to 21.14.13 to resolve Dependabot alerts ([#769](https://github.com/tkoyama010/pyvista-wasm/issues/769)) ([16de6da](https://github.com/tkoyama010/pyvista-wasm/commit/16de6da0b7d3e5b8f58b43420d8eed2306b6dbad))
+* bump zod to 4.6.7 to resolve Dependabot alert ([#770](https://github.com/tkoyama010/pyvista-wasm/issues/770)) ([675a35a](https://github.com/tkoyama010/pyvista-wasm/commit/675a35ac8a27359d06f49a24298ff04ad26984cb))
+
 ## [0.15.4](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.3...pyvista-wasm-v0.15.4) (2026-10-23)
 
 ### Bug Fixes
