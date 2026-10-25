@@ -890,3 +890,53 @@ def test_save_string_path(tmp_path) -> None:
     out = str(tmp_path / "cube.obj")
     cube.save(out)
     assert Path(out).exists()
+
+
+class TestSmooth:
+    """Tests for PolyData.smooth (issue #779)."""
+
+    def test_smooth_returns_polydata(self) -> None:
+        """Test smooth returns polydata."""
+        mesh = Sphere()
+        smoothed = mesh.smooth()
+        assert isinstance(smoothed, PolyData)
+
+    def test_smooth_scene_data_contains_smooth_filter(self) -> None:
+        """Test smooth scene data contains smooth filter."""
+        mesh = Sphere()
+        smoothed = mesh.smooth(n_iter=10, relaxation_factor=0.3)
+        scene = smoothed.to_scene_data()
+        assert scene["type"] == "mesh"
+        filters_list = scene["filters"]
+        assert filters_list[-1]["type"] == "smooth"  # type: ignore[index]
+        assert filters_list[-1]["nIterations"] == 10  # type: ignore[index]
+        assert filters_list[-1]["relaxationFactor"] == 0.3  # type: ignore[index]
+
+    def test_smooth_chains_after_shrink(self) -> None:
+        """Test smooth chains after shrink."""
+        mesh = Sphere()
+        scene = mesh.shrink(0.5).smooth().to_scene_data()
+        filters_list = scene["filters"]
+        assert [f["type"] for f in filters_list] == ["shrink", "smooth"]  # type: ignore[index]
+
+    def test_smooth_invalid_iterations(self) -> None:
+        """Test smooth invalid iterations."""
+        mesh = Sphere()
+        try:
+            mesh.smooth(n_iter=0)
+        except ValueError:
+            pass
+        else:
+            msg = "expected ValueError"
+            raise AssertionError(msg)
+
+    def test_smooth_invalid_relaxation(self) -> None:
+        """Test smooth invalid relaxation."""
+        mesh = Sphere()
+        try:
+            mesh.smooth(relaxation_factor=1.5)
+        except ValueError:
+            pass
+        else:
+            msg = "expected ValueError"
+            raise AssertionError(msg)

@@ -277,6 +277,8 @@ type PointDataArray = {
 type FilterConfig = {
   type: string;
   shrinkFactor?: number;
+  nIterations?: number;
+  relaxationFactor?: number;
   radius?: number;
   numberOfSides?: number;
   normal?: [number, number, number];
