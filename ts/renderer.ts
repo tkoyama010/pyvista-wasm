@@ -292,6 +292,10 @@ async function buildScene(
       }
     }
 
+    if (sceneData.charts && sceneData.charts.length > 0) {
+      setupCharts(sceneData.charts, container);
+    }
+
     renderer.resetCamera();
     if (sceneData.camera) {
       await setupCamera(renderer, sceneData.camera);
@@ -1111,6 +1115,255 @@ async function setupCamera(
  * @param cfg
  * @param containerElement
  */
+/** Margin between the chart canvas edge and the plot area, in pixels. */
+const ChartMargin = 48;
+/** Number of grid divisions per axis. */
+const GridDivisions = 4;
+/** Relative vertical padding added to the data range. */
+const DataPaddingRatio = 0.05;
+/** Fraction of the category slot occupied by a bar. */
+const BarWidthFactor = 0.8;
+/** Default marker size for scatter series, in pixels. */
+const DefaultMarkerSize = 6;
+/** Axis stroke width. */
+const AxisLineWidth = 1.5;
+/** Title offset below the chart margin, in pixels. */
+const TitleOffsetY = 4;
+/** Distance of the rotated y-axis label from the left edge, in pixels. */
+const LabelOffsetY = 12;
+/** Legend box geometry, in pixels. */
+const LegendBoxWidth = 140;
+const LegendLineHeight = 20;
+const LegendTopPad = 8;
+const LegendLeftPad = 8;
+const LegendTextOffsetX = 28;
+const LegendTextOffsetY = 17;
+const LegendSwatchOffsetY = 12;
+const LegendSwatchWidth = 14;
+const LegendSwatchHeight = 4;
+/** Font sizes, in pixels. */
+const ChartTitleFontSize = 16;
+const ChartAxisFontSize = 14;
+const ChartLegendFontSize = 12;
+
+/** Linear scale mapping data values to canvas pixels. */
+interface PixelScale {
+  dataMin: number;
+  dataMax: number;
+  canvasStart: number;
+  canvasSize: number;
+}
+
+/** Convert an RGB triple in [0, 1] to a CSS color string. */
+function cssColor(c: [number, number, number]): string {
+  const RgbMax = 255;
+  const r = Math.round(c[0] * RgbMax);
+  const g = Math.round(c[1] * RgbMax);
+  const b = Math.round(c[2] * RgbMax);
+  return `rgb(${String(r)},${String(g)},${String(b)})`;
+}
+
+/** Map a data value through a pixel scale. */
+function toPx(value: number, scale: PixelScale): number {
+  return (
+    scale.canvasStart +
+    ((value - scale.dataMin) / (scale.dataMax - scale.dataMin)) *
+      scale.canvasSize
+  );
+}
+
+/**
+ * Render 2D chart overlays onto a canvas layered above the WebGL canvas.
+ *
+ * Charts are drawn with the 2D canvas API instead of VTK chart classes
+ * because VTK.wasm does not yet expose usable VTK::ChartsCore objects in
+ * the rendering binary. The backend can switch once upstream chart classes
+ * become available.
+ * @param charts - Chart configurations from the scene data.
+ * @param containerElement - Element that hosts the WebGL canvas.
+ */
+function setupCharts(
+  charts: ChartConfig[],
+  containerElement: HTMLElement,
+): void {
+  const [chart] = charts;
+  if (!chart) {
+    return;
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = chart.width;
+  canvas.height = chart.height;
+  canvas.style.position = "absolute";
+  canvas.style.left = "50%";
+  canvas.style.top = "50%";
+  canvas.style.transform = "translate(-50%, -50%)";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "9";
+  canvas.style.background = "rgba(255,255,255,0.92)";
+  canvas.style.borderRadius = "4px";
+  containerElement.append(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+
+  const plotWidth = canvas.width - ChartMargin * 2;
+  const plotHeight = canvas.height - ChartMargin * 2;
+  const yOrigin = canvas.height - ChartMargin;
+
+  // Combined data range across all series
+  let xMin = Number.POSITIVE_INFINITY;
+  let xMax = Number.NEGATIVE_INFINITY;
+  let yMin = Number.POSITIVE_INFINITY;
+  let yMax = Number.NEGATIVE_INFINITY;
+  for (const series of chart.series) {
+    for (const x of series.x) {
+      xMin = Math.min(xMin, x);
+      xMax = Math.max(xMax, x);
+    }
+    for (const y of series.y) {
+      yMin = Math.min(yMin, y);
+      yMax = Math.max(yMax, y);
+    }
+  }
+  if (xMin === xMax) {
+    xMax = xMin + 1;
+  }
+  if (yMin === yMax) {
+    yMax = yMin + 1;
+  }
+  const padY = (yMax - yMin) * DataPaddingRatio;
+  yMin -= padY;
+  yMax += padY;
+
+  const xScale: PixelScale = {
+    dataMin: xMin,
+    dataMax: xMax,
+    canvasStart: ChartMargin,
+    canvasSize: plotWidth,
+  };
+  const yScale: PixelScale = {
+    dataMin: yMin,
+    dataMax: yMax,
+    canvasStart: yOrigin,
+    canvasSize: -plotHeight,
+  };
+
+  // Axes and grid
+  ctx.strokeStyle = "#cccccc";
+  ctx.fillStyle = "#555555";
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= GridDivisions; i++) {
+    const gx = ChartMargin + (plotWidth * i) / GridDivisions;
+    const gy = yOrigin - (plotHeight * i) / GridDivisions;
+    ctx.beginPath();
+    ctx.moveTo(gx, yOrigin);
+    ctx.lineTo(gx, ChartMargin);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(ChartMargin, gy);
+    ctx.lineTo(canvas.width - ChartMargin, gy);
+    ctx.stroke();
+  }
+  ctx.strokeStyle = "#333333";
+  ctx.lineWidth = AxisLineWidth;
+  ctx.strokeRect(ChartMargin, ChartMargin, plotWidth, plotHeight);
+
+  // Labels and title
+  ctx.fillStyle = "#333333";
+  ctx.font = `${String(ChartAxisFontSize)}px sans-serif`;
+  ctx.textAlign = "center";
+  if (chart.title) {
+    ctx.font = `bold ${String(ChartTitleFontSize)}px sans-serif`;
+    ctx.fillText(chart.title, canvas.width / 2, ChartMargin / 2 + TitleOffsetY);
+    ctx.font = `${String(ChartAxisFontSize)}px sans-serif`;
+  }
+  if (chart.xLabel) {
+    ctx.fillText(chart.xLabel, canvas.width / 2, canvas.height - 10);
+  }
+  if (chart.yLabel) {
+    ctx.save();
+    ctx.translate(LabelOffsetY, canvas.height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(chart.yLabel, 0, 0);
+    ctx.restore();
+  }
+
+  // Series
+  for (const series of chart.series) {
+    const color = cssColor(series.color);
+    if (series.kind === "bar") {
+      const barWidth = (plotWidth / series.x.length) * BarWidthFactor;
+      ctx.fillStyle = color;
+      series.x.forEach((xv, i) => {
+        const yv = series.y[i];
+        if (yv === undefined) {
+          return;
+        }
+        const left = toPx(xv, xScale) - barWidth / 2;
+        const top = toPx(yv, yScale);
+        ctx.fillRect(left, top, barWidth, yOrigin - top);
+      });
+    } else if (series.kind === "scatter") {
+      ctx.fillStyle = color;
+      const radius = (series.size ?? DefaultMarkerSize) / 2;
+      series.x.forEach((xv, i) => {
+        const yv = series.y[i];
+        if (yv === undefined) {
+          return;
+        }
+        ctx.beginPath();
+        ctx.arc(toPx(xv, xScale), toPx(yv, yScale), radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    } else {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = series.width ?? 2;
+      ctx.beginPath();
+      series.x.forEach((xv, i) => {
+        const py = toPx(series.y[i] ?? 0, yScale);
+        const px = toPx(xv, xScale);
+        if (i === 0) {
+          ctx.moveTo(px, py);
+        } else {
+          ctx.lineTo(px, py);
+        }
+      });
+      ctx.stroke();
+    }
+  }
+
+  // Legend
+  const labeled = chart.series.filter((s) => s.label);
+  if (labeled.length > 0) {
+    const boxHeight = labeled.length * LegendLineHeight + 10;
+    const bx = canvas.width - ChartMargin - LegendBoxWidth;
+    const by = ChartMargin + LegendTopPad;
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.fillRect(bx, by, LegendBoxWidth, boxHeight);
+    ctx.strokeStyle = "#999999";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(bx, by, LegendBoxWidth, boxHeight);
+    ctx.font = `${String(ChartLegendFontSize)}px sans-serif`;
+    ctx.textAlign = "left";
+    labeled.forEach((s, i) => {
+      ctx.fillStyle = cssColor(s.color);
+      ctx.fillRect(
+        bx + LegendLeftPad,
+        by + LegendSwatchOffsetY + i * LegendLineHeight,
+        LegendSwatchWidth,
+        LegendSwatchHeight,
+      );
+      ctx.fillStyle = "#333333";
+      ctx.fillText(
+        s.label ?? "",
+        bx + LegendTextOffsetX,
+        by + LegendTextOffsetY + i * LegendLineHeight,
+      );
+    });
+  }
+}
+
 function setupTextActor(
   cfg: TextActorConfig,
   containerElement: HTMLElement,

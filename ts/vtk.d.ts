@@ -370,6 +370,27 @@ type TextActorConfig = {
   italic: boolean;
 };
 
+/** A single series in a 2D chart. */
+type ChartSeries = {
+  kind: "line" | "scatter" | "bar";
+  x: number[];
+  y: number[];
+  color: [number, number, number];
+  width?: number;
+  size?: number;
+  label?: string | null;
+};
+
+/** Configuration for a 2D chart overlay. */
+type ChartConfig = {
+  width: number;
+  height: number;
+  title: string;
+  xLabel: string;
+  yLabel: string;
+  series: ChartSeries[];
+};
+
 /** VTK.wasm configuration options for createNamespace(). */
 type WasmConfig = {
   rendering?: "webgl" | "webgpu";
@@ -384,6 +405,7 @@ type SceneData = {
   lights: LightConfig[];
   actors: ActorConfig[];
   textActors?: TextActorConfig[];
+  charts?: ChartConfig[];
   axes: boolean;
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
