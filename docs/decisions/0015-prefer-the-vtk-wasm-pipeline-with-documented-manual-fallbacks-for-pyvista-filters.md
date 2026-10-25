@@ -1,4 +1,4 @@
-# Decide how pyvista-wasm executes PyVista filters on top of the vtk-wasm pipeline
+# Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters
 
 * Status: accepted
 * Date: 2026-02-14

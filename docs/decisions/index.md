@@ -15,7 +15,7 @@
 * [0009 - Decide how to sync GitHub repository settings with Terraform](0009-decide-how-to-sync-github-repository-settings-with-terraform.md)
 * [0013 - Decision to add a pi coding agent development environment to GitHub Codespaces](0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md)
 * [0014 - Decision not to use Nix in the Codespace environment](0014-decision-not-to-use-nix-in-the-codespace-environment.md)
-* [0015 - Decide how pyvista-wasm executes PyVista filters on top of the vtk-wasm pipeline](0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md)
+* [0015 - Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters](0015-prefer-the-vtk-wasm-pipeline-with-documented-manual-fallbacks-for-pyvista-filters.md)
 
 ## Rejected Records
 

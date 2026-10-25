@@ -17,6 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:1
-msgid "Decide how pyvista-wasm executes PyVista filters on top of the vtk-wasm pipeline"
+#: ../../decisions/0015-prefer-the-vtk-wasm-pipeline-with-documented-manual-fallbacks-for-pyvista-filters.md:1
+msgid "Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters"
 msgstr ""
