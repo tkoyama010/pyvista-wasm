@@ -130,7 +130,544 @@ _VECTOR_COMPONENTS = 3  # Number of components in a 3D vector (x, y, z)
 _TUBE_MIN_SIDES = 3
 
 
-class PolyData:
+class CellData(PointData):
+    """Dict-like container for cell data arrays.
+
+    Mirrors ``pyvista.DataSet.cell_data``. Same interface as
+    :class:`~pyvista_wasm.PointData` but associated with cells.
+
+    """
+
+
+class FieldData(PointData):
+    """Dict-like container for field data arrays.
+
+    Mirrors ``pyvista.DataSet.field_data``. Same interface as
+    :class:`~pyvista_wasm.PointData` but associated with the dataset as a
+    whole.
+
+    """
+
+
+class DataSet:
+    """Base class for all datasets.
+
+    Provides the shared PyVista ``DataSet`` API: points, data attribute
+    containers, and geometric properties.
+
+    Parameters
+    ----------
+    points : array-like
+        Vertex coordinates as an (n, 3) array.
+
+    """
+
+    def __init__(self, points: ArrayLike) -> None:
+        """Initialize a dataset from points."""
+        self.points = np.asarray(points)
+        self._point_data = PointData()
+        self._cell_data = CellData()
+        self._field_data = FieldData()
+
+    @property
+    def point_data(self) -> PointData:
+        """Access point data arrays."""
+        return self._point_data
+
+    @property
+    def cell_data(self) -> CellData:
+        """Access cell data arrays."""
+        return self._cell_data
+
+    @property
+    def field_data(self) -> FieldData:
+        """Access field data arrays."""
+        return self._field_data
+
+    def __setitem__(self, name: str, array: ArrayLike) -> None:
+        """Set a point data array using dictionary-style access."""
+        self._point_data[name] = array
+
+    def __getitem__(self, name: str) -> np.ndarray:
+        """Get a point data array using dictionary-style access."""
+        return self._point_data[name]
+
+    @property
+    def n_points(self) -> int:
+        """Return the number of points."""
+        return len(self.points)
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells."""
+        return 0
+
+    @property
+    def bounds(self) -> tuple[float, float, float, float, float, float]:
+        """Return the bounding box as ``(xmin, xmax, ymin, ymax, zmin, zmax)``."""
+        if self.n_points == 0:
+            nan = float("nan")
+            return (nan, nan, nan, nan, nan, nan)
+        x, y, z = self.points[:, 0], self.points[:, 1], self.points[:, 2]
+        return (
+            float(x.min()),
+            float(x.max()),
+            float(y.min()),
+            float(y.max()),
+            float(z.min()),
+            float(z.max()),
+        )
+
+    @property
+    def center(self) -> tuple[float, float, float]:
+        """Return the center of the bounding box."""
+        b = self.bounds
+        return (
+            (b[0] + b[1]) / 2,
+            (b[2] + b[3]) / 2,
+            (b[4] + b[5]) / 2,
+        )
+
+    def to_scene_data(self) -> dict[str, object]:
+        """Return a JSON-serializable dict describing this dataset.
+
+        Raises
+        ------
+        NotImplementedError
+            If the dataset type cannot be rendered yet.
+
+        """
+        msg = f"Rendering {type(self).__name__} is not supported yet (issue #774)"
+        raise NotImplementedError(msg)
+
+    def plot(
+        self,
+        color: str | tuple[float, float, float] | None = None,
+        opacity: float = 1.0,
+        pbr: bool = False,  # noqa: FBT001 FBT002
+        metallic: float = 0.0,
+        roughness: float = 0.5,
+    ) -> None:
+        """Plot this mesh.
+
+        This is a convenience method that creates a :class:`~pyvista_wasm.Plotter`,
+        adds this mesh, and calls :func:`~pyvista_wasm.Plotter.show`.
+
+        Parameters
+        ----------
+        color : str or tuple, optional
+            Color of the mesh. Can be a color name or RGB tuple.
+        opacity : float, optional
+            Opacity of the mesh, between 0 (transparent) and 1 (opaque).
+        pbr : bool, optional
+            Enable physically based rendering (PBR). Default is False.
+        metallic : float, optional
+            Metallic factor for PBR, between 0 and 1. Default is 0.0.
+        roughness : float, optional
+            Roughness factor for PBR, between 0 and 1. Default is 0.5.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> sphere = pv.Sphere()
+        >>> sphere.plot(color='red')  # doctest: +SKIP
+
+        """
+        from .plotter import Plotter  # noqa: PLC0415
+
+        plotter = Plotter()
+        plotter.add_mesh(
+            self,
+            color=color,
+            opacity=opacity,
+            pbr=pbr,
+            metallic=metallic,
+            roughness=roughness,
+        )
+        plotter.show()
+
+
+class PointSet(DataSet):
+    """Concrete implementation of a set of points.
+
+    Mirrors ``pyvista.PointSet``. A PointSet is a dataset that contains only
+    points with no cell connectivity; it renders as a point cloud.
+
+    Parameters
+    ----------
+    points : array-like
+        Vertex coordinates as an (n, 3) array.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> import numpy as np
+    >>> points = np.random.rand(10, 3)
+    >>> ps = pv.PointSet(points)
+    >>> ps.n_points
+    10
+
+    """
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells (one vertex cell per point)."""
+        return self.n_points
+
+    def to_scene_data(self) -> dict[str, object]:
+        """Return a JSON-serializable dict describing this point set."""
+        data: dict[str, object] = {
+            "type": "points",
+            "points": self.points.flatten().tolist(),
+        }
+        if len(self._point_data) > 0:
+            data["pointData"] = [
+                {
+                    "name": name,
+                    "numberOfComponents": 1 if array.ndim == 1 else array.shape[1],
+                    "values": array.flatten().tolist(),
+                }
+                for name, array in self._point_data.items()
+            ]
+        return data
+
+
+class ImageData(DataSet):
+    """Structured grid with uniform spacing (vtkImageData).
+
+    Mirrors ``pyvista.ImageData``.
+
+    Parameters
+    ----------
+    dimensions : array-like, optional
+        Number of points along each axis as ``(nx, ny, nz)``. Default is
+        ``(10, 10, 10)``.
+    spacing : array-like, optional
+        Spacing along each axis as ``(sx, sy, sz)``. Default is ``(1, 1, 1)``.
+    origin : array-like, optional
+        Position of the (0, 0, 0) point as ``(x, y, z)``. Default is ``(0, 0, 0)``.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> grid = pv.ImageData(dimensions=(2, 3, 4), spacing=(1, 1, 1))
+    >>> grid.n_points
+    24
+
+    """
+
+    def __init__(
+        self,
+        dimensions: ArrayLike = (10, 10, 10),
+        spacing: ArrayLike = (1.0, 1.0, 1.0),
+        origin: ArrayLike = (0.0, 0.0, 0.0),
+    ) -> None:
+        """Initialize an ImageData from dimensions, spacing, and origin."""
+        dims, sp, org = np.asarray(dimensions), np.asarray(spacing), np.asarray(origin)
+        self.dimensions: tuple[int, int, int] = (int(dims[0]), int(dims[1]), int(dims[2]))
+        self.spacing: tuple[float, float, float] = (float(sp[0]), float(sp[1]), float(sp[2]))
+        self.origin: tuple[float, float, float] = (float(org[0]), float(org[1]), float(org[2]))
+        super().__init__(np.zeros((1, 3)))  # placeholder; points is overridden
+
+    @property
+    def points(self) -> np.ndarray:  # type: ignore[override]
+        """Return the grid points as an (n, 3) array."""
+        nx, ny, nz = self.dimensions
+        sx, sy, sz = self.spacing
+        ox, oy, oz = self.origin
+        x = ox + np.arange(nx) * sx
+        y = oy + np.arange(ny) * sy
+        z = oz + np.arange(nz) * sz
+        gx, gy, gz = np.meshgrid(x, y, z, indexing="ij")
+        return np.column_stack((gx.ravel(order="F"), gy.ravel(order="F"), gz.ravel(order="F")))
+
+    @points.setter
+    def points(self, value: ArrayLike) -> None:
+        """Points are derived from dimensions/spacing/origin; ignore assignment."""
+
+    @property
+    def n_points(self) -> int:
+        """Return the number of points."""
+        nx, ny, nz = self.dimensions
+        return nx * ny * nz
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells."""
+        nx, ny, nz = self.dimensions
+        return max(nx - 1, 0) * max(ny - 1, 0) * max(nz - 1, 0)
+
+    @property
+    def bounds(self) -> tuple[float, float, float, float, float, float]:
+        """Return the bounding box as ``(xmin, xmax, ymin, ymax, zmin, zmax)``."""
+        nx, ny, nz = self.dimensions
+        sx, sy, sz = self.spacing
+        ox, oy, oz = self.origin
+        return (
+            ox,
+            ox + (nx - 1) * sx,
+            oy,
+            oy + (ny - 1) * sy,
+            oz,
+            oz + (nz - 1) * sz,
+        )
+
+
+class RectilinearGrid(DataSet):
+    """Grid with variable spacing along each axis (vtkRectilinearGrid).
+
+    Mirrors ``pyvista.RectilinearGrid``.
+
+    Parameters
+    ----------
+    x : array-like, optional
+        Coordinates along the x axis.
+    y : array-like, optional
+        Coordinates along the y axis.
+    z : array-like, optional
+        Coordinates along the z axis.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> import numpy as np
+    >>> xr = np.arange(3)
+    >>> yr = np.arange(4)
+    >>> zr = np.arange(5)
+    >>> grid = pv.RectilinearGrid(xr, yr, zr)
+    >>> grid.n_points
+    60
+
+    """
+
+    def __init__(
+        self,
+        x: ArrayLike = (0.0,),
+        y: ArrayLike = (0.0,),
+        z: ArrayLike = (0.0,),
+    ) -> None:
+        """Initialize a RectilinearGrid from axis coordinate arrays."""
+        self.x = np.asarray(x)
+        self.y = np.asarray(y)
+        self.z = np.asarray(z)
+        super().__init__(np.zeros((1, 3)))  # placeholder; points is overridden
+
+    @property
+    def dimensions(self) -> tuple[int, int, int]:
+        """Return the number of points along each axis."""
+        return (len(self.x), len(self.y), len(self.z))
+
+    @property
+    def points(self) -> np.ndarray:  # type: ignore[override]
+        """Return the grid points as an (n, 3) array."""
+        gx, gy, gz = np.meshgrid(self.x, self.y, self.z, indexing="ij")
+        return np.column_stack((gx.ravel(order="F"), gy.ravel(order="F"), gz.ravel(order="F")))
+
+    @points.setter
+    def points(self, value: ArrayLike) -> None:
+        """Points are derived from the axis arrays; ignore assignment."""
+
+    @property
+    def n_points(self) -> int:
+        """Return the number of points."""
+        return self.x.size * self.y.size * self.z.size
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells."""
+        return max(self.x.size - 1, 0) * max(self.y.size - 1, 0) * max(self.z.size - 1, 0)
+
+    @property
+    def bounds(self) -> tuple[float, float, float, float, float, float]:
+        """Return the bounding box as ``(xmin, xmax, ymin, ymax, zmin, zmax)``."""
+        return (
+            float(self.x.min()),
+            float(self.x.max()),
+            float(self.y.min()),
+            float(self.y.max()),
+            float(self.z.min()),
+            float(self.z.max()),
+        )
+
+
+class StructuredGrid(DataSet):
+    """Grid of points with structured connectivity (vtkStructuredGrid).
+
+    Mirrors ``pyvista.StructuredGrid``.
+
+    Parameters
+    ----------
+    points : array-like, optional
+        Point coordinates as an (n, 3) array in x-fastest ordering.
+    dimensions : array-like, optional
+        Number of points along each axis as ``(nx, ny, nz)``. Inferred from
+        the point count when omitted.
+
+    """
+
+    def __init__(
+        self,
+        points: ArrayLike | None = None,
+        dimensions: ArrayLike | None = None,
+    ) -> None:
+        """Initialize a StructuredGrid from points and optional dimensions."""
+        pts = np.zeros((0, 3)) if points is None else np.asarray(points)
+        super().__init__(pts)
+        if dimensions is not None:
+            dims = np.asarray(dimensions)
+            self.dimensions = (int(dims[0]), int(dims[1]), int(dims[2]))
+        elif self.n_points > 0:
+            self.dimensions = (self.n_points, 1, 1)
+        else:
+            self.dimensions = (0, 0, 0)
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells."""
+        nx, ny, nz = self.dimensions
+        return max(nx - 1, 0) * max(ny - 1, 0) * max(nz - 1, 0)
+
+
+class UnstructuredGrid(DataSet):
+    """Dataset with arbitrary cell connectivity (vtkUnstructuredGrid).
+
+    Mirrors ``pyvista.UnstructuredGrid`` for the common constructor form
+    ``UnstructuredGrid(points, cells, celltypes)`` where ``cells`` is a flat
+    array with leading cell counts (VTK cell connectivity format).
+
+    Parameters
+    ----------
+    points : array-like, optional
+        Vertex coordinates as an (n, 3) array.
+    cells : array-like, optional
+        Flat connectivity array where each cell is prefixed by its number of
+        points, e.g. ``[3, 0, 1, 2, 3, 3, 2, 4]`` for two triangles.
+    celltypes : array-like, optional
+        VTK cell type per cell. Defaults to one unknown type per cell.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> import numpy as np
+    >>> points = np.array([[0.0, 0, 0], [1, 0, 0], [0, 1, 0]])
+    >>> cells = [3, 0, 1, 2]
+    >>> grid = pv.UnstructuredGrid(points, cells)
+    >>> grid.n_cells
+    1
+
+    """
+
+    def __init__(
+        self,
+        points: ArrayLike | None = None,
+        cells: ArrayLike | None = None,
+        celltypes: ArrayLike | None = None,
+    ) -> None:
+        """Initialize an UnstructuredGrid from points, cells, and cell types."""
+        pts = np.zeros((0, 3)) if points is None else np.asarray(points)
+        super().__init__(pts)
+        self.cells = np.asarray(cells) if cells is not None else np.array([])
+        self.celltypes = (
+            np.asarray(celltypes)
+            if celltypes is not None
+            else np.zeros(self._count_cells(), dtype=int)
+        )
+
+    def _count_cells(self) -> int:
+        """Count cells in the flat connectivity array."""
+        cells = self.cells
+        count = 0
+        i = 0
+        while i < len(cells):
+            i += int(cells[i]) + 1
+            count += 1
+        return count
+
+    @property
+    def n_cells(self) -> int:
+        """Return the number of cells."""
+        if len(self.celltypes) > 0:
+            return len(self.celltypes)
+        return self._count_cells()
+
+
+class MultiBlock:
+    """Composite container of datasets (vtkMultiBlockDataSet).
+
+    Mirrors ``pyvista.MultiBlock``. Accepts a list of datasets or a dict
+    mapping names to datasets.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> block = pv.MultiBlock({'sphere': pv.Sphere()})
+    >>> block.n_blocks
+    1
+
+    """
+
+    def __init__(self, data: list | dict | None = None) -> None:
+        """Initialize a MultiBlock from a list or dict of datasets."""
+        self._blocks: dict[str, object] = {}
+        self._names: list[str] = []
+        if isinstance(data, dict):
+            for key, value in data.items():
+                self[str(key)] = value
+        elif isinstance(data, list):
+            for index, value in enumerate(data):
+                self[index] = value
+
+    @property
+    def n_blocks(self) -> int:
+        """Return the number of blocks."""
+        return len(self._blocks)
+
+    def __len__(self) -> int:
+        """Return the number of blocks."""
+        return len(self._blocks)
+
+    def keys(self) -> list[str]:
+        """Return the block names."""
+        return list(self._names)
+
+    def __setitem__(self, key: int | str, value: object) -> None:
+        """Set a block by index or name."""
+        name = str(key)
+        if name not in self._blocks:
+            self._names.append(name)
+        self._blocks[name] = value
+
+    def __getitem__(self, key: int | str) -> object:
+        """Get a block by index or name."""
+        if isinstance(key, int):
+            return self._blocks[self._names[key]]
+        return self._blocks[key]
+
+    @property
+    def bounds(self) -> tuple[float, float, float, float, float, float]:
+        """Return the combined bounding box of all blocks."""
+        blocks = [b for b in self._blocks.values() if isinstance(b, DataSet)]
+        if not blocks:
+            nan = float("nan")
+            return (nan, nan, nan, nan, nan, nan)
+        bs = [b.bounds for b in blocks]
+        return (
+            min(b[0] for b in bs),
+            max(b[1] for b in bs),
+            min(b[2] for b in bs),
+            max(b[3] for b in bs),
+            min(b[4] for b in bs),
+            max(b[5] for b in bs),
+        )
+
+    @property
+    def center(self) -> tuple[float, float, float]:
+        """Return the center of the combined bounding box."""
+        b = self.bounds
+        return ((b[0] + b[1]) / 2, (b[2] + b[3]) / 2, (b[4] + b[5]) / 2)
+
+
+class PolyData(DataSet):
     """Base polygonal mesh class.
 
     Parameters
@@ -153,84 +690,12 @@ class PolyData:
         _scene_data: dict[str, Any] | None = None,
     ) -> None:
         """Initialize a PolyData mesh."""
-        self.points = np.asarray(points)
+        super().__init__(points)
         self.faces = np.asarray(faces) if faces is not None else None
         self.t_coords = np.asarray(t_coords) if t_coords is not None else None
         self.scalars = np.asarray(scalars) if scalars is not None else None
         self.scalar_name = scalar_name
         self._scene_data = _scene_data
-        self._point_data = PointData()
-
-    @property
-    def point_data(self) -> PointData:
-        """Access point data arrays.
-
-        Returns
-        -------
-        PointData
-            Dict-like container for point data arrays.
-
-        Examples
-        --------
-        >>> import pyvista_wasm as pv
-        >>> import numpy as np
-        >>> mesh = pv.Sphere()
-        >>> mesh.point_data['elevation'] = mesh.points[:, 2]
-        >>> 'elevation' in mesh.point_data
-        True
-
-        Render with scalar coloring:
-
-        >>> plotter = pv.Plotter()
-        >>> _ = plotter.add_mesh(mesh, scalars='elevation', cmap='viridis')
-        >>> plotter.show()  # doctest: +SKIP
-
-        """
-        return self._point_data
-
-    def __setitem__(self, name: str, array: ArrayLike) -> None:
-        """Set a point data array using dictionary-style access.
-
-        Parameters
-        ----------
-        name : str
-            Name of the array.
-        array : array-like
-            Data array to store.
-
-        Examples
-        --------
-        >>> import pyvista_wasm as pv
-        >>> import numpy as np
-        >>> mesh = pv.Sphere()
-        >>> mesh['elevation'] = mesh.points[:, 2]
-        >>> plotter = pv.Plotter()
-        >>> _ = plotter.add_mesh(mesh, scalars='elevation', cmap='viridis')
-        >>> plotter.show()  # doctest: +SKIP
-
-        """
-        self._point_data[name] = array
-
-    def __getitem__(self, name: str) -> np.ndarray:
-        """Get a point data array using dictionary-style access.
-
-        Parameters
-        ----------
-        name : str
-            Name of the array.
-
-        Returns
-        -------
-        np.ndarray
-            The requested array.
-
-        """
-        return self._point_data[name]
-
-    @property
-    def n_points(self) -> int:
-        """Return the number of points."""
-        return len(self.points)
 
     @property
     def bounding_sphere(self) -> tuple[float, tuple[float, float, float]]:
@@ -283,52 +748,6 @@ class PolyData:
     def n_faces(self) -> int:
         """Return the number of faces."""
         return len(self.faces) if self.faces is not None else 0
-
-    def plot(
-        self,
-        color: str | tuple[float, float, float] | None = None,
-        opacity: float = 1.0,
-        pbr: bool = False,  # noqa: FBT001 FBT002
-        metallic: float = 0.0,
-        roughness: float = 0.5,
-    ) -> None:
-        """Plot this mesh.
-
-        This is a convenience method that creates a :class:`~pyvista_wasm.Plotter`,
-        adds this mesh, and calls :func:`~pyvista_wasm.Plotter.show`.
-
-        Parameters
-        ----------
-        color : str or tuple, optional
-            Color of the mesh. Can be a color name or RGB tuple.
-        opacity : float, optional
-            Opacity of the mesh, between 0 (transparent) and 1 (opaque).
-        pbr : bool, optional
-            Enable physically based rendering (PBR). Default is False.
-        metallic : float, optional
-            Metallic factor for PBR, between 0 and 1. Default is 0.0.
-        roughness : float, optional
-            Roughness factor for PBR, between 0 and 1. Default is 0.5.
-
-        Examples
-        --------
-        >>> import pyvista_wasm as pv
-        >>> sphere = pv.Sphere()
-        >>> sphere.plot(color='red')  # doctest: +SKIP
-
-        """
-        from .plotter import Plotter  # noqa: PLC0415
-
-        plotter = Plotter()
-        plotter.add_mesh(
-            self,
-            color=color,
-            opacity=opacity,
-            pbr=pbr,
-            metallic=metallic,
-            roughness=roughness,
-        )
-        plotter.show()
 
     def save(self, filename: str | Path) -> None:
         """Write this mesh to disk using meshio.

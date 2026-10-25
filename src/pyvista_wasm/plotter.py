@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from .camera import Camera
     from .examples import CubeMap
     from .light import Light
-    from .mesh import PolyData
+    from .mesh import DataSet
     from .text import Text
     from .texture import Texture
 
@@ -102,7 +102,7 @@ class Plotter:
 
     def add_mesh(  # noqa: PLR0913
         self,
-        mesh: PolyData,
+        mesh: DataSet,
         color: str | tuple[float, float, float] | None = None,
         opacity: float = 1.0,
         pbr: bool = False,  # noqa: FBT001 FBT002
