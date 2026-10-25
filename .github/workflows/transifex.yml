@@ -1,0 +1,42 @@
+---
+name: Transifex Sync
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '!docs/pot/**'
+      - '!docs/locale/**'
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  transifex:
+    runs-on: ubuntu-latest
+    environment: transifex
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: pip install -e ".[docs]"
+      - name: Generate .pot files
+        run: cd docs && make gettext
+      - name: Create pull request for updated .pot files
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        with:
+          commit-message: 'chore: update pot files'
+          branch: chore/update-pot-files
+          title: 'chore: update pot files'
+          body: |
+            Auto-generated pull request to update `.pot` files for Transifex translations.
+          add-paths: |-
+            docs/pot/

@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:1
+msgid "Decide whether to replace Biome with xo"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:3
+msgid "Status: proposed"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:4
+msgid "Date: 2026-09-13"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:5
+msgid "Decision-makers: tkoyama010"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:7
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:9
+msgid "The repository currently uses [Biome](https://biomejs.dev/) (`biome.json`, `@biomejs/biome` in `package.json`) to lint and format all TypeScript, JavaScript, JSON, and Markdown files. Biome is a single Rust binary invoked through `npm run lint` / `npm run format` and wired into pre-commit.ci. A community discussion raised [xo](https://github.com/xojs/xo) — an ESLint-based zero-config linter with the Prettier-backed `xo --fix` formatter — as a possible alternative. Should we migrate the JavaScript/TypeScript toolchain from Biome to xo, or stay on Biome?"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:11
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:13
+msgid "**Zero-config experience**: Both tools advertise themselves as configuration-free. Any migration must not increase the amount of lint configuration the project maintains."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:14
+msgid "**TypeScript support**: The hand-written glue layer lives in `ts/` (including a large ambient declaration file, `ts/vtk.d.ts`). The tool must lint modern TypeScript well, including ambient declarations."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:15
+msgid "**Speed**: CI runs the full test suite on every PR; lint steps should stay fast."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:16
+msgid "**Ecosystem and rule coverage**: The project relies on the linter to catch correctness issues (unused variables, unsafe assertions, a11y for renderer code) rather than to enforce opinionated style."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:17
+msgid "**Maintenance overhead**: pyvista-wasm is a small project. Additional dependencies, plugins, or config drift are a real cost."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:19
+msgid "Considered Options"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:21
+msgid "**Option A: Stay on Biome (status quo)**"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:22
+msgid "**Option B: Migrate to xo**"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:24
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:26
+msgid "Chosen option: \"**Option A: Stay on Biome (status quo)**\", because Biome already satisfies every decision driver while xo regresses on TypeScript depth, speed, and configuration effort for this repository."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:28
+msgid "TypeScript support: Biome's first-class TS parser handles `ts/vtk.d.ts` natively. xo is ESLint underneath; deep TS checking requires `@typescript-eslint` with type-aware rules, which adds setup and is slow."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:29
+msgid "Speed: Biome is a single Rust binary and finishes in well under a second on this repo. xo/Prettier runs the Node-based ESLint pipeline, measurably slower in CI on every PR."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:30
+msgid "Configuration: The project already carries `biome.json` with per-file overrides for `ts/renderer.ts` and `ts/vtk.d.ts`. Migrating means re-expressing those overrides as ESLint configuration plus a Prettier config to match the current formatting (2-space indent, width 80, semicolons) — net more configuration, not less."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:31
+msgid "Dependencies: Biome replaces ESLint + Prettier in one package. xo bundles ESLint, plugins, and Prettier, but the project would keep `eslint-plugin-jsdoc` as a separate dev dependency to preserve JSDoc linting, and would add Prettier's ecosystem on top."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:32
+msgid "Formatting parity: Biome both lints and formats with one tool and one config. xo delegates formatting to Prettier, splitting the pipeline in two for no gain here."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:34
+msgid "xo remains a good default for greenfield JavaScript-only projects that want the ESLint plugin ecosystem. This repository is not that: it is TypeScript-heavy, already formatted by Biome, and does not need ESLint-only plugins."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:36
+msgid "Consequences"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:38
+msgid "Good, because no migration work is needed and CI keeps its current fast lint step."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:39
+msgid "Good, because formatting stays stable — no repo-wide reformat diff that would pollute `git blame`."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:40
+msgid "Bad, because Biome's rule catalogue is smaller than ESLint's; if a future need requires an ESLint-only plugin, this decision should be revisited."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:42
+msgid "Confirmation"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:44
+msgid "Compliance is verified by the existing CI: `npm run lint` / `npm run format` (Biome) run through pre-commit.ci and GitHub Actions on every PR. If `biome.json` or `@biomejs/biome` is removed from the repository without a superseding ADR, this decision is violated."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:46
+msgid "Pros and Cons of the Options"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:48
+msgid "Option A: Stay on Biome (status quo)"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:50
+msgid "[Biome](https://biomejs.dev/) — single Rust toolchain for linting and formatting."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:52
+msgid "Good, because it is already installed, configured, and passing in CI."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:53
+msgid "Good, because first-class TypeScript parsing covers `ts/*.ts` and ambient declarations without extra plugins."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:54
+msgid "Good, because lint + format come from one binary and one config file."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:55
+msgid "Bad, because the plugin ecosystem is smaller than ESLint's; niche rules may not exist."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:57
+msgid "Option B: Migrate to xo"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:59
+msgid "[xo](https://github.com/xojs/xo) — opinionated ESLint wrapper with Prettier formatting."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:61
+msgid "Good, because it exposes the full ESLint plugin ecosystem (including `eslint-plugin-jsdoc` natively)."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:62
+msgid "Good, because its presets are well known in the JS community and it supports `--fix` autofix workflows."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:63
+msgid "Neutral, because the project does not currently use any ESLint-only plugin beyond JSDoc, which is already installed alongside Biome."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:64
+msgid "Bad, because TypeScript type-aware linting requires extra `@typescript-eslint` setup and is slow."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:65
+msgid "Bad, because formatting moves to Prettier, adding a second tool and config to keep style identical to today's Biome output."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:66
+msgid "Bad, because migration cost (config rewrite, repo-wide reformat, CI churn) buys no capability the project needs today."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:68
+msgid "More Information"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:70
+msgid "Current Biome configuration: [`biome.json`](../../biome.json)"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:71
+msgid "Lint/format entry points: `lint` and `format` scripts in [`package.json`](../../package.json)"
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:72
+msgid "Biome is referenced as the code-style badge in [`CONTRIBUTING.md`](../../CONTRIBUTING.md); if this decision is ever revisited, that badge and the pre-commit configuration must change together."
+msgstr ""
+
+#: ../decisions/0011-decide-whether-to-replace-biome-with-xo.md:73
+msgid "Revisit triggers: a need for an ESLint-only rule or plugin, or a Biome breaking change that removes a rule the project relies on."
+msgstr ""

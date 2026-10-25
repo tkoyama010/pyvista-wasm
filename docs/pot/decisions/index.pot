@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../decisions/index.md:2
+msgid "Architecture Decision Records"
+msgstr ""
+
+#: ../decisions/index.md:4
+msgid "Accepted Records"
+msgstr ""
+
+#: ../decisions/index.md:6
+msgid "[0000 - Use Markdown Architectural Decision Records](0000-use-markdown-architectural-decision-records.md)"
+msgstr ""
+
+#: ../decisions/index.md:7
+msgid "[0001 - Use Slidev for the PyCon JP 2026 talk slide deck](0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md)"
+msgstr ""
+
+#: ../decisions/index.md:8
+msgid "[0002 - Decide how to preview slides in pull requests and deploy the deck from main](0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md)"
+msgstr ""
+
+#: ../decisions/index.md:9
+msgid "[0003 - Decide how to internationalize the Slidev deck (JA/EN)](0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md)"
+msgstr ""
+
+#: ../decisions/index.md:10
+msgid "[0004 - Adopt the \"1 slide, 1 message\" principle for the slide deck](0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md)"
+msgstr ""
+
+#: ../decisions/index.md:11
+msgid "[0005 - Verify AGENTS.md quality in CI](0005-verify-agents-md-quality-in-ci.md)"
+msgstr ""
+
+#: ../decisions/index.md:12
+msgid "[0006 - Decide how to keep slide locale files in sync (JA/EN)](0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md)"
+msgstr ""
+
+#: ../decisions/index.md:13
+msgid "[0007 - Decide how to internationalize and sync the README](0007-decide-how-to-internationalize-and-sync-the-readme.md)"
+msgstr ""
+
+#: ../decisions/index.md:14
+msgid "[0008 - Decide how to internationalize the ReadTheDocs documentation](0008-decide-how-to-internationalize-the-readthedocs-documentation.md)"
+msgstr ""
+
+#: ../decisions/index.md:15
+msgid "[0009 - Decide how to sync GitHub repository settings with Terraform](0009-decide-how-to-sync-github-repository-settings-with-terraform.md)"
+msgstr ""
+
+#: ../decisions/index.md:16
+msgid "[0013 - Decision to add a pi coding agent development environment to GitHub Codespaces](0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md)"
+msgstr ""
+
+#: ../decisions/index.md:17
+msgid "[0014 - Decision not to use Nix in the Codespace environment](0014-decision-not-to-use-nix-in-the-codespace-environment.md)"
+msgstr ""
+
+#: ../decisions/index.md:18
+msgid "[0015 - Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters](0015-prefer-the-vtk-wasm-pipeline-with-documented-manual-fallbacks-for-pyvista-filters.md)"
+msgstr ""
+
+#: ../decisions/index.md:20
+msgid "Rejected Records"
+msgstr ""
+
+#: ../decisions/index.md:22
+#: ../decisions/index.md:26
+#: ../decisions/index.md:30
+msgid "None"
+msgstr ""
+
+#: ../decisions/index.md:24
+msgid "Superseded Records"
+msgstr ""
+
+#: ../decisions/index.md:28
+msgid "Deprecated Records"
+msgstr ""
+
+#: ../decisions/index.md:32
+msgid "Records with non-standard statuses"
+msgstr ""
+
+#: ../decisions/index.md:34
+msgid "Status `proposed`"
+msgstr ""
+
+#: ../decisions/index.md:36
+msgid "[0010 - Track PyVista API coverage matrix for pyvista-wasm](0010-track-pyvista-api-coverage-matrix-for-pyvista-wasm.md)"
+msgstr ""
+
+#: ../decisions/index.md:37
+msgid "[0011 - Decide whether to replace Biome with xo](0011-decide-whether-to-replace-biome-with-xo.md)"
+msgstr ""
