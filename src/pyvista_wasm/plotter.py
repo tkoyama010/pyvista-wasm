@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from numpy.typing import ArrayLike
 
     from .camera import Camera
+    from .charts import Chart2D
     from .examples import CubeMap
     from .light import Light
     from .mesh import DataSet
@@ -92,6 +93,7 @@ class Plotter:
 
         """
         self._actors: list[dict[str, object]] = []
+        self._charts: list[Chart2D] = []
         self._renderer = get_renderer(
             lighting=lighting,
             wasm_rendering=wasm_rendering,
@@ -370,6 +372,34 @@ class Plotter:
         )
 
         return actor
+
+    def add_chart(self, chart: Chart2D) -> dict[str, object]:
+        """Add a 2D chart to the scene.
+
+        Parameters
+        ----------
+        chart : Chart2D
+            The :class:`~pyvista_wasm.charts.Chart2D` to render.
+
+        Returns
+        -------
+        dict
+            Actor information dictionary.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> import numpy as np
+        >>> x = np.linspace(0, np.pi, 30)
+        >>> chart = pv.Chart2D(title="sin")
+        >>> _ = chart.line(x, np.sin(x))
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_chart(chart)
+
+        """
+        self._renderer.add_chart_actor(chart)
+        self._charts.append(chart)
+        return {"chart": chart}
 
     def show(
         self,

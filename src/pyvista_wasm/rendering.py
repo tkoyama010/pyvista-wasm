@@ -287,6 +287,7 @@ class _BaseHTMLRenderer:
             raise ValueError(msg)
 
         self.actors: list[dict[str, object]] = []
+        self.charts: list[object] = []
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
         self.text_actors: list[Text] = []
@@ -669,6 +670,23 @@ class _BaseHTMLRenderer:
             )
         return lights_data
 
+    def add_chart_actor(self, chart: object) -> dict[str, object]:
+        """Add a 2D chart to the renderer.
+
+        Parameters
+        ----------
+        chart : Chart2D
+            The chart object to render.
+
+        Returns
+        -------
+        dict
+            Actor information dictionary.
+
+        """
+        self.charts.append(chart)
+        return {"chart": chart}
+
     def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:  # noqa: C901
         """Build JSON-serializable actor configuration."""
         mesh = actor_info["mesh"]
@@ -821,6 +839,10 @@ class _BaseHTMLRenderer:
             "lights": self._build_lights_data(),
             "actors": actors_data,
             "textActors": text_actors_data,
+            "charts": [
+                chart.to_scene_data()  # type: ignore[attr-defined]
+                for chart in self.charts
+            ],
             "axes": self._axes_enabled,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
@@ -1633,6 +1655,7 @@ class MockRenderer:
 
         """
         self.actors: list[dict[str, object]] = []
+        self.charts: list[object] = []
         self.lights: list[Light] = []
         self.lighting: str | None = lighting
         self.text_actors: list[Text] = []
@@ -1864,12 +1887,31 @@ class MockRenderer:
         self.text_actors.append(text)
         logger.info("Added text actor: %s", text.input)
 
+    def add_chart_actor(self, chart: object) -> dict[str, object]:
+        """Mock add_chart_actor.
+
+        Parameters
+        ----------
+        chart : Chart2D
+            The chart actor to add (stored but not rendered).
+
+        Returns
+        -------
+        dict
+            Mock actor dictionary with chart data.
+
+        """
+        self.charts.append(chart)
+        logger.info("Added chart")
+        return {"chart": chart}
+
     def clear(self) -> None:
         """Mock clear.
 
         Removes all actors, lights, and text actors from the mock renderer.
         """
         self.actors = []
+        self.charts = []
         self.lights = []
         self._scalar_bar = None
         self.text_actors = []

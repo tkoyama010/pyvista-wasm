@@ -2,6 +2,7 @@ __all__ = [
     "Arrow",
     "Camera",
     "CellData",
+    "Chart2D",
     "Circle",
     "Cone",
     "Cube",
@@ -42,6 +43,7 @@ __license__: str
 
 from . import examples
 from .camera import Camera
+from .charts import Chart2D
 from .light import Light
 from .mesh import (
     Arrow,
