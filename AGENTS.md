@@ -89,3 +89,5 @@ Never do the following:
 ## Contributing
 
 When creating an issue, follow the templates in `.github/ISSUE_TEMPLATE/`. Details that change often (dependency pins, hook lists) live in `pyproject.toml`, `package.json`, and `.pre-commit-config.yaml` — check those files instead of trusting this document.
+
+Architecture decision records live in `docs/decisions/` (MADR, generated TOC via the `pyadr` pre-commit hooks). ADR titles state the decision — the conclusion — not the question: write `Prefer X over Y`, never `Decide how to ...`. The H1 heading and the file slug (`NNNN-<title-in-slug-format>.md`) must match the title.

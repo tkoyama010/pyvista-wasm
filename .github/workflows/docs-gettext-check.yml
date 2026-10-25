@@ -68,3 +68,6 @@ jobs:
             exit 1
           fi
           echo "Catalog parity OK: every .pot has a matching .po and vice versa"
+      - name: Check .po translation completeness
+        run: |-
+          python scripts/check_po_translations.py --baseline docs/locale/ja/translation-baseline.json
