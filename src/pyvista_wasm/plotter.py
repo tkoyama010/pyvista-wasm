@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import numpy as np
+    from numpy.typing import ArrayLike
 
     from .camera import Camera
     from .examples import CubeMap
@@ -22,6 +23,7 @@ if TYPE_CHECKING:
     from .mesh import DataSet
     from .text import Text
     from .texture import Texture
+    from .transform import Transform
 
 
 class Plotter:
@@ -115,6 +117,7 @@ class Plotter:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        transform: Transform | ArrayLike | None = None,
         **kwargs: object,
     ) -> dict[str, object]:
         """Add a mesh to the plotter.
@@ -161,6 +164,9 @@ class Plotter:
             Name of the colormap to use when rendering scalars. Default is 'viridis'.
             Supported colormaps: 'viridis', 'plasma', 'inferno', 'magma', 'jet',
             'rainbow', 'turbo', 'coolwarm'.
+        transform : Transform or array-like, optional
+            A :class:`~pyvista_wasm.Transform` or 4x4 homogeneous matrix
+            applied to the mesh geometry before rendering.
         **kwargs
             Additional rendering options.
 
@@ -239,6 +245,15 @@ class Plotter:
 
         """
         # Add mesh to VTK.wasm renderer
+        from .transform import Transform  # noqa: PLC0415
+
+        transform_obj = (
+            transform
+            if isinstance(transform, Transform)
+            else Transform(transform)
+            if transform is not None
+            else None
+        )
         actor = self._renderer.add_mesh_actor(
             mesh,
             color=color,
@@ -253,6 +268,7 @@ class Plotter:
             style=style,
             scalars=scalars,
             cmap=cmap,
+            transform=transform_obj,
         )
 
         # Store reference
@@ -271,6 +287,7 @@ class Plotter:
                 "style": style,
                 "scalars": scalars,
                 "cmap": cmap,
+                "transform": transform,
                 "actor": actor,
                 "kwargs": kwargs,
             },

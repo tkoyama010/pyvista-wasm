@@ -4,6 +4,8 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 import pyvista_wasm as pv
+from pyvista_wasm import Plotter
+from pyvista_wasm.rendering import _BaseHTMLRenderer
 
 
 class TestTranslate:
@@ -116,3 +118,30 @@ class TestMeshTransform:
         mesh = pv.Sphere()
         moved = mesh.transform(np.diag([2.0, 2, 2, 1]))
         assert moved.n_points == mesh.n_points
+
+
+class TestActorTransform:
+    """Tests for add_mesh(transform=...) (issue #776)."""
+
+    def test_actor_stores_transform(self) -> None:
+        """Test actor stores transform."""
+        plotter = Plotter()
+        plotter.add_mesh(pv.Sphere(), transform=pv.Transform().translate((1, 2, 3)))
+        renderer_actor = plotter._renderer.actors[0]
+        assert isinstance(renderer_actor["transform"], pv.Transform)
+
+    def test_accepts_matrix(self) -> None:
+        """Test accepts matrix."""
+        plotter = Plotter()
+        plotter.add_mesh(pv.Sphere(), transform=np.eye(4))
+        renderer_actor = plotter._renderer.actors[0]
+        assert isinstance(renderer_actor["transform"], pv.Transform)
+
+    def test_build_actor_data_bakes_transform(self) -> None:
+        """Test build actor data bakes transform."""
+        renderer = _BaseHTMLRenderer()
+        mesh = pv.PolyData(np.array([[0.0, 0, 0], [1, 1, 1]]))
+        transform = pv.Transform().translate((10, 0, 0))
+        actor_info = renderer.add_mesh_actor(mesh, transform=transform)
+        data = renderer._build_actor_data(actor_info)
+        assert data["source"]["points"][0] == 10.0
