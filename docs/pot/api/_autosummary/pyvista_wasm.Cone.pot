@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:35+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../api/_autosummary/pyvista_wasm.Cone.rst:2
+msgid "pyvista\\_wasm.Cone"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:1
+msgid "Create a cone mesh."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Cone.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:3
+msgid "Center of the cone (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:5
+msgid "Direction vector of the cone axis. Default is (1, 0, 0)."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:7
+msgid "Height of the cone. Default is 1.0."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:9
+msgid "Base radius of the cone. Default is 0.5."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:11
+msgid "Number of facets around the cone. Default is 6."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:13
+msgid "Whether to cap the base of the cone. Default is True."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Cone.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:16
+msgid "A cone mesh."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Cone.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Cone:20
+msgid "Examples"
+msgstr ""

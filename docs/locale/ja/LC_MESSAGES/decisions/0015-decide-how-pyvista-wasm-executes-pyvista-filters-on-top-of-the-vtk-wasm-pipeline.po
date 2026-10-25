@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:35+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:1
+msgid ""
+"Decide how pyvista-wasm executes PyVista filters on top of the vtk-wasm "
+"pipeline"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:3
+msgid "Status: accepted"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:4
+msgid "Date: 2026-02-14"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:5
+msgid "Decision-makers: tkoyama010"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:7
+msgid "Context and Problem Statement"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:9
+msgid ""
+"PyVista's filter API (`clip`, `decimate`, `smooth`, `contour`, ...) is a "
+"thin Python wrapper over VTK's pipeline: each filter is a `vtkAlgorithm` "
+"whose output ports feed the renderer. pyvista-wasm drives the same VTK "
+"code compiled to WebAssembly (VTK.wasm), where "
+"`VTK::CommonExecutionModel` — the module defining algorithms, ports, and "
+"the pipeline — is available with serialization coverage ([vtk-wasm "
+"roadmap](https://kitware.github.io/vtk-wasm/roadmap/)). However, the "
+"pyvista-wasm renderer bridge (`ts/renderer.ts`) builds scenes as a flat "
+"list of actors with a `source` per actor, and some algorithm classes are "
+"not registered with the VTK.wasm `vtkDeserializer` in the rendering-mode "
+"binary — `vtkShrinkPolyData` is a known example, worked around with a "
+"hand-written JavaScript implementation. Issue "
+"[#778](https://github.com/tkoyama010/pyvista-wasm/issues/778) asks how "
+"pyvista-wasm should execute PyVista filters on top of the available "
+"`VTK::CommonExecutionModel` classes. Which execution strategy should "
+"pyvista-wasm adopt?"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:11
+msgid "Decision Drivers"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:13
+msgid ""
+"**PyVista parity**: filter methods should behave like their PyVista "
+"counterparts without Python-side reimplementation drift."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:14
+msgid ""
+"**Upstream availability varies**: some `vtkAlgorithm` classes are not "
+"deserializable in the current VTK.wasm binary, so a strategy that "
+"requires every filter to be a wasm pipeline object fails for those "
+"filters."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:15
+msgid ""
+"**Renderer simplicity**: the bridge must stay auditable; a scene format "
+"that grows an unbounded set of bespoke cases is a maintenance liability."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:16
+msgid ""
+"**Testability**: the strategy must be verifiable in pytest (mock "
+"renderer) and Playwright (browser) without flaky visual assertions."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:18
+msgid "Considered Options"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:20
+msgid ""
+"**Option A: Prefer wasm pipeline objects, fall back to documented manual "
+"implementations (hybrid)**"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:21
+msgid ""
+"**Option B: Always serialize real `vtkAlgorithm` chains and require "
+"upstream to register every filter**"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:22
+msgid ""
+"**Option C: Reimplement all filters in pure Python/NumPy and never use "
+"the wasm pipeline**"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:24
+msgid "Decision Outcome"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:26
+msgid ""
+"Chosen option: **Option A — hybrid, prefer the wasm pipeline, fall back "
+"to manual implementations**."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:28
+msgid ""
+"When a filter class is registered with the VTK.wasm deserializer, "
+"pyvista-wasm serializes it as a `source` filter chain in the scene data "
+"and lets VTK.wasm execute it (this is how `clip`, `tube`, and `contour` "
+"work today)."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:29
+msgid ""
+"When a filter class is unavailable upstream, pyvista-wasm implements it "
+"manually in the renderer bridge (as `shrink` already does), and the "
+"filter's docstring documents the manual implementation so the workaround "
+"can be removed when upstream registers the class."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:30
+msgid ""
+"Each new filter lands one at a time with a mock-renderer test asserting "
+"the serialized scene data and, where practical, a Playwright browser "
+"test."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:32
+msgid ""
+"This keeps PyVista parity for the most filters at the lowest maintenance "
+"cost, degrades gracefully where the wasm binary is incomplete, and gives "
+"every filter a documented upgrade path to a real pipeline object."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:34
+msgid "Positive consequences"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:36
+msgid ""
+"Filters ship incrementally without blocking on upstream VTK.wasm "
+"registrations."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:37
+msgid ""
+"The scene format stays flat and auditable; no bespoke pipeline graph "
+"format is introduced."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:38
+msgid ""
+"Missing upstream deserializer registrations are easy to inventory (search"
+" for the documented manual implementations)."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:40
+msgid "Negative consequences"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:42
+msgid ""
+"Manual fallbacks can drift from VTK semantics until upstream classes "
+"become available; each carries a documented ceiling."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:43
+msgid "Two execution paths mean two test surfaces per filter."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:45
+msgid "Validation"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:47
+msgid ""
+"The strategy is already validated by the shipped filters: `clip`, `tube`,"
+" and `contour` exercise the wasm pipeline path, and `shrink` exercises "
+"the manual fallback path. Both paths are covered by `tests/test_mesh.py`."
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:49
+msgid "More information"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:51
+msgid "Issue [#778](https://github.com/tkoyama010/pyvista-wasm/issues/778)"
+msgstr ""
+
+#: ../decisions/0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md:52
+msgid ""
+"[vtk-wasm roadmap — module coverage](https://kitware.github.io/vtk-"
+"wasm/roadmap/)"
+msgstr ""

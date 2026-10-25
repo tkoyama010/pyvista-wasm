@@ -55,6 +55,8 @@ docs/content/
 docs/stlite_demo.md
 docs/api/_autosummary/
 docs/locale/**/*.mo
+docs/pot/**/*.js
+docs/pot/**/*.css
 *.doctree
 .doctrees/
 *.pickle

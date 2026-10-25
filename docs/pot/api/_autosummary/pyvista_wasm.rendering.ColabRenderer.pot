@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:35+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:2
+msgid "pyvista\\_wasm.rendering.ColabRenderer"
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer:1
+msgid "Renderer for Google Colaboratory notebooks."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer:3
+msgid "This renderer generates an iframe with the visualization and returns it as an ``IPython.display.HTML`` object. The sandboxed iframe embeds the standalone HTML via ``srcdoc``, bypassing Colab's sanitization of inline ``<script>`` tags in cell output. This enables automatic inline rendering when ``plotter.show()`` is called in Colab."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer:10
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.render:12
+msgid "Examples"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.__init__:1
+msgid "Initialize the Colab renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.__init__:3
+msgid "Lighting mode. ``\"default\"`` creates a default directional light, ``None`` creates no default lights. Default is ``\"default\"``."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.__init__:6
+msgid "WebAssembly rendering backend. One of ``\"webgl\"`` or ``\"webgpu\"``. Default is ``\"webgl\"``."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.__init__:9
+msgid "Execution mode for VTK.wasm method calls. One of ``\"sync\"`` or ``\"async\"``. Default is ``\"sync\"``."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:0
+msgid "Raises"
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.__init__:13
+msgid "If Google Colaboratory is not available."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:13
+msgid "Methods"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.rendering.ColabRenderer.__init__>`\\ \\(\\[lighting\\, wasm\\_rendering\\, wasm\\_mode\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_axes <pyvista_wasm.rendering.ColabRenderer.add_axes>`\\ \\(\\*\\*kwargs\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add an orientation marker (axes indicator) to the viewport."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_chart_actor <pyvista_wasm.rendering.ColabRenderer.add_chart_actor>`\\ \\(chart\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a 2D chart to the renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_light <pyvista_wasm.rendering.ColabRenderer.add_light>`\\ \\(light\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a light source to the scene."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_mesh_actor <pyvista_wasm.rendering.ColabRenderer.add_mesh_actor>`\\ \\(mesh\\[\\, color\\, opacity\\, pbr\\, ...\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a mesh to the renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_points_actor <pyvista_wasm.rendering.ColabRenderer.add_points_actor>`\\ \\(points\\[\\, color\\, opacity\\, ...\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a point cloud to the renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_scalar_bar <pyvista_wasm.rendering.ColabRenderer.add_scalar_bar>`\\ \\(\\[title\\, vertical\\, n\\_labels\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a scalar bar to the scene."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`add_text_actor <pyvista_wasm.rendering.ColabRenderer.add_text_actor>`\\ \\(text\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Add a text actor to the scene."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`clear <pyvista_wasm.rendering.ColabRenderer.clear>`\\ \\(\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Remove all actors, lights, and text actors from the renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`create_container <pyvista_wasm.rendering.ColabRenderer.create_container>`\\ \\(\\[element\\_id\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Store the container ID for later HTML generation."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`generate_standalone_html <pyvista_wasm.rendering.ColabRenderer.generate_standalone_html>`\\ \\(\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Generate a complete standalone HTML page with vtk.js."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`render <pyvista_wasm.rendering.ColabRenderer.render>`\\ \\(\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.render:1
+msgid "Render the scene in Google Colaboratory."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`screenshot <pyvista_wasm.rendering.ColabRenderer.screenshot>`\\ \\(\\[filename\\, ...\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:1
+msgid "Take a screenshot of the rendered scene."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`set_background <pyvista_wasm.rendering.ColabRenderer.set_background>`\\ \\(color\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Set the background color of the renderer."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`set_environment_texture <pyvista_wasm.rendering.ColabRenderer.set_environment_texture>`\\ \\(texture\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Set the environment texture for image-based lighting."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid ":py:obj:`view_vector <pyvista_wasm.rendering.ColabRenderer.view_vector>`\\ \\(vector\\[\\, viewup\\]\\)"
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:36:<autosummary>:1
+msgid "Point the camera in the direction of the given vector."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:38
+msgid "Attributes"
+msgstr ""
+
+#: ../:1:<autosummary>:1
+msgid ":py:obj:`camera <pyvista_wasm.rendering.ColabRenderer.camera>`"
+msgstr ""
+
+#: ../:1:<autosummary>:1
+msgid "Get or set the camera for the renderer."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.render:3
+msgid "Generates an iframe with the visualization and returns it as an ``IPython.display.HTML`` object so Colab captures it in the cell output area."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.render:7
+msgid "The ``IPython.display.HTML`` object wrapping the sandboxed iframe."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.rendering.ColabRenderer.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:3
+msgid "This method raises NotImplementedError because Colab does not support direct screenshot capture. Use BrowserRenderer for screenshots in standard Python environments."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:7
+msgid "File path to save the image."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:9
+msgid "Whether to make the background transparent."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:11
+msgid "If True, return a numpy array of the image."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:13
+msgid "Window size as (width, height)."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:15
+msgid "Scale factor for higher resolution."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:18
+msgid "Image data as numpy array if return_img is True, otherwise None."
+msgstr ""
+
+#: ../../src/pyvista_wasm/rendering.py:docstring of pyvista_wasm.rendering.ColabRenderer.screenshot:21
+msgid "Screenshots are not supported in Colab environments."
+msgstr ""
