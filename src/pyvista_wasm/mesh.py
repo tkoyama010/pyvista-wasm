@@ -14,6 +14,9 @@ if TYPE_CHECKING:
 
     from numpy.typing import ArrayLike
 
+if TYPE_CHECKING:
+    from .transform import Transform
+
 
 class PointData:
     """Dict-like container for point data arrays.
@@ -748,6 +751,49 @@ class PolyData(DataSet):
     def n_faces(self) -> int:
         """Return the number of faces."""
         return len(self.faces) if self.faces is not None else 0
+
+    def transform(
+        self,
+        transform: Transform | ArrayLike,
+        *,
+        inplace: bool = False,
+    ) -> PolyData:
+        """Apply a transformation to the mesh points.
+
+        Mirrors ``pyvista.DataSet.transform``. Accepts a
+        :class:`~pyvista_wasm.Transform` or a 4x4 homogeneous matrix.
+
+        Parameters
+        ----------
+        transform : Transform or array-like
+            The transformation to apply.
+        inplace : bool, optional
+            If True, modify this mesh in place and return it. Default is
+            False (return a new mesh).
+
+        Returns
+        -------
+        PolyData
+            The transformed mesh.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> mesh = pv.Sphere()
+        >>> moved = mesh.transform(pv.Transform().translate((1, 2, 3)))
+        >>> moved.center
+        (1.0, 2.0, 3.0)
+
+        """
+        from .transform import Transform  # noqa: PLC0415
+
+        if not isinstance(transform, Transform):
+            transform = Transform(transform)
+        new_points = transform.apply(self.points)
+        if inplace:
+            self.points = new_points
+            return self
+        return PolyData(new_points, faces=self.faces, _scene_data=self._scene_data)
 
     def save(self, filename: str | Path) -> None:
         """Write this mesh to disk using meshio.
