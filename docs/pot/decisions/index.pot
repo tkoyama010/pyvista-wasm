@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:35+0900\n"
+"POT-Creation-Date: 2026-10-25 14:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgid "[0014 - Decision not to use Nix in the Codespace environment](0014-decisi
 msgstr ""
 
 #: ../decisions/index.md:18
-msgid "[0015 - Decide how pyvista-wasm executes PyVista filters on top of the vtk-wasm pipeline](0015-decide-how-pyvista-wasm-executes-pyvista-filters-on-top-of-the-vtk-wasm-pipeline.md)"
+msgid "[0015 - Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters](0015-prefer-the-vtk-wasm-pipeline-with-documented-manual-fallbacks-for-pyvista-filters.md)"
 msgstr ""
 
 #: ../decisions/index.md:20
