@@ -91,6 +91,7 @@ if TYPE_CHECKING:
     from .mesh import DataSet
     from .text import Text
     from .texture import Texture
+    from .transform import Transform
 
 
 from jinja2 import Environment, StrictUndefined
@@ -333,6 +334,7 @@ class _BaseHTMLRenderer:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        transform: Transform | None = None,
     ) -> dict[str, object]:
         """Add a mesh to the renderer.
 
@@ -369,6 +371,8 @@ class _BaseHTMLRenderer:
             in ``mesh.point_data``.
         cmap : str, default='viridis'
             Name of the colormap to use when rendering scalars.
+        transform : Transform, optional
+            Transformation applied to the mesh geometry before rendering.
 
         Returns
         -------
@@ -411,6 +415,7 @@ class _BaseHTMLRenderer:
             "style": style,
             "scalars": scalars,
             "cmap": cmap,
+            "transform": transform,
         }
         self.actors.append(actor_info)
         return actor_info
@@ -664,7 +669,7 @@ class _BaseHTMLRenderer:
             )
         return lights_data
 
-    def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:
+    def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:  # noqa: C901
         """Build JSON-serializable actor configuration."""
         mesh = actor_info["mesh"]
         color: tuple[float, ...] = actor_info.get("color") or (0.5, 0.5, 0.5)  # type: ignore[assignment]
@@ -672,6 +677,9 @@ class _BaseHTMLRenderer:
         smooth_shading = bool(actor_info.get("smooth_shading", True))
         style = str(actor_info.get("style", "surface"))
 
+        transform = actor_info.get("transform")
+        if transform is not None:
+            mesh = mesh.transform(transform)  # type: ignore[union-attr,attr-defined]
         source_data = mesh.to_scene_data()  # type: ignore[attr-defined]
 
         # Normals configuration
@@ -1667,6 +1675,7 @@ class MockRenderer:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        transform: Transform | None = None,
     ) -> dict[str, object]:
         """Mock mesh addition.
 
@@ -1698,6 +1707,8 @@ class MockRenderer:
             Scalar array name (stored but not rendered).
         cmap : str
             Colormap name (stored but not rendered).
+        transform : Transform, optional
+            Transformation (stored but not rendered).
 
         Returns
         -------
@@ -1719,6 +1730,7 @@ class MockRenderer:
             "style": style,
             "scalars": scalars,
             "cmap": cmap,
+            "transform": transform,
         }
         self.actors.append(actor)
         logger.info("Added mesh with %d points", mesh.n_points)
