@@ -925,6 +925,71 @@ class PolyData(DataSet):
             _scene_data=base_scene,
         )
 
+    def smooth(
+        self,
+        n_iter: int = 20,
+        relaxation_factor: float = 0.1,
+    ) -> PolyData:
+        """Smooth the mesh with Laplacian smoothing.
+
+        Mirrors the PyVista ``smooth`` filter API. The smoothing is
+        computed in JavaScript at render time as a manual implementation
+        (Laplacian relaxation towards each vertex's edge-adjacent
+        neighbours) because ``vtkSmoothPolyDataFilter`` is not registered
+        with the ``vtkDeserializer`` in VTK.wasm's rendering-mode binary.
+
+        Parameters
+        ----------
+        n_iter : int, optional
+            Number of smoothing iterations. Default is 20.
+        relaxation_factor : float, optional
+            Relaxation factor per iteration, between 0 and 1. Default is 0.1.
+
+        Returns
+        -------
+        PolyData
+            A new mesh with the smooth filter applied at render time.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> sphere = pv.Sphere()
+        >>> smoothed = sphere.smooth(n_iter=50, relaxation_factor=0.2)
+        >>> isinstance(smoothed, pv.PolyData)
+        True
+
+        """
+        if n_iter < 1:
+            msg = f"n_iter must be >= 1, got {n_iter}"
+            raise ValueError(msg)
+        if not (0.0 <= relaxation_factor <= 1.0):
+            msg = f"relaxation_factor must be between 0 and 1, got {relaxation_factor}"
+            raise ValueError(msg)
+
+        base_scene = (
+            dict(self._scene_data)
+            if self._scene_data
+            else {
+                "type": "mesh",
+                "points": self.points.flatten().tolist(),
+            }
+        )
+        base_scene.setdefault("filters", [])
+        filters_list: list[object] = base_scene["filters"]  # type: ignore[assignment]
+        filters_list.append(
+            {
+                "type": "smooth",
+                "nIterations": n_iter,
+                "relaxationFactor": relaxation_factor,
+            },
+        )
+
+        return PolyData(
+            points=self.points,
+            faces=self.faces,
+            _scene_data=base_scene,
+        )
+
     def clip(
         self,
         normal: str | tuple[float, float, float] = "x",

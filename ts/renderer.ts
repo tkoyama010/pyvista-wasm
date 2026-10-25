@@ -1407,6 +1407,16 @@ async function applyFilters(
     if (f.type === "shrink" && f.shrinkFactor !== undefined) {
       current = await applyShrinkFilter(vtk, current, f.shrinkFactor); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     } else if (
+      f.type === "smooth" &&
+      f.nIterations !== undefined &&
+      f.relaxationFactor !== undefined
+    ) {
+      // eslint-disable-next-line no-await-in-loop -- VTK.wasm requires sequential await
+      current = await applySmoothFilter(vtk, current, {
+        nIterations: f.nIterations,
+        relaxationFactor: f.relaxationFactor,
+      });
+    } else if (
       f.type === "tube" &&
       f.radius !== undefined &&
       f.numberOfSides !== undefined
@@ -1440,6 +1450,110 @@ async function applyFilters(
   }
 
   return current;
+}
+
+/**
+ * Manual Laplacian smooth filter — relax each vertex toward the average
+ * of its edge-adjacent neighbours.
+ *
+ * VTK.wasm does not register a deserializer for ``vtkSmoothPolyDataFilter``
+ * in the rendering-mode binary, so smoothing is computed manually here,
+ * following the same workaround pattern as the shrink filter.
+ * @param vtk
+ * @param sourceResult
+ * @param options - Smoothing parameters.
+ * @param options.nIterations - Number of Laplacian iterations.
+ * @param options.relaxationFactor - Relaxation factor per iteration.
+ * @returns A {@link SourceResult} with smoothed points.
+ */
+async function applySmoothFilter(
+  vtk: VtkWasmNamespace,
+  sourceResult: SourceResult,
+  options: { nIterations: number; relaxationFactor: number },
+): Promise<SourceResult> {
+  const inputPd = await getPolyData(sourceResult);
+  const pointsObject = await inputPd.getPoints();
+  const inPoints = await pointsObject.getData();
+  const polysObject = await inputPd.getPolys();
+  const polys = await polysObject.getData();
+  if (polys.length === 0) {
+    return sourceResult;
+  }
+
+  // Build point adjacency from polygon edges
+  const neighbours: Map<number, Set<number>> = new Map();
+  let index = 0;
+  while (index < polys.length) {
+    const nVerts = at(polys, index);
+    index++;
+    for (let k = 0; k < nVerts; k++) {
+      const a = at(polys, index + k);
+      const b = at(polys, index + ((k + 1) % nVerts));
+      const edges: [number, number][] = [
+        [a, b],
+        [b, a],
+      ];
+      for (const [u, v] of edges) {
+        let set = neighbours.get(u);
+        if (!set) {
+          set = new Set();
+          neighbours.set(u, set);
+        }
+        set.add(v);
+      }
+    }
+    index += nVerts;
+  }
+
+  const nPoints = inPoints.length / PointStride;
+  let points = new Float32Array(nPoints * PointStride);
+  for (let i = 0; i < inPoints.length; i++) {
+    points[i] = at(inPoints, i);
+  }
+  const next = new Float32Array(nPoints * PointStride);
+  for (let iter = 0; iter < options.nIterations; iter++) {
+    for (let pi = 0; pi < nPoints; pi++) {
+      const set = neighbours.get(pi);
+      if (!set || set.size === 0) {
+        for (const c of [Xoffset, Yoffset, Zoffset]) {
+          next[pi * PointStride + c] = points[pi * PointStride + c] ?? 0;
+        }
+      } else {
+        let sx = 0;
+        let sy = 0;
+        let sz = 0;
+        for (const ni of set) {
+          sx += points[ni * PointStride + Xoffset] ?? 0;
+          sy += points[ni * PointStride + Yoffset] ?? 0;
+          sz += points[ni * PointStride + Zoffset] ?? 0;
+        }
+        const n = set.size;
+        const channels: [number, number][] = [
+          [Xoffset, sx],
+          [Yoffset, sy],
+          [Zoffset, sz],
+        ];
+        for (const [c, s] of channels) {
+          const avg = s / n;
+          const cur = points[pi * PointStride + c] ?? 0;
+          next[pi * PointStride + c] =
+            cur + options.relaxationFactor * (avg - cur);
+        }
+      }
+    }
+    const swap = points;
+    points = next;
+    next.fill(0);
+    void swap;
+  }
+
+  const outputPd = vtk.vtkPolyData();
+  const outPointsObject = await outputPd.getPoints();
+  const PointComponents = 3;
+  await outPointsObject.setData(points, PointComponents);
+  const outPolysObject = await outputPd.getPolys();
+  await outPolysObject.setData(new Uint32Array(Array.from(polys)));
+  return { output: outputPd, isFilter: false };
 }
 
 /**
