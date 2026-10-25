@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: pyvista-wasm \n"
+"Project-Id-Version: pyvista-wasm\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-23 03:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: ../../api/index.md:1
@@ -207,16 +207,20 @@ msgid "Clip the mesh with a plane."
 msgstr "平面でメッシュをクリップします。"
 
 #: ../../api/index.md:97:<autosummary>:1
-msgid ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
-msgstr ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
+msgid ""
+":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
+msgstr ""
+":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
 
 #: ../../api/index.md:97:<autosummary>:1
 msgid "Generate contour lines at constant scalar values."
 msgstr "一定のスカラー値で等高線を生成します。"
 
 #: ../../api/index.md:97:<autosummary>:1
-msgid ":py:obj:`pyvista_wasm.PolyData.rotate_z <pyvista_wasm.PolyData.rotate_z>`"
-msgstr ":py:obj:`pyvista_wasm.PolyData.rotate_z <pyvista_wasm.PolyData.rotate_z>`"
+msgid ""
+":py:obj:`pyvista_wasm.PolyData.rotate_z <pyvista_wasm.PolyData.rotate_z>`"
+msgstr ""
+":py:obj:`pyvista_wasm.PolyData.rotate_z <pyvista_wasm.PolyData.rotate_z>`"
 
 #: ../../api/index.md:97:<autosummary>:1
 msgid "Rotate the mesh around the Z axis by the given angle (degrees)."
@@ -259,7 +263,8 @@ msgid ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
 msgstr ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
 
 #: ../../api/index.md:111:<autosummary>:1
-msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
+msgid ""
+"Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
 msgstr "glTF（GL Transmission Format）ファイルのリーダー（``.gltf``または``.glb``）。"
 
 #: ../../api/index.md:111:<autosummary>:1
@@ -299,8 +304,10 @@ msgid "Examples"
 msgstr "例"
 
 #: ../../api/index.md:145:<autosummary>:1
-msgid ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
-msgstr ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
+msgid ""
+":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Cubemap texture holding six face image URLs."
@@ -336,13 +343,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.load_neptune "
 "<pyvista_wasm.examples.load_neptune>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.load_venus "
-"<pyvista_wasm.examples.load_venus>`"
+":py:obj:`pyvista_wasm.examples.load_neptune "
+"<pyvista_wasm.examples.load_neptune>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Load the planet Neptune as a textured sphere."
-msgstr "テクスチャ付き球体として金星をロードします。"
+msgstr "テクスチャ付き球体として海王星をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -358,8 +365,10 @@ msgid "Load the planet Uranus as a textured sphere."
 msgstr "テクスチャ付き球体として天王星をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
-msgid ":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
-msgstr ":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
+msgid ""
+":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Load the Moon as a textured sphere."
@@ -367,15 +376,15 @@ msgstr "テクスチャ付き球体として月をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
-msgid ":py:obj:`pyvista_wasm.examples.load_sun <pyvista_wasm.examples.load_sun>`"
+msgid ""
+":py:obj:`pyvista_wasm.examples.load_sun <pyvista_wasm.examples.load_sun>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.load_uranus "
-"<pyvista_wasm.examples.load_uranus>`"
+":py:obj:`pyvista_wasm.examples.load_sun <pyvista_wasm.examples.load_sun>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Load the Sun as a textured sphere."
-msgstr "テクスチャ付き球体として天王星をロードします。"
+msgstr "テクスチャ付き球体として太陽をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -383,13 +392,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.load_mercury "
 "<pyvista_wasm.examples.load_mercury>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.load_venus "
-"<pyvista_wasm.examples.load_venus>`"
+":py:obj:`pyvista_wasm.examples.load_mercury "
+"<pyvista_wasm.examples.load_mercury>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Load the planet Mercury as a textured sphere."
-msgstr "テクスチャ付き球体として金星をロードします。"
+msgstr "テクスチャ付き球体として水星をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -397,13 +406,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.load_saturn "
 "<pyvista_wasm.examples.load_saturn>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.load_uranus "
-"<pyvista_wasm.examples.load_uranus>`"
+":py:obj:`pyvista_wasm.examples.load_saturn "
+"<pyvista_wasm.examples.load_saturn>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Load the planet Saturn as a textured sphere."
-msgstr "テクスチャ付き球体として天王星をロードします。"
+msgstr "テクスチャ付き球体として土星をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -411,13 +420,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.load_saturn_rings "
 "<pyvista_wasm.examples.load_saturn_rings>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.load_uranus "
-"<pyvista_wasm.examples.load_uranus>`"
+":py:obj:`pyvista_wasm.examples.load_saturn_rings "
+"<pyvista_wasm.examples.load_saturn_rings>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Load the planet Saturn's rings."
-msgstr "テクスチャ付き球体として金星をロードします。"
+msgstr "土星の環をロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid ""
@@ -461,13 +470,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.download_neptune_surface "
 "<pyvista_wasm.examples.download_neptune_surface>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.download_venus_surface "
-"<pyvista_wasm.examples.download_venus_surface>`"
+":py:obj:`pyvista_wasm.examples.download_neptune_surface "
+"<pyvista_wasm.examples.download_neptune_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Download the Neptune planet surface texture."
-msgstr "金星の惑星表面テクスチャをダウンロードします。"
+msgstr "海王星の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -483,8 +492,12 @@ msgid "Download the Uranus planet surface texture."
 msgstr "天王星の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
-msgid ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examples.download_moon_surface>`"
-msgstr ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examples.download_moon_surface>`"
+msgid ""
+":py:obj:`pyvista_wasm.examples.download_moon_surface "
+"<pyvista_wasm.examples.download_moon_surface>`"
+msgstr ""
+":py:obj:`pyvista_wasm.examples.download_moon_surface "
+"<pyvista_wasm.examples.download_moon_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid "Download the Moon surface texture."
@@ -496,13 +509,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.download_sun_surface "
 "<pyvista_wasm.examples.download_sun_surface>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.download_uranus_surface "
-"<pyvista_wasm.examples.download_uranus_surface>`"
+":py:obj:`pyvista_wasm.examples.download_sun_surface "
+"<pyvista_wasm.examples.download_sun_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Download the Sun surface texture."
-msgstr "天王星の惑星表面テクスチャをダウンロードします。"
+msgstr "太陽の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -510,13 +523,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.download_mercury_surface "
 "<pyvista_wasm.examples.download_mercury_surface>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.download_mars_surface "
-"<pyvista_wasm.examples.download_mars_surface>`"
+":py:obj:`pyvista_wasm.examples.download_mercury_surface "
+"<pyvista_wasm.examples.download_mercury_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Download the Mercury planet surface texture."
-msgstr "火星の惑星表面テクスチャをダウンロードします。"
+msgstr "水星の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -524,13 +537,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.download_saturn_surface "
 "<pyvista_wasm.examples.download_saturn_surface>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.download_uranus_surface "
-"<pyvista_wasm.examples.download_uranus_surface>`"
+":py:obj:`pyvista_wasm.examples.download_saturn_surface "
+"<pyvista_wasm.examples.download_saturn_surface>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Download the Saturn planet surface texture."
-msgstr "天王星の惑星表面テクスチャをダウンロードします。"
+msgstr "土星の惑星表面テクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
@@ -538,13 +551,13 @@ msgid ""
 ":py:obj:`pyvista_wasm.examples.download_saturn_rings "
 "<pyvista_wasm.examples.download_saturn_rings>`"
 msgstr ""
-":py:obj:`pyvista_wasm.examples.download_bunny "
-"<pyvista_wasm.examples.download_bunny>`"
+":py:obj:`pyvista_wasm.examples.download_saturn_rings "
+"<pyvista_wasm.examples.download_saturn_rings>`"
 
 #: ../../api/index.md:145:<autosummary>:1
 #, fuzzy
 msgid "Download the Saturn's rings texture."
-msgstr "天王星の惑星表面テクスチャをダウンロードします。"
+msgstr "土星の環のテクスチャをダウンロードします。"
 
 #: ../../api/index.md:145:<autosummary>:1
 msgid ""
