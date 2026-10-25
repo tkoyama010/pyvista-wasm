@@ -28,6 +28,7 @@ __all__ = [
     "Text",
     "TextProperty",
     "Texture",
+    "Transform",
     "UnstructuredGrid",
     "__version__",
     "examples",
@@ -68,3 +69,4 @@ from .readers import GLTFReader, OBJReader, PLYReader, PolyDataReader, STLReader
 from .streamlit_integration import pyvista_chart
 from .text import Text, TextProperty
 from .texture import Texture
+from .transform import Transform
