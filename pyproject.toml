@@ -95,7 +95,7 @@ test = [
   "playwright>=1.40.0,<1.64.0",
   "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
-  "pytest-playwright>=0.4.0,<0.10.0",
+  "pytest-playwright>=0.4.0,<0.11.0",
 ]
 
 [tool.hatch]
