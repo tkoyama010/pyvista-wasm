@@ -53,7 +53,7 @@ optional-dependencies.dev = [
   "pre-commit>=3.0.0,<5.0.0",
   "pytest>=7.0.0,<9.2.0",
   "pytest-cov>=4.0.0,<8.0.0",
-  "ruff>=0.1.0,<0.17.0",
+  "ruff>=0.1.0,<0.18.0",
   "tox>=4.0.0,<4.68.0",
 ]
 optional-dependencies.docs = [
@@ -85,7 +85,7 @@ scripts.pyvista-wasm = "pyvista_wasm._cli:cli_main"
 dev = [
   "mypy>=1.0.0,<2.5.0",
   "pre-commit>=3.0.0,<5.0.0",
-  "ruff>=0.1.0,<0.17.0",
+  "ruff>=0.1.0,<0.18.0",
   "tox>=4.0.0,<4.68.0",
   { include-group = "test" },
 ]
