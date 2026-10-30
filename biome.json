@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.2/schema.json",
   "files": {
-    "includes": ["ts/**/*.ts", "*.js", "*.json", "*.md"]
+    "includes": ["ts/**/*.ts", "*.js", "*.json"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -40,11 +40,7 @@
           "correctness": {
             "noUndeclaredVariables": "off"
           },
-          "nursery": {
-            "noExcessiveStatementsPerFunction": "off",
-            "noUnsafeTypeAssertion": "off",
-            "useConsistentFunctionStyle": "off"
-          },
+          "nursery": "off",
           "performance": {
             "noAwaitInLoops": "off"
           },
