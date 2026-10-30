@@ -50,6 +50,7 @@ pytest tests/ src/ -m "not playwright" --cov=pyvista_wasm
 ```
 
 Conventions:
+
 - Group related tests into a class named after the function or command under test (e.g. `TestCameraAzimuth`, `TestTextureRendering`):
 
   ```python
@@ -79,6 +80,7 @@ CI runs the full test suite on every PR, [pre-commit.ci](https://pre-commit.ci) 
 ## Boundaries
 
 Never do the following:
+
 - Never commit or modify anything under `.github/workflows/` or other CI configuration, or `.pre-commit-config.yaml` — generated/maintained infrastructure is out of scope for agent edits.
 - Never commit secrets, API keys, or credentials. Never modify files that hold them.
 - Never commit generated artifacts: `src/pyvista_wasm/templates/renderer.js` is built via `npm run build`, and vtk-wasm binaries live in `packages/vtk-wasm-binary/`.

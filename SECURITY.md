@@ -5,14 +5,15 @@
 
 ## Supported Versions
 
-| Version | Supported          |
+| Version | Supported |
 | ------- | ------------------ |
-| latest  | :white_check_mark: |
+| latest | :white_check_mark: |
 
 ## SPEC 8 — Securing the Release Process
 
 This project follows [SPEC 8](https://scientific-python.org/specs/spec-0008/) for
 securing the release process:
+
 - **Trusted Publishing**: Releases are published to PyPI using OpenID Connect (OIDC)
   trusted publishing, eliminating the need for long-lived API tokens
 - **Build Provenance Attestations**: All PyPI releases include cryptographically
@@ -36,6 +37,7 @@ Instead, please report them via
 [GitHub's private vulnerability reporting](https://github.com/tkoyama010/pyvista-wasm/security/advisories/new).
 
 Include as much of the following information as possible:
+
 - Type of issue (e.g., code injection, cross-site scripting, etc.)
 - Full paths of source file(s) related to the issue
 - Steps to reproduce the issue

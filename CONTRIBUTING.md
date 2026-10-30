@@ -52,6 +52,7 @@ This project adheres to the [Contributor Covenant 3.0](CODE_OF_CONDUCT.md). By p
 ## Getting Started
 
 pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visualization to the browser using WebAssembly. Before contributing:
+
 1. Check the [issue tracker](https://github.com/tkoyama010/pyvista-wasm/issues) for existing issues or create a new one
 1. Read through the [README](https://github.com/tkoyama010/pyvista-wasm#readme)
 
@@ -68,6 +69,7 @@ pyvista-wasm is a PyVista-like API for VTK.wasm that brings intuitive 3D visuali
 ### GitHub Codespaces
 
 No local setup is required if you use [GitHub Codespaces](https://github.com/features/codespaces). A devcontainer (`.devcontainer/devcontainer.json`) provisions a CI-equivalent environment with uv, npm dependencies, pre-commit, tox, Playwright-ready Python, and the [pi coding agent CLI](https://github.com/earendil-works/pi-coding-agent) preinstalled.
+
 1. Open the repository (or any pull request) on GitHub, click the **Code** button, and select **Codespaces**, or create one from the CLI:
 
    ```bash
@@ -89,6 +91,7 @@ The devcontainer mirrors the GitHub Actions test workflow (Python 3.13, tox, `np
 #### Using the devcontainer locally
 
 The same environment runs on your own machine without Codespaces:
+
 1. Install [Docker](https://docs.docker.com/get-docker/) and [VS Code](https://code.visualstudio.com/) with the **Dev Containers** extension (or the [`devcontainer` CLI](https://github.com/devcontainers/cli)).
 
 1. Clone the repository, open it in VS Code, and run **Dev Containers: Reopen in Container** from the command palette. VS Code builds the container from `.devcontainer/devcontainer.json`, runs `postCreateCommand`, and attaches the workspace. From the CLI instead:
@@ -179,6 +182,7 @@ type(scope): description
 ```
 
 Common types:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation only changes
@@ -210,6 +214,7 @@ The project uses pre-commit hooks to ensure code quality.
 The English `README.md` is the authoritative source of truth. Localized `README.<lang>.md` files (e.g. `README.ja.md`) are derived from it and must preserve the same heading/section structure. GitHub renders these files automatically and shows a language switcher on the repository page.
 
 A zero-dependency drift-detection tool ([readme-i18n-check](https://github.com/tkoyama010/readme-i18n-check), Python stdlib only) enforces two checks:
+
 1. **Structural parity** — heading levels (H1-H6) must match between `README.md` and each `README.<lang>.md`. This catches missing, extra, or restructured sections.
 1. **Stale translation** — if a `README.<lang>.md` was last committed before the latest `README.md` change, CI flags it as stale.
 
@@ -226,6 +231,7 @@ Both checks run in CI (`.github/workflows/readme-i18n-check.yml`) and the struct
 ### Resolving a Stale-Translation Failure
 
 When CI reports a stale translation:
+
 1. Review the changes to `README.md` since the last translation update.
 1. Update `README.<lang>.md` to reflect the English changes and commit it.
 1. If the English change is cosmetic (e.g. a badge URL) and does not require translation, add the filename to `.github/readme-i18n-allowlist` (one filename per line) and commit that change.
@@ -323,6 +329,7 @@ uv run pytest --cov=pyvista_wasm --cov-report=html
 ### Continuous Integration
 
 Pull requests are automatically tested using GitHub Actions:
+
 - Linting and formatting checks
 - Tests on Python 3.13, 3.14, and 3.15
 - Tests on Linux, Windows, and macOS
@@ -356,6 +363,7 @@ We welcome various types of contributions:
 ### Recognition
 
 All contributions are recognized using [all-contributors](https://allcontributors.org/). Contributions include:
+
 - Code
 - Documentation
 - Ideas and planning
@@ -380,6 +388,7 @@ This project follows several [Scientific Python SPECs](https://scientific-python
 ## Questions?
 
 If you have questions about contributing, feel free to:
+
 - Check existing [issues](https://github.com/tkoyama010/pyvista-wasm/issues)
 - Open a new [issue](https://github.com/tkoyama010/pyvista-wasm/issues/new)
 

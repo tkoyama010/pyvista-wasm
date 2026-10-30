@@ -14,7 +14,7 @@
 
 提供類似 [PyVista](https://github.com/pyvista/pyvista) 的 API 給 [VTK.wasm](https://kitware.github.io/vtk-wasm/) — 透過 WebAssembly 在瀏覽器中實現直覺式的 3D 視覺化。
 
-| [用 JupyterLite 試用]  | [用 Stlite 試用]  | [用 marimo 試用]  |
+| [用 JupyterLite 試用] | [用 Stlite 試用] | [用 marimo 試用] |
 | :--------------------: | :---------------: | :---------------: |
 | ![jupyterlite-preview] | ![stlite-preview] | ![marimo-preview] |
 
@@ -68,6 +68,7 @@ PyCon JP 2026 的議程介紹了 pyvista-wasm，包含即時示範與 WASM 渲�
 本專案將 [pyvista-js](https://github.com/tkoyama010/pyvista-js) 中使用的 [vtk.js](https://github.com/Kitware/vtk-js) 渲染後端替換為 [VTK.wasm](https://kitware.github.io/vtk-wasm/)（`@kitware/vtk-wasm` npm 套件）。
 
 主要差異：
+
 - **渲染後端**：VTK.wasm（VTK C++ 的 WebAssembly 移植版本），而非 vtk.js（純 JavaScript 重寫版本）
 - **API 風格**：VTK.wasm 使用命名空間物件上的 `vtk.vtkRenderer()` 工廠函式，而非 vtk.js 的 `vtk.Rendering.Core.vtkRenderer.newInstance()` 階層結構
 - **初始化**：VTK.wasm 需要透過 `vtkWASM.createNamespace()` 進行非同步初始化以載入 WASM 二進位檔
