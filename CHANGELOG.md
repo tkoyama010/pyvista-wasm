@@ -339,7 +339,7 @@
 
 ### Features
 
-- add __main__.py to enable python -m pyvista_wasm ([#80](https://github.com/tkoyama010/pyvista-wasm/issues/80)) ([d3f4346](https://github.com/tkoyama010/pyvista-wasm/commit/d3f4346cba0cdc32f20ec70fc255d5e09552ae82))
+- add **main**.py to enable python -m pyvista_wasm ([#80](https://github.com/tkoyama010/pyvista-wasm/issues/80)) ([d3f4346](https://github.com/tkoyama010/pyvista-wasm/commit/d3f4346cba0cdc32f20ec70fc255d5e09552ae82))
 - add intro.ipynb notebook and update ReadTheDocs config for JupyterLite ([#83](https://github.com/tkoyama010/pyvista-wasm/issues/83)) ([291f90e](https://github.com/tkoyama010/pyvista-wasm/commit/291f90eba1dc81560615f12735d6d26b779168dd))
 - Update Try Lite Now link to ReadTheDocs and remove JupyterLite deploy action ([#82](https://github.com/tkoyama010/pyvista-wasm/issues/82)) ([0baad4c](https://github.com/tkoyama010/pyvista-wasm/commit/0baad4cb91b420141149b1be159edab677903bf1))
 

@@ -14,8 +14,8 @@
 
 [PyVista](https://github.com/pyvista/pyvista) のような API を [VTK.wasm](https://kitware.github.io/vtk-wasm/) に提供し、WebAssembly を使ってブラウザで直感的な 3D 可視化を実現します。
 
-| [JupyterLite で試す] | [Stlite で試す] | [marimo で試す] |
-| :-------------------: | :-------------: | :-------------: |
+|  [JupyterLite で試す]  |  [Stlite で試す]  |  [marimo で試す]  |
+| :--------------------: | :---------------: | :---------------: |
 | ![jupyterlite-preview] | ![stlite-preview] | ![marimo-preview] |
 
 ## Table of Contents
@@ -68,7 +68,6 @@ PyCon JP 2026 のトークでは、pyvista-wasm をライブデモと WASM レ�
 このプロジェクトは [pyvista-js](https://github.com/tkoyama010/pyvista-js) で使用されている [vtk.js](https://github.com/Kitware/vtk-js) レンダリングバックエンドを [VTK.wasm](https://kitware.github.io/vtk-wasm/) (`@kitware/vtk-wasm` npm パッケージ) に置き換えます。
 
 主な違い:
-
 - **レンダリングバックエンド**: vtk.js (JavaScript の再実装) ではなく VTK.wasm (VTK C++ の WebAssembly ポート) を使用
 - **API スタイル**: VTK.wasm は名前空間オブジェクト上で `vtk.vtkRenderer()` ファクトリ関数を使用。vtk.js の `vtk.Rendering.Core.vtkRenderer.newInstance()` 階層とは異なる
 - **初期化**: VTK.wasm は WASM バイナリを読み込むために `vtkWASM.createNamespace()` による非同期初期化が必要
