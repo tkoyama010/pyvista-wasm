@@ -43,3 +43,9 @@ class TestRemoveActor:
         actor = plotter.add_mesh(pv.Cube())
         plotter.remove_actor(actor)
         assert len(plotter._renderer.lights) == 1
+
+    def test_empty_plotter_is_noop(self) -> None:
+        """Test removing from a plotter with no actors is a no-op."""
+        plotter = pv.Plotter()
+        plotter.remove_actor({"actor": object()})
+        assert len(plotter.actors) == 0
