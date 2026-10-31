@@ -409,6 +409,8 @@ type SceneData = {
   textActors?: TextActorConfig[];
   charts?: ChartConfig[];
   axes: boolean;
+  /** Mouse interaction style name; defaults to "trackball". */
+  interactionStyle?: string;
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
 };
