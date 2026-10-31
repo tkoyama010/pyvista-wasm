@@ -327,12 +327,20 @@ const DefaultViewAngle = 30;
 
 /** Subtract two 3-vectors. */
 function sub(a: number[], b: number[]): [number, number, number] {
-  return [(a[0] ?? 0) - (b[0] ?? 0), (a[1] ?? 0) - (b[1] ?? 0), (a[2] ?? 0) - (b[2] ?? 0)];
+  return [
+    (a[0] ?? 0) - (b[0] ?? 0),
+    (a[1] ?? 0) - (b[1] ?? 0),
+    (a[2] ?? 0) - (b[2] ?? 0),
+  ];
 }
 
 /** Dot product of two 3-vectors. */
 function dot(a: number[], b: number[]): number {
-  return (a[0] ?? 0) * (b[0] ?? 0) + (a[1] ?? 0) * (b[1] ?? 0) + (a[2] ?? 0) * (b[2] ?? 0);
+  return (
+    (a[0] ?? 0) * (b[0] ?? 0) +
+    (a[1] ?? 0) * (b[1] ?? 0) +
+    (a[2] ?? 0) * (b[2] ?? 0)
+  );
 }
 
 /** Cross product of two 3-vectors. */
@@ -347,7 +355,9 @@ function cross(a: number[], b: number[]): [number, number, number] {
 /** Normalize a 3-vector. */
 function normalize(v: number[]): [number, number, number] {
   const length = Math.hypot(v[0] ?? 0, v[1] ?? 0, v[2] ?? 0);
-  return length === 0 ? [0, 0, 0] : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
+  return length === 0
+    ? [0, 0, 0]
+    : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
 }
 
 /**
@@ -379,7 +389,7 @@ function setupGrid(
   if (!ctx) {
     return;
   }
-  if (!cameraConfig?.position || !cameraConfig.focalPoint) {
+  if (!(cameraConfig?.position && cameraConfig.focalPoint)) {
     console.info(
       "show_grid needs an explicit camera (plotter.camera = ...); skipping grid.",
     );
@@ -406,15 +416,26 @@ function setupGrid(
     const tanHalf = Math.tan((cam.viewAngle * Math.PI) / 360);
     const ndcX = dot(d, right) / (z * tanHalf * aspect);
     const ndcY = dot(d, up2) / (z * tanHalf);
-    return [(ndcX * 0.5 + 0.5) * canvas.width, (1 - (ndcY * 0.5 + 0.5)) * canvas.height];
+    return [
+      (ndcX * 0.5 + 0.5) * canvas.width,
+      (1 - (ndcY * 0.5 + 0.5)) * canvas.height,
+    ];
   };
 
   // Choose, per axis, the face plane away from the camera
   const Faces = 8; // grid divisions per face edge
   const planeAt = (axis: 0 | 1 | 2): number =>
     cam.position[axis] > (axis === 0 ? xmax : axis === 1 ? ymax : zmax)
-      ? (axis === 0 ? xmin : axis === 1 ? ymin : zmin)
-      : (axis === 0 ? xmax : axis === 1 ? ymax : zmax);
+      ? axis === 0
+        ? xmin
+        : axis === 1
+          ? ymin
+          : zmin
+      : axis === 0
+        ? xmax
+        : axis === 1
+          ? ymax
+          : zmax;
 
   for (const axis of [0, 1, 2] as const) {
     const plane = planeAt(axis);
@@ -428,7 +449,10 @@ function setupGrid(
       const other1 = others[1] ?? 1;
       const uMin: [number, number] = [lo[other0], lo[other1]];
       const uMax: [number, number] = [hi[other0], hi[other1]];
-      const linePoint = (other: 0 | 1, value: number): [number, number, number] => {
+      const linePoint = (
+        other: 0 | 1,
+        value: number,
+      ): [number, number, number] => {
         const p: [number, number, number] = [0, 0, 0];
         p[axis] = plane;
         p[other === 0 ? other0 : other1] = value;
