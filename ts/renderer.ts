@@ -1325,10 +1325,7 @@ function setupCharts(
         const py = toPx(series.y[i] ?? 0, yScale);
         ctx.lineTo(toPx(xv, xScale), py);
       });
-      ctx.lineTo(
-        toPx(series.x[series.x.length - 1] ?? 0, xScale),
-        yOrigin,
-      );
+      ctx.lineTo(toPx(series.x[series.x.length - 1] ?? 0, xScale), yOrigin);
       ctx.closePath();
       ctx.fill();
       ctx.globalAlpha = 1;
