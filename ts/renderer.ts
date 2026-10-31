@@ -737,11 +737,21 @@ async function injectPointData(
 
   const pd = await polydata.getPointData();
   for (const array of pointDataArrays) {
-    const dataArray = vtk.vtkFloatArray({
-      numberOfComponents: array.numberOfComponents,
-      name: array.name,
-    });
-    await dataArray.setArray(Float32Array.from(array.values)); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
+    const dataArray =
+      array.dtype === "uchar"
+        ? vtk.vtkUnsignedCharArray({
+            numberOfComponents: array.numberOfComponents,
+            name: array.name,
+          })
+        : vtk.vtkFloatArray({
+            numberOfComponents: array.numberOfComponents,
+            name: array.name,
+          });
+    await dataArray.setArray(
+      array.dtype === "uchar"
+        ? Uint8Array.from(array.values)
+        : Float32Array.from(array.values),
+    ); // eslint-disable-line no-await-in-loop -- VTK.wasm requires sequential await
     pd.addArray(dataArray);
   }
 }
@@ -969,6 +979,14 @@ async function setupActor(
     const pd = await getPolyData(sourceResult);
     await injectPointData(vtk, pd, cfg.source.pointData);
     await injectTcoords(vtk, pd, cfg.source.tCoords);
+  }
+
+  // Activate the Python-mapped RGB scalar array so the mapper renders
+  // direct per-point colors (VTK treats 3-component uchar scalars as RGB).
+  if (cfg.scalars?.colorArrayName) {
+    const colorPd = await getPolyData(sourceResult);
+    const colorPointData = await colorPd.getPointData();
+    colorPointData.setActiveScalars(cfg.scalars.colorArrayName);
   }
 
   let currentResult = sourceResult;
