@@ -670,6 +670,74 @@ class MultiBlock:
         return ((b[0] + b[1]) / 2, (b[2] + b[3]) / 2, (b[4] + b[5]) / 2)
 
 
+def _subdivide_once(
+    points: np.ndarray,
+    faces: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Perform one level of linear subdivision on a mesh.
+
+    Triangles are split into 4 triangles; any other n-gon is split into
+    n quads using edge midpoints and the face centre.
+    """
+    new_points = [points]
+    n_points = len(points)
+    midpoint_index: dict[tuple[int, int], int] = {}
+
+    def midpoint(a: int, b: int) -> int:
+        key = (min(a, b), max(a, b))
+        idx = midpoint_index.get(key)
+        if idx is None:
+            idx = n_points + len(midpoint_index)
+            midpoint_index[key] = idx
+            new_points.append((points[a] + points[b]) / 2)
+        return idx
+
+    new_faces: list[list[int]] = []
+    array = np.asarray(faces)
+    if array.ndim > 1:
+        faces_list = [[int(v) for v in row] for row in array]
+    else:
+        faces_list = []
+        flat = array.tolist()
+        walk = 0
+        while walk < len(flat):
+            size = int(flat[walk])
+            walk += 1
+            faces_list.append([int(v) for v in flat[walk : walk + size]])
+            walk += size
+    i = 0
+    while i < len(faces_list):
+        ids = faces_list[i]
+        i += 1
+        if len(ids) < 3:  # noqa: PLR2004
+            continue
+        size = len(ids)
+        if size == 3:  # noqa: PLR2004
+            a, b, c = ids
+            m_ab = midpoint(a, b)
+            m_bc = midpoint(b, c)
+            m_ca = midpoint(c, a)
+            new_faces += [
+                [a, m_ab, m_ca],
+                [m_ab, b, m_bc],
+                [m_ca, m_bc, c],
+                [m_ab, m_bc, m_ca],
+            ]
+        else:
+            center_index = n_points + len(midpoint_index)
+            new_points.append(points[ids].mean(axis=0))
+            mids = [midpoint(ids[k], ids[(k + 1) % size]) for k in range(size)]
+            for k in range(size):
+                prev = mids[k - 1]
+                new_faces.append([ids[k], mids[k], center_index, prev])
+
+    all_points = np.vstack(new_points)
+    out: list[int] = []
+    for face in new_faces:
+        out.extend([len(face), *face])
+    return all_points, np.asarray(out, dtype=int)
+
+
 class PolyData(DataSet):
     """Base polygonal mesh class.
 
@@ -989,6 +1057,56 @@ class PolyData(DataSet):
             faces=self.faces,
             _scene_data=base_scene,
         )
+
+    def subdivide(self, nsub: int = 1, subfilter: str = "linear") -> PolyData:
+        """Subdivide each face into ``4**nsub`` smaller faces.
+
+        Mirrors the PyVista ``subdivide`` filter API with the ``linear``
+        subdivision scheme: each edge gets a midpoint vertex and each
+        n-gon face is split into n quads (triangles become 4 triangles).
+        The subdivision is computed in Python with NumPy because the
+        vtk-wasm binary does not register a deserializer for the
+        ``vtkLinearSubdivisionFilter``.
+
+        Parameters
+        ----------
+        nsub : int, optional
+            Number of subdivision levels. Default is 1.
+        subfilter : str, optional
+            Subdivision scheme. Only ``"linear"`` is supported; other
+            PyVista schemes (``"butterfly"``, ``"center"``) raise
+            ``NotImplementedError``.
+
+        Returns
+        -------
+        PolyData
+            A new subdivided mesh.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> quad = pv.PolyData(
+        ...     points=[[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0]],
+        ...     faces=[[0, 1, 2, 3]],
+        ... )
+        >>> sub = quad.subdivide(nsub=1)
+        >>> sub.n_points
+        9
+
+        """
+        if nsub < 1:
+            msg = f"nsub must be >= 1, got {nsub}"
+            raise ValueError(msg)
+        if subfilter != "linear":
+            msg = f"Only the 'linear' subfilter is supported, got {subfilter!r}"
+            raise NotImplementedError(msg)
+
+        faces = self.faces if self.faces is not None else np.zeros(0, dtype=int)
+        points = self.points.copy()
+        for _ in range(nsub):
+            points, faces = _subdivide_once(points, faces)
+
+        return PolyData(points=points, faces=faces, _scene_data=None)
 
     def clip(
         self,
