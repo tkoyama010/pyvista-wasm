@@ -148,6 +148,12 @@
   },
   "overrides": [
     {
+      "includes": ["*.md"],
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
       "includes": ["ts/renderer.ts"],
       "linter": {
         "rules": {
