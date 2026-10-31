@@ -813,6 +813,9 @@ class _BaseHTMLRenderer:
                 "opacity": ta.prop.opacity,
                 "bold": ta.prop.bold,
                 "italic": ta.prop.italic,
+                "backgroundColor": list(ta.prop.background_color)
+                if ta.prop.background_color is not None
+                else None,
             }
             for ta in self.text_actors
         ]

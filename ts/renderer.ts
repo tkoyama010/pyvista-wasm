@@ -1385,8 +1385,16 @@ function setupTextActor(
   div.style.pointerEvents = "none";
   div.style.zIndex = "10";
   div.style.whiteSpace = "pre";
-  div.style.textShadow =
-    "1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)";
+  if (cfg.backgroundColor) {
+    const [br, bg, bb] = cfg.backgroundColor;
+    div.style.background = `rgba(${String(br)},${String(bg)},${String(bb)},${String(cfg.opacity)})`;
+    div.style.padding = "2px 4px";
+    div.style.borderRadius = "3px";
+    div.style.textShadow = "none";
+  } else {
+    div.style.textShadow =
+      "1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)";
+  }
   containerElement.append(div);
 }
 
