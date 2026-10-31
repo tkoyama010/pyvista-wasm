@@ -257,8 +257,6 @@ async function buildScene(
 
     const bbox = container.getBoundingClientRect();
     const canvasId = `${sceneData.containerId}-canvas`;
-    const DefaultCanvasWidth = 600;
-    const DefaultCanvasHeight = 400;
     const canvas = document.createElement("canvas");
     canvas.id = canvasId;
     canvas.width = bbox.width || DefaultCanvasWidth;
@@ -292,6 +290,10 @@ async function buildScene(
       }
     }
 
+    if (sceneData.pointLabels && sceneData.pointLabels.length > 0) {
+      setupPointLabels(sceneData.pointLabels, sceneData.camera, container);
+    }
+
     if (sceneData.charts && sceneData.charts.length > 0) {
       setupCharts(sceneData.charts, container);
     }
@@ -319,6 +321,109 @@ async function buildScene(
     showOverlayError(overlay, msg);
   }
 }
+
+/**
+ * Draw point labels (VTK::RenderingLabel mapping) as DOM overlays.
+ *
+ * Labels are projected with the scene camera; the wasm binary does not
+ * register the vtkLabelPlacementMapper classes. Without an explicit
+ * camera configuration the projection is unknown, so labels are
+ * skipped with a console note.
+ * @param labels - Label configuration from the scene data.
+ * @param cameraConfig - The scene camera, required for projection.
+ * @param containerElement - The DOM element that holds the VTK canvas.
+ */
+function setupPointLabels(
+  labels: PointLabelConfig[],
+  cameraConfig: CameraConfig | undefined,
+  containerElement: HTMLElement,
+): void {
+  if (!(cameraConfig?.position && cameraConfig.focalPoint)) {
+    console.info(
+      "add_point_labels needs an explicit camera (plotter.camera = ...); skipping labels.",
+    );
+    return;
+  }
+  const cam = {
+    position: cameraConfig.position,
+    focal: cameraConfig.focalPoint,
+    up: cameraConfig.viewUp ?? [0, 1, 0],
+    viewAngle: cameraConfig.viewAngle ?? DefaultViewAngle,
+  };
+  const aspect =
+    (containerElement.clientWidth || DefaultCanvasWidth) /
+    (containerElement.clientHeight || DefaultCanvasHeight);
+  const tanHalf = Math.tan((cam.viewAngle * Math.PI) / 360);
+  const forward = normalize(sub(cam.focal, cam.position));
+  const right = normalize(cross(forward, cam.up));
+  const up2 = cross(right, forward);
+  for (const label of labels) {
+    const d = sub(label.position, cam.position);
+    const z = dot(d, forward);
+    if (z <= 0) {
+      continue;
+    }
+    const ndcX = dot(d, right) / (z * tanHalf * aspect);
+    const ndcY = dot(d, up2) / (z * tanHalf);
+    const div = document.createElement("div");
+    div.textContent = label.text;
+    div.style.position = "absolute";
+    div.style.left = `${String((ndcX * 0.5 + 0.5) * 100)}%`;
+    div.style.top = `${String((1 - (ndcY * 0.5 + 0.5)) * 100)}%`;
+    div.style.transform = "translate(-50%, -50%)";
+    div.style.color = "#111";
+    div.style.background = "rgba(255,255,255,0.85)";
+    div.style.fontSize = "12px";
+    div.style.padding = "1px 3px";
+    div.style.borderRadius = "2px";
+    div.style.pointerEvents = "none";
+    div.style.zIndex = "10";
+    div.style.whiteSpace = "pre";
+    containerElement.append(div);
+  }
+}
+
+/** Default perspective view angle in degrees (VTK default). */
+const DefaultViewAngle = 30;
+
+/** Subtract two 3-vectors. */
+function sub(a: number[], b: number[]): [number, number, number] {
+  return [
+    (a[0] ?? 0) - (b[0] ?? 0),
+    (a[1] ?? 0) - (b[1] ?? 0),
+    (a[2] ?? 0) - (b[2] ?? 0),
+  ];
+}
+
+/** Dot product of two 3-vectors. */
+function dot(a: number[], b: number[]): number {
+  return (
+    (a[0] ?? 0) * (b[0] ?? 0) +
+    (a[1] ?? 0) * (b[1] ?? 0) +
+    (a[2] ?? 0) * (b[2] ?? 0)
+  );
+}
+
+/** Cross product of two 3-vectors. */
+function cross(a: number[], b: number[]): [number, number, number] {
+  return [
+    (a[1] ?? 0) * (b[2] ?? 0) - (a[2] ?? 0) * (b[1] ?? 0),
+    (a[2] ?? 0) * (b[0] ?? 0) - (a[0] ?? 0) * (b[2] ?? 0),
+    (a[0] ?? 0) * (b[1] ?? 0) - (a[1] ?? 0) * (b[0] ?? 0),
+  ];
+}
+
+/** Normalize a 3-vector. */
+function normalize(v: number[]): [number, number, number] {
+  const length = Math.hypot(v[0] ?? 0, v[1] ?? 0, v[2] ?? 0);
+  return length === 0
+    ? [0, 0, 0]
+    : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
+}
+
+/** Default canvas size when the container is not laid out yet. */
+const DefaultCanvasWidth = 600;
+const DefaultCanvasHeight = 400;
 
 /**
  * Bootstrap the renderer: show the overlay immediately, then wait

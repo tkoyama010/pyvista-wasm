@@ -350,6 +350,12 @@ type ActorConfig = {
   texture?: TextureConfig;
 };
 
+/** A text label anchored at a 3D point. */
+type PointLabelConfig = {
+  position: [number, number, number];
+  text: string;
+};
+
 /** Camera position and projection settings. */
 type CameraConfig = {
   position?: [number, number, number];
@@ -409,6 +415,8 @@ type SceneData = {
   textActors?: TextActorConfig[];
   charts?: ChartConfig[];
   axes: boolean;
+  /** Text labels anchored at 3D points (VTK::RenderingLabel). */
+  pointLabels?: PointLabelConfig[];
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
 };

@@ -753,6 +753,37 @@ class Plotter:
         """
         self._renderer.set_environment_texture(texture)
 
+    def add_point_labels(
+        self,
+        points: object,
+        labels: list[str],
+    ) -> None:
+        """Add text labels anchored at 3D points.
+
+        Mirrors ``pyvista.Plotter.add_point_labels``. Labels are drawn as
+        DOM overlays positioned with the scene camera; set
+        ``plotter.camera`` explicitly so the projection is available.
+
+        Parameters
+        ----------
+        points : array-like
+            An ``(n, 3)`` array of anchor points.
+        labels : list of str
+            One label per point.
+
+        Examples
+        --------
+        >>> import numpy as np
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_mesh(pv.Sphere())
+        >>> plotter.add_point_labels(
+        ...     np.array([[0.0, 0, 1]]), ["north pole"]
+        ... )  # doctest: +SKIP
+
+        """
+        self._renderer.add_point_labels(points, labels)
+
     def add_light(self, light: Light) -> None:
         """Add a light source to the scene.
 
