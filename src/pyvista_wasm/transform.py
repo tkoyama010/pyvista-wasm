@@ -89,6 +89,35 @@ class Transform:
         """Rotate ``angle`` degrees about the z axis."""
         return self._compose(_rotation_matrix(angle, "z"))
 
+    def rotate(self, vector: ArrayLike, angle: float) -> Transform:
+        """Rotate ``angle`` degrees about ``vector`` (Rodrigues' formula).
+
+        Mirrors ``pyvista.Transform.rotate(vector, angle)``. The axis
+        vector does not need to be normalized.
+        """
+        axis = np.asarray(vector, dtype=float)
+        if axis.shape != (3,):
+            msg = f"vector must have shape (3,), got {axis.shape}"
+            raise ValueError(msg)
+        norm = np.linalg.norm(axis)
+        if norm == 0:
+            msg = "vector must be non-zero"
+            raise ValueError(msg)
+        axis = axis / norm
+        theta = np.deg2rad(angle)
+        c, s = np.cos(theta), np.sin(theta)
+        x, y, z = axis
+        cross = np.array(
+            [
+                [0.0, -z, y],
+                [z, 0.0, -x],
+                [-y, x, 0.0],
+            ],
+        )
+        operation = np.eye(4)
+        operation[:3, :3] = c * np.eye(3) + s * cross + (1 - c) * np.outer(axis, axis)
+        return self._compose(operation)
+
     def scale(self, factors: ArrayLike) -> Transform:
         """Scale by ``(sx, sy, sz)`` factors."""
         s = np.asarray(factors, dtype=float)
