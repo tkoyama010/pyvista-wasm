@@ -15,7 +15,7 @@
 提供類似 [PyVista](https://github.com/pyvista/pyvista) 的 API 給 [VTK.wasm](https://kitware.github.io/vtk-wasm/) — 透過 WebAssembly 在瀏覽器中實現直覺式的 3D 視覺化。
 
 | [用 JupyterLite 試用] | [用 Stlite 試用] | [用 marimo 試用] |
-| :-------------------: | :--------------: | :--------------: |
+| :--------------------: | :---------------: | :---------------: |
 | ![jupyterlite-preview] | ![stlite-preview] | ![marimo-preview] |
 
 ## Table of Contents

@@ -15,7 +15,7 @@
 [PyVista](https://github.com/pyvista/pyvista) のような API を [VTK.wasm](https://kitware.github.io/vtk-wasm/) に提供し、WebAssembly を使ってブラウザで直感的な 3D 可視化を実現します。
 
 | [JupyterLite で試す] | [Stlite で試す] | [marimo で試す] |
-| :-------------------: | :-------------: | :-------------: |
+| :--------------------: | :---------------: | :---------------: |
 | ![jupyterlite-preview] | ![stlite-preview] | ![marimo-preview] |
 
 ## Table of Contents
