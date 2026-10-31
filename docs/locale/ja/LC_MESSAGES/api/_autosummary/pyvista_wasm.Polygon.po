@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 16:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Polygon.rst:2
+msgid "pyvista\\_wasm.Polygon"
+msgstr "pyvista\\_wasm.Polygon"
+
+#: of pyvista_wasm.mesh.Polygon:1
+msgid "Create a regular polygon mesh in the xy plane."
+msgstr "xy平面上に正多角形メッシュを作成します。"
+
+#: of pyvista_wasm.mesh.Polygon:3
+msgid ""
+"This mirrors the :func:`pyvista.Polygon` API. The geometry is generated "
+"with NumPy because the vtk-wasm binary does not register a deserializer "
+"for ``vtkRegularPolygonSource``."
+msgstr ""
+":func:`pyvista.Polygon` APIと同様の動作をします。vtk-wasmバイナリは"
+"``vtkRegularPolygonSource``のデシリアライザーを登録していないため、"
+"ジオメトリはNumPyで生成されます。"
+
+#: ../../api/_autosummary/pyvista_wasm.Polygon.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.Polygon:7
+msgid "Radius of the circumscribed circle. Default is 1.0."
+msgstr "外接円の半径。デフォルトは1.0です。"
+
+#: of pyvista_wasm.mesh.Polygon:9
+msgid "Number of sides (>= 3). Default is 6."
+msgstr "辺の数 (>= 3)。デフォルトは6です。"
+
+#: of pyvista_wasm.mesh.Polygon:11
+msgid "Center of the polygon (x, y, z). Default is (0, 0, 0)."
+msgstr "多角形の中心 (x, y, z)。デフォルトは(0, 0, 0)です。"
+
+#: ../../api/_autosummary/pyvista_wasm.Polygon.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: ../../api/_autosummary/pyvista_wasm.Polygon.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.Polygon:14
+msgid "A polygon mesh."
+msgstr "多角形メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.Polygon.rst
+msgid "Examples"
+msgstr "例"

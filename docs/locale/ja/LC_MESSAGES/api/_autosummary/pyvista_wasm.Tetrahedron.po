@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 16:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Tetrahedron.rst:2
+msgid "pyvista\\_wasm.Tetrahedron"
+msgstr "pyvista\\_wasm.Tetrahedron"
+
+#: of pyvista_wasm.mesh.Tetrahedron:1
+msgid "Create a tetrahedron mesh."
+msgstr "正四面体メッシュを作成します。"
+
+#: of pyvista_wasm.mesh.Tetrahedron:3
+msgid ""
+"Mirrors :func:`pyvista.Tetrahedron`. The vertices are placed on a sphere "
+"of the given radius, and the four faces are outward-oriented triangles."
+msgstr ""
+":func:`pyvista.Tetrahedron`と同様の動作をします。頂点は指定された半径の"
+"球面上に配置され、4つの面は外向きの三角形になります。"
+
+#: ../../api/_autosummary/pyvista_wasm.Tetrahedron.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.Tetrahedron:6
+msgid "Radius of the circumscribed sphere. Default is 1.0."
+msgstr "外接球の半径。デフォルトは1.0です。"
+
+#: of pyvista_wasm.mesh.Tetrahedron:8
+msgid "Center of the tetrahedron (x, y, z). Default is (0, 0, 0)."
+msgstr "四面体の中心 (x, y, z)。デフォルトは(0, 0, 0)です。"
+
+#: ../../api/_autosummary/pyvista_wasm.Tetrahedron.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: ../../api/_autosummary/pyvista_wasm.Tetrahedron.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.Tetrahedron:11
+msgid "A tetrahedron mesh."
+msgstr "四面体メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.Tetrahedron.rst
+msgid "Examples"
+msgstr "例"

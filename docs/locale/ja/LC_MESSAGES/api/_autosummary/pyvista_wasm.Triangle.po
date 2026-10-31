@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 16:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../api/_autosummary/pyvista_wasm.Triangle.rst:2
+msgid "pyvista\\_wasm.Triangle"
+msgstr "pyvista\\_wasm.Triangle"
+
+#: of pyvista_wasm.mesh.Triangle:1
+msgid "Create an equilateral triangle mesh in the xy plane."
+msgstr "xy平面上に正三角形メッシュを作成します。"
+
+#: of pyvista_wasm.mesh.Triangle:3
+msgid ""
+"Mirrors :func:`pyvista.Triangle`; a thin wrapper around :func:`Polygon` "
+"with ``n_sides=3``, matching PyVista's implementation."
+msgstr ""
+":func:`pyvista.Triangle`と同様の動作をします。PyVistaの実装に合わせて、"
+"``n_sides=3``の:func:`Polygon`の薄いラッパーになっています。"
+
+#: ../../api/_autosummary/pyvista_wasm.Triangle.rst
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: of pyvista_wasm.mesh.Triangle:6
+msgid "Center of the triangle (x, y, z). Default is (0, 0, 0)."
+msgstr "三角形の中心 (x, y, z)。デフォルトは(0, 0, 0)です。"
+
+#: of pyvista_wasm.mesh.Triangle:8
+msgid "Radius of the circumscribed circle. Default is 1.0."
+msgstr "外接円の半径。デフォルトは1.0です。"
+
+#: ../../api/_autosummary/pyvista_wasm.Triangle.rst
+msgid "Returns"
+msgstr "戻り値"
+
+#: ../../api/_autosummary/pyvista_wasm.Triangle.rst
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: of pyvista_wasm.mesh.Triangle:11
+msgid "A triangle mesh."
+msgstr "三角形メッシュ。"
+
+#: ../../api/_autosummary/pyvista_wasm.Triangle.rst
+msgid "Examples"
+msgstr "例"
