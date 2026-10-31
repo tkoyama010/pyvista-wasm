@@ -911,7 +911,7 @@ class Plotter:
                     opacity=float(cast("float", entry["opacity"])),
                     point_size=float(cast("float", entry["point_size"])),
                     render_points_as_spheres=bool(
-                        cast("bool", entry["render_points_as_spheres"])
+                        cast("bool", entry["render_points_as_spheres"]),
                     ),
                 )
                 continue
@@ -929,7 +929,8 @@ class Plotter:
                 texture=cast("Texture | None", entry["texture"]),
                 show_edges=bool(cast("bool", entry["show_edges"])),
                 edge_color=cast(
-                    "str | tuple[float, float, float] | None", entry["edge_color"]
+                    "str | tuple[float, float, float] | None",
+                    entry["edge_color"],
                 ),
                 style=cast("str", entry["style"]),
                 scalars=cast("str | None", entry["scalars"]),
