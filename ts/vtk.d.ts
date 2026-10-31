@@ -271,6 +271,8 @@ type PointDataArray = {
   numberOfComponents: number;
   values: number[];
   name: string;
+  /** "uchar" builds a vtkUnsignedCharArray (direct RGB colors); "float" (default) a vtkFloatArray. */
+  dtype?: "float" | "uchar";
 };
 
 /** Configuration for a geometry filter (shrink, tube, clip, or contour). */
@@ -348,6 +350,16 @@ type ActorConfig = {
   renderPointsAsSpheres?: boolean;
   pointSize?: number;
   texture?: TextureConfig;
+  scalars?: ScalarsConfig;
+};
+
+/** Scalar coloring configuration (colors are mapped Python-side). */
+type ScalarsConfig = {
+  arrayName: string;
+  cmap: string;
+  range: [number, number];
+  /** Name of the per-point RGB array to set as active scalars. */
+  colorArrayName?: string;
 };
 
 /** Camera position and projection settings. */
