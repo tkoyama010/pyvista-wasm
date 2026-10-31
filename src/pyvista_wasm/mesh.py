@@ -682,7 +682,7 @@ class PolyData(DataSet):
 
     """
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
         points: ArrayLike,
         faces: ArrayLike | None = None,
@@ -690,11 +690,13 @@ class PolyData(DataSet):
         t_coords: ArrayLike | None = None,
         scalars: ArrayLike | None = None,
         scalar_name: str = "scalars",
+        lines: ArrayLike | None = None,
         _scene_data: dict[str, Any] | None = None,
     ) -> None:
         """Initialize a PolyData mesh."""
         super().__init__(points)
         self.faces = np.asarray(faces) if faces is not None else None
+        self.lines = np.asarray(lines) if lines is not None else None
         self.t_coords = np.asarray(t_coords) if t_coords is not None else None
         self.scalars = np.asarray(scalars) if scalars is not None else None
         self.scalar_name = scalar_name
@@ -1419,6 +1421,8 @@ class PolyData(DataSet):
             }
             if self.faces is not None:
                 data["polys"] = self.faces.tolist()
+            if self.lines is not None:
+                data["lines"] = self.lines.tolist()
 
         # Inject texture coordinates
         if self.t_coords is not None:

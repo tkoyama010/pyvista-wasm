@@ -874,6 +874,113 @@ class Plotter:
         }
         self._renderer.add_scalar_bar(title=title, vertical=vertical, n_labels=n_labels)
 
+    def add_bounding_box(self, color: str | None = None) -> dict[str, object]:
+        """Add the outline of the bounds of all actors.
+
+        Mirrors ``pyvista.Plotter.add_bounding_box``. The outline is
+        built as a lines-only :class:`PolyData` around the union of all
+        actor bounds.
+
+        Parameters
+        ----------
+        color : str, optional
+            Outline color name. Default is renderer default.
+
+        Returns
+        -------
+        actor
+            The VTK.wasm actor rendering the outline.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_mesh(pv.Sphere())
+        >>> _ = plotter.add_bounding_box()
+
+        """
+        import numpy as np  # noqa: PLC0415
+
+        from .mesh import PolyData  # noqa: PLC0415
+
+        meshes = [entry["mesh"] for entry in self._actors]
+        if not meshes:
+            msg = "add_bounding_box requires at least one actor"
+            raise ValueError(msg)
+        bounds = np.array([mesh.bounds for mesh in meshes])  # type: ignore[attr-defined]
+        lows = bounds[:, ::2].min(axis=0)
+        highs = bounds[:, 1::2].max(axis=0)
+        xmin, ymin, zmin = lows.tolist()
+        xmax, ymax, zmax = highs.tolist()
+        corners = np.array(
+            [
+                [xmin, ymin, zmin],
+                [xmax, ymin, zmin],
+                [xmax, ymax, zmin],
+                [xmin, ymax, zmin],
+                [xmin, ymin, zmax],
+                [xmax, ymin, zmax],
+                [xmax, ymax, zmax],
+                [xmin, ymax, zmax],
+            ],
+        )
+        edges = [
+            (0, 1),
+            (1, 2),
+            (2, 3),
+            (3, 0),
+            (4, 5),
+            (5, 6),
+            (6, 7),
+            (7, 4),
+            (0, 4),
+            (1, 5),
+            (2, 6),
+            (3, 7),
+        ]
+        lines: list[int] = []
+        for a, b in edges:
+            lines.extend([2, a, b])
+        outline = PolyData(points=corners, lines=np.asarray(lines))
+        return self.add_mesh(outline, color=color)
+
+    def show_grid(self, color: str | None = None) -> None:
+        """Show a bounds grid around the actors.
+
+        Mirrors ``pyvista.Plotter.show_grid``. The grid is drawn as a
+        2D overlay (the wasm binary does not register the
+        ``vtkGridAxesActor`` classes), projecting the three back faces
+        of the bounds with the scene camera. A camera must be set
+        explicitly (``plotter.camera = ...``); with the default camera
+        the grid is skipped because the projected camera parameters are
+        not available.
+
+        Parameters
+        ----------
+        color : str, optional
+            Grid color name. Default is renderer default.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_mesh(pv.Sphere())
+        >>> plotter.show_grid()  # doctest: +SKIP
+
+        """
+        import numpy as np  # noqa: PLC0415
+
+        meshes = [entry["mesh"] for entry in self._actors]
+        if not meshes:
+            msg = "show_grid requires at least one actor"
+            raise ValueError(msg)
+        lows = np.array([mesh.bounds[::2] for mesh in meshes]).min(axis=0)  # type: ignore[attr-defined]
+        highs = np.array([mesh.bounds[1::2] for mesh in meshes]).max(axis=0)  # type: ignore[attr-defined]
+        self._renderer.set_grid(
+            bounds=[*lows.tolist(), *highs.tolist()],
+            color=color,
+        )
+
     def clear(self) -> None:
         """Clear all actors from the plotter.
 

@@ -257,8 +257,6 @@ async function buildScene(
 
     const bbox = container.getBoundingClientRect();
     const canvasId = `${sceneData.containerId}-canvas`;
-    const DefaultCanvasWidth = 600;
-    const DefaultCanvasHeight = 400;
     const canvas = document.createElement("canvas");
     canvas.id = canvasId;
     canvas.width = bbox.width || DefaultCanvasWidth;
@@ -296,6 +294,10 @@ async function buildScene(
       setupCharts(sceneData.charts, container);
     }
 
+    if (sceneData.grid) {
+      setupGrid(sceneData.grid, sceneData.camera, container);
+    }
+
     renderer.resetCamera();
     if (sceneData.camera) {
       await setupCamera(renderer, sceneData.camera);
@@ -319,6 +321,137 @@ async function buildScene(
     showOverlayError(overlay, msg);
   }
 }
+
+/** Default perspective view angle in degrees (VTK default). */
+const DefaultViewAngle = 30;
+
+/** Subtract two 3-vectors. */
+function sub(a: number[], b: number[]): [number, number, number] {
+  return [(a[0] ?? 0) - (b[0] ?? 0), (a[1] ?? 0) - (b[1] ?? 0), (a[2] ?? 0) - (b[2] ?? 0)];
+}
+
+/** Dot product of two 3-vectors. */
+function dot(a: number[], b: number[]): number {
+  return (a[0] ?? 0) * (b[0] ?? 0) + (a[1] ?? 0) * (b[1] ?? 0) + (a[2] ?? 0) * (b[2] ?? 0);
+}
+
+/** Cross product of two 3-vectors. */
+function cross(a: number[], b: number[]): [number, number, number] {
+  return [
+    (a[1] ?? 0) * (b[2] ?? 0) - (a[2] ?? 0) * (b[1] ?? 0),
+    (a[2] ?? 0) * (b[0] ?? 0) - (a[0] ?? 0) * (b[2] ?? 0),
+    (a[0] ?? 0) * (b[1] ?? 0) - (a[1] ?? 0) * (b[0] ?? 0),
+  ];
+}
+
+/** Normalize a 3-vector. */
+function normalize(v: number[]): [number, number, number] {
+  const length = Math.hypot(v[0] ?? 0, v[1] ?? 0, v[2] ?? 0);
+  return length === 0 ? [0, 0, 0] : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
+}
+
+/**
+ * Draw a bounds grid (VTK::RenderingGridAxes mapping) as a 2D overlay.
+ *
+ * The three back faces of the bounds box are projected with the scene
+ * camera and drawn with the canvas API; the wasm binary does not
+ * register the vtkGridAxes actor classes. Without an explicit camera
+ * configuration the projected parameters are unknown, so the grid is
+ * skipped with a console note.
+ * @param config - Grid configuration from the scene data.
+ * @param cameraConfig - The scene camera, required for projection.
+ * @param containerElement - The DOM element that holds the VTK canvas.
+ */
+function setupGrid(
+  config: GridConfig,
+  cameraConfig: CameraConfig | undefined,
+  containerElement: HTMLElement,
+): void {
+  const canvas = document.createElement("canvas");
+  canvas.width = containerElement.clientWidth || DefaultCanvasWidth;
+  canvas.height = containerElement.clientHeight || DefaultCanvasHeight;
+  canvas.style.position = "absolute";
+  canvas.style.inset = "0";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "8";
+  containerElement.append(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+  if (!cameraConfig?.position || !cameraConfig.focalPoint) {
+    console.info(
+      "show_grid needs an explicit camera (plotter.camera = ...); skipping grid.",
+    );
+    return;
+  }
+
+  const [xmin, xmax, ymin, ymax, zmin, zmax] = config.bounds;
+  const cam = {
+    position: cameraConfig.position,
+    focal: cameraConfig.focalPoint,
+    up: cameraConfig.viewUp ?? [0, 1, 0],
+    viewAngle: cameraConfig.viewAngle ?? DefaultViewAngle,
+  };
+  const aspect = canvas.width / canvas.height;
+  ctx.strokeStyle = config.color ?? "#888";
+  ctx.lineWidth = 1;
+
+  const project = (p: [number, number, number]): [number, number] => {
+    const forward = normalize(sub(cam.focal, cam.position));
+    const right = normalize(cross(forward, cam.up));
+    const up2 = cross(right, forward);
+    const d = sub(p, cam.position);
+    const z = dot(d, forward);
+    const tanHalf = Math.tan((cam.viewAngle * Math.PI) / 360);
+    const ndcX = dot(d, right) / (z * tanHalf * aspect);
+    const ndcY = dot(d, up2) / (z * tanHalf);
+    return [(ndcX * 0.5 + 0.5) * canvas.width, (1 - (ndcY * 0.5 + 0.5)) * canvas.height];
+  };
+
+  // Choose, per axis, the face plane away from the camera
+  const Faces = 8; // grid divisions per face edge
+  const planeAt = (axis: 0 | 1 | 2): number =>
+    cam.position[axis] > (axis === 0 ? xmax : axis === 1 ? ymax : zmax)
+      ? (axis === 0 ? xmin : axis === 1 ? ymin : zmin)
+      : (axis === 0 ? xmax : axis === 1 ? ymax : zmax);
+
+  for (const axis of [0, 1, 2] as const) {
+    const plane = planeAt(axis);
+    const others = ([0, 1, 2] as const).filter((a) => a !== axis);
+    const lo: [number, number, number] = [xmin, ymin, zmin];
+    const hi: [number, number, number] = [xmax, ymax, zmax];
+    for (let i = 0; i <= Faces; i++) {
+      const t = i / Faces;
+      ctx.beginPath();
+      const other0 = others[0] ?? 0;
+      const other1 = others[1] ?? 1;
+      const uMin: [number, number] = [lo[other0], lo[other1]];
+      const uMax: [number, number] = [hi[other0], hi[other1]];
+      const linePoint = (other: 0 | 1, value: number): [number, number, number] => {
+        const p: [number, number, number] = [0, 0, 0];
+        p[axis] = plane;
+        p[other === 0 ? other0 : other1] = value;
+        return p;
+      };
+      const aValue = uMin[0] + (uMax[0] - uMin[0]) * t;
+      const bValue = uMin[1] + (uMax[1] - uMin[1]) * t;
+      const start = project(linePoint(0, aValue));
+      const end = project(linePoint(0, uMax[0]));
+      const start2 = project(linePoint(1, bValue));
+      const end2 = project(linePoint(1, uMax[1]));
+      ctx.moveTo(start[0], start[1]);
+      ctx.lineTo(end[0], end[1]);
+      ctx.moveTo(start2[0], start2[1]);
+      ctx.lineTo(end2[0], end2[1]);
+      ctx.stroke();
+    }
+  }
+}
+
+/** Default canvas size when the container is not laid out yet. */
+const DefaultCanvasWidth = 600;
+const DefaultCanvasHeight = 400;
 
 /**
  * Bootstrap the renderer: show the overlay immediately, then wait
@@ -693,6 +826,32 @@ async function createMeshSource(
     const cellArray = vtk.vtkCellArray();
     await cellArray.setData(offsetsArray, connectivityArray);
     await polydata.setPolys(cellArray);
+  }
+  if (cfg.lines && cfg.lines.length > 0) {
+    const lineOffsets: number[] = [0];
+    const lineConnectivity: number[] = [];
+    let li = 0;
+    const legacyLines = cfg.lines;
+    while (li < legacyLines.length) {
+      const count = legacyLines[li] ?? 0;
+      for (let j = 1; j <= count; j++) {
+        lineConnectivity.push(legacyLines[li + j] ?? 0);
+      }
+      lineOffsets.push(lineConnectivity.length);
+      li += count + 1;
+    }
+    const ComponentsOne = 1;
+    const lineOffsetsArray = vtk.vtkIntArray({
+      numberOfComponents: ComponentsOne,
+    });
+    await lineOffsetsArray.setArray(Int32Array.from(lineOffsets));
+    const lineConnectivityArray = vtk.vtkIntArray({
+      numberOfComponents: ComponentsOne,
+    });
+    await lineConnectivityArray.setArray(Int32Array.from(lineConnectivity));
+    const lineCellArray = vtk.vtkCellArray();
+    await lineCellArray.setData(lineOffsetsArray, lineConnectivityArray);
+    await polydata.setLines(lineCellArray);
   }
 
   return { output: polydata, isFilter: false };
