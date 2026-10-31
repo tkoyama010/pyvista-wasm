@@ -119,6 +119,10 @@ class Plotter:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        ambient: float = 0.0,
+        diffuse: float = 1.0,
+        specular: float = 0.0,
+        specular_power: float = 100.0,
         transform: Transform | ArrayLike | None = None,
         **kwargs: object,
     ) -> dict[str, object]:
@@ -162,6 +166,15 @@ class Plotter:
         scalars : str, optional
             Name of the scalar array to use for coloring. The array must exist
             in ``mesh.point_data``.
+        ambient : float, optional
+            Ambient material response coefficient, between 0 and 1. Default is 0.0.
+        diffuse : float, optional
+            Diffuse material response coefficient, between 0 and 1. Default is 1.0.
+        specular : float, optional
+            Specular (mirror-like) response coefficient, between 0 and 1.
+            Default is 0.0.
+        specular_power : float, optional
+            Specular power (shininess). Default is 100.0.
         cmap : str, optional
             Name of the colormap to use when rendering scalars. Default is 'viridis'.
             Supported colormaps: 'viridis', 'plasma', 'inferno', 'magma', 'jet',
@@ -270,6 +283,10 @@ class Plotter:
             style=style,
             scalars=scalars,
             cmap=cmap,
+            ambient=ambient,
+            diffuse=diffuse,
+            specular=specular,
+            specular_power=specular_power,
             transform=transform_obj,
         )
 
@@ -289,6 +306,10 @@ class Plotter:
                 "style": style,
                 "scalars": scalars,
                 "cmap": cmap,
+                "ambient": ambient,
+                "diffuse": diffuse,
+                "specular": specular,
+                "specular_power": specular_power,
                 "transform": transform,
                 "actor": actor,
                 "kwargs": kwargs,
