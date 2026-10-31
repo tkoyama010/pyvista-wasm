@@ -7,7 +7,7 @@ using VTK.wasm in browser environments.
 from __future__ import annotations
 
 import uuid
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from .rendering import get_renderer
 
@@ -894,8 +894,6 @@ class Plotter:
         >>> plotter.remove_actor(actor)
 
         """
-        from typing import cast  # noqa: PLC0415
-
         from .transform import Transform  # noqa: PLC0415
 
         kept = [a for a in self._actors if a.get("actor") is not actor]
