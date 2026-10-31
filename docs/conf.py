@@ -120,7 +120,7 @@ myst_enable_extensions = [
 
 # -- Options for jupyterlite-sphinx ------------------------------------------
 jupyterlite_dir = ".jupyterlite"
-jupyterlite_contents = ["content", "../src"]
+jupyterlite_contents = ["content"]
 global_enable_try_examples = True
 try_examples_global_warning_text = (
     "pyvista-wasm's interactive examples are experimental and may not always work as expected."
