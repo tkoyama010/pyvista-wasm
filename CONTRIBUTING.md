@@ -173,7 +173,7 @@ git checkout -b fix/issue-description
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/). Your commit messages should follow this format:
 
-```
+```text
 type(scope): description
 
 [optional body]
