@@ -1,34 +1,37 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2026, Tetsuo Koyama
-# This file is distributed under the same license as the pyvista-wasm
-# package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
-#
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Tetsuo Koyama <tkoyama010@gmail.com>, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 11:51+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: ja <LL@li.org>\n"
-"Language: ja\n"
+"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"PO-Revision-Date: 2026-10-31 08:59+0000\n"
+"Last-Translator: Tetsuo Koyama <tkoyama010@gmail.com>, 2026\n"
+"Language-Team: Japanese (https://app.transifex.com/tkoyama010/teams/310886/ja/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Generated-By: Babel 2.18.0\n"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst:2
+#: ../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst:2
 msgid "pyvista\\_wasm.examples.download\\_saturn\\_surface"
 msgstr "pyvista\\_wasm.examples.download\\_saturn\\_surface"
 
-#: of pyvista_wasm.examples.download_saturn_surface:1
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:1
 msgid "Download the Saturn planet surface texture."
 msgstr "土星の惑星表面テクスチャをダウンロードします。"
 
-#: of pyvista_wasm.examples.download_saturn_surface:3
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:3
 msgid ""
 "Returns the Saturn surface image from the PyVista ``solar_textures`` dataset"
 " as a :class:`~pyvista_wasm.texture.Texture`, mirroring the "
@@ -42,23 +45,26 @@ msgstr ""
 "API と同じです。テクスチャは `Solar Textures "
 "<https://www.solarsystemscope.com/textures/>`_ から取得しています。"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst
+#: ../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst:0
 msgid "Returns"
 msgstr "戻り値"
 
-#: of pyvista_wasm.examples.download_saturn_surface:9
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:9
 msgid "Texture wrapping the Saturn surface image URL."
 msgstr "土星表面画像のURLをラップするテクスチャ。"
 
-#: ../../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst
+#: ../api/_autosummary/pyvista_wasm.examples.download_saturn_surface.rst:0
 msgid "Return type"
 msgstr "戻り値の型"
 
-#: of pyvista_wasm.examples.download_saturn_surface:13
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:13
 msgid "Notes"
 msgstr "注釈"
 
-#: of pyvista_wasm.examples.download_saturn_surface:14
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:14
 msgid ""
 "pyvista-wasm textures are URL-based, so no file is downloaded on the Python "
 "side — the returned :class:`~pyvista_wasm.texture.Texture` wraps the remote "
@@ -68,7 +74,8 @@ msgstr ""
 ":class:`~pyvista_wasm.texture.Texture` はリモート画像のURLをラップし、VTK.wasm がブラウザ上で "
 "WebGL 経由でサンプリングします。"
 
-#: of pyvista_wasm.examples.download_saturn_surface:18
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:18
 msgid ""
 "To render a textured Saturn globe, pass the texture directly to "
 ":meth:`~pyvista_wasm.Plotter.add_mesh` on the result of "
@@ -84,10 +91,12 @@ msgstr ""
 "<https://docs.pyvista.org/examples/99-advanced/planets.html>`_ サンプルの wasm "
 "版に相当します。"
 
-#: of pyvista_wasm.examples.download_saturn_surface:26
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:26
 msgid "Examples"
 msgstr "例"
 
-#: of pyvista_wasm.examples.download_saturn_surface:30
+#: ../../src/pyvista_wasm/examples.pydocstring of
+#: pyvista_wasm.examples.download_saturn_surface:30
 msgid "Render a textured Saturn planet sphere in the browser."
 msgstr "ブラウザでテクスチャ付きの土星惑星球体をレンダリングします。"
