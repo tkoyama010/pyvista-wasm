@@ -350,6 +350,17 @@ type ActorConfig = {
   texture?: TextureConfig;
 };
 
+/** Scalar bar (color legend) overlay configuration. */
+type ScalarBarConfig = {
+  title: string;
+  vertical: boolean;
+  nLabels: number;
+  /** Gradient stops as RGB triplets (0-255), low to high. */
+  gradient?: [number, number, number][];
+  /** Scalar range the gradient spans. */
+  range?: [number, number];
+};
+
 /** Camera position and projection settings. */
 type CameraConfig = {
   position?: [number, number, number];
@@ -409,6 +420,7 @@ type SceneData = {
   textActors?: TextActorConfig[];
   charts?: ChartConfig[];
   axes: boolean;
+  scalarBar?: ScalarBarConfig;
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
 };
