@@ -415,6 +415,80 @@ class ImageData(DataSet):
             oz + (nz - 1) * sz,
         )
 
+    def gaussian_smooth(
+        self,
+        radius_factor: float = 1.5,
+        std_dev: float = 2.0,
+        scalars: str | None = None,
+    ) -> ImageData:
+        """Smooth the point data with a separable Gaussian kernel.
+
+        Mirrors ``pyvista.ImageData.gaussian_smooth``. The smoothing is
+        computed with NumPy because the vtk-wasm binary does not register
+        a deserializer for ``vtkImageGaussianSmooth`` (VTK::ImagingCore).
+
+        Parameters
+        ----------
+        radius_factor : float, optional
+            Kernel radius in standard deviations. Default is 1.5.
+        std_dev : float, optional
+            Standard deviation of the Gaussian kernel in voxels. Default
+            is 2.0.
+        scalars : str, optional
+            Name of the point-data array to smooth. Defaults to the first
+            array in ``point_data``.
+
+        Returns
+        -------
+        ImageData
+            A new grid with the smoothed array under the same name.
+
+        Examples
+        --------
+        >>> import numpy as np
+        >>> import pyvista_wasm as pv
+        >>> grid = pv.ImageData(dimensions=(10, 10, 10))
+        >>> rng = np.random.default_rng()
+        >>> grid.point_data["values"] = rng.random(grid.n_points)
+        >>> smoothed = grid.gaussian_smooth(std_dev=1.0)
+        >>> float(smoothed.point_data["values"].std()) < float(
+        ...     grid.point_data["values"].std()
+        ... )
+        True
+
+        """
+        if scalars is None:
+            if not self._point_data:
+                msg = "no point data arrays to smooth"
+                raise ValueError(msg)
+            scalars = next(iter(self._point_data.keys()))
+        array = self._point_data[scalars]
+        dims = self.dimensions
+        volume = array.reshape(dims, order="F").astype(float)
+
+        radius = max(1, int(radius_factor * std_dev))
+        offsets = np.arange(-radius, radius + 1)
+        kernel = np.exp(-(offsets**2) / (2 * std_dev**2))
+        kernel /= kernel.sum()
+
+        def _smooth_1d(values: np.ndarray) -> np.ndarray:
+            """Convolve one axis with an edge-padded, valid-length kernel."""
+            return np.convolve(np.pad(values, radius, mode="edge"), kernel, mode="valid")
+
+        smoothed = volume
+        for axis in range(3):
+            smoothed = np.apply_along_axis(_smooth_1d, axis, smoothed)
+
+        result = ImageData(
+            dimensions=self.dimensions,
+            spacing=self.spacing,
+            origin=self.origin,
+        )
+        for name, values in self._point_data.items():
+            result.point_data[name] = values
+        result.point_data[scalars] = smoothed.ravel(order="F")
+        return result
+
 
 class RectilinearGrid(DataSet):
     """Grid with variable spacing along each axis (vtkRectilinearGrid).
