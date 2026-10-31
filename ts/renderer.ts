@@ -296,6 +296,10 @@ async function buildScene(
       setupCharts(sceneData.charts, container);
     }
 
+    if (sceneData.scalarBar) {
+      setupScalarBar(sceneData.scalarBar, container);
+    }
+
     renderer.resetCamera();
     if (sceneData.camera) {
       await setupCamera(renderer, sceneData.camera);
@@ -318,6 +322,68 @@ async function buildScene(
         : "An unexpected error occurred while rendering the scene.";
     showOverlayError(overlay, msg);
   }
+}
+
+/**
+ * Draw the scalar bar (color legend) as a canvas overlay.
+ *
+ * The vtk-wasm binary does not register ``vtkScalarBarActor``
+ * (VTK::RenderingAnnotation), so the legend is drawn with the 2D canvas
+ * API using the Python-mapped colormap gradient.
+ * @param config - Scalar bar configuration from the scene data.
+ * @param containerElement - The DOM element that holds the VTK canvas.
+ */
+function setupScalarBar(
+  config: ScalarBarConfig,
+  containerElement: HTMLElement,
+): void {
+  const gradient = config.gradient;
+  if (!gradient || gradient.length === 0) {
+    return;
+  }
+  const canvas = document.createElement("canvas");
+  const width = 90;
+  const barWidth = 20;
+  const barHeight = 160;
+  canvas.width = width;
+  canvas.height = barHeight + 40;
+  canvas.style.position = "absolute";
+  canvas.style.right = "16px";
+  canvas.style.top = "50%";
+  canvas.style.transform = "translateY(-50%)";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "9";
+  canvas.style.background = "rgba(255,255,255,0.92)";
+  canvas.style.borderRadius = "4px";
+  containerElement.append(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+
+  const barLeft = 10;
+  const barTop = 30;
+  const step = (barHeight - 1) / (gradient.length - 1);
+  for (let i = 0; i < gradient.length; i++) {
+    const [r, g, b] = gradient[i] ?? [0, 0, 0];
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
+    ctx.fillRect(barLeft, barTop + step * i, barWidth, step + 1);
+  }
+  ctx.strokeStyle = "#444";
+  ctx.strokeRect(barLeft, barTop, barWidth, barHeight - 1);
+
+  ctx.fillStyle = "#222";
+  ctx.font = "12px sans-serif";
+  if (config.title) {
+    ctx.fillText(config.title, barLeft, 18);
+  }
+  const [rangeMin, rangeMax] = config.range ?? [0, 1];
+  ctx.fillText(rangeMax.toPrecision(3), barLeft + barWidth + 4, barTop + 10);
+  ctx.fillText(
+    rangeMin.toPrecision(3),
+    barLeft + barWidth + 4,
+    barTop + barHeight - 2,
+  );
 }
 
 /**
