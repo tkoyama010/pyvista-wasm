@@ -85,6 +85,7 @@ Never do the following:
 - Never commit secrets, API keys, or credentials. Never modify files that hold them.
 - Never commit generated artifacts: `src/pyvista_wasm/templates/renderer.js` is built via `npm run build`, and vtk-wasm binaries live in `packages/vtk-wasm-binary/`.
 - Never edit generated files by hand.
+- Never edit `docs/pot/` or `docs/locale/` machine-generated translation files directly; translations go through Transifex (see `transifex.yml` and the Transifex pi extension in `.pi/extensions/transifex.ts`).
 
 ## Contributing
 
