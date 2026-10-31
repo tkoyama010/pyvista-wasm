@@ -16,7 +16,7 @@ build:
       - jupytext --to notebook jupyterlite/content/intro.py --output docs/content/intro.ipynb
     post_build:
       # Build JupyterLite for the docs site
-      - jupyter lite build --contents docs/content --output-dir docs/_build/html/lite
+      - jupyter lite build --contents docs/content --contents src --output-dir docs/_build/html/lite
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
   configuration: docs/conf.py
