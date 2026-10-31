@@ -273,11 +273,12 @@ class _BaseHTMLRenderer:
         Raises
         ------
         ValueError
-            If ``wasm_rendering`` is not ``"webgl"`` or ``"webgpu"``, or
-            ``wasm_mode`` is not ``"sync"`` or ``"async"``.
+            If ``wasm_rendering`` is not one of ``"auto"``, ``"webgl"``,
+            ``"webgl2"`` or ``"webgpu"``, or ``wasm_mode`` is not
+            ``"sync"`` or ``"async"``.
 
         """
-        valid_rendering = {"webgl", "webgpu"}
+        valid_rendering = {"auto", "webgl", "webgl2", "webgpu"}
         if wasm_rendering not in valid_rendering:
             msg = f"wasm_rendering must be one of {valid_rendering!r}, got {wasm_rendering!r}"
             raise ValueError(msg)
