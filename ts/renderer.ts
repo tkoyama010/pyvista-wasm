@@ -162,9 +162,15 @@ function at(array: Float32Array | Uint32Array, index: number): number {
 }
 
 /** Wraps either a VTK algorithm (filter/source) or raw PolyData. */
-type SourceResult =
-  | { output: VtkAlgorithm; isFilter: true }
-  | { output: VtkPolyData; isFilter: false };
+interface SourceFilterResult {
+  output: VtkAlgorithm;
+  isFilter: true;
+}
+interface SourcePolyDataResult {
+  output: VtkPolyData;
+  isFilter: false;
+}
+type SourceResult = SourceFilterResult | SourcePolyDataResult;
 
 /**
  * Resolve a {@link SourceResult} to its underlying PolyData.
@@ -485,7 +491,7 @@ function createSource(
 function createSphereSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkSphereSource({
     center: cfg.center,
     radius: cfg.radius,
@@ -504,7 +510,7 @@ function createSphereSource(
 function createConeSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkConeSource({
     height: cfg.height,
     radius: cfg.radius,
@@ -522,7 +528,7 @@ function createConeSource(
 function createCubeSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkCubeSource({
     xLength: cfg.xLength,
     yLength: cfg.yLength,
@@ -540,7 +546,7 @@ function createCubeSource(
 function createCylinderSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkCylinderSource({
     height: cfg.height,
     radius: cfg.radius,
@@ -603,7 +609,7 @@ function createCircleSource(
 function createArrowSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkArrowSource({
     tipLength: cfg.tipLength,
     tipRadius: cfg.tipRadius,
@@ -621,7 +627,7 @@ function createArrowSource(
 function createLineSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkLineSource({
     point1: cfg.point1,
     point2: cfg.point2,
@@ -638,7 +644,7 @@ function createLineSource(
 function createPlaneSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): SourceResult {
+): SourceFilterResult {
   const source = vtk.vtkPlaneSource({
     origin: cfg.origin,
   });
@@ -658,7 +664,7 @@ function createPlaneSource(
 async function createMeshSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): Promise<SourceResult> {
+): Promise<SourcePolyDataResult> {
   const polydata = vtk.vtkPolyData();
   const PointsComponents = 3;
   const pointsFloatArray = vtk.vtkFloatArray({
@@ -707,7 +713,7 @@ async function createMeshSource(
 async function createPointsSource(
   vtk: VtkWasmNamespace,
   cfg: SourceConfig,
-): Promise<SourceResult> {
+): Promise<SourcePolyDataResult> {
   const polydata = vtk.vtkPolyData();
   const PointsComponents = 3;
   const pointsFloatArray = vtk.vtkFloatArray({
@@ -1647,7 +1653,7 @@ async function applyTubeFilter(
   sourceResult: SourceResult,
   radius: number,
   numberOfSides: number,
-): Promise<SourceResult> {
+): Promise<SourceFilterResult> {
   const tubeFilter = vtk.vtkTubeFilter({
     radius,
     numberOfSides,
@@ -1674,7 +1680,7 @@ async function applyClipFilter(
     origin: [number, number, number];
     invert: boolean;
   },
-): Promise<SourceResult> {
+): Promise<SourceFilterResult> {
   const { normal, origin, invert } = options;
   const plane = vtk.vtkPlane();
   plane.setOrigin(origin[0], origin[1], origin[2]);
