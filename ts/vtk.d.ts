@@ -374,12 +374,14 @@ type TextActorConfig = {
 
 /** A single series in a 2D chart. */
 type ChartSeries = {
-  kind: "line" | "scatter" | "bar";
+  kind: "line" | "scatter" | "bar" | "area";
   x: number[];
   y: number[];
   color: [number, number, number];
   width?: number;
   size?: number;
+  /** Fill opacity for "area" series. */
+  opacity?: number;
   label?: string | null;
 };
 

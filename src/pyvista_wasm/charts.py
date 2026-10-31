@@ -237,3 +237,46 @@ class Chart2D:
             "yLabel": self.y_axis.label,
             "series": self._series,
         }
+
+    def area(
+        self,
+        x: ArrayLike,
+        y: ArrayLike,
+        color: str | tuple[float, float, float] | None = None,
+        opacity: float = 0.35,
+        label: str | None = None,
+    ) -> dict[str, object]:
+        """Add an area (filled line) series.
+
+        Mirrors the PyVista charts area plotting style.
+
+        Parameters
+        ----------
+        x : array-like
+            X coordinates.
+        y : array-like
+            Y coordinates.
+        color : str or tuple, optional
+            Fill color.
+        opacity : float, optional
+            Fill opacity between 0 and 1. Default is 0.35.
+        label : str, optional
+            Series label for the legend.
+
+        Returns
+        -------
+        dict
+            The stored series entry.
+
+        """
+        xv, yv = self._validate_xy(x, y)
+        entry: dict[str, object] = {
+            "kind": "area",
+            "x": xv.tolist(),
+            "y": yv.tolist(),
+            "color": self._resolve_color(color, len(self._series)),
+            "opacity": float(opacity),
+            "label": label,
+        }
+        self._series.append(entry)
+        return entry
