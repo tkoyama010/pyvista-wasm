@@ -748,7 +748,7 @@ class _BaseHTMLRenderer:
             "diffuse": float(cast("float", actor_info.get("diffuse", 1.0))),
             "specular": float(cast("float", actor_info.get("specular", 0.0))),
             "specularPower": float(
-                cast("float", actor_info.get("specular_power", 100.0))
+                cast("float", actor_info.get("specular_power", 100.0)),
             ),
         }
 

@@ -867,7 +867,10 @@ async function applyPbr(
  * @param prop - The actor property to mutate.
  * @param lighting - Lighting coefficients, or undefined to keep defaults.
  */
-function applyLighting(prop: VtkProperty, lighting: LightingConfig | undefined): void {
+function applyLighting(
+  prop: VtkProperty,
+  lighting: LightingConfig | undefined,
+): void {
   if (!lighting) {
     return;
   }
@@ -1045,10 +1048,7 @@ async function setupActor(
   }
 
   await applyPbr(actor, cfg.pbr);
-  applyLighting(
-    await actor.getProperty(),
-    cfg.pbr ? undefined : cfg.lighting,
-  );
+  applyLighting(await actor.getProperty(), cfg.pbr ? undefined : cfg.lighting);
 
   if (cfg.actorType === "points") {
     const DefaultPointSize = 5;
