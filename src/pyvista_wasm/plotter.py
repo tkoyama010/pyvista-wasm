@@ -898,8 +898,6 @@ class Plotter:
 
         from .transform import Transform  # noqa: PLC0415
 
-        if len(self._actors) == 0:
-            return
         kept = [a for a in self._actors if a.get("actor") is not actor]
         if len(kept) == len(self._actors):
             return
