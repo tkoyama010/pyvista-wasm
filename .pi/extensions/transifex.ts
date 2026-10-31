@@ -85,6 +85,20 @@ function nextPath(next: string | undefined | null): string | undefined {
 	return url.startsWith(`${API}/`) ? url : undefined;
 }
 
+/**
+ * RST inline literal closing markers (``) must not be immediately followed
+ * by a CJK fullwidth opening bracket. Sphinx gettext substitutes the
+ * translation back into the RST source verbatim, and docutils only accepts
+ * an inline-literal ENDING marker when the character AFTER it is not suited
+ * for the next inline start. A fullwidth `（` directly after a closing ```
+ * desynchronizes the backtick matching and the rest of the paragraph renders
+ * as visible raw backticks (reproduced locally with docutils 0.23; adding a
+ * space before the bracket fixes it).
+ */
+export function looksSafeForRstRendering(text: string): boolean {
+	return !/`{2,}(?=[（「『【〔])/.test(text);
+}
+
 /** Return the (slot id, key, source) triples of untranslated strings from a resource_translations response. */
 export function pickUntranslated(
 	response: JsonApiResponse,
@@ -274,6 +288,18 @@ export default function (pi: ExtensionAPI) {
 					// model result would erase the slot.
 					if (!text) {
 						failed.push({ id, error: "empty translation text; not saved" });
+						continue;
+					}
+					// Fail closed on markup that breaks the Sphinx ja build: an
+					// RST inline literal ending right before a fullwidth bracket
+					// renders raw backticks on the site (e.g. ``'surface'``（デフォルト）).
+					// Space before the bracket, or rephrase.
+					if (!looksSafeForRstRendering(text)) {
+						failed.push({
+							id,
+							error:
+								'translation ends an RST inline literal (``) directly before a fullwidth bracket (（「『【〔); insert a space after the closing backticks or rephrase',
+						});
 						continue;
 					}
 					strings = { ...strings, [form ?? "other"]: text };
