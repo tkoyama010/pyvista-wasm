@@ -24,6 +24,9 @@ class TextProperty:
         Enable bold text. Default is ``False``.
     italic : bool, optional
         Enable italic text. Default is ``False``.
+    background_color : tuple of float or str, optional
+        Background color behind the text (VTK::RenderingContext2D
+        context actor). ``None`` (default) draws no background.
 
     Examples
     --------
@@ -34,13 +37,14 @@ class TextProperty:
 
     """
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
         font_size: int = 18,
         color: tuple[float, float, float] | str = (1.0, 1.0, 1.0),
         opacity: float = 1.0,
         bold: bool = False,  # noqa: FBT001 FBT002
         italic: bool = False,  # noqa: FBT001 FBT002
+        background_color: tuple[float, float, float] | str | None = None,
     ) -> None:
         """Initialize a TextProperty instance."""
         self.font_size = int(font_size)
@@ -50,6 +54,9 @@ class TextProperty:
         self.opacity = float(opacity)
         self.bold = bool(bold)
         self.italic = bool(italic)
+        if isinstance(background_color, str):
+            background_color = _color_name_to_rgb(background_color)
+        self.background_color: tuple[float, float, float] | None = background_color
 
 
 class Text:
