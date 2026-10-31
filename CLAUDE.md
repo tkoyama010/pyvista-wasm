@@ -1,3 +1,1 @@
-# AGENTS.md
-
 @AGENTS.md
