@@ -321,6 +321,32 @@ async function buildScene(
 }
 
 /**
+ * Resolve the requested rendering backend (issue #801).
+ *
+ * "auto" probes the browser for WebGPU support and falls back to
+ * WebGL2; an explicit "webgpu" request falls back with a console
+ * warning when the browser lacks WebGPU.
+ * @param config - The wasm configuration from the scene data.
+ * @returns A concrete backend name for vtkWASM.createNamespace.
+ */
+function resolveWasmConfig(config: WasmConfig | undefined): WasmConfig {
+  const requested = config?.rendering ?? "webgl";
+  const hasWebGpu = typeof navigator !== "undefined" && "gpu" in navigator;
+  if (requested === "webgpu" && !hasWebGpu) {
+    console.warn(
+      "pyvista-wasm: WebGPU was requested but is not available in this " +
+        "browser; falling back to WebGL2.",
+    );
+    return { ...config, rendering: "webgl" };
+  }
+  if (requested === "auto") {
+    return { ...config, rendering: hasWebGpu ? "webgpu" : "webgl" };
+  }
+  // "webgl" and "webgl2" both use the WebGL2 context path.
+  return { ...config, rendering: "webgl" };
+}
+
+/**
  * Bootstrap the renderer: show the overlay immediately, then wait
  * for VTK.wasm to become available before building the scene.
  */
@@ -364,7 +390,7 @@ if (!isWebGl2Available()) {
   ); // eslint-disable-line unicorn/prefer-top-level-await
 } else if (typeof vtkWASM !== "undefined") {
   void vtkWASM
-    .createNamespace(undefined, pvSceneData.wasmConfig)
+    .createNamespace(undefined, resolveWasmConfig(pvSceneData.wasmConfig))
     .then((vtk) => buildScene(vtk, pvOverlay, pvContainer, pvSceneData)); // eslint-disable-line unicorn/prefer-top-level-await
 }
 
