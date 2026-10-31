@@ -2189,3 +2189,126 @@ def Plane(  # noqa: N802 PLR0913
             "normal": [float(n[0]), float(n[1]), float(n[2])],
         },
     )
+
+
+def _parametric_surface(
+    u_range: tuple[float, float],
+    v_range: tuple[float, float],
+    resolution: tuple[int, int],
+    func: object,
+) -> PolyData:
+    """Sample a parametric ``func(u, v) -> (x, y, z)`` into a quad mesh."""
+    nu, nv = resolution
+    us = np.linspace(u_range[0], u_range[1], nu)
+    vs = np.linspace(v_range[0], v_range[1], nv)
+    grid = np.empty((nv, nu, 3), dtype=float)
+    for j, v in enumerate(vs):
+        for i, u in enumerate(us):
+            grid[j, i] = func(u, v)  # type: ignore[operator]
+    points = grid.reshape(-1, 3)
+    faces: list[int] = []
+    for j in range(nv - 1):
+        for i in range(nu - 1):
+            idx0 = j * nu + i
+            faces.extend([4, idx0, idx0 + 1, idx0 + nu + 1, idx0 + nu])
+    return PolyData(points=points, faces=np.asarray(faces))
+
+
+def ParametricKlein(  # noqa: N802
+    radius: float = 1.0,
+    center: tuple[float, float, float] = (0.0, 0.0, 0.0),
+    u_resolution: int = 40,
+    v_resolution: int = 40,
+) -> PolyData:
+    """Create a Klein bottle mesh.
+
+    Mirrors ``pyvista.ParametricKlein``. The surface is generated with
+    NumPy because the vtk-wasm binary does not register a deserializer
+    for ``vtkParametricKlein`` (VTK::CommonComputationalGeometry).
+
+    Parameters
+    ----------
+    radius : float, optional
+        Scaling factor for the surface. Default is 1.0.
+    center : tuple, optional
+        Offset applied to all points (x, y, z). Default is (0, 0, 0).
+    u_resolution : int, optional
+        Number of samples along u. Default is 40.
+    v_resolution : int, optional
+        Number of samples along v. Default is 40.
+
+    Returns
+    -------
+    PolyData
+        A Klein bottle mesh.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> klein = pv.ParametricKlein()
+    >>> klein.n_points
+    1600
+
+    """
+    x_center, y_center, z_center = center
+
+    def func(u: float, v: float) -> tuple[float, float, float]:
+        uu = 2 * np.pi * u
+        w = np.pi * v
+        cosw = np.cos(w) - 1
+        x = radius * 8 * cosw * np.cos(uu / 2) + x_center
+        y = radius * 8 * np.sin(uu / 2) * np.sin(w) ** 2 / (1 + np.sqrt(2)) + y_center
+        z = radius * 8 * np.sin(uu / 2) * cosw * np.sin(w) + z_center
+        return (x, y, z)  # type: ignore[return-value]
+
+    return _parametric_surface((0.0, 2.0), (0.0, 2.0), (u_resolution, v_resolution), func)
+
+
+def ParametricTorus(  # noqa: N802
+    radius: float = 1.0,
+    center: tuple[float, float, float] = (0.0, 0.0, 0.0),
+    u_resolution: int = 40,
+    v_resolution: int = 40,
+) -> PolyData:
+    """Create a torus mesh.
+
+    Mirrors ``pyvista.ParametricTorus``. The surface is generated with
+    NumPy because the vtk-wasm binary does not register a deserializer
+    for ``vtkParametricTorus`` (VTK::CommonComputationalGeometry).
+
+    Parameters
+    ----------
+    radius : float, optional
+        Major radius of the torus. Default is 1.0.
+    center : tuple, optional
+        Offset applied to all points (x, y, z). Default is (0, 0, 0).
+    u_resolution : int, optional
+        Number of samples around the tube. Default is 40.
+    v_resolution : int, optional
+        Number of samples around the ring. Default is 40.
+
+    Returns
+    -------
+    PolyData
+        A torus mesh.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> torus = pv.ParametricTorus()
+    >>> torus.n_points
+    1600
+
+    """
+    x_center, y_center, z_center = center
+    r_minor = radius / 2
+
+    def func(u: float, v: float) -> tuple[float, float, float]:
+        theta = 2 * np.pi * u
+        phi = 2 * np.pi * v
+        x = (radius + r_minor * np.cos(phi)) * np.cos(theta) + x_center
+        y = (radius + r_minor * np.cos(phi)) * np.sin(theta) + y_center
+        z = r_minor * np.sin(phi) + z_center
+        return (x, y, z)  # type: ignore[return-value]
+
+    return _parametric_surface((0.0, 1.0), (0.0, 1.0), (u_resolution, v_resolution), func)
