@@ -894,7 +894,7 @@ class Plotter:
         >>> plotter.remove_actor(actor)
 
         """
-        from typing import cast
+        from typing import cast  # noqa: PLC0415
 
         from .transform import Transform  # noqa: PLC0415
 
