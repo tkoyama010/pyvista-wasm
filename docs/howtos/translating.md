@@ -1,77 +1,32 @@
 # Translating the documentation
 
-This guide explains how to add or update translations for the pyvista-wasm documentation.
+This guide explains how translations for the pyvista-wasm documentation are managed.
 
-The project uses Sphinx native gettext + Read the Docs translations, as decided in [ADR-0008](../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md).
+The project uses Sphinx native gettext + Read the Docs translations, as decided in [ADR-0008](../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md). Translations are managed in [Transifex](https://app.transifex.com/tkoyama010/pyvista-wasm/), following the same approach as [pyvista-js](https://github.com/tkoyama010/pyvista-js).
 
-## Prerequisites
-
-Install the documentation extras:
-
-```console
-$ pip install -e ".[docs]"
-```
-
-This installs `sphinx`, `sphinx-intl`, and all other tools needed to build the documentation.
+The committed `docs/pot/` templates and `docs/locale/` catalogs are machine-generated files — never edit them by hand.
 
 ## Workflow
 
-### 1. Generate `.pot` templates
+### 1. `.pot` templates are updated automatically
 
-Extract translatable strings from the documentation source:
+When a pull request that touches `docs/` merges to `main`, the [Transifex Sync workflow](https://github.com/tkoyama010/pyvista-wasm/blob/main/.github/workflows/transifex.yml) runs `sphinx-build -b gettext` and opens a `chore: update pot files` pull request that updates `docs/pot/`.
 
-```console
-$ make -C docs gettext
-```
+### 2. Translate in Transifex
 
-This runs `sphinx-build -b gettext` and produces `.pot` files under `docs/_build/gettext/`.
+Merge that pull request, then translate the new strings in the Transifex editor, or with the Transifex pi extension (`.pi/extensions/transifex.ts`), which exposes `transifex_list_resources`, `transifex_get_untranslated`, and `transifex_translate` tools backed by the Transifex API.
 
-### 2. Update `.po` catalogs
+### 3. Sync `.po` catalogs back to the repository
 
-Update the `.po` files for a specific language (e.g. `ja`):
+Pull the translated catalogs from Transifex and commit them, as in [#812](https://github.com/tkoyama010/pyvista-wasm/pull/812):
 
 ```console
-$ make -C docs update-po LANG=ja
+$ tx pull -l ja
+$ git add docs/locale && git commit -m "fix: sync ja translation catalogs from Transifex"
 ```
 
-This runs `sphinx-intl update -p docs/_build/gettext -l ja` and updates `docs/locale/ja/LC_MESSAGES/*.po`.
-
-New `msgid` entries appear with empty `msgstr` fields. Existing translations are preserved.
-
-### 3. Translate `.po` files
-
-Edit the `.po` files under `docs/locale/<lang>/LC_MESSAGES/` with a text editor or `.po`-aware editor (e.g. Poedit, VS Code with gettext extensions).
-
-Fill in the `msgstr` field for each `msgid` entry:
-
-```po
-msgid "Installation"
-msgstr "インストール"
-```
-
-Preserve reStructuredText/MyST syntax inside `msgstr` entries (links, roles, directives, etc.).
-
-### 4. Build locally to verify
-
-Build the documentation in the target language:
-
-```console
-$ make -C docs html-lang LANG=ja
-```
-
-Open `docs/_build/html/ja/index.html` in a browser to verify the translation.
-
-### 5. Submit a pull request
-
-Commit the updated `.po` files and open a pull request. The translation will be built on Read the Docs after merge.
+When a feature pull request adds a new documented API page, the matching `.po` catalog must land with that pull request, otherwise the Read the Docs ja build has no catalog for the new page.
 
 ## Read the Docs configuration
 
 Each language is built as a separate Read the Docs translation project, linked to the parent (English) project via the Read the Docs dashboard. The flyout-menu language switcher appears automatically once the translation project is linked.
-
-To add a new language:
-
-1. Create a Read the Docs project (e.g. `pyvista-wasm-<lang>`), set its Language to the target language, and point it at the same repository.
-1. Add it as a "Translation" of the parent (English) project via the Read the Docs dashboard.
-1. Bootstrap the `.po` catalogs: `make -C docs update-po LANG=<lang>`.
-1. Translate the `.po` files and submit a pull request.
