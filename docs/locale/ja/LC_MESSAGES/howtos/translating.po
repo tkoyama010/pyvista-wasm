@@ -1,197 +1,124 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2026, Tetsuo Koyama
-# This file is distributed under the same license as the pyvista-wasm
-# package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Tetsuo Koyama <tkoyama010@gmail.com>, 2026
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: pyvista-wasm \n"
+"Project-Id-Version: pyvista-wasm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 16:09+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ja\n"
-"Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"POT-Creation-Date: 2026-10-31 08:33+0000\n"
+"PO-Revision-Date: 2026-10-31 08:59+0000\n"
+"Last-Translator: Tetsuo Koyama <tkoyama010@gmail.com>, 2026\n"
+"Language-Team: Japanese (https://app.transifex.com/tkoyama010/teams/310886/ja/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../howtos/translating.md:1
+#: ../howtos/translating.md:1
 msgid "Translating the documentation"
 msgstr "ドキュメントの翻訳"
 
-#: ../../howtos/translating.md:3
+#: ../howtos/translating.md:3
 msgid ""
-"This guide explains how to add or update translations for the pyvista-"
-"wasm documentation."
-msgstr "このガイドでは、pyvista-wasmドキュメントの翻訳を追加・更新する方法を説明します。"
+"This guide explains how translations for the pyvista-wasm documentation are "
+"managed."
+msgstr "このガイドでは、pyvista-wasmドキュメントの翻訳の管理方法を説明します。"
 
-#: ../../howtos/translating.md:5
+#: ../howtos/translating.md:5
 msgid ""
 "The project uses Sphinx native gettext + Read the Docs translations, as "
-"decided in [ADR-0008](../decisions/0008-decide-how-to-internationalize-"
-"the-readthedocs-documentation.md)."
+"decided in [ADR-0008](../decisions/0008-decide-how-to-internationalize-the-"
+"readthedocs-documentation.md). Translations are managed in "
+"[Transifex](https://app.transifex.com/tkoyama010/pyvista-wasm/), following "
+"the same approach as [pyvista-js](https://github.com/tkoyama010/pyvista-js)."
 msgstr ""
-"本プロジェクトは[ADR-0008](../decisions/0008-decide-how-to-internationalize-"
-"the-readthedocs-documentation.md)で決定された通り、Sphinxネイティブgettext"
-" + Read the Docs翻訳を使用します。"
+"このプロジェクトでは、[ADR-0008](../decisions/0008-decide-how-to-internationalize-the-"
+"readthedocs-documentation.md)で決定されたとおり、Sphinxネイティブのgettext + Read the "
+"Docs翻訳を使用しています。翻訳は[pyvista-js](https://github.com/tkoyama010/pyvista-"
+"js)と同じアプローチで、[Transifex](https://app.transifex.com/tkoyama010/pyvista-"
+"wasm/)で管理されています。"
 
-#: ../../howtos/translating.md:7
-msgid "Prerequisites"
-msgstr "前提条件"
-
-#: ../../howtos/translating.md:9
-msgid "Install the documentation extras:"
-msgstr "ドキュメントのextrasをインストールします:"
-
-#: ../../howtos/translating.md:15
+#: ../howtos/translating.md:7
 msgid ""
-"This installs `sphinx`, `sphinx-intl`, and all other tools needed to "
-"build the documentation."
+"The committed `docs/pot/` templates and `docs/locale/` catalogs are machine-"
+"generated files — never edit them by hand."
 msgstr ""
-"これにより`sphinx`、`sphinx-intl`、およびドキュメントビルドに必要な全ツールが"
-"インストールされます。"
+"コミットされている`docs/pot/`テンプレートと`docs/locale/`カタログは機械生成ファイルです。決して手動で編集しないでください。"
 
-#: ../../howtos/translating.md:17
+#: ../howtos/translating.md:9
 msgid "Workflow"
 msgstr "ワークフロー"
 
-#: ../../howtos/translating.md:19
-msgid "1. Generate `.pot` templates"
-msgstr "1. `.pot`テンプレートの生成"
+#: ../howtos/translating.md:11
+msgid "1. `.pot` templates are updated automatically"
+msgstr "1. `.pot`テンプレートは自動的に更新されます"
 
-#: ../../howtos/translating.md:21
-msgid "Extract translatable strings from the documentation source:"
-msgstr "ドキュメントソースから翻訳可能な文字列を抽出します:"
-
-#: ../../howtos/translating.md:27
+#: ../howtos/translating.md:13
 msgid ""
-"This runs `sphinx-build -b gettext` and produces `.pot` files under "
-"`docs/_build/gettext/`."
+"When a pull request that touches `docs/` merges to `main`, the [Transifex "
+"Sync workflow](https://github.com/tkoyama010/pyvista-"
+"wasm/blob/main/.github/workflows/transifex.yml) runs `sphinx-build -b "
+"gettext` and opens a `chore: update pot files` pull request that updates "
+"`docs/pot/`."
 msgstr ""
-"これは`sphinx-build -b gettext`を実行し、`docs/_build/gettext/`に"
-"`.pot`ファイルを生成します。"
+"`docs/`に触れるプルリクエストが`main`にマージされると、[Transifex "
+"Syncワークフロー](https://github.com/tkoyama010/pyvista-"
+"wasm/blob/main/.github/workflows/transifex.yml)が`sphinx-build -b "
+"gettext`を実行し、`docs/pot/`を更新する`chore: update pot files`プルリクエストを開きます。"
 
-#: ../../howtos/translating.md:29
-msgid "2. Update `.po` catalogs"
-msgstr "2. `.po`カタログの更新"
+#: ../howtos/translating.md:15
+msgid "2. Translate in Transifex"
+msgstr "2. Transifexで翻訳する"
 
-#: ../../howtos/translating.md:31
-msgid "Update the `.po` files for a specific language (e.g. `ja`):"
-msgstr "特定の言語（例: `ja`）の`.po`ファイルを更新します:"
-
-#: ../../howtos/translating.md:37
+#: ../howtos/translating.md:17
 msgid ""
-"This runs `sphinx-intl update -p docs/_build/gettext -l ja` and updates "
-"`docs/locale/ja/LC_MESSAGES/*.po`."
+"Merge that pull request, then translate the new strings in the Transifex "
+"editor, or with the Transifex pi extension (`.pi/extensions/transifex.ts`), "
+"which exposes `transifex_list_resources`, `transifex_get_untranslated`, and "
+"`transifex_translate` tools backed by the Transifex API."
 msgstr ""
-"これは`sphinx-intl update -p docs/_build/gettext -l ja`を実行し、"
-"`docs/locale/ja/LC_MESSAGES/*.po`を更新します。"
+"そのプルリクエストをマージしたら、Transifexエディタで、またはTransifex "
+"APIを利用する`transifex_list_resources`、`transifex_get_untranslated`、`transifex_translate`ツールを公開しているTransifex"
+" pi拡張機能（`.pi/extensions/transifex.ts`）で新しい文字列を翻訳してください。"
 
-#: ../../howtos/translating.md:39
+#: ../howtos/translating.md:19
+msgid "3. Sync `.po` catalogs back to the repository"
+msgstr "3. `.po`カタログをリポジトリに同期する"
+
+#: ../howtos/translating.md:21
 msgid ""
-"New `msgid` entries appear with empty `msgstr` fields. Existing "
-"translations are preserved."
+"Pull the translated catalogs from Transifex and commit them, as in "
+"[#812](https://github.com/tkoyama010/pyvista-wasm/pull/812):"
 msgstr ""
-"新しい`msgid`エントリは空の`msgstr`フィールドとして表示されます。"
-"既存の翻訳は保持されます。"
+"翻訳済みカタログをTransifexから取得してコミットします（[#812](https://github.com/tkoyama010/pyvista-"
+"wasm/pull/812)と同様）:"
 
-#: ../../howtos/translating.md:41
-msgid "3. Translate `.po` files"
-msgstr "3. `.po`ファイルの翻訳"
-
-#: ../../howtos/translating.md:43
+#: ../howtos/translating.md:28
 msgid ""
-"Edit the `.po` files under `docs/locale/<lang>/LC_MESSAGES/` with a text "
-"editor or `.po`-aware editor (e.g. Poedit, VS Code with gettext "
-"extensions)."
+"When a feature pull request adds a new documented API page, the matching "
+"`.po` catalog must land with that pull request, otherwise the Read the Docs "
+"ja build has no catalog for the new page."
 msgstr ""
-"`docs/locale/<lang>/LC_MESSAGES/`以下の`.po`ファイルをテキストエディタまたは"
-"`.po`対応エディタ（例: Poedit、gettext拡張機能を入れたVS Code）で編集します。"
+"機能追加のプルリクエストが新しいAPIドキュメントページを追加する場合、対応する`.po`カタログはそのプルリクエストに含まれていなければなりません。それがないと、Read"
+" the Docsのjaビルドに新しいページ用のカタログが存在しません。"
 
-#: ../../howtos/translating.md:45
-msgid "Fill in the `msgstr` field for each `msgid` entry:"
-msgstr "各`msgid`エントリの`msgstr`フィールドを埋めます:"
-
-#: ../../howtos/translating.md:52
-msgid ""
-"Preserve reStructuredText/MyST syntax inside `msgstr` entries (links, "
-"roles, directives, etc.)."
-msgstr ""
-"`msgstr`エントリ内のreStructuredText/MyST構文（リンク、ロール、"
-"ディレクティブ等）を保持してください。"
-
-#: ../../howtos/translating.md:54
-msgid "4. Build locally to verify"
-msgstr "4. ローカルビルドで確認"
-
-#: ../../howtos/translating.md:56
-msgid "Build the documentation in the target language:"
-msgstr "対象言語でドキュメントをビルドします:"
-
-#: ../../howtos/translating.md:62
-msgid ""
-"Open `docs/_build/html/ja/index.html` in a browser to verify the "
-"translation."
-msgstr ""
-"ブラウザで`docs/_build/html/ja/index.html`を開いて翻訳を確認します。"
-
-#: ../../howtos/translating.md:64
-msgid "5. Submit a pull request"
-msgstr "5. プルリクエストの送信"
-
-#: ../../howtos/translating.md:66
-msgid ""
-"Commit the updated `.po` files and open a pull request. The translation "
-"will be built on Read the Docs after merge."
-msgstr ""
-"更新した`.po`ファイルをコミットしてプルリクエストを開きます。"
-"マージ後、Read the Docsで翻訳がビルドされます。"
-
-#: ../../howtos/translating.md:68
+#: ../howtos/translating.md:30
 msgid "Read the Docs configuration"
 msgstr "Read the Docsの設定"
 
-#: ../../howtos/translating.md:70
+#: ../howtos/translating.md:32
 msgid ""
 "Each language is built as a separate Read the Docs translation project, "
-"linked to the parent (English) project via the Read the Docs dashboard. "
-"The flyout-menu language switcher appears automatically once the "
-"translation project is linked."
+"linked to the parent (English) project via the Read the Docs dashboard. The "
+"flyout-menu language switcher appears automatically once the translation "
+"project is linked."
 msgstr ""
-"各言語は個別のRead the Docs翻訳プロジェクトとしてビルドされ、"
-"Read the Docsダッシュボード経由で親（英語）プロジェクトにリンクされます。"
-"翻訳プロジェクトがリンクされると、フライアウトメニューの言語スイッチャーが"
-"自動的に表示されます。"
-
-#: ../../howtos/translating.md:72
-msgid "To add a new language:"
-msgstr "新しい言語を追加するには:"
-
-#: ../../howtos/translating.md:74
-msgid ""
-"Create a Read the Docs project (e.g. `pyvista-wasm-<lang>`), set its "
-"Language to the target language, and point it at the same repository."
-msgstr ""
-"Read the Docsプロジェクト（例: `pyvista-wasm-<lang>`）を作成し、"
-"Languageを対象言語に設定し、同じリポジトリを指定します。"
-
-#: ../../howtos/translating.md:75
-msgid ""
-"Add it as a \"Translation\" of the parent (English) project via the Read "
-"the Docs dashboard."
-msgstr ""
-"Read the Docsダッシュボードで親（英語）プロジェクトの「Translation」として"
-"追加します。"
-
-#: ../../howtos/translating.md:76
-msgid "Bootstrap the `.po` catalogs: `make -C docs update-po LANG=<lang>`."
-msgstr ".poカタログをブートストラップ: `make -C docs update-po LANG=<lang>`"
-
-#: ../../howtos/translating.md:77
-msgid "Translate the `.po` files and submit a pull request."
-msgstr ".poファイルを翻訳してプルリクエストを送信します。"
+"各言語は個別のRead the Docs翻訳プロジェクトとしてビルドされ、Read the "
+"Docsダッシュボード経由で親（英語）プロジェクトにリンクされます。翻訳プロジェクトがリンクされると、フライアウトメニューの言語スイッチャーが自動的に表示されます。"

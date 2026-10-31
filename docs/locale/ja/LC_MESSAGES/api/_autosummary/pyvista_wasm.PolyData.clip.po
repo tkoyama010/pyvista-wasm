@@ -1,96 +1,104 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2026, Tetsuo Koyama
-# This file is distributed under the same license as the pyvista-wasm
-# package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Tetsuo Koyama <tkoyama010@gmail.com>, 2026
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: pyvista-wasm \n"
+"Project-Id-Version: pyvista-wasm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 14:20+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ja\n"
-"Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"PO-Revision-Date: 2026-10-31 08:59+0000\n"
+"Last-Translator: Tetsuo Koyama <tkoyama010@gmail.com>, 2026\n"
+"Language-Team: Japanese (https://app.transifex.com/tkoyama010/teams/310886/ja/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst:2
+#: ../api/_autosummary/pyvista_wasm.PolyData.clip.rst:2
 msgid "pyvista\\_wasm.PolyData.clip"
 msgstr "pyvista\\_wasm.PolyData.clip"
 
-#: of pyvista_wasm.mesh.PolyData.clip:1
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:1
 msgid "Clip the mesh with a plane."
 msgstr "平面でメッシュをクリップします。"
 
-#: of pyvista_wasm.mesh.PolyData.clip:3
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:3
 msgid ""
-"This filter clips the mesh with a plane defined by a normal vector and an"
-" origin point using VTK.wasm's built-in ``vtkClipPolyData`` filter with a"
-" ``vtkPlane`` clip function. Points on one side of the plane are removed."
-" It mirrors the PyVista ``clip`` filter API."
+"This filter clips the mesh with a plane defined by a normal vector and an "
+"origin point using VTK.wasm's built-in ``vtkClipPolyData`` filter with a "
+"``vtkPlane`` clip function. Points on one side of the plane are removed. It "
+"mirrors the PyVista ``clip`` filter API."
 msgstr ""
-"このフィルタは、法線ベクトルと原点で定義される平面を使用してメッシュをクリップします。"
-"VTK.wasm の組み込み ``vtkClipPolyData`` フィルタと ``vtkPlane`` クリップ関数を使用します。"
-"平面の片側のポイントは削除されます。PyVista の ``clip`` フィルタ API をミラーリングします。"
+"このフィルタは、法線ベクトルと原点で定義される平面を使用してメッシュをクリップします。VTK.wasm の組み込み "
+"``vtkClipPolyData`` フィルタと ``vtkPlane`` "
+"クリップ関数を使用します。平面の片側のポイントは削除されます。PyVista の ``clip`` フィルタ API をミラーリングします。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+#: ../api/_autosummary/pyvista_wasm.PolyData.clip.rst:0
 msgid "Parameters"
 msgstr "パラメータ"
 
-#: of pyvista_wasm.mesh.PolyData.clip:8
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:8
 msgid ""
 "The normal vector of the clipping plane. Can be a string specifying a "
-"cardinal direction ('x', 'y', 'z', '-x', '-y', '-z') or a 3-tuple of "
-"floats (nx, ny, nz). Default is 'x'."
+"cardinal direction ('x', 'y', 'z', '-x', '-y', '-z') or a 3-tuple of floats "
+"(nx, ny, nz). Default is 'x'."
 msgstr ""
-"クリップ平面の法線ベクトル。基本方向を指定する文字列（'x', 'y', 'z', '-x', '-y', '-z'）"
-"または float の3タプル (nx, ny, nz)。デフォルトは 'x'。"
+"クリップ平面の法線ベクトル。基本方向を指定する文字列（'x', 'y', 'z', '-x', '-y', '-z'）または float の3タプル "
+"(nx, ny, nz)。デフォルトは 'x'。"
 
-#: of pyvista_wasm.mesh.PolyData.clip:12
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:12
 msgid ""
 "The origin point of the clipping plane as (x, y, z). If not provided, "
 "defaults to the center of the mesh's bounding box."
-msgstr ""
-"クリップ平面の原点 (x, y, z)。指定されない場合、メッシュのバウンディングボックスの"
-"中心がデフォルトになります。"
+msgstr "クリップ平面の原点 (x, y, z)。指定されない場合、メッシュのバウンディングボックスの中心がデフォルトになります。"
 
-#: of pyvista_wasm.mesh.PolyData.clip:15
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:15
 msgid ""
-"If True, flip the clipping direction to keep the part that would normally"
-" be removed. Default is False."
-msgstr ""
-"True の場合、クリップ方向を反転して通常は削除される部分を保持します。デフォルトはFalse。"
+"If True, flip the clipping direction to keep the part that would normally be"
+" removed. Default is False."
+msgstr "True の場合、クリップ方向を反転して通常は削除される部分を保持します。デフォルトはFalse。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+#: ../api/_autosummary/pyvista_wasm.PolyData.clip.rst:0
 msgid "Returns"
 msgstr "戻り値"
 
-#: of pyvista_wasm.mesh.PolyData.clip:19
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:19
 msgid "A new mesh with clipped cells removed."
 msgstr "クリップされたセルが削除された新しいメッシュ。"
 
-#: ../../api/_autosummary/pyvista_wasm.PolyData.clip.rst
+#: ../api/_autosummary/pyvista_wasm.PolyData.clip.rst:0
 msgid "Return type"
 msgstr "戻り値の型"
 
-#: of pyvista_wasm.mesh.PolyData.clip:23
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:23
 msgid "Examples"
 msgstr "例"
 
-#: of pyvista_wasm.mesh.PolyData.clip:33
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:33
 msgid "Clip along the negative Y axis:"
 msgstr "負のY軸に沿ってクリップします:"
 
-#: of pyvista_wasm.mesh.PolyData.clip:39
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:39
 msgid "Clip with a custom normal vector:"
 msgstr "カスタム法線ベクトルでクリップします:"
 
-#: of pyvista_wasm.mesh.PolyData.clip:45
+#: ../../src/pyvista_wasm/mesh.pydocstring of
+#: pyvista_wasm.mesh.PolyData.clip:45
 msgid "Render the clipped mesh:"
 msgstr "クリップされたメッシュをレンダリングします:"
