@@ -409,6 +409,8 @@ type SceneData = {
   textActors?: TextActorConfig[];
   charts?: ChartConfig[];
   axes: boolean;
+  /** Background image URL drawn behind the scene (VTK::RenderingImage). */
+  backgroundImage?: string | null;
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
 };

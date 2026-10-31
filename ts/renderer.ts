@@ -266,6 +266,7 @@ async function buildScene(
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.tabIndex = -1;
+    canvas.style.zIndex = "1";
     canvas.addEventListener("click", () => {
       canvas.focus();
     });
@@ -290,6 +291,19 @@ async function buildScene(
       for (const textConfig of sceneData.textActors) {
         setupTextActor(textConfig, container);
       }
+    }
+
+    if (sceneData.backgroundImage) {
+      const backdrop = document.createElement("img");
+      backdrop.src = sceneData.backgroundImage;
+      backdrop.style.position = "absolute";
+      backdrop.style.inset = "0";
+      backdrop.style.width = "100%";
+      backdrop.style.height = "100%";
+      backdrop.style.objectFit = "cover";
+      backdrop.style.zIndex = "0";
+      backdrop.style.pointerEvents = "none";
+      container.prepend(backdrop);
     }
 
     if (sceneData.charts && sceneData.charts.length > 0) {
