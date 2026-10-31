@@ -1,3 +1,3 @@
-# pyvista-wasm
+# AGENTS.md
 
 @AGENTS.md
