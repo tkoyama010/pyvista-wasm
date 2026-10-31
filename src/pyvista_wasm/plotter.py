@@ -826,6 +826,30 @@ class Plotter:
         """
         self._renderer.add_axes(**kwargs)
 
+    def enable_trackball_style(self) -> None:
+        """Set the interaction style to trackball rotation (default)."""
+        self._renderer.set_interaction_style("trackball")
+
+    def enable_trackball_actor_style(self) -> None:
+        """Rotate actors (not the camera) with the mouse."""
+        self._renderer.set_interaction_style("trackball_actor")
+
+    def enable_joystick_style(self) -> None:
+        """Interact only while the mouse button is held down."""
+        self._renderer.set_interaction_style("joystick")
+
+    def enable_joystick_actor_style(self) -> None:
+        """Rotate actors only while the mouse button is held down."""
+        self._renderer.set_interaction_style("joystick_actor")
+
+    def enable_2d_style(self) -> None:
+        """Restrict interaction to panning and zooming in the view plane."""
+        self._renderer.set_interaction_style("2d")
+
+    def enable_zoom_style(self) -> None:
+        """Left-click drag zooms the view."""
+        self._renderer.set_interaction_style("zoom")
+
     def add_scalar_bar(
         self,
         title: str = "",
