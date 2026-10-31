@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 08:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../api/_autosummary/pyvista_wasm.Tetrahedron.rst:2
+msgid "pyvista\\_wasm.Tetrahedron"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:1
+msgid "Create a tetrahedron mesh."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:3
+msgid "Mirrors :func:`pyvista.Tetrahedron`. The vertices are placed on a sphere of the given radius, and the four faces are outward-oriented triangles."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Tetrahedron.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:7
+msgid "Radius of the circumscribed sphere. Default is 1.0."
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:9
+msgid "Center of the tetrahedron (x, y, z). Default is (0, 0, 0)."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Tetrahedron.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:12
+msgid "A tetrahedron mesh."
+msgstr ""
+
+#: ../api/_autosummary/pyvista_wasm.Tetrahedron.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.Tetrahedron:16
+msgid "Examples"
+msgstr ""
