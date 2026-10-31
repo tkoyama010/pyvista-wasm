@@ -37,6 +37,7 @@ Thank you for your interest in contributing to pyvista-wasm! This document provi
 - [Types of Contributions](#types-of-contributions)
   - [Code Contributions](#code-contributions)
   - [Documentation](#documentation)
+  - [Translation](#translation)
   - [Community](#community)
   - [Recognition](#recognition)
 - [Scientific Python Standards](#scientific-python-standards)
@@ -352,6 +353,21 @@ We welcome various types of contributions:
 - Improving existing documentation
 - Adding examples and tutorials
 - Fixing typos and clarifications
+- Translating documentation (via [Transifex](https://app.transifex.com/tkoyama010/pyvista-wasm-doc/))
+
+### Translation
+
+Documentation is translated on [Transifex](https://app.transifex.com/tkoyama010/pyvista-wasm-doc/translate/). The repository ships a [pi](https://pi.dev) coding-agent extension at `.pi/extensions/transifex.ts` that lets the agent translate untranslated strings directly against the Transifex API v3. It is preconfigured for `tkoyama010/pyvista-wasm-doc`.
+
+To use it:
+
+1. Generate an API token at <https://app.transifex.com/user/settings/> and either export it as `TX_TOKEN` or store it in `~/.tx-token`
+1. Start `pi` in the repository and accept the project-trust prompt (project-local extensions only load for trusted projects)
+1. Ask pi to translate, for example: "Translate the untranslated strings in the `index` resource to Japanese" — the agent uses the `transifex_list_resources`, `transifex_get_untranslated`, and `transifex_translate` tools
+
+Japanese (`ja`) is the current target language; translations land in `docs/locale/<lang>/LC_MESSAGES` via the Transifex GitHub integration.
+
+The extension imports `typebox`, one of pi's built-in extension imports (see the "Available Imports" section of the pi extension docs); it is also declared in `package.json` so module resolution works in clean checkouts.
 
 ### Community
 
@@ -384,6 +400,7 @@ This project follows several [Scientific Python SPECs](https://scientific-python
 ## Community Resources
 
 - **Issues**: [GitHub Issues](https://github.com/tkoyama010/pyvista-wasm/issues)
+- **Translations**: [Transifex](https://app.transifex.com/tkoyama010/pyvista-wasm-doc/)
 
 ## Questions?
 
