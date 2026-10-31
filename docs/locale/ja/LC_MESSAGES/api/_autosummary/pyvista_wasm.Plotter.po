@@ -2,10 +2,10 @@
 # Copyright (C) 2026, Tetsuo Koyama
 # This file is distributed under the same license as the pyvista-wasm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Tetsuo Koyama <tkoyama010@gmail.com>, 2026
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -50,7 +50,7 @@ msgid ""
 "Creates a default directional light - ``None``: No default lights are "
 "created, giving full control over lighting"
 msgstr ""
-"プロッタのライティングモード。オプション: - ``\"default\"``（デフォルト）: デフォルトの方向ライトを作成 - ``None``: "
+"プロッタのライティングモード。オプション: - ``\"default\"`` （デフォルト）: デフォルトの方向ライトを作成 - ``None``: "
 "デフォルトライトが作成されず、ライティングを完全に制御可能"
 
 #: ../../src/pyvista_wasm/plotter.pydocstring of
@@ -594,7 +594,7 @@ msgid ""
 "Visualization style of the mesh. One of ``'surface'`` (default), "
 "``'wireframe'``, or ``'points'``."
 msgstr ""
-"メッシュの可視化スタイル。``'surface'``（デフォルト）、``'wireframe'``、または ``'points'`` のいずれか。"
+"メッシュの可視化スタイル。``'surface'`` （デフォルト）、``'wireframe'``、または ``'points'`` のいずれか。"
 
 #: ../../src/pyvista_wasm/plotter.pydocstring of
 #: pyvista_wasm.plotter.Plotter.add_mesh:36
