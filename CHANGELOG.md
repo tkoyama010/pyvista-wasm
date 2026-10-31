@@ -2,37 +2,33 @@
 
 ## [0.17.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.16.0...pyvista-wasm-v0.17.0) (2026-10-31)
 
-
 ### Features
 
-* add Chart2D and Plotter.add_chart ([#806](https://github.com/tkoyama010/pyvista-wasm/issues/806)) ([b08985d](https://github.com/tkoyama010/pyvista-wasm/commit/b08985da3206c829ff024d4c87300cee17bd043e))
-* add dataset family for VTK::CommonDataModel parity ([#802](https://github.com/tkoyama010/pyvista-wasm/issues/802)) ([1fd9812](https://github.com/tkoyama010/pyvista-wasm/commit/1fd9812393bb1ac77305c424b8f0f4ad7af9509e))
-* add PolyData.smooth Laplacian filter ([#810](https://github.com/tkoyama010/pyvista-wasm/issues/810)) ([13c84eb](https://github.com/tkoyama010/pyvista-wasm/commit/13c84eb9146abe892d296138bc011c44163cb2f6))
-* Add Polygon, Triangle and Tetrahedron source meshes ([#842](https://github.com/tkoyama010/pyvista-wasm/issues/842)) ([072d9d4](https://github.com/tkoyama010/pyvista-wasm/commit/072d9d4209047614248c13687396e5e1f0d722a7))
-* add Transform class and PolyData.transform ([#804](https://github.com/tkoyama010/pyvista-wasm/issues/804)) ([590e089](https://github.com/tkoyama010/pyvista-wasm/commit/590e08929d928ebf2e29a688ef21f62c16621e4b))
-* add_mesh(transform=...) to apply Transform to actors ([#805](https://github.com/tkoyama010/pyvista-wasm/issues/805)) ([9e8459a](https://github.com/tkoyama010/pyvista-wasm/commit/9e8459a8a58716c14dacfef81ab09284fef71b91))
-* set up Transifex sync for the docs translation project ([#809](https://github.com/tkoyama010/pyvista-wasm/issues/809)) ([8001bde](https://github.com/tkoyama010/pyvista-wasm/commit/8001bdefb59a90c51ccdf04932a3b46e63d776da))
-
+- add Chart2D and Plotter.add_chart ([#806](https://github.com/tkoyama010/pyvista-wasm/issues/806)) ([b08985d](https://github.com/tkoyama010/pyvista-wasm/commit/b08985da3206c829ff024d4c87300cee17bd043e))
+- add dataset family for VTK::CommonDataModel parity ([#802](https://github.com/tkoyama010/pyvista-wasm/issues/802)) ([1fd9812](https://github.com/tkoyama010/pyvista-wasm/commit/1fd9812393bb1ac77305c424b8f0f4ad7af9509e))
+- add PolyData.smooth Laplacian filter ([#810](https://github.com/tkoyama010/pyvista-wasm/issues/810)) ([13c84eb](https://github.com/tkoyama010/pyvista-wasm/commit/13c84eb9146abe892d296138bc011c44163cb2f6))
+- Add Polygon, Triangle and Tetrahedron source meshes ([#842](https://github.com/tkoyama010/pyvista-wasm/issues/842)) ([072d9d4](https://github.com/tkoyama010/pyvista-wasm/commit/072d9d4209047614248c13687396e5e1f0d722a7))
+- add Transform class and PolyData.transform ([#804](https://github.com/tkoyama010/pyvista-wasm/issues/804)) ([590e089](https://github.com/tkoyama010/pyvista-wasm/commit/590e08929d928ebf2e29a688ef21f62c16621e4b))
+- add_mesh(transform=...) to apply Transform to actors ([#805](https://github.com/tkoyama010/pyvista-wasm/issues/805)) ([9e8459a](https://github.com/tkoyama010/pyvista-wasm/commit/9e8459a8a58716c14dacfef81ab09284fef71b91))
+- set up Transifex sync for the docs translation project ([#809](https://github.com/tkoyama010/pyvista-wasm/issues/809)) ([8001bde](https://github.com/tkoyama010/pyvista-wasm/commit/8001bdefb59a90c51ccdf04932a3b46e63d776da))
 
 ### Bug Fixes
 
-* **biome:** enable all nursery rules except noUnsafeTypeAssertion and useConsistentFunctionStyle ([#823](https://github.com/tkoyama010/pyvista-wasm/issues/823)) ([4f517a9](https://github.com/tkoyama010/pyvista-wasm/commit/4f517a9aec3c2bf750165bc3d9c0b311ab092546))
-* complete ADR-0015 ja translations and add translation-completeness CI ([#808](https://github.com/tkoyama010/pyvista-wasm/issues/808)) ([f3f50e2](https://github.com/tkoyama010/pyvista-wasm/commit/f3f50e2937aef5c41447801fdedbddbe7c0ad555))
-* mount src into JupyterLite drive so docs examples can import pyvista_wasm ([#844](https://github.com/tkoyama010/pyvista-wasm/issues/844)) ([5ab8d3c](https://github.com/tkoyama010/pyvista-wasm/commit/5ab8d3c7374dfdb310081ff629f284a450413f4c))
-* resolve Dependabot security alerts for tornado and vue-i18n ([#822](https://github.com/tkoyama010/pyvista-wasm/issues/822)) ([5810395](https://github.com/tkoyama010/pyvista-wasm/commit/5810395ddee9dea6c2849aa837a3b92a932d0b05))
-* sync ja translation catalogs from Transifex ([#812](https://github.com/tkoyama010/pyvista-wasm/issues/812)) ([6be1931](https://github.com/tkoyama010/pyvista-wasm/commit/6be1931c7a3f75baa9c0667ee87b5c2ab6af6569))
-* sync Transifex badge into README translations ([#850](https://github.com/tkoyama010/pyvista-wasm/issues/850)) ([8bcb870](https://github.com/tkoyama010/pyvista-wasm/commit/8bcb8707b5d2a77f23b6a423cbabbf4288a040e9))
-
+- **biome:** enable all nursery rules except noUnsafeTypeAssertion and useConsistentFunctionStyle ([#823](https://github.com/tkoyama010/pyvista-wasm/issues/823)) ([4f517a9](https://github.com/tkoyama010/pyvista-wasm/commit/4f517a9aec3c2bf750165bc3d9c0b311ab092546))
+- complete ADR-0015 ja translations and add translation-completeness CI ([#808](https://github.com/tkoyama010/pyvista-wasm/issues/808)) ([f3f50e2](https://github.com/tkoyama010/pyvista-wasm/commit/f3f50e2937aef5c41447801fdedbddbe7c0ad555))
+- mount src into JupyterLite drive so docs examples can import pyvista_wasm ([#844](https://github.com/tkoyama010/pyvista-wasm/issues/844)) ([5ab8d3c](https://github.com/tkoyama010/pyvista-wasm/commit/5ab8d3c7374dfdb310081ff629f284a450413f4c))
+- resolve Dependabot security alerts for tornado and vue-i18n ([#822](https://github.com/tkoyama010/pyvista-wasm/issues/822)) ([5810395](https://github.com/tkoyama010/pyvista-wasm/commit/5810395ddee9dea6c2849aa837a3b92a932d0b05))
+- sync ja translation catalogs from Transifex ([#812](https://github.com/tkoyama010/pyvista-wasm/issues/812)) ([6be1931](https://github.com/tkoyama010/pyvista-wasm/commit/6be1931c7a3f75baa9c0667ee87b5c2ab6af6569))
+- sync Transifex badge into README translations ([#850](https://github.com/tkoyama010/pyvista-wasm/issues/850)) ([8bcb870](https://github.com/tkoyama010/pyvista-wasm/commit/8bcb8707b5d2a77f23b6a423cbabbf4288a040e9))
 
 ### Reverts
 
-* "fix(biome): enable all nursery rules except noUnsafeTypeAssertion and useConsistentFunctionStyle" ([#843](https://github.com/tkoyama010/pyvista-wasm/issues/843)) ([4c00476](https://github.com/tkoyama010/pyvista-wasm/commit/4c00476399c91d98d3e9765cc411b69041756a4b))
-
+- "fix(biome): enable all nursery rules except noUnsafeTypeAssertion and useConsistentFunctionStyle" ([#843](https://github.com/tkoyama010/pyvista-wasm/issues/843)) ([4c00476](https://github.com/tkoyama010/pyvista-wasm/commit/4c00476399c91d98d3e9765cc411b69041756a4b))
 
 ### Documentation
 
-* ADR-0015 filter execution strategy on the vtk-wasm pipeline ([#807](https://github.com/tkoyama010/pyvista-wasm/issues/807)) ([81bbcf9](https://github.com/tkoyama010/pyvista-wasm/commit/81bbcf90bf27ae6d2a3de141732607042be629b1))
-* document Transifex translation workflow in contributing guide ([#848](https://github.com/tkoyama010/pyvista-wasm/issues/848)) ([bbfd2e5](https://github.com/tkoyama010/pyvista-wasm/commit/bbfd2e5fc9111f3deb9cb39da26fe8a2232193b1))
+- ADR-0015 filter execution strategy on the vtk-wasm pipeline ([#807](https://github.com/tkoyama010/pyvista-wasm/issues/807)) ([81bbcf9](https://github.com/tkoyama010/pyvista-wasm/commit/81bbcf90bf27ae6d2a3de141732607042be629b1))
+- document Transifex translation workflow in contributing guide ([#848](https://github.com/tkoyama010/pyvista-wasm/issues/848)) ([bbfd2e5](https://github.com/tkoyama010/pyvista-wasm/commit/bbfd2e5fc9111f3deb9cb39da26fe8a2232193b1))
 
 ## [0.16.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.15.4...pyvista-wasm-v0.16.0) (2026-10-24)
 
