@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-10-31 08:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,474 +76,498 @@ msgstr ""
 msgid "Mesh"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData <pyvista_wasm.PolyData>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Base polygonal mesh class."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Arrow <pyvista_wasm.Arrow>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create an arrow mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Sphere <pyvista_wasm.Sphere>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a sphere mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Cube <pyvista_wasm.Cube>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a cube mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Cylinder <pyvista_wasm.Cylinder>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a cylinder mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Cone <pyvista_wasm.Cone>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a cone mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Plane <pyvista_wasm.Plane>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a plane mesh."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Disc <pyvista_wasm.Disc>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a disc (annular ring) geometric primitive."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Circle <pyvista_wasm.Circle>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a circle defined by a set of points in the XY plane."
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Line <pyvista_wasm.Line>`"
 msgstr ""
 
-#: ../api/index.md:61:<autosummary>:1
+#: ../api/index.md:64:<autosummary>:1
 msgid "Create a line segment between two points."
 msgstr ""
 
-#: ../api/index.md:64
+#: ../api/index.md:64:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Polygon <pyvista_wasm.Polygon>`"
+msgstr ""
+
+#: ../api/index.md:64:<autosummary>:1
+msgid "Create a regular polygon mesh in the xy plane."
+msgstr ""
+
+#: ../api/index.md:64:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Triangle <pyvista_wasm.Triangle>`"
+msgstr ""
+
+#: ../api/index.md:64:<autosummary>:1
+msgid "Create an equilateral triangle mesh in the xy plane."
+msgstr ""
+
+#: ../api/index.md:64:<autosummary>:1
+msgid ":py:obj:`pyvista_wasm.Tetrahedron <pyvista_wasm.Tetrahedron>`"
+msgstr ""
+
+#: ../api/index.md:64:<autosummary>:1
+msgid "Create a tetrahedron mesh."
+msgstr ""
+
+#: ../api/index.md:67
 msgid "Text"
 msgstr ""
 
-#: ../api/index.md:72:<autosummary>:1
+#: ../api/index.md:75:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Text <pyvista_wasm.Text>`"
 msgstr ""
 
-#: ../api/index.md:72:<autosummary>:1
+#: ../api/index.md:75:<autosummary>:1
 msgid "A text annotation actor for 3D rendering."
 msgstr ""
 
-#: ../api/index.md:72:<autosummary>:1
+#: ../api/index.md:75:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.TextProperty <pyvista_wasm.TextProperty>`"
 msgstr ""
 
-#: ../api/index.md:72:<autosummary>:1
+#: ../api/index.md:75:<autosummary>:1
 msgid "Properties for text rendering."
 msgstr ""
 
-#: ../api/index.md:75
+#: ../api/index.md:78
 msgid "Texture"
 msgstr ""
 
-#: ../api/index.md:82:<autosummary>:1
+#: ../api/index.md:85:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.Texture <pyvista_wasm.Texture>`"
 msgstr ""
 
-#: ../api/index.md:82:<autosummary>:1
+#: ../api/index.md:85:<autosummary>:1
 msgid "Surface texture wrapping an image URL."
 msgstr ""
 
-#: ../api/index.md:85
+#: ../api/index.md:88
 msgid "Filters"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.clip <pyvista_wasm.PolyData.clip>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Clip the mesh with a plane."
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.contour <pyvista_wasm.PolyData.contour>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Generate contour lines at constant scalar values."
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.rotate_z <pyvista_wasm.PolyData.rotate_z>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Rotate the mesh around the Z axis by the given angle (degrees)."
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.shrink <pyvista_wasm.PolyData.shrink>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Shrink the cells of a mesh towards their centroid."
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.texture_map_to_plane <pyvista_wasm.PolyData.texture_map_to_plane>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Generate texture coordinates by projecting points onto the XY plane."
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyData.tube <pyvista_wasm.PolyData.tube>`"
 msgstr ""
 
-#: ../api/index.md:97:<autosummary>:1
+#: ../api/index.md:100:<autosummary>:1
 msgid "Generate a tube around a line polydata."
 msgstr ""
 
-#: ../api/index.md:100
+#: ../api/index.md:103
 msgid "Readers"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.GLTFReader <pyvista_wasm.GLTFReader>`"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid "Reader for glTF (GL Transmission Format) files (``.gltf`` or ``.glb``)."
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.OBJReader <pyvista_wasm.OBJReader>`"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid "Reader for Wavefront OBJ files (``.obj``)."
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PLYReader <pyvista_wasm.PLYReader>`"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid "Reader for PLY (Polygon File Format) files (``.ply``)."
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.PolyDataReader <pyvista_wasm.PolyDataReader>`"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid "Reader for legacy VTK PolyData files (``.vtk``)."
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.STLReader <pyvista_wasm.STLReader>`"
 msgstr ""
 
-#: ../api/index.md:111:<autosummary>:1
+#: ../api/index.md:114:<autosummary>:1
 msgid "Reader for STL (STereoLithography) files (``.stl``)."
 msgstr ""
 
-#: ../api/index.md:114
+#: ../api/index.md:117
 msgid "Examples"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.CubeMap <pyvista_wasm.examples.CubeMap>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Cubemap texture holding six face image URLs."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_earth <pyvista_wasm.examples.load_earth>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Earth as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_venus <pyvista_wasm.examples.load_venus>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Venus as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_neptune <pyvista_wasm.examples.load_neptune>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Neptune as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_uranus <pyvista_wasm.examples.load_uranus>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Uranus as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_moon <pyvista_wasm.examples.load_moon>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the Moon as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_jupiter <pyvista_wasm.examples.load_jupiter>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Jupiter as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_pluto <pyvista_wasm.examples.load_pluto>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the dwarf planet Pluto as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_sun <pyvista_wasm.examples.load_sun>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the Sun as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_mercury <pyvista_wasm.examples.load_mercury>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Mercury as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_saturn <pyvista_wasm.examples.load_saturn>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Saturn as a textured sphere."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.load_saturn_rings <pyvista_wasm.examples.load_saturn_rings>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Load the planet Saturn's rings."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_earth_surface <pyvista_wasm.examples.download_earth_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Earth planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_mars_surface <pyvista_wasm.examples.download_mars_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Mars planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_venus_surface <pyvista_wasm.examples.download_venus_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Venus planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_neptune_surface <pyvista_wasm.examples.download_neptune_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Neptune planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_uranus_surface <pyvista_wasm.examples.download_uranus_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Uranus planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_moon_surface <pyvista_wasm.examples.download_moon_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Moon surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_jupiter_surface <pyvista_wasm.examples.download_jupiter_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Jupiter planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_pluto_surface <pyvista_wasm.examples.download_pluto_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Pluto planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_sun_surface <pyvista_wasm.examples.download_sun_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Sun surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_mercury_surface <pyvista_wasm.examples.download_mercury_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Mercury planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_saturn_surface <pyvista_wasm.examples.download_saturn_surface>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Saturn planet surface texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_saturn_rings <pyvista_wasm.examples.download_saturn_rings>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Saturn's rings texture."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_bunny <pyvista_wasm.examples.download_bunny>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Stanford Bunny dataset."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_lucy <pyvista_wasm.examples.download_lucy>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the Lucy Angel dataset."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_cad_model <pyvista_wasm.examples.download_cad_model>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the CAD model dataset."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_damaged_helmet <pyvista_wasm.examples.download_damaged_helmet>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the damaged helmet glTF example."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_masonry_texture <pyvista_wasm.examples.download_masonry_texture>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the masonry texture dataset."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_sky_box_cube_map <pyvista_wasm.examples.download_sky_box_cube_map>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the skybox cube map dataset."
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.examples.download_trumpet <pyvista_wasm.examples.download_trumpet>`"
 msgstr ""
 
-#: ../api/index.md:151:<autosummary>:1
+#: ../api/index.md:154:<autosummary>:1
 msgid "Download the trumpet dataset."
 msgstr ""
 
-#: ../api/index.md:154
+#: ../api/index.md:157
 msgid "Rendering"
 msgstr ""
 
-#: ../api/index.md:161:<autosummary>:1
+#: ../api/index.md:164:<autosummary>:1
 msgid ":py:obj:`pyvista_wasm.rendering.ColabRenderer <pyvista_wasm.rendering.ColabRenderer>`"
 msgstr ""
 
-#: ../api/index.md:161:<autosummary>:1
+#: ../api/index.md:164:<autosummary>:1
 msgid "Renderer for Google Colaboratory notebooks."
 msgstr ""
