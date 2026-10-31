@@ -1092,3 +1092,75 @@ class GLTFReader:
             for z in [min_vals[2], max_vals[2]]
         ]
         return np.array(points)
+
+
+class XMLPolyDataReader:
+    """Reader for VTK XML PolyData files (``.vtp``).
+
+    Implements the VTK::IOXML mapping (issue #784). Reads ASCII data
+    arrays with the standard library; binary/base64 arrays are not
+    supported yet.
+
+    Parameters
+    ----------
+    path : str or Path
+        Path to the ``.vtp`` file.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> reader = pv.XMLPolyDataReader("mesh.vtp")  # doctest: +SKIP
+    >>> mesh = reader.read()  # doctest: +SKIP
+
+    """
+
+    def __init__(self, path: str | Path) -> None:
+        """Initialize the reader with a file path."""
+        self._path = Path(path)
+        if not self._path.exists():
+            msg = f"File not found: {self._path}"
+            raise FileNotFoundError(msg)
+        if self._path.suffix.lower() != ".vtp":
+            msg = f"Expected a .vtp file, got: {self._path.suffix}"
+            raise ValueError(msg)
+
+    def read(self) -> PolyData:
+        """Read the file and return a :class:`PolyData`."""
+        from xml.etree.ElementTree import parse  # noqa: PLC0415
+
+        # ponytail: stdlib XML parser accepts DTDs (billion-laughs risk);
+        # the file is the user's own local mesh, swap to defusedxml if
+        # this reader is ever pointed at untrusted files.
+        root = parse(self._path).getroot()  # noqa: S314
+        if root.get("type") != "PolyData":
+            msg = f"Not a VTK PolyData file: {self._path}"
+            raise ValueError(msg)
+        piece = root.find(".//PolyData/Piece")
+        if piece is None:
+            msg = f"No PolyData piece in file: {self._path}"
+            raise ValueError(msg)
+
+        points = np.fromstring(
+            piece.findtext("./Points/DataArray", default=""),
+            dtype=float,
+            sep=" ",
+        ).reshape(-1, _N_COORDS)
+
+        connectivity = np.fromstring(
+            piece.findtext("./Polys/DataArray[@Name='connectivity']", default=""),
+            dtype=int,
+            sep=" ",
+        ).tolist()
+        offsets = np.fromstring(
+            piece.findtext("./Polys/DataArray[@Name='offsets']", default=""),
+            dtype=int,
+            sep=" ",
+        ).tolist()
+
+        faces: list[int] = []
+        start = 0
+        for offset in offsets:
+            faces.extend([offset - start, *connectivity[start:offset]])
+            start = offset
+        flat_faces = np.asarray(faces, dtype=int) if faces else None
+        return PolyData(points=points, faces=flat_faces)

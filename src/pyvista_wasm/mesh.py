@@ -5,6 +5,7 @@ Provides geometric primitives and mesh handling compatible with PyVista API.
 
 from __future__ import annotations
 
+import itertools
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -796,15 +797,15 @@ class PolyData(DataSet):
         return PolyData(new_points, faces=self.faces, _scene_data=self._scene_data)
 
     def save(self, filename: str | Path) -> None:
-        """Write this mesh to disk using meshio.
+        """Write this mesh to disk.
 
-        The file format is inferred from the extension of ``filename``.
-        Any format supported by `meshio <https://github.com/nschloe/meshio>`_
-        can be used (e.g. ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``).
+        ``.vtp`` (VTK XML PolyData) files are written natively with the
+        standard library (VTK::IOXML mapping, issue #784); any other
+        format is delegated to `meshio <https://github.com/nschloe/meshio>`_.
 
         .. note::
 
-            Requires ``meshio`` to be installed::
+            Non-``.vtp`` formats require ``meshio`` to be installed::
 
                 pip install "pyvista-wasm[io]"
 
@@ -826,7 +827,8 @@ class PolyData(DataSet):
         Raises
         ------
         ImportError
-            If ``meshio`` is not installed.
+            If a non-``.vtp`` format is requested and ``meshio`` is not
+            installed.
 
         Examples
         --------
@@ -835,6 +837,11 @@ class PolyData(DataSet):
         >>> mesh.save('trumpet.obj')  # doctest: +SKIP
 
         """
+        from pathlib import Path  # noqa: PLC0415
+
+        if Path(filename).suffix.lower() == ".vtp":
+            _write_vtp(self, Path(filename))
+            return
         try:
             import meshio  # noqa: PLC0415
         except ImportError:
@@ -2189,3 +2196,65 @@ def Plane(  # noqa: N802 PLR0913
             "normal": [float(n[0]), float(n[1]), float(n[2])],
         },
     )
+
+
+def _face_cells(faces: np.ndarray | None) -> list[list[int]]:
+    """Normalize PolyData faces (flat vtk-style or 2D) into cell lists."""
+    if faces is None or len(faces) == 0:
+        return []
+    array = np.asarray(faces)
+    if array.ndim > 1:
+        return [[int(v) for v in row] for row in array]
+    flat = array.tolist()
+    cells: list[list[int]] = []
+    i = 0
+    while i < len(flat):
+        size = int(flat[i])
+        i += 1
+        cells.append([int(v) for v in flat[i : i + size]])
+        i += size
+    return cells
+
+
+def _write_vtp(mesh: PolyData, path: Path) -> None:
+    """Write a :class:`PolyData` to a VTK XML PolyData (``.vtp``) file.
+
+    Uses ASCII data arrays (no compression) so the file stays readable
+    and parseable with the standard library on both sides.
+    """
+    from xml.etree.ElementTree import Element, ElementTree, SubElement  # noqa: PLC0415
+
+    cells = _face_cells(mesh.faces)
+    connectivity = [index for cell in cells for index in cell]
+    offsets = list(itertools.accumulate(len(cell) for cell in cells))
+    vtk_file = Element(
+        "VTKFile",
+        {"type": "PolyData", "version": "1.0", "byte_order": "LittleEndian"},
+    )
+    poly_data = SubElement(vtk_file, "PolyData")
+    piece = SubElement(
+        poly_data,
+        "Piece",
+        {
+            "NumberOfPoints": str(len(mesh.points)),
+            "NumberOfPolys": str(len(cells)),
+        },
+    )
+    points = SubElement(piece, "Points")
+    SubElement(
+        points,
+        "DataArray",
+        {"type": "Float64", "NumberOfComponents": "3", "format": "ascii"},
+    ).text = " ".join(repr(float(v)) for v in mesh.points.ravel())
+    polys = SubElement(piece, "Polys")
+    SubElement(
+        polys,
+        "DataArray",
+        {"type": "Int64", "Name": "connectivity", "format": "ascii"},
+    ).text = " ".join(str(v) for v in connectivity)
+    SubElement(
+        polys,
+        "DataArray",
+        {"type": "Int64", "Name": "offsets", "format": "ascii"},
+    ).text = " ".join(str(v) for v in offsets)
+    ElementTree(vtk_file).write(path, encoding="unicode", xml_declaration=True)
