@@ -299,6 +299,7 @@ class _BaseHTMLRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
+        self._background_image: str | None = None
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
@@ -575,6 +576,19 @@ class _BaseHTMLRenderer:
             self._environment_texture_url = texture
             self._environment_texture_cubemap = None
 
+    def set_background_image(self, url: str) -> None:
+        """Set an image shown behind the rendered scene.
+
+        Mirrors ``pyvista.Plotter.add_background_image`` (VTK::RenderingImage).
+
+        Parameters
+        ----------
+        url : str
+            Image URL or data URL drawn behind the scene.
+
+        """
+        self._background_image = url
+
     def set_background(self, color: tuple[float, float, float]) -> None:
         """Set the background color of the renderer.
 
@@ -844,6 +858,7 @@ class _BaseHTMLRenderer:
                 for chart in self.charts
             ],
             "axes": self._axes_enabled,
+            "backgroundImage": self._background_image,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
             "wasmConfig": {
@@ -1666,6 +1681,11 @@ class MockRenderer:
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
+        self._background_image: str | None = None
+
+    def set_background_image(self, url: str) -> None:
+        """Mock background image (stored, not rendered)."""
+        self._background_image = url
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.
