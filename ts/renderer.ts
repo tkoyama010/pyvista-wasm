@@ -338,7 +338,7 @@ function setupPointLabels(
   cameraConfig: CameraConfig | undefined,
   containerElement: HTMLElement,
 ): void {
-  if (!cameraConfig?.position || !cameraConfig.focalPoint) {
+  if (!(cameraConfig?.position && cameraConfig.focalPoint)) {
     console.info(
       "add_point_labels needs an explicit camera (plotter.camera = ...); skipping labels.",
     );
@@ -388,12 +388,20 @@ const DefaultViewAngle = 30;
 
 /** Subtract two 3-vectors. */
 function sub(a: number[], b: number[]): [number, number, number] {
-  return [(a[0] ?? 0) - (b[0] ?? 0), (a[1] ?? 0) - (b[1] ?? 0), (a[2] ?? 0) - (b[2] ?? 0)];
+  return [
+    (a[0] ?? 0) - (b[0] ?? 0),
+    (a[1] ?? 0) - (b[1] ?? 0),
+    (a[2] ?? 0) - (b[2] ?? 0),
+  ];
 }
 
 /** Dot product of two 3-vectors. */
 function dot(a: number[], b: number[]): number {
-  return (a[0] ?? 0) * (b[0] ?? 0) + (a[1] ?? 0) * (b[1] ?? 0) + (a[2] ?? 0) * (b[2] ?? 0);
+  return (
+    (a[0] ?? 0) * (b[0] ?? 0) +
+    (a[1] ?? 0) * (b[1] ?? 0) +
+    (a[2] ?? 0) * (b[2] ?? 0)
+  );
 }
 
 /** Cross product of two 3-vectors. */
@@ -408,7 +416,9 @@ function cross(a: number[], b: number[]): [number, number, number] {
 /** Normalize a 3-vector. */
 function normalize(v: number[]): [number, number, number] {
   const length = Math.hypot(v[0] ?? 0, v[1] ?? 0, v[2] ?? 0);
-  return length === 0 ? [0, 0, 0] : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
+  return length === 0
+    ? [0, 0, 0]
+    : [(v[0] ?? 0) / length, (v[1] ?? 0) / length, (v[2] ?? 0) / length];
 }
 
 /** Default canvas size when the container is not laid out yet. */
