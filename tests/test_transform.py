@@ -1,6 +1,7 @@
 """Tests for Transform (issue #775, VTK::CommonMath parity)."""
 
 import numpy as np
+import pytest
 from numpy.testing import assert_allclose
 
 import pyvista_wasm as pv
@@ -145,3 +146,35 @@ class TestActorTransform:
         actor_info = renderer.add_mesh_actor(mesh, transform=transform)
         data = renderer._build_actor_data(actor_info)
         assert data["source"]["points"][0] == 10.0
+
+
+class TestRotateArbitraryAxis:
+    """Tests for rotate about an arbitrary axis (Rodrigues' formula)."""
+
+    def test_matches_rotate_z(self) -> None:
+        """Test rotation about the z axis matches rotate_z."""
+        t1 = pv.Transform().rotate((0, 0, 1), 90)
+        t2 = pv.Transform().rotate_z(90)
+        assert_allclose(t1.matrix, t2.matrix, atol=1e-12)
+
+    def test_applies_to_point(self) -> None:
+        """Test rotating a point about the z axis."""
+        transform = pv.Transform().rotate((0, 0, 1), 90)
+        result = transform.apply([[1, 0, 0]])
+        assert_allclose(result, [[0, 1, 0]], atol=1e-12)
+
+    def test_non_normalized_axis(self) -> None:
+        """Test the axis vector is normalized internally."""
+        t1 = pv.Transform().rotate((0, 0, 5), 90)
+        t2 = pv.Transform().rotate((0, 0, 1), 90)
+        assert_allclose(t1.matrix, t2.matrix, atol=1e-12)
+
+    def test_zero_axis_raises(self) -> None:
+        """Test a zero axis vector raises ValueError."""
+        with pytest.raises(ValueError, match="non-zero"):
+            pv.Transform().rotate((0, 0, 0), 90)
+
+    def test_invalid_shape_raises(self) -> None:
+        """Test a non-3-component axis raises ValueError."""
+        with pytest.raises(ValueError, match=r"shape \(3,\)"):
+            pv.Transform().rotate((1, 0), 90)
