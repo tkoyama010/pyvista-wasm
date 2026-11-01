@@ -59,6 +59,9 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.Disc
    pyvista_wasm.Circle
    pyvista_wasm.Line
+   pyvista_wasm.Polygon
+   pyvista_wasm.Triangle
+   pyvista_wasm.Tetrahedron
 ```
 
 ## Text

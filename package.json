@@ -12,6 +12,7 @@
     "@biomejs/biome": "^2.5.15",
     "esbuild": "^0.28",
     "eslint-plugin-jsdoc": "^65.3.6",
+    "typebox": "^1.4.3",
     "typescript": "^7.0"
   },
   "overrides": {
