@@ -10,6 +10,7 @@ import base64
 import json
 import logging
 import struct
+import zlib
 from pathlib import Path
 
 import numpy as np
@@ -1094,6 +1095,55 @@ class GLTFReader:
         return np.array(points)
 
 
+# VTK XML DataArray type name -> numpy dtype
+_VTK_DTYPES = {
+    "Int8": np.int8,
+    "UInt8": np.uint8,
+    "Int16": np.int16,
+    "UInt16": np.uint16,
+    "Int32": np.int32,
+    "UInt32": np.uint32,
+    "Int64": np.int64,
+    "UInt64": np.uint64,
+    "Float32": np.float32,
+    "Float64": np.float64,
+}
+
+
+def _decode_binary_payload(text: str, compressor: str | None) -> bytes:
+    """Decode a VTK XML inline ``binary`` DataArray payload.
+
+    Without a compressor the payload is a little-endian ``uint32`` byte
+    count followed by the raw data. With ``vtkZLibDataCompressor`` it is
+    a little-endian header (block count, block size, last partial block
+    size) followed by one offset word per block, then zlib-compressed
+    blocks.
+    """
+    raw = base64.b64decode("".join(text.split()))
+    if not compressor:
+        (nbytes,) = struct.unpack_from("<I", raw)
+        return raw[4 : 4 + nbytes]
+    n_blocks, _block_size, _last_size = struct.unpack_from("<3I", raw)
+    offsets = struct.unpack_from(f"<{n_blocks}I", raw, 12)
+    chunks = []
+    for i, start in enumerate(offsets):
+        end = offsets[i + 1] if i + 1 < n_blocks else len(raw)
+        chunks.append(zlib.decompress(raw[start:end]))
+    return b"".join(chunks)
+
+
+def _read_data_array(element, compressor: str | None = None) -> np.ndarray:
+    """Read a ``<DataArray>`` element (ASCII or binary) as a 1D array."""
+    if element is None or element.text is None:
+        return np.empty(0)
+    vtk_type = element.get("type", "Float64")
+    text = element.text
+    if element.get("format") == "binary":
+        payload = _decode_binary_payload(text, compressor)
+        return np.frombuffer(payload, dtype=np.dtype(_VTK_DTYPES[vtk_type]).newbyteorder("<"))
+    return np.fromstring(text, dtype=_VTK_DTYPES[vtk_type], sep=" ")  # noqa: S307, S301
+
+
 class XMLPolyDataReader:
     """Reader for VTK XML PolyData files (``.vtp``).
 
@@ -1109,8 +1159,12 @@ class XMLPolyDataReader:
     Examples
     --------
     >>> import pyvista_wasm as pv
-    >>> reader = pv.XMLPolyDataReader("mesh.vtp")  # doctest: +SKIP
-    >>> mesh = reader.read()  # doctest: +SKIP
+    >>> from pyvista_wasm import examples
+    >>> path = examples.download_cow_head(load=False)
+    >>> reader = pv.XMLPolyDataReader(path)
+    >>> mesh = reader.read()
+    >>> mesh.n_points > 0
+    True
 
     """
 
@@ -1140,21 +1194,16 @@ class XMLPolyDataReader:
             msg = f"No PolyData piece in file: {self._path}"
             raise ValueError(msg)
 
-        points = np.fromstring(
-            piece.findtext("./Points/DataArray", default=""),
-            dtype=float,
-            sep=" ",
-        ).reshape(-1, _N_COORDS)
+        points = _read_data_array(
+            piece.find("./Points/DataArray"), root.get("compressor"),
+        )
+        points = points.reshape(-1, _N_COORDS)
 
-        connectivity = np.fromstring(
-            piece.findtext("./Polys/DataArray[@Name='connectivity']", default=""),
-            dtype=int,
-            sep=" ",
+        connectivity = _read_data_array(
+            piece.find("./Polys/DataArray[@Name='connectivity']"), root.get("compressor"),
         ).tolist()
-        offsets = np.fromstring(
-            piece.findtext("./Polys/DataArray[@Name='offsets']", default=""),
-            dtype=int,
-            sep=" ",
+        offsets = _read_data_array(
+            piece.find("./Polys/DataArray[@Name='offsets']"), root.get("compressor"),
         ).tolist()
 
         faces: list[int] = []

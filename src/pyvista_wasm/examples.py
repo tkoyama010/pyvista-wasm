@@ -339,6 +339,43 @@ def download_bunny() -> PolyData:
     return PLYReader(path).read()
 
 
+def download_cow_head(load: bool = True) -> PolyData | Path:
+    """Download the cow head dataset.
+
+    Downloads ``cowHead.vtp`` from the PyVista vtk-data repository and
+    returns it as a :class:`~pyvista_wasm.PolyData` mesh, mirroring the
+    ``pyvista.examples.download_cow_head`` API.
+
+    Parameters
+    ----------
+    load : bool, optional
+        Load the dataset after downloading it. When ``False``, only the
+        path to the downloaded ``.vtp`` file is returned.
+
+    Returns
+    -------
+    pyvista_wasm.PolyData or Path
+        The cow head mesh, or the path to the ``.vtp`` file when
+        ``load=False``.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> mesh = examples.download_cow_head()
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mesh)
+    >>> plotter.show()  # doctest: +SKIP
+
+    """
+    from .readers import XMLPolyDataReader  # noqa: PLC0415
+
+    path = _download_file("cowHead.vtp")
+    if not load:
+        return path
+    return XMLPolyDataReader(path).read()
+
+
 def load_earth(
     radius: float = 1.0,
     lat_resolution: int = 50,
