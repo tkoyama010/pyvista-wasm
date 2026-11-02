@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 15:45+0900\n"
+"POT-Creation-Date: 2026-11-02 21:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,7 @@ msgstr ""
 
 #: ../api/_autosummary/pyvista_wasm.PolyData.rst:32:<autosummary>:1
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.save:1
-msgid "Write this mesh to disk using meshio."
+msgid "Write this mesh to disk."
 msgstr ""
 
 #: ../api/_autosummary/pyvista_wasm.PolyData.rst:32:<autosummary>:1
@@ -331,11 +331,11 @@ msgid "A new mesh with rotated points."
 msgstr ""
 
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.save:3
-msgid "The file format is inferred from the extension of ``filename``. Any format supported by `meshio <https://github.com/nschloe/meshio>`_ can be used (e.g. ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``)."
+msgid "``.vtp`` (VTK XML PolyData) files are written natively with the standard library (VTK::IOXML mapping, issue #784); any other format is delegated to `meshio <https://github.com/nschloe/meshio>`_."
 msgstr ""
 
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.save:9
-msgid "Requires ``meshio`` to be installed::"
+msgid "Non-``.vtp`` formats require ``meshio`` to be installed::"
 msgstr ""
 
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.save:13
@@ -347,7 +347,7 @@ msgid "Output path. The extension determines the file format."
 msgstr ""
 
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.save:24
-msgid "If ``meshio`` is not installed."
+msgid "If a non-``.vtp`` format is requested and ``meshio`` is not     installed."
 msgstr ""
 
 #: ../../src/pyvista_wasm/mesh.py:docstring of pyvista_wasm.mesh.PolyData.shrink:3
