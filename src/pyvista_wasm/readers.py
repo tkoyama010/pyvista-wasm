@@ -10,11 +10,16 @@ import base64
 import json
 import logging
 import struct
+import zlib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import numpy as np
 
 from .mesh import PolyData
+
+if TYPE_CHECKING:
+    from xml.etree.ElementTree import Element as _Element
 
 logger = logging.getLogger(__name__)
 
@@ -1092,3 +1097,126 @@ class GLTFReader:
             for z in [min_vals[2], max_vals[2]]
         ]
         return np.array(points)
+
+
+# VTK XML DataArray type name -> numpy dtype
+_VTK_DTYPES = {
+    "Int8": np.int8,
+    "UInt8": np.uint8,
+    "Int16": np.int16,
+    "UInt16": np.uint16,
+    "Int32": np.int32,
+    "UInt32": np.uint32,
+    "Int64": np.int64,
+    "UInt64": np.uint64,
+    "Float32": np.float32,
+    "Float64": np.float64,
+}
+
+
+def _decode_binary_payload(text: str, compressor: str | None) -> bytes:
+    """Decode a VTK XML inline ``binary`` DataArray payload.
+
+    Without a compressor the payload is a little-endian ``uint32`` byte
+    count followed by the raw data. With ``vtkZLibDataCompressor`` it is
+    a little-endian header (block count, block size, last partial block
+    size) followed by one offset word per block, then zlib-compressed
+    blocks.
+    """
+    raw = base64.b64decode("".join(text.split()))
+    if not compressor:
+        (nbytes,) = struct.unpack_from("<I", raw)
+        return raw[4 : 4 + nbytes]
+    n_blocks, _block_size, _last_size = struct.unpack_from("<3I", raw)
+    offsets = struct.unpack_from(f"<{n_blocks}I", raw, 12)
+    chunks = []
+    for i, start in enumerate(offsets):
+        end = offsets[i + 1] if i + 1 < n_blocks else len(raw)
+        chunks.append(zlib.decompress(raw[start:end]))
+    return b"".join(chunks)
+
+
+def _read_data_array(element: _Element | None, compressor: str | None = None) -> np.ndarray:
+    """Read a ``<DataArray>`` element (ASCII or binary) as a 1D array."""
+    if element is None or element.text is None:
+        return np.empty(0)
+    vtk_type = element.get("type", "Float64")
+    text = element.text
+    if element.get("format") == "binary":
+        payload = _decode_binary_payload(text, compressor)
+        return np.frombuffer(payload, dtype=np.dtype(_VTK_DTYPES[vtk_type]).newbyteorder("<"))
+    return np.fromstring(text, dtype=_VTK_DTYPES[vtk_type], sep=" ")
+
+
+class XMLPolyDataReader:
+    """Reader for VTK XML PolyData files (``.vtp``).
+
+    Implements the VTK::IOXML mapping (issue #784). Reads ASCII data
+    arrays with the standard library; binary/base64 arrays are not
+    supported yet.
+
+    Parameters
+    ----------
+    path : str or Path
+        Path to the ``.vtp`` file.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> from pyvista_wasm import examples
+    >>> path = examples.download_cow_head(load=False)
+    >>> reader = pv.XMLPolyDataReader(path)
+    >>> mesh = reader.read()
+    >>> mesh.n_points > 0
+    True
+
+    """
+
+    def __init__(self, path: str | Path) -> None:
+        """Initialize the reader with a file path."""
+        self._path = Path(path)
+        if not self._path.exists():
+            msg = f"File not found: {self._path}"
+            raise FileNotFoundError(msg)
+        if self._path.suffix.lower() != ".vtp":
+            msg = f"Expected a .vtp file, got: {self._path.suffix}"
+            raise ValueError(msg)
+
+    def read(self) -> PolyData:
+        """Read the file and return a :class:`PolyData`."""
+        from xml.etree.ElementTree import parse  # noqa: PLC0415
+
+        # ponytail: stdlib XML parser accepts DTDs (billion-laughs risk);
+        # the file is the user's own local mesh, swap to defusedxml if
+        # this reader is ever pointed at untrusted files.
+        root = parse(self._path).getroot()  # noqa: S314
+        if root.get("type") != "PolyData":
+            msg = f"Not a VTK PolyData file: {self._path}"
+            raise ValueError(msg)
+        piece = root.find(".//PolyData/Piece")
+        if piece is None:
+            msg = f"No PolyData piece in file: {self._path}"
+            raise ValueError(msg)
+
+        points = _read_data_array(
+            piece.find("./Points/DataArray"),
+            root.get("compressor"),
+        )
+        points = points.reshape(-1, _N_COORDS)
+
+        connectivity = _read_data_array(
+            piece.find("./Polys/DataArray[@Name='connectivity']"),
+            root.get("compressor"),
+        ).tolist()
+        offsets = _read_data_array(
+            piece.find("./Polys/DataArray[@Name='offsets']"),
+            root.get("compressor"),
+        ).tolist()
+
+        faces: list[int] = []
+        start = 0
+        for offset in offsets:
+            faces.extend([offset - start, *connectivity[start:offset]])
+            start = offset
+        flat_faces = np.asarray(faces, dtype=int) if faces else None
+        return PolyData(points=points, faces=flat_faces)
