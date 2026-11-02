@@ -339,7 +339,7 @@ def download_bunny() -> PolyData:
     return PLYReader(path).read()
 
 
-def download_cow_head(load: bool = True) -> PolyData | Path:
+def download_cow_head(*, load: bool = True) -> PolyData | Path:
     """Download the cow head dataset.
 
     Downloads ``cowHead.vtp`` from the PyVista vtk-data repository and

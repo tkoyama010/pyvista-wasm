@@ -12,10 +12,14 @@ import logging
 import struct
 import zlib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import numpy as np
 
 from .mesh import PolyData
+
+if TYPE_CHECKING:
+    from xml.etree.ElementTree import Element as _Element
 
 logger = logging.getLogger(__name__)
 
@@ -1132,7 +1136,7 @@ def _decode_binary_payload(text: str, compressor: str | None) -> bytes:
     return b"".join(chunks)
 
 
-def _read_data_array(element, compressor: str | None = None) -> np.ndarray:
+def _read_data_array(element: _Element | None, compressor: str | None = None) -> np.ndarray:
     """Read a ``<DataArray>`` element (ASCII or binary) as a 1D array."""
     if element is None or element.text is None:
         return np.empty(0)
@@ -1141,7 +1145,7 @@ def _read_data_array(element, compressor: str | None = None) -> np.ndarray:
     if element.get("format") == "binary":
         payload = _decode_binary_payload(text, compressor)
         return np.frombuffer(payload, dtype=np.dtype(_VTK_DTYPES[vtk_type]).newbyteorder("<"))
-    return np.fromstring(text, dtype=_VTK_DTYPES[vtk_type], sep=" ")  # noqa: S307, S301
+    return np.fromstring(text, dtype=_VTK_DTYPES[vtk_type], sep=" ")
 
 
 class XMLPolyDataReader:
@@ -1195,15 +1199,18 @@ class XMLPolyDataReader:
             raise ValueError(msg)
 
         points = _read_data_array(
-            piece.find("./Points/DataArray"), root.get("compressor"),
+            piece.find("./Points/DataArray"),
+            root.get("compressor"),
         )
         points = points.reshape(-1, _N_COORDS)
 
         connectivity = _read_data_array(
-            piece.find("./Polys/DataArray[@Name='connectivity']"), root.get("compressor"),
+            piece.find("./Polys/DataArray[@Name='connectivity']"),
+            root.get("compressor"),
         ).tolist()
         offsets = _read_data_array(
-            piece.find("./Polys/DataArray[@Name='offsets']"), root.get("compressor"),
+            piece.find("./Polys/DataArray[@Name='offsets']"),
+            root.get("compressor"),
         ).tolist()
 
         faces: list[int] = []
