@@ -23,6 +23,16 @@
         "infra",
         "talk"
       ]
+    },
+    {
+      "login": "transifex",
+      "name": "Transifex",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22542?v=4",
+      "profile": "https://www.transifex.com/",
+      "contributions": [
+        "doc",
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
