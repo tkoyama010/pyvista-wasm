@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Tetsuo Koyama
+# This file is distributed under the same license as the pyvista-wasm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Tetsuo Koyama <tkoyama010@gmail.com>, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pyvista-wasm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-02 21:47+0000\n"
+"PO-Revision-Date: 2026-11-02 23:08+0000\n"
+"Last-Translator: Tetsuo Koyama <tkoyama010@gmail.com>, 2026\n"
+"Language-Team: Japanese (https://app.transifex.com/tkoyama010/teams/310886/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../api/_autosummary/pyvista_wasm.XMLPolyDataReader.rst:2
+msgid "pyvista\\_wasm.XMLPolyDataReader"
+msgstr "pyvista\\_wasm.XMLPolyDataReader"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader:1
+msgid "Reader for VTK XML PolyData files (``.vtp``)."
+msgstr "VTK XML PolyData ファイル (``.vtp``) のリーダー。"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader:3
+msgid ""
+"Implements the VTK::IOXML mapping (issue #784). Reads ASCII data arrays with"
+" the standard library; binary/base64 arrays are not supported yet."
+msgstr ""
+"VTK::IOXML マッピングを実装しています (issue #784)。ASCII データ配列は標準ラブラリで読み取ります。バイナリ／Base64 "
+"配列は未対応です。"
+
+#: ../api/_autosummary/pyvista_wasm.XMLPolyDataReader.rst:0
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader:7
+msgid "Path to the ``.vtp`` file."
+msgstr "``.vtp`` ファイルのパス。"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader:11
+msgid "Examples"
+msgstr "例"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader.__init__:1 ../:1:<autosummary>:1
+msgid "Initialize the reader with a file path."
+msgstr "ファイルパスを指定してリーダーを初期化します。"
+
+#: ../api/_autosummary/pyvista_wasm.XMLPolyDataReader.rst:13
+msgid "Methods"
+msgstr "メソッド"
+
+#: ../:1:<autosummary>:1
+msgid ":py:obj:`__init__ <pyvista_wasm.XMLPolyDataReader.__init__>`\\ \\(path\\)"
+msgstr ":py:obj:`__init__ <pyvista_wasm.XMLPolyDataReader.__init__>`\\ \\(path\\)"
+
+#: ../:1:<autosummary>:1
+msgid ":py:obj:`read <pyvista_wasm.XMLPolyDataReader.read>`\\ \\(\\)"
+msgstr ":py:obj:`read <pyvista_wasm.XMLPolyDataReader.read>`\\ \\(\\)"
+
+#: ../../src/pyvista_wasm/readers.pydocstring of
+#: pyvista_wasm.readers.XMLPolyDataReader.read:1 ../:1:<autosummary>:1
+msgid "Read the file and return a :class:`PolyData`."
+msgstr "ファイルを読み込み、:class:`PolyData` を返します。"
