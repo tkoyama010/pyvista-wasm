@@ -59,6 +59,9 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.Disc
    pyvista_wasm.Circle
    pyvista_wasm.Line
+   pyvista_wasm.Polygon
+   pyvista_wasm.Triangle
+   pyvista_wasm.Tetrahedron
 ```
 
 ## Text
@@ -109,6 +112,7 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.PLYReader
    pyvista_wasm.PolyDataReader
    pyvista_wasm.STLReader
+   pyvista_wasm.XMLPolyDataReader
 ```
 
 ## Examples
@@ -145,6 +149,7 @@ This section provides detailed documentation for the pyvista-wasm public API.
    pyvista_wasm.examples.download_bunny
    pyvista_wasm.examples.download_lucy
    pyvista_wasm.examples.download_cad_model
+   pyvista_wasm.examples.download_cow_head
    pyvista_wasm.examples.download_damaged_helmet
    pyvista_wasm.examples.download_masonry_texture
    pyvista_wasm.examples.download_sky_box_cube_map

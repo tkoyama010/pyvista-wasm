@@ -23,6 +23,25 @@
         "infra",
         "talk"
       ]
+    },
+    {
+      "login": "transifex",
+      "name": "Transifex",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22542?v=4",
+      "profile": "https://www.transifex.com/",
+      "contributions": [
+        "doc",
+        "translation"
+      ]
+    },
+    {
+      "login": "pre-commit",
+      "name": "pre-commit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6943086?v=4",
+      "profile": "https://pre-commit.com",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,

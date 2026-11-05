@@ -5,6 +5,7 @@ Provides geometric primitives and mesh handling compatible with PyVista API.
 
 from __future__ import annotations
 
+import itertools
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -796,15 +797,15 @@ class PolyData(DataSet):
         return PolyData(new_points, faces=self.faces, _scene_data=self._scene_data)
 
     def save(self, filename: str | Path) -> None:
-        """Write this mesh to disk using meshio.
+        """Write this mesh to disk.
 
-        The file format is inferred from the extension of ``filename``.
-        Any format supported by `meshio <https://github.com/nschloe/meshio>`_
-        can be used (e.g. ``'.obj'``, ``'.vtk'``, ``'.ply'``, ``'.stl'``).
+        ``.vtp`` (VTK XML PolyData) files are written natively with the
+        standard library (VTK::IOXML mapping, issue #784); any other
+        format is delegated to `meshio <https://github.com/nschloe/meshio>`_.
 
         .. note::
 
-            Requires ``meshio`` to be installed::
+            Non-``.vtp`` formats require ``meshio`` to be installed::
 
                 pip install "pyvista-wasm[io]"
 
@@ -826,7 +827,8 @@ class PolyData(DataSet):
         Raises
         ------
         ImportError
-            If ``meshio`` is not installed.
+            If a non-``.vtp`` format is requested and ``meshio`` is not
+            installed.
 
         Examples
         --------
@@ -835,6 +837,11 @@ class PolyData(DataSet):
         >>> mesh.save('trumpet.obj')  # doctest: +SKIP
 
         """
+        from pathlib import Path  # noqa: PLC0415
+
+        if Path(filename).suffix.lower() == ".vtp":
+            _write_vtp(self, Path(filename))
+            return
         try:
             import meshio  # noqa: PLC0415
         except ImportError:
@@ -2189,3 +2196,210 @@ def Plane(  # noqa: N802 PLR0913
             "normal": [float(n[0]), float(n[1]), float(n[2])],
         },
     )
+
+
+def _face_cells(faces: np.ndarray | None) -> list[list[int]]:
+    """Normalize PolyData faces (flat vtk-style or 2D) into cell lists."""
+    if faces is None or len(faces) == 0:
+        return []
+    array = np.asarray(faces)
+    if array.ndim > 1:
+        return [[int(v) for v in row] for row in array]
+    flat = array.tolist()
+    cells: list[list[int]] = []
+    i = 0
+    while i < len(flat):
+        size = int(flat[i])
+        i += 1
+        cells.append([int(v) for v in flat[i : i + size]])
+        i += size
+    return cells
+
+
+def _write_vtp(mesh: PolyData, path: Path) -> None:
+    """Write a :class:`PolyData` to a VTK XML PolyData (``.vtp``) file.
+
+    Uses ASCII data arrays (no compression) so the file stays readable
+    and parseable with the standard library on both sides.
+    """
+    from xml.etree.ElementTree import Element, ElementTree, SubElement  # noqa: PLC0415
+
+    cells = _face_cells(mesh.faces)
+    connectivity = [index for cell in cells for index in cell]
+    offsets = list(itertools.accumulate(len(cell) for cell in cells))
+    vtk_file = Element(
+        "VTKFile",
+        {"type": "PolyData", "version": "1.0", "byte_order": "LittleEndian"},
+    )
+    poly_data = SubElement(vtk_file, "PolyData")
+    piece = SubElement(
+        poly_data,
+        "Piece",
+        {
+            "NumberOfPoints": str(len(mesh.points)),
+            "NumberOfPolys": str(len(cells)),
+        },
+    )
+    points = SubElement(piece, "Points")
+    SubElement(
+        points,
+        "DataArray",
+        {"type": "Float64", "NumberOfComponents": "3", "format": "ascii"},
+    ).text = " ".join(repr(float(v)) for v in mesh.points.ravel())
+    polys = SubElement(piece, "Polys")
+    SubElement(
+        polys,
+        "DataArray",
+        {"type": "Int64", "Name": "connectivity", "format": "ascii"},
+    ).text = " ".join(str(v) for v in connectivity)
+    SubElement(
+        polys,
+        "DataArray",
+        {"type": "Int64", "Name": "offsets", "format": "ascii"},
+    ).text = " ".join(str(v) for v in offsets)
+    ElementTree(vtk_file).write(path, encoding="unicode", xml_declaration=True)
+
+
+def Polygon(  # noqa: N802
+    radius: float = 1.0,
+    n_sides: int = 6,
+    center: tuple[float, float, float] = (0.0, 0.0, 0.0),
+) -> PolyData:
+    """Create a regular polygon mesh in the xy plane.
+
+    This mirrors the :func:`pyvista.Polygon` API. The geometry is generated
+    with NumPy because the vtk-wasm binary does not register a deserializer
+    for ``vtkRegularPolygonSource``.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Radius of the circumscribed circle. Default is 1.0.
+    n_sides : int, optional
+        Number of sides (>= 3). Default is 6.
+    center : tuple, optional
+        Center of the polygon (x, y, z). Default is (0, 0, 0).
+
+    Returns
+    -------
+    PolyData
+        A polygon mesh.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> hexagon = pv.Polygon(n_sides=6)
+    >>> hexagon.n_points
+    6
+
+    """
+    if n_sides < 3:  # noqa: PLR2004
+        msg = f"n_sides must be >= 3, got {n_sides}"
+        raise ValueError(msg)
+    angles = 2 * np.pi * np.arange(n_sides) / n_sides
+    pts = np.column_stack(
+        (
+            radius * np.cos(angles) + center[0],
+            radius * np.sin(angles) + center[1],
+            np.full(n_sides, center[2]),
+        ),
+    )
+    return PolyData(
+        points=pts,
+        faces=np.array([n_sides, *range(n_sides)]),
+    )
+
+
+def Triangle(  # noqa: N802
+    center: tuple[float, float, float] = (0.0, 0.0, 0.0),
+    radius: float = 1.0,
+) -> PolyData:
+    """Create an equilateral triangle mesh in the xy plane.
+
+    Mirrors :func:`pyvista.Triangle`; a thin wrapper around
+    :func:`Polygon` with ``n_sides=3``, matching PyVista's implementation.
+
+    Parameters
+    ----------
+    center : tuple, optional
+        Center of the triangle (x, y, z). Default is (0, 0, 0).
+    radius : float, optional
+        Radius of the circumscribed circle. Default is 1.0.
+
+    Returns
+    -------
+    PolyData
+        A triangle mesh.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> tri = pv.Triangle()
+    >>> tri.n_points
+    3
+
+    """
+    return Polygon(radius=radius, n_sides=3, center=center)
+
+
+def Tetrahedron(  # noqa: N802
+    radius: float = 1.0,
+    center: tuple[float, float, float] = (0.0, 0.0, 0.0),
+) -> PolyData:
+    """Create a tetrahedron mesh.
+
+    Mirrors :func:`pyvista.Tetrahedron`. The vertices are placed on a
+    sphere of the given radius, and the four faces are outward-oriented
+    triangles.
+
+    Parameters
+    ----------
+    radius : float, optional
+        Radius of the circumscribed sphere. Default is 1.0.
+    center : tuple, optional
+        Center of the tetrahedron (x, y, z). Default is (0, 0, 0).
+
+    Returns
+    -------
+    PolyData
+        A tetrahedron mesh.
+
+    Examples
+    --------
+    >>> import pyvista_wasm as pv
+    >>> tet = pv.Tetrahedron()
+    >>> tet.n_points
+    4
+
+    """
+    # Regular tetrahedron vertices: alternating signs of each coordinate
+    vertices = np.array(
+        [
+            [1, 1, 1],
+            [1, -1, -1],
+            [-1, 1, -1],
+            [-1, -1, 1],
+        ],
+        dtype=float,
+    ) / np.sqrt(3)
+    faces = np.array(
+        [
+            3,
+            0,
+            1,
+            2,
+            3,
+            0,
+            3,
+            1,
+            3,
+            0,
+            2,
+            3,
+            3,
+            1,
+            3,
+            2,
+        ],
+    )
+    return PolyData(points=vertices * radius + np.asarray(center), faces=faces)

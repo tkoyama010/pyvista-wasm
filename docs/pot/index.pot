@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-01 00:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgid "pyvista-wasm"
 msgstr ""
 
 #: ../../README.md:4
-msgid "[![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb) [![Stlite](https://img.shields.io/badge/stlite-Streamlit%20in%20Browser-FF4B4B?logo=streamlit)](https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt) [![marimo](https://marimo.io/shield.svg)](https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tkoyama010/pyvista-wasm/blob/main/notebooks/intro.ipynb) [![Slidev](https://img.shields.io/badge/Slides-PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io/pyvista-wasm/slides/)"
+msgid "[![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://pyvista-wasm.readthedocs.io/en/latest/lite/lab/index.html?path=intro.ipynb) [![Stlite](https://img.shields.io/badge/stlite-Streamlit%20in%20Browser-FF4B4B?logo=streamlit)](https://edit.share.stlite.net/#!CgZhcHAucHkSxQQKBmFwcC5weRK6BAq3BCIiIlN0cmVhbWxpdCBhcHAgZm9yIHRoZSBweXZpc3RhLWpzIHN0bGl0ZSBkZW1vLiIiIgoKaW1wb3J0IHN0cmVhbWxpdCBhcyBzdAppbXBvcnQgc3RyZWFtbGl0LmNvbXBvbmVudHMudjEgYXMgY29tcG9uZW50cwoKaW1wb3J0IHB5dmlzdGFfd2FzbSBhcyBwdgpmcm9tIHB5dmlzdGFfd2FzbSBpbXBvcnQgZXhhbXBsZXMKCmNvbG9yID0gc3Quc2VsZWN0Ym94KAogICAgIkNvbG9yIiwKICAgIFsiZ3JheSIsICJ3aGl0ZSIsICJyZWQiLCAiZ3JlZW4iLCAiYmx1ZSIsICJ5ZWxsb3ciLCAiY3lhbiIsICJtYWdlbnRhIl0sCikKCm9wYWNpdHkgPSBzdC5zbGlkZXIoIk9wYWNpdHkiLCBtaW5fdmFsdWU9MC4wLCBtYXhfdmFsdWU9MS4wLCB2YWx1ZT0wLjgsIHN0ZXA9MC4xKQoKcGxvdHRlciA9IHB2LlBsb3R0ZXIoKQoKbWVzaCA9IGV4YW1wbGVzLmRvd25sb2FkX2J1bm55KCkKCnBsb3R0ZXIuYWRkX21lc2gobWVzaCwgY29sb3I9Y29sb3IsIG9wYWNpdHk9b3BhY2l0eSkKCmh0bWwgPSBwbG90dGVyLmdlbmVyYXRlX3N0YW5kYWxvbmVfaHRtbCgpCmNvbXBvbmVudHMuaHRtbChodG1sLCBoZWlnaHQ9NjAwKRoMcHl2aXN0YS13YXNt) [![marimo](https://marimo.io/shield.svg)](https://marimo.app/?code=JYWwDg9gTgLgBCAhlUEBQaD6mDmBTAOzykRjwBNMB3YGACzgF44AiABgDoBGAZg4DYWaRGDBMEyVBwCCogBQ1y9RixAVgAVxAsAlBjQABEWA4BjPABsLwgM4BPAqbjk8AMziY5OgFxo4-uFBIWARgUygIMGAwDAC4RCpEWlDwyOiOYAIbGEQrORYwOwA3YGzEAFpEm209OKg8GA0oAjg5EDCIqLAAGj0MI1EzS2sXd0921K6fPwCg6HhCkrLqRGr4mzgwIpn-VwiQTeLSnJW1uZC8AA9EcAs8G1iA+sbmuCubsDubbs3t-uMhlY0KMPHJ3rd7j8ttM4p8IDAyFBxFsOAAFCzwxFeHYIe4MZjgz73DjkCBUAgYxCUABGGgIBDs2NhGIRxA4VMoahsdDaeNqAThrKgHG5ZOxGGAY0wBBueGwTGYLGwSEy2BYvjiAKgdOxQA) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tkoyama010/pyvista-wasm/blob/main/notebooks/intro.ipynb) [![Slidev](https://img.shields.io/badge/Slides-PyCon%20JP%202026-639BFF?logo=slides)](https://tkoyama010.github.io/pyvista-wasm/slides/) [![Transifex](https://img.shields.io/badge/Translations-Transifex-blue.svg)](https://app.transifex.com/tkoyama010/pyvista-wasm-doc/)"
 msgstr ""
 
 #: ../../README.md:4
@@ -56,7 +56,11 @@ msgstr ""
 msgid "Slidev"
 msgstr ""
 
-#: ../../README.md:16
+#: ../../README.md:4
+msgid "Transifex"
+msgstr ""
+
+#: ../../README.md:17
 msgid "[PyVista](https://github.com/pyvista/pyvista)-like API for [VTK.wasm](https://kitware.github.io/vtk-wasm/) — bring intuitive 3D visualization to the browser using WebAssembly."
 msgstr ""
 
@@ -76,7 +80,7 @@ msgstr ""
 msgid "![jupyterlite-preview]"
 msgstr ""
 
-#: ../../README.md:20
+#: ../../README.md:21
 msgid "jupyterlite-preview"
 msgstr ""
 
@@ -84,7 +88,7 @@ msgstr ""
 msgid "![stlite-preview]"
 msgstr ""
 
-#: ../../README.md:20
+#: ../../README.md:21
 msgid "stlite-preview"
 msgstr ""
 
@@ -92,131 +96,131 @@ msgstr ""
 msgid "![marimo-preview]"
 msgstr ""
 
-#: ../../README.md:20
+#: ../../README.md:21
 msgid "marimo-preview"
 msgstr ""
 
-#: ../../README.md:22
+#: ../../README.md:23
 msgid "Table of Contents"
 msgstr ""
 
-#: ../../README.md:24
+#: ../../README.md:25
 msgid "[Table of Contents](#table-of-contents)"
 msgstr ""
 
-#: ../../README.md:25
+#: ../../README.md:26
 msgid "[Install](#install)"
 msgstr ""
 
-#: ../../README.md:26
+#: ../../README.md:27
 msgid "[Usage](#usage)"
 msgstr ""
 
-#: ../../README.md:27
+#: ../../README.md:28
 msgid "[Presentation](#presentation)"
 msgstr ""
 
-#: ../../README.md:28
+#: ../../README.md:29
 msgid "[Differences from pyvista-js](#differences-from-pyvista-js)"
 msgstr ""
 
-#: ../../README.md:29
+#: ../../README.md:30
 msgid "[Citation](#citation)"
 msgstr ""
 
-#: ../../README.md:30
+#: ../../README.md:31
 msgid "[Contributing](#contributing)"
 msgstr ""
 
-#: ../../README.md:31
+#: ../../README.md:32
 msgid "[License](#license)"
 msgstr ""
 
-#: ../../README.md:33
+#: ../../README.md:34
 msgid "Install"
 msgstr ""
 
-#: ../../README.md:35
+#: ../../README.md:36
 msgid "[![PyPI](https://img.shields.io/pypi/v/pyvista-wasm)](https://pypi.org/project/pyvista-wasm/)"
 msgstr ""
 
-#: ../../README.md:35
+#: ../../README.md:36
 msgid "PyPI"
 msgstr ""
 
-#: ../../README.md:41
+#: ../../README.md:42
 msgid "For Pyodide/stlite:"
 msgstr ""
 
-#: ../../README.md:49
+#: ../../README.md:50
 msgid "Usage"
 msgstr ""
 
-#: ../../README.md:59
+#: ../../README.md:60
 msgid "Presentation"
 msgstr ""
 
-#: ../../README.md:61
+#: ../../README.md:62
 msgid "The PyCon JP 2026 talk introduces pyvista-wasm with live demos and a deep dive into the WASM rendering architecture:"
 msgstr ""
 
-#: ../../README.md:63
+#: ../../README.md:64
 msgid "[**View the slide deck**](https://tkoyama010.github.io/pyvista-wasm/slides/)"
 msgstr ""
 
-#: ../../README.md:65
+#: ../../README.md:66
 msgid "[**Talk details on pretalx**](https://pretalx.com/pyconjp2026/talk/review/VVJZFPCFCJCRGGKWEWKPYC3QXF8YE3A9)"
 msgstr ""
 
-#: ../../README.md:67
+#: ../../README.md:68
 msgid "Differences from pyvista-js"
 msgstr ""
 
-#: ../../README.md:69
+#: ../../README.md:70
 msgid "This project replaces the [vtk.js](https://github.com/Kitware/vtk-js) rendering backend used in [pyvista-js](https://github.com/tkoyama010/pyvista-js) with [VTK.wasm](https://kitware.github.io/vtk-wasm/) (`@kitware/vtk-wasm` npm package)."
 msgstr ""
 
-#: ../../README.md:71
+#: ../../README.md:72
 msgid "Key differences:"
 msgstr ""
 
-#: ../../README.md:73
+#: ../../README.md:74
 msgid "**Rendering backend**: VTK.wasm (WebAssembly port of VTK C++) instead of vtk.js (pure JavaScript reimplementation)"
 msgstr ""
 
-#: ../../README.md:74
+#: ../../README.md:75
 msgid "**API style**: VTK.wasm uses `vtk.vtkRenderer()` factory functions on a namespace object, vs vtk.js's `vtk.Rendering.Core.vtkRenderer.newInstance()` hierarchy"
 msgstr ""
 
-#: ../../README.md:75
+#: ../../README.md:76
 msgid "**Initialization**: VTK.wasm requires async initialization via `vtkWASM.createNamespace()` to load the WASM binary"
 msgstr ""
 
-#: ../../README.md:76
+#: ../../README.md:77
 msgid "**Feature parity**: VTK.wasm provides access to the full VTK C++ API, enabling features not available in vtk.js"
 msgstr ""
 
-#: ../../README.md:78
+#: ../../README.md:79
 msgid "Citation"
 msgstr ""
 
-#: ../../README.md:80
+#: ../../README.md:81
 msgid "If you use pyvista-wasm in academic or project work, please cite it. See [`CITATION.cff`](CITATION.cff) for the full citation metadata, or use the BibTeX entry below:"
 msgstr ""
 
-#: ../../README.md:93
+#: ../../README.md:94
 msgid "Contributing"
 msgstr ""
 
-#: ../../README.md:95
+#: ../../README.md:96
 msgid "Contributions are welcome! Please open an issue or pull request on [GitHub](https://github.com/tkoyama010/pyvista-wasm/issues). See [`CONTRIBUTORS.md`](CONTRIBUTORS.md) for the list of contributors."
 msgstr ""
 
-#: ../../README.md:97
+#: ../../README.md:98
 msgid "License"
 msgstr ""
 
-#: ../../README.md:99
+#: ../../README.md:100
 msgid "[Apache License 2.0](LICENSE) © Tetsuo Koyama"
 msgstr ""
 

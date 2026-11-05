@@ -22,15 +22,19 @@ __all__ = [
     "PointSet",
     "PolyData",
     "PolyDataReader",
+    "Polygon",
     "RectilinearGrid",
     "STLReader",
     "Sphere",
     "StructuredGrid",
+    "Tetrahedron",
     "Text",
     "TextProperty",
     "Texture",
     "Transform",
+    "Triangle",
     "UnstructuredGrid",
+    "XMLPolyDataReader",
     "__version__",
     "examples",
     "pyvista_chart",
@@ -61,13 +65,23 @@ from .mesh import (
     PointData,
     PointSet,
     PolyData,
+    Polygon,
     RectilinearGrid,
     Sphere,
     StructuredGrid,
+    Tetrahedron,
+    Triangle,
     UnstructuredGrid,
 )
 from .plotter import Plotter
-from .readers import GLTFReader, OBJReader, PLYReader, PolyDataReader, STLReader
+from .readers import (
+    GLTFReader,
+    OBJReader,
+    PLYReader,
+    PolyDataReader,
+    STLReader,
+    XMLPolyDataReader,
+)
 from .streamlit_integration import pyvista_chart
 from .text import Text, TextProperty
 from .texture import Texture
