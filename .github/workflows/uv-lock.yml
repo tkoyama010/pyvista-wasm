@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           persist-credentials: false
       - name: Install uv
-        uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa  # v10.3.1
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
       - name: Update uv.lock
         run: uv lock
       - name: Commit uv.lock
