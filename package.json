@@ -11,8 +11,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.5",
     "esbuild": "^0.28",
-    "eslint-plugin-jsdoc": "^65.3.6",
-    "typebox": "^1.4.3",
+    "eslint-plugin-jsdoc": "^65.4.3",
+    "typebox": "^1.4.4",
     "typescript": "^7.0"
   },
   "overrides": {
