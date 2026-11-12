@@ -16,6 +16,7 @@
 * [0013 - Decision to add a pi coding agent development environment to GitHub Codespaces](0013-decision-to-add-a-pi-coding-agent-development-environment-to-github-codespaces.md)
 * [0014 - Decision not to use Nix in the Codespace environment](0014-decision-not-to-use-nix-in-the-codespace-environment.md)
 * [0015 - Prefer the vtk-wasm pipeline with documented manual fallbacks for PyVista filters](0015-prefer-the-vtk-wasm-pipeline-with-documented-manual-fallbacks-for-pyvista-filters.md)
+* [0016 - Prefer a shared vtk-wasm object wrapping helper over per-module plumbing](0016-prefer-a-shared-vtk-wasm-object-wrapping-helper-over-per-module-plumbing.md)
 
 ## Rejected Records
 
