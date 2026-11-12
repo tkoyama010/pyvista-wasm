@@ -78,7 +78,7 @@ import sys
 import tempfile
 import time
 import webbrowser
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -687,7 +687,7 @@ class _BaseHTMLRenderer:
         self.charts.append(chart)
         return {"chart": chart}
 
-    def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:  # noqa: C901
+    def _build_actor_data(self, actor_info: dict[str, object]) -> dict[str, object]:
         """Build JSON-serializable actor configuration."""
         mesh = actor_info["mesh"]
         color: tuple[float, ...] = actor_info.get("color") or (0.5, 0.5, 0.5)  # type: ignore[assignment]
@@ -714,17 +714,13 @@ class _BaseHTMLRenderer:
         if texture is not None:
             texture_data = {"url": getattr(texture, "url", "")}
 
-        # Scalars
-        scalars_data = None
-        scalars_name = actor_info.get("scalars")
-        if scalars_name is not None:
-            cmap = actor_info.get("cmap", "viridis")
-            scalars_array = mesh.point_data[str(scalars_name)]  # type: ignore[attr-defined]
-            scalars_data = {
-                "arrayName": scalars_name,
-                "cmap": cmap,
-                "range": [float(scalars_array.min()), float(scalars_array.max())],
-            }
+        # Scalars — mapped to per-point RGB colors in Python because the
+        # vtk-wasm binary exposes no lookup-table classes (VTK::ImagingColor).
+        scalars_data = self._build_scalars_data(
+            actor_info,
+            cast("DataSet", mesh),
+            source_data,
+        )
 
         # PBR
         pbr_data = None
@@ -778,6 +774,43 @@ class _BaseHTMLRenderer:
                 result["mapper"] = {"class": "vtkMapper"}
 
         return result
+
+    def _build_scalars_data(
+        self,
+        actor_info: dict[str, object],
+        mesh: DataSet,
+        source_data: dict[str, object],
+    ) -> dict[str, object] | None:
+        """Build scalar coloring data and inject the RGB color array."""
+        scalars_name = actor_info.get("scalars")
+        if scalars_name is None:
+            return None
+        from .colormaps import map_to_rgb  # noqa: PLC0415
+
+        cmap = actor_info.get("cmap", "viridis")
+        scalars_array = mesh.point_data[str(scalars_name)]  # type: ignore[attr-defined]
+        rgb = map_to_rgb(
+            scalars_array,
+            cmap=str(cmap),
+            clim=(float(scalars_array.min()), float(scalars_array.max())),
+        )
+        rgb_name = "__rgb"
+        source_data.setdefault("pointData", [])
+        source_data["pointData"] = [  # type: ignore[assignment]
+            *cast("list[object]", source_data["pointData"]),
+            {
+                "name": rgb_name,
+                "values": rgb.ravel().tolist(),
+                "numberOfComponents": 3,
+                "dtype": "uchar",
+            },
+        ]
+        return {
+            "arrayName": scalars_name,
+            "cmap": cmap,
+            "range": [float(scalars_array.min()), float(scalars_array.max())],
+            "colorArrayName": rgb_name,
+        }
 
     def _build_camera_data(self) -> dict[str, object] | None:
         """Build JSON-serializable camera configuration."""
