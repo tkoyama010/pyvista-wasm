@@ -312,6 +312,7 @@ type SourceConfig = {
   normal?: [number, number, number];
   points?: number[];
   polys?: number[];
+  lines?: number[];
   data?: string;
   pointData?: PointDataArray[];
   tCoords?: number[];
@@ -348,6 +349,13 @@ type ActorConfig = {
   renderPointsAsSpheres?: boolean;
   pointSize?: number;
   texture?: TextureConfig;
+};
+
+/** Bounds grid overlay configuration. */
+type GridConfig = {
+  /** Scene bounds: xmin, xmax, ymin, ymax, zmin, zmax. */
+  bounds: [number, number, number, number, number, number];
+  color?: string | null;
 };
 
 /** Camera position and projection settings. */
@@ -409,6 +417,8 @@ type SceneData = {
   textActors?: TextActorConfig[];
   charts?: ChartConfig[];
   axes: boolean;
+  /** Bounds grid overlay configuration (VTK::RenderingGridAxes). */
+  grid?: GridConfig | null;
   camera?: CameraConfig;
   wasmConfig?: WasmConfig;
 };

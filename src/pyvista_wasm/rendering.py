@@ -299,6 +299,7 @@ class _BaseHTMLRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
+        self._grid: dict[str, object] | None = None
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
@@ -523,6 +524,10 @@ class _BaseHTMLRenderer:
 
         """
         self._axes_enabled = True
+
+    def set_grid(self, bounds: list[float], color: str | None) -> None:
+        """Configure the bounds grid overlay (VTK::RenderingGridAxes)."""
+        self._grid = {"bounds": [float(v) for v in bounds], "color": color}
 
     def add_scalar_bar(
         self,
@@ -844,6 +849,7 @@ class _BaseHTMLRenderer:
                 for chart in self.charts
             ],
             "axes": self._axes_enabled,
+            "grid": self._grid,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
             "wasmConfig": {
@@ -1666,6 +1672,11 @@ class MockRenderer:
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
+        self._grid: dict[str, object] | None = None
+
+    def set_grid(self, bounds: list[float], color: str | None) -> None:
+        """Mock grid configuration (stored, not rendered)."""
+        self._grid = {"bounds": bounds, "color": color}
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.
