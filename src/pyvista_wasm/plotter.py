@@ -40,8 +40,10 @@ class Plotter:
         - ``"default"`` (default): Creates a default directional light
         - ``None``: No default lights are created, giving full control over lighting
     wasm_rendering : str, optional
-        WebAssembly rendering backend. One of ``"webgl"`` or ``"webgpu"``.
-        Default is ``"webgl"``.
+        WebAssembly rendering backend. One of ``"auto"``, ``"webgl"``,
+        ``"webgl2"`` or ``"webgpu"``. ``"auto"`` picks WebGPU when the
+        browser supports it and falls back to WebGL2. Default is
+        ``"webgl"``.
     wasm_mode : str, optional
         Execution mode for VTK.wasm method calls. One of ``"sync"`` or
         ``"async"``. ``"async"`` requires WebAssembly JavaScript Promise

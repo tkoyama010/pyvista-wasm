@@ -395,7 +395,7 @@ type ChartConfig = {
 
 /** VTK.wasm configuration options for createNamespace(). */
 type WasmConfig = {
-  rendering?: "webgl" | "webgpu";
+  rendering?: "auto" | "webgl" | "webgl2" | "webgpu";
   mode?: "sync" | "async";
 };
 
