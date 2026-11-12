@@ -817,6 +817,38 @@ class _BaseHTMLRenderer:
             for ta in self.text_actors
         ]
 
+    def _build_scalar_bar_data(self) -> dict[str, object] | None:
+        """Build scalar bar scene data including the colormap gradient."""
+        config = self._scalar_bar
+        if config is None:
+            return None
+        gradient = None
+        scalar_range = None
+        import numpy as np  # noqa: PLC0415
+
+        for actor_info in reversed(self.actors):
+            scalars_name = actor_info.get("scalars")
+            if scalars_name is None:
+                continue
+            from .colormaps import map_to_rgb  # noqa: PLC0415
+
+            mesh = actor_info.get("mesh")
+            scalars_array = mesh.point_data[str(scalars_name)]  # type: ignore[union-attr,attr-defined]
+            cmap = str(actor_info.get("cmap", "viridis"))
+            gradient = [
+                [int(c) for c in color]
+                for color in map_to_rgb(
+                    np.linspace(0.0, 1.0, 32),
+                    cmap=cmap,
+                )
+            ]
+            scalar_range = [
+                float(scalars_array.min()),
+                float(scalars_array.max()),
+            ]
+            break
+        return {**config, "gradient": gradient, "range": scalar_range}
+
     def _build_scene_data(self) -> dict[str, object]:
         """Build a complete JSON-serializable scene description.
 
@@ -844,6 +876,7 @@ class _BaseHTMLRenderer:
                 for chart in self.charts
             ],
             "axes": self._axes_enabled,
+            "scalarBar": self._build_scalar_bar_data(),
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
             "wasmConfig": {
