@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from .charts import Chart2D
     from .examples import CubeMap
     from .light import Light
-    from .mesh import DataSet
+    from .mesh import DataSet, ImageData
     from .text import Text
     from .texture import Texture
     from .transform import Transform
@@ -371,6 +371,106 @@ class Plotter:
             },
         )
 
+        return actor
+
+    def add_volume(  # noqa: PLR0913
+        self,
+        volume: ImageData,
+        scalars: str | None = None,
+        cmap: str = "viridis",
+        opacity: str | float = "linear",
+        clim: tuple[float, float] | None = None,
+        max_points: int = 50000,
+        show_scalar_bar: bool = True,  # noqa: FBT001, FBT002
+    ) -> dict[str, object]:
+        """Add a volume to the scene.
+
+        Mirrors ``pyvista.Plotter.add_volume``. The vtk-wasm binary does
+        not register a deserializer for ``vtkSmartVolumeMapper`` (the
+        main demo capability from the "What's New in VTK-wasm"
+        webinar), so the volume is rendered as a translucent point
+        cloud: each voxel becomes a point coloured by its scalar value.
+        True ray-cast volume rendering replaces this once the volume
+        mapper classes are registered upstream.
+
+        Parameters
+        ----------
+        volume : ImageData
+            The volume to render.
+        scalars : str, optional
+            Name of the point-data array to render. Defaults to the
+            first array in ``volume.point_data``.
+        cmap : str, optional
+            Colormap name. Default is ``'viridis'``.
+        opacity : str or float, optional
+            Opacity preset (``"linear"``, ``"sigmoid"``, ``"geom"``)
+            or a constant opacity between 0 and 1. Default is
+            ``"linear"``.
+        clim : tuple, optional
+            Scalar range (reserved for the volume mapper). Defaults to
+            the data range.
+        max_points : int, optional
+            Decimation limit for the point-cloud approximation.
+            Default is 50000.
+        show_scalar_bar : bool, optional
+            Add a scalar bar for the volume. Default is True.
+
+        Returns
+        -------
+        actor
+            The VTK.wasm actor rendering the volume points.
+
+        Examples
+        --------
+        >>> import numpy as np
+        >>> import pyvista_wasm as pv
+        >>> grid = pv.ImageData(dimensions=(32, 32, 32))
+        >>> x, y, z = np.meshgrid(*(np.linspace(-1, 1, 32),) * 3, indexing="ij")
+        >>> grid.point_data["values"] = np.exp(-(x**2 + y**2 + z**2) * 4).ravel(order="F")
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_volume(grid, scalars="values", opacity="sigmoid")  # doctest: +SKIP
+
+        """
+        import numpy as np  # noqa: PLC0415
+
+        from .mesh import PolyData  # noqa: PLC0415
+
+        if not volume.point_data.keys():
+            msg = "the volume has no point data arrays to render"
+            raise ValueError(msg)
+        if scalars is None:
+            scalars = next(iter(volume.point_data.keys()))
+        values = np.asarray(volume.point_data[str(scalars)])
+        vmin, vmax = clim if clim is not None else (float(values.min()), float(values.max()))
+        if vmax <= vmin:
+            msg = f"clim must be increasing, got {clim!r}"
+            raise ValueError(msg)
+
+        if isinstance(opacity, str):
+            presets = {"linear": 0.3, "sigmoid": 0.2, "geom": 0.4}
+            if opacity not in presets:
+                msg = f"opacity preset must be one of {sorted(presets)}, got {opacity!r}"
+                raise ValueError(msg)
+            base_opacity = presets[opacity]
+        else:
+            base_opacity = float(opacity)
+
+        points = volume.points
+        if len(points) > max_points:
+            step = int(np.ceil(len(points) / max_points))
+            points = points[::step]
+            values = values[::step]
+
+        cloud = PolyData(points=points)
+        cloud.point_data[str(scalars)] = values
+        actor = self.add_mesh(
+            cloud,
+            opacity=base_opacity,
+            scalars=str(scalars),
+            cmap=cmap,
+        )
+        if show_scalar_bar:
+            self.add_scalar_bar(title=str(scalars))
         return actor
 
     def add_chart(self, chart: Chart2D) -> dict[str, object]:
