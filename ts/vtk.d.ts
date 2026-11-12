@@ -370,6 +370,8 @@ type TextActorConfig = {
   fontSize: number;
   bold: boolean;
   italic: boolean;
+  /** RGB background behind the text (context actor); undefined draws none. */
+  backgroundColor?: [number, number, number] | null;
 };
 
 /** A single series in a 2D chart. */
