@@ -299,6 +299,7 @@ class _BaseHTMLRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
+        self._point_labels: list[dict[str, object]] = []
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
@@ -523,6 +524,31 @@ class _BaseHTMLRenderer:
 
         """
         self._axes_enabled = True
+
+    def add_point_labels(self, points: object, labels: list[str]) -> None:
+        """Add text labels anchored at 3D points (VTK::RenderingLabel).
+
+        Parameters
+        ----------
+        points : array-like
+            An ``(n, 3)`` array of anchor points.
+        labels : list of str
+            One label per point.
+
+        """
+        import numpy as np  # noqa: PLC0415
+
+        pts = np.asarray(points, dtype=float)
+        if pts.ndim != 2 or pts.shape[1] != 3:  # noqa: PLR2004
+            msg = f"points must have shape (n, 3), got {pts.shape}"
+            raise ValueError(msg)
+        if len(labels) != len(pts):
+            msg = f"expected {len(pts)} labels, got {len(labels)}"
+            raise ValueError(msg)
+        self._point_labels = [
+            {"position": [float(x) for x in point], "text": label}
+            for point, label in zip(pts.tolist(), labels, strict=True)
+        ]
 
     def add_scalar_bar(
         self,
@@ -844,6 +870,7 @@ class _BaseHTMLRenderer:
                 for chart in self.charts
             ],
             "axes": self._axes_enabled,
+            "pointLabels": self._point_labels,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
             "wasmConfig": {
@@ -1666,6 +1693,17 @@ class MockRenderer:
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
+        self._point_labels: list[dict[str, object]] = []
+
+    def add_point_labels(self, points: object, labels: list[str]) -> None:
+        """Mock label registration (stored, not rendered)."""
+        import numpy as np  # noqa: PLC0415
+
+        pts = np.asarray(points, dtype=float)
+        self._point_labels = [
+            {"position": [float(x) for x in p_], "text": label}
+            for p_, label in zip(pts.tolist(), labels, strict=True)
+        ]
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.
