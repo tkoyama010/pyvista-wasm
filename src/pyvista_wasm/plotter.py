@@ -7,7 +7,7 @@ using VTK.wasm in browser environments.
 from __future__ import annotations
 
 import uuid
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from .rendering import get_renderer
 
@@ -873,6 +873,68 @@ class Plotter:
             "n_labels": n_labels,
         }
         self._renderer.add_scalar_bar(title=title, vertical=vertical, n_labels=n_labels)
+
+    def remove_actor(self, actor: dict[str, object]) -> None:
+        """Remove a previously added actor from the plotter.
+
+        Mirrors ``pyvista.Plotter.remove_actor``. Pass the dict returned
+        by :meth:`add_mesh` or :meth:`add_points` as ``actor``. Unknown
+        actors are ignored.
+
+        Parameters
+        ----------
+        actor : dict
+            The actor info returned by :meth:`add_mesh`.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> actor = plotter.add_mesh(pv.Sphere())
+        >>> plotter.remove_actor(actor)
+
+        """
+        from .transform import Transform  # noqa: PLC0415
+
+        kept = [a for a in self._actors if a.get("actor") is not actor]
+        if len(kept) == len(self._actors):
+            return
+        self._actors = kept
+        self._renderer.actors = []
+        for entry in self._actors:
+            if entry.get("type") == "points":
+                self._renderer.add_points_actor(
+                    entry["points"],  # type: ignore[arg-type]
+                    color=cast("str | tuple[float, float, float] | None", entry["color"]),
+                    opacity=float(cast("float", entry["opacity"])),
+                    point_size=float(cast("float", entry["point_size"])),
+                    render_points_as_spheres=bool(
+                        cast("bool", entry["render_points_as_spheres"]),
+                    ),
+                )
+                continue
+            transform = entry.get("transform")
+            if transform is not None and not isinstance(transform, Transform):
+                transform = Transform(cast("ArrayLike", transform))
+            self._renderer.add_mesh_actor(
+                cast("DataSet", entry["mesh"]),
+                color=cast("str | tuple[float, float, float] | None", entry["color"]),
+                opacity=float(cast("float", entry["opacity"])),
+                pbr=bool(cast("bool", entry["pbr"])),
+                metallic=float(cast("float", entry["metallic"])),
+                roughness=float(cast("float", entry["roughness"])),
+                smooth_shading=bool(cast("bool", entry["smooth_shading"])),
+                texture=cast("Texture | None", entry["texture"]),
+                show_edges=bool(cast("bool", entry["show_edges"])),
+                edge_color=cast(
+                    "str | tuple[float, float, float] | None",
+                    entry["edge_color"],
+                ),
+                style=cast("str", entry["style"]),
+                scalars=cast("str | None", entry["scalars"]),
+                cmap=cast("str", entry["cmap"]),
+                transform=transform,
+            )
 
     def clear(self) -> None:
         """Clear all actors from the plotter.
