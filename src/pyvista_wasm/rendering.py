@@ -78,7 +78,7 @@ import sys
 import tempfile
 import time
 import webbrowser
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -335,6 +335,10 @@ class _BaseHTMLRenderer:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        ambient: float = 0.0,
+        diffuse: float = 1.0,
+        specular: float = 0.0,
+        specular_power: float = 100.0,
         transform: Transform | None = None,
     ) -> dict[str, object]:
         """Add a mesh to the renderer.
@@ -370,6 +374,14 @@ class _BaseHTMLRenderer:
         scalars : str, optional
             Name of the scalar array to use for coloring. The array must exist
             in ``mesh.point_data``.
+        ambient : float, default=0.0
+            Ambient material response coefficient.
+        diffuse : float, default=1.0
+            Diffuse material response coefficient.
+        specular : float, default=0.0
+            Specular response coefficient.
+        specular_power : float, default=100.0
+            Specular power (shininess).
         cmap : str, default='viridis'
             Name of the colormap to use when rendering scalars.
         transform : Transform, optional
@@ -416,6 +428,10 @@ class _BaseHTMLRenderer:
             "style": style,
             "scalars": scalars,
             "cmap": cmap,
+            "ambient": ambient,
+            "diffuse": diffuse,
+            "specular": specular,
+            "specular_power": specular_power,
             "transform": transform,
         }
         self.actors.append(actor_info)
@@ -726,6 +742,16 @@ class _BaseHTMLRenderer:
                 "range": [float(scalars_array.min()), float(scalars_array.max())],
             }
 
+        # Material response coefficients (VTK::RenderingOpenGL2 property)
+        lighting_data = {
+            "ambient": float(cast("float", actor_info.get("ambient", 0.0))),
+            "diffuse": float(cast("float", actor_info.get("diffuse", 1.0))),
+            "specular": float(cast("float", actor_info.get("specular", 0.0))),
+            "specularPower": float(
+                cast("float", actor_info.get("specular_power", 100.0)),
+            ),
+        }
+
         # PBR
         pbr_data = None
         if actor_info.get("pbr"):
@@ -760,6 +786,7 @@ class _BaseHTMLRenderer:
             "shading": "gouraud" if smooth_shading else "flat",
             "edges": edge_data,
             "pbr": pbr_data,
+            "lighting": lighting_data,
             "texture": texture_data,
             "scalars": scalars_data,
             "actorType": actor_type,
@@ -1698,6 +1725,10 @@ class MockRenderer:
         style: str = "surface",
         scalars: str | None = None,
         cmap: str = "viridis",
+        ambient: float = 0.0,
+        diffuse: float = 1.0,
+        specular: float = 0.0,
+        specular_power: float = 100.0,
         transform: Transform | None = None,
     ) -> dict[str, object]:
         """Mock mesh addition.

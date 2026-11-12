@@ -329,6 +329,14 @@ type PbrConfig = {
   roughness: number;
 };
 
+/** Material response coefficients (ambient/diffuse/specular). */
+type LightingConfig = {
+  ambient: number;
+  diffuse: number;
+  specular: number;
+  specularPower: number;
+};
+
 /** Configuration for an image texture loaded from a URL. */
 type TextureConfig = {
   url: string;
@@ -343,6 +351,7 @@ type ActorConfig = {
   shading?: string;
   edges?: EdgesConfig;
   pbr?: PbrConfig;
+  lighting?: LightingConfig;
   normals?: NormalsConfig;
   actorType?: string;
   renderPointsAsSpheres?: boolean;

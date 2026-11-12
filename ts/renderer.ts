@@ -862,6 +862,25 @@ async function applyPbr(
 }
 
 /**
+ * Apply material response coefficients (ambient/diffuse/specular) from
+ * the VTK::RenderingOpenGL2 property model.
+ * @param prop - The actor property to mutate.
+ * @param lighting - Lighting coefficients, or undefined to keep defaults.
+ */
+function applyLighting(
+  prop: VtkProperty,
+  lighting: LightingConfig | undefined,
+): void {
+  if (!lighting) {
+    return;
+  }
+  prop.setAmbient(lighting.ambient);
+  prop.setDiffuse(lighting.diffuse);
+  prop.setSpecular(lighting.specular);
+  prop.setSpecularPower(lighting.specularPower);
+}
+
+/**
  * Load an image from a URL for use as a texture.
  *
  * CORS is enabled so the decoded pixels can be sampled by WebGL.
@@ -1029,6 +1048,7 @@ async function setupActor(
   }
 
   await applyPbr(actor, cfg.pbr);
+  applyLighting(await actor.getProperty(), cfg.pbr ? undefined : cfg.lighting);
 
   if (cfg.actorType === "points") {
     const DefaultPointSize = 5;
