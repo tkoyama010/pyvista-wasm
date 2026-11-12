@@ -299,6 +299,7 @@ class _BaseHTMLRenderer:
         self._view_up: tuple[float, float, float] = (0.0, 1.0, 0.0)
         self._camera: Camera | None = None
         self._axes_enabled: bool = False
+        self._interaction_style: str = "trackball"
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
@@ -523,6 +524,37 @@ class _BaseHTMLRenderer:
 
         """
         self._axes_enabled = True
+
+    def set_interaction_style(self, style: str) -> None:
+        """Set the mouse interaction style.
+
+        Mirrors the ``Plotter.enable_*_style()`` family backed by
+        VTK::InteractionStyle.
+
+        Parameters
+        ----------
+        style : str
+            One of ``"trackball"``, ``"trackball_actor"``,
+            ``"joystick"``, ``"joystick_actor"``, ``"2d"``, ``"zoom"``.
+
+        Raises
+        ------
+        ValueError
+            If ``style`` is not a known style name.
+
+        """
+        known = {
+            "trackball",
+            "trackball_actor",
+            "joystick",
+            "joystick_actor",
+            "2d",
+            "zoom",
+        }
+        if style not in known:
+            msg = f"style must be one of {sorted(known)}, got {style!r}"
+            raise ValueError(msg)
+        self._interaction_style = style
 
     def add_scalar_bar(
         self,
@@ -844,6 +876,7 @@ class _BaseHTMLRenderer:
                 for chart in self.charts
             ],
             "axes": self._axes_enabled,
+            "interactionStyle": self._interaction_style,
             "camera": self._build_camera_data(),
             "lightingMode": self.lighting,
             "wasmConfig": {
@@ -1666,6 +1699,11 @@ class MockRenderer:
         self._scalar_bar: dict[str, object] | None = None
         self._wasm_rendering: str = wasm_rendering
         self._wasm_mode: str = wasm_mode
+        self._interaction_style: str = "trackball"
+
+    def set_interaction_style(self, style: str) -> None:
+        """Mock style selection (stored, not rendered)."""
+        self._interaction_style = style
 
     def create_container(self, element_id: str = "pyvista-container") -> None:
         """Mock container creation.

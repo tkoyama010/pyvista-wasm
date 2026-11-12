@@ -305,7 +305,10 @@ async function buildScene(
       canvasSelector,
       renderWindow,
     });
-    await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+    await applyInteractionStyle(
+      interactor,
+      sceneData.interactionStyle ?? "trackball",
+    );
 
     renderWindow.render();
     await interactor.start();
@@ -318,6 +321,47 @@ async function buildScene(
         : "An unexpected error occurred while rendering the scene.";
     showOverlayError(overlay, msg);
   }
+}
+
+/**
+ * Select the mouse interaction style for the interactor.
+ *
+ * Only the setter for the trackball style is guaranteed in every
+ * vtk-wasm binary, so the remaining styles are probed dynamically and
+ * fail with an actionable message when the binary lacks them
+ * (VTK::InteractionStyle, issue #782).
+ * @param interactor - The interactor to configure.
+ * @param styleName - Style name from the scene configuration.
+ */
+async function applyInteractionStyle(
+  interactor: VtkInteractor,
+  styleName: string,
+): Promise<void> {
+  if (styleName === "trackball") {
+    await interactor.interactorStyle.setCurrentStyleToTrackballCamera();
+    return;
+  }
+  const setterCandidates: Record<string, string[]> = {
+    trackball_actor: ["setCurrentStyleToTrackballActor"],
+    joystick: ["setCurrentStyleToJoystickCamera", "setCurrentStyleToJoystick"],
+    joystick_actor: ["setCurrentStyleToJoystickActor"],
+    "2d": ["setCurrentStyleTo2D", "setCurrentStyleToScene2D"],
+    zoom: ["setCurrentStyleToZoom"],
+  };
+  const manager = interactor.interactorStyle as unknown as Record<
+    string,
+    (() => Promise<void>) | undefined
+  >;
+  const setter = (setterCandidates[styleName] ?? [])
+    .map((name) => manager[name])
+    .find((fn) => typeof fn === "function");
+  if (!setter) {
+    throw new Error(
+      `Interactor style "${styleName}" is not available in this vtk-wasm ` +
+        'binary; only "trackball" is guaranteed.',
+    );
+  }
+  await setter.call(interactor.interactorStyle);
 }
 
 /**
