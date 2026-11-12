@@ -753,6 +753,26 @@ class Plotter:
         """
         self._renderer.set_environment_texture(texture)
 
+    def add_background_image(self, url: str) -> None:
+        """Show an image behind the rendered scene.
+
+        Mirrors ``pyvista.Plotter.add_background_image``.
+
+        Parameters
+        ----------
+        url : str
+            Image URL or data URL.
+
+        Examples
+        --------
+        >>> import pyvista_wasm as pv
+        >>> plotter = pv.Plotter()
+        >>> _ = plotter.add_mesh(pv.Sphere())
+        >>> plotter.add_background_image("sky.png")  # doctest: +SKIP
+
+        """
+        self._renderer.set_background_image(url)
+
     def add_light(self, light: Light) -> None:
         """Add a light source to the scene.
 
