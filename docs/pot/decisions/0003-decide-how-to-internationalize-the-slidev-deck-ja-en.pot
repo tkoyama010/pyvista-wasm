@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,63 +376,63 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "slidev-addon-i18nb"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Two separate decks"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Inline JA/EN"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Custom vue-i18n"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Build-time locale"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Single-language rendering (runtime switch)"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "~"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Independent JA/EN maintenance"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Compatibility with ADR-0002 deployment"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Zero-cost / GitHub-native"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Authoring ergonomics"
 msgstr ""
 
-#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:0
+#: ../decisions/0003-decide-how-to-internationalize-the-slidev-deck-ja-en.md:123
 msgid "Low build-time impact"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -368,67 +368,67 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "1 slide, 1 message"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "1 slide, 1 topic"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Free-form"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Lessig method"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Takahashi method"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Audience focus and comprehension"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "~"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Narrative clarity"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Live-presentation pacing"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Slide-source readability under VCS"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Alignment with best practices"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Compatibility with code/diagram/demo slides"
 msgstr ""
 
-#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:0
+#: ../decisions/0004-adopt-the-1-slide-1-message-principle-for-the-slide-deck.md:124
 msgid "Verifiable compliance criterion"
 msgstr ""
 
