@@ -1295,32 +1295,30 @@ function setupCharts(
     if (series.kind === "bar") {
       const barWidth = (plotWidth / series.x.length) * BarWidthFactor;
       ctx.fillStyle = color;
-      series.x.forEach((xv, i) => {
+      for (const [i, xv] of series.x.entries()) {
         const yv = series.y[i];
-        if (yv === undefined) {
-          return;
+        if (yv !== undefined) {
+          const left = toPx(xv, xScale) - barWidth / 2;
+          const top = toPx(yv, yScale);
+          ctx.fillRect(left, top, barWidth, yOrigin - top);
         }
-        const left = toPx(xv, xScale) - barWidth / 2;
-        const top = toPx(yv, yScale);
-        ctx.fillRect(left, top, barWidth, yOrigin - top);
-      });
+      }
     } else if (series.kind === "scatter") {
       ctx.fillStyle = color;
       const radius = (series.size ?? DefaultMarkerSize) / 2;
-      series.x.forEach((xv, i) => {
+      for (const [i, xv] of series.x.entries()) {
         const yv = series.y[i];
-        if (yv === undefined) {
-          return;
+        if (yv !== undefined) {
+          ctx.beginPath();
+          ctx.arc(toPx(xv, xScale), toPx(yv, yScale), radius, 0, Math.PI * 2);
+          ctx.fill();
         }
-        ctx.beginPath();
-        ctx.arc(toPx(xv, xScale), toPx(yv, yScale), radius, 0, Math.PI * 2);
-        ctx.fill();
-      });
+      }
     } else {
       ctx.strokeStyle = color;
       ctx.lineWidth = series.width ?? 2;
       ctx.beginPath();
-      series.x.forEach((xv, i) => {
+      for (const [i, xv] of series.x.entries()) {
         const py = toPx(series.y[i] ?? 0, yScale);
         const px = toPx(xv, xScale);
         if (i === 0) {
@@ -1328,7 +1326,7 @@ function setupCharts(
         } else {
           ctx.lineTo(px, py);
         }
-      });
+      }
       ctx.stroke();
     }
   }
@@ -1346,7 +1344,7 @@ function setupCharts(
     ctx.strokeRect(bx, by, LegendBoxWidth, boxHeight);
     ctx.font = `${String(ChartLegendFontSize)}px sans-serif`;
     ctx.textAlign = "left";
-    labeled.forEach((s, i) => {
+    for (const [i, s] of labeled.entries()) {
       ctx.fillStyle = cssColor(s.color);
       ctx.fillRect(
         bx + LegendLeftPad,
@@ -1360,7 +1358,7 @@ function setupCharts(
         bx + LegendTextOffsetX,
         by + LegendTextOffsetY + i * LegendLineHeight,
       );
-    });
+    }
   }
 }
 
@@ -1593,8 +1591,8 @@ async function applyShrinkFilter(
     let cy = 0;
     let cz = 0;
     const indices: number[] = [];
-    for (let index_ = 0; index_ < nVerts; index_++) {
-      const vi = at(polys, index + index_);
+    for (let corner = 0; corner < nVerts; corner++) {
+      const vi = at(polys, index + corner);
       indices.push(vi);
       cx += at(inPoints, vi * PointStride + Xoffset);
       cy += at(inPoints, vi * PointStride + Yoffset);
