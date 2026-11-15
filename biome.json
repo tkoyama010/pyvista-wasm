@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.6.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
   "files": {
     "includes": ["ts/**/*.ts", "*.js", "*.json", "*.md"]
   },
@@ -28,6 +28,17 @@
     }
   },
   "overrides": [
+    {
+      "includes": ["package.json"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "usePackageJsonCpu": "off",
+            "usePackageJsonEngines": "off"
+          }
+        }
+      }
+    },
     {
       "includes": ["*.md"],
       "formatter": {
