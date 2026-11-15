@@ -1,0 +1,80 @@
+---
+# Runs the pi coding agent manually from the Actions tab.
+#
+# Triggers only via workflow_dispatch, so only users with Actions write
+# access can invoke it (no comment-triggered path).
+#
+# Required repository configuration:
+#   secret   PI_TOKEN          API token for the opencode provider, which
+#                              serves the deepseek-v4.1-flash model used below
+#   secret   TKOYAMA010_TOKEN  PAT belonging to tkoyama010 (contents/issues/
+#                              pull-requests write scopes), used to check out the
+#                              repository and open PRs so they are attributed to
+#                              tkoyama010 instead of github-actions[bot].
+name: Pi Agent
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Task for the pi agent'
+        required: true
+        type: string
+      pull_number:
+        description: 'Optional pull request number to check out'
+        required: false
+        type: number
+      issue_number:
+        description: 'Optional issue number to resolve; the agent creates a pull request closing it'
+        required: false
+        type: number
+permissions: {}
+concurrency:
+  group: pi-agent
+  cancel-in-progress: false
+jobs:
+  pi-agent:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      # Only same-repository PR heads are checked out: a fork head must not be
+      # checked out before the agent runs with PI_TOKEN and a write-capable
+      # token. The agent can still inspect fork PR diffs via its GitHub tools.
+      - name: Reject fork pull request heads
+        if: ${{ inputs.pull_number != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pull_number }}" --jq '.head.repo.full_name')"
+          = "${GITHUB_REPOSITORY}"
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          token: ${{ secrets.TKOYAMA010_TOKEN }}
+          ref: ${{ inputs.pull_number && format('refs/pull/{0}/head', inputs.pull_number) || '' }}
+          fetch-depth: 0
+          # Persist the tkoyama010 PAT so the agent's git pushes authenticate
+          # when creating the PR branch.
+          persist-credentials: true
+      # Commits made by the agent carry the tkoyama010 identity, and the
+      # tkoyama010 PAT passed as github_token makes the pull request author
+      # tkoyama010 rather than github-actions[bot].
+      - name: Configure git identity
+        run: |-
+          git config user.name 'tkoyama010'
+          git config user.email 'tkoyama010@users.noreply.github.com'
+      - name: Run Pi agent
+        uses: shaftoe/pi-coding-agent-action@381f578da466b8d2ef48f0fdb8a940f276fe4c3c  # v2.30.1
+        with:
+          github_token: ${{ secrets.TKOYAMA010_TOKEN }}
+          provider: opencode
+          model: deepseek-v4.1-flash
+          token: ${{ secrets.PI_TOKEN }}
+          prompt: |-
+            ${{
+              inputs.issue_number
+              && format('Resolve issue #{0} with a PR whose body says "Closes #{0}". Task: ', inputs.issue_number)
+              || ''
+            }}${{ inputs.prompt }}

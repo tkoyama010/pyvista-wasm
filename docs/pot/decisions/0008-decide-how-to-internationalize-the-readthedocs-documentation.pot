@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,63 +357,66 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Sphinx gettext + RTD translations"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Per-language source trees"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "External service (Crowdin/Transifex/Weblate)"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Keep English-only"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Single-language rendering per locale (RTD URL + switcher)"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:124
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:124
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Independent maintenance of each translation"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Compatibility with existing RTD build (Sphinx + JupyterLite)"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:124
 msgid "~"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Zero-cost / GitHub-native"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Contributor ergonomics (PR-based, no proprietary tooling)"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Low build-time / config complexity"
 msgstr ""
 
-#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:0
+#: ../decisions/0008-decide-how-to-internationalize-the-readthedocs-documentation.md:116
 msgid "Reuses existing `docs/conf.py` i18n config"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -405,71 +405,71 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Structural parity only"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Structural parity + stale check"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Automated translation action"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Dual-maintenance (status quo)"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Single-source build-time"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "English authoritative source"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "~"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "GitHub native README.<lang>.md rendering"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Standard Readme layout preserved"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Structural drift detected"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Content drift detected"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Zero-cost / GitHub-native"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Low maintenance burden"
 msgstr ""
 
-#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:0
+#: ../decisions/0007-decide-how-to-internationalize-and-sync-the-readme.md:133
 msgid "Consistency with ADR-0008/0006"
 msgstr ""
 
