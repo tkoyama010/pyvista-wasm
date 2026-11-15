@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -410,71 +410,71 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Slidev"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "sphinx-revealjs"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "reveal.js"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Marp"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Google Slides"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "PowerPoint"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "JupyterLab/RISE"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Live web demo embedding"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "~"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Code syntax highlighting"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Ease of authoring"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Portability"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Version-control friendliness"
 msgstr ""
 
-#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:0
+#: ../decisions/0001-use-slidev-for-the-pycon-jp-2026-talk-slide-deck.md:140
 msgid "Community adoption"
 msgstr ""
 

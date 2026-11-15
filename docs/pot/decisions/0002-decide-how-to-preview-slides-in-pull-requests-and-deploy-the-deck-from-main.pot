@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,8 +248,8 @@ msgstr ""
 msgid "Bad, because migrating the Pages source breaks the existing redirect workflow and adds migration complexity."
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
 #: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:82
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Netlify"
 msgstr ""
 
@@ -285,8 +285,8 @@ msgstr ""
 msgid "Bad, because it is not compatible with the existing `gh-pages` redirect workflow; the redirect would need to be migrated or the deck would live on a separate Netlify domain, splitting the project's web presence."
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
 #: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:94
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Vercel"
 msgstr ""
 
@@ -318,8 +318,8 @@ msgstr ""
 msgid "Bad, because it is not compatible with the existing `gh-pages` redirect workflow; the deck would live on a separate Vercel domain."
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
 #: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:105
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Cloudflare Pages"
 msgstr ""
 
@@ -371,8 +371,8 @@ msgstr ""
 msgid "Bad, because there is no automatic main-branch deployment — the deck is not accessible at a live URL without manual artifact download, failing the automatic-deployment driver."
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
 #: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:123
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Read the Docs subpath"
 msgstr ""
 
@@ -412,55 +412,58 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "GH Pages (branch) + pr-preview"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "GH Pages (Actions) + deploy-pages"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Build artifact only"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Zero-cost hosting"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:146
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Auto-deploy on push to main"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:146
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Per-PR live preview URL"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Ease of setup"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:146
 msgid "~"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Low maintenance burden"
 msgstr ""
 
-#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:0
+#: ../decisions/0002-decide-how-to-preview-slides-in-pull-requests-and-deploy-the-deck-from-main.md:139
 msgid "Compatibility with existing `gh-pages` redirect"
 msgstr ""
 

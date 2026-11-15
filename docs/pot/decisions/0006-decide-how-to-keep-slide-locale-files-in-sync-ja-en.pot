@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyvista-wasm \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25 14:47+0900\n"
+"POT-Creation-Date: 2026-11-15 00:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -360,63 +360,63 @@ msgstr ""
 msgid "The table below summarises how each option scores against the evaluation criteria. ✓ = strong, ~ = partial, ✗ = weak."
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Criterion"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Key-parity check"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Key-parity + value check"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "No enforcement (status quo)"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Single-source build-time"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "PR-template checklist"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Structural drift detection"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "✓"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "✗"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Content drift detection"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "~"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "CI enforcement (automated)"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Zero-cost / GitHub-native"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Minimal maintenance burden"
 msgstr ""
 
-#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:0
+#: ../decisions/0006-decide-how-to-keep-slide-locale-files-in-sync-ja-en.md:122
 msgid "Catches swapped key assignments"
 msgstr ""
 
