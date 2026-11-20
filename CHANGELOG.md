@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.18.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.17.0...pyvista-wasm-v0.18.0) (2026-11-20)
+
+### Features
+
+- add manually triggered pi agent workflow ([#880](https://github.com/tkoyama010/pyvista-wasm/issues/880)) ([047cd4d](https://github.com/tkoyama010/pyvista-wasm/commit/047cd4d316ac5d7ed9e8a3b45ce7564427709453))
+
 ## [0.17.0](https://github.com/tkoyama010/pyvista-wasm/compare/pyvista-wasm-v0.16.0...pyvista-wasm-v0.17.0) (2026-11-13)
 
 ### Features
