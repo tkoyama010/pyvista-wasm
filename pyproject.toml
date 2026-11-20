@@ -64,7 +64,7 @@ optional-dependencies.docs = [
   "myst-parser>=4.0.0,<6.0.0; python_version>='3.13'",
   "sphinx>=8.0.0,<10.0.0; python_version>='3.13'",
   "sphinx-book-theme>=1.1.0,<1.5.0; python_version>='3.13'",
-  "sphinx-design>=0.6.0,<0.8.0; python_version>='3.13'",
+  "sphinx-design>=0.6.0,<0.9.0; python_version>='3.13'",
   "sphinx-intl>=2.2.0,<2.5.0; python_version>='3.13'",
   "sphinxcontrib-mermaid>=2.0.0,<3.0.0; python_version>='3.13'",
   "sphinxcontrib-typer>=0.5.1,<1.0.1; python_version>='3.13'",
