@@ -66,7 +66,7 @@ jobs:
           git config user.name 'tkoyama010'
           git config user.email 'tkoyama010@users.noreply.github.com'
       - name: Run Pi agent
-        uses: shaftoe/pi-coding-agent-action@381f578da466b8d2ef48f0fdb8a940f276fe4c3c  # v2.30.1
+        uses: shaftoe/pi-coding-agent-action@c9c89dcabbf612ab2a528acfad8785a8075e22f3  # v2.30.2
         with:
           github_token: ${{ secrets.TKOYAMA010_TOKEN }}
           provider: opencode
